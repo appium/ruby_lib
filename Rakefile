@@ -2,7 +2,9 @@ require 'rubygems'
 require 'rake'
 require 'date'
 
-def version_file; 'lib/app_lib/version.rb'; end
+# Defines gem name.
+def repo_name; 'app_lib'; end
+def version_file; 'lib/ruby_console/version.rb'; end
 def version_rgx; /VERSION = '([^']+)'/m; end
 
 def version
@@ -56,11 +58,21 @@ task :release => :gem do
   sh "git tag v#{version}"
   sh 'git push origin master'
   sh "git push origin v#{version}"
-  sh "gem push app_lib-#{version}.gem"
+  sh "gem push #{repo_name}-#{version}.gem"
 end
 
 desc 'Build a new gem'
 task :gem do
-  sh 'chmod 0600 ~/.gem/credentials'
-  sh 'gem build app_lib.gemspec'
+  `chmod 0600 ~/.gem/credentials`
+  sh "gem build #{repo_name}.gemspec"
+end
+
+desc 'Build a new gem (same as gem task)'
+task :build => :gem do
+end
+
+desc 'Install gem'
+task :install => :gem do
+ `gem uninstall -aIx #{repo_name}`
+ sh "gem install --no-rdoc --no-ri #{repo_name}-#{version}.gem"
 end
