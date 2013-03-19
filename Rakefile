@@ -61,5 +61,6 @@ end
 
 desc 'Build a new gem'
 task :gem do
+  sh 'chmod 0600 ~/.gem/credentials'
   sh 'gem build app_lib.gemspec'
 end
