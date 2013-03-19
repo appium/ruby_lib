@@ -24,8 +24,8 @@ Gem::Specification.new do |s|
   s.homepage = 'https://github.com/bootstraponline/app_lib'
   s.require_paths = [ 'lib' ]
 
-  s.add_dependency 'selenium-webdriver', '~> 2.31.0'
-  s.add_dependency 'awesome_print', '~> 1.1.0'
+  s.add_runtime_dependency 'selenium-webdriver', '~> 2.31.0'
+  s.add_runtime_dependency 'awesome_print', '~> 1.1.0'
 
   s.add_development_dependency 'rake', '~> 10.0.3'
 
