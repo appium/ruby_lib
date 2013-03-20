@@ -8,6 +8,9 @@ https://github.com/appium/appium/blob/82995f47408530c80c3376f4e07a1f649d96ba22/s
 https://github.com/appium/appium/blob/c58eeb66f2d6fa3b9a89d188a2e657cca7cb300f/LICENSE
 =end
 
+add_to_path __FILE__
+add_to_path __FILE__, 'element'
+
 require 'selenium-webdriver'
 
 # Path to the .app or .app.zip.
