@@ -8,7 +8,17 @@ Helper methods for writing cross platform (iPad, iPhone, Android) tests in Ruby 
 
 Make sure you're using Ruby 1.9.3+ with upgraded rubygems and bundler.
 
+#### Install
+
 ```
-gem update --system
-gem update bundler
+gem update --system ;\
+gem update bundler ;\
+gem uninstall -aIx app_lib ;\
+gem install --no-rdoc --no-ri app_lib
 ```
+
+#### Run from Source
+
+`pry -r ./lib/app_lib.rb`
+
+Then `start_driver`
