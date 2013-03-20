@@ -34,7 +34,7 @@ end
 # @param index [Integer] the index
 # @return [Element] the found element of type tag_name
 def ele_index tag_name, index
-  $driver.find_element :xpath, %Q(#{tag_name}[@index=#{index}])
+  find_eles(tag_name)[index]
 end
 
 # Get all elements exactly matching tag name
