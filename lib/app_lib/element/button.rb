@@ -27,10 +27,12 @@
 =end
 
 # Find a button by text and optionally number.
-# @param text [String] the text to exactly match
+# @param text [String, Integer] the text to exactly match. If int then the button at that index is returned.
 # @param number [Integer] the occurance of the button matching text. Defaults to the first button.
 # @return [Button] the button found with text and matching number
 def button text, number=0
+  return ele_index :button, text if text.is_a? Numeric
+
   number >= 1 ? button_text_num( text, number ) :
   button_text( text )
 end

@@ -28,9 +28,10 @@ def last_textfield
 end
 
 # Get the first textfield that matches text.
-# @param text [String] the text to match exactly
+# @param text [String, Integer] the text to match exactly. If int then the textfield at that index is returned.
 # @return [Textfield]
 def textfield text
+  return ele_index :textfield, text if text.is_a? Numeric
   find_ele_by_text :textfield, text
 end
 

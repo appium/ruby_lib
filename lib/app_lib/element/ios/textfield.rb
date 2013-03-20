@@ -33,9 +33,16 @@ def last_textfield
 end
 
 # Get the first textfield that matches text.
-# @param text [String] the text to match exactly
+# @param text [String, Integer] the text to match exactly. If int then the textfield at that index is returned.
 # @return [Textfield]
 def textfield text
+  # Don't use ele_index because that only works on one element type.
+  # iOS needs to combine textfield and secure to match Android.
+  if text.is_a? Numeric
+    js = textfield_js 'r = r.length > 0 ? $(r[#{text}]) : r;'
+    return execute_script(js).first
+  end
+
   # find_ele_by_text :textfield, text
   js = %Q(
     var t = au.getElementsByXpath('textfield[@text="#{text}"]').value;

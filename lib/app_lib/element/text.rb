@@ -26,9 +26,10 @@ def last_text
 end
 
 # Get the first element that matches text.
-# @param text [String] the text to find exactly
+# @param text [String, Integer] the text to find exactly. If int then the text at that index is returned.
 # @return [Text]
 def text text
+  return ele_index :text, text if text.is_a? Numeric
   find_ele_by_text :text, text
 end
 
