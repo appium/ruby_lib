@@ -5,3 +5,5 @@ def self.add_to_path path
 end
 
 add_to_path 'app_lib'
+
+require 'console'
