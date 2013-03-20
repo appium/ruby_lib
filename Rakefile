@@ -4,7 +4,7 @@ require 'date'
 
 # Defines gem name.
 def repo_name; 'app_lib'; end
-def version_file; 'lib/ruby_console/version.rb'; end
+def version_file; "lib/#{repo_name}/version.rb"; end
 def version_rgx; /VERSION = '([^']+)'/m; end
 
 def version
