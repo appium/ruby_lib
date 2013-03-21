@@ -156,6 +156,13 @@ def no_wait
   $driver.manage.timeouts.implicit_wait = 0
 end
 
+# Set implicit wait to timeout, defaults to 30.
+# @param timeout [Integer] the timeout in seconds
+# @return [void]
+def set_wait timeout=30
+  $driver.manage.timeouts.implicit_wait = timeout
+end
+
 # The same as $driver.execute_script
 # @return the object returned by execute_script
 def execute_script script, *args
