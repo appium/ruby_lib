@@ -29,6 +29,12 @@ def wait &block
   result
 end
 
+# Presses the back button on Android.
+# @return [void]
+def back
+  $driver.navigate.back
+end
+
 # Get the element of type tag_name at matching index.
 # @param tag_name [String] the tag name to find
 # @param index [Integer] the index
