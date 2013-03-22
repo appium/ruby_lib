@@ -1,8 +1,6 @@
-#### appium_lib
+#### appium_lib [![Dependency Status](https://gemnasium.com/appium/ruby_lib.png)](https://gemnasium.com/appium/ruby_lib)
 
 `appium/ruby_lib` is published as `appium_lib` on RubyGems.
-
-[![Dependency Status](https://gemnasium.com/appium/ruby_lib.png)](https://gemnasium.com/appium/ruby_lib)
 
 - [Documentation for appium_lib](http://www.rubydoc.info/github/appium/appium_lib/master/toplevel)
 
