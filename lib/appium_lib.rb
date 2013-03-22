@@ -5,6 +5,6 @@ def self.add_to_path file, path=false
  $:.unshift path unless $:.include? path
 end
 
-add_to_path __FILE__, 'app_lib'
+add_to_path __FILE__, 'appium_lib'
 
 require 'console'

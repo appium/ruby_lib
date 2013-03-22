@@ -1,24 +1,31 @@
-#### app_lib
+#### appium_lib
 
-[![Dependency Status](https://gemnasium.com/bootstraponline/app_lib.png)](https://gemnasium.com/bootstraponline/app_lib)
+[![Dependency Status](https://gemnasium.com/appium/appium_lib.png)](https://gemnasium.com/appium/appium_lib)
 
-- [Documentation for app_lib](http://www.rubydoc.info/github/bootstraponline/app_lib/master/toplevel)
+- [Documentation for appium_lib](http://www.rubydoc.info/github/appium/appium_lib/master/toplevel)
 
 Helper methods for writing cross platform (iPad, iPhone, Android) tests in Ruby using Appium.
 
 Make sure you're using Ruby 1.9.3+ with upgraded rubygems and bundler.
 
-#### Install
+#### Install / Upgrade
 
-```
+Update rubygems and bundler.
+
+```ruby
 gem update --system ;\
-gem update bundler ;\
-gem uninstall -aIx app_lib ;\
-gem install --no-rdoc --no-ri app_lib
+gem update bundler
+```
+
+Install the latest gem release.
+
+```ruby
+gem uninstall -aIx appium_lib ;\
+gem install --no-rdoc --no-ri appium_lib
 ```
 
 #### Run from Source
 
-`pry -r ./lib/app_lib.rb`
+`pry -r ./lib/appium_lib.rb`
 
 Then `start_driver`

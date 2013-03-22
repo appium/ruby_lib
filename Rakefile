@@ -3,7 +3,7 @@ require 'rake'
 require 'date'
 
 # Defines gem name.
-def repo_name; 'app_lib'; end
+def repo_name; 'appium_lib'; end # ruby_lib published as appium_lib
 def version_file; "lib/#{repo_name}/version.rb"; end
 def version_rgx; /VERSION = '([^']+)'/m; end
 

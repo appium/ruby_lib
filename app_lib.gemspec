@@ -8,20 +8,20 @@ end
 
 add_to_path 'lib'
 
-require 'app_lib/version'
+require 'appium_lib/version'
 
 Gem::Specification.new do |s|
   # 1.8.x is not supported
   s.required_ruby_version = '>= 1.9.3'
 
-  s.name = 'app_lib'
+  s.name = 'appium_lib'
   s.version = AppLib::VERSION
   s.date = AppLib::DATE
   s.license = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
   s.description = s.summary = 'Ruby lib for use with Appium'
   s.description += '.' # avoid identical warning
   s.authors = s.email = [ 'code@bootstraponline.com' ]
-  s.homepage = 'https://github.com/bootstraponline/app_lib'
+  s.homepage = 'https://github.com/appium/ruby_lib' # published as appium_lib
   s.require_paths = [ 'lib' ]
 
   s.add_runtime_dependency 'selenium-webdriver', '~> 2.31.0'
