@@ -2,7 +2,7 @@
 
 `appium/ruby_lib` is published as `appium_lib` on RubyGems.
 
-- [Documentation for appium_lib](http://www.rubydoc.info/github/appium/appium_lib/master/toplevel)
+- [Documentation for appium_lib](http://www.rubydoc.info/github/appium/ruby_lib/master/frames)
 
 Helper methods for writing cross platform (iPad, iPhone, Android) tests in Ruby using Appium.
 
