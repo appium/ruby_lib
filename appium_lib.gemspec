@@ -15,8 +15,8 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 1.9.3'
 
   s.name = 'appium_lib'
-  s.version = AppLib::VERSION
-  s.date = AppLib::DATE
+  s.version = AppiumLib::VERSION
+  s.date = AppiumLib::DATE
   s.license = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
   s.description = s.summary = 'Ruby lib for use with Appium'
   s.description += '.' # avoid identical warning
