@@ -61,6 +61,10 @@ task :release => :gem do
   sh "gem push #{repo_name}-#{version}.gem"
 end
 
+desc 'Build and release a new gem to rubygems.org (same as release)'
+task :publish => :release do
+end
+
 desc 'Build a new gem'
 task :gem do
   `chmod 0600 ~/.gem/credentials`
