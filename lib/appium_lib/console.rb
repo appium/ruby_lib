@@ -27,6 +27,9 @@ APP_PACKAGE = ENV['APP_PACKAGE'] unless defined?(APP_PACKAGE)
 # Android app starting activity.
 APP_ACTIVITY = ENV['APP_ACTIVITY'] unless defined?(APP_ACTIVITY)
 
+# Android app waiting activity
+APP_WAIT_ACTIVITY = ENV['APP_WAIT_ACTIVITY'] unless defined?(APP_WAIT_ACTIVITY)
+
 # Sauce Username
 SAUCE_USERNAME = ENV['SAUCE_USERNAME'] unless defined?(SAUCE_USERNAME)
 
@@ -74,7 +77,8 @@ def android_capabilities
     name: APP_NAME || 'Ruby Console Android Appium',
     app: absolute_app_path,
     :'app-package' => APP_PACKAGE,
-    :'app-activity' => APP_ACTIVITY
+    :'app-activity' => APP_ACTIVITY,
+    :'app-wait-activity' => APP_WAIT_ACTIVITY
   }
 end
 
