@@ -240,7 +240,8 @@ def get_inspect
 end
 
 # Android only. Intended for use with console.
-def inspect
+# Inspects and prints the current page.
+def page
   puts get_inspect
   nil
 end
