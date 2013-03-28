@@ -4,6 +4,7 @@
 - [Documentation for appium_lib](http://www.rubydoc.info/github/appium/ruby_lib/master/frames)
 
 Helper methods for writing cross platform (iPad, iPhone, Android) tests in Ruby using Appium.
+There's also an [Appium Ruby Console](https://github.com/appium/ruby_console) which uses this lib.
 
 Make sure you're using Ruby 1.9.3+ with upgraded rubygems and bundler.
 
