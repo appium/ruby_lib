@@ -29,6 +29,24 @@ def wait &block
   result
 end
 
+# Return the first element matching name.
+# on Android name is content description
+# on iOS name is the accessibility label or the text.
+# @param name [String] the name to search for
+# @return [Element] the first matching element
+def name name
+  $driver.find_element :name, name
+end
+
+# Return all element matching name.
+# on Android name is content description
+# on iOS name is the accessibility label or the text.
+# @param name [String] the name to search for
+# @return [Array<Element>] all matching elements
+def names name
+  $driver.find_elements :name, name
+end
+
 # Presses the back button on Android.
 # @return [void]
 def back
