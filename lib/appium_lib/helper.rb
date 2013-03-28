@@ -198,3 +198,49 @@ end
 def password length=1
   '•' * length
 end
+
+# Android only.
+def get_inspect
+  def run node
+    r = []
+
+    run_internal = lambda do |node|
+      if node.kind_of? Array
+        node.each { |node| run_internal.call node }
+        return
+      end
+
+      keys = node.keys
+      return if keys.empty?
+      
+      obj = {}
+      obj.merge!( { desc: node["@content-desc"] } ) if keys.include?("@content-desc") && !node["@content-desc"].empty?
+      obj.merge!( { text: node["@text"] } ) if keys.include?("@text") && !node["@text"].empty?
+      obj.merge!( { class: node["@class"] } ) if keys.include?("@class") && !obj.empty?
+
+      r.push obj if !obj.empty?
+      run_internal.call node['node'] if keys.include?('node')
+    end
+
+    run_internal.call node
+    r
+  end
+
+  json = JSON.parse($driver.page_source)
+  node = json['hierarchy']
+  results = run node
+
+  out = ''
+  results.each { |e|
+    out += e[:class].split('.').last + "\n"
+    out += "  text: #{e[:text]}\n" unless e[:text].nil?
+    out += "  desc: #{e[:desc]}\n" unless e[:desc].nil?
+  }
+  out
+end
+
+# Android only. Intended for use with console.
+def inspect
+  puts get_inspect
+  nil
+end
