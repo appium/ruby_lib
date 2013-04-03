@@ -146,11 +146,8 @@ def start_driver
   # when no commands are entered after 60 seconds.
   $driver.execute_script 'mobile: setCommandTimeout', timeout: 9999
 
-  # Must set implicit_wait to zero or $ commands will fail.
-  # execute_script "$('button')"
-  # $ commands fail anyway now so set implicit wait.
-  # https://github.com/appium/appium/issues/214
-  $driver.manage.timeouts.implicit_wait = 30
+  # Set implicit wait by default unless we're using Pry.
+  $driver.manage.timeouts.implicit_wait = 30 unless defined?(Pry)
 
   $driver
 end
