@@ -29,6 +29,20 @@ def wait &block
   result
 end
 
+# Return the first element matching text.
+# @param text [String] the text to search for
+# @return [Element] the first matching element
+def txt text
+  txts(text).first
+end
+
+# Return all elements matching text.
+# @param text [String] the text to search for
+# @return [Array<Element>] all matching elements
+def txts text
+  $driver.find_elements :xpath, "//*[contains(@text, '#{text}')]"
+end
+
 # Return the first element matching name.
 # on Android name is content description
 # on iOS name is the accessibility label or the text.
@@ -38,7 +52,7 @@ def name name
   $driver.find_element :name, name
 end
 
-# Return all element matching name.
+# Return all elements matching name.
 # on Android name is content description
 # on iOS name is the accessibility label or the text.
 # @param name [String] the name to search for
