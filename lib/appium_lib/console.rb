@@ -65,6 +65,9 @@ require 'alert'
 # combine secure & textfield on iOS to match Android behavior.
 $os == :ios ? require('ios/textfield') :
               require('android/textfield')
+              
+# implicit_wait default_wait
+$default_wait = 30
 
 # WebDriver capabilities. Must be valid for Sauce to work.
 # https://github.com/jlipps/appium/blob/master/app/android.js
@@ -147,7 +150,7 @@ def start_driver
   $driver.execute_script 'mobile: setCommandTimeout', timeout: 9999
 
   # Set implicit wait by default unless we're using Pry.
-  $driver.manage.timeouts.implicit_wait = 30 unless defined?(Pry)
+  $driver.manage.timeouts.implicit_wait = $default_wait unless defined?(Pry)
 
   $driver
 end
@@ -160,7 +163,7 @@ end
 # Set implicit wait to timeout, defaults to 30.
 # @param timeout [Integer] the timeout in seconds
 # @return [void]
-def set_wait timeout=30
+def set_wait timeout=$default_wait
   $driver.manage.timeouts.implicit_wait = timeout
 end
 
