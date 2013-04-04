@@ -52,6 +52,8 @@ task :release => :gem do
     exit!
   end
 
+  Rake::Task['notes'].execute
+
   # Commit then pull before pushing.
   sh "git commit --allow-empty -am 'Release #{version}'"
   sh 'git pull'
@@ -79,4 +81,44 @@ desc 'Install gem'
 task :install => :gem do
  `gem uninstall -aIx #{repo_name}`
  sh "gem install --no-rdoc --no-ri #{repo_name}-#{version}.gem"
+end
+
+desc 'Update release notes'
+task :notes do
+  tags = `git tag`.split "\n"
+  pairs = []
+  tags.each_index { |a| pairs.push tags[a] + '...' + tags[a+1] unless tags[a+1].nil? }
+
+  notes = ''
+
+  dates = `git log --tags --simplify-by-decoration --pretty="format:%d %ad" --date=short`.split "\n"
+  pairs.reverse! # pairs are in reverse order.
+
+  tag_date = []
+  pairs.each do |pair|
+    tag = pair.split('...').last
+    dates.each do |line|
+      # regular tag, or tag on master.
+      if line.include?('(' + tag + ')') || line.include?(tag + ',')
+        tag_date.push tag + ' ' + line.match(/\d{4}-\d{2}-\d{2}/)[0]
+        break
+      end
+    end
+  end
+
+  pairs.each_index do |a|
+    data =`git log --pretty=oneline #{pairs[a]}`
+    new_data = ''
+    data.split("\n").each do |line|
+      hex = line.match(/[a-zA-Z0-9]+/)[0];
+      # use first 7 chars to match GitHub
+      new_data += "- [#{hex[0...7]}](https://github.com/appium/ruby_lib/commit/#{hex}) #{line.gsub(hex, '').strip}\n"
+    end
+    data = new_data + "\n"
+
+    # last pair is the released version.
+    notes += "#### #{tag_date[a]}\n\n" + data + "\n"
+  end
+
+  File.open('release_notes.md', 'w') { |f| f.write notes.to_s.strip }
 end
