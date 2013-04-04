@@ -167,8 +167,43 @@ def set_wait timeout=$default_wait
   $driver.manage.timeouts.implicit_wait = timeout
 end
 
+# Returns the default client side wait.
+# This value is independent of what the server is using
+# @return [Integer]
+def get_wait
+  $default_wait
+end
+
+# Returns existance of element.
+#
+# Example:
+#
+# exists { button('sign in') } ? puts('true') : puts('false')
+#
+# @return [Boolean]
+def exists &search_block
+  pre_check = 0
+  post_check = $default_wait
+
+  set_wait pre_check # set wait to zero
+
+  # the element exists unless an error is raised.
+  exists = true
+
+  begin
+    search_block.call # search for element
+  rescue
+    exists = false # error means it's not there
+  end
+
+  # restore wait
+  set_wait post_check
+
+  return exists
+end
+
 # The same as $driver.execute_script
-# @return the object returned by execute_script
+# @return [Object] the object returned by execute_script
 def execute_script script, *args
   $driver.execute_script script, *args
 end
