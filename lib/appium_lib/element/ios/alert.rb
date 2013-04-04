@@ -1,5 +1,5 @@
 # encoding: utf-8
-
+if $os == :ios
 # iOS only
 # Tap the alert button identified by value.
 # @param value [Integer, String] either an integer index of the button or the button's name
@@ -45,3 +45,5 @@ def alert_dismiss_text
   b = a.find_elements(:tag_name, :button)
   b.first.text if b && b.size >= 1
 end
+
+end # if $os == :ios

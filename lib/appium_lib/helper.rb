@@ -29,38 +29,6 @@ def wait &block
   result
 end
 
-# Return the first element matching text.
-# @param text [String] the text to search for
-# @return [Element] the first matching element
-def txt text
-  txts(text).first
-end
-
-# Return all elements matching text.
-# @param text [String] the text to search for
-# @return [Array<Element>] all matching elements
-def txts text
-  $driver.find_elements :xpath, "//*[contains(@text, '#{text}')]"
-end
-
-# Return the first element matching name.
-# on Android name is content description
-# on iOS name is the accessibility label or the text.
-# @param name [String] the name to search for
-# @return [Element] the first matching element
-def name name
-  $driver.find_element :name, name
-end
-
-# Return all elements matching name.
-# on Android name is content description
-# on iOS name is the accessibility label or the text.
-# @param name [String] the name to search for
-# @return [Array<Element>] all matching elements
-def names name
-  $driver.find_elements :name, name
-end
-
 # Presses the back button on Android.
 # @return [void]
 def back
@@ -248,7 +216,7 @@ def get_inspect
   results.each { |e|
     out += e[:class].split('.').last + "\n"
     out += "  text: #{e[:text]}\n" unless e[:text].nil?
-    out += "  desc: #{e[:desc]}\n" unless e[:desc].nil?
+    out += "  name: #{e[:desc]}\n" unless e[:desc].nil?
   }
   out
 end

@@ -12,20 +12,17 @@ class Selenium::WebDriver::Element
     self.attribute :name
   end
   
-  # Fixes NoMethodError: undefined method `type' for #<Selenium::WebDriver::Element
-  def type
-    self.attribute :type
-  end
-  
+  # Use tag_name to get element's type.
+  #
   # Tag name appears to be the same as type.
   #
   # Fixes Selenium::WebDriver::Error::UnknownError: Not yet implemented
   def tag_name
-    type
+    self.attribute :type
   end
 
   # Cross platform way of entering text into a textfield
-  def set_value text
+  def type text
   # enter text then tap window to hide the keyboard.
   js = %Q(
     au.getElement('#{self.ref}').setValue('#{text}');
@@ -35,7 +32,7 @@ class Selenium::WebDriver::Element
   end if $os == :ios
 
   # Cross platform way of entering text into a textfield
-  def set_value text
+  def type text
     self.send_keys text
   end if $os == :android
 

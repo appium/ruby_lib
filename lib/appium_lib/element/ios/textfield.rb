@@ -1,10 +1,9 @@
 # encoding: utf-8
+if $os == :ios
 # UIATextField & UIASecureTextField methods
 #
 # Find textfield and then secure elements in one server call
 # to match Android.
-
-if $os == :ios
 
 # Get an array of textfield texts.
 # @return [Array<String>]
