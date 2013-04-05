@@ -5,6 +5,14 @@ name, names, text, text should match substring and case insensitive.
 
 iOS .name() is the accessibility attribute. If not defined, then .label() is used instead.
 This differs from Android where name (the content description) is empty when not set.
+
+name defaults to label when undefined. value is never a default so that must be
+included in a new search.
+
+The search order is:
+1. name
+2. label (implied by name)
+3. value
 =end
 
 # Return the first element matching text.
@@ -12,9 +20,17 @@ This differs from Android where name (the content description) is empty when not
 # @return [Element] the first matching element
 def text text
   # returnElems requires a wrapped $(element).
+  # set to empty array when length is zero to prevent hang.
   js = %Q(
-    var element = $(au.mainWindow.elements().firstWithPredicate("name contains[c] '#{text}'"));
-    au._returnElems(element);
+    var eles = au.mainWindow.elements();
+    var a = eles.firstWithPredicate("name contains[c] '#{text}'");
+    if ( a.length === 0 ) {
+      a = eles.firstWithPredicate("value contains[c] '#{text}'");
+      if ( a.length === 0 ) {
+        a = [];
+      }
+    }
+    au._returnElems($(a));
   )
 
   execute_script(js).first
@@ -27,7 +43,12 @@ def texts text
   # returnElems requires a wrapped $(element).
   # must call toArray when using withPredicate instead of firstWithPredicate.
   js = %Q(
-    var a = au.mainWindow.elements().withPredicate("name contains[c] '#{text}'").toArray();
+    var eles = au.mainWindow.elements();
+    var a = eles.withPredicate("name contains[c] '#{text}'").toArray();
+    a = a.concat( eles.withPredicate("value contains[c] '#{text}'").toArray() );
+    if ( a.length === 0 ) {
+      a = [];
+    }
     au._returnElems($(a));
   )
 
