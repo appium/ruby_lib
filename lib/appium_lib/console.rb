@@ -58,14 +58,20 @@ require 'button'
 require 'text'
 require 'window'
 require 'patch'
-require 'alert'
 
 # Android combines secure and textfield.
 # iOS differentiates between secure and textfield.
 # combine secure & textfield on iOS to match Android behavior.
-$os == :ios ? require('ios/textfield') :
-              require('android/textfield')
-              
+if $os == :ios
+  require 'ios/textfield'
+  require 'ios/alert'
+  require 'ios/generic'
+else
+  require 'android/textfield'
+  require 'android/alert'
+  require 'android/generic'
+end
+
 # implicit_wait default_wait
 $default_wait = 30
 
