@@ -16,6 +16,11 @@ The search order is:
 2. label (implied by name)
 3. value
 
+The element order is:
+1. button
+2. textfield
+3. secure textfield
+4. all elements
 =end
 
 # Return the first element matching text.
@@ -24,12 +29,35 @@ The search order is:
 def find text
   # returnElems requires a wrapped $(element).
   # set to empty array when length is zero to prevent hang.
+  #
+  # UIAElementNil when not matched
+  #
+  # 1. secureTextFields
+  # 2. textFields
+  # 3. buttons
+  # 4. elements
   js = %Q(
-    var eles = au.mainWindow.elements();
-    var a = eles.firstWithPredicate("name contains[c] '#{text}' || label contains[c] '#{text}' || value contains[c] '#{text}'");
+    function isNil( a ) {
+      return a.type() === 'UIAElementNil';
+    }
+
+    var w = au.mainWindow;
+    var search = "name contains[c] '#{text}' || label contains[c] '#{text}' || value contains[c] '#{text}'";
+    var a = w.secureTextFields().firstWithPredicate(search);
+    if ( isNil(a) ) {
+      a = w.textFields().firstWithPredicate(search);
+      if ( isNil(a) ) {
+        a = w.buttons().firstWithPredicate(search);
+        if ( isNil(a) ) {
+          a = w.elements().firstWithPredicate(search);
+        }
+      }
+    }
+
     if ( a.length === 0 ) {
       a = [];
     }
+
     au._returnElems($(a));
   )
 
@@ -43,11 +71,14 @@ def finds text
   # returnElems requires a wrapped $(element).
   # must call toArray when using withPredicate instead of firstWithPredicate.
   js = %Q(
-    var eles = au.mainWindow.elements();
-    var a = eles.withPredicate("name contains[c] '#{text}' || label contains[c] '#{text}' || value contains[c] '#{text}'").toArray();
+    var w = au.mainWindow;
+    var search = "name contains[c] '#{text}' || label contains[c] '#{text}' || value contains[c] '#{text}'";
+    var a = w.elements().withPredicate(search).toArray();
+
     if ( a.length === 0 ) {
       a = [];
     }
+
     au._returnElems($(a));
   )
 
