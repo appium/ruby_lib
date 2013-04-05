@@ -15,12 +15,6 @@ The search order is:
 1. name
 2. label (implied by name)
 3. value
-
-The element order is:
-1. button
-2. textfield
-3. secure textfield
-4. all elements
 =end
 
 # Return the first element matching text.
