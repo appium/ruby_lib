@@ -71,13 +71,16 @@ iOS uses accessibility label with a fallback to text.
 0. `(Array<String>) textfields` Get an array of textfield texts.
 
 #### text
-0. `(Text) text(index)` Find a text by index.
-0. `(Array<Text>) e_texts` Get an array of text elements.
-0. `(Text) first_text` Get the first text element.
-0. `(Text) last_text` Get the last text element.
-0. `(Text) text(text)` Get the first element that matches text.
-0. `(Text) text_include(text)` Get the first textfield that includes text.
-0. `(Array<String>) texts` Get an array of text texts.
+
+The Static Text methods have been prefixed with `s_` to avoid conflicting with the generic text methods.
+
+0. `(Text) s_text(index)` Find a text by index.
+0. `(Array<Text>) s_e_texts` Get an array of text elements.
+0. `(Text) s_first_text` Get the first text element.
+0. `(Text) s_last_text` Get the last text element.
+0. `(Text) s_text(text)` Get the first element that matches text.
+0. `(Text) s_text_include(text)` Get the first textfield that includes text.
+0. `(Array<String>) s_texts` Get an array of text texts.
 
 #### window
 0. `(Object) window_size` Get the window's size.
