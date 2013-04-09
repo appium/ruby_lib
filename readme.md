@@ -29,3 +29,7 @@ gem install --no-rdoc --no-ri appium_lib
 `pry -r ./lib/appium_lib.rb`
 
 Then `start_driver`
+
+#### Documentation
+
+See [docs.md](https://github.com/appium/ruby_lib/blob/master/docs.md)
