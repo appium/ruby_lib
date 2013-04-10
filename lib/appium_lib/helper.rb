@@ -266,3 +266,13 @@ def page element
   children.each { |c| page c } if children
   nil
 end if $os == :ios
+
+# JavaScript code from https://github.com/appium/appium/blob/master/app/android.js
+#
+# Math.round((duration * 1000) / 200)
+# (.20 * 1000) / 200 = 1
+#
+# We want steps to be exactly 1. If it's zero then a tap is used instead of a swipe.
+def fast_duration
+  0.20
+end
