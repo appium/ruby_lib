@@ -219,11 +219,50 @@ def get_inspect
     out += "  name: #{e[:desc]}\n" unless e[:desc].nil?
   }
   out
-end
+end if $os == :android
 
 # Android only. Intended for use with console.
 # Inspects and prints the current page.
 def page
   puts get_inspect
   nil
-end
+end if $os == :android
+
+def page element
+
+  def empty ele
+    (ele['name'] || ele['label'] || ele['value']) == nil
+  end
+
+  def fix_space s
+    # char code 160 (name, label) vs 32 (value) will break comparison.
+    # convert string to binary and remove 160.
+    # \xC2\xA0
+    s.force_encoding('binary').gsub("\xC2\xA0".force_encoding('binary'), ' ') if s
+  end
+
+  if ! empty( element )
+    puts "#{element['type']}"
+    name = fix_space element['name']
+    label = fix_space element['label']
+    value = fix_space element['value']
+
+    if name == label && name == value
+      puts "   name, label, value: #{name}" if name
+    elsif name == label
+      puts "   name, label: #{name}" if name
+      puts "   value: #{value}" if value
+    elsif name == value
+      puts "   name, value: #{name}" if name
+      puts "  label: #{label}" if label
+    else
+      puts "   name: #{name}" if name
+      puts "  label: #{label}" if label
+      puts "  value: #{value}" if value
+    end
+  end
+
+  children = element['children']
+  children.each { |c| page c } if children
+  nil
+end if $os == :ios
