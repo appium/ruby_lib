@@ -112,7 +112,10 @@ end
 def absolute_app_path
     raise 'APP_PATH environment variable not set!' if APP_PATH.nil?
     return APP_PATH if APP_PATH.match(/^http/) # public URL for Sauce
-    return APP_PATH if APP_PATH.match(/^\//) # absolute file path
+    if APP_PATH.match(/^\//) # absolute file path
+      raise "App doesn't exist. #{APP_PATH}" unless File.exist? APP_PATH 
+      return APP_PATH
+    end
     file = File.join(File.dirname(__FILE__), APP_PATH)
     raise "App doesn't exist #{file}" unless File.exist? file
     file
