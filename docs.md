@@ -39,10 +39,12 @@ text      | UIAStaticText
 - `source` Prints a JSON view of the current page.
 - `page` Prints the content descriptions and text values on the current page.
 - `(Element) find(value)` Returns the first element that contains value.
-- `(Element) name(name)` Returns the first element matching name. Android name is the content description.
+- `(Element) finds(value)` Returns all elements containing value (iOS only for now).
+- `(Element) name(name)` Returns the first element containing name. Android name is the content description.
 iOS uses accessibility label with a fallback to text.
-- `(Array<Element>) names(name)` Returns all elements matching name.
-
+- `(Array<Element>) names(name)` Returns all elements containing name.
+- `(Element) text(text)` Returns the first element containing text.
+- `(Array<Element>) texts(text)` Returns all elements containing text.
 --
 
 #### alert
