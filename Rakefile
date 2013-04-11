@@ -4,6 +4,7 @@ require 'date'
 
 # Defines gem name.
 def repo_name; 'appium_lib'; end # ruby_lib published as appium_lib
+def gh_name; 'ruby_lib'; end # the name as used on github.com
 def version_file; "lib/#{repo_name}/version.rb"; end
 def version_rgx; /VERSION = '([^']+)'/m; end
 
@@ -80,8 +81,8 @@ end
 
 desc 'Install gem'
 task :install => :gem do
- `gem uninstall -aIx #{repo_name}`
- sh "gem install --no-rdoc --no-ri #{repo_name}-#{version}.gem"
+  `gem uninstall -aIx #{repo_name}`
+  sh "gem install --no-rdoc --no-ri #{repo_name}-#{version}.gem"
 end
 
 desc 'Update release notes'
@@ -113,7 +114,7 @@ task :notes do
     data.split("\n").each do |line|
       hex = line.match(/[a-zA-Z0-9]+/)[0];
       # use first 7 chars to match GitHub
-      new_data += "- [#{hex[0...7]}](https://github.com/appium/ruby_lib/commit/#{hex}) #{line.gsub(hex, '').strip}\n"
+      new_data += "- [#{hex[0...7]}](https://github.com/appium/#{gh_name}/commit/#{hex}) #{line.gsub(hex, '').strip}\n"
     end
     data = new_data + "\n"
 
