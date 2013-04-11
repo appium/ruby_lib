@@ -1,3 +1,23 @@
+#### v0.0.28 2013-04-11
+
+- [70606a4](https://github.com/appium/ruby_lib/commit/70606a43cebcd0c19b98a1876fb929f03db7bb0e) Release 0.0.28
+- [61d1943](https://github.com/appium/ruby_lib/commit/61d19439c8597ca3562028d6c985370a5d43fa26) Update docs.md
+- [7676a90](https://github.com/appium/ruby_lib/commit/7676a90af8a1951817fcc8c49ddef46577cf5726) Add iOS name, names, text, texts
+- [7bc936c](https://github.com/appium/ruby_lib/commit/7bc936c63fff14780595a9a9fd360670d6e00178) Update webdriver
+- [e3646d3](https://github.com/appium/ruby_lib/commit/e3646d311873f82287e2a14a8c699c2d097c5a6c) Add fast_duration
+- [22ac58a](https://github.com/appium/ruby_lib/commit/22ac58ab3f48cc51019fafde19efdc012d5b8c2b) Check that app path exists
+- [217bca9](https://github.com/appium/ruby_lib/commit/217bca9e85c5e5e4a21832c34cc715476b0dd181) Add page for iOS
+- [2abf365](https://github.com/appium/ruby_lib/commit/2abf365017555c37e95cfa57f0142b0a2fa944a8) Update docs.md
+- [a1d26ff](https://github.com/appium/ruby_lib/commit/a1d26ff13912e301079cc8ca222013850b660d21) Add link to docs.md
+- [e4d27c9](https://github.com/appium/ruby_lib/commit/e4d27c95e344ca7b25512044b65cbdbe4a9dce82) Update docs.md
+- [2cf20a0](https://github.com/appium/ruby_lib/commit/2cf20a026ef33e727b1da360634668ddda70518d) Create docs.md
+- [e1f470e](https://github.com/appium/ruby_lib/commit/e1f470e0a2b9a6cf94ffa20edbc244e31c0375e8) Add find for Android
+- [37bb4e9](https://github.com/appium/ruby_lib/commit/37bb4e90b29e5adb4438b287b6387a504c94b5c4) Update comment
+- [aaeba81](https://github.com/appium/ruby_lib/commit/aaeba817376dd8e3cadeab37d096abc0170b565b) Add order to find
+- [73b757c](https://github.com/appium/ruby_lib/commit/73b757cd28c5bc85b98d6e747f79f7ee33af5022) Define find and finds to search everything
+- [ebd6c1b](https://github.com/appium/ruby_lib/commit/ebd6c1bc7d3f8be01fdf5346786c2b5fb2da8deb) Fix text and texts on iOS
+
+
 #### v0.0.27 2013-04-05
 
 - [fb4af20](https://github.com/appium/ruby_lib/commit/fb4af206c114cf8f75fcb41cdbbea0ba728bf7e6) Release 0.0.27

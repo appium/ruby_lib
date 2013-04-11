@@ -52,12 +52,13 @@ task :release => :gem do
     exit!
   end
 
-  Rake::Task['notes'].execute
-
   # Commit then pull before pushing.
   sh "git commit --allow-empty -am 'Release #{version}'"
   sh 'git pull'
   sh "git tag v#{version}"
+  # update notes now that there's a new tag
+  Rake::Task['notes'].execute
+  sh "git commit --allow-empty -am 'Update release notes'"
   sh 'git push origin master'
   sh "git push origin v#{version}"
   sh "gem push #{repo_name}-#{version}.gem"
