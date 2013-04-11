@@ -1,3 +1,11 @@
+#### v0.0.27 2013-04-05
+
+- [fb4af20](https://github.com/appium/ruby_lib/commit/fb4af206c114cf8f75fcb41cdbbea0ba728bf7e6) Release 0.0.27
+- [ca00d82](https://github.com/appium/ruby_lib/commit/ca00d82fb8e716d5941ec0ee6b38b207329b915e) Fix require
+- [ad00639](https://github.com/appium/ruby_lib/commit/ad006393ce8b6dc071c98b2edf73c32707d37762) Update readme.md
+- [80027ba](https://github.com/appium/ruby_lib/commit/80027ba6caca5d79345a9abf8cf1b8b9573fad9d) Update release notes
+
+
 #### v0.0.26 2013-04-04
 
 - [07fed25](https://github.com/appium/ruby_lib/commit/07fed259a743d9f3f3d72bfc8c8b9eac7b26d724) Release 0.0.26
