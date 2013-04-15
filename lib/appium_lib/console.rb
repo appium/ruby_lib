@@ -72,9 +72,6 @@ else
   require 'android/generic'
 end
 
-# implicit_wait default_wait
-$default_wait = 30
-
 # WebDriver capabilities. Must be valid for Sauce to work.
 # https://github.com/jlipps/appium/blob/master/app/android.js
 def android_capabilities
@@ -140,9 +137,11 @@ end
 
 # Creates a new global driver and quits the old one if it exists.
 # @return [Selenium::WebDriver] the new global driver
-def start_driver
+def start_driver wait=30
   @client = @client || Selenium::WebDriver::Remote::Http::Default.new
   @client.timeout = 999999
+
+  $default_wait = wait
 
   # If the driver already exists, quit before creating a new driver.
   driver_quit
