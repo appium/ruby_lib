@@ -42,16 +42,7 @@ def textfield text
     return execute_script(js).first
   end
 
-  # find_ele_by_text :textfield, text
-  js = %Q(
-    var t = au.getElementsByXpath('textfield[@text="#{text}"]').value;
-    var s = au.getElementsByXpath('secure[@text="#{text}"]').value;
-    t.concat(s)[0];
-  )
-
-  puts js if defined?(Pry)
-
-  execute_script js
+  textfield_include text
 end
 
 # Get the first textfield that includes text.
@@ -61,6 +52,22 @@ def textfield_include text
   js = %Q(
     var t = au.getElementsByXpath('textfield[contains(@text, "#{text}")]').value;
     var s = au.getElementsByXpath('secure[contains(@text, "#{text}")]').value;
+    t.concat(s)[0];
+  )
+
+  puts js if defined?(Pry)
+
+  execute_script js
+end
+
+# Get the first textfield that exactly matches text.
+# @param text [String] the text the textfield must exactly match
+# @return [Textfield]
+def textfield_exact text
+  # find_ele_by_text :textfield, text
+  js = %Q(
+    var t = au.getElementsByXpath('textfield[@text="#{text}"]').value;
+    var s = au.getElementsByXpath('secure[@text="#{text}"]').value;
     t.concat(s)[0];
   )
 
