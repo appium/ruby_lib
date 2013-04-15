@@ -1,3 +1,13 @@
+#### v0.0.29 2013-04-15
+
+- [1c1e0ee](https://github.com/appium/ruby_lib/commit/1c1e0eeed8d636dc81d3b74612405722b1134071) Release 0.0.29
+- [2278c8e](https://github.com/appium/ruby_lib/commit/2278c8e662d32df86933a63f14dea4df431a95e5) Add wait param to start_driver
+- [f5f82c0](https://github.com/appium/ruby_lib/commit/f5f82c0f98291e0f8b8ae0baa6285ad4b62cc34e) Default to partial match
+- [2e7f8c6](https://github.com/appium/ruby_lib/commit/2e7f8c6b09aa433d3712685f6842a052dd4847b3) Update webdriver
+- [b7b6caa](https://github.com/appium/ruby_lib/commit/b7b6caa8ab0c2683626aed265ee6ec2feece37f0) Use gh_name
+- [6562cd6](https://github.com/appium/ruby_lib/commit/6562cd64734888c761c0373fd866e8c15b2ddf8e) Update release notes
+
+
 #### v0.0.28 2013-04-11
 
 - [70606a4](https://github.com/appium/ruby_lib/commit/70606a43cebcd0c19b98a1876fb929f03db7bb0e) Release 0.0.28
