@@ -1,8 +1,5 @@
 # encoding: utf-8
 =begin
-Run with:
-pry -r ./console.rb
-
 Based on simple_test.rb
 https://github.com/appium/appium/blob/82995f47408530c80c3376f4e07a1f649d96ba22/sample-code/examples/ruby/simple_test.rb
 https://github.com/appium/appium/blob/c58eeb66f2d6fa3b9a89d188a2e657cca7cb300f/LICENSE
