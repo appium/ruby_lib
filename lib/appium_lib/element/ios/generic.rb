@@ -36,7 +36,7 @@ def first_ele_js predicate
     }
 
     var w = au.mainWindow;
-    var search = #{predicate};
+    var search = "#{predicate}";
     var a = w.secureTextFields().firstWithPredicate(search);
     if ( isNil(a) ) {
       a = w.textFields().firstWithPredicate(search);
@@ -59,7 +59,7 @@ end
 def all_ele_js predicate
   %Q(
     var w = au.mainWindow;
-    var search = #{predicate};
+    var search = "#{predicate}";
     var a = w.elements().withPredicate(search).toArray();
 
     if ( a.length === 0 ) {
