@@ -149,8 +149,7 @@ def start_driver wait=30
   begin
     $driver = Selenium::WebDriver.for(:remote, http_client: @client, desired_capabilities: capabilities, url: server_url)
   rescue Errno::ECONNREFUSED
-    puts 'ERROR: Unable to connect to Appium. Is the server running?'
-    exit
+    raise 'ERROR: Unable to connect to Appium. Is the server running?'
   end
 
   # Set timeout to a large number so that Appium doesn't quit
