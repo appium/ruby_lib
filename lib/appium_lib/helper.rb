@@ -40,7 +40,8 @@ end
 # @param index [Integer] the index
 # @return [Element] the found element of type tag_name
 def ele_index tag_name, index
-  find_eles(tag_name)[index]
+  # XPath index starts at 1. ruby_lib index starts at 0
+  find_element :xpath, "//#{tag_name}[#{index + 1}]"
 end
 
 # Get all elements exactly matching tag name
