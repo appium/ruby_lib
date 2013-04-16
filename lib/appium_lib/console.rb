@@ -151,7 +151,7 @@ def start_driver wait=30
 
   # Set timeout to a large number so that Appium doesn't quit
   # when no commands are entered after 60 seconds.
-  $driver.execute_script 'mobile: setCommandTimeout', timeout: 9999
+  mobile :setCommandTimeout, timeout: 9999
 
   # Set implicit wait by default unless we're using Pry.
   $driver.manage.timeouts.implicit_wait = $default_wait unless defined?(Pry)
