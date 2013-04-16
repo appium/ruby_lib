@@ -1,3 +1,11 @@
+#### v0.0.30 2013-04-16
+
+- [6d65a9c](https://github.com/appium/ruby_lib/commit/6d65a9c2895b1b66556b12fee4fc9649f558ede1) Release 0.0.30
+- [5692f96](https://github.com/appium/ruby_lib/commit/5692f9604a09b6198f8ada7823d8f74858b8af88) Fix quote
+- [ee17332](https://github.com/appium/ruby_lib/commit/ee173329758ea486d32d6887439de39a749ceba0) Use driver_quit
+- [5a71419](https://github.com/appium/ruby_lib/commit/5a71419c931ab19f8ab2816e1e5ee35ff457b2a0) Update release notes
+
+
 #### v0.0.29 2013-04-15
 
 - [1c1e0ee](https://github.com/appium/ruby_lib/commit/1c1e0eeed8d636dc81d3b74612405722b1134071) Release 0.0.29
