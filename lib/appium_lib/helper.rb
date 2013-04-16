@@ -149,8 +149,8 @@ end
 # @param tag_name [String] the tag to match
 # @return [Element]
 def first_ele tag_name
-  tag = find_eles tag_name
-  tag = tag.first unless tag.nil?
+  # XPath index starts at 1
+  find_element :xpath, "//#{tag_name}[1]"
 end
 
 # Get the last tag that matches tag_name
