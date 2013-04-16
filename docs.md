@@ -210,8 +210,10 @@ After do |scenario|
 end
 
 at_exit do
+  # selenium-webdriver (2.32.1) or better can use
+  # $driver.session_id
   ID = $driver.send(:bridge).session_id
-  $driver.quit
+  driver_quit
   
   if !SAUCE_USERNAME.nil? && !SAUCE_ACCESS_KEY.nil?
     URL = "https://#{SAUCE_USERNAME}:#{SAUCE_ACCESS_KEY}@saucelabs.com/rest/v1/#{SAUCE_USERNAME}/jobs/#{ID}"
