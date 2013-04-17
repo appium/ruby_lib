@@ -77,7 +77,12 @@ def find_eles_attr tag_name, attribute
   )
 
   $driver.execute_script js
-end
+end if $os == :ios
+
+def find_eles_attr tag_name, attribute
+  # on android, assume the attr is name (which falls back to text).
+  mobile :find, [ 'all', [ [26, "(?i).*#{tag_name}.*"], [100] ] ]
+end if $os == :android
 
 # iOS only. Android uses uiautomator instead of uiautomation.
 # Get an array of attribute values from elements exactly matching tag name.
@@ -99,7 +104,7 @@ def find_2_eles_attr tag_name_1, tag_name_2, attribute
   )
 
   $driver.execute_script js
-end
+end if $os == :ios # Android doesn't use find_2_eles_attr
 
 # Get the first tag that exactly matches tag and text.
 # @param tag [String] the tag name to match
