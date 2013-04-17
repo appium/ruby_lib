@@ -228,8 +228,14 @@ def get_inspect
   out = ''
   results.each { |e|
     out += e[:class].split('.').last + "\n"
-    out += "  text: #{e[:text]}\n" unless e[:text].nil?
-    out += "  name: #{e[:desc]}\n" unless e[:desc].nil?
+
+    out += "  class: #{e[:class]}\n"
+    if ( e[:text] == e[:desc] )
+      out += "  text, name: #{e[:text]}\n" unless e[:text].nil?
+    else
+      out += "  text: #{e[:text]}\n" unless e[:text].nil?
+      out += "  name: #{e[:desc]}\n" unless e[:desc].nil?
+    end
   }
   out
 end if $os == :android
