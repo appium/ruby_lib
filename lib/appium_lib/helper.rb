@@ -165,8 +165,7 @@ end
 # @param tag_name [String] the tag to match
 # @return [Element]
 def last_ele tag_name
-  tag = find_eles tag_name
-  tag = tag.last unless tag.nil?
+  xpath "//#{tag_name}[last()]"
 end
 
 # Prints a JSON view of the current page
