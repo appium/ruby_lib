@@ -11,7 +11,7 @@ end
 
 # Get an array of text elements.
 # @return [Array<Text>]
-def s_e_texts
+def e_s_texts
   find_eles :text
 end
 
