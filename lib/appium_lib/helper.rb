@@ -79,9 +79,49 @@ def find_eles_attr tag_name, attribute
   $driver.execute_script js
 end if $os == :ios
 
+# Returns an array of android classes that match the tag name
+def tag_name_to_android tag_name
+  tag_name = tag_name.to_s.downcase.strip
+
+  def prefix *tags
+    tags.map!{ |tag| "android.widget.#{tag}" }
+  end
+
+  # must match names in AndroidElementClassMap (Appium's Java server)
+  case tag_name
+    when 'button'
+      prefix 'Button', 'ImageButton'
+    when 'text'
+      prefix 'TextView'
+    when 'list'
+      prefix 'ListView'
+    when 'frame'
+      prefix 'FrameLayout'
+    when 'linear'
+      prefix 'LinearLayout'
+    when 'textfield'
+      prefix 'EditText'
+  end # return result of case
+end
+
 def find_eles_attr tag_name, attribute
-  # on android, assume the attr is name (which falls back to text).
-  mobile :find, [ 'all', [ [26, "(?i).*#{tag_name}.*"], [100] ] ]
+=begin
+sel1 = [ [4, 'android.widget.Button'], [100] ]
+sel2 = [ [4, 'android.widget.ImageButton'], [100] ]
+
+args = [ 'all', sel1, sel2 ]
+
+mobile :find, args
+=end
+  array = ['all']
+
+  tag_name_to_android(tag_name).each do |name|
+    # on android, assume the attr is name (which falls back to text).
+    # sel.className(name).getStringAttribute("name")
+    array.push [ [4, name], [100] ]
+  end
+
+  mobile :find, array
 end if $os == :android
 
 # iOS only. Android uses uiautomator instead of uiautomation.
