@@ -104,7 +104,7 @@ end
 # Converts environment variable APP_PATH to an absolute path.
 # @return [String] APP_PATH as an absolute path
 def absolute_app_path
-    raise 'APP_PATH environment variable not set!' if APP_PATH.nil?
+    raise 'APP_PATH environment variable not set!' if APP_PATH.nil? || APP_PATH.empty?
     return APP_PATH if APP_PATH.match(/^http/) # public URL for Sauce
     if APP_PATH.match(/^\//) # absolute file path
       raise "App doesn't exist. #{APP_PATH}" unless File.exist? APP_PATH 
