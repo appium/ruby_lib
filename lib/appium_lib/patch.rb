@@ -79,8 +79,7 @@ module Selenium::WebDriver::Remote
         raise ArgumentError, "#{opts.inspect} invalid for #{command.inspect}"
       end
       
-      puts verb
-      puts path
+      puts "#{verb} /#{path.split('/')[2..-1].join('/')}"
       puts command_hash.to_json
       
       puts "-> #{verb.to_s.upcase} #{path}" if $DEBUG
