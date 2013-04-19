@@ -55,9 +55,9 @@ end
 # @param text [String] the text to search for
 # @return [Element] the first matching element
 def text text
-  # TODO: Use XPath index once it's implemented
-  # https://github.com/appium/appium/issues/295
-  texts(text).first
+  # Return the first element matching selector.
+  # s.textContains(value)
+  mobile :find, [ [ [3, text] ] ]
 end
 
 # Return all elements matching text.
