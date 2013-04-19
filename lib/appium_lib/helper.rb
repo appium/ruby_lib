@@ -86,6 +86,9 @@ def tag_name_to_android tag_name
   def prefix *tags
     tags.map!{ |tag| "android.widget.#{tag}" }
   end
+  # note that 'secure' is not an allowed tag name on android
+  # because android can't tell what a secure textfield is
+  # they're all edittexts.
 
   # must match names in AndroidElementClassMap (Appium's Java server)
   case tag_name
