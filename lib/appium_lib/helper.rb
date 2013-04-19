@@ -95,7 +95,7 @@ def tag_name_to_android tag_name
       prefix 'TextView'
     when 'list'
       prefix 'ListView'
-    when 'frame'
+    when 'window', 'frame'
       prefix 'FrameLayout'
     when 'linear'
       prefix 'LinearLayout'
