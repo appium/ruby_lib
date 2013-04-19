@@ -40,13 +40,20 @@ def find val
   args = [ [4, 'android.widget.EditText'], [7, val] ],
   # s.className('android.widget.EditText').textContains(value);
          [ [4, 'android.widget.EditText'], [3, val] ],
-  # s.classNameMatches('(?i).*button.*').descriptionContains(value);
-         [ [26, '(?i).*button.*'], [7, val] ],
-  # s.classNameMatches('(?i).*button.*').textContains(value);
-         [ [26, '(?i).*button.*'], [3, val] ],
-  # s.descriptionContains(value);
+
+         # s.className('android.widget.Button').descriptionContains(value);
+         [ [4, 'android.widget.Button'], [7, val] ],
+         # s.className('android.widget.Button').textContains(value);
+         [ [4, 'android.widget.Button'], [3, val] ],
+
+         # s.className('android.widget.ImageButton').descriptionContains(value);
+         [ [4, 'android.widget.ImageButton'], [7, val] ],
+         # s.className('android.widget.ImageButton').textContains(value);
+         [ [4, 'android.widget.ImageButton'], [3, val] ],
+
+         # s.descriptionContains(value);
          [ [7, val] ],
-  # s.textContains(value);
+         # s.textContains(value);
          [ [3, val] ]
   mobile :find, args
 end
