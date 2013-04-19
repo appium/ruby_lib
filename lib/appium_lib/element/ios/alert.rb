@@ -2,9 +2,17 @@
 if $os == :ios
 # iOS only
 # Tap the alert button identified by value.
+#
+# Click the ok button:
+#   alert_click 'OK'
+#
+# Click the first button:
+#   alert_click 0
+#
 # @param value [Integer, String] either an integer index of the button or the button's name
 # @return [void]
 def alert_click value
+  value = "'#{value}'" if value.is_a?(String)
   $driver.execute_script "UIATarget.localTarget().frontMostApp().alert().buttons()[#{value}].tap();"
 end
 
