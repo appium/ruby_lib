@@ -79,10 +79,16 @@ module Selenium::WebDriver::Remote
         raise ArgumentError, "#{opts.inspect} invalid for #{command.inspect}"
       end
       
-      puts "#{verb} /#{path.split('/')[2..-1].join('/')}"
-      puts command_hash.to_json
-      
-      puts "-> #{verb.to_s.upcase} #{path}" if $DEBUG
+      # change path from session/efac972c-941a-499c-803c-d7d008749/execute
+      # to /execute
+      # path may be nil, session, or not have anything after the session_id.
+      path_str = ''
+      path_match = path.match /.*\h{8}-\h{4}-\h{4}-\h{4}-\h{12}/
+      path_str = path.sub(path_match[0], '') unless path_match.nil?
+
+      puts "#{verb} #{path_str}"
+      puts command_hash.to_json unless command_hash.to_json == 'null'
+      # puts "verb: #{verb}, path #{path}, command_hash #{command_hash.to_json}"
       http.call verb, path, command_hash
     end # def
   end # class
