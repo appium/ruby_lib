@@ -294,7 +294,7 @@ def page
   nil
 end if $os == :android
 
-def page element
+def get_page element
 
   def empty ele
     (ele['name'] || ele['label'] || ele['value']) == nil
@@ -330,6 +330,11 @@ def page element
 
   children = element['children']
   children.each { |c| page c } if children
+  nil
+end if $os == :ios
+
+def page
+  get_page get_source
   nil
 end if $os == :ios
 
