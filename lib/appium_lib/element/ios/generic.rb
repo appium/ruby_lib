@@ -20,22 +20,30 @@ Android name = iOS name & label
 Android text = iOS value
 =end
 
+# returnElems requires a wrapped $(element).
+# set to empty array when length is zero to prevent hang.
+#
+# UIAElementNil when not matched
+#
+# 1. secureTextFields
+# 2. textFields
+# 3. buttons
+# 4. elements
+#
+# search takes the window to search.
+# start searching webview first.
+# window 0 is the main window.
+# window 1 is the 1st webview (if it exists)
+# must break instead of return because it's not a function.
+#
+# single element length is undefined when found and 0 when not found.
 def first_ele_js predicate
-  # returnElems requires a wrapped $(element).
-  # set to empty array when length is zero to prevent hang.
-  #
-  # UIAElementNil when not matched
-  #
-  # 1. secureTextFields
-  # 2. textFields
-  # 3. buttons
-  # 4. elements
   %Q(
-    function isNil( a ) {
-      return a.type() === 'UIAElementNil';
-    }
+  function isNil( a ) {
+    return a.type() === 'UIAElementNil';
+  }
 
-    var w = au.mainWindow;
+  function search( w ) {
     var search = "#{predicate}";
     var a = w.secureTextFields().firstWithPredicate(search);
     if ( isNil(a) ) {
@@ -48,11 +56,34 @@ def first_ele_js predicate
       }
     }
 
-    if ( a.length === 0 ) {
-      a = [];
-    }
+    return a;
+  }
 
-    au._returnElems($(a));
+  function search_web( windowIndex ) {
+    var a = undefined;
+
+    try {
+      a = UIATarget.localTarget().frontMostApp().windows()[windowIndex].scrollViews()[0].webViews()[0].elements().firstWithPredicate("#{predicate}");
+    } catch(e) {}
+
+    return a;
+  }
+
+  function run() {
+    var windows = au.mainApp.windows();
+    for (var i = 0, len = windows.length; i < len; i++) {
+      var result = search_web( i );
+      if ( isNil( result ) ) {
+        result = search( windows[ i ] );
+      }
+      if ( ! isNil( result ) ) {
+        return au._returnElems( $( [ result ] ) );
+      }
+    }
+    return au._returnElems( $( [] ) );
+  }
+
+  run();
   )
 end
 
