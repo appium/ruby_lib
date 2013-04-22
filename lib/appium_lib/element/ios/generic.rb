@@ -107,7 +107,9 @@ end
 def find text
   js = first_ele_js "name contains[c] '#{text}' || label contains[c] '#{text}' || value contains[c] '#{text}'"
 
-  execute_script(js).first
+  ele = execute_script(js).first
+  raise Selenium::WebDriver::Error::NoSuchElementError, '' if ele.nil?
+  ele
 end
 
 # Return all elements matching text.
