@@ -301,6 +301,8 @@ def get_page element
   end
 
   def fix_space s
+    # ints don't respond to force encoding
+    return s unless s.respond_to? :force_encoding
     # char code 160 (name, label) vs 32 (value) will break comparison.
     # convert string to binary and remove 160.
     # \xC2\xA0
