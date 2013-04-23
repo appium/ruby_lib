@@ -331,7 +331,7 @@ def get_page element
   end
 
   children = element['children']
-  children.each { |c| page c } if children
+  children.each { |c| get_page c } if children
   nil
 end if $os == :ios
 
