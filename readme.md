@@ -24,11 +24,18 @@ gem uninstall -aIx appium_lib ;\
 gem install --no-rdoc --no-ri appium_lib
 ```
 
-#### Run from Source
+#### Simple Usage
 
-`pry -r ./lib/appium_lib.rb`
+```ruby
+require 'appium_lib'
 
-Then `start_driver`
+# Start a driver based on APP_PATH
+Appium::Driver.new.start_driver
+
+# Start an Android driver
+apk = { 'APP_PATH' => ENV['APK_PATH'] }
+Appium::Driver.new(apk).start_driver
+```
 
 #### Documentation
 
