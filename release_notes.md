@@ -1,3 +1,40 @@
+#### v0.3.0 2013-04-25
+
+- [e08e88c](https://github.com/appium/ruby_lib/commit/e08e88c40cc56e132c5db18d9d5862028861d5f2) Release 0.3.0
+- [3f4dd63](https://github.com/appium/ruby_lib/commit/3f4dd63ab2ab2e97b457bb188a347af6c74bc7df) Update code style
+- [9bbb17e](https://github.com/appium/ruby_lib/commit/9bbb17e4079c7db1c033284c3120611f11f33656) Update readme.md
+- [354bf19](https://github.com/appium/ruby_lib/commit/354bf19090ca6b1a7812d067321452094f7a62c0) Add new usage example
+- [9668450](https://github.com/appium/ruby_lib/commit/96684503b091af581a78067342106feef5769a92) Restore top level methods
+- [b095c4a](https://github.com/appium/ruby_lib/commit/b095c4a94109c508fc286801d957e4535e27462d) Rewrite as a real lib
+- [71628ff](https://github.com/appium/ruby_lib/commit/71628ff13fc84c3b15f0dc3986a75bd3fcb7a28e) Fix page for iOS
+- [fce0d67](https://github.com/appium/ruby_lib/commit/fce0d676cb78582703934872a0256c55ad55d225) Add force encoding check
+- [aed2607](https://github.com/appium/ruby_lib/commit/aed26079c25ee2f80c8a1462dde7d589d30e014b) Raise NoSuchElementError on find
+- [82dc953](https://github.com/appium/ruby_lib/commit/82dc953a302fc4505d6c7c2121da0ccbe71e053a) Add webview support to find
+- [151edde](https://github.com/appium/ruby_lib/commit/151edde563bb907b07c7896794ecbb81568c3e29) Define no args page for iOS
+- [b3227f7](https://github.com/appium/ruby_lib/commit/b3227f73175697782c5dbc8f62ad911fcae88965) Quote button name when string
+- [0c0073d](https://github.com/appium/ruby_lib/commit/0c0073d0785ff64606c7887ec4eb83a8bcc5cafd) Add grid and relative
+- [3b87251](https://github.com/appium/ruby_lib/commit/3b87251d9e749590873c1bb118c88dd4b8fdaea0) Add note about secure tag on Android
+- [494f0e3](https://github.com/appium/ruby_lib/commit/494f0e39d9b1ebbafd731b4d311e4cc1cee02266) Add window mapping for Android
+- [e4d63a5](https://github.com/appium/ruby_lib/commit/e4d63a569c6fede034a1fd411ba9047327389063) Replace classNameMatches with className
+- [dd82100](https://github.com/appium/ruby_lib/commit/dd821001ee333801a36f2b5c01e4793e47fd037e) Fix find_eles_attr
+- [de7a1bc](https://github.com/appium/ruby_lib/commit/de7a1bc1112aa3d1930647738d85ae54270685d2) Improve webdriver debug messages
+- [dff41da](https://github.com/appium/ruby_lib/commit/dff41dae4a0d67200336b3daa677ab73157c0464) Better webdriver debug messages
+- [d2ca728](https://github.com/appium/ruby_lib/commit/d2ca72880c9bdfb853a5dcd63e3db16fa03d3f1d) Use textContains to fetch first element only
+- [1cbb69d](https://github.com/appium/ruby_lib/commit/1cbb69d8b9b69cdacfdfef663ab8ff31d506ba50) Check for empty app path
+- [427e105](https://github.com/appium/ruby_lib/commit/427e105be7865c5a637e62fb597cc034b4cda2ad) Fix format
+- [40cd10b](https://github.com/appium/ruby_lib/commit/40cd10bf72a080a0a34f43d189befab1b1f953e4) Update get_inspect
+- [bc1cdb1](https://github.com/appium/ruby_lib/commit/bc1cdb120ccef4598333838cfaf35c54d84ad79a) Add find_eles_attr
+- [e89f8bd](https://github.com/appium/ruby_lib/commit/e89f8bdad8919471ae12c11343b82c2d04d88027) Use XPath last()
+- [133cf98](https://github.com/appium/ruby_lib/commit/133cf98bd27c26d1a5438bdf4534149f0f8aef89) Add xpath, xpaths
+- [435eac0](https://github.com/appium/ruby_lib/commit/435eac0bd8020dd5fc30a9ae163f72ab4fda1565) Fix name
+- [050734f](https://github.com/appium/ruby_lib/commit/050734f7a64e8d9386b5c2e2ccb0ce653f816437) Update first_ele to use XPath #15
+- [f89dcc3](https://github.com/appium/ruby_lib/commit/f89dcc361b8c6762cad541fc9b5a2e1955b1cd27) Update ele_index to use XPath #15
+- [763d086](https://github.com/appium/ruby_lib/commit/763d0862135bf9e06ad177c9e3e20a83819b1775) Use mobile method
+- [09035ab](https://github.com/appium/ruby_lib/commit/09035ab053df980baf43b8d1128f68fe52df37a4) Remove old comment
+- [2d07ed0](https://github.com/appium/ruby_lib/commit/2d07ed0d5868c734168b31fb47881eaa4c74af1c) Raise instead of puts
+- [d904c0f](https://github.com/appium/ruby_lib/commit/d904c0f83cc6212f7682c3d15123f5db9a380312) Update release notes
+
+
 #### v0.0.30 2013-04-16
 
 - [6d65a9c](https://github.com/appium/ruby_lib/commit/6d65a9c2895b1b66556b12fee4fc9649f558ede1) Release 0.0.30
