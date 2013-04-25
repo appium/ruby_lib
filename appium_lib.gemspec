@@ -8,15 +8,15 @@ end
 
 add_to_path 'lib'
 
-require 'appium_lib/version'
+require 'appium_lib/common/version'
 
 Gem::Specification.new do |s|
   # 1.8.x is not supported
   s.required_ruby_version = '>= 1.9.3'
 
   s.name = 'appium_lib'
-  s.version = AppiumLib::VERSION
-  s.date = AppiumLib::DATE
+  s.version = Appium::VERSION
+  s.date = Appium::DATE
   s.license = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
   s.description = s.summary = 'Ruby lib for use with Appium'
   s.description += '.' # avoid identical warning

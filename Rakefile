@@ -5,7 +5,7 @@ require 'date'
 # Defines gem name.
 def repo_name; 'appium_lib'; end # ruby_lib published as appium_lib
 def gh_name; 'ruby_lib'; end # the name as used on github.com
-def version_file; "lib/#{repo_name}/version.rb"; end
+def version_file; "lib/#{repo_name}/common/version.rb"; end
 def version_rgx; /VERSION = '([^']+)'/m; end
 
 def version
@@ -79,9 +79,16 @@ desc 'Build a new gem (same as gem task)'
 task :build => :gem do
 end
 
+desc 'Uninstall gem'
+task :uninstall do
+  cmd = "gem uninstall -aIx #{repo_name}"
+  puts cmd
+  # rescue on gem not installed error.
+  begin; `cmd`; rescue; end
+end
+
 desc 'Install gem'
-task :install => :gem do
-  `gem uninstall -aIx #{repo_name}`
+task :install => [ :gem, :uninstall ] do
   sh "gem install --no-rdoc --no-ri #{repo_name}-#{version}.gem"
 end
 
