@@ -35,6 +35,10 @@ module Appium::Common
     @driver.navigate.back
   end
 
+  def session_id
+    @driver.session_id
+  end
+
   def xpath xpath_str
     find_element :xpath, xpath_str
   end
