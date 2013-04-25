@@ -35,8 +35,17 @@ module Appium::Common
     @driver.navigate.back
   end
 
+  # For Sauce Labs reporting
   def session_id
     @driver.session_id
+  end
+
+  def sauce_username
+    @sauce_username
+  end
+
+  def sauce_access_key
+    @sauce_access_key
   end
 
   def xpath xpath_str
@@ -140,5 +149,13 @@ module Appium::Common
   # @return [JSON]
   def get_source
     JSON.parse(@driver.page_source)
+  end
+
+  def find_name name
+    find_element :name, name
+  end
+
+  def find_names name
+    find_elements :name, name
   end
 end # module Appium::Common
