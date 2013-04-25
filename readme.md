@@ -33,7 +33,7 @@ require 'appium_lib'
 Appium::Driver.new.start_driver
 
 # Start an Android driver
-apk = { 'APP_PATH' => ENV['APK_PATH'] }
+apk = { 'APP_PATH' => ENV['APP_APK'] }
 Appium::Driver.new(apk).start_driver
 ```
 
