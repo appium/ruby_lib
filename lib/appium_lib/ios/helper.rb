@@ -66,7 +66,7 @@ module Appium::Ios
       s.force_encoding('binary').gsub("\xC2\xA0".force_encoding('binary'), ' ') if s
     end
 
-    if ! empty( element )
+    unless empty(element)
       puts "#{element['type']}"
       name = fix_space element['name']
       label = fix_space element['label']

@@ -25,7 +25,7 @@ module Appium::Common
   def wait &block
     # Rescue Timeout::Error: execution expired
     result = nil
-    timeout(30) { while(!(result = begin;block.call;rescue;end)) do; sleep(0.5) end }
+    timeout(30) { until (result = begin; block.call; rescue; end) do; sleep 0.5 end }
     result
   end
 

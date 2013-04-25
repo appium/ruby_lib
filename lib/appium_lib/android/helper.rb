@@ -91,7 +91,7 @@ module Appium::Android
       out += e[:class].split('.').last + "\n"
 
       out += "  class: #{e[:class]}\n"
-      if ( e[:text] == e[:desc] )
+      if e[:text] == e[:desc]
         out += "  text, name: #{e[:text]}\n" unless e[:text].nil?
       else
         out += "  text: #{e[:text]}\n" unless e[:text].nil?

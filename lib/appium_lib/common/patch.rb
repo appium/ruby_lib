@@ -59,7 +59,7 @@ module Selenium::WebDriver::Remote
       verb, path = COMMANDS[command] || raise(ArgumentError, "unknown command: #{command.inspect}")
       path       = path.dup
 
-      path[':session_id'] = @session_id if path.include?(":session_id")
+      path[':session_id'] = @session_id if path.include?(':session_id')
 
       begin
         opts.each { |key, value| path[key.inspect] = escaper.escape(value.to_s) }

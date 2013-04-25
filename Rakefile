@@ -1,12 +1,13 @@
+# encoding: utf-8
 require 'rubygems'
 require 'rake'
 require 'date'
 
 # Defines gem name.
-def repo_name; 'appium_lib'; end # ruby_lib published as appium_lib
-def gh_name; 'ruby_lib'; end # the name as used on github.com
-def version_file; "lib/#{repo_name}/common/version.rb"; end
-def version_rgx; /VERSION = '([^']+)'/m; end
+def repo_name; 'appium_lib' end # ruby_lib published as appium_lib
+def gh_name; 'ruby_lib' end # the name as used on github.com
+def version_file; "lib/#{repo_name}/common/version.rb" end
+def version_rgx; /VERSION = '([^']+)'/m end
 
 def version
   @version = @version || File.read(version_file).match(version_rgx)[1]
@@ -119,7 +120,7 @@ task :notes do
     data =`git log --pretty=oneline #{pairs[a]}`
     new_data = ''
     data.split("\n").each do |line|
-      hex = line.match(/[a-zA-Z0-9]+/)[0];
+      hex = line.match(/[a-zA-Z0-9]+/)[0]
       # use first 7 chars to match GitHub
       new_data += "- [#{hex[0...7]}](https://github.com/appium/#{gh_name}/commit/#{hex}) #{line.gsub(hex, '').strip}\n"
     end

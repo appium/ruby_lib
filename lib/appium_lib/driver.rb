@@ -191,7 +191,7 @@ module Appium
       @default_wait
     end
 
-    # Returns existance of element.
+    # Returns existence of element.
     #
     # Example:
     #
@@ -216,7 +216,7 @@ module Appium
       # restore wait
       set_wait post_check
 
-      return exists
+      exists
     end
 
     # The same as @driver.execute_script
