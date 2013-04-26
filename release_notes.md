@@ -1,3 +1,14 @@
+#### v0.3.2 2013-04-26
+
+- [eee6632](https://github.com/appium/ruby_lib/commit/eee6632251c40c8b2d6be9a361f429d7c89762f8) Release 0.3.2
+- [b22d747](https://github.com/appium/ruby_lib/commit/b22d7473f03e1b13a1ffd9ddc2ea5ca1396c4642) Default to app_activity if app_wait_activity is not set
+- [76198ad](https://github.com/appium/ruby_lib/commit/76198ad4d169d836007a247b2ebe8cad5391f512) Fix reset clearing iOS JavaScript
+- [445519b](https://github.com/appium/ruby_lib/commit/445519b4528c9c253865f76fdac921a22c31fbd7) Use Appium's detailed error messages
+- [e00964f](https://github.com/appium/ruby_lib/commit/e00964fa7b9ccd047b06f1432ddd1e62170306df) Update readme.md
+- [ef0b626](https://github.com/appium/ruby_lib/commit/ef0b626940d86fd07dbb86ac16b40dd5b0b5ce4a) Avoid invisible elements
+- [7278574](https://github.com/appium/ruby_lib/commit/727857450f0d2fc29ef53bbe4f5536619eedb250) Update release notes
+
+
 #### v0.3.1 2013-04-26
 
 - [e00fc6e](https://github.com/appium/ruby_lib/commit/e00fc6efb8f0c94ac6e196e831980ee96676b645) Release 0.3.1
