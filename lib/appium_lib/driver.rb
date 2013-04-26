@@ -32,6 +32,8 @@ module Appium
   require 'android/element/textfield'
 
   class Driver
+    @@loaded = false
+
     def initialize opts={}
       opts = {} if opts.nil?
       # Path to the .apk, .app or .app.zip.
@@ -78,6 +80,20 @@ module Appium
 
       # Save global reference to last created Appium driver for top level methods.
       $last_driver = self
+
+      # Promote exactly once the first time the driver is created.
+      # Subsequent drivers do not trigger promotion.
+      unless @@loaded
+        @@loaded = true
+        # Promote Appium driver methods to Object instance methods.
+        $last_driver.public_methods(false).each do | m |
+          Object.class_eval do
+            define_method m do | *args, &block |
+              $last_driver.send m, *args, &block
+            end
+          end
+        end
+      end
     end # def initialize
 
     # WebDriver capabilities. Must be valid for Sauce to work.

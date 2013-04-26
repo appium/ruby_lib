@@ -87,7 +87,7 @@ module Appium::Ios
   #
   # single element length is undefined when found and 0 when not found.
   def first_ele_js predicate
-    %Q(
+    <<-JS
     function isNil( a ) {
       return a.type() === 'UIAElementNil';
     }
@@ -133,11 +133,11 @@ module Appium::Ios
     }
 
     run();
-    )
+    JS
   end
 
   def all_ele_js predicate
-    %Q(
+    <<-JS
       var w = au.mainWindow;
       var search = "#{predicate}";
       var a = w.elements().withPredicate(search).toArray();
@@ -147,7 +147,7 @@ module Appium::Ios
       }
 
       au._returnElems($(a));
-    )
+    JS
   end
 
   # Return the first element matching text.
