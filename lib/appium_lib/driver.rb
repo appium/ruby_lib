@@ -71,6 +71,7 @@ module Appium
         # load Android specific methods
         extend Appium::Android
       else
+        @ios_js = [] # used to keep track of loaded JavaScript on iOS
         # load iOS specific methods
         extend Appium::Ios
       end

@@ -19,6 +19,55 @@ module Appium::Ios
   Android name = iOS name & label
   Android text = iOS value
 =end
+  def ios_js_loaded? method_name
+    @ios_js.include? method_name
+  end
+
+  def ios_js_load method_name
+    @ios_js.push method_name
+  end
+
+  def name_contains_js
+    # execute_script 'au.mainApp.getNameContains("sign")'
+    # execute_script 'au.mainApp.getNameContains("zzz")'
+    <<-JS
+    UIAElement.prototype.getNameContains = function(targetName) {
+      var target = UIATarget.localTarget();
+      target.pushTimeout(0);
+      var search = "name contains[c] '" + targetName + "' || label contains[c] '" + targetName + "'";
+      var searchElements = function(element) {
+        var children = element.elements();
+        var result = children.firstWithPredicate(search);
+        if (result.type() !== 'UIAElementNil') {
+          return result;
+        }
+
+        for ( var a = 0, len = children.length; a < len; a++) {
+          result = searchElements(children[a]);
+          if (result.type() !== 'UIAElementNil') {
+            return result;
+          }
+        }
+
+        return result;
+      };
+      var result = searchElements(this);
+      target.popTimeout();
+
+      if (result.type() === 'UIAElementNil') {
+        return {
+          status: 7,
+          value: {'message': 'An element could not be located on the page using the given search parameters.'}
+        };
+      }
+
+      return {
+        status: 0,
+        value: {ELEMENT: au.getId(result)}
+      };
+    };
+    JS
+  end
 
   # returnElems requires a wrapped $(element).
   # set to empty array when length is zero to prevent hang.
@@ -149,9 +198,12 @@ module Appium::Ios
   # @param name [String] the name to search for
   # @return [Element] the first matching element
   def name name
-    js = first_ele_js "name contains[c] '#{name}' || label contains[c] '#{name}'"
+    unless ios_js_loaded? 'name_contains_js'
+      execute_script name_contains_js
+      ios_js_load 'name_contains_js'
+    end
 
-    execute_script(js).first
+    execute_script %(au.mainApp.getNameContains("#{name}"))
   end
 
   # Return all elements matching name.
