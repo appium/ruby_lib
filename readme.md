@@ -30,14 +30,41 @@ gem install --no-rdoc --no-ri appium_lib
 require 'appium_lib'
 
 # Start a driver based on APP_PATH
-Appium::Driver.new.start_driver
+app = { 'APP_PATH' => '/path/to/MyiOS.app' }
+Appium::Driver.new(app).start_driver
 
 # Start an Android driver
 # must quit old driver before starting a new one
 driver_quit
-apk = { 'APP_PATH' => ENV['APP_APK'] }
+apk = { 'APP_PATH'          => '/path/to/the.apk',
+        'APP_PACKAGE'       => 'com.example.pkg',
+        'APP_ACTIVITY'      => 'act.Start',
+        'APP_WAIT_ACTIVITY' => 'act.Splash' }
 Appium::Driver.new(apk).start_driver
 ```
+
+#### iOS env vars
+
+- `APP_PATH` Path to the .app folder
+
+#### Android env vars
+
+- `APP_PATH` Path to the apk
+- `APP_PACKAGE` The APK's package
+- `APP_ACTIVITY` Activity to start
+- `APP_WAIT_ACTIVITY` Optional. Activity to wait for.
+
+#### Sauce Labs env vars
+
+- `APP_NAME` Name of the test run
+- `SAUCE_USERNAME` Sauce username
+- `SAUCE_ACCESS_KEY` Sauce API key
+
+#### Troubleshooting
+
+1. Does `adb kill-server; adb devices` list an active Android device?
+2. Have you defined the proper env vars? `APP_PATH, APP_PACKAGE, APP_ACTIVITY, APP_WAIT_ACTIVITY`
+3. Are you running appium from source? `node server.js -V --fast-reset`
 
 #### Documentation
 
