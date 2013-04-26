@@ -33,6 +33,8 @@ require 'appium_lib'
 Appium::Driver.new.start_driver
 
 # Start an Android driver
+# must quit old driver before starting a new one
+driver_quit
 apk = { 'APP_PATH' => ENV['APP_APK'] }
 Appium::Driver.new(apk).start_driver
 ```
