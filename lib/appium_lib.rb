@@ -5,7 +5,10 @@ $last_driver = nil
 # Invoke top level methods on last created Appium driver.
 def self.method_missing method, *args, &block
   raise "driver is nil. called #{method}" if $last_driver == nil
-  $last_driver.send method, *args, &block
+
+  $last_driver.respond_to?(method) ?
+    $last_driver.send( method, *args, &block ) :
+    super
 end
 
 module Appium
