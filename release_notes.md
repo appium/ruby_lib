@@ -1,3 +1,14 @@
+#### v0.3.1 2013-04-26
+
+- [e00fc6e](https://github.com/appium/ruby_lib/commit/e00fc6efb8f0c94ac6e196e831980ee96676b645) Release 0.3.1
+- [81d762a](https://github.com/appium/ruby_lib/commit/81d762a92293a9d59600154f1f0a5944aee5b439) Check method exists before calling
+- [4b3f3dc](https://github.com/appium/ruby_lib/commit/4b3f3dc91714b08aae0acee51aa1137c58f59acb) Fix method dispatch
+- [fa8b679](https://github.com/appium/ruby_lib/commit/fa8b679b816bd1507c7c9de3f301a3b8a7742d8f) Fix iOS name
+- [5be26c4](https://github.com/appium/ruby_lib/commit/5be26c411fcf75154301749cd790487d3dd71ea9) Add sauce methods and find_name
+- [b3724d3](https://github.com/appium/ruby_lib/commit/b3724d36a85188c7c8c85dadc313c6c43c8bed59) Add session_id
+- [433de96](https://github.com/appium/ruby_lib/commit/433de96d25907841fbc9110d79ad0c1fa6eacf73) Update release notes
+
+
 #### v0.3.0 2013-04-25
 
 - [e08e88c](https://github.com/appium/ruby_lib/commit/e08e88c40cc56e132c5db18d9d5862028861d5f2) Release 0.3.0
