@@ -30,15 +30,17 @@ module Appium::Ios
   def name_contains_js
     # execute_script 'au.mainApp.getNameContains("sign")'
     # execute_script 'au.mainApp.getNameContains("zzz")'
+    # must check .isVisible or a hidden element may be returned.
+    # .tap() will error on invisible elements.
     <<-JS
     UIAElement.prototype.getNameContains = function(targetName) {
       var target = UIATarget.localTarget();
       target.pushTimeout(0);
-      var search = "name contains[c] '" + targetName + "' || label contains[c] '" + targetName + "'";
+      var search = "(name contains[c] '" + targetName + "' || label contains[c] '" + targetName + "') && visible == 1";
       var searchElements = function(element) {
         var children = element.elements();
         var result = children.firstWithPredicate(search);
-        if (result.type() !== 'UIAElementNil') {
+        if (result.type() !== 'UIAElementNil' && result.isVisible() === 1) {
           return result;
         }
 
