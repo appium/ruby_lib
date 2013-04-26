@@ -81,3 +81,22 @@ module Selenium::WebDriver::Remote
     end # def
   end # class
 end if defined? Pry # module Selenium::WebDriver::Remote
+
+# Print Appium's origValue error messages.
+class Selenium::WebDriver::Remote::Response
+  def error_message
+    val = value
+
+    case val
+      when Hash
+        msg = val['origValue'] || val['message'] or return 'unknown error'
+        msg << " (#{ val['class'] })" if val['class']
+      when String
+        msg = val
+      else
+        msg = "unknown error, status=#{status}: #{val.inspect}"
+    end
+
+    msg
+  end
+end
