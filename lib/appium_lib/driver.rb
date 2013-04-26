@@ -108,7 +108,7 @@ module Appium
         app: absolute_app_path,
         :'app-package' => @app_package,
         :'app-activity' => @app_activity,
-        :'app-wait-activity' => @app_wait_activity
+        :'app-wait-activity' => @app_wait_activity || @app_activity
       }
     end
 
