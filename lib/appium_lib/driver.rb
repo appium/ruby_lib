@@ -254,6 +254,13 @@ module Appium
     def mobile method, *args
       raise 'Method must not be nil' if method.nil?
       raise 'Method must have .to_s' unless method.respond_to? :to_s
+
+      if method.to_s.strip.downcase == 'reset'
+        # reset will undefine custom iOS JavaScript
+        # mark js as unloaded so it'll reload next use.
+        @ios_js = [] if @ios_js
+      end
+
       @driver.execute_script "mobile: #{method.to_s}", *args
     end
 
