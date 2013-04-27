@@ -34,6 +34,9 @@ module Appium
   class Driver
     @@loaded = false
 
+    attr_reader :app_path, :app_name, :app_package, :app_activity,
+                :app_wait_activity, :sauce_username, :sauce_access_key,
+                :port, :os, :ios_js
     def initialize opts={}
       opts = {} if opts.nil?
       # Path to the .apk, .app or .app.zip.
@@ -156,6 +159,15 @@ module Appium
     def restart
       driver_quit
       start_driver
+    end
+
+    # return driver
+    def driver
+      @driver
+    end
+
+    def screenshot png_save_path
+      @driver.save_screenshot png_save_path
     end
 
     # Quits the driver
