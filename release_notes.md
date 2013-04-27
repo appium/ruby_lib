@@ -1,3 +1,12 @@
+#### v0.3.3 2013-04-27
+
+- [b0ca37c](https://github.com/appium/ruby_lib/commit/b0ca37cfe47318f029e1f2ad498a5c08338016d7) Release 0.3.3
+- [e7f55d9](https://github.com/appium/ruby_lib/commit/e7f55d92181660ea188a5123e6e4f447389c8d6d) Add driver method
+- [6d381fe](https://github.com/appium/ruby_lib/commit/6d381fe029bd9a5c11aa4d1a322d6afb603c6434) Update readme.md
+- [07da208](https://github.com/appium/ruby_lib/commit/07da208973ea4de64ec9605ef5dd38884771e8c6) Add troubleshooting steps
+- [7df8ddc](https://github.com/appium/ruby_lib/commit/7df8ddcd0edb294abaddd2424f0f6b45f086fb53) Update release notes
+
+
 #### v0.3.2 2013-04-26
 
 - [eee6632](https://github.com/appium/ruby_lib/commit/eee6632251c40c8b2d6be9a361f429d7c89762f8) Release 0.3.2
