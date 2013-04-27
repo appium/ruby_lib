@@ -29,7 +29,7 @@ gem install --no-rdoc --no-ri appium_lib
 ```ruby
 require 'appium_lib'
 
-# Start a driver based on APP_PATH
+# Start an iOS driver based on APP_PATH
 app = { 'APP_PATH' => '/path/to/MyiOS.app' }
 Appium::Driver.new(app).start_driver
 
