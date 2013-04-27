@@ -31,22 +31,35 @@ module Appium::Ios
     # execute_script 'au.mainApp.getNameContains("sign")'
     # execute_script 'au.mainApp.getNameContains("zzz")'
     # must check .isVisible or a hidden element may be returned.
-    # .tap() will error on invisible elements.
+    # .tap() may error on invisible elements.
+    # if there are no visible elements though, then it's useful
+    # to .tap() on an invisible element.
     <<-JS
     UIAElement.prototype.getNameContains = function(targetName) {
       var target = UIATarget.localTarget();
       target.pushTimeout(0);
-      var search = "(name contains[c] '" + targetName + "' || label contains[c] '" + targetName + "') && visible == 1";
+      var search = "name contains[c] '" + targetName + "' || label contains[c] '" + targetName + "'";
+      var result = {};
+      result.type = function() { return 'UIAElementNil'; };
+      result.isVisible = function() { return -1; };
+
       var searchElements = function(element) {
         var children = element.elements();
-        var result = children.firstWithPredicate(search);
-        if (result.type() !== 'UIAElementNil' && result.isVisible() === 1) {
-          return result;
+        var results = children.withPredicate(search);
+
+        for (var resIdx = 0, resLen = results.length; resIdx < resLen; resIdx++) {
+          var tmp = results[resIdx];
+          if (tmp.type() !== 'UIAElementNil') {
+            result = tmp;
+            if (tmp.isVisible() === 1) {
+              return tmp;
+            }
+          }
         }
 
         for ( var a = 0, len = children.length; a < len; a++) {
-          result = searchElements(children[a]);
-          if (result.type() !== 'UIAElementNil') {
+          searchElements(children[a]);
+          if (result.type() !== 'UIAElementNil' && result.isVisible() === 1) {
             return result;
           }
         }
