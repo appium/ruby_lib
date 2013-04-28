@@ -38,6 +38,9 @@ module Appium
                 :app_wait_activity, :sauce_username, :sauce_access_key,
                 :port, :os, :ios_js
     def initialize opts={}
+      # quit last driver
+      $driver.driver_quit if $driver
+
       opts = {} if opts.nil?
       # Path to the .apk, .app or .app.zip.
       # The path can be local or remote for Sauce.
@@ -81,18 +84,21 @@ module Appium
         extend Appium::Ios
       end
 
+      # apply os specific patches
+      patch_webdriver_element
+
       # Save global reference to last created Appium driver for top level methods.
-      $last_driver = self
+      $driver = self
 
       # Promote exactly once the first time the driver is created.
       # Subsequent drivers do not trigger promotion.
       unless @@loaded
         @@loaded = true
         # Promote Appium driver methods to Object instance methods.
-        $last_driver.public_methods(false).each do | m |
+        $driver.public_methods(false).each do | m |
           Object.class_eval do
             define_method m do | *args, &block |
-              $last_driver.send m, *args, &block
+              $driver.send m, *args, &block
             end
           end
         end

@@ -75,7 +75,7 @@ module Selenium::WebDriver::Remote
       path_str = path.sub(path_match[0], '') unless path_match.nil?
 
       puts "#{verb} #{path_str}"
-      puts command_hash.to_json unless command_hash.to_json == 'null'
+      ap command_hash.to_json unless command_hash.to_json == 'null'
       # puts "verb: #{verb}, path #{path}, command_hash #{command_hash.to_json}"
       http.call verb, path, command_hash
     end # def
