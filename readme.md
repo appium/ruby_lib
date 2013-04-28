@@ -8,6 +8,10 @@ Helper methods for writing cross platform (iPad, iPhone, Android) tests in Ruby 
 
 Make sure you're using Ruby 1.9.3+ with upgraded rubygems and bundler.
 
+#### Start appium server
+
+`node server.js -V --fast-reset --without-delay`
+
 #### Install / Upgrade
 
 Update rubygems and bundler.
