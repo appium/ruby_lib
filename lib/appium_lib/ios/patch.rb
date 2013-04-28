@@ -4,11 +4,13 @@ module Appium::Ios
   class Selenium::WebDriver::Element
     # Cross platform way of entering text into a textfield
     def type text
+      puts 'ios type'
       # enter text then tap window to hide the keyboard.
-      js = %Q(
-      au.getElement('#{self.ref}').setValue('#{text}');
-      au.lookup('window')[0].tap()
-    )
+      js = <<-JS
+        au.getElement('#{self.ref}').setValue('#{text}');
+        au.lookup('window')[0].tap();
+      JS
+      puts js
       @driver.execute_script js
     end
   end

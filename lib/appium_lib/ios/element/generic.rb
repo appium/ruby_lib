@@ -76,6 +76,7 @@ module Appium::Ios
         };
       }
 
+      console.log("Match is visible? " + result.isVisible())
       return {
         status: 0,
         value: {ELEMENT: au.getId(result)}
