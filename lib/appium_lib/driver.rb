@@ -37,35 +37,39 @@ module Appium
     attr_reader :app_path, :app_name, :app_package, :app_activity,
                 :app_wait_activity, :sauce_username, :sauce_access_key,
                 :port, :os, :ios_js
-    def initialize opts={}
+    def initialize options={}
       # quit last driver
       $driver.driver_quit if $driver
+
+      opts = {}
+      # convert to downcased symbols
+      options.each_pair { |k,v| opts[k.to_s.downcase.strip.intern] = v }
 
       opts = {} if opts.nil?
       # Path to the .apk, .app or .app.zip.
       # The path can be local or remote for Sauce.
-      @app_path = opts.fetch 'APP_PATH', ENV['APP_PATH']
+      @app_path = opts.fetch :app_path, ENV['APP_PATH']
       raise 'APP_PATH must be set.' if @app_path.nil?
 
       # The name to use for the test run on Sauce.
-      @app_name = opts.fetch 'APP_NAME', ENV['APP_NAME']
+      @app_name = opts.fetch :app_name, ENV['APP_NAME']
 
       # Android app package
-      @app_package = opts.fetch 'APP_PACKAGE', ENV['APP_PACKAGE']
+      @app_package = opts.fetch :app_package, ENV['APP_PACKAGE']
 
       # Android app starting activity.
-      @app_activity = opts.fetch 'APP_ACTIVITY', ENV['APP_ACTIVITY']
+      @app_activity = opts.fetch :app_activity, ENV['APP_ACTIVITY']
 
       # Android app waiting activity
-      @app_wait_activity = opts.fetch 'APP_WAIT_ACTIVITY', ENV['APP_WAIT_ACTIVITY']
+      @app_wait_activity = opts.fetch :app_wait_activity, ENV['APP_WAIT_ACTIVITY']
 
       # Sauce Username
-      @sauce_username = opts.fetch'SAUCE_USERNAME', ENV['SAUCE_USERNAME']
+      @sauce_username = opts.fetch :sauce_username, ENV['SAUCE_USERNAME']
 
       # Sauce Key
-      @sauce_access_key = opts.fetch 'SAUCE_ACCESS_KEY', ENV['SAUCE_ACCESS_KEY']
+      @sauce_access_key = opts.fetch :sauce_access_key, ENV['SAUCE_ACCESS_KEY']
 
-      @port = opts.fetch 'PORT', ENV['PORT'] || 4723
+      @port = opts.fetch :port, ENV['PORT'] || 4723
 
       @os = :ios
       @os = :android if @app_path.end_with?('.apk') || @app_path.end_with?('.apk.zip')
@@ -86,6 +90,9 @@ module Appium
 
       # apply os specific patches
       patch_webdriver_element
+
+      # enable debug patch
+      patch_webdriver_bridge if opts.fetch :debug, defined?(Pry)
 
       # Save global reference to last created Appium driver for top level methods.
       $driver = self

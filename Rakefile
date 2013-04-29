@@ -90,7 +90,7 @@ end
 
 desc 'Install gem'
 task :install => [ :gem, :uninstall ] do
-  sh "gem install --no-rdoc --no-ri #{repo_name}-#{version}.gem"
+  sh "gem install --no-rdoc --no-ri --local #{repo_name}-#{version}.gem"
 end
 
 desc 'Update release notes'

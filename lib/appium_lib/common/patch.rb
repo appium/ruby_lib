@@ -52,11 +52,11 @@ require 'selenium/webdriver/remote/http/default'
 # Show http calls to the Selenium server.
 #
 # Invaluable for debugging.
-module Selenium::WebDriver::Remote
-  class Bridge
+def patch_webdriver_bridge
+  Selenium::WebDriver::Remote::Bridge.class_eval do
     # Code from lib/selenium/webdriver/remote/bridge.rb
     def raw_execute(command, opts = {}, command_hash = nil)
-      verb, path = COMMANDS[command] || raise(ArgumentError, "unknown command: #{command.inspect}")
+      verb, path = Selenium::WebDriver::Remote::COMMANDS[command] || raise(ArgumentError, "unknown command: #{command.inspect}")
       path       = path.dup
 
       path[':session_id'] = @session_id if path.include?(':session_id')
@@ -75,12 +75,16 @@ module Selenium::WebDriver::Remote
       path_str = path.sub(path_match[0], '') unless path_match.nil?
 
       puts "#{verb} #{path_str}"
-      ap command_hash.to_json unless command_hash.to_json == 'null'
+      unless command_hash.nil? || command_hash.length == 0
+        print_command = command_hash.clone
+        print_command.delete :args if print_command[:args] == []
+        ap print_command
+      end
       # puts "verb: #{verb}, path #{path}, command_hash #{command_hash.to_json}"
       http.call verb, path, command_hash
     end # def
   end # class
-end if defined? Pry # module Selenium::WebDriver::Remote
+end # def
 
 # Print Appium's origValue error messages.
 class Selenium::WebDriver::Remote::Response
