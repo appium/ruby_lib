@@ -54,6 +54,9 @@ module Appium
       # The name to use for the test run on Sauce.
       @app_name = opts.fetch :app_name, ENV['APP_NAME']
 
+      # If key or env is defined, use selendroid else nil
+      @selendroid = opts.key?(:selendroid) ||  ENV['SELENDROID'] ? 'selendroid' : nil
+
       # Android app package
       @app_package = opts.fetch :app_package, ENV['APP_PACKAGE']
 
@@ -119,7 +122,7 @@ module Appium
         browserName: 'Android',
         platform: 'LINUX',
         version: '4.1',
-        device: 'Android',
+        device: @selendroid || 'Android',
         name: @app_name || 'Ruby Console Android Appium',
         app: absolute_app_path,
         :'app-package' => @app_package,
