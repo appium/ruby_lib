@@ -1,3 +1,15 @@
+#### v0.3.5 2013-04-30
+
+- [a886ef4](https://github.com/appium/ruby_lib/commit/a886ef4722a902fdef15ecfc7164299399f1d524) Release 0.3.5
+- [193eb71](https://github.com/appium/ruby_lib/commit/193eb716023f52506cdf599cff6aae4f4a3c1119) Fix JSON.parse
+- [54ba323](https://github.com/appium/ruby_lib/commit/54ba323721a704d3ceb34f71dd8e1fcf9069dd78) Use upstream get name contains
+- [6f66b46](https://github.com/appium/ruby_lib/commit/6f66b46725ee397cc437901e95431ec95935d9c2) Name contains moved upstream
+- [2d33b5c](https://github.com/appium/ruby_lib/commit/2d33b5ce4078d784f7f6f0ac07651166a466b34c) Update readme.md
+- [4a1f87e](https://github.com/appium/ruby_lib/commit/4a1f87e1f0524595d7bd15027b4a009a42b5ff83) Update example
+- [6177c49](https://github.com/appium/ruby_lib/commit/6177c497f9c114203e624f530e51f4f54a61788a) Rename get_wait
+- [e33f8fb](https://github.com/appium/ruby_lib/commit/e33f8fb96a97c30d765fe8b98288493b51dcb41c) Update release notes
+
+
 #### v0.3.4 2013-04-30
 
 - [ffdf104](https://github.com/appium/ruby_lib/commit/ffdf104ffdecb165cfe410976145134768756e30) Release 0.3.4
