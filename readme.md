@@ -41,7 +41,7 @@ Appium::Driver.new(app).start_driver
 # Start Android driver
 apk = { app_path: '/path/to/the.apk',
         app_package: 'com.example.pkg',
-        app_activity: 'act.Start',
+        app_activity: 'act.Start'
       }
 Appium::Driver.new(apk).start_driver
 ```
