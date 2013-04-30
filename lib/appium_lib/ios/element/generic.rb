@@ -27,64 +27,6 @@ module Appium::Ios
     @ios_js.push method_name
   end
 
-  def name_contains_js
-    # execute_script 'au.mainApp.getNameContains("sign")'
-    # execute_script 'au.mainApp.getNameContains("zzz")'
-    # must check .isVisible or a hidden element may be returned.
-    # .tap() may error on invisible elements.
-    # if there are no visible elements though, then it's useful
-    # to .tap() on an invisible element.
-    <<-JS
-    UIAElement.prototype.getNameContains = function(targetName) {
-      var target = UIATarget.localTarget();
-      target.pushTimeout(0);
-      var search = "name contains[c] '" + targetName + "' || label contains[c] '" + targetName + "'";
-      var result = {};
-      result.type = function() { return 'UIAElementNil'; };
-      result.isVisible = function() { return -1; };
-
-      var searchElements = function(element) {
-        var children = element.elements();
-        var results = children.withPredicate(search);
-
-        for (var resIdx = 0, resLen = results.length; resIdx < resLen; resIdx++) {
-          var tmp = results[resIdx];
-          if (tmp.type() !== 'UIAElementNil') {
-            result = tmp;
-            if (tmp.isVisible() === 1) {
-              return tmp;
-            }
-          }
-        }
-
-        for ( var a = 0, len = children.length; a < len; a++) {
-          searchElements(children[a]);
-          if (result.type() !== 'UIAElementNil' && result.isVisible() === 1) {
-            return result;
-          }
-        }
-
-        return result;
-      };
-      var result = searchElements(this);
-      target.popTimeout();
-
-      if (result.type() === 'UIAElementNil') {
-        return {
-          status: 7,
-          value: {'message': 'An element could not be located on the page using the given search parameters.'}
-        };
-      }
-
-      console.log("Match is visible? " + result.isVisible())
-      return {
-        status: 0,
-        value: {ELEMENT: au.getId(result)}
-      };
-    };
-    JS
-  end
-
   # returnElems requires a wrapped $(element).
   # set to empty array when length is zero to prevent hang.
   #
@@ -214,7 +156,7 @@ module Appium::Ios
   # @param name [String] the name to search for
   # @return [Element] the first matching element
   def name name
-    execute_script %(au.mainApp.getNameContains("#{name}"))
+    mobile :findElementNameContains, name: name
   end
 
   # Return all elements matching name.
