@@ -31,19 +31,18 @@ gem install --no-rdoc --no-ri appium_lib
 #### Simple Usage
 
 ```ruby
+require 'rubygems'
 require 'appium_lib'
 
-# Start an iOS driver based on APP_PATH
-app = { 'APP_PATH' => '/path/to/MyiOS.app' }
+# Start iOS driver
+app = { app_path: '/path/to/MyiOS.app'}
 Appium::Driver.new(app).start_driver
 
-# Start an Android driver
-# must quit old driver before starting a new one
-driver_quit
-apk = { 'APP_PATH'          => '/path/to/the.apk',
-        'APP_PACKAGE'       => 'com.example.pkg',
-        'APP_ACTIVITY'      => 'act.Start',
-        'APP_WAIT_ACTIVITY' => 'act.Splash' }
+# Start Android driver
+apk = { app_path: '/path/to/the.apk',
+        app_package: 'com.example.pkg',
+        app_activity: 'act.Start',
+      }
 Appium::Driver.new(apk).start_driver
 ```
 
