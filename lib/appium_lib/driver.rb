@@ -232,7 +232,7 @@ module Appium
     # Returns the default client side wait.
     # This value is independent of what the server is using
     # @return [Integer]
-    def get_wait
+    def default_wait
       @default_wait
     end
 
