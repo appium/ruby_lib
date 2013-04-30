@@ -20,12 +20,14 @@ module Appium::Common
 
   # Check every 0.5 seconds to see if block.call is true.
   # Give up after 30 seconds.
+  # @param max_wait [Integer] the maximum time in seconds to wait for
+  # @param interval [Float] the time in seconds to wait after calling the block
   # @param block [Block] the block to call
   # @return [Object] the result of block.call
-  def wait &block
+  def wait max_wait=30, interval=0.5, &block
     # Rescue Timeout::Error: execution expired
     result = nil
-    timeout(30) { until (result = begin; block.call; rescue; end) do; sleep 0.5 end }
+    timeout(max_wait) { until (result = begin; block.call; rescue; end) do; sleep interval end }
     result
   end
 
