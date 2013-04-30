@@ -214,11 +214,6 @@ module Appium::Ios
   # @param name [String] the name to search for
   # @return [Element] the first matching element
   def name name
-    unless ios_js_loaded? 'name_contains_js'
-      execute_script name_contains_js
-      ios_js_load 'name_contains_js'
-    end
-
     execute_script %(au.mainApp.getNameContains("#{name}"))
   end
 
