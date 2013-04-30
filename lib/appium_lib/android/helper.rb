@@ -82,7 +82,7 @@ module Appium::Android
       r
     end
 
-    json = JSON.parse(@driver.page_source)
+    json = get_source
     node = json['hierarchy']
     results = run node
 
