@@ -1,3 +1,16 @@
+#### v0.3.4 2013-04-30
+
+- [ffdf104](https://github.com/appium/ruby_lib/commit/ffdf104ffdecb165cfe410976145134768756e30) Release 0.3.4
+- [4edc9f6](https://github.com/appium/ruby_lib/commit/4edc9f6097e29d2816dceef546a819fd6ee431d2) Add params to wait
+- [da1c042](https://github.com/appium/ruby_lib/commit/da1c0424873fa5f859b1ec558356a3ad0721097b) Add selendroid launch support
+- [f398041](https://github.com/appium/ruby_lib/commit/f398041369884d8068950ab9e703a8a2d750082c) Use symbols for driver opts
+- [cf09a0d](https://github.com/appium/ruby_lib/commit/cf09a0d1ca8de835043f855cbd74ced9abb5f1b0) Add expected server opts
+- [fe6c7d7](https://github.com/appium/ruby_lib/commit/fe6c7d71dbaf7f7b383d117918de2498945406d4) Fix os specific patches
+- [d9b9c1a](https://github.com/appium/ruby_lib/commit/d9b9c1a2fcc1857e0e7c78d250fd59b84726d69b) Improve logging
+- [3b831b0](https://github.com/appium/ruby_lib/commit/3b831b089e02c4a53585d90ed009f5ad3cb982a7) Return invisible match if no visible result
+- [cdb11b6](https://github.com/appium/ruby_lib/commit/cdb11b6facde318af2524499c6473ea736865dde) Update release notes
+
+
 #### v0.3.3 2013-04-27
 
 - [b0ca37c](https://github.com/appium/ruby_lib/commit/b0ca37cfe47318f029e1f2ad498a5c08338016d7) Release 0.3.3
