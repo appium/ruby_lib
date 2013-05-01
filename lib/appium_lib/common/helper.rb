@@ -33,7 +33,6 @@ module Appium::Common
     # Rescue Timeout::Error: execution expired
     result = nil
     timeout max_wait do
-      puts "Result is nil? #{result.nil?} #{result}"
       until (result = begin; block.call || true; rescue; end)
         sleep interval
       end
