@@ -1,3 +1,11 @@
+#### v0.3.6 2013-05-01
+
+- [67e5c86](https://github.com/appium/ruby_lib/commit/67e5c867d38251687dc7ebd5de013db5712fcac3) Release 0.3.6
+- [a0a46f7](https://github.com/appium/ruby_lib/commit/a0a46f773a57c9ef7b92252afed467bd7cd01b96) Fix wait and add wait_true
+- [e7cde77](https://github.com/appium/ruby_lib/commit/e7cde775473bd3981cac5b356f78289f832091a9) Add wait example
+- [68a2fdd](https://github.com/appium/ruby_lib/commit/68a2fdde6851f8b24b953a380073b4957f128f06) Update release notes
+
+
 #### v0.3.5 2013-04-30
 
 - [a886ef4](https://github.com/appium/ruby_lib/commit/a886ef4722a902fdef15ecfc7164299399f1d524) Release 0.3.5
