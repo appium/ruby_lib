@@ -1,3 +1,10 @@
+#### v0.3.7 2013-05-01
+
+- [edfd20a](https://github.com/appium/ruby_lib/commit/edfd20a6ffdef8484b9f7b5eddb9c21815241d42) Release 0.3.7
+- [9f8511c](https://github.com/appium/ruby_lib/commit/9f8511c1416867df606dfb3d058f83ee277ce39a) Remove puts
+- [366da1f](https://github.com/appium/ruby_lib/commit/366da1f6e3c0621d55920bce244fc5aedd678e7d) Update release notes
+
+
 #### v0.3.6 2013-05-01
 
 - [67e5c86](https://github.com/appium/ruby_lib/commit/67e5c867d38251687dc7ebd5de013db5712fcac3) Release 0.3.6
