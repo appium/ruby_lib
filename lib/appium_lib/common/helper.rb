@@ -18,7 +18,12 @@ module Appium::Common
   #
   # find_element :text doesn't work so use XPath to find by text.
 
-  # Check every 0.5 seconds to see if block.call is true.
+  # Check every 0.5 seconds to see if block.call doesn't raise an exception.
+  # if .call raises an exception then it will be tried again.
+  # if .call doesn't raise an exception then it will stop waiting.
+  #
+  # Example: wait { name('back').click }
+  #
   # Give up after 30 seconds.
   # @param max_wait [Integer] the maximum time in seconds to wait for
   # @param interval [Float] the time in seconds to wait after calling the block
@@ -27,7 +32,29 @@ module Appium::Common
   def wait max_wait=30, interval=0.5, &block
     # Rescue Timeout::Error: execution expired
     result = nil
-    timeout(max_wait) { until (result = begin; block.call; rescue; end) do; sleep interval end }
+    timeout max_wait do
+      puts "Result is nil? #{result.nil?} #{result}"
+      until (result = begin; block.call || true; rescue; end)
+        sleep interval
+      end
+    end
+    result
+  end
+
+  # Check every 0.5 seconds to see if block.call returns true. nil is considered a failure.
+  # Give up after 30 seconds.
+  # @param max_wait [Integer] the maximum time in seconds to wait for
+  # @param interval [Float] the time in seconds to wait after calling the block
+  # @param block [Block] the block to call
+  # @return [Object] the result of block.call
+  def wait_true max_wait=30, interval=0.5, &block
+    # Rescue Timeout::Error: execution expired
+    result = nil
+    timeout max_wait do
+      until (result = begin; block.call; rescue; end)
+        sleep interval
+      end
+    end
     result
   end
 
