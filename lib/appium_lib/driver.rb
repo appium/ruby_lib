@@ -36,7 +36,7 @@ module Appium
 
     attr_reader :app_path, :app_name, :app_package, :app_activity,
                 :app_wait_activity, :sauce_username, :sauce_access_key,
-                :port, :os, :ios_js
+                :port, :os, :ios_js, :debug
     def initialize options={}
       # quit last driver
       $driver.driver_quit if $driver
@@ -76,7 +76,6 @@ module Appium
 
       @os = :ios
       @os = :android if @app_path.end_with?('.apk') || @app_path.end_with?('.apk.zip')
-      puts "OS is: #{@os}" if defined?(Pry)
 
       # load common methods
       extend Appium::Common
@@ -95,7 +94,12 @@ module Appium
       patch_webdriver_element
 
       # enable debug patch
-      patch_webdriver_bridge if opts.fetch :debug, defined?(Pry)
+      @debug = opts.fetch :debug, defined?(Pry)
+
+      if @debug
+        puts "OS is: #{@os}"
+        patch_webdriver_bridge
+      end
 
       # Save global reference to last created Appium driver for top level methods.
       $driver = self

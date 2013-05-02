@@ -55,8 +55,6 @@ module Appium::Ios
       t.concat(s)[0];
     )
 
-    puts js if defined? Pry
-
     execute_script js
   end
 
@@ -70,8 +68,6 @@ module Appium::Ios
       var s = au.getElementsByXpath('secure[@text="#{text}"]').value;
       t.concat(s)[0];
     )
-
-    puts js if defined? Pry
 
     execute_script js
   end
