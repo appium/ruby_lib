@@ -213,7 +213,8 @@ module Appium
 
       # Set timeout to a large number so that Appium doesn't quit
       # when no commands are entered after 60 seconds.
-      mobile :setCommandTimeout, timeout: 9999
+      # broken on selendroid: https://github.com/appium/appium/issues/513
+      mobile :setCommandTimeout, timeout: 9999 unless @selendroid
 
       # Set implicit wait by default unless we're using Pry.
       @driver.manage.timeouts.implicit_wait = @default_wait unless defined? Pry
