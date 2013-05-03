@@ -57,6 +57,11 @@ module Appium::Common
     result
   end
 
+  # Find by id. Useful for selendroid
+  def id id
+    find_element :id, id
+  end
+
   # Presses the back button on Android.
   # @return [void]
   def back
