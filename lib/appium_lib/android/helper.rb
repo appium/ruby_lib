@@ -54,9 +54,53 @@ module Appium::Android
     mobile :find, array
   end
 
+  def get_selendroid_inspect
+    def run node
+      r = []
+
+      run_internal = lambda do |node|
+        if node.kind_of? Array
+          node.each { |node| run_internal.call node }
+          return
+        end
+
+        keys = node.keys
+        return if keys.empty?
+
+        obj = {}
+        obj.merge!( { desc: node['name'] } ) if keys.include?('name') && !node['name'].empty?
+        obj.merge!( { text: node['value'] } ) if keys.include?('value') && !node['value'].empty?
+        obj.merge!( { class: node['type'] } ) if keys.include?('type') && !obj.empty?
+
+        r.push obj if !obj.empty?
+        run_internal.call node['children'] if keys.include?('children')
+      end
+
+      run_internal.call node
+      r
+    end
+
+    json = get_source
+    node = json['children']
+    results = run node
+
+    out = ''
+    results.each { |e|
+      out += e[:class].split('.').last + "\n"
+
+      out += "  class: #{e[:class]}\n"
+      if e[:text] == e[:desc]
+        out += "  text, name: #{e[:text]}\n" unless e[:text].nil?
+      else
+        out += "  text: #{e[:text]}\n" unless e[:text].nil?
+        out += "  name: #{e[:desc]}\n" unless e[:desc].nil?
+      end
+    }
+    out
+  end
 
   # Android only.
-  def get_inspect
+  def get_android_inspect
     def run node
       r = []
 
@@ -99,6 +143,10 @@ module Appium::Android
       end
     }
     out
+  end
+
+  def get_inspect
+    @selendroid ? get_selendroid_inspect : get_android_inspect
   end
 
   # Android only. Intended for use with console.
