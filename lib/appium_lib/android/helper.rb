@@ -68,8 +68,11 @@ module Appium::Android
         return if keys.empty?
 
         obj = {}
-        obj.merge!( { desc: node['name'] } ) if keys.include?('name') && !node['name'].empty?
+        # name is id
+        obj.merge!( { id: node['name'] } ) if keys.include?('name') && !node['name'].empty?
         obj.merge!( { text: node['value'] } ) if keys.include?('value') && !node['value'].empty?
+        # label is name
+        obj.merge!( { name: node['label'] } ) if keys.include?('label') && !node['label'].empty?
         obj.merge!( { class: node['type'] } ) if keys.include?('type') && !obj.empty?
 
         r.push obj if !obj.empty?
@@ -86,15 +89,26 @@ module Appium::Android
 
     out = ''
     results.each { |e|
+      no_text = e[:text].nil?
+      no_name = e[:name].nil? || e[:name] == 'null'
+
+      # Ignore elements with id only.
+      next if no_text && no_name
+
       out += e[:class].split('.').last + "\n"
 
+      # name is id when using selendroid.
+      # remove id/ prefix
+      e[:id].sub!(/^id\//, '') if e[:id]
+
       out += "  class: #{e[:class]}\n"
-      if e[:text] == e[:desc]
-        out += "  text, name: #{e[:text]}\n" unless e[:text].nil?
-      else
-        out += "  text: #{e[:text]}\n" unless e[:text].nil?
-        out += "  name: #{e[:desc]}\n" unless e[:desc].nil?
-      end
+      # id('back_button').click
+      out += "  id: #{e[:id]}\n" unless e[:id].nil?
+      # find_element(:link_text, 'text')
+      out += "  text: #{e[:text]}\n" unless no_text
+      # label is name. default is 'null'
+      # find_element(:link_text, 'Facebook')
+      out += "  name: #{e[:name]}\n" unless no_name
     }
     out
   end
