@@ -207,6 +207,8 @@ module Appium
 
       begin
         @driver = Selenium::WebDriver.for :remote, http_client: @client, desired_capabilities: capabilities, url: server_url
+        # Load touch methods. Required for Selendroid.
+        @driver.extend Selenium::WebDriver::DriverExtensions::HasTouchScreen
       rescue Errno::ECONNREFUSED
         raise 'ERROR: Unable to connect to Appium. Is the server running?'
       end
