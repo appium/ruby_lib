@@ -125,7 +125,7 @@ module Appium
       {
         browserName: 'Android',
         platform: 'LINUX',
-        version: '4.1',
+        version: '4.2',
         device: @selendroid || 'Android',
         name: @app_name || 'Ruby Console Android Appium',
         app: absolute_app_path,
