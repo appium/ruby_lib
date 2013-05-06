@@ -1,3 +1,10 @@
+#### v0.3.9 2013-05-06
+
+- [3b4fbb4](https://github.com/appium/ruby_lib/commit/3b4fbb4e6957a92ac4236d5666d932ee9da238e7) Release 0.3.9
+- [98b1b1e](https://github.com/appium/ruby_lib/commit/98b1b1e8e0952244c1ca2c8738d7d33af7eb0f68) Fix extra slashes in path
+- [4c43359](https://github.com/appium/ruby_lib/commit/4c433597c4409ab7c89e395297d2a6af3c6c439d) Update release notes
+
+
 #### v0.3.8 2013-05-06
 
 - [e7bc45f](https://github.com/appium/ruby_lib/commit/e7bc45fd88f026dc51237d767da9f9dfa2e05b56) Release 0.3.8
