@@ -1,3 +1,16 @@
+#### v0.3.8 2013-05-06
+
+- [e7bc45f](https://github.com/appium/ruby_lib/commit/e7bc45fd88f026dc51237d767da9f9dfa2e05b56) Release 0.3.8
+- [dc3a50f](https://github.com/appium/ruby_lib/commit/dc3a50f23ca6ba4978ddb9af1dadf6c6015eb9fb) Use 4.2 not 4.1
+- [f8042f1](https://github.com/appium/ruby_lib/commit/f8042f158f046815238463a9ea86cd66ea725942) Fix page Selendroid
+- [f9866e0](https://github.com/appium/ruby_lib/commit/f9866e034ea9a3744387fb15d5ca3ba221f27429) Load touch methods
+- [c3f9a2b](https://github.com/appium/ruby_lib/commit/c3f9a2b0300ee238acf4ce750f9b651ff39eb919) Don't set timeout on Selendroid until it's fixed
+- [d88245e](https://github.com/appium/ruby_lib/commit/d88245efe8fed5927e136719a9747b788dbd0fc2) Add page for Selendroid
+- [ff63433](https://github.com/appium/ruby_lib/commit/ff63433db6d68170ef135e151d6ac154c3504f4f) Add id method
+- [c59f7ce](https://github.com/appium/ruby_lib/commit/c59f7cefc76a9f172e6e6494aca275b5687d1a74) Improve debugging
+- [873bed9](https://github.com/appium/ruby_lib/commit/873bed9c3d30d0c4a64a497c9636c53275ab943f) Update release notes
+
+
 #### v0.3.7 2013-05-01
 
 - [edfd20a](https://github.com/appium/ruby_lib/commit/edfd20a6ffdef8484b9f7b5eddb9c21815241d42) Release 0.3.7
