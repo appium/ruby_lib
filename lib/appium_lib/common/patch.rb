@@ -67,6 +67,9 @@ def patch_webdriver_bridge
         raise ArgumentError, "#{opts.inspect} invalid for #{command.inspect}"
       end
 
+      # convert /// into /
+      path.gsub! /\/+/, '/'
+
       # change path from session/efac972c-941a-499c-803c-d7d008749/execute
       # to /execute
       # path may be nil, session, or not have anything after the session_id.
