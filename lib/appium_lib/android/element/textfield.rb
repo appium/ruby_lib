@@ -26,18 +26,18 @@ module Appium::Android
     last_ele :textfield
   end
 
-  # Get the first textfield that matches text.
-  # @param text [String, Integer] the text to match exactly. If int then the textfield at that index is returned.
+  # Get the first textfield that includes text.
+  # @param text [String, Integer] the text to search for. If int then the textfield at that index is returned.
   # @return [Textfield]
   def textfield text
     return ele_index :textfield, text if text.is_a? Numeric
-    find_ele_by_text :textfield, text
+    find_ele_by_text_include :textfield, text
   end
 
-  # Get the first textfield that includes text.
-  # @param text [String] the text the textfield must include
+  # Get the first textfield that matches text.
+  # @param text [String] the text to match
   # @return [Textfield]
-  def textfield_include text
-    find_ele_by_text_include :textfield, text
+  def textfield_exact text
+    find_ele_by_text :textfield, text
   end
 end # module Appium::Android

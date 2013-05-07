@@ -80,7 +80,9 @@ the first element that matches.
   # @param name [String] the name to search for
   # @return [Element] the first matching element
   def name name
-    @driver.find_element :name, name
+    # work around https://github.com/appium/appium/issues/543
+    # @driver.find_element :name, name
+    mobile :find, [ [ [7, name] ] ]
   end
 
   # Return all elements matching name.
