@@ -7,12 +7,6 @@ module Appium::Android
     button(value).click
   end
 
-  # Get the alert message text.
-  # @return [String]
-  def alert_text
-    get_page
-  end
-
   # Accept the alert.
   # The last button is considered "accept."
   # @return [void]
