@@ -74,6 +74,7 @@ module Appium::Android
         # label is name
         obj.merge!( { name: node['label'] } ) if keys.include?('label') && !node['label'].empty?
         obj.merge!( { class: node['type'] } ) if keys.include?('type') && !obj.empty?
+        obj.merge!( { shown: node['shown'] } ) if keys.include?('shown')
 
         r.push obj if !obj.empty?
         run_internal.call node['children'] if keys.include?('children')
@@ -91,7 +92,7 @@ module Appium::Android
     results.each { |e|
       no_text = e[:text].nil?
       no_name = e[:name].nil? || e[:name] == 'null'
-
+      next unless e[:shown] # skip invisible
       # Ignore elements with id only.
       next if no_text && no_name
 
@@ -109,6 +110,7 @@ module Appium::Android
       # label is name. default is 'null'
       # find_element(:link_text, 'Facebook')
       out += "  name: #{e[:name]}\n" unless no_name
+      # out += "  visible: #{e[:shown]}\n" unless e[:shown].nil?
     }
     out
   end

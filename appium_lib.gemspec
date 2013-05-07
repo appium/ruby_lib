@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency 'selenium-webdriver', '~> 2.32.1'
   s.add_runtime_dependency 'awesome_print', '~> 1.1.0'
+  s.add_runtime_dependency 'json', '~> 1.7.7'
 
   s.add_development_dependency 'rake', '~> 10.0.3'
 
