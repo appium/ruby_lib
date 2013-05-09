@@ -26,12 +26,17 @@ module Appium::Android
     last_ele :textfield
   end
 
-  # Get the first textfield that includes text.
+  # Get the first textfield that includes text or name (content description).
   # @param text [String, Integer] the text to search for. If int then the textfield at that index is returned.
   # @return [Textfield]
   def textfield text
     return ele_index :textfield, text if text.is_a? Numeric
-    find_ele_by_text_include :textfield, text
+
+    # s.className('android.widget.EditText').descriptionContains(value);
+    args = [ [4, 'android.widget.EditText'], [7, text] ],
+    # s.className('android.widget.EditText').textContains(value);
+           [ [4, 'android.widget.EditText'], [3, text] ]
+    mobile :find, args
   end
 
   # Get the first textfield that matches text.
