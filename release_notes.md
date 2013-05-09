@@ -69,6 +69,9 @@
 
 #### v0.3.2 2013-04-26
 
+- [14d705a](https://github.com/appium/ruby_lib/commit/14d705acd527f13e2962e2c04200b6d28fd36cbb) Release 0.3.11
+- [ebdae44](https://github.com/appium/ruby_lib/commit/ebdae448b108c76e586ad8f8ae86a1abc495e7e5) Search name and text when using textfield
+- [e549984](https://github.com/appium/ruby_lib/commit/e549984b871819ce67ff6948e32a870574b7b4d2) Update release notes
 - [db557df](https://github.com/appium/ruby_lib/commit/db557df9939fa44f2a6bf5d8afd950a2fa4b4178) Release 0.3.10
 - [c3adbc5](https://github.com/appium/ruby_lib/commit/c3adbc52f0b049e6b9292ac2ff328160d1820668) Fix name and textfield
 - [5c26137](https://github.com/appium/ruby_lib/commit/5c261370fd68f363f0ab2f4d70ad486c43dc46fb) Android can't get alert text
@@ -115,6 +118,13 @@
 - [6d381fe](https://github.com/appium/ruby_lib/commit/6d381fe029bd9a5c11aa4d1a322d6afb603c6434) Update readme.md
 - [07da208](https://github.com/appium/ruby_lib/commit/07da208973ea4de64ec9605ef5dd38884771e8c6) Add troubleshooting steps
 - [7df8ddc](https://github.com/appium/ruby_lib/commit/7df8ddcd0edb294abaddd2424f0f6b45f086fb53) Update release notes
+
+
+#### v0.3.11 2013-05-09
+
+- [14d705a](https://github.com/appium/ruby_lib/commit/14d705acd527f13e2962e2c04200b6d28fd36cbb) Release 0.3.11
+- [ebdae44](https://github.com/appium/ruby_lib/commit/ebdae448b108c76e586ad8f8ae86a1abc495e7e5) Search name and text when using textfield
+- [e549984](https://github.com/appium/ruby_lib/commit/e549984b871819ce67ff6948e32a870574b7b4d2) Update release notes
 
 
 #### v0.3.10 2013-05-07
