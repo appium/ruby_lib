@@ -93,4 +93,17 @@ the first element that matches.
   def names name
     @driver.find_elements :name, name
   end
+
+  # Scroll to an element containing target text or description.
+  # @param text [String] the text to search for in the text value and content description
+  # @return [Element] the element scrolled to
+  def scroll_to text
+    args = 'scroll',
+        # textContains(text)
+        [ [3, text] ],
+        # descriptionContains(text)
+        [ [7, text] ]
+
+    mobile :find, args
+  end
 end # module Appium::Android
