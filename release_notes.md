@@ -69,6 +69,9 @@
 
 #### v0.3.2 2013-04-26
 
+- [faf3e98](https://github.com/appium/ruby_lib/commit/faf3e98d0d745df9bbbfada93dcfd6b47a585793) Release 0.3.12
+- [7ff6b95](https://github.com/appium/ruby_lib/commit/7ff6b955cafc235a554d192cc09014c4400dc27a) Add scroll_to
+- [d590b4d](https://github.com/appium/ruby_lib/commit/d590b4da6eab2da4068292ff6604afa89e73017e) Update release notes
 - [14d705a](https://github.com/appium/ruby_lib/commit/14d705acd527f13e2962e2c04200b6d28fd36cbb) Release 0.3.11
 - [ebdae44](https://github.com/appium/ruby_lib/commit/ebdae448b108c76e586ad8f8ae86a1abc495e7e5) Search name and text when using textfield
 - [e549984](https://github.com/appium/ruby_lib/commit/e549984b871819ce67ff6948e32a870574b7b4d2) Update release notes
@@ -118,6 +121,13 @@
 - [6d381fe](https://github.com/appium/ruby_lib/commit/6d381fe029bd9a5c11aa4d1a322d6afb603c6434) Update readme.md
 - [07da208](https://github.com/appium/ruby_lib/commit/07da208973ea4de64ec9605ef5dd38884771e8c6) Add troubleshooting steps
 - [7df8ddc](https://github.com/appium/ruby_lib/commit/7df8ddcd0edb294abaddd2424f0f6b45f086fb53) Update release notes
+
+
+#### v0.3.12 2013-05-10
+
+- [faf3e98](https://github.com/appium/ruby_lib/commit/faf3e98d0d745df9bbbfada93dcfd6b47a585793) Release 0.3.12
+- [7ff6b95](https://github.com/appium/ruby_lib/commit/7ff6b955cafc235a554d192cc09014c4400dc27a) Add scroll_to
+- [d590b4d](https://github.com/appium/ruby_lib/commit/d590b4da6eab2da4068292ff6604afa89e73017e) Update release notes
 
 
 #### v0.3.11 2013-05-09
