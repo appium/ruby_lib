@@ -75,7 +75,7 @@ module Appium
       @port = opts.fetch :port, ENV['PORT'] || 4723
 
       @os = :ios
-      @os = :android if @app_path.end_with?('.apk') || @app_path.end_with?('.apk.zip')
+      @os = :android if @app_path.include?('.apk') || @app_path.include?('.apk.zip')
 
       # load common methods
       extend Appium::Common
