@@ -69,6 +69,9 @@
 
 #### v0.3.2 2013-04-26
 
+- [7badb99](https://github.com/appium/ruby_lib/commit/7badb998734ee4c4ae0781c5e8f3cfc4b862eeb3) Release 0.3.13
+- [efaa0ea](https://github.com/appium/ruby_lib/commit/efaa0eaebe5a045dba8370ec98aea8bdf31637ba) Fix #52
+- [fd0941c](https://github.com/appium/ruby_lib/commit/fd0941cd02dbfeff32e506dcff8192480e13fb38) Update release notes
 - [faf3e98](https://github.com/appium/ruby_lib/commit/faf3e98d0d745df9bbbfada93dcfd6b47a585793) Release 0.3.12
 - [7ff6b95](https://github.com/appium/ruby_lib/commit/7ff6b955cafc235a554d192cc09014c4400dc27a) Add scroll_to
 - [d590b4d](https://github.com/appium/ruby_lib/commit/d590b4da6eab2da4068292ff6604afa89e73017e) Update release notes
@@ -121,6 +124,13 @@
 - [6d381fe](https://github.com/appium/ruby_lib/commit/6d381fe029bd9a5c11aa4d1a322d6afb603c6434) Update readme.md
 - [07da208](https://github.com/appium/ruby_lib/commit/07da208973ea4de64ec9605ef5dd38884771e8c6) Add troubleshooting steps
 - [7df8ddc](https://github.com/appium/ruby_lib/commit/7df8ddcd0edb294abaddd2424f0f6b45f086fb53) Update release notes
+
+
+#### v0.3.13 2013-05-10
+
+- [7badb99](https://github.com/appium/ruby_lib/commit/7badb998734ee4c4ae0781c5e8f3cfc4b862eeb3) Release 0.3.13
+- [efaa0ea](https://github.com/appium/ruby_lib/commit/efaa0eaebe5a045dba8370ec98aea8bdf31637ba) Fix #52
+- [fd0941c](https://github.com/appium/ruby_lib/commit/fd0941cd02dbfeff32e506dcff8192480e13fb38) Update release notes
 
 
 #### v0.3.12 2013-05-10
