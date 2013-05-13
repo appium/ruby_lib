@@ -14,6 +14,18 @@ module Appium::Ios
         JS
         @driver.execute_script js
       end
+
+      # returns if the element is visible
+      # 1 = visible
+      # 0 = not visible
+      # null = unknown
+      # http://developer.apple.com/library/ios/#documentation/ToolsLanguages/Reference/UIAElementClassReference/UIAElement/UIAElement.html#//apple_ref/doc/uid/TP40009903
+      def visible
+        js = <<-JS
+          au.getElement('#{self.ref}').isVisible();
+        JS
+        @driver.execute_script js
+      end
     end
   end
 end
