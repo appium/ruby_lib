@@ -69,6 +69,9 @@
 
 #### v0.3.2 2013-04-26
 
+- [cc56df8](https://github.com/appium/ruby_lib/commit/cc56df88825ac8e705e740eed7ac8ca42bcc9dd0) Release 0.3.15
+- [8613403](https://github.com/appium/ruby_lib/commit/8613403db07435908a149dc296fb92cad8af2e35) Use boolean for .visible on iOS
+- [59980db](https://github.com/appium/ruby_lib/commit/59980db949a3a8c18d8441a369e6ef566df3ccae) Update release notes
 - [12aa291](https://github.com/appium/ruby_lib/commit/12aa29132a9a88076fbf8c76fbb65b1aa5e1fc96) Release 0.3.14
 - [a61b297](https://github.com/appium/ruby_lib/commit/a61b297d387b0c28865b050eaa3d7d59efae2a34) Add .visible for iOS
 - [6f6dda5](https://github.com/appium/ruby_lib/commit/6f6dda53fb12a483a524370c3d3c729fa1b87be4) Update gemspec
@@ -128,6 +131,13 @@
 - [6d381fe](https://github.com/appium/ruby_lib/commit/6d381fe029bd9a5c11aa4d1a322d6afb603c6434) Update readme.md
 - [07da208](https://github.com/appium/ruby_lib/commit/07da208973ea4de64ec9605ef5dd38884771e8c6) Add troubleshooting steps
 - [7df8ddc](https://github.com/appium/ruby_lib/commit/7df8ddcd0edb294abaddd2424f0f6b45f086fb53) Update release notes
+
+
+#### v0.3.15 2013-05-13
+
+- [cc56df8](https://github.com/appium/ruby_lib/commit/cc56df88825ac8e705e740eed7ac8ca42bcc9dd0) Release 0.3.15
+- [8613403](https://github.com/appium/ruby_lib/commit/8613403db07435908a149dc296fb92cad8af2e35) Use boolean for .visible on iOS
+- [59980db](https://github.com/appium/ruby_lib/commit/59980db949a3a8c18d8441a369e6ef566df3ccae) Update release notes
 
 
 #### v0.3.14 2013-05-13
