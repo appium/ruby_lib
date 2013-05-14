@@ -69,6 +69,9 @@
 
 #### v0.3.2 2013-04-26
 
+- [fb34a03](https://github.com/appium/ruby_lib/commit/fb34a03ceec0be552f218323bf266fda7f7e060b) Release 0.3.16
+- [6e552ae](https://github.com/appium/ruby_lib/commit/6e552ae0d9a66a03ac50caa38f73f3f3dbded317) Selendroid is boolean
+- [7cdab46](https://github.com/appium/ruby_lib/commit/7cdab467f88555d6755f0cdf1ce6e6795c878c2b) Update release notes
 - [cc56df8](https://github.com/appium/ruby_lib/commit/cc56df88825ac8e705e740eed7ac8ca42bcc9dd0) Release 0.3.15
 - [8613403](https://github.com/appium/ruby_lib/commit/8613403db07435908a149dc296fb92cad8af2e35) Use boolean for .visible on iOS
 - [59980db](https://github.com/appium/ruby_lib/commit/59980db949a3a8c18d8441a369e6ef566df3ccae) Update release notes
@@ -131,6 +134,13 @@
 - [6d381fe](https://github.com/appium/ruby_lib/commit/6d381fe029bd9a5c11aa4d1a322d6afb603c6434) Update readme.md
 - [07da208](https://github.com/appium/ruby_lib/commit/07da208973ea4de64ec9605ef5dd38884771e8c6) Add troubleshooting steps
 - [7df8ddc](https://github.com/appium/ruby_lib/commit/7df8ddcd0edb294abaddd2424f0f6b45f086fb53) Update release notes
+
+
+#### v0.3.16 2013-05-14
+
+- [fb34a03](https://github.com/appium/ruby_lib/commit/fb34a03ceec0be552f218323bf266fda7f7e060b) Release 0.3.16
+- [6e552ae](https://github.com/appium/ruby_lib/commit/6e552ae0d9a66a03ac50caa38f73f3f3dbded317) Selendroid is boolean
+- [7cdab46](https://github.com/appium/ruby_lib/commit/7cdab467f88555d6755f0cdf1ce6e6795c878c2b) Update release notes
 
 
 #### v0.3.15 2013-05-13
