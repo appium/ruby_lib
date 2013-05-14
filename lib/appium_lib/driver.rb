@@ -54,8 +54,9 @@ module Appium
       # The name to use for the test run on Sauce.
       @app_name = opts.fetch :app_name, ENV['APP_NAME']
 
-      # If key or env is defined, use selendroid else nil
-      @selendroid = opts.key?(:selendroid) ||  ENV['SELENDROID'] ? 'selendroid' : nil
+      # If Android, this will toggle selendroid as a device
+      @selendroid = opts.fetch :selendroid, ENV['SELENDROID']
+      @selendroid = 'selendroid' if @selendroid
 
       # Android app package
       @app_package = opts.fetch :app_package, ENV['APP_PACKAGE']
