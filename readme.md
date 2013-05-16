@@ -72,4 +72,6 @@ Appium::Driver.new(apk).start_driver
 
 #### Documentation
 
-See [docs.md](https://github.com/appium/ruby_lib/blob/master/docs.md)
+- [Overview ](https://github.com/appium/ruby_lib/blob/master/docs/docs.md) 
+- [Android methods](https://github.com/appium/ruby_lib/blob/master/docs/android_docs.md)
+- [iOS methods](https://github.com/appium/ruby_lib/blob/master/docs/ios_docs.md)
