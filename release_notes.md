@@ -1,3 +1,48 @@
+#### v0.3.16 2013-05-14
+
+- [fb34a03](https://github.com/appium/ruby_lib/commit/fb34a03ceec0be552f218323bf266fda7f7e060b) Release 0.3.16
+- [6e552ae](https://github.com/appium/ruby_lib/commit/6e552ae0d9a66a03ac50caa38f73f3f3dbded317) Selendroid is boolean
+
+
+#### v0.3.15 2013-05-13
+
+- [cc56df8](https://github.com/appium/ruby_lib/commit/cc56df88825ac8e705e740eed7ac8ca42bcc9dd0) Release 0.3.15
+- [8613403](https://github.com/appium/ruby_lib/commit/8613403db07435908a149dc296fb92cad8af2e35) Use boolean for .visible on iOS
+
+
+#### v0.3.14 2013-05-13
+
+- [12aa291](https://github.com/appium/ruby_lib/commit/12aa29132a9a88076fbf8c76fbb65b1aa5e1fc96) Release 0.3.14
+- [a61b297](https://github.com/appium/ruby_lib/commit/a61b297d387b0c28865b050eaa3d7d59efae2a34) Add .visible for iOS
+- [6f6dda5](https://github.com/appium/ruby_lib/commit/6f6dda53fb12a483a524370c3d3c729fa1b87be4) Update gemspec
+
+
+#### v0.3.13 2013-05-10
+
+- [7badb99](https://github.com/appium/ruby_lib/commit/7badb998734ee4c4ae0781c5e8f3cfc4b862eeb3) Release 0.3.13
+- [efaa0ea](https://github.com/appium/ruby_lib/commit/efaa0eaebe5a045dba8370ec98aea8bdf31637ba) Fix #52
+
+
+#### v0.3.12 2013-05-10
+
+- [faf3e98](https://github.com/appium/ruby_lib/commit/faf3e98d0d745df9bbbfada93dcfd6b47a585793) Release 0.3.12
+- [7ff6b95](https://github.com/appium/ruby_lib/commit/7ff6b955cafc235a554d192cc09014c4400dc27a) Add scroll_to
+
+
+#### v0.3.11 2013-05-09
+
+- [14d705a](https://github.com/appium/ruby_lib/commit/14d705acd527f13e2962e2c04200b6d28fd36cbb) Release 0.3.11
+- [ebdae44](https://github.com/appium/ruby_lib/commit/ebdae448b108c76e586ad8f8ae86a1abc495e7e5) Search name and text when using textfield
+
+
+#### v0.3.10 2013-05-07
+
+- [db557df](https://github.com/appium/ruby_lib/commit/db557df9939fa44f2a6bf5d8afd950a2fa4b4178) Release 0.3.10
+- [c3adbc5](https://github.com/appium/ruby_lib/commit/c3adbc52f0b049e6b9292ac2ff328160d1820668) Fix name and textfield
+- [5c26137](https://github.com/appium/ruby_lib/commit/5c261370fd68f363f0ab2f4d70ad486c43dc46fb) Android can't get alert text
+- [36f68de](https://github.com/appium/ruby_lib/commit/36f68de51954de79754e8f377f4a6dad47361dc1) Add shown attribute to Selendroid page
+
+
 #### v0.3.9 2013-05-06
 
 - [3b4fbb4](https://github.com/appium/ruby_lib/commit/3b4fbb4e6957a92ac4236d5666d932ee9da238e7) Release 0.3.9
@@ -62,136 +107,6 @@
 
 #### v0.3.2 2013-04-26
 
-- [fb34a03](https://github.com/appium/ruby_lib/commit/fb34a03ceec0be552f218323bf266fda7f7e060b) Release 0.3.16
-- [6e552ae](https://github.com/appium/ruby_lib/commit/6e552ae0d9a66a03ac50caa38f73f3f3dbded317) Selendroid is boolean
-- [cc56df8](https://github.com/appium/ruby_lib/commit/cc56df88825ac8e705e740eed7ac8ca42bcc9dd0) Release 0.3.15
-- [8613403](https://github.com/appium/ruby_lib/commit/8613403db07435908a149dc296fb92cad8af2e35) Use boolean for .visible on iOS
-- [12aa291](https://github.com/appium/ruby_lib/commit/12aa29132a9a88076fbf8c76fbb65b1aa5e1fc96) Release 0.3.14
-- [a61b297](https://github.com/appium/ruby_lib/commit/a61b297d387b0c28865b050eaa3d7d59efae2a34) Add .visible for iOS
-- [6f6dda5](https://github.com/appium/ruby_lib/commit/6f6dda53fb12a483a524370c3d3c729fa1b87be4) Update gemspec
-- [7badb99](https://github.com/appium/ruby_lib/commit/7badb998734ee4c4ae0781c5e8f3cfc4b862eeb3) Release 0.3.13
-- [efaa0ea](https://github.com/appium/ruby_lib/commit/efaa0eaebe5a045dba8370ec98aea8bdf31637ba) Fix #52
-- [faf3e98](https://github.com/appium/ruby_lib/commit/faf3e98d0d745df9bbbfada93dcfd6b47a585793) Release 0.3.12
-- [7ff6b95](https://github.com/appium/ruby_lib/commit/7ff6b955cafc235a554d192cc09014c4400dc27a) Add scroll_to
-- [14d705a](https://github.com/appium/ruby_lib/commit/14d705acd527f13e2962e2c04200b6d28fd36cbb) Release 0.3.11
-- [ebdae44](https://github.com/appium/ruby_lib/commit/ebdae448b108c76e586ad8f8ae86a1abc495e7e5) Search name and text when using textfield
-- [db557df](https://github.com/appium/ruby_lib/commit/db557df9939fa44f2a6bf5d8afd950a2fa4b4178) Release 0.3.10
-- [c3adbc5](https://github.com/appium/ruby_lib/commit/c3adbc52f0b049e6b9292ac2ff328160d1820668) Fix name and textfield
-- [5c26137](https://github.com/appium/ruby_lib/commit/5c261370fd68f363f0ab2f4d70ad486c43dc46fb) Android can't get alert text
-- [36f68de](https://github.com/appium/ruby_lib/commit/36f68de51954de79754e8f377f4a6dad47361dc1) Add shown attribute to Selendroid page
-- [3b4fbb4](https://github.com/appium/ruby_lib/commit/3b4fbb4e6957a92ac4236d5666d932ee9da238e7) Release 0.3.9
-- [98b1b1e](https://github.com/appium/ruby_lib/commit/98b1b1e8e0952244c1ca2c8738d7d33af7eb0f68) Fix extra slashes in path
-- [e7bc45f](https://github.com/appium/ruby_lib/commit/e7bc45fd88f026dc51237d767da9f9dfa2e05b56) Release 0.3.8
-- [dc3a50f](https://github.com/appium/ruby_lib/commit/dc3a50f23ca6ba4978ddb9af1dadf6c6015eb9fb) Use 4.2 not 4.1
-- [f8042f1](https://github.com/appium/ruby_lib/commit/f8042f158f046815238463a9ea86cd66ea725942) Fix page Selendroid
-- [f9866e0](https://github.com/appium/ruby_lib/commit/f9866e034ea9a3744387fb15d5ca3ba221f27429) Load touch methods
-- [c3f9a2b](https://github.com/appium/ruby_lib/commit/c3f9a2b0300ee238acf4ce750f9b651ff39eb919) Don't set timeout on Selendroid until it's fixed
-- [d88245e](https://github.com/appium/ruby_lib/commit/d88245efe8fed5927e136719a9747b788dbd0fc2) Add page for Selendroid
-- [ff63433](https://github.com/appium/ruby_lib/commit/ff63433db6d68170ef135e151d6ac154c3504f4f) Add id method
-- [c59f7ce](https://github.com/appium/ruby_lib/commit/c59f7cefc76a9f172e6e6494aca275b5687d1a74) Improve debugging
-- [edfd20a](https://github.com/appium/ruby_lib/commit/edfd20a6ffdef8484b9f7b5eddb9c21815241d42) Release 0.3.7
-- [9f8511c](https://github.com/appium/ruby_lib/commit/9f8511c1416867df606dfb3d058f83ee277ce39a) Remove puts
-- [67e5c86](https://github.com/appium/ruby_lib/commit/67e5c867d38251687dc7ebd5de013db5712fcac3) Release 0.3.6
-- [a0a46f7](https://github.com/appium/ruby_lib/commit/a0a46f773a57c9ef7b92252afed467bd7cd01b96) Fix wait and add wait_true
-- [e7cde77](https://github.com/appium/ruby_lib/commit/e7cde775473bd3981cac5b356f78289f832091a9) Add wait example
-- [a886ef4](https://github.com/appium/ruby_lib/commit/a886ef4722a902fdef15ecfc7164299399f1d524) Release 0.3.5
-- [193eb71](https://github.com/appium/ruby_lib/commit/193eb716023f52506cdf599cff6aae4f4a3c1119) Fix JSON.parse
-- [54ba323](https://github.com/appium/ruby_lib/commit/54ba323721a704d3ceb34f71dd8e1fcf9069dd78) Use upstream get name contains
-- [6f66b46](https://github.com/appium/ruby_lib/commit/6f66b46725ee397cc437901e95431ec95935d9c2) Name contains moved upstream
-- [2d33b5c](https://github.com/appium/ruby_lib/commit/2d33b5ce4078d784f7f6f0ac07651166a466b34c) Update readme.md
-- [4a1f87e](https://github.com/appium/ruby_lib/commit/4a1f87e1f0524595d7bd15027b4a009a42b5ff83) Update example
-- [6177c49](https://github.com/appium/ruby_lib/commit/6177c497f9c114203e624f530e51f4f54a61788a) Rename get_wait
-- [ffdf104](https://github.com/appium/ruby_lib/commit/ffdf104ffdecb165cfe410976145134768756e30) Release 0.3.4
-- [4edc9f6](https://github.com/appium/ruby_lib/commit/4edc9f6097e29d2816dceef546a819fd6ee431d2) Add params to wait
-- [da1c042](https://github.com/appium/ruby_lib/commit/da1c0424873fa5f859b1ec558356a3ad0721097b) Add selendroid launch support
-- [f398041](https://github.com/appium/ruby_lib/commit/f398041369884d8068950ab9e703a8a2d750082c) Use symbols for driver opts
-- [cf09a0d](https://github.com/appium/ruby_lib/commit/cf09a0d1ca8de835043f855cbd74ced9abb5f1b0) Add expected server opts
-- [fe6c7d7](https://github.com/appium/ruby_lib/commit/fe6c7d71dbaf7f7b383d117918de2498945406d4) Fix os specific patches
-- [d9b9c1a](https://github.com/appium/ruby_lib/commit/d9b9c1a2fcc1857e0e7c78d250fd59b84726d69b) Improve logging
-- [3b831b0](https://github.com/appium/ruby_lib/commit/3b831b089e02c4a53585d90ed009f5ad3cb982a7) Return invisible match if no visible result
-- [b0ca37c](https://github.com/appium/ruby_lib/commit/b0ca37cfe47318f029e1f2ad498a5c08338016d7) Release 0.3.3
-- [e7f55d9](https://github.com/appium/ruby_lib/commit/e7f55d92181660ea188a5123e6e4f447389c8d6d) Add driver method
-- [6d381fe](https://github.com/appium/ruby_lib/commit/6d381fe029bd9a5c11aa4d1a322d6afb603c6434) Update readme.md
-- [07da208](https://github.com/appium/ruby_lib/commit/07da208973ea4de64ec9605ef5dd38884771e8c6) Add troubleshooting steps
-
-
-#### v0.3.16 2013-05-14
-
-- [fb34a03](https://github.com/appium/ruby_lib/commit/fb34a03ceec0be552f218323bf266fda7f7e060b) Release 0.3.16
-- [6e552ae](https://github.com/appium/ruby_lib/commit/6e552ae0d9a66a03ac50caa38f73f3f3dbded317) Selendroid is boolean
-
-
-#### v0.3.15 2013-05-13
-
-- [cc56df8](https://github.com/appium/ruby_lib/commit/cc56df88825ac8e705e740eed7ac8ca42bcc9dd0) Release 0.3.15
-- [8613403](https://github.com/appium/ruby_lib/commit/8613403db07435908a149dc296fb92cad8af2e35) Use boolean for .visible on iOS
-
-
-#### v0.3.14 2013-05-13
-
-- [12aa291](https://github.com/appium/ruby_lib/commit/12aa29132a9a88076fbf8c76fbb65b1aa5e1fc96) Release 0.3.14
-- [a61b297](https://github.com/appium/ruby_lib/commit/a61b297d387b0c28865b050eaa3d7d59efae2a34) Add .visible for iOS
-- [6f6dda5](https://github.com/appium/ruby_lib/commit/6f6dda53fb12a483a524370c3d3c729fa1b87be4) Update gemspec
-
-
-#### v0.3.13 2013-05-10
-
-- [7badb99](https://github.com/appium/ruby_lib/commit/7badb998734ee4c4ae0781c5e8f3cfc4b862eeb3) Release 0.3.13
-- [efaa0ea](https://github.com/appium/ruby_lib/commit/efaa0eaebe5a045dba8370ec98aea8bdf31637ba) Fix #52
-
-
-#### v0.3.12 2013-05-10
-
-- [faf3e98](https://github.com/appium/ruby_lib/commit/faf3e98d0d745df9bbbfada93dcfd6b47a585793) Release 0.3.12
-- [7ff6b95](https://github.com/appium/ruby_lib/commit/7ff6b955cafc235a554d192cc09014c4400dc27a) Add scroll_to
-
-
-#### v0.3.11 2013-05-09
-
-- [14d705a](https://github.com/appium/ruby_lib/commit/14d705acd527f13e2962e2c04200b6d28fd36cbb) Release 0.3.11
-- [ebdae44](https://github.com/appium/ruby_lib/commit/ebdae448b108c76e586ad8f8ae86a1abc495e7e5) Search name and text when using textfield
-
-
-#### v0.3.10 2013-05-07
-
-- [db557df](https://github.com/appium/ruby_lib/commit/db557df9939fa44f2a6bf5d8afd950a2fa4b4178) Release 0.3.10
-- [c3adbc5](https://github.com/appium/ruby_lib/commit/c3adbc52f0b049e6b9292ac2ff328160d1820668) Fix name and textfield
-- [5c26137](https://github.com/appium/ruby_lib/commit/5c261370fd68f363f0ab2f4d70ad486c43dc46fb) Android can't get alert text
-- [36f68de](https://github.com/appium/ruby_lib/commit/36f68de51954de79754e8f377f4a6dad47361dc1) Add shown attribute to Selendroid page
-- [3b4fbb4](https://github.com/appium/ruby_lib/commit/3b4fbb4e6957a92ac4236d5666d932ee9da238e7) Release 0.3.9
-- [98b1b1e](https://github.com/appium/ruby_lib/commit/98b1b1e8e0952244c1ca2c8738d7d33af7eb0f68) Fix extra slashes in path
-- [e7bc45f](https://github.com/appium/ruby_lib/commit/e7bc45fd88f026dc51237d767da9f9dfa2e05b56) Release 0.3.8
-- [dc3a50f](https://github.com/appium/ruby_lib/commit/dc3a50f23ca6ba4978ddb9af1dadf6c6015eb9fb) Use 4.2 not 4.1
-- [f8042f1](https://github.com/appium/ruby_lib/commit/f8042f158f046815238463a9ea86cd66ea725942) Fix page Selendroid
-- [f9866e0](https://github.com/appium/ruby_lib/commit/f9866e034ea9a3744387fb15d5ca3ba221f27429) Load touch methods
-- [c3f9a2b](https://github.com/appium/ruby_lib/commit/c3f9a2b0300ee238acf4ce750f9b651ff39eb919) Don't set timeout on Selendroid until it's fixed
-- [d88245e](https://github.com/appium/ruby_lib/commit/d88245efe8fed5927e136719a9747b788dbd0fc2) Add page for Selendroid
-- [ff63433](https://github.com/appium/ruby_lib/commit/ff63433db6d68170ef135e151d6ac154c3504f4f) Add id method
-- [c59f7ce](https://github.com/appium/ruby_lib/commit/c59f7cefc76a9f172e6e6494aca275b5687d1a74) Improve debugging
-- [edfd20a](https://github.com/appium/ruby_lib/commit/edfd20a6ffdef8484b9f7b5eddb9c21815241d42) Release 0.3.7
-- [9f8511c](https://github.com/appium/ruby_lib/commit/9f8511c1416867df606dfb3d058f83ee277ce39a) Remove puts
-- [67e5c86](https://github.com/appium/ruby_lib/commit/67e5c867d38251687dc7ebd5de013db5712fcac3) Release 0.3.6
-- [a0a46f7](https://github.com/appium/ruby_lib/commit/a0a46f773a57c9ef7b92252afed467bd7cd01b96) Fix wait and add wait_true
-- [e7cde77](https://github.com/appium/ruby_lib/commit/e7cde775473bd3981cac5b356f78289f832091a9) Add wait example
-- [a886ef4](https://github.com/appium/ruby_lib/commit/a886ef4722a902fdef15ecfc7164299399f1d524) Release 0.3.5
-- [193eb71](https://github.com/appium/ruby_lib/commit/193eb716023f52506cdf599cff6aae4f4a3c1119) Fix JSON.parse
-- [54ba323](https://github.com/appium/ruby_lib/commit/54ba323721a704d3ceb34f71dd8e1fcf9069dd78) Use upstream get name contains
-- [6f66b46](https://github.com/appium/ruby_lib/commit/6f66b46725ee397cc437901e95431ec95935d9c2) Name contains moved upstream
-- [2d33b5c](https://github.com/appium/ruby_lib/commit/2d33b5ce4078d784f7f6f0ac07651166a466b34c) Update readme.md
-- [4a1f87e](https://github.com/appium/ruby_lib/commit/4a1f87e1f0524595d7bd15027b4a009a42b5ff83) Update example
-- [6177c49](https://github.com/appium/ruby_lib/commit/6177c497f9c114203e624f530e51f4f54a61788a) Rename get_wait
-- [ffdf104](https://github.com/appium/ruby_lib/commit/ffdf104ffdecb165cfe410976145134768756e30) Release 0.3.4
-- [4edc9f6](https://github.com/appium/ruby_lib/commit/4edc9f6097e29d2816dceef546a819fd6ee431d2) Add params to wait
-- [da1c042](https://github.com/appium/ruby_lib/commit/da1c0424873fa5f859b1ec558356a3ad0721097b) Add selendroid launch support
-- [f398041](https://github.com/appium/ruby_lib/commit/f398041369884d8068950ab9e703a8a2d750082c) Use symbols for driver opts
-- [cf09a0d](https://github.com/appium/ruby_lib/commit/cf09a0d1ca8de835043f855cbd74ced9abb5f1b0) Add expected server opts
-- [fe6c7d7](https://github.com/appium/ruby_lib/commit/fe6c7d71dbaf7f7b383d117918de2498945406d4) Fix os specific patches
-- [d9b9c1a](https://github.com/appium/ruby_lib/commit/d9b9c1a2fcc1857e0e7c78d250fd59b84726d69b) Improve logging
-- [3b831b0](https://github.com/appium/ruby_lib/commit/3b831b089e02c4a53585d90ed009f5ad3cb982a7) Return invisible match if no visible result
-- [b0ca37c](https://github.com/appium/ruby_lib/commit/b0ca37cfe47318f029e1f2ad498a5c08338016d7) Release 0.3.3
-- [e7f55d9](https://github.com/appium/ruby_lib/commit/e7f55d92181660ea188a5123e6e4f447389c8d6d) Add driver method
-- [6d381fe](https://github.com/appium/ruby_lib/commit/6d381fe029bd9a5c11aa4d1a322d6afb603c6434) Update readme.md
-- [07da208](https://github.com/appium/ruby_lib/commit/07da208973ea4de64ec9605ef5dd38884771e8c6) Add troubleshooting steps
 - [eee6632](https://github.com/appium/ruby_lib/commit/eee6632251c40c8b2d6be9a361f429d7c89762f8) Release 0.3.2
 - [b22d747](https://github.com/appium/ruby_lib/commit/b22d7473f03e1b13a1ffd9ddc2ea5ca1396c4642) Default to app_activity if app_wait_activity is not set
 - [76198ad](https://github.com/appium/ruby_lib/commit/76198ad4d169d836007a247b2ebe8cad5391f512) Fix reset clearing iOS JavaScript
