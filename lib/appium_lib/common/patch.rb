@@ -86,7 +86,40 @@ def patch_webdriver_bridge
       unless command_hash.nil? || command_hash.length == 0
         print_command = command_hash.clone
         print_command.delete :args if print_command[:args] == []
-        ap print_command
+
+        mobile_find = 'mobile: find'
+        if print_command[:script] == mobile_find
+          args = print_command[:args]
+          puts "#{mobile_find}"#" #{args}"
+
+          # [[[[3, "sign"]]]] => [[[3, "sign"]]]
+          #
+          # [[[[4, "android.widget.EditText"], [7, "z"]], [[4, "android.widget.EditText"], [3, "z"]]]]
+          # => [[[4, "android.widget.EditText"], [7, "z"]], [[4, "android.widget.EditText"], [3, "z"]]]
+          args = args[0]
+          option = args[0].to_s.downcase
+          has_option = ! option.match(/all|scroll/).nil?
+          puts option if has_option
+
+          start = has_option ? 1 : 0
+
+          start.upto(args.length-1) do |selector_index|
+            selectors = args[selector_index]
+            selectors_size = selectors.length
+            selectors.each_index do |pair_index|
+              pair = selectors[pair_index]
+              res = $driver.dynamic_code_to_string pair[0], pair[1]
+
+              if selectors_size == 1 || pair_index >= selectors_size - 1
+                puts res
+              elsif selectors_size > 1 && pair_index < selectors_size
+                print res + '.'
+              end
+            end
+          end # start.upto
+        else
+          ap print_command
+        end
       end
       # puts "verb: #{verb}, path #{path}, command_hash #{command_hash.to_json}"
       http.call verb, path, command_hash

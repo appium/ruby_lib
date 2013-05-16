@@ -13,6 +13,7 @@ module Appium
   require 'common/helper'
   require 'common/patch'
   require 'common/version'
+  require 'common/dynamic'
   require 'common/element/button'
   require 'common/element/text'
   require 'common/element/window'
