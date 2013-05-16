@@ -104,6 +104,7 @@ e.rel_location
 e.click
 e.send_keys 'keys to send'
 e.set_value 'value to set' # ruby_console specific
+e.displayed? # true or false depending if the element is visible
 
 # alert example without helper methods
 alert = $driver.switch_to.alert
