@@ -220,7 +220,7 @@ module Appium
       @driver
     end
 
-    # Takes a png screenshot and saves to the target path. Android only.
+    # Takes a png screenshot and saves to the target path.
     #
     # @param png_save_path [String] the full path to save the png
     # @return [void]
