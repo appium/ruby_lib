@@ -1,3 +1,19 @@
+#### v0.4.0 2013-05-16
+
+- [70a59fe](https://github.com/appium/ruby_lib/commit/70a59fefcaa4f16ba0e7629f16feaae3e5f8c424) Release 0.4.0
+- [b30548e](https://github.com/appium/ruby_lib/commit/b30548e58783bc6b20bd5c0f11e2ae9ddb5faa30) Translate mobile find on Android
+- [1ea8b85](https://github.com/appium/ruby_lib/commit/1ea8b85ebb7c7531c2791f3c41d0280d947edad0) Screenshot should work on iOS
+- [3797644](https://github.com/appium/ruby_lib/commit/3797644874ff1e56a8c35f9825e42c8486902984) Update docs
+- [0e2c119](https://github.com/appium/ruby_lib/commit/0e2c119199535a2e9a8e708453fa068c6445e6ca) Fix release notes
+- [5c28a2d](https://github.com/appium/ruby_lib/commit/5c28a2debcd8386aab62b48d0b087ed7dac84d8d) Next release will be 0.4.0
+- [b9e5044](https://github.com/appium/ruby_lib/commit/b9e5044ddf6f998c09f006d8a6d95a5560f2fdd3) Remove comment
+- [30c2ada](https://github.com/appium/ruby_lib/commit/30c2adaecb0bca734664192a805968a83f4b7a8b) Update doc links
+- [d08cd59](https://github.com/appium/ruby_lib/commit/d08cd5944aeda9fa3f3842fd5a259e0385b88166) Add JS doc gen
+- [61530fb](https://github.com/appium/ruby_lib/commit/61530fb908822cd32be6cb25d94ffb00f68ec87b) Update docs
+- [ebe6a2f](https://github.com/appium/ruby_lib/commit/ebe6a2fa91a748c0c823dbb969afa51ab3710acd) Update docs.md
+- [637fef7](https://github.com/appium/ruby_lib/commit/637fef7f7547e6e2b2fd8f70e19ef3f3870cc136) Use element.displayed? not visible
+
+
 #### v0.3.16 2013-05-14
 
 - [fb34a03](https://github.com/appium/ruby_lib/commit/fb34a03ceec0be552f218323bf266fda7f7e060b) Release 0.3.16
