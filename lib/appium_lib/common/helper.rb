@@ -58,33 +58,35 @@ module Appium::Common
   end
 
   # Find by id. Useful for selendroid
+  # @param id [String] the id to search for
+  # @return [Element]
   def id id
     find_element :id, id
   end
 
-  # Presses the back button on Android.
+  # Navigate back.
   # @return [void]
   def back
     @driver.navigate.back
   end
 
-  # For Sauce Labs reporting
+  # For Sauce Labs reporting. Returns the current session id.
   def session_id
     @driver.session_id
   end
 
-  def sauce_username
-    @sauce_username
-  end
-
-  def sauce_access_key
-    @sauce_access_key
-  end
-
+  # Returns the first element that matches the provided xpath.
+  #
+  # @param xpath_str [String] the XPath string
+  # @return [Element]
   def xpath xpath_str
     find_element :xpath, xpath_str
   end
 
+  # Returns all elements that match the provided xpath.
+  #
+  # @param xpath_str [String] the XPath string
+  # @return [Array<Element>]
   def xpaths xpath_str
     find_elements :xpath, xpath_str
   end
@@ -185,10 +187,18 @@ module Appium::Common
     JSON.parse @driver.page_source, max_nesting: 9999
   end
 
+  # Returns the first element that matches name
+  #
+  # @param name [String] the name to match
+  # @return [Element]
   def find_name name
     find_element :name, name
   end
 
+  # Returns all elements that match name
+  #
+  # @param name [String] the name to match
+  # @return [Array<Element>]
   def find_names name
     find_elements :name, name
   end

@@ -1,5 +1,6 @@
 # encoding: utf-8
 module Appium::Ios
+  # @private
   # class_eval inside a method because class Selenium::WebDriver::Element
   # will trigger as soon as the file is required. in contrast a method
   # will trigger only when invoked.

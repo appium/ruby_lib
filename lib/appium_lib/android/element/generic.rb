@@ -8,22 +8,22 @@ In Android //* is used to find partial case insensitive text matches.
 
 find_element :name by default uses a partial case insensitive match.
 On iOS the default is an exact name match.
-=end
 
-=begin
-    // iOS version
-    // https://github.com/appium/ruby_lib/blob/37bb4e90b29e5adb4438b287b6387a504c94b5c4/lib/appium_lib/element/ios/generic.rb#L23
-    var search = "name contains[c] '#{text}' || label contains[c] '#{text}' || value contains[c] '#{text}'";
-    var a = w.secureTextFields().firstWithPredicate(search);
+```javascript
+// iOS version
+// https://github.com/appium/ruby_lib/blob/37bb4e90b29e5adb4438b287b6387a504c94b5c4/lib/appium_lib/element/ios/generic.rb#L23
+var search = "name contains[c] '#{text}' || label contains[c] '#{text}' || value contains[c] '#{text}'";
+var a = w.secureTextFields().firstWithPredicate(search);
+if ( isNil(a) ) {
+  a = w.textFields().firstWithPredicate(search);
+  if ( isNil(a) ) {
+    a = w.buttons().firstWithPredicate(search);
     if ( isNil(a) ) {
-      a = w.textFields().firstWithPredicate(search);
-      if ( isNil(a) ) {
-        a = w.buttons().firstWithPredicate(search);
-        if ( isNil(a) ) {
-          a = w.elements().firstWithPredicate(search);
-        }
-      }
+      a = w.elements().firstWithPredicate(search);
     }
+  }
+}
+```
 
 Android considers both a textfield and a secure textfield to be "EditText".
 Name (the content desc) is searched first and then we search for value (text).
@@ -35,6 +35,12 @@ so we consider the element a button if the class name contains the word button.
 After looking for textfields and buttons, then we search all elements. Find will return
 the first element that matches.
 =end
+
+  # Find the value contained in content description or text. Search elements
+  # in this order: EditText, Button, ImageButton
+  #
+  # @param val [String] the value to search for
+  # @return [Element]
   def find val
     # s.className('android.widget.EditText').descriptionContains(value);
     args = [ [4, 'android.widget.EditText'], [7, val] ],

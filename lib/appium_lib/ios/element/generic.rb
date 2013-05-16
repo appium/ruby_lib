@@ -19,14 +19,8 @@ module Appium::Ios
   Android name = iOS name & label
   Android text = iOS value
 =end
-  def ios_js_loaded? method_name
-    @ios_js.include? method_name
-  end
 
-  def ios_js_load method_name
-    @ios_js.push method_name
-  end
-
+  # @private
   # returnElems requires a wrapped $(element).
   # set to empty array when length is zero to prevent hang.
   #
@@ -44,6 +38,8 @@ module Appium::Ios
   # must break instead of return because it's not a function.
   #
   # single element length is undefined when found and 0 when not found.
+  # @param predicate [String] the predicate
+  # @return [String] the completed JavaScript program
   def first_ele_js predicate
     <<-JS
     function isNil( a ) {
@@ -94,6 +90,9 @@ module Appium::Ios
     JS
   end
 
+  # @private
+  # @param predicate [String] the predicate
+  # @return [String] the completed JavaScript program
   def all_ele_js predicate
     <<-JS
       var w = au.mainWindow;

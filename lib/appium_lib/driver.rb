@@ -36,7 +36,34 @@ module Appium
 
     attr_reader :app_path, :app_name, :app_package, :app_activity,
                 :app_wait_activity, :sauce_username, :sauce_access_key,
-                :port, :os, :ios_js, :debug
+                :port, :os, :debug
+    # Creates a new driver.
+    #
+    # ```ruby
+    # # Options include:
+    # :app_path, :app_name, :app_package, :app_activity,
+    # :app_wait_activity, :sauce_username, :sauce_access_key,
+    # :port, :os, :debug
+    #
+    # require 'rubygems'
+    # require 'appium_lib'
+    #
+    # # Start iOS driver
+    # app = { app_path: '/path/to/MyiOS.app'}
+    # Appium::Driver.new(app).start_driver
+    #
+    # # Start Android driver
+    # apk = { app_path: '/path/to/the.apk',
+    #         app_package: 'com.example.pkg',
+    #         app_activity: 'act.Start',
+    #         app_wait_activity: 'act.Start'
+    # }
+    #
+    # Appium::Driver.new(apk).start_driver
+    # ```
+    #
+    # @param options [Object] A hash containing various options.
+    # @return [Driver]
     def initialize options={}
       # quit last driver
       $driver.driver_quit if $driver
@@ -86,7 +113,6 @@ module Appium
         # load Android specific methods
         extend Appium::Android
       else
-        @ios_js = [] # used to keep track of loaded JavaScript on iOS
         # load iOS specific methods
         extend Appium::Ios
       end
@@ -118,8 +144,11 @@ module Appium
           end
         end
       end
+
+      self # return newly created driver
     end # def initialize
 
+    # @private
     # WebDriver capabilities. Must be valid for Sauce to work.
     # https://github.com/jlipps/appium/blob/master/app/android.js
     def android_capabilities
@@ -136,6 +165,7 @@ module Appium
       }
     end
 
+    # @private
     # WebDriver capabilities. Must be valid for Sauce to work.
     def ios_capabilities
       {
@@ -148,6 +178,7 @@ module Appium
       }
     end
 
+    # @private
     def capabilities
       @os == :ios ? ios_capabilities : android_capabilities
     end
@@ -177,16 +208,22 @@ module Appium
     end
 
     # Restarts the driver
+    # @return [Driver] the driver
     def restart
       driver_quit
       start_driver
     end
 
-    # return driver
+    # Returns the driver
+    # @return [Driver] the driver
     def driver
       @driver
     end
 
+    # Takes a png screenshot and saves to the target path. Android only.
+    #
+    # @param png_save_path [String] the full path to save the png
+    # @return [void]
     def screenshot png_save_path
       @driver.save_screenshot png_save_path
     end
@@ -199,6 +236,8 @@ module Appium
     end
 
     # Creates a new global driver and quits the old one if it exists.
+    #
+    # @param wait [Integer] seconds to wait before timing out a command. defaults to 30 seconds
     # @return [Selenium::WebDriver] the new global driver
     def start_driver wait=30
       @client = @client || Selenium::WebDriver::Remote::Http::Default.new
@@ -250,6 +289,7 @@ module Appium
     #
     # exists { button('sign in') } ? puts('true') : puts('false')
     #
+    # @param search_block [Block] the block to call
     # @return [Boolean]
     def exists &search_block
       pre_check = 0
@@ -273,7 +313,9 @@ module Appium
     end
 
     # The same as @driver.execute_script
-    # @return [Object] the object returned by execute_script
+    # @param script [String] the script to execute
+    # @param args [*args] the args to pass to the script
+    # @return [Object]
     def execute_script script, *args
       @driver.execute_script script, *args
     end
@@ -282,36 +324,40 @@ module Appium
     #
     # https://github.com/appium/appium/wiki/Automating-mobile-gestures
     #
-    # @driver.execute_script 'mobile: swipe', endX: 100, endY: 100, duration: 0.01
+    # driver.execute_script 'mobile: swipe', endX: 100, endY: 100, duration: 0.01
     #
     # becomes
     #
     # mobile :swipe, endX: 100, endY: 100, duration: 0.01
+    # @param method [String, Symbol] the method to execute
+    # @param args [*args] the args to pass to the method
+    # @return [Object]
     def mobile method, *args
       raise 'Method must not be nil' if method.nil?
       raise 'Method must have .to_s' unless method.respond_to? :to_s
-
-      if method.to_s.strip.downcase == 'reset'
-        # reset will undefine custom iOS JavaScript
-        # mark js as unloaded so it'll reload next use.
-        @ios_js = [] if @ios_js
-      end
 
       @driver.execute_script "mobile: #{method.to_s}", *args
     end
 
     # Calls @driver.find_elements
+    #
+    # @param args [*args] the args to use
+    # @return [Array<Element>] Array is empty when no elements are found.
     def find_elements *args
       @driver.find_elements *args
     end
 
     # Calls @driver.find_elements
+    #
+    # @param args [*args] the args to use
+    # @return [Element]
     def find_element *args
       @driver.find_element *args
     end
 
     # Quit the driver and Pry.
     # quit and exit are reserved by Pry.
+    # @return [void]
     def x
       driver_quit
       exit # exit pry

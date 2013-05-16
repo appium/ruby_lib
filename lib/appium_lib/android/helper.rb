@@ -1,9 +1,12 @@
 # encoding: utf-8
 module Appium::Android
   # Returns an array of android classes that match the tag name
+  # @param tag_name [String] the tag name to convert to an android class
+  # @return [String]
   def tag_name_to_android tag_name
     tag_name = tag_name.to_s.downcase.strip
 
+    # @private
     def prefix *tags
       tags.map!{ |tag| "android.widget.#{tag}" }
     end
@@ -33,8 +36,11 @@ module Appium::Android
         raise "Invalid tag name #{tag_name}"
     end # return result of case
   end
-
-  # on android, assume the attr is name (which falls back to text).
+  # Find all elements matching the attribute
+  # On android, assume the attr is name (which falls back to text).
+  #
+  # @param tag_name [String] the tag name to search for
+  # @return [Element]
   def find_eles_attr tag_name
 =begin
     sel1 = [ [4, 'android.widget.Button'], [100] ]
@@ -54,7 +60,11 @@ module Appium::Android
     mobile :find, array
   end
 
+  # Selendroid only.
+  # Returns a string containing interesting elements.
+  # @return [String]
   def get_selendroid_inspect
+    # @private
     def run node
       r = []
 
@@ -116,7 +126,10 @@ module Appium::Android
   end
 
   # Android only.
+  # Returns a string containing interesting elements.
+  # @return [String]
   def get_android_inspect
+    # @private
     def run node
       r = []
 
@@ -161,11 +174,14 @@ module Appium::Android
     out
   end
 
+  # Automatically detects selendroid or android.
+  # Returns a string containing interesting elements.
+  # @return [String]
   def get_inspect
     @selendroid ? get_selendroid_inspect : get_android_inspect
   end
 
-  # Android only. Intended for use with console.
+  # Intended for use with console.
   # Inspects and prints the current page.
   def page
     puts get_inspect
@@ -174,8 +190,10 @@ module Appium::Android
 
   # JavaScript code from https://github.com/appium/appium/blob/master/app/android.js
   #
+  # ```javascript
   # Math.round((duration * 1000) / 200)
   # (.20 * 1000) / 200 = 1
+  # ```
   #
   # We want steps to be exactly 1. If it's zero then a tap is used instead of a swipe.
   def fast_duration

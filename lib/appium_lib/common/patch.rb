@@ -4,19 +4,21 @@ module Appium::Common
   class Selenium::WebDriver::Element
     # Note: For testing .text should be used over value, and name.
 
-    # Fixes NoMethodError: undefined method `value' for #<Selenium::WebDriver::Element:0x..fa4a9148235390a44 id="1">
+    # Returns the value attribute
+    #
+    # Fixes NoMethodError: undefined method `value' for Selenium::WebDriver::Element
     def value
       self.attribute :value
     end
 
-    # Fixes NoMethodError: undefined method `name' for #<Selenium::WebDriver::Element
+    # Returns the name attribute
+    #
+    # Fixes NoMethodError: undefined method `name' for Selenium::WebDriver::Element
     def name
       self.attribute :name
     end
 
-    # Use tag_name to get element's type.
-    #
-    # Tag name appears to be the same as type.
+    # Returns the type attribute
     #
     # Fixes Selenium::WebDriver::Error::UnknownError: Not yet implemented
     def tag_name
@@ -25,7 +27,9 @@ module Appium::Common
 
     # For use with mobile tap.
     #
+    # ```ruby
     # execute_script 'mobile: tap', :x => 0.0, :y => 0.98
+    # ```
     #
     # https://github.com/appium/appium/wiki/Automating-mobile-gestures
     # @return [OpenStruct] the relative x, y in a struct. ex: { x: 0.50, y: 0.20 }
@@ -49,6 +53,7 @@ require 'selenium/webdriver/remote/commands'
 require 'selenium/webdriver/remote/http/common'
 require 'selenium/webdriver/remote/http/default'
 
+# @private
 # Show http calls to the Selenium server.
 #
 # Invaluable for debugging.
@@ -91,6 +96,7 @@ end # def
 
 # Print Appium's origValue error messages.
 class Selenium::WebDriver::Remote::Response
+  # @private
   def error_message
     val = value
 

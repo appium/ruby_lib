@@ -2,6 +2,7 @@
 
 $driver = nil
 
+# @private
 # Invoke top level methods on last created Appium driver.
 def self.method_missing method, *args, &block
   raise "driver is nil. called #{method}" if $driver == nil
@@ -12,6 +13,7 @@ def self.method_missing method, *args, &block
 end
 
 module Appium
+  # @private
   def self.add_to_path file, path=false
    path = path ? "../#{path}/" : '..'
    path = File.expand_path path, file

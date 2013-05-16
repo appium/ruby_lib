@@ -93,6 +93,11 @@ task :install => [ :gem, :uninstall ] do
   sh "gem install --no-rdoc --no-ri --local #{repo_name}-#{version}.gem"
 end
 
+desc 'Update android and iOS docs'
+task :docs do
+  sh "ruby docs_gen/make_docs.rb"
+end
+
 desc 'Update release notes'
 task :notes do
   tags = `git tag`.split "\n"
@@ -122,7 +127,10 @@ task :notes do
     data.split("\n").each do |line|
       hex = line.match(/[a-zA-Z0-9]+/)[0]
       # use first 7 chars to match GitHub
-      new_data += "- [#{hex[0...7]}](https://github.com/appium/#{gh_name}/commit/#{hex}) #{line.gsub(hex, '').strip}\n"
+      comment = line.gsub(hex, '').strip
+      next if comment == 'Update release notes'
+      # Update release notes
+      new_data += "- [#{hex[0...7]}](https://github.com/appium/#{gh_name}/commit/#{hex}) #{comment}\n"
     end
     data = new_data + "\n"
 

@@ -72,6 +72,7 @@ module Appium::Ios
     execute_script js
   end
 
+  # @private
   # Return combined lookup of textfield and secure
   # with an optional filter. $() wrap is required for .each
   def textfield_js filter=''
