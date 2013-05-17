@@ -41,52 +41,8 @@ module Appium::Ios
   # @param predicate [String] the predicate
   # @return [String] the completed JavaScript program
   def first_ele_js predicate
-    <<-JS
-    function isNil( a ) {
-      return a.type() === 'UIAElementNil';
-    }
-
-    function search( w ) {
-      var search = "#{predicate}";
-      var a = w.secureTextFields().firstWithPredicate(search);
-      if ( isNil(a) ) {
-        a = w.textFields().firstWithPredicate(search);
-        if ( isNil(a) ) {
-          a = w.buttons().firstWithPredicate(search);
-          if ( isNil(a) ) {
-            a = w.elements().firstWithPredicate(search);
-          }
-        }
-      }
-
-      return a;
-    }
-
-    function search_web( windowIndex ) {
-      var a = undefined;
-
-      try {
-        a = UIATarget.localTarget().frontMostApp().windows()[windowIndex].scrollViews()[0].webViews()[0].elements().firstWithPredicate("#{predicate}");
-      } catch(e) {}
-
-      return a;
-    }
-
-    function run() {
-      var windows = au.mainApp.windows();
-      for (var i = 0, len = windows.length; i < len; i++) {
-        var result = search_web( i );
-        if ( isNil( result ) ) {
-          result = search( windows[ i ] );
-        }
-        if ( ! isNil( result ) ) {
-          return au._returnElems( $( [ result ] ) );
-        }
-      }
-      return au._returnElems( $( [] ) );
-    }
-
-    run();
+    (<<-JS).strip # remove trailing newline
+       au.mainApp.getFirstWithPredicateWeighted("#{predicate}");
     JS
   end
 
@@ -94,16 +50,8 @@ module Appium::Ios
   # @param predicate [String] the predicate
   # @return [String] the completed JavaScript program
   def all_ele_js predicate
-    <<-JS
-      var w = au.mainWindow;
-      var search = "#{predicate}";
-      var a = w.elements().withPredicate(search).toArray();
-
-      if ( a.length === 0 ) {
-        a = [];
-      }
-
-      au._returnElems($(a));
+    (<<-JS).strip # remove trailing newline
+      au.mainApp.getAllWithPredicate("#{predicate}");
     JS
   end
 
@@ -112,10 +60,7 @@ module Appium::Ios
   # @return [Element] the first matching element
   def find text
     js = first_ele_js "name contains[c] '#{text}' || label contains[c] '#{text}' || value contains[c] '#{text}'"
-
-    ele = execute_script(js).first
-    raise Selenium::WebDriver::Error::NoSuchElementError, '' if ele.nil?
-    ele
+    execute_script js
   end
 
   # Return all elements matching text.
@@ -125,7 +70,6 @@ module Appium::Ios
     # returnElems requires a wrapped $(element).
     # must call toArray when using withPredicate instead of firstWithPredicate.
     js = all_ele_js "name contains[c] '#{text}' || label contains[c] '#{text}' || value contains[c] '#{text}'"
-
     execute_script js
   end
 
@@ -134,8 +78,7 @@ module Appium::Ios
   # @return [Element] the first matching element
   def text text
     js = first_ele_js "value contains[c] '#{text}'"
-
-    execute_script(js).first
+    execute_script js
   end
 
   # Return all elements matching text.
@@ -144,8 +87,7 @@ module Appium::Ios
   def texts text
     # XPath //* is not implemented on iOS
     # https://github.com/appium/appium/issues/430
-      js = all_ele_js "value contains[c] '#{text}'"
-
+    js = all_ele_js "value contains[c] '#{text}'"
     execute_script js
   end
 
@@ -164,11 +106,9 @@ module Appium::Ios
   # @param name [String] the name to search for
   # @return [Array<Element>] all matching elements
   def names name
-    # find_elements :name is not the same as on Android.
-    # it's case sensitive and exact on iOS and not on Android.
+    # :name is not consistent across iOS and Android so use custom JavaScript
     # https://github.com/appium/appium/issues/379
-    js = all_ele_js "name contains[c] '#{name}' || label contains[c] '#{name}''"
-
+    js = all_ele_js "name contains[c] '#{name}' || label contains[c] '#{name}'"
     execute_script js
   end
 end # module Appium::Ios
