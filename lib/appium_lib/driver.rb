@@ -149,6 +149,17 @@ module Appium
       self # return newly created driver
     end # def initialize
 
+    # Returns the status payload
+    def status
+      driver.status.payload
+    end
+
+    # Returns the server's version string
+    # @return [String]
+    def server_version
+      status['value']['build']['version']
+    end
+
     # @private
     # WebDriver capabilities. Must be valid for Sauce to work.
     # https://github.com/jlipps/appium/blob/master/app/android.js

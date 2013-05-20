@@ -1,4 +1,24 @@
 # encoding: utf-8
+
+# Add status to WebDriver
+# https://code.google.com/p/selenium/issues/detail?id=5669
+class Selenium::WebDriver::Driver
+  def status
+    bridge.status
+  end
+end
+
+class Selenium::WebDriver::Remote::Bridge
+  def status
+    raw_execute :status
+  end
+end
+
+class Selenium::WebDriver::Remote::Bridge
+  command :status, :get, 'status'
+end
+# end Add status to WebDriver
+
 module Appium::Common
   # Implement useful features for element.
   class Selenium::WebDriver::Element
