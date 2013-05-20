@@ -1,3 +1,11 @@
+#### v0.4.1 2013-05-20
+
+- [cd8dd73](https://github.com/appium/ruby_lib/commit/cd8dd73461d6bdb8903a8b3f5bba9ce554a44789) Release 0.4.1
+- [9e8cd0a](https://github.com/appium/ruby_lib/commit/9e8cd0a915e6c9c373ebd3a33a653c573f776636) Add status
+- [978d489](https://github.com/appium/ruby_lib/commit/978d48964361ca36267b866b1fe69d0b09b3f273) Update docs
+- [eb11923](https://github.com/appium/ruby_lib/commit/eb11923543a1e3e2fe8f19d2f09959cefd16fa05) Fix generic iOS methods
+
+
 #### v0.4.0 2013-05-16
 
 - [70a59fe](https://github.com/appium/ruby_lib/commit/70a59fefcaa4f16ba0e7629f16feaae3e5f8c424) Release 0.4.0
