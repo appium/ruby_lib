@@ -1,3 +1,10 @@
+#### v0.4.2 2013-05-20
+
+- [be814c2](https://github.com/appium/ruby_lib/commit/be814c286bd55fb133f333738da9b0dcd6146b69) Release 0.4.2
+- [9d2cfe8](https://github.com/appium/ruby_lib/commit/9d2cfe86b3367fd3f4551962a042fe25da1e31bd) Add page_window for Apptentive
+- [e9b5e97](https://github.com/appium/ruby_lib/commit/e9b5e97baf7b6a417dc3865b7cc0c163c0165d70) Update docs
+
+
 #### v0.4.1 2013-05-20
 
 - [cd8dd73](https://github.com/appium/ruby_lib/commit/cd8dd73461d6bdb8903a8b3f5bba9ce554a44789) Release 0.4.1
