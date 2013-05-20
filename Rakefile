@@ -58,8 +58,9 @@ task :release => :gem do
   sh "git commit --allow-empty -am 'Release #{version}'"
   sh 'git pull'
   sh "git tag v#{version}"
-  # update notes now that there's a new tag
+  # update notes and docs now that there's a new tag
   Rake::Task['notes'].execute
+  Rake::Task['docs'].execute
   sh "git commit --allow-empty -am 'Update release notes'"
   sh 'git push origin master'
   sh "git push origin v#{version}"
