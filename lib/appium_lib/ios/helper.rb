@@ -105,6 +105,21 @@ module Appium::Ios
     nil
   end
 
+  # Gets the JSON source of window number
+  # @param window_number [Integer] the int index of the target window
+  # @return [JSON]
+  def source_window window_number=0
+    execute_script "UIATarget.localTarget().frontMostApp().windows()[#{window_number}].getTree()"
+  end
+
+  # Prints parsed page source to console.
+  # @param window_number [Integer] the int index of the target window
+  # example: page_window 0
+  def page_window window_number=0
+    get_page source_window window_number
+    nil
+  end
+
   # The fastest duration that can be used on iOS.
   # @return [Float]
   def fast_duration
