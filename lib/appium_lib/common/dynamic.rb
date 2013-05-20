@@ -35,6 +35,7 @@ module Appium
         100 => [ 'getStringAttribute("name")', 'GET_NAME', 100]
       }
 
+      # @private
       def dynamic_code_to_string code, value=false
         result = @@map[code].first
         return result unless value

@@ -3,12 +3,14 @@
 # Add status to WebDriver
 # https://code.google.com/p/selenium/issues/detail?id=5669
 class Selenium::WebDriver::Driver
+  # @private
   def status
     bridge.status
   end
 end
 
 class Selenium::WebDriver::Remote::Bridge
+  # @private
   def status
     raw_execute :status
   end
