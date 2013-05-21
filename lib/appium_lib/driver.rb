@@ -201,15 +201,15 @@ module Appium
     # Converts environment variable APP_PATH to an absolute path.
     # @return [String] APP_PATH as an absolute path
     def absolute_app_path
-        raise 'APP_PATH environment variable not set!' if @app_path.nil? || @app_path.empty?
-        return @app_path if @app_path.match(/^http/) # public URL for Sauce
-        if @app_path.match(/^\//) # absolute file path
-          raise "App doesn't exist. #{@app_path}" unless File.exist? @app_path
-          return @app_path
-        end
-        file = File.join(File.dirname(__FILE__), @app_path)
-        raise "App doesn't exist #{file}" unless File.exist? file
-        file
+      raise 'APP_PATH environment variable not set!' if @app_path.nil? || @app_path.empty?
+      return @app_path if @app_path.match(/^http/) # public URL for Sauce
+      if @app_path.match(/^\//) # absolute file path
+        raise "App doesn't exist. #{@app_path}" unless File.exist? @app_path
+        return @app_path
+      end
+      file = File.join(File.dirname(__FILE__), @app_path)
+      raise "App doesn't exist #{file}" unless File.exist? file
+      file
     end
 
     # Get the server url for sauce or local based on env vars.
