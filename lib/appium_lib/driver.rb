@@ -4,6 +4,55 @@ Based on simple_test.rb
 https://github.com/appium/appium/blob/82995f47408530c80c3376f4e07a1f649d96ba22/sample-code/examples/ruby/simple_test.rb
 https://github.com/appium/appium/blob/c58eeb66f2d6fa3b9a89d188a2e657cca7cb300f/LICENSE
 =end
+
+# Load appium.txt (toml format) into system ENV
+# the basedir of this file + appium.txt is what's used
+# @param opts [Hash] file: '/path/to/appium.txt', verbose: true
+# @return [nil]
+def load_appium_txt opts
+  raise 'opts must be a hash' unless opts.kind_of? Hash
+  opts.each_pair { |k,v| opts[k.to_s.downcase.strip.intern] = v }
+  opts = {} if opts.nil?
+  file = opts.fetch :file, nil
+  raise 'Must pass file' unless file
+  verbose = opts.fetch :verbose, false
+  # Check for env vars in .txt
+  toml = File.expand_path File.join File.dirname(file), 'appium.txt'
+  puts "appium.txt path: #{toml}" if verbose
+  # @private
+  def update data, *args
+    args.each do |name|
+      var = data[name]
+      ENV[name] = var if var
+    end
+  end
+
+  toml_exists = File.exists? toml
+  puts "Exists? #{toml_exists}" if verbose
+
+  if toml_exists
+    require 'toml'
+    require 'ap'
+    puts "Loading #{toml}" if verbose
+
+    # bash requires A="OK"
+    # toml requires A = "OK"
+    #
+    # A="OK" => A = "OK"
+    data = File.read(toml).gsub /([^\s])\=(")/, "\\1 = \\2"
+    data = TOML::Parser.new(data).parsed
+    ap data
+
+    update data, 'APP_PATH', 'APP_APK', 'APP_PACKAGE',
+           'APP_ACTIVITY', 'APP_WAIT_ACTIVITY',
+           'SELENDROID'
+
+    # Ensure app path is absolute
+    ENV['APP_PATH'] = File.expand_path ENV['APP_PATH'] if ENV['APP_PATH']
+  end
+  nil
+end
+
 module Appium
   add_to_path __FILE__
 
