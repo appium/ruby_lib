@@ -74,6 +74,9 @@ module Appium
       options.each_pair { |k,v| opts[k.to_s.downcase.strip.intern] = v }
 
       opts = {} if opts.nil?
+
+      @default_wait = opts.fetch :wait, 30
+
       # Path to the .apk, .app or .app.zip.
       # The path can be local or remote for Sauce.
       @app_path = opts.fetch :app_path, ENV['APP_PATH']
@@ -249,13 +252,10 @@ module Appium
 
     # Creates a new global driver and quits the old one if it exists.
     #
-    # @param wait [Integer] seconds to wait before timing out a command. defaults to 30 seconds
     # @return [Selenium::WebDriver] the new global driver
-    def start_driver wait=30
+    def start_driver
       @client = @client || Selenium::WebDriver::Remote::Http::Default.new
       @client.timeout = 999999
-
-      @default_wait = wait
 
       begin
         @driver = Selenium::WebDriver.for :remote, http_client: @client, desired_capabilities: capabilities, url: server_url
