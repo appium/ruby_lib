@@ -25,7 +25,8 @@ module Appium::Common
   # Example: wait { name('back').click }
   #
   # Give up after 30 seconds.
-  # @param max_wait [Integer] the maximum time in seconds to wait for
+  # @param max_wait [Integer] the maximum time in seconds to wait for.
+  #         Note that max wait 0 means infinity.
   # @param interval [Float] the time in seconds to wait after calling the block
   # @param block [Block] the block to call
   # @return [Object] the result of block.call
@@ -187,17 +188,17 @@ module Appium::Common
     JSON.parse @driver.page_source, max_nesting: 9999
   end
 
-  # Returns the first element that matches name
+  # Returns the first element that exactly matches name
   #
-  # @param name [String] the name to match
+  # @param name [String] the name to exactly match
   # @return [Element]
   def find_name name
     find_element :name, name
   end
 
-  # Returns all elements that match name
+  # Returns all elements that exactly match name
   #
-  # @param name [String] the name to match
+  # @param name [String] the name to exactly match
   # @return [Array<Element>]
   def find_names name
     find_elements :name, name

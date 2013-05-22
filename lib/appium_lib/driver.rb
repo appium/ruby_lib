@@ -62,7 +62,6 @@ module Appium
   require 'common/helper'
   require 'common/patch'
   require 'common/version'
-  require 'common/dynamic'
   require 'common/element/button'
   require 'common/element/text'
   require 'common/element/window'
@@ -75,6 +74,7 @@ module Appium
   require 'ios/element/textfield'
 
   # android
+  require 'android/dynamic'
   require 'android/helper'
   require 'android/patch'
   require 'android/element/alert'
