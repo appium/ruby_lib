@@ -39,9 +39,13 @@ module Appium::Android
   # Find all elements matching the attribute
   # On android, assume the attr is name (which falls back to text).
   #
+  # ```ruby
+  #   find_eles_attr :text
+  # ```
+  #
   # @param tag_name [String] the tag name to search for
   # @return [Element]
-  def find_eles_attr tag_name
+  def find_eles_attr tag_name, attribute=nil
 =begin
     sel1 = [ [4, 'android.widget.Button'], [100] ]
     sel2 = [ [4, 'android.widget.ImageButton'], [100] ]
