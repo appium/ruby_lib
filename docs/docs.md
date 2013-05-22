@@ -81,8 +81,8 @@ The Static Text methods have been prefixed with `s_` to avoid conflicting with t
 
 0. `(Text) s_text(index)` Find a text by index.
 0. `(Array<Text>) s_e_texts` Get an array of text elements.
-0. `(Text) s_first_text` Get the first text element.
-0. `(Text) s_last_text` Get the last text element.
+0. `(Text) first_s_text` Get the first text element.
+0. `(Text) last_s_text` Get the last text element.
 0. `(Text) s_text(text)` Get the first element that matches text.
 0. `(Text) s_text_include(text)` Get the first textfield that includes text.
 0. `(Array<String>) s_texts` Get an array of text texts.
