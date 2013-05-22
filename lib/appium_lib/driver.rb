@@ -285,6 +285,8 @@ module Appium
 
     # Takes a png screenshot and saves to the target path.
     #
+    # Example: screenshot '/tmp/hi.png'
+    #
     # @param png_save_path [String] the full path to save the png
     # @return [void]
     def screenshot png_save_path
