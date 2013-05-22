@@ -84,9 +84,9 @@ module Appium
   class Driver
     @@loaded = false
 
-    attr_reader :app_path, :app_name, :app_package, :app_activity,
-                :app_wait_activity, :sauce_username, :sauce_access_key,
-                :port, :os, :debug
+    attr_reader :default_wait, :app_path, :app_name, :selendroid,
+                :app_package, :app_activity, :app_wait_activity,
+                :sauce_username, :sauce_access_key, :port, :os, :debug
     # Creates a new driver.
     #
     # ```ruby
@@ -112,17 +112,14 @@ module Appium
     # Appium::Driver.new(apk).start_driver
     # ```
     #
-    # @param options [Object] A hash containing various options.
+    # @param opts [Object] A hash containing various options.
     # @return [Driver]
-    def initialize options={}
+    def initialize opts={}
       # quit last driver
       $driver.driver_quit if $driver
-
-      opts = {}
-      # convert to downcased symbols
-      options.each_pair { |k,v| opts[k.to_s.downcase.strip.intern] = v }
-
       opts = {} if opts.nil?
+      # convert to downcased symbols
+      opts.each_pair { |k,v| opts[k.to_s.downcase.strip.intern] = v }
 
       @default_wait = opts.fetch :wait, 30
 
@@ -174,9 +171,11 @@ module Appium
       patch_webdriver_element
 
       # enable debug patch
-      @debug = opts.fetch :debug, defined?(Pry)
-
+      # !!'constant' == true
+      @debug = opts.fetch :debug, !!defined?(Pry)
+      puts "Debug is: #{@debug}"
       if @debug
+        ap opts
         puts "OS is: #{@os}"
         patch_webdriver_bridge
       end
