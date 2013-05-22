@@ -349,12 +349,13 @@ module Appium
     #
     # exists { button('sign in') } ? puts('true') : puts('false')
     #
+    # @param pre_check [Integer]  the amount in seconds to set the
+    #                             wait to before checking existance
+    # @param post_check [Integer] the amount in seconds to set the
+    #                             wait to after checking existance
     # @param search_block [Block] the block to call
     # @return [Boolean]
-    def exists &search_block
-      pre_check = 0
-      post_check = @default_wait
-
+    def exists pre_check=0, post_check=@default_wait, &search_block
       set_wait pre_check # set wait to zero
 
       # the element exists unless an error is raised.
@@ -367,7 +368,7 @@ module Appium
       end
 
       # restore wait
-      set_wait post_check
+      set_wait post_check if post_check != pre_check
 
       exists
     end
