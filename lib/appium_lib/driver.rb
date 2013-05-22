@@ -41,7 +41,7 @@ def load_appium_txt opts
     # A="OK" => A = "OK"
     data = File.read(toml).gsub /([^\s])\=(")/, "\\1 = \\2"
     data = TOML::Parser.new(data).parsed
-    ap data
+    ap data unless data.empty?
 
     update data, 'APP_PATH', 'APP_APK', 'APP_PACKAGE',
            'APP_ACTIVITY', 'APP_WAIT_ACTIVITY',
@@ -175,7 +175,7 @@ module Appium
       @debug = opts.fetch :debug, !!defined?(Pry)
       puts "Debug is: #{@debug}"
       if @debug
-        ap opts
+        ap opts unless opts.empty?
         puts "OS is: #{@os}"
         patch_webdriver_bridge
       end

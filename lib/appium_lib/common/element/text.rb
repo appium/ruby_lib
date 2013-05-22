@@ -17,13 +17,13 @@ module Appium::Common
 
   # Get the first text element.
   # @return [Text]
-  def s_first_text
+  def first_s_text
     first_ele :text
   end
 
   # Get the last text element
   # @return [Text]
-  def s_last_text
+  def last_s_text
     last_ele :text
   end
 
