@@ -131,6 +131,7 @@ module Appium::Android
 
   # Android only.
   # Returns a string containing interesting elements.
+  # If an element has no content desc or text, then it's not returned by this method.
   # @return [String]
   def get_android_inspect
     # @private
