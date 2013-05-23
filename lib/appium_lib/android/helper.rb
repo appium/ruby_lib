@@ -129,6 +129,33 @@ module Appium::Android
     out
   end
 
+  # Count all classes on screen and print to stdout.
+  # Useful for appium_console.
+  def page_class
+    r = []
+    run_internal = lambda do |node|
+      if node.kind_of? Array
+        node.each { |node| run_internal.call node }
+        return
+      end
+
+      keys = node.keys
+      return if keys.empty?
+      r.push node['@class'] if keys.include?('@class')
+
+      run_internal.call node['node'] if keys.include?('node')
+    end
+    json = get_source
+    run_internal.call json['hierarchy']
+
+    r = r.sort
+    r.uniq.each do |ele|
+      print r.count(ele)
+      puts "x #{ele}\n"
+    end
+    nil
+  end
+
   # Android only.
   # Returns a string containing interesting elements.
   # If an element has no content desc or text, then it's not returned by this method.
