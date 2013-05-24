@@ -275,9 +275,7 @@ module Appium::Android
     out
   end
 
-  # Count all classes on screen and print to stdout.
-  # Useful for appium_console.
-  def page_class
+  def get_page_class
     r = []
     run_internal = lambda do |node|
       if node.kind_of? Array
@@ -294,11 +292,18 @@ module Appium::Android
     json = get_source
     run_internal.call json['hierarchy']
 
+    res = ''
     r = r.sort
     r.uniq.each do |ele|
-      print r.count(ele)
-      puts "x #{ele}\n"
+      res += "#{r.count(ele)}x #{ele}\n"
     end
+    res
+  end
+
+  # Count all classes on screen and print to stdout.
+  # Useful for appium_console.
+  def page_class
+    puts get_page_class
     nil
   end
 
