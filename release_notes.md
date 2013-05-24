@@ -1,3 +1,9 @@
+#### v0.5.1 2013-05-24
+
+- [1a98819](https://github.com/appium/ruby_lib/commit/1a98819e93e739496f27a6ec2ad4197ca78c08a4) Release 0.5.1
+- [2003589](https://github.com/appium/ruby_lib/commit/2003589197a78d54f3d177abbf2335724c090e1e) Fix names on Android
+
+
 #### v0.5.0 2013-05-24
 
 - [de58f71](https://github.com/appium/ruby_lib/commit/de58f7164230d7551df8462d65d0e43a3d0cfdab) Release 0.5.0
