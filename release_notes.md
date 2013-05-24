@@ -1,3 +1,23 @@
+#### v0.5.0 2013-05-24
+
+- [de58f71](https://github.com/appium/ruby_lib/commit/de58f7164230d7551df8462d65d0e43a3d0cfdab) Release 0.5.0
+- [062a2a2](https://github.com/appium/ruby_lib/commit/062a2a21fc3768c0d19b33d317c7ba5828bcbc3e) Add page_class
+- [9e1e091](https://github.com/appium/ruby_lib/commit/9e1e091f1cc27d3330faa9c44b8241b720c10595) Add note
+- [1372009](https://github.com/appium/ruby_lib/commit/1372009afdd62c6c2f57ffa8d9fa4fce3de056b2) Fix method signature
+- [f0e0954](https://github.com/appium/ruby_lib/commit/f0e0954d8f2c8f941b4f95bf995890454e748c4f) Dynamic is Android only
+- [8a1a387](https://github.com/appium/ruby_lib/commit/8a1a387e1fe03e9a3e9d0fafd2064fb9cd3759c4) Update docs.md
+- [eaa5b79](https://github.com/appium/ruby_lib/commit/eaa5b79f6768f3fd0da0637fad46c3dec4cd4ad1) Rename s_first_text s_last_text
+- [edbd74f](https://github.com/appium/ruby_lib/commit/edbd74fb8a32b53f37c65dd3617afaf6c6bd5641) Add example for screenshot
+- [73fcb72](https://github.com/appium/ruby_lib/commit/73fcb72d78bf02cb0deaa9af3f65ce074518c4fa) Add params to exists
+- [558d4af](https://github.com/appium/ruby_lib/commit/558d4afc023243374eadf6187c5036c0ac8dd4ba) Fix opts
+- [adfdc18](https://github.com/appium/ruby_lib/commit/adfdc18f224dcb98e41630ed354bdc2ac61241d8) Fix gemspec
+- [299d0c8](https://github.com/appium/ruby_lib/commit/299d0c8085e5117d7cdb5084334fb8e35efad32d) Move appium.txt loading to appium_lib
+- [aaf54be](https://github.com/appium/ruby_lib/commit/aaf54be45c0b711c4c3a86d3b42a853f1bdc80d1) Fix code format
+- [9e3a3e9](https://github.com/appium/ruby_lib/commit/9e3a3e9c3321c1fb78d8ed8df9b98f7f99d8c258) Move default wait to init param
+- [ae9acb1](https://github.com/appium/ruby_lib/commit/ae9acb1fcea3dc2af32032ade35ee9263668e7a8) Update docs
+- [849594b](https://github.com/appium/ruby_lib/commit/849594bdd87bf6133cbb64c43d0a02f427f17467) Update method comments
+
+
 #### v0.4.2 2013-05-20
 
 - [be814c2](https://github.com/appium/ruby_lib/commit/be814c286bd55fb133f333738da9b0dcd6146b69) Release 0.4.2
