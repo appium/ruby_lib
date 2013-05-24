@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.version = Appium::VERSION
   s.date = Appium::DATE
   s.license = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-  s.description = s.summary = 'Ruby lib for use with Appium'
+  s.description = s.summary = 'Ruby library for Appium'
   s.description += '.' # avoid identical warning
   s.authors = s.email = [ 'code@bootstraponline.com' ]
   s.homepage = 'https://github.com/appium/ruby_lib' # published as appium_lib
