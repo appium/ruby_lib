@@ -72,6 +72,7 @@ Appium::Driver.new(apk).start_driver
 
 #### Documentation
 
-- [Overview ](https://github.com/appium/ruby_lib/blob/master/docs/docs.md) 
+- [Installing Appium on OS X](https://github.com/appium/ruby_console/blob/master/osx.md)
+- [Overview](https://github.com/appium/ruby_lib/blob/master/docs/docs.md) 
 - [Android methods](https://github.com/appium/ruby_lib/blob/master/docs/android_docs.md)
 - [iOS methods](https://github.com/appium/ruby_lib/blob/master/docs/ios_docs.md)
