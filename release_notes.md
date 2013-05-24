@@ -1,3 +1,10 @@
+#### v0.5.2 2013-05-24
+
+- [44ffbcb](https://github.com/appium/ruby_lib/commit/44ffbcb4715c8caac2770972c72ca498e751be34) Release 0.5.2
+- [61e92f8](https://github.com/appium/ruby_lib/commit/61e92f87e6870be06b34a20dc0dfc64ddfed7f13) Add get_page_class
+- [cca5db4](https://github.com/appium/ruby_lib/commit/cca5db4d98e00306f99110cd43398b0dc1f5980f) Update tag names
+
+
 #### v0.5.1 2013-05-24
 
 - [1a98819](https://github.com/appium/ruby_lib/commit/1a98819e93e739496f27a6ec2ad4197ca78c08a4) Release 0.5.1
