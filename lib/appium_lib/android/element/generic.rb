@@ -97,7 +97,9 @@ the first element that matches.
   # @param name [String] the name to search for
   # @return [Array<Element>] all matching elements
   def names name
-    @driver.find_elements :name, name
+    args = 'all',
+           [ [7, name] ]
+    mobile :find, args
   end
 
   # Scroll to an element containing target text or description.
