@@ -249,7 +249,9 @@ module Appium
     # Converts environment variable APP_PATH to an absolute path.
     # @return [String] APP_PATH as an absolute path
     def absolute_app_path
-      raise 'APP_PATH environment variable not set!' if @app_path.nil? || @app_path.empty?
+      raise 'APP_PATH not set!' if @app_path.nil? || @app_path.empty?
+      # Sauce storage API. http://saucelabs.com/docs/rest#storage
+      return @app_path if @app_path.start_with? 'sauce-storage:'
       return @app_path if @app_path.match(/^http/) # public URL for Sauce
       if @app_path.match(/^\//) # absolute file path
         raise "App doesn't exist. #{@app_path}" unless File.exist? @app_path
