@@ -46,6 +46,12 @@ task :bump do
   bump
 end
 
+desc 'Install gems required for release task'
+task :dev do
+  sh 'gem install --no-rdoc --no-ri yard'
+  sh 'gem install --no-rdoc --no-ri redcarpet'
+end
+
 # Inspired by Gollum's Rakefile
 desc 'Build and release a new gem to rubygems.org'
 task :release => :gem do
