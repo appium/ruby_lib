@@ -1,3 +1,11 @@
+#### v0.5.4 2013-05-28
+
+- [9e95106](https://github.com/appium/ruby_lib/commit/9e951061b9da6cee7b90ee310bbbef2b7c660fb1) Release 0.5.4
+- [d66020c](https://github.com/appium/ruby_lib/commit/d66020c66b02889d4a96809f41d02d4aa3e4b915) Fix gemspec. yard is required for docs task
+- [1c6509d](https://github.com/appium/ruby_lib/commit/1c6509ddea68305b47f251e0d0c1ff4a5c1493ee) Add dev task to install gems required for release task
+- [5106643](https://github.com/appium/ruby_lib/commit/51066439a4bacf7fea4a469044f6c3e2b60356c9) Add Sauce Storage support
+
+
 #### v0.5.3 2013-05-24
 
 - [b24565d](https://github.com/appium/ruby_lib/commit/b24565df67d4f0468ab5e3c1a700711a4c82b80d) Release 0.5.3
