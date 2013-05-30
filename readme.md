@@ -1,4 +1,4 @@
-#### appium_lib [![Dependency Status](https://gemnasium.com/appium/ruby_lib.png)](https://gemnasium.com/appium/ruby_lib)
+#### appium_lib [![Gem Version](https://badge.fury.io/rb/appium_lib.png)](http://badge.fury.io/rb/appium_lib)[![Dependency Status](https://gemnasium.com/appium/ruby_lib.png)](https://gemnasium.com/appium/ruby_lib)
 
 - [appium_lib on RubyGems](https://rubygems.org/gems/appium_lib)
 - [Documentation for appium_lib](http://www.rubydoc.info/github/appium/ruby_lib/master/frames)
