@@ -1,3 +1,11 @@
+#### v0.5.5 2013-05-31
+
+- [e061482](https://github.com/appium/ruby_lib/commit/e061482a0f712914c5fb21da92da357b79e07b87) Release 0.5.5
+- [82f9c58](https://github.com/appium/ruby_lib/commit/82f9c580d68189b669d3f5029914f00c8fd17c06) Fix value contains operator
+- [c5b8d84](https://github.com/appium/ruby_lib/commit/c5b8d849b29f46beebd1aea4ff59f2de6edd9dc6) Update readme.md
+- [c14fbb3](https://github.com/appium/ruby_lib/commit/c14fbb3c39b0c33a5d42dfe9da5427cebb9ec336) Add version badge
+
+
 #### v0.5.4 2013-05-28
 
 - [9e95106](https://github.com/appium/ruby_lib/commit/9e951061b9da6cee7b90ee310bbbef2b7c660fb1) Release 0.5.4
