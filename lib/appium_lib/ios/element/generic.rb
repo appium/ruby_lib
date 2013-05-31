@@ -63,12 +63,12 @@ module Appium::Ios
     # prefer value search. this may error with:
     # Can't use in/contains operator with collection 1
     js = first_ele_js "value contains[c] '#{text}'"
-    ignore { ele = execute_script js }
+    ele = ignore { execute_script js }
 
     # now search name and label if the value search didn't match.
     unless ele
       js = first_ele_js "name contains[c] '#{text}' || label contains[c] '#{text}'"
-      ignore { ele ||= execute_script js }
+      ele = ignore { execute_script js }
     end
 
     # manually raise error if no element was found
@@ -81,10 +81,14 @@ module Appium::Ios
   # @param text [String] the text to search for
   # @return [Array<Element>] all matching elements
   def finds text
-    # returnElems requires a wrapped $(element).
-    # must call toArray when using withPredicate instead of firstWithPredicate.
-    js = all_ele_js "name contains[c] '#{text}' || label contains[c] '#{text}' || value contains[c] '#{text}'"
-    execute_script js
+    eles = []
+    # value contains may error
+    js = all_ele_js "value contains[c] '#{text}'"
+    eles = ignore { execute_script js }
+
+    js = all_ele_js "name contains[c] '#{text}' || label contains[c] '#{text}'"
+    eles += ignore { execute_script js }
+    eles
   end
 
   # Return the first element matching text.
