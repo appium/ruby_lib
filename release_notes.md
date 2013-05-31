@@ -1,3 +1,9 @@
+#### v0.5.6 2013-05-31
+
+- [7c3335c](https://github.com/appium/ruby_lib/commit/7c3335c82e8b96e4a4cf74ae20faf98906b63770) Release 0.5.6
+- [b231d8f](https://github.com/appium/ruby_lib/commit/b231d8fbcdd35cc7a027e02a7733d10a616d2f7b) Fix finds
+
+
 #### v0.5.5 2013-05-31
 
 - [e061482](https://github.com/appium/ruby_lib/commit/e061482a0f712914c5fb21da92da357b79e07b87) Release 0.5.5
