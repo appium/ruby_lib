@@ -41,6 +41,11 @@ module Appium::Common
     result
   end
 
+  # Return block.call and ignore any exceptions.
+  def ignore &block
+    begin; block.call; rescue; end
+  end
+
   # Check every 0.5 seconds to see if block.call returns true. nil is considered a failure.
   # Give up after 30 seconds.
   # @param max_wait [Integer] the maximum time in seconds to wait for

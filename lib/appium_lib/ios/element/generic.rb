@@ -59,8 +59,22 @@ module Appium::Ios
   # @param text [String] the text to search for
   # @return [Element] the first matching element
   def find text
-    js = first_ele_js "name contains[c] '#{text}' || label contains[c] '#{text}' || value contains[c] '#{text}'"
-    execute_script js
+    ele = nil
+    # prefer value search. this may error with:
+    # Can't use in/contains operator with collection 1
+    js = first_ele_js "value contains[c] '#{text}'"
+    ignore { ele = execute_script js }
+
+    # now search name and label if the value search didn't match.
+    unless ele
+      js = first_ele_js "name contains[c] '#{text}' || label contains[c] '#{text}'"
+      ignore { ele ||= execute_script js }
+    end
+
+    # manually raise error if no element was found
+    raise Selenium::WebDriver::Error::NoSuchElementError, 'An element could not be located on the page using the given search parameters.' unless ele
+
+    ele
   end
 
   # Return all elements matching text.
