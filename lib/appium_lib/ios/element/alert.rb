@@ -19,13 +19,18 @@ module Appium::Ios
   # Get the alert message text.
   # @return [String]
   def alert_text
-    @driver.switch_to.alert.text
+    # this will call get text twice so call bridge directly
+    # ".switch_to.alert" calls it once, then ".text" another time.
+    # @driver.switch_to.alert.text
+    driver.send(:bridge).getAlertText
   end
 
   # Accept the alert.
   # @return [void]
   def alert_accept
-    @driver.switch_to.alert.accept
+    # @driver.switch_to.alert.accept
+    # ".switch_to.alert" calls getAlertText so use bridge directly
+    driver.send(:bridge).acceptAlert
   end
 
   # Get the text of the alert's accept button.
@@ -41,7 +46,9 @@ module Appium::Ios
   # Dismiss the alert.
   # @return [void]
   def alert_dismiss
-    @driver.switch_to.alert.dismiss
+    # @driver.switch_to.alert.dismiss
+    # ".switch_to.alert" calls getAlertText so use bridge directly
+    driver.send(:bridge).dismissAlert
   end
 
   # Get the text of the alert's dismiss button.
