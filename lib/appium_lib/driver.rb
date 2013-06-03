@@ -191,7 +191,12 @@ module Appium
         $driver.public_methods(false).each do | m |
           Object.class_eval do
             define_method m do | *args, &block |
-              $driver.send m, *args, &block
+              begin
+                # prefer existing method
+                super(*args, &block)
+              rescue
+                $driver.send(m, *args, &block)
+              end
             end
           end
         end
