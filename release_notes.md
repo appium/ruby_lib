@@ -1,3 +1,9 @@
+#### v0.5.7 2013-06-03
+
+- [669f734](https://github.com/appium/ruby_lib/commit/669f7345b7e8a92e8206b847d4a2263731df3c4b) Release 0.5.7
+- [bb5b7a5](https://github.com/appium/ruby_lib/commit/bb5b7a568dab38dc7044e3925274f9f7ee84a362) Add page_class for iOS
+
+
 #### v0.5.6 2013-05-31
 
 - [7c3335c](https://github.com/appium/ruby_lib/commit/7c3335c82e8b96e4a4cf74ae20faf98906b63770) Release 0.5.6
