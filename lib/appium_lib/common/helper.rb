@@ -208,4 +208,12 @@ module Appium::Common
   def find_names name
     find_elements :name, name
   end
+
+  # Returns the first element matching tag_name
+  #
+  # @param tag_name [String] the tag_name to search for
+  # @return [Element]
+  def tag tag_name
+    find_element :tag_name, tag_name
+  end
 end # module Appium::Common
