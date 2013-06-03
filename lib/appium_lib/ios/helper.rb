@@ -51,6 +51,38 @@ module Appium::Ios
     '•' * length
   end
 
+  # Returns a string of class counts.
+  def get_page_class
+    r = []
+    run_internal = lambda do |node|
+      if node.kind_of? Array
+        node.each { |node| run_internal.call node }
+        return
+      end
+
+      keys = node.keys
+      return if keys.empty?
+      r.push node['type'] if keys.include?('type')
+
+      run_internal.call node['children'] if keys.include?('children')
+    end
+    json = get_source
+    run_internal.call json['children']
+
+    res = []
+    r = r.sort
+    r.uniq.each do |ele|
+      res.push "#{r.count(ele)}x #{ele}\n"
+    end
+    count_sort  = ->(one,two) { two.match(/(\d+)x/)[1].to_i <=> one.match(/(\d+)x/)[1].to_i }
+    res.sort(&count_sort).join ''
+  end
+
+  def page_class
+    puts get_page_class
+    nil
+  end
+
   # Returns a string of interesting elements. iOS only.
   #
   # @param element [Object] the element to search. omit to search everything
