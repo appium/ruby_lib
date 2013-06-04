@@ -7,9 +7,13 @@ $driver = nil
 def self.method_missing method, *args, &block
   raise "driver is nil. called #{method}" if $driver == nil
 
-  $driver.respond_to?(method) ?
-      $driver.send( method, *args, &block ) :
-      super
+  if $driver.respond_to?(method)
+      # puts "[method_missing] Calling driver.send for #{method}"
+      $driver.send( method, *args, &block )
+  else
+      # puts "[method_missing] Calling super for #{method}"
+      super(*args, &block )
+    end
 end
 
 module Appium

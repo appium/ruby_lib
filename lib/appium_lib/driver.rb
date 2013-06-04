@@ -192,10 +192,13 @@ module Appium
           Object.class_eval do
             define_method m do | *args, &block |
               begin
-                # prefer existing method
+                # puts "[Object.class_eval] Calling super for #{m}"
+                # prefer existing method.
+                # super will invoke method missing on driver
                 super(*args, &block)
-              rescue
-                $driver.send(m, *args, &block)
+              rescue NoMethodError
+                # puts '[Object.class_eval] NoMethodError'
+                $driver.send m, *args, &block
               end
             end
           end

@@ -57,7 +57,7 @@ module Appium::Common
     # @return [OpenStruct] the relative x, y in a struct. ex: { x: 0.50, y: 0.20 }
     def location_rel
       xy = self.location
-      w = window_size
+      w = $driver.window_size
       OpenStruct.new( x: xy.x.to_f / w.width.to_f,
                       y: xy.y.to_f / w.height.to_f )
     end
