@@ -1,3 +1,12 @@
+#### v0.5.8 2013-06-04
+
+- [91f5c2f](https://github.com/appium/ruby_lib/commit/91f5c2f2bd388c1d4c4e771d2abea3772197de9c) Release 0.5.8
+- [b4e592c](https://github.com/appium/ruby_lib/commit/b4e592cc3d101a4ac9f7fa374ae8c75fcdc5218a) Fix call twice
+- [18e3f7d](https://github.com/appium/ruby_lib/commit/18e3f7d1c6869ba0d2c248b9c242d08c47390346) Prefer existing method before calling driver method
+- [1f72729](https://github.com/appium/ruby_lib/commit/1f727290c2452833df87a8b4d559bf5c51955a1e) switch_to.alert calls getAlertText so use bridge directly
+- [9752a3b](https://github.com/appium/ruby_lib/commit/9752a3bdf8173653f6d5c2d412bb7c70f0b5f023) Add tag method
+
+
 #### v0.5.7 2013-06-03
 
 - [669f734](https://github.com/appium/ruby_lib/commit/669f7345b7e8a92e8206b847d4a2263731df3c4b) Release 0.5.7
