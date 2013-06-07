@@ -76,3 +76,12 @@ Appium::Driver.new(apk).start_driver
 - [Overview](https://github.com/appium/ruby_lib/blob/master/docs/docs.md) 
 - [Android methods](https://github.com/appium/ruby_lib/blob/master/docs/android_docs.md)
 - [iOS methods](https://github.com/appium/ruby_lib/blob/master/docs/ios_docs.md)
+
+Print the currently active activity using Pry.
+
+```ruby
+def current_activity
+  `adb shell dumpsys window windows`.each_line.grep(/mFocusedApp/).first.split(' ').last.gsub('}','')
+end
+current_activity
+```
