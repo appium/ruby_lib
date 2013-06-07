@@ -80,8 +80,10 @@ Appium::Driver.new(apk).start_driver
 Print the currently active activity using Pry.
 
 ```ruby
-def current_activity
-  `adb shell dumpsys window windows`.each_line.grep(/mFocusedApp/).first.split(' ').last.gsub('}','')
+def current_app
+  pair = `adb shell dumpsys window windows`.each_line.grep(/mFocusedApp/).first.split(' ').last.gsub('}','').split('/')
+  { pkg: pair.first, act: pair.last }
 end
-current_activity
+
+current_app
 ```
