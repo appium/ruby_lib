@@ -1,3 +1,10 @@
+#### v0.5.9 2013-06-11
+
+- [ac76a23](https://github.com/appium/ruby_lib/commit/ac76a23ca4c7f5bb89a833937cc726654fa2df82) Release 0.5.9
+- [b377791](https://github.com/appium/ruby_lib/commit/b3777911709538a230d1fd3be31ae21f72040b00) Update readme.md
+- [893737a](https://github.com/appium/ruby_lib/commit/893737a6033ed7c8e6f1c31f5b45f65b841320c2) Add current_activity
+
+
 #### v0.5.8 2013-06-04
 
 - [91f5c2f](https://github.com/appium/ruby_lib/commit/91f5c2f2bd388c1d4c4e771d2abea3772197de9c) Release 0.5.8
