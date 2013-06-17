@@ -171,7 +171,7 @@ module Appium::Android
       when 'viewswitcher'
         prefix 'ViewSwitcher'
       when 'web'
-        prefix 'WebView'
+        'android.webkit.WebView' # WebView is not a widget
       when 'window'
         prefix 'FrameLayout'
       when 'zoom'
