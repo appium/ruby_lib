@@ -1,3 +1,9 @@
+#### v0.5.10 2013-06-17
+
+- [16d696a](https://github.com/appium/ruby_lib/commit/16d696aa368bdce198b7ef7a1cc1370f6c5d2ac7) Release 0.5.10
+- [5cc0a7a](https://github.com/appium/ruby_lib/commit/5cc0a7a52d43af7690705f889860c2dc4788b892) Add search and resolve id
+
+
 #### v0.5.9 2013-06-11
 
 - [ac76a23](https://github.com/appium/ruby_lib/commit/ac76a23ca4c7f5bb89a833937cc726654fa2df82) Release 0.5.9
