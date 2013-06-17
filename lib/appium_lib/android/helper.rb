@@ -382,4 +382,18 @@ module Appium::Android
   def fast_duration
     0.20
   end
+
+  # Search strings.xml's values for target.
+  # @param target [String] the target to search for in strings.xml values
+  # @return [Array]
+  def search_id target
+    mobile :searchId, target
+  end
+
+  # Resolve id in strings.xml and return the value.
+  # @param id [String] the id to resolve
+  # @return [String]
+  def resolve_id id
+    mobile :resolveId, id
+  end
 end # module Appium::Android
