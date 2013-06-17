@@ -390,6 +390,13 @@ module Appium::Android
     mobile :searchId, target
   end
 
+  # Search strings.xml's keys for target.
+  # @param target [String] the target to search for in strings.xml keys
+  # @return [Array]
+  def search_value target
+    mobile :searchValue, target
+  end
+
   # Resolve id in strings.xml and return the value.
   # @param id [String] the id to resolve
   # @return [String]
