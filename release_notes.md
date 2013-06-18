@@ -1,3 +1,10 @@
+#### v0.5.11 2013-06-18
+
+- [891e003](https://github.com/appium/ruby_lib/commit/891e003748038a006121c8a4e0c702c12c405799) Release 0.5.11
+- [5e7f381](https://github.com/appium/ruby_lib/commit/5e7f381aa8fc4b64af9103beae67cfc2fc310484) WebView is not a widget
+- [830c3fb](https://github.com/appium/ruby_lib/commit/830c3fb07e01da64a6934a9a0868861a67326f4f) Add search value
+
+
 #### v0.5.10 2013-06-17
 
 - [16d696a](https://github.com/appium/ruby_lib/commit/16d696aa368bdce198b7ef7a1cc1370f6c5d2ac7) Release 0.5.10
