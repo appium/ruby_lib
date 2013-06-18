@@ -1,3 +1,9 @@
+#### v0.5.12 2013-06-18
+
+- [89b0902](https://github.com/appium/ruby_lib/commit/89b0902ed94ed43d8a9f0e364463da77015dcfb7) Release 0.5.12
+- [7c4e8d1](https://github.com/appium/ruby_lib/commit/7c4e8d16d909112cebd2a80f0d8140723efd644a) search_id, search_value replaced with xml_keys, xml_values
+
+
 #### v0.5.11 2013-06-18
 
 - [891e003](https://github.com/appium/ruby_lib/commit/891e003748038a006121c8a4e0c702c12c405799) Release 0.5.11
