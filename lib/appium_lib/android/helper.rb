@@ -386,15 +386,15 @@ module Appium::Android
   # Search strings.xml's values for target.
   # @param target [String] the target to search for in strings.xml values
   # @return [Array]
-  def search_id target
-    mobile :searchId, target
+  def xml_keys target
+    mobile :xmlKeyContains, target
   end
 
   # Search strings.xml's keys for target.
   # @param target [String] the target to search for in strings.xml keys
   # @return [Array]
-  def search_value target
-    mobile :searchValue, target
+  def xml_values target
+    mobile :xmlValueContains, target
   end
 
   # Resolve id in strings.xml and return the value.
