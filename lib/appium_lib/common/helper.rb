@@ -216,4 +216,13 @@ module Appium::Common
   def tag tag_name
     find_element :tag_name, tag_name
   end
+
+  # Lists package, activity, and adb shell am start -n value for current app.
+  # Works on local host only (not remote).
+  def current_app
+    line = `adb shell dumpsys window windows`.each_line.grep(/mFocusedApp/).first
+    puts line
+    pair = line.split(' ').last.gsub('}','').split('/')
+    { package: pair.first, activity: pair.last, am_start: pair.first + '/' + pair.last }
+  end
 end # module Appium::Common
