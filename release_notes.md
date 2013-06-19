@@ -1,3 +1,11 @@
+#### v0.5.13 2013-06-19
+
+- [146e19a](https://github.com/appium/ruby_lib/commit/146e19a1b322d1bb625c6bb3ce1b80e67a7e80fa) Release 0.5.13
+- [2eb4bb0](https://github.com/appium/ruby_lib/commit/2eb4bb0c696f41c839227dd99256d77d52bf995f) Check method exists before calling
+- [8d48ca2](https://github.com/appium/ruby_lib/commit/8d48ca2c4463b54d5d68332b58e3ed8eff01edf0) Current app is in the lib now
+- [683ae29](https://github.com/appium/ruby_lib/commit/683ae2975fde08d069fefb731a342c7ddd9ebb92) Add current_app
+
+
 #### v0.5.12 2013-06-18
 
 - [89b0902](https://github.com/appium/ruby_lib/commit/89b0902ed94ed43d8a9f0e364463da77015dcfb7) Release 0.5.12
