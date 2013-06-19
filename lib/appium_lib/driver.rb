@@ -191,15 +191,14 @@ module Appium
         $driver.public_methods(false).each do | m |
           Object.class_eval do
             define_method m do | *args, &block |
-              begin
-                # puts "[Object.class_eval] Calling super for #{m}"
-                # prefer existing method.
-                # super will invoke method missing on driver
-                super(*args, &block)
-              rescue NoMethodError
-                # puts '[Object.class_eval] NoMethodError'
-                $driver.send m, *args, &block
-              end
+                if defined?(super) # check if method is defined on super
+                  # puts "[Object.class_eval] Calling super for #{m}"
+                  # prefer existing method.
+                  super(*args, &block)
+                else
+                  # puts '[Object.class_eval] not on super, calling driver.'
+                  $driver.send m, *args, &block
+                end
             end
           end
         end
