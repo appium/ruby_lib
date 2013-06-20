@@ -403,4 +403,15 @@ module Appium::Android
   def resolve_id id
     mobile :resolveId, id
   end
+
+  # Lists package, activity, and adb shell am start -n value for current app.
+  # Works on local host only (not remote).
+  def current_app
+    line = `adb shell dumpsys window windows`.each_line.grep(/mFocusedApp/).first.strip
+    pair = line.split(' ').last.gsub('}','').split('/')
+    OpenStruct.new line: line,
+                   package: pair.first,
+                   activity: pair.last,
+                   am_start: pair.first + '/' + pair.last
+  end
 end # module Appium::Android
