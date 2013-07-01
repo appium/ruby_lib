@@ -39,6 +39,7 @@ text      | UIAStaticText
 
 - `source` Prints a JSON view of the current page.
 - `page` Prints the content descriptions and text values on the current page.
+- `page_class` Prints the classes found on the current page.
 - `(Element) find(value)` Returns the first element that contains value.
 - `(Element) finds(value)` Returns all elements containing value (iOS only for now).
 - `(Element) name(name)` Returns the first element containing name. Android name is the content description.
