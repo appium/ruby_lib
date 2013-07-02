@@ -233,3 +233,12 @@ at_exit do
   end
 end
 ```
+
+#### Set iOS version
+
+```bash
+export V=`git rev-parse --verify HEAD`
+/usr/libexec/PlistBuddy -c "Set :CFBundleVersion $V" Info.plist
+/usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $V" Info.plist
+/usr/bin/plutil -convert binary1 Info.plist
+```
