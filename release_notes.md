@@ -1,3 +1,10 @@
+#### v0.5.15 2013-07-03
+
+- [734fe68](https://github.com/appium/ruby_lib/commit/734fe6887f36aa1ad59ef7ce992ba2e2f4c8c7d3) Release 0.5.15
+- [0e203d7](https://github.com/appium/ruby_lib/commit/0e203d76610abd519ba9d2fe9c14b50c94df5bbd) Fix driver methods overriding object methods
+- [efc4602](https://github.com/appium/ruby_lib/commit/efc460278af5b6f2a24c290f704781be4e9b2d4b) Fix open struct
+
+
 #### v0.5.14 2013-07-03
 
 - [521f79b](https://github.com/appium/ruby_lib/commit/521f79b11497c0c963b7059347e02d81a08f665a) Release 0.5.14
