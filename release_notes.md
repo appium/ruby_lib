@@ -1,3 +1,15 @@
+#### v0.5.14 2013-07-03
+
+- [521f79b](https://github.com/appium/ruby_lib/commit/521f79b11497c0c963b7059347e02d81a08f665a) Release 0.5.14
+- [7831c7d](https://github.com/appium/ruby_lib/commit/7831c7d21bc6ae3c39d91c6903cb5e96ec066f16) Update current_app
+- [3009abc](https://github.com/appium/ruby_lib/commit/3009abc44624f58c2201ad881b918e79252c2a83) Add iOS version commands
+- [d224b6b](https://github.com/appium/ruby_lib/commit/d224b6b982d6ca7bc741ec9f92d597203081d4c6) Update readme.md
+- [89a43da](https://github.com/appium/ruby_lib/commit/89a43da27d3629d5a4f3dc521fefb6e00a97ad2e) Update docs.md
+- [85469de](https://github.com/appium/ruby_lib/commit/85469de2cb574722719e77809498319d948add15) Update readme.md
+- [95c5c3c](https://github.com/appium/ruby_lib/commit/95c5c3cccf7b038293c9b8bd8bb168edc5bdd6a2) Current app is only for Android
+- [460699c](https://github.com/appium/ruby_lib/commit/460699cce767339bf73efd8b5791464130681cb8) Update current_app
+
+
 #### v0.5.13 2013-06-19
 
 - [146e19a](https://github.com/appium/ruby_lib/commit/146e19a1b322d1bb625c6bb3ce1b80e67a7e80fa) Release 0.5.13
