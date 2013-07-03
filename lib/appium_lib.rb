@@ -8,13 +8,13 @@ def self.method_missing method, *args, &block
   raise "driver is nil. called #{method}" if $driver == nil
 
   if $driver.respond_to?(method)
-    puts "[method_missing] Calling driver.send for #{method}"
+    # puts "[method_missing] Calling driver.send for #{method}"
     $driver.send(method, *args, &block)
   elsif self.respond_to?(method)
-    puts "[method_missing] Calling super with args for #{method}"
+    # puts "[method_missing] Calling super with args for #{method}"
     super(*args, &block)
   else
-    puts puts "[method_missing] Calling super (no args) for #{method}"
+    # puts "[method_missing] Calling super (no args) for #{method}"
     super
   end
 end

@@ -191,16 +191,14 @@ module Appium
         $driver.public_methods(false).each do | m |
           Object.class_eval do
             define_method m do | *args, &block |
-                if defined?(super) # check if method is defined on super
-                  puts "[Object.class_eval] Calling super for '#{m}'"
+                begin
+                  # puts "[Object.class_eval] Calling super for '#{m}'"
                   # prefer existing method.
+                  # super will invoke method missing on driver
                   super(*args, &block)
-                  puts "[Object.class_eval] '#{m}' on OpenStruct"
-                elsif self.class == OpenStruct && self.respond_to?(m)
-                  super(*args, &block)
-                else
-                  puts "[Object.class_eval] '#{m}' not on super"
-                  $driver.send m, *args, &block
+                rescue NoMethodError
+                  # puts "[Object.class_eval] '#{m}' not on super"
+                  $driver.send m, *args, &block if $driver.respond_to?(m)
                 end
             end
           end
