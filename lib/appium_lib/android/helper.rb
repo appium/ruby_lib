@@ -408,10 +408,12 @@ module Appium::Android
   # Works on local host only (not remote).
   def current_app
     line = `adb shell dumpsys window windows`.each_line.grep(/mFocusedApp/).first.strip
-    pair = line.split(' ').last.gsub('}','').split('/')
+    pair = line.split(' ').last.gsub('}','').split '/'
+    pkg = pair.first
+    act = pair.last
     OpenStruct.new line: line,
-                   package: pair.first,
-                   activity: pair.last,
-                   am_start: pair.first + '/' + pair.last
+                   package: pkg,
+                   activity: act,
+                   am_start: pkg + '/' + act
   end
 end # module Appium::Android
