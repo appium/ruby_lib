@@ -192,11 +192,14 @@ module Appium
           Object.class_eval do
             define_method m do | *args, &block |
                 if defined?(super) # check if method is defined on super
-                  # puts "[Object.class_eval] Calling super for #{m}"
+                  puts "[Object.class_eval] Calling super for '#{m}'"
                   # prefer existing method.
                   super(*args, &block)
+                  puts "[Object.class_eval] '#{m}' on OpenStruct"
+                elsif self.class == OpenStruct && self.respond_to?(m)
+                  super(*args, &block)
                 else
-                  # puts '[Object.class_eval] not on super, calling driver.'
+                  puts "[Object.class_eval] '#{m}' not on super"
                   $driver.send m, *args, &block
                 end
             end
