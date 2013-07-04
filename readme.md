@@ -10,7 +10,7 @@ Make sure you're using Ruby 1.9.3+ with upgraded rubygems and bundler.
 
 #### Start appium server
 
-`node server.js -V --fast-reset --without-delay`
+`node server.js`
 
 #### Install / Upgrade
 
@@ -68,7 +68,7 @@ Appium::Driver.new(apk).start_driver
 
 1. Does `adb kill-server; adb devices` list an active Android device?
 2. Have you defined the proper env vars? `APP_PATH, APP_PACKAGE, APP_ACTIVITY, APP_WAIT_ACTIVITY`
-3. Are you running appium from source? `node server.js -V --fast-reset`
+3. Are you running appium from source? `node server.js`
 
 #### Documentation
 
