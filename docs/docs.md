@@ -242,3 +242,14 @@ export V=`git rev-parse --verify HEAD`
 /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $V" Info.plist
 /usr/bin/plutil -convert binary1 Info.plist
 ```
+
+#### Set Android version
+
+```ruby
+# Save as set_version.rb and pass version as first arg.
+Dir.glob('./**/AndroidManifest.xml') do |xml|
+  data = File.read xml
+  data.scan(/android:version(?:Code|Name)="[^"]*"/).each { |m| data.gsub!(m, m.sub(/"[^"]*"/, '"' + ARGV.first + '"')) }
+  File.open(xml, 'w') { |f| f.write data }
+end
+```
