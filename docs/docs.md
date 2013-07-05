@@ -247,9 +247,10 @@ export V=`git rev-parse --verify HEAD`
 
 ```ruby
 # Save as set_version.rb and pass version as first arg.
+# android:versionCode must be an int
 Dir.glob('./**/AndroidManifest.xml') do |xml|
   data = File.read xml
-  data.scan(/android:version(?:Code|Name)="[^"]*"/).each { |m| data.gsub!(m, m.sub(/"[^"]*"/, '"' + ARGV.first + '"')) }
+  data.scan(/android:versionName="[^"]*"/).each { |m| data.gsub!(m, m.sub(/"[^"]*"/, '"' + ARGV.first + '"')) }
   File.open(xml, 'w') { |f| f.write data }
 end
 ```
