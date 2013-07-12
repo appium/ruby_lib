@@ -96,7 +96,8 @@ The Static Text methods have been prefixed with `s_` to avoid conflicting with t
 ```ruby
 e.name # button, text
 e.value # secure, textfield
-e.type
+e.type 'some text' # type text into textfield
+e.clear # clear textfield
 e.tag_name # calls .type (patch.rb)
 e.text
 e.size
