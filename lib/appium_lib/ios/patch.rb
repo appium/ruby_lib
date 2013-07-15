@@ -9,9 +9,21 @@ module Appium::Ios
       # Cross platform way of entering text into a textfield
       def type text
         # enter text then tap window to hide the keyboard.
+=begin
+Find the top left corner of the keyboard and move up 10 pixels (origin.y - 10)
+now swipe down until the end of the window - 10 pixels.
+-10 to ensure we're not going outside the window bounds.
+
+Swiping inside the keyboard will not dismiss it.
+=end
         js = <<-JS
           au.getElement('#{self.ref}').setValue('#{text}');
-          au.lookup('window')[0].tap();
+
+          if (au.mainApp.keyboard().type() !== "UIAElementNil") {
+            var startY = au.mainApp.keyboard().rect().origin.y - 10;
+            var endY = au.mainWindow.rect().size.height - 10;
+            au.flickApp(0, startY, 0, endY);
+          }
         JS
         @driver.execute_script js
       end
