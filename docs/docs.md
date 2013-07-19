@@ -47,6 +47,7 @@ iOS uses accessibility label with a fallback to text.
 - `(Array<Element>) names(name)` Returns all elements containing name.
 - `(Element) text(text)` Returns the first element containing text.
 - `(Array<Element>) texts(text)` Returns all elements containing text.
+- `current_app` Returns information about the current app. Android only.
 
 --
 
