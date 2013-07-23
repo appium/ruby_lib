@@ -8,7 +8,7 @@ https://github.com/appium/appium/blob/c58eeb66f2d6fa3b9a89d188a2e657cca7cb300f/L
 # Load appium.txt (toml format) into system ENV
 # the basedir of this file + appium.txt is what's used
 # @param opts [Hash] file: '/path/to/appium.txt', verbose: true
-# @return [nil]
+# @return [Array<String>] the require files. nil if require doesn't exist
 def load_appium_txt opts
   raise 'opts must be a hash' unless opts.kind_of? Hash
   opts.each_pair { |k,v| opts[k.to_s.downcase.strip.intern] = v }
@@ -17,7 +17,8 @@ def load_appium_txt opts
   raise 'Must pass file' unless file
   verbose = opts.fetch :verbose, false
   # Check for env vars in .txt
-  toml = File.expand_path File.join File.dirname(file), 'appium.txt'
+  parent_dir = File.dirname file
+  toml = File.expand_path File.join parent_dir, 'appium.txt'
   puts "appium.txt path: #{toml}" if verbose
   # @private
   def update data, *args
@@ -29,6 +30,7 @@ def load_appium_txt opts
 
   toml_exists = File.exists? toml
   puts "Exists? #{toml_exists}" if verbose
+  data = nil
 
   if toml_exists
     require 'toml'
@@ -39,9 +41,14 @@ def load_appium_txt opts
     # toml requires A = "OK"
     #
     # A="OK" => A = "OK"
-    data = File.read(toml).gsub /([^\s])\=(")/, "\\1 = \\2"
+    data = File.read toml
+
+    data = data.split("\n").map do |line|
+      line.sub /([^\s])\=/, "\\1 = "
+    end.join "\n"
+
     data = TOML::Parser.new(data).parsed
-    ap data unless data.empty?
+    ap data unless data.empty? if verbose
 
     update data, 'APP_PATH', 'APP_APK', 'APP_PACKAGE',
            'APP_ACTIVITY', 'APP_WAIT_ACTIVITY',
@@ -50,7 +57,19 @@ def load_appium_txt opts
     # Ensure app path is absolute
     ENV['APP_PATH'] = File.expand_path ENV['APP_PATH'] if ENV['APP_PATH']
   end
-  nil
+
+  # return list of require files as an array
+  # nil if require doesn't exist
+  if data && data['require']
+    r = data['require']
+    r = r.kind_of?(Array) ? r : [ r ]
+    # ensure files are absolute
+    r.map! do |file|
+      file = file.include?(File::Separator) ? file :
+             File.join(parent_dir, file)
+      File.expand_path file
+    end
+  end
 end
 
 module Appium
@@ -209,6 +228,22 @@ module Appium
     end # def initialize
 
     # Returns the status payload
+    #
+    # ```ruby
+    # {"status"=>0,
+    #  "value"=>
+    #   {"build"=>
+    #     {"version"=>"0.8.2",
+    #      "revision"=>"f2a2bc3782e4b0370d97a097d7e04913cf008995"}},
+    #  "sessionId"=>"8f4b34a7-a9a9-4ac5-b125-36258143446a"}
+    # ```
+    #
+    #  Discover the Appium rev running on the server.
+    #
+    # `status["value"]["build"]["revision"]`
+    # `f2a2bc3782e4b0370d97a097d7e04913cf008995`
+    #
+    # @return [JSON]
     def status
       driver.status.payload
     end
