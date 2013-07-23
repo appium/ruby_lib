@@ -35,6 +35,8 @@ text      | UIAStaticText
 
 --
 
+- `status["value"]["build"]["revision"]` Discover the Appium rev running on the server.
+
 #### generic
 
 - `source` Prints a JSON view of the current page.
