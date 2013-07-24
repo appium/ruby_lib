@@ -120,7 +120,7 @@ module Appium
     # require 'appium_lib'
     #
     # # Start iOS driver
-    # app = { app_path: '/path/to/MyiOS.app', device:ios}
+    # app = { app_path: '/path/to/MyiOS.app', device:'ios'}
     # Appium::Driver.new(app).start_driver
     #
     # # Start Android driver
