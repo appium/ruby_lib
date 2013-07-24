@@ -100,6 +100,14 @@ module Appium
   require 'android/element/generic'
   require 'android/element/textfield'
 
+  # selendroid
+  require 'selendroid/dynamic'
+  require 'selendroid/helper'
+  require 'selendroid/patch'
+  require 'selendroid/element/alert'
+  require 'selendroid/element/generic'
+  require 'selendroid/element/textfield'
+
   class Driver
     @@loaded = false
 
@@ -112,20 +120,21 @@ module Appium
     # # Options include:
     # :app_path, :app_name, :app_package, :app_activity,
     # :app_wait_activity, :sauce_username, :sauce_access_key,
-    # :port, :os, :debug
+    # :port, :os, :debug, :device
     #
     # require 'rubygems'
     # require 'appium_lib'
     #
     # # Start iOS driver
-    # app = { app_path: '/path/to/MyiOS.app'}
+    # app = { app_path: '/path/to/MyiOS.app', device:ios}
     # Appium::Driver.new(app).start_driver
     #
     # # Start Android driver
     # apk = { app_path: '/path/to/the.apk',
     #         app_package: 'com.example.pkg',
     #         app_activity: 'act.Start',
-    #         app_wait_activity: 'act.Start'
+    #         app_wait_activity: 'act.Start',
+    #         device: 'ios'
     # }
     #
     # Appium::Driver.new(apk).start_driver
@@ -150,10 +159,6 @@ module Appium
       # The name to use for the test run on Sauce.
       @app_name = opts.fetch :app_name, ENV['APP_NAME']
 
-      # If Android, this will toggle selendroid as a device
-      @selendroid = opts.fetch :selendroid, ENV['SELENDROID']
-      @selendroid = 'selendroid' if @selendroid
-
       # Android app package
       @app_package = opts.fetch :app_package, ENV['APP_PACKAGE']
 
@@ -171,21 +176,28 @@ module Appium
 
       @port = opts.fetch :port, ENV['PORT'] || 4723
 
-      @os = :ios
-      @os = :android if @app_path.match /\.apk/i
+      # Determine the platform
+      @device = opts.fetch :device, ENV['DEVICE']
 
       # load common methods
       extend Appium::Common
-      if @os == :android
-        raise 'APP_ACTIVITY must be set.' if @app_activity.nil?
+      case @device
+        when 'android'
+          @os = :android
+          raise 'APP_ACTIVITY must be set.' if @app_activity.nil?
 
-        # load Android specific methods
-        extend Appium::Android
-      else
-        # load iOS specific methods
-        extend Appium::Ios
+          # load Android specific methods
+          extend Appium::Android
+        when 'selendroid'
+          @os = :selendroid
+          raise 'APP_ACTIVITY must be set.' if @app_activity.nil?
+
+          # load Android specific methods
+          extend Appium::Selendroid
+        when 'ios'
+          @os = :ios
+          extend Appium::Ios
       end
-
       # apply os specific patches
       patch_webdriver_element
 
@@ -262,7 +274,7 @@ module Appium
         browserName: 'Android',
         platform: 'LINUX',
         version: '4.2',
-        device: @selendroid || 'Android',
+        device: 'Android',
         name: @app_name || 'Ruby Console Android Appium',
         app: absolute_app_path,
         :'app-package' => @app_package,
@@ -273,12 +285,29 @@ module Appium
 
     # @private
     # WebDriver capabilities. Must be valid for Sauce to work.
+    # https://github.com/jlipps/appium/blob/master/app/android.js
+    def selendroid_capabilities
+      {
+          browserName: 'Android',
+          platform: 'LINUX',
+          version: '4.2',
+          device: 'Selendroid',
+          name: @app_name || 'Ruby Console Selendroid Appium',
+          app: absolute_app_path,
+          :'app-package' => @app_package,
+          :'app-activity' => @app_activity,
+          :'app-wait-activity' => @app_wait_activity || @app_activity
+      }
+    end
+
+    # @private
+    # WebDriver capabilities. Must be valid for Sauce to work.
     def ios_capabilities
       {
         browserName: 'iOS 6.0',
         platform: 'Mac 10.8',
         version: '6.0',
-        device: 'iPhone Simulator',
+        platform: 'iPhone Simulator',
         name: @app_name || 'Ruby Console iOS Appium',
         app: absolute_app_path
       }
@@ -286,7 +315,14 @@ module Appium
 
     # @private
     def capabilities
-      @os == :ios ? ios_capabilities : android_capabilities
+      case @os
+        when :ios
+          ios_capabilities
+        when :android
+          android_capabilities
+        when :selendroid
+          selendroid_capabilities
+      end
     end
 
     # Converts environment variable APP_PATH to an absolute path.
