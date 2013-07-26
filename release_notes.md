@@ -1,11 +1,30 @@
-#### v0.5.15 2013-07-03
+#### v0.5.16 2013-07-26
+
+- [bd71fb4](https://github.com/appium/ruby_lib/commit/bd71fb4e430608d32923c583c8d4d592f11a96fc) Release 0.5.16
+- [7b83b85](https://github.com/appium/ruby_lib/commit/7b83b85c41caf25376414d978ff63d49ab22f057) Only return files that exist
+- [1f0428d](https://github.com/appium/ruby_lib/commit/1f0428dca4e843a82de2d46be3c724e2dc7930c7) Fix keyboard race condition
+- [c99ed34](https://github.com/appium/ruby_lib/commit/c99ed341c779fb3eff4ab92a95a4a773a1ce212f) Update docs.md
+- [7103921](https://github.com/appium/ruby_lib/commit/71039210e1e0b7481df59210ce4addebcae7ba08) Fix link
+- [f76ea9b](https://github.com/appium/ruby_lib/commit/f76ea9b42a728aae247f88f732879cda94101624) Add require support to appium.txt
+- [12b8e59](https://github.com/appium/ruby_lib/commit/12b8e5938cb616015cb86d62e41ee9d29cace097) Update docs.md
+- [7d6a8f2](https://github.com/appium/ruby_lib/commit/7d6a8f2fa728e616e7fd459cdeef0d5cce9064b4) Add current_app to docs
+- [16ea945](https://github.com/appium/ruby_lib/commit/16ea9454941d84bb02ba4950aeea8df6d70cab26) Fix hide keyboard on iOS
+- [ad9263c](https://github.com/appium/ruby_lib/commit/ad9263cbabb4e1c56bbe9fafe85b048f2a285c11) Add Sauce wait req
+- [98ee244](https://github.com/appium/ruby_lib/commit/98ee244d460f6251c5c6cff8cc79ca8610cc6165) Add .clear example for textfield
+- [d373071](https://github.com/appium/ruby_lib/commit/d3730717faba192cc66f5346c2847ecf6cb60e16) Fix activity name example in readme
+- [50023f3](https://github.com/appium/ruby_lib/commit/50023f3a8201b0875025e5a94ec841fb23c35714) Fix Android version
+- [c4d281a](https://github.com/appium/ruby_lib/commit/c4d281a62d7923f9e6a65fbc870cb1dc6a959849) Add Android set version code
+- [5675f4a](https://github.com/appium/ruby_lib/commit/5675f4a03f8b20939e8cc1b5b13df795072d6553) Update readme.md
+
+
+#### 
 
 - [734fe68](https://github.com/appium/ruby_lib/commit/734fe6887f36aa1ad59ef7ce992ba2e2f4c8c7d3) Release 0.5.15
 - [0e203d7](https://github.com/appium/ruby_lib/commit/0e203d76610abd519ba9d2fe9c14b50c94df5bbd) Fix driver methods overriding object methods
 - [efc4602](https://github.com/appium/ruby_lib/commit/efc460278af5b6f2a24c290f704781be4e9b2d4b) Fix open struct
 
 
-#### v0.5.14 2013-07-03
+#### 
 
 - [521f79b](https://github.com/appium/ruby_lib/commit/521f79b11497c0c963b7059347e02d81a08f665a) Release 0.5.14
 - [7831c7d](https://github.com/appium/ruby_lib/commit/7831c7d21bc6ae3c39d91c6903cb5e96ec066f16) Update current_app
@@ -17,7 +36,7 @@
 - [460699c](https://github.com/appium/ruby_lib/commit/460699cce767339bf73efd8b5791464130681cb8) Update current_app
 
 
-#### v0.5.13 2013-06-19
+#### 
 
 - [146e19a](https://github.com/appium/ruby_lib/commit/146e19a1b322d1bb625c6bb3ce1b80e67a7e80fa) Release 0.5.13
 - [2eb4bb0](https://github.com/appium/ruby_lib/commit/2eb4bb0c696f41c839227dd99256d77d52bf995f) Check method exists before calling
@@ -25,33 +44,33 @@
 - [683ae29](https://github.com/appium/ruby_lib/commit/683ae2975fde08d069fefb731a342c7ddd9ebb92) Add current_app
 
 
-#### v0.5.12 2013-06-18
+#### 
 
 - [89b0902](https://github.com/appium/ruby_lib/commit/89b0902ed94ed43d8a9f0e364463da77015dcfb7) Release 0.5.12
 - [7c4e8d1](https://github.com/appium/ruby_lib/commit/7c4e8d16d909112cebd2a80f0d8140723efd644a) search_id, search_value replaced with xml_keys, xml_values
 
 
-#### v0.5.11 2013-06-18
+#### 
 
 - [891e003](https://github.com/appium/ruby_lib/commit/891e003748038a006121c8a4e0c702c12c405799) Release 0.5.11
 - [5e7f381](https://github.com/appium/ruby_lib/commit/5e7f381aa8fc4b64af9103beae67cfc2fc310484) WebView is not a widget
 - [830c3fb](https://github.com/appium/ruby_lib/commit/830c3fb07e01da64a6934a9a0868861a67326f4f) Add search value
 
 
-#### v0.5.10 2013-06-17
+#### 
 
 - [16d696a](https://github.com/appium/ruby_lib/commit/16d696aa368bdce198b7ef7a1cc1370f6c5d2ac7) Release 0.5.10
 - [5cc0a7a](https://github.com/appium/ruby_lib/commit/5cc0a7a52d43af7690705f889860c2dc4788b892) Add search and resolve id
 
 
-#### v0.5.9 2013-06-11
+#### 
 
 - [ac76a23](https://github.com/appium/ruby_lib/commit/ac76a23ca4c7f5bb89a833937cc726654fa2df82) Release 0.5.9
 - [b377791](https://github.com/appium/ruby_lib/commit/b3777911709538a230d1fd3be31ae21f72040b00) Update readme.md
 - [893737a](https://github.com/appium/ruby_lib/commit/893737a6033ed7c8e6f1c31f5b45f65b841320c2) Add current_activity
 
 
-#### v0.5.8 2013-06-04
+#### 
 
 - [91f5c2f](https://github.com/appium/ruby_lib/commit/91f5c2f2bd388c1d4c4e771d2abea3772197de9c) Release 0.5.8
 - [b4e592c](https://github.com/appium/ruby_lib/commit/b4e592cc3d101a4ac9f7fa374ae8c75fcdc5218a) Fix call twice
@@ -60,19 +79,19 @@
 - [9752a3b](https://github.com/appium/ruby_lib/commit/9752a3bdf8173653f6d5c2d412bb7c70f0b5f023) Add tag method
 
 
-#### v0.5.7 2013-06-03
+#### 
 
 - [669f734](https://github.com/appium/ruby_lib/commit/669f7345b7e8a92e8206b847d4a2263731df3c4b) Release 0.5.7
 - [bb5b7a5](https://github.com/appium/ruby_lib/commit/bb5b7a568dab38dc7044e3925274f9f7ee84a362) Add page_class for iOS
 
 
-#### v0.5.6 2013-05-31
+#### 
 
 - [7c3335c](https://github.com/appium/ruby_lib/commit/7c3335c82e8b96e4a4cf74ae20faf98906b63770) Release 0.5.6
 - [b231d8f](https://github.com/appium/ruby_lib/commit/b231d8fbcdd35cc7a027e02a7733d10a616d2f7b) Fix finds
 
 
-#### v0.5.5 2013-05-31
+#### 
 
 - [e061482](https://github.com/appium/ruby_lib/commit/e061482a0f712914c5fb21da92da357b79e07b87) Release 0.5.5
 - [82f9c58](https://github.com/appium/ruby_lib/commit/82f9c580d68189b669d3f5029914f00c8fd17c06) Fix value contains operator
@@ -80,7 +99,7 @@
 - [c14fbb3](https://github.com/appium/ruby_lib/commit/c14fbb3c39b0c33a5d42dfe9da5427cebb9ec336) Add version badge
 
 
-#### v0.5.4 2013-05-28
+#### 
 
 - [9e95106](https://github.com/appium/ruby_lib/commit/9e951061b9da6cee7b90ee310bbbef2b7c660fb1) Release 0.5.4
 - [d66020c](https://github.com/appium/ruby_lib/commit/d66020c66b02889d4a96809f41d02d4aa3e4b915) Fix gemspec. yard is required for docs task
@@ -88,27 +107,27 @@
 - [5106643](https://github.com/appium/ruby_lib/commit/51066439a4bacf7fea4a469044f6c3e2b60356c9) Add Sauce Storage support
 
 
-#### v0.5.3 2013-05-24
+#### 
 
 - [b24565d](https://github.com/appium/ruby_lib/commit/b24565df67d4f0468ab5e3c1a700711a4c82b80d) Release 0.5.3
 - [5c7169a](https://github.com/appium/ruby_lib/commit/5c7169ae5fecc9adf0bd0a8f7fc6aea5a90495a2) Update appium_lib.gemspec
 - [1a03758](https://github.com/appium/ruby_lib/commit/1a03758dede749f9fd23f00db1be9199c159a6c8) Update readme.md
 
 
-#### v0.5.2 2013-05-24
+#### 
 
 - [44ffbcb](https://github.com/appium/ruby_lib/commit/44ffbcb4715c8caac2770972c72ca498e751be34) Release 0.5.2
 - [61e92f8](https://github.com/appium/ruby_lib/commit/61e92f87e6870be06b34a20dc0dfc64ddfed7f13) Add get_page_class
 - [cca5db4](https://github.com/appium/ruby_lib/commit/cca5db4d98e00306f99110cd43398b0dc1f5980f) Update tag names
 
 
-#### v0.5.1 2013-05-24
+#### 
 
 - [1a98819](https://github.com/appium/ruby_lib/commit/1a98819e93e739496f27a6ec2ad4197ca78c08a4) Release 0.5.1
 - [2003589](https://github.com/appium/ruby_lib/commit/2003589197a78d54f3d177abbf2335724c090e1e) Fix names on Android
 
 
-#### v0.5.0 2013-05-24
+#### 
 
 - [de58f71](https://github.com/appium/ruby_lib/commit/de58f7164230d7551df8462d65d0e43a3d0cfdab) Release 0.5.0
 - [062a2a2](https://github.com/appium/ruby_lib/commit/062a2a21fc3768c0d19b33d317c7ba5828bcbc3e) Add page_class
@@ -128,14 +147,14 @@
 - [849594b](https://github.com/appium/ruby_lib/commit/849594bdd87bf6133cbb64c43d0a02f427f17467) Update method comments
 
 
-#### v0.4.2 2013-05-20
+#### 
 
 - [be814c2](https://github.com/appium/ruby_lib/commit/be814c286bd55fb133f333738da9b0dcd6146b69) Release 0.4.2
 - [9d2cfe8](https://github.com/appium/ruby_lib/commit/9d2cfe86b3367fd3f4551962a042fe25da1e31bd) Add page_window for Apptentive
 - [e9b5e97](https://github.com/appium/ruby_lib/commit/e9b5e97baf7b6a417dc3865b7cc0c163c0165d70) Update docs
 
 
-#### v0.4.1 2013-05-20
+#### 
 
 - [cd8dd73](https://github.com/appium/ruby_lib/commit/cd8dd73461d6bdb8903a8b3f5bba9ce554a44789) Release 0.4.1
 - [9e8cd0a](https://github.com/appium/ruby_lib/commit/9e8cd0a915e6c9c373ebd3a33a653c573f776636) Add status
@@ -143,7 +162,7 @@
 - [eb11923](https://github.com/appium/ruby_lib/commit/eb11923543a1e3e2fe8f19d2f09959cefd16fa05) Fix generic iOS methods
 
 
-#### v0.4.0 2013-05-16
+#### 
 
 - [70a59fe](https://github.com/appium/ruby_lib/commit/70a59fefcaa4f16ba0e7629f16feaae3e5f8c424) Release 0.4.0
 - [b30548e](https://github.com/appium/ruby_lib/commit/b30548e58783bc6b20bd5c0f11e2ae9ddb5faa30) Translate mobile find on Android
@@ -159,44 +178,44 @@
 - [637fef7](https://github.com/appium/ruby_lib/commit/637fef7f7547e6e2b2fd8f70e19ef3f3870cc136) Use element.displayed? not visible
 
 
-#### v0.3.16 2013-05-14
+#### 
 
 - [fb34a03](https://github.com/appium/ruby_lib/commit/fb34a03ceec0be552f218323bf266fda7f7e060b) Release 0.3.16
 - [6e552ae](https://github.com/appium/ruby_lib/commit/6e552ae0d9a66a03ac50caa38f73f3f3dbded317) Selendroid is boolean
 
 
-#### v0.3.15 2013-05-13
+#### 
 
 - [cc56df8](https://github.com/appium/ruby_lib/commit/cc56df88825ac8e705e740eed7ac8ca42bcc9dd0) Release 0.3.15
 - [8613403](https://github.com/appium/ruby_lib/commit/8613403db07435908a149dc296fb92cad8af2e35) Use boolean for .visible on iOS
 
 
-#### v0.3.14 2013-05-13
+#### 
 
 - [12aa291](https://github.com/appium/ruby_lib/commit/12aa29132a9a88076fbf8c76fbb65b1aa5e1fc96) Release 0.3.14
 - [a61b297](https://github.com/appium/ruby_lib/commit/a61b297d387b0c28865b050eaa3d7d59efae2a34) Add .visible for iOS
 - [6f6dda5](https://github.com/appium/ruby_lib/commit/6f6dda53fb12a483a524370c3d3c729fa1b87be4) Update gemspec
 
 
-#### v0.3.13 2013-05-10
+#### 
 
 - [7badb99](https://github.com/appium/ruby_lib/commit/7badb998734ee4c4ae0781c5e8f3cfc4b862eeb3) Release 0.3.13
 - [efaa0ea](https://github.com/appium/ruby_lib/commit/efaa0eaebe5a045dba8370ec98aea8bdf31637ba) Fix #52
 
 
-#### v0.3.12 2013-05-10
+#### 
 
 - [faf3e98](https://github.com/appium/ruby_lib/commit/faf3e98d0d745df9bbbfada93dcfd6b47a585793) Release 0.3.12
 - [7ff6b95](https://github.com/appium/ruby_lib/commit/7ff6b955cafc235a554d192cc09014c4400dc27a) Add scroll_to
 
 
-#### v0.3.11 2013-05-09
+#### 
 
 - [14d705a](https://github.com/appium/ruby_lib/commit/14d705acd527f13e2962e2c04200b6d28fd36cbb) Release 0.3.11
 - [ebdae44](https://github.com/appium/ruby_lib/commit/ebdae448b108c76e586ad8f8ae86a1abc495e7e5) Search name and text when using textfield
 
 
-#### v0.3.10 2013-05-07
+#### 
 
 - [db557df](https://github.com/appium/ruby_lib/commit/db557df9939fa44f2a6bf5d8afd950a2fa4b4178) Release 0.3.10
 - [c3adbc5](https://github.com/appium/ruby_lib/commit/c3adbc52f0b049e6b9292ac2ff328160d1820668) Fix name and textfield
@@ -204,13 +223,13 @@
 - [36f68de](https://github.com/appium/ruby_lib/commit/36f68de51954de79754e8f377f4a6dad47361dc1) Add shown attribute to Selendroid page
 
 
-#### v0.3.9 2013-05-06
+#### 
 
 - [3b4fbb4](https://github.com/appium/ruby_lib/commit/3b4fbb4e6957a92ac4236d5666d932ee9da238e7) Release 0.3.9
 - [98b1b1e](https://github.com/appium/ruby_lib/commit/98b1b1e8e0952244c1ca2c8738d7d33af7eb0f68) Fix extra slashes in path
 
 
-#### v0.3.8 2013-05-06
+#### 
 
 - [e7bc45f](https://github.com/appium/ruby_lib/commit/e7bc45fd88f026dc51237d767da9f9dfa2e05b56) Release 0.3.8
 - [dc3a50f](https://github.com/appium/ruby_lib/commit/dc3a50f23ca6ba4978ddb9af1dadf6c6015eb9fb) Use 4.2 not 4.1
@@ -222,20 +241,20 @@
 - [c59f7ce](https://github.com/appium/ruby_lib/commit/c59f7cefc76a9f172e6e6494aca275b5687d1a74) Improve debugging
 
 
-#### v0.3.7 2013-05-01
+#### 
 
 - [edfd20a](https://github.com/appium/ruby_lib/commit/edfd20a6ffdef8484b9f7b5eddb9c21815241d42) Release 0.3.7
 - [9f8511c](https://github.com/appium/ruby_lib/commit/9f8511c1416867df606dfb3d058f83ee277ce39a) Remove puts
 
 
-#### v0.3.6 2013-05-01
+#### 
 
 - [67e5c86](https://github.com/appium/ruby_lib/commit/67e5c867d38251687dc7ebd5de013db5712fcac3) Release 0.3.6
 - [a0a46f7](https://github.com/appium/ruby_lib/commit/a0a46f773a57c9ef7b92252afed467bd7cd01b96) Fix wait and add wait_true
 - [e7cde77](https://github.com/appium/ruby_lib/commit/e7cde775473bd3981cac5b356f78289f832091a9) Add wait example
 
 
-#### v0.3.5 2013-04-30
+#### 
 
 - [a886ef4](https://github.com/appium/ruby_lib/commit/a886ef4722a902fdef15ecfc7164299399f1d524) Release 0.3.5
 - [193eb71](https://github.com/appium/ruby_lib/commit/193eb716023f52506cdf599cff6aae4f4a3c1119) Fix JSON.parse
@@ -246,7 +265,7 @@
 - [6177c49](https://github.com/appium/ruby_lib/commit/6177c497f9c114203e624f530e51f4f54a61788a) Rename get_wait
 
 
-#### v0.3.4 2013-04-30
+#### 
 
 - [ffdf104](https://github.com/appium/ruby_lib/commit/ffdf104ffdecb165cfe410976145134768756e30) Release 0.3.4
 - [4edc9f6](https://github.com/appium/ruby_lib/commit/4edc9f6097e29d2816dceef546a819fd6ee431d2) Add params to wait
@@ -258,7 +277,7 @@
 - [3b831b0](https://github.com/appium/ruby_lib/commit/3b831b089e02c4a53585d90ed009f5ad3cb982a7) Return invisible match if no visible result
 
 
-#### v0.3.3 2013-04-27
+#### 
 
 - [b0ca37c](https://github.com/appium/ruby_lib/commit/b0ca37cfe47318f029e1f2ad498a5c08338016d7) Release 0.3.3
 - [e7f55d9](https://github.com/appium/ruby_lib/commit/e7f55d92181660ea188a5123e6e4f447389c8d6d) Add driver method
@@ -266,7 +285,7 @@
 - [07da208](https://github.com/appium/ruby_lib/commit/07da208973ea4de64ec9605ef5dd38884771e8c6) Add troubleshooting steps
 
 
-#### v0.3.2 2013-04-26
+#### 
 
 - [eee6632](https://github.com/appium/ruby_lib/commit/eee6632251c40c8b2d6be9a361f429d7c89762f8) Release 0.3.2
 - [b22d747](https://github.com/appium/ruby_lib/commit/b22d7473f03e1b13a1ffd9ddc2ea5ca1396c4642) Default to app_activity if app_wait_activity is not set
@@ -276,7 +295,7 @@
 - [ef0b626](https://github.com/appium/ruby_lib/commit/ef0b626940d86fd07dbb86ac16b40dd5b0b5ce4a) Avoid invisible elements
 
 
-#### v0.3.1 2013-04-26
+#### 
 
 - [e00fc6e](https://github.com/appium/ruby_lib/commit/e00fc6efb8f0c94ac6e196e831980ee96676b645) Release 0.3.1
 - [81d762a](https://github.com/appium/ruby_lib/commit/81d762a92293a9d59600154f1f0a5944aee5b439) Check method exists before calling
@@ -286,7 +305,7 @@
 - [b3724d3](https://github.com/appium/ruby_lib/commit/b3724d36a85188c7c8c85dadc313c6c43c8bed59) Add session_id
 
 
-#### v0.3.0 2013-04-25
+#### 
 
 - [e08e88c](https://github.com/appium/ruby_lib/commit/e08e88c40cc56e132c5db18d9d5862028861d5f2) Release 0.3.0
 - [3f4dd63](https://github.com/appium/ruby_lib/commit/3f4dd63ab2ab2e97b457bb188a347af6c74bc7df) Update code style
@@ -322,14 +341,14 @@
 - [2d07ed0](https://github.com/appium/ruby_lib/commit/2d07ed0d5868c734168b31fb47881eaa4c74af1c) Raise instead of puts
 
 
-#### v0.0.30 2013-04-16
+#### 
 
 - [6d65a9c](https://github.com/appium/ruby_lib/commit/6d65a9c2895b1b66556b12fee4fc9649f558ede1) Release 0.0.30
 - [5692f96](https://github.com/appium/ruby_lib/commit/5692f9604a09b6198f8ada7823d8f74858b8af88) Fix quote
 - [ee17332](https://github.com/appium/ruby_lib/commit/ee173329758ea486d32d6887439de39a749ceba0) Use driver_quit
 
 
-#### v0.0.29 2013-04-15
+#### 
 
 - [1c1e0ee](https://github.com/appium/ruby_lib/commit/1c1e0eeed8d636dc81d3b74612405722b1134071) Release 0.0.29
 - [2278c8e](https://github.com/appium/ruby_lib/commit/2278c8e662d32df86933a63f14dea4df431a95e5) Add wait param to start_driver
@@ -338,7 +357,7 @@
 - [b7b6caa](https://github.com/appium/ruby_lib/commit/b7b6caa8ab0c2683626aed265ee6ec2feece37f0) Use gh_name
 
 
-#### v0.0.28 2013-04-11
+#### 
 
 - [70606a4](https://github.com/appium/ruby_lib/commit/70606a43cebcd0c19b98a1876fb929f03db7bb0e) Release 0.0.28
 - [61d1943](https://github.com/appium/ruby_lib/commit/61d19439c8597ca3562028d6c985370a5d43fa26) Update docs.md
@@ -358,14 +377,14 @@
 - [ebd6c1b](https://github.com/appium/ruby_lib/commit/ebd6c1bc7d3f8be01fdf5346786c2b5fb2da8deb) Fix text and texts on iOS
 
 
-#### v0.0.27 2013-04-05
+#### 
 
 - [fb4af20](https://github.com/appium/ruby_lib/commit/fb4af206c114cf8f75fcb41cdbbea0ba728bf7e6) Release 0.0.27
 - [ca00d82](https://github.com/appium/ruby_lib/commit/ca00d82fb8e716d5941ec0ee6b38b207329b915e) Fix require
 - [ad00639](https://github.com/appium/ruby_lib/commit/ad006393ce8b6dc071c98b2edf73c32707d37762) Update readme.md
 
 
-#### v0.0.26 2013-04-04
+#### 
 
 - [07fed25](https://github.com/appium/ruby_lib/commit/07fed259a743d9f3f3d72bfc8c8b9eac7b26d724) Release 0.0.26
 - [7c77faa](https://github.com/appium/ruby_lib/commit/7c77faa7087f9aa4bf2cc387a13b9bb0974d59a1) Add exists method
@@ -378,13 +397,13 @@
 - [3416272](https://github.com/appium/ruby_lib/commit/341627269bf50497ebe4a6e388939d45d53e2032) Update readme.md
 
 
-#### v0.0.25 2013-03-28
+#### 
 
 - [6a975a6](https://github.com/appium/ruby_lib/commit/6a975a6cc0e97866c3ef6248f0f7d1abbc934577) Release 0.0.25
 - [6a8fdce](https://github.com/appium/ruby_lib/commit/6a8fdcea4c8fdc308c7d107e958fbabed9719056) Rename inspect
 
 
-#### v0.0.24 2013-03-28
+#### 
 
 - [d5bcb94](https://github.com/appium/ruby_lib/commit/d5bcb94966c4a7806a47ee892f3e5ff784a739e2) Release 0.0.24
 - [17f9a67](https://github.com/appium/ruby_lib/commit/17f9a67143720dbfc50b34783a11c7bf5c28ea3c) Add .lock to ignore
@@ -393,29 +412,29 @@
 - [2444290](https://github.com/appium/ruby_lib/commit/24442908f9426b228dc760497ef98f9cf579d4d5) Add name methods
 
 
-#### v0.0.23 2013-03-27
+#### 
 
 - [789634c](https://github.com/appium/ruby_lib/commit/789634c6b20d4030eaec4d385a85275b3fabfe76) Release 0.0.23
 - [6d58a33](https://github.com/appium/ruby_lib/commit/6d58a33bce0bf1ff3c6156717519a2db6a27bb84) Add app-wait-activity
 
 
-#### v0.0.22 2013-03-23
+#### 
 
 - [bfd7761](https://github.com/appium/ruby_lib/commit/bfd7761c0f2b32e7ab0bbe8372228163181e60b9) Release 0.0.22
 
 
-#### v0.0.21 2013-03-22
+#### 
 
 - [4066823](https://github.com/appium/ruby_lib/commit/40668230b89eaa66970889b20305279029048698) Release 0.0.21
 
 
-#### v0.0.20 2013-03-22
+#### 
 
 - [ed588a1](https://github.com/appium/ruby_lib/commit/ed588a1ccc67d0efa0d8d56f4f9b08c23b261687) Release 0.0.20
 - [a4a7199](https://github.com/appium/ruby_lib/commit/a4a7199dfb609841310ad4e31ccbb56e3ecfa90d) Update readme.md
 
 
-#### v0.0.19 2013-03-22
+#### 
 
 - [01f2d15](https://github.com/appium/ruby_lib/commit/01f2d150ae3d8e88970b361a8330c6ccc174097d) Release 0.0.19
 - [10eec2f](https://github.com/appium/ruby_lib/commit/10eec2f197899395978b73de049aed08ceda55cc) AppLib => AppiumLib
