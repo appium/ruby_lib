@@ -210,7 +210,7 @@ module Appium
         @@loaded = true
         # Promote Appium driver methods to Object instance methods.
         $driver.public_methods(false).each do | m |
-          Object.class_eval do
+          MiniTest::Spec.class_eval do
             define_method m do | *args, &block |
                 begin
                   # puts "[Object.class_eval] Calling super for '#{m}'"

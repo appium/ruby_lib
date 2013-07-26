@@ -17,10 +17,11 @@ now swipe down until the end of the window - 10 pixels.
 Swiping inside the keyboard will not dismiss it.
 =end
         # type
-        execute_script %(au.getElement('#{self.ref}').setValue('#{text}');)
+        $driver.execute_script %(au.getElement('#{self.ref}').setValue('#{text}');)
 
         # wait for keyboard
-        wait_true { execute_script %(au.mainApp.keyboard().type() !== 'UIAElementNil') }
+        $driver.wait_true { $driver.execute_script %(au.mainApp.keyboard().type
+() !== 'UIAElementNil') }
 
         # dismiss keyboard
         js = <<-JS
@@ -31,7 +32,7 @@ Swiping inside the keyboard will not dismiss it.
           }
         JS
 
-        execute_script js
+        $driver.execute_script js
       end
     end
   end
