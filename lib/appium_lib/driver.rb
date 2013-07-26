@@ -67,8 +67,10 @@ def load_appium_txt opts
     r.map! do |file|
       file = file.include?(File::Separator) ? file :
              File.join(parent_dir, file)
-      File.expand_path file
+      file = File.expand_path file
+      File.exists?(file) ? file : nil
     end
+    r.compact # remove nils
   end
 end
 
