@@ -52,10 +52,15 @@ def load_appium_txt opts
 
     update data, 'APP_PATH', 'APP_APK', 'APP_PACKAGE',
            'APP_ACTIVITY', 'APP_WAIT_ACTIVITY',
-           'SELENDROID'
+           'DEVICE'
 
     # Ensure app path is absolute
-    ENV['APP_PATH'] = File.expand_path ENV['APP_PATH'] if ENV['APP_PATH']
+    ENV['APP_PATH'] = File.expand_path ENV['APP_PATH'] if ENV['APP_PATH'] &&
+        !ENV['APP_PATH'].empty?
+
+    if ! %w(ios android selendroid).include? ENV['DEVICE']
+      raise 'DEVICE must be ios, android, or selendroid'
+    end
   end
 
   # return list of require files as an array
@@ -72,6 +77,10 @@ def load_appium_txt opts
     end
     r.compact # remove nils
   end
+end
+
+module MiniTest
+  class Spec; end
 end
 
 module Appium
@@ -105,10 +114,11 @@ module Appium
   class Driver
     @@loaded = false
 
-    attr_reader :default_wait, :app_path, :app_name, :selendroid,
+    attr_reader :default_wait, :app_path, :app_name,
                 :app_package, :app_activity, :app_wait_activity,
                 :sauce_username, :sauce_access_key, :port, :os, :debug
     # Creates a new driver.
+    # :device is :android, :ios, or :selendroid
     #
     # ```ruby
     # # Options include:
@@ -120,11 +130,12 @@ module Appium
     # require 'appium_lib'
     #
     # # Start iOS driver
-    # app = { app_path: '/path/to/MyiOS.app'}
+    # app = { device: :ios, app_path: '/path/to/MyiOS.app'}
     # Appium::Driver.new(app).start_driver
     #
     # # Start Android driver
-    # apk = { app_path: '/path/to/the.apk',
+    # apk = { device: :android
+    #         app_path: '/path/to/the.apk',
     #         app_package: 'com.example.pkg',
     #         app_activity: 'act.Start',
     #         app_wait_activity: 'act.Start'
@@ -152,10 +163,6 @@ module Appium
       # The name to use for the test run on Sauce.
       @app_name = opts.fetch :app_name, ENV['APP_NAME']
 
-      # If Android, this will toggle selendroid as a device
-      @selendroid = opts.fetch :selendroid, ENV['SELENDROID']
-      @selendroid = 'selendroid' if @selendroid
-
       # Android app package
       @app_package = opts.fetch :app_package, ENV['APP_PACKAGE']
 
@@ -173,12 +180,13 @@ module Appium
 
       @port = opts.fetch :port, ENV['PORT'] || 4723
 
-      @os = :ios
-      @os = :android if @app_path.match /\.apk/i
+      # :ios, :android, :selendroid
+      @device = opts.fetch :device, ENV['DEVICE'] || :ios
+      @device = @device.intern # device must be a symbol
 
       # load common methods
       extend Appium::Common
-      if @os == :android
+      if @device == :android
         raise 'APP_ACTIVITY must be set.' if @app_activity.nil?
 
         # load Android specific methods
@@ -197,7 +205,7 @@ module Appium
       puts "Debug is: #{@debug}"
       if @debug
         ap opts unless opts.empty?
-        puts "OS is: #{@os}"
+        puts "Device is: #{@device}"
         patch_webdriver_bridge
       end
 
@@ -210,7 +218,7 @@ module Appium
         @@loaded = true
         # Promote Appium driver methods to Object instance methods.
         $driver.public_methods(false).each do | m |
-          MiniTest::Spec.class_eval do
+          ::MiniTest::Spec.class_eval do
             define_method m do | *args, &block |
                 begin
                   # puts "[Object.class_eval] Calling super for '#{m}'"
@@ -264,9 +272,8 @@ module Appium
         browserName: 'Android',
         platform: 'LINUX',
         version: '4.2',
-        device: @selendroid || 'Android',
+        device: @device == :android ? 'Android' : 'selendroid',
         name: @app_name || 'Ruby Console Android Appium',
-        app: absolute_app_path,
         :'app-package' => @app_package,
         :'app-activity' => @app_activity,
         :'app-wait-activity' => @app_wait_activity || @app_activity
@@ -281,14 +288,15 @@ module Appium
         platform: 'Mac 10.8',
         version: '6.0',
         device: 'iPhone Simulator',
-        name: @app_name || 'Ruby Console iOS Appium',
-        app: absolute_app_path
+        name: @app_name || 'Ruby Console iOS Appium'
       }
     end
 
     # @private
     def capabilities
-      @os == :ios ? ios_capabilities : android_capabilities
+      caps = @device == :ios ? ios_capabilities : android_capabilities
+      caps[:app] = absolute_app_path unless @app_path.nil? || @app_path.empty?
+      caps
     end
 
     # Converts environment variable APP_PATH to an absolute path.
@@ -365,7 +373,7 @@ module Appium
       # Set timeout to a large number so that Appium doesn't quit
       # when no commands are entered after 60 seconds.
       # broken on selendroid: https://github.com/appium/appium/issues/513
-      mobile :setCommandTimeout, timeout: 9999 unless @selendroid
+      mobile :setCommandTimeout, timeout: 9999 unless @device == :selendroid
 
       # Set implicit wait by default unless we're using Pry.
       @driver.manage.timeouts.implicit_wait = @default_wait unless defined? Pry
