@@ -35,11 +35,13 @@ require 'rubygems'
 require 'appium_lib'
 
 # Start iOS driver
-app = { app_path: '/path/to/MyiOS.app'}
+app = { device: :ios, app_path: '/path/to/MyiOS.app'}
 Appium::Driver.new(app).start_driver
 
 # Start Android driver
-apk = { app_path: '/path/to/the.apk',
+apk = { 
+        device: :android
+        app_path: '/path/to/the.apk',
         app_package: 'com.example.pkg',
         app_activity: '.act.Start',
         app_wait_activity: '.act.Start'
