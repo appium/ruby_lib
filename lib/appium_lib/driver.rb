@@ -79,7 +79,8 @@ def load_appium_txt opts
   end
 end
 
-module MiniTest
+# Fix uninitialized constant Minitest (NameError)
+module Minitest
   class Spec; end
 end
 
@@ -114,9 +115,9 @@ module Appium
   class Driver
     @@loaded = false
 
-    attr_reader :default_wait, :app_path, :app_name,
+    attr_reader :default_wait, :app_path, :app_name, :device,
                 :app_package, :app_activity, :app_wait_activity,
-                :sauce_username, :sauce_access_key, :port, :os, :debug
+                :sauce_username, :sauce_access_key, :port, :debug
     # Creates a new driver.
     # :device is :android, :ios, or :selendroid
     #
@@ -218,7 +219,8 @@ module Appium
         @@loaded = true
         # Promote Appium driver methods to Object instance methods.
         $driver.public_methods(false).each do | m |
-          ::MiniTest::Spec.class_eval do
+          # not MiniTest::Spec
+          ::Minitest::Spec.class_eval do
             define_method m do | *args, &block |
                 begin
                   # puts "[Object.class_eval] Calling super for '#{m}'"
