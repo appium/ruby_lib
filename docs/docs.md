@@ -7,7 +7,7 @@
 - [iOS UI Automation](http://developer.apple.com/library/ios/#documentation/DeveloperTools/Reference/UIAutomationRef/_index.html) Example use `@driver.execute_script "UIATarget.localTarget().frontMostApp().mainWindow().rect()"
 `
 - [Android UIAutomator](http://developer.android.com/tools/help/uiautomator/index.html)
-- [UiSelector.java](https://android.googlesource.com/platform/frameworks/testing/+/master/uiautomator/library/src/com/android/uiautomator/core/UiSelector.java)
+- [UiSelector.java](https://android.googlesource.com/platform/frameworks/testing/+/master/uiautomator/library/core-src/com/android/uiautomator/core/UiSelector.java)
 - [Ruby selenium-webdriver](http://selenium.googlecode.com/svn/trunk/docs/api/rb/index.html)
 - [Appium](https://github.com/appium/appium/blob/master/README.md)
 - [Appium extension](https://github.com/appium/appium/wiki/Automating-mobile-gestures)
@@ -110,6 +110,9 @@ e.click
 e.send_keys 'keys to send'
 e.set_value 'value to set' # ruby_console specific
 e.displayed? # true or false depending if the element is visible
+e.selected? # is the tab selected?
+e.attribute('checked') # is the checkbox checked?
+
 
 # alert example without helper methods
 alert = $driver.switch_to.alert

@@ -292,6 +292,13 @@ module Appium::Android
     out
   end
 
+  # Automatically detects selendroid or android.
+  # Returns a string containing interesting elements.
+  # @return [String]
+  def get_inspect
+    @device == :selendroid ? get_selendroid_inspect : get_android_inspect
+  end
+
   # Intended for use with console.
   # Inspects and prints the current page.
   def page

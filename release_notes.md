@@ -1,3 +1,22 @@
+#### v0.5.16 2013-07-26
+
+- [bd71fb4](https://github.com/appium/ruby_lib/commit/bd71fb4e430608d32923c583c8d4d592f11a96fc) Release 0.5.16
+- [7b83b85](https://github.com/appium/ruby_lib/commit/7b83b85c41caf25376414d978ff63d49ab22f057) Only return files that exist
+- [1f0428d](https://github.com/appium/ruby_lib/commit/1f0428dca4e843a82de2d46be3c724e2dc7930c7) Fix keyboard race condition
+- [c99ed34](https://github.com/appium/ruby_lib/commit/c99ed341c779fb3eff4ab92a95a4a773a1ce212f) Update docs.md
+- [7103921](https://github.com/appium/ruby_lib/commit/71039210e1e0b7481df59210ce4addebcae7ba08) Fix link
+- [f76ea9b](https://github.com/appium/ruby_lib/commit/f76ea9b42a728aae247f88f732879cda94101624) Add require support to appium.txt
+- [12b8e59](https://github.com/appium/ruby_lib/commit/12b8e5938cb616015cb86d62e41ee9d29cace097) Update docs.md
+- [7d6a8f2](https://github.com/appium/ruby_lib/commit/7d6a8f2fa728e616e7fd459cdeef0d5cce9064b4) Add current_app to docs
+- [16ea945](https://github.com/appium/ruby_lib/commit/16ea9454941d84bb02ba4950aeea8df6d70cab26) Fix hide keyboard on iOS
+- [ad9263c](https://github.com/appium/ruby_lib/commit/ad9263cbabb4e1c56bbe9fafe85b048f2a285c11) Add Sauce wait req
+- [98ee244](https://github.com/appium/ruby_lib/commit/98ee244d460f6251c5c6cff8cc79ca8610cc6165) Add .clear example for textfield
+- [d373071](https://github.com/appium/ruby_lib/commit/d3730717faba192cc66f5346c2847ecf6cb60e16) Fix activity name example in readme
+- [50023f3](https://github.com/appium/ruby_lib/commit/50023f3a8201b0875025e5a94ec841fb23c35714) Fix Android version
+- [c4d281a](https://github.com/appium/ruby_lib/commit/c4d281a62d7923f9e6a65fbc870cb1dc6a959849) Add Android set version code
+- [5675f4a](https://github.com/appium/ruby_lib/commit/5675f4a03f8b20939e8cc1b5b13df795072d6553) Update readme.md
+
+
 #### v0.5.15 2013-07-03
 
 - [734fe68](https://github.com/appium/ruby_lib/commit/734fe6887f36aa1ad59ef7ce992ba2e2f4c8c7d3) Release 0.5.15

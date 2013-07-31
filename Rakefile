@@ -130,7 +130,7 @@ task :notes do
     tag = pair.split('...').last
     dates.each do |line|
       # regular tag, or tag on master.
-      if line.include?('(' + tag + ')') || line.include?(tag + ',')
+      if line.include?(tag + ')') || line.include?(tag + ',')
         tag_date.push tag + ' ' + line.match(/\d{4}-\d{2}-\d{2}/)[0]
         break
       end
