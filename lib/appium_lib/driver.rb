@@ -81,7 +81,10 @@ end
 
 # Fix uninitialized constant Minitest (NameError)
 module Minitest
-  class Spec; end
+  # Fix superclass mismatch for class Spec
+  class Runnable; end
+  class Test < Runnable; end
+  class Spec < Test; end
 end
 
 module Appium
@@ -227,7 +230,10 @@ module Appium
                   # prefer existing method.
                   # super will invoke method missing on driver
                   super(*args, &block)
-                rescue NoMethodError
+                  # minitest also defines a name method,
+                  # so rescue argument error
+                  # and call the name method on $driver
+                rescue NoMethodError, ArgumentError
                   # puts "[Object.class_eval] '#{m}' not on super"
                   $driver.send m, *args, &block if $driver.respond_to?(m)
                 end
