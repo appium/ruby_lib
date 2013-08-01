@@ -208,7 +208,7 @@ module Appium
         when :ios
           extend Appium::Ios
       end
-      # apply device specific patches
+      # apply os specific patches
       patch_webdriver_element
 
       # enable debug patch
