@@ -1,5 +1,5 @@
 # encoding: utf-8
-module Appium::Android
+module Appium::Selendroid
   # @private
   # class_eval inside a method because class Selenium::WebDriver::Element
   # will trigger as soon as the file is required. in contrast a method

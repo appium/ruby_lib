@@ -116,7 +116,9 @@ module Appium
   require 'android/element/textfield'
 
   # selendroid
+  require 'selendroid/patch'
 
+  
   class Driver
     @@loaded = false
 
@@ -130,7 +132,7 @@ module Appium
     # # Options include:
     # :app_path, :app_name, :app_package, :app_activity,
     # :app_wait_activity, :sauce_username, :sauce_access_key,
-    # :port, :os, :debug, :device
+    # :port, :debug, :device
     #
     # require 'rubygems'
     # require 'appium_lib'
@@ -145,7 +147,6 @@ module Appium
     #         app_package: 'com.example.pkg',
     #         app_activity: 'act.Start',
     #         app_wait_activity: 'act.Start',
-    #         device: 'ios'
     # }
     #
     # Appium::Driver.new(apk).start_driver
@@ -193,16 +194,21 @@ module Appium
 
       # load common methods
       extend Appium::Common
-      if @device == :android
-        raise 'APP_ACTIVITY must be set.' if @app_activity.nil?
+      case @device
+        when :android
+          raise 'APP_ACTIVITY must be set.' if @app_activity.nil?
 
-        # load Android specific methods
-        extend Appium::Android
-      else
-        # load iOS specific methods
-        extend Appium::Ios
+          # load Android specific methods
+          extend Appium::Android
+        when :selendroid
+          raise 'APP_ACTIVITY must be set.' if @app_activity.nil?
+
+          # load Android specific methods
+          extend Appium::Selendroid
+        when :ios
+          extend Appium::Ios
       end
-      # apply os specific patches
+      # apply device specific patches
       patch_webdriver_element
 
       # enable debug patch
@@ -224,21 +230,17 @@ module Appium
         @@loaded = true
         # Promote Appium driver methods to Object instance methods.
         $driver.public_methods(false).each do | m |
-          # not MiniTest::Spec
-          ::Minitest::Spec.class_eval do
+          Object.class_eval do
             define_method m do | *args, &block |
-                begin
-                  # puts "[Object.class_eval] Calling super for '#{m}'"
-                  # prefer existing method.
-                  # super will invoke method missing on driver
-                  super(*args, &block)
-                  # minitest also defines a name method,
-                  # so rescue argument error
-                  # and call the name method on $driver
-                rescue NoMethodError, ArgumentError
-                  # puts "[Object.class_eval] '#{m}' not on super"
-                  $driver.send m, *args, &block if $driver.respond_to?(m)
-                end
+              begin
+                # puts "[Object.class_eval] Calling super for '#{m}'"
+                # prefer existing method.
+                # super will invoke method missing on driver
+                super(*args, &block)
+              rescue NoMethodError
+                # puts "[Object.class_eval] '#{m}' not on super"
+                $driver.send m, *args, &block if $driver.respond_to?(m)
+              end
             end
           end
         end
@@ -315,15 +317,21 @@ module Appium
         platform: 'Mac 10.8',
         version: '6.0',
         device: 'iPhone Simulator',
-        name: @app_name || 'Ruby Console iOS Appium'
+        name: @app_name || 'Ruby Console iOS Appium',
+        app: absolute_app_path
       }
     end
 
     # @private
     def capabilities
-      caps = @device == :ios ? ios_capabilities : android_capabilities
-      caps[:app] = absolute_app_path unless @app_path.nil? || @app_path.empty?
-      caps
+      case @device
+        when :ios
+          ios_capabilities
+        when :android
+          android_capabilities
+        when :selendroid
+          selendroid_capabilities
+      end
     end
 
     # Converts environment variable APP_PATH to an absolute path.
