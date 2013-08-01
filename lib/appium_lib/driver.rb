@@ -302,7 +302,6 @@ module Appium
         version: '4.2',
         device: 'Selendroid',
         name: @app_name || 'Ruby Console Selendroid Appium',
-        app: absolute_app_path,
         :'app-package' => @app_package,
         :'app-activity' => @app_activity,
         :'app-wait-activity' => @app_wait_activity || @app_activity
@@ -318,7 +317,6 @@ module Appium
         version: '6.0',
         device: 'iPhone Simulator',
         name: @app_name || 'Ruby Console iOS Appium',
-        app: absolute_app_path
       }
     end
 
@@ -326,12 +324,14 @@ module Appium
     def capabilities
       case @device
         when :ios
-          ios_capabilities
+          caps = ios_capabilities
         when :android
-          android_capabilities
+          caps = android_capabilities
         when :selendroid
-          selendroid_capabilities
+          caps = selendroid_capabilities
       end
+      caps[:app] = absolute_app_path unless @app_path.nil? || @app_path.empty?
+      caps
     end
 
     # Converts environment variable APP_PATH to an absolute path.
