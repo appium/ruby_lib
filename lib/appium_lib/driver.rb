@@ -316,7 +316,7 @@ module Appium
         platform: 'Mac 10.8',
         version: '6.0',
         device: 'iPhone Simulator',
-        name: @app_name || 'Ruby Console iOS Appium',
+        name: @app_name || 'Ruby Console iOS Appium'
       }
     end
 
