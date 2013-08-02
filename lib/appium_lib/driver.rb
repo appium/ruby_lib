@@ -115,6 +115,10 @@ module Appium
   require 'android/element/generic'
   require 'android/element/textfield'
 
+  # selendroid
+  require 'selendroid/patch'
+
+  
   class Driver
     @@loaded = false
 
@@ -128,7 +132,7 @@ module Appium
     # # Options include:
     # :app_path, :app_name, :app_package, :app_activity,
     # :app_wait_activity, :sauce_username, :sauce_access_key,
-    # :port, :os, :debug
+    # :port, :debug, :device
     #
     # require 'rubygems'
     # require 'appium_lib'
@@ -142,7 +146,7 @@ module Appium
     #         app_path: '/path/to/the.apk',
     #         app_package: 'com.example.pkg',
     #         app_activity: 'act.Start',
-    #         app_wait_activity: 'act.Start'
+    #         app_wait_activity: 'act.Start',
     # }
     #
     # Appium::Driver.new(apk).start_driver
@@ -190,16 +194,20 @@ module Appium
 
       # load common methods
       extend Appium::Common
-      if @device == :android
-        raise 'APP_ACTIVITY must be set.' if @app_activity.nil?
+      case @device
+        when :android
+          raise 'APP_ACTIVITY must be set.' if @app_activity.nil?
 
-        # load Android specific methods
-        extend Appium::Android
-      else
-        # load iOS specific methods
-        extend Appium::Ios
+          # load Android specific methods
+          extend Appium::Android
+        when :selendroid
+          raise 'APP_ACTIVITY must be set.' if @app_activity.nil?
+
+          # load Android specific methods
+          extend Appium::Selendroid
+        when :ios
+          extend Appium::Ios
       end
-
       # apply os specific patches
       patch_webdriver_element
 
@@ -222,21 +230,17 @@ module Appium
         @@loaded = true
         # Promote Appium driver methods to Object instance methods.
         $driver.public_methods(false).each do | m |
-          # not MiniTest::Spec
-          ::Minitest::Spec.class_eval do
+          Object.class_eval do
             define_method m do | *args, &block |
-                begin
-                  # puts "[Object.class_eval] Calling super for '#{m}'"
-                  # prefer existing method.
-                  # super will invoke method missing on driver
-                  super(*args, &block)
-                  # minitest also defines a name method,
-                  # so rescue argument error
-                  # and call the name method on $driver
-                rescue NoMethodError, ArgumentError
-                  # puts "[Object.class_eval] '#{m}' not on super"
-                  $driver.send m, *args, &block if $driver.respond_to?(m)
-                end
+              begin
+                # puts "[Object.class_eval] Calling super for '#{m}'"
+                # prefer existing method.
+                # super will invoke method missing on driver
+                super(*args, &block)
+              rescue NoMethodError
+                # puts "[Object.class_eval] '#{m}' not on super"
+                $driver.send m, *args, &block if $driver.respond_to?(m)
+              end
             end
           end
         end
@@ -290,6 +294,22 @@ module Appium
 
     # @private
     # WebDriver capabilities. Must be valid for Sauce to work.
+    # https://github.com/jlipps/appium/blob/master/app/android.js
+    def selendroid_capabilities
+      {
+        browserName: 'Android',
+        platform: 'LINUX',
+        version: '4.2',
+        device: 'Selendroid',
+        name: @app_name || 'Ruby Console Selendroid Appium',
+        :'app-package' => @app_package,
+        :'app-activity' => @app_activity,
+        :'app-wait-activity' => @app_wait_activity || @app_activity
+      }
+    end
+
+    # @private
+    # WebDriver capabilities. Must be valid for Sauce to work.
     def ios_capabilities
       {
         browserName: 'iOS 6.0',
@@ -302,7 +322,14 @@ module Appium
 
     # @private
     def capabilities
-      caps = @device == :ios ? ios_capabilities : android_capabilities
+      case @device
+        when :ios
+          caps = ios_capabilities
+        when :android
+          caps = android_capabilities
+        when :selendroid
+          caps = selendroid_capabilities
+      end
       caps[:app] = absolute_app_path unless @app_path.nil? || @app_path.empty?
       caps
     end
