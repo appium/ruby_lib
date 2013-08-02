@@ -36,6 +36,7 @@ text      | UIAStaticText
 --
 
 - `status["value"]["build"]["revision"]` Discover the Appium rev running on the server.
+- `driver.keyboard.send_keys "msg"` Sends keys to currently active element
 
 #### generic
 
