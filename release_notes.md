@@ -1,3 +1,15 @@
+#### v0.6.0 2013-08-05
+
+- [09aa23d](https://github.com/appium/ruby_lib/commit/09aa23d8c1b769b054c7d0e24ec86cf55d6bc027) Release 0.6.0
+- [cbaf19d](https://github.com/appium/ruby_lib/commit/cbaf19d9d607b00dde89aca3829f17808780c2f3) Add keyboard send_keys documentation
+- [25333d6](https://github.com/appium/ruby_lib/commit/25333d6d2871ba5009dcf4050185dbdf1d324ce9) Fix for Minitest 5
+- [1e047b0](https://github.com/appium/ruby_lib/commit/1e047b092740703083ed9e452f9e77d6086f8372) Minitest 5 only
+- [7ef93e9](https://github.com/appium/ruby_lib/commit/7ef93e99fbc373a6d4f2a75f1abc81a12a9688fa) Update usage example
+- [47f53f9](https://github.com/appium/ruby_lib/commit/47f53f9706d3aa302a431c2b91592ee8c72ba399) Device is now required
+- [62d5f2a](https://github.com/appium/ruby_lib/commit/62d5f2a258e927ee56e042466503c023c9138f6c) Patch only MiniTest
+- [6ce29df](https://github.com/appium/ruby_lib/commit/6ce29df7b9d7b144a750579faab9629741f64593) Fix release notes
+
+
 #### v0.5.16 2013-07-26
 
 - [bd71fb4](https://github.com/appium/ruby_lib/commit/bd71fb4e430608d32923c583c8d4d592f11a96fc) Release 0.5.16
