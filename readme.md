@@ -47,6 +47,9 @@ apk = {
         app_wait_activity: '.act.Start'
       }
 Appium::Driver.new(apk).start_driver
+
+# Define the methods on all objects.
+Appium.promote_appium_methods Object
 ```
 
 #### iOS env vars
