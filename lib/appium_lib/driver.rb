@@ -115,6 +115,44 @@ module Appium
   require 'android/element/generic'
   require 'android/element/textfield'
 
+  ##
+  # Promote appium methods to class instance methods
+  #
+  # @param class_array [Array<Class>] An array of classes
+  #
+  # To promote methods to all classes:
+  #
+  # ```ruby
+  # Appium.promote_appium_methods Object
+  # ```
+
+  def self.promote_appium_methods class_array
+    raise 'Driver is nil' if $driver.nil?
+    # Wrap single class into an array
+    class_array = [class_array] unless class_array.class == Array
+    # Promote Appium driver methods to class instance methods.
+    class_array.each do |klass|
+      $driver.public_methods(false).each do |m|
+        klass.class_eval do
+          define_method m do |*args, &block|
+            begin
+              # Prefer existing method.
+              # super will invoke method missing on driver
+              super(*args, &block)
+                # minitest also defines a name method,
+                # so rescue argument error
+                # and call the name method on $driver
+            rescue NoMethodError, ArgumentError
+              # puts "[Object.class_eval] '#{m}' not on super"
+              $driver.send m, *args, &block if $driver.respond_to?(m)
+            end
+          end
+        end
+      end
+    end
+    nil # return nil
+  end
+
   class Driver
     @@loaded = false
 
@@ -220,26 +258,8 @@ module Appium
       # Subsequent drivers do not trigger promotion.
       unless @@loaded
         @@loaded = true
-        # Promote Appium driver methods to Object instance methods.
-        $driver.public_methods(false).each do | m |
-          # not MiniTest::Spec
-          ::Minitest::Spec.class_eval do
-            define_method m do | *args, &block |
-                begin
-                  # puts "[Object.class_eval] Calling super for '#{m}'"
-                  # prefer existing method.
-                  # super will invoke method missing on driver
-                  super(*args, &block)
-                  # minitest also defines a name method,
-                  # so rescue argument error
-                  # and call the name method on $driver
-                rescue NoMethodError, ArgumentError
-                  # puts "[Object.class_eval] '#{m}' not on super"
-                  $driver.send m, *args, &block if $driver.respond_to?(m)
-                end
-            end
-          end
-        end
+        # Promote only on Minitest::Spec (minitest 5) by default
+        Appium.promote_appium_methods ::Minitest::Spec
       end
 
       self # return newly created driver
