@@ -1,3 +1,9 @@
+#### v0.6.1 2013-08-05
+
+- [44b4b29](https://github.com/appium/ruby_lib/commit/44b4b29596b59b1d8a7a7ab7485f176a84143ac3) Release 0.6.1
+- [a58228f](https://github.com/appium/ruby_lib/commit/a58228f728576be4bbe8325788ed28571b810bb4) Refactor promotion into a method
+
+
 #### v0.6.0 2013-08-05
 
 - [09aa23d](https://github.com/appium/ruby_lib/commit/09aa23d8c1b769b054c7d0e24ec86cf55d6bc027) Release 0.6.0
