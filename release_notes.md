@@ -1,3 +1,11 @@
+#### v0.6.2 2013-08-07
+
+- [509e7b8](https://github.com/appium/ruby_lib/commit/509e7b81f02c6b0c4cdcb07aca034c9dad260ff4) Release 0.6.2
+- [69a698b](https://github.com/appium/ruby_lib/commit/69a698b0ba7b3aa7bbe8846711eac8da0108552e) Add px_to_window_rel
+- [218185f](https://github.com/appium/ruby_lib/commit/218185fea68277537ed47dbc9312c874e26489b9) Add promote example
+- [b57772c](https://github.com/appium/ruby_lib/commit/b57772c48c409d981518d9aee7ab1b7accd3465a) Fix comments
+
+
 #### v0.6.1 2013-08-05
 
 - [44b4b29](https://github.com/appium/ruby_lib/commit/44b4b29596b59b1d8a7a7ab7485f176a84143ac3) Release 0.6.1
