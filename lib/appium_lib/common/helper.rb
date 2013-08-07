@@ -216,4 +216,20 @@ module Appium::Common
   def tag tag_name
     find_element :tag_name, tag_name
   end
+
+  # Converts pixel values to window relative values
+  #
+  # ```ruby
+  # px_to_window_rel x: 50, y: 150
+  # ```
+
+  def px_to_window_rel opts={}
+
+    w = $driver.window_size
+    x = opts.fetch :x, 0
+    y = opts.fetch :y, 0
+
+    OpenStruct.new( x: x.to_f / w.width.to_f,
+                    y: y.to_f / w.height.to_f )
+  end
 end # module Appium::Common
