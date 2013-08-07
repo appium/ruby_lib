@@ -5,6 +5,22 @@ https://github.com/appium/appium/blob/82995f47408530c80c3376f4e07a1f649d96ba22/s
 https://github.com/appium/appium/blob/c58eeb66f2d6fa3b9a89d188a2e657cca7cb300f/LICENSE
 =end
 
+require 'rubygems'
+require 'ap'
+
+# Support OpenStruct in Awesome Print
+# /awesome_print/lib/awesome_print/formatter.rb
+# upstream issue: https://github.com/michaeldv/awesome_print/pull/36
+class AwesomePrint::Formatter
+    remove_const :CORE if defined?(CORE)
+    CORE = [ :array, :hash, :class, :file, :dir, :bigdecimal, :rational, :struct, :openstruct, :method, :unboundmethod ]
+
+  def awesome_openstruct target
+    awesome_hash target.marshal_dump
+  end
+end
+
+
 # Load appium.txt (toml format) into system ENV
 # the basedir of this file + appium.txt is what's used
 # @param opts [Hash] file: '/path/to/appium.txt', verbose: true
@@ -34,7 +50,6 @@ def load_appium_txt opts
 
   if toml_exists
     require 'toml'
-    require 'ap'
     puts "Loading #{toml}" if verbose
 
     # bash requires A="OK"
