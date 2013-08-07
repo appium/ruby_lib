@@ -90,9 +90,8 @@ end
 desc 'Uninstall gem'
 task :uninstall do
   cmd = "gem uninstall -aIx #{repo_name}"
-  puts cmd
   # rescue on gem not installed error.
-  begin; `cmd`; rescue; end
+  begin; sh "#{cmd}"; rescue; end
 end
 
 desc 'Install gem'

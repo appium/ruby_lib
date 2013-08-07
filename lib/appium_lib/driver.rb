@@ -74,9 +74,10 @@ def load_appium_txt opts
         !ENV['APP_PATH'].empty?
 
     # device is not case sensitive
-    ENV['DEVICE'] = ENV['DEVICE'].strip.downcase if ENV['DEVICE']
+    ENV['DEVICE'] = ENV['DEVICE'].strip.downcase if !ENV['DEVICE'].nil?
     if ! %w(ios android selendroid).include? ENV['DEVICE']
-      raise 'DEVICE must be ios, android, or selendroid'
+      raise %(DEVICE="#{ENV['DEVICE']}" must be ios, android,
+or selendroid.)
     end
   end
 
