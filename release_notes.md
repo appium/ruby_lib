@@ -1,3 +1,11 @@
+#### v0.6.3 2013-08-07
+
+- [ccf8e37](https://github.com/appium/ruby_lib/commit/ccf8e375283bd9038fcf6c1db576f7539065e6d0) Release 0.6.3
+- [d55c6fa](https://github.com/appium/ruby_lib/commit/d55c6faddcbfd42b1f500e617e38eaa18ddc6532) Fix device and rake uninstall
+- [8c704ee](https://github.com/appium/ruby_lib/commit/8c704eece569c37bcc491e8edf88b34e1310ee96) Support OpenStruct in Awesome Print
+- [898fe27](https://github.com/appium/ruby_lib/commit/898fe27a86056b5ec6931555ad778c04c3a3a342) Device is not case sensitive
+
+
 #### v0.6.2 2013-08-07
 
 - [509e7b8](https://github.com/appium/ruby_lib/commit/509e7b81f02c6b0c4cdcb07aca034c9dad260ff4) Release 0.6.2
