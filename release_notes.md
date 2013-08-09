@@ -1,3 +1,10 @@
+#### v0.6.4 2013-08-09
+
+- [94a9bbc](https://github.com/appium/ruby_lib/commit/94a9bbc595f42008d7fdb7ba6814efd38955294b) Release 0.6.4
+- [3b24fcd](https://github.com/appium/ruby_lib/commit/3b24fcd4c23941502eec22d99a3e3db7094b9401) Add optional $driver.global_webdriver_http_sleep
+- [dae3508](https://github.com/appium/ruby_lib/commit/dae3508b566de1a3eaae64483cd79d9502a71859) Add longClick example
+
+
 #### v0.6.3 2013-08-07
 
 - [ccf8e37](https://github.com/appium/ruby_lib/commit/ccf8e375283bd9038fcf6c1db576f7539065e6d0) Release 0.6.3
