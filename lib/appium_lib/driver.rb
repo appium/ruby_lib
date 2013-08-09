@@ -176,6 +176,9 @@ module Appium
     attr_reader :default_wait, :app_path, :app_name, :device,
                 :app_package, :app_activity, :app_wait_activity,
                 :sauce_username, :sauce_access_key, :port, :debug
+
+    # The amount to sleep in seconds before every webdriver http call.
+    attr_accessor :global_webdriver_http_sleep
     # Creates a new driver.
     # :device is :android, :ios, or :selendroid
     #

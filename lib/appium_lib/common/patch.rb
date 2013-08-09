@@ -143,6 +143,8 @@ def patch_webdriver_bridge
           ap print_command
         end
       end
+      delay = $driver.global_webdriver_http_sleep
+      sleep delay if !delay.nil? && delay > 0
       # puts "verb: #{verb}, path #{path}, command_hash #{command_hash.to_json}"
       http.call verb, path, command_hash
     end # def
