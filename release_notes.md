@@ -1,3 +1,9 @@
+#### v0.6.5 2013-08-13
+
+- [8b7b4d6](https://github.com/appium/ruby_lib/commit/8b7b4d6d7836bfede93b6da99bdcac836d218481) Release 0.6.5
+- [8dadb52](https://github.com/appium/ruby_lib/commit/8dadb52e0bc0372cef575d5f1c82acdc9bec4c20) Add directory support to appium.txt require
+
+
 #### v0.6.4 2013-08-09
 
 - [94a9bbc](https://github.com/appium/ruby_lib/commit/94a9bbc595f42008d7fdb7ba6814efd38955294b) Release 0.6.4
