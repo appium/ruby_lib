@@ -91,9 +91,27 @@ or selendroid.)
       file = file.include?(File::Separator) ? file :
              File.join(parent_dir, file)
       file = File.expand_path file
+
       File.exists?(file) ? file : nil
     end
-    r.compact # remove nils
+    r.compact! # remove nils
+
+    files = []
+
+    # now expand dirs
+    r.each do |item|
+      unless File.directory? item
+        # save file
+        files << item
+        next # only look inside folders
+      end
+      Dir.glob(File.join(item, '**/*.rb')) do |file|
+        # do not add folders to the file list
+        files << File.expand_path(file) unless File.directory? file
+      end
+    end
+
+    files
   end
 end
 
