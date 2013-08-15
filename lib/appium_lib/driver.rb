@@ -193,7 +193,8 @@ module Appium
 
     attr_reader :default_wait, :app_path, :app_name, :device,
                 :app_package, :app_activity, :app_wait_activity,
-                :sauce_username, :sauce_access_key, :port, :debug
+                :sauce_username, :sauce_access_key, :port, :debug,
+                :export_session
 
     # The amount to sleep in seconds before every webdriver http call.
     attr_accessor :global_webdriver_http_sleep
@@ -232,6 +233,8 @@ module Appium
       opts = {} if opts.nil?
       # convert to downcased symbols
       opts.each_pair { |k,v| opts[k.to_s.downcase.strip.intern] = v }
+
+      @export_session = opts.fetch :export_session, false
 
       @default_wait = opts.fetch :wait, 30
 
@@ -433,6 +436,16 @@ module Appium
         @driver = Selenium::WebDriver.for :remote, http_client: @client, desired_capabilities: capabilities, url: server_url
         # Load touch methods. Required for Selendroid.
         @driver.extend Selenium::WebDriver::DriverExtensions::HasTouchScreen
+
+        # export session
+        if @export_session
+          begin
+            File.open('/tmp/appium_lib_session', 'w') do |f|
+              f.puts @driver.session_id
+            end
+          rescue
+          end
+        end
       rescue Errno::ECONNREFUSED
         raise 'ERROR: Unable to connect to Appium. Is the server running?'
       end
