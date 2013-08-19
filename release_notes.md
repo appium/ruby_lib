@@ -1,3 +1,10 @@
+#### v0.6.6 2013-08-19
+
+- [5b84a0b](https://github.com/appium/ruby_lib/commit/5b84a0bd9d9273c704414bdb9a9857b503439b90) Release 0.6.6
+- [6f3b002](https://github.com/appium/ruby_lib/commit/6f3b0027757d8fbf62bc26d8a3497caab025c8c8) Add export session option.
+- [b05c07e](https://github.com/appium/ruby_lib/commit/b05c07e5ddcb6ba7dc79d20a38f1dae8567c52c6) Fix screenshot return value
+
+
 #### v0.6.5 2013-08-13
 
 - [8b7b4d6](https://github.com/appium/ruby_lib/commit/8b7b4d6d7836bfede93b6da99bdcac836d218481) Release 0.6.5
