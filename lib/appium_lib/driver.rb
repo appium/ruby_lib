@@ -194,7 +194,7 @@ module Appium
     attr_reader :default_wait, :app_path, :app_name, :device,
                 :app_package, :app_activity, :app_wait_activity,
                 :sauce_username, :sauce_access_key, :port, :debug,
-                :export_session
+                :export_session, :device_cap
 
     # The amount to sleep in seconds before every webdriver http call.
     attr_accessor :global_webdriver_http_sleep
@@ -262,6 +262,9 @@ module Appium
       @sauce_access_key = opts.fetch :sauce_access_key, ENV['SAUCE_ACCESS_KEY']
 
       @port = opts.fetch :port, ENV['PORT'] || 4723
+
+      # device as used in device capabilities
+      @device_cap = opts.fetch :device_cap, false
 
       # :ios, :android, :selendroid
       @device = opts.fetch :device, ENV['DEVICE'] || :ios
@@ -356,7 +359,7 @@ module Appium
         browserName: 'iOS 6.0',
         platform: 'Mac 10.8',
         version: '6.0',
-        device: 'iPhone Simulator',
+        device: @device_cap || 'iPhone Simulator',
         name: @app_name || 'Ruby Console iOS Appium'
       }
     end
