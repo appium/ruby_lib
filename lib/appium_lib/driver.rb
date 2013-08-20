@@ -263,7 +263,11 @@ module Appium
 
       @port = opts.fetch :port, ENV['PORT'] || 4723
 
-      # device as used in device capabilities
+      # device as used in device capabilities.
+      # iOS only.
+      #
+      # Android is always Android or Selendroid so there's no
+      # override required.
       @device_cap = opts.fetch :device_cap, false
 
       # :ios, :android, :selendroid
