@@ -32,6 +32,13 @@ last_image = find_elements(:tag_name, :ImageView).last
 mobile(:longClick, element: last_image.ref)
 ```
 
+Rotate examples.
+
+```ruby
+driver.rotate :landscape
+driver.rotate :portrait
+```
+
 --
 
 Tag Name  | UIA
