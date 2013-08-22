@@ -260,10 +260,22 @@ end
 #### Set iOS version
 
 ```bash
+# git clone
 export V=`git rev-parse --verify HEAD`
+
+# Delete all old DerivedData
+rm -rf "/Users/`whoami`/Library/Developer/Xcode/DerivedData/ProjectName*"
+# xcode build
+cd "/Users/`whoami`/Library/Developer/Xcode/DerivedData/ProjectName*/Build/Products/Debug-iphonesimulator/ProjectName.app"
+
+# set version
 /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $V" Info.plist
 /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $V" Info.plist
 /usr/bin/plutil -convert binary1 Info.plist
+
+# zip app
+cd ..
+zip -r -X "$WORKSPACE/ProjectName.zip" ProjectName.app
 ```
 
 #### Set Android version
@@ -277,3 +289,4 @@ Dir.glob('./**/AndroidManifest.xml') do |xml|
   File.open(xml, 'w') { |f| f.write data }
 end
 ```
+
