@@ -1,3 +1,13 @@
+#### v0.6.7 2013-08-23
+
+- [a1f5942](https://github.com/appium/ruby_lib/commit/a1f5942e907339f1c3968c5af03feb5bde6b1b7c) Release 0.6.7
+- [4a08dd6](https://github.com/appium/ruby_lib/commit/4a08dd63add2fd11e7cbb7aadaa086f6fb014ed2) Enable bundleid in app device cap
+- [caff218](https://github.com/appium/ruby_lib/commit/caff2187c378e619ee5b4e0524734df372354b69) Improve docs
+- [b579ca7](https://github.com/appium/ruby_lib/commit/b579ca7fd83c6673be1f04d745b9d6cbdaeb6504) Add iOS Jenkins Xcode note
+- [4fbf0fb](https://github.com/appium/ruby_lib/commit/4fbf0fbdea07120ebf4d270bfee2cf251ba312fb) Add landscape and portrait rotate examples
+- [c6d4353](https://github.com/appium/ruby_lib/commit/c6d43537c759342b1ceed72cf8a81573c5070c65) Allow setting device cap
+
+
 #### v0.6.6 2013-08-19
 
 - [5b84a0b](https://github.com/appium/ruby_lib/commit/5b84a0bd9d9273c704414bdb9a9857b503439b90) Release 0.6.6
