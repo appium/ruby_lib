@@ -386,6 +386,10 @@ module Appium
         raise "App doesn't exist. #{@app_path}" unless File.exist? @app_path
         return @app_path
       end
+
+      # if it doesn't contain a slash then it's a bundle id
+      return @app_path unless @app_path.match(/[\/\\]/)
+
       file = File.join(File.dirname(__FILE__), @app_path)
       raise "App doesn't exist #{file}" unless File.exist? file
       file
