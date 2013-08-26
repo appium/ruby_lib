@@ -294,8 +294,14 @@ end
 
 mobile gestures on iOS are known to be crashy. Fix by adding pre/post event sleep.
 
-```
+```ruby
 sleep 3
 mobile :tap, x: 10, y: 100, duration: 0.5
 sleep 1
+```
+
+Accept an alert if it exists.
+
+```ruby
+alert_accept if exists { alert_text }
 ```
