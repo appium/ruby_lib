@@ -4,7 +4,7 @@
 - [Documentation for appium_lib](http://www.rubydoc.info/github/appium/ruby_lib/master/frames)
 - [Appium Ruby Console](https://github.com/appium/ruby_console)
 
-Helper methods for writing cross platform (iPad, iPhone, Android) tests in Ruby using Appium. Note that user waits should not exceed 120 seconds if they're going to run on Sauce Labs.
+Helper methods for writing cross platform (iOS, Android) tests in Ruby using Appium. Note that user waits should not exceed 120 seconds if they're going to run on Sauce Labs.
 
 Make sure you're using Ruby 1.9.3+ with upgraded rubygems and bundler.
 
