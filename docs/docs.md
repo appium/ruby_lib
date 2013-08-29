@@ -290,6 +290,12 @@ Dir.glob('./**/AndroidManifest.xml') do |xml|
 end
 ```
 
+#### Android notes
+
+list all ids on API 18
+
+`get_source.to_s.scan(/id\/([^\"]*)\"/)`
+
 #### iOS notes
 
 mobile gestures on iOS are known to be crashy. Fix by adding pre/post event sleep.
