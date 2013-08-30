@@ -338,21 +338,32 @@ module Appium::Android
       r
     end
 
+    @strings_xml ||= xml_keys ''
     json = get_source
     node = json['hierarchy']
     results = run node
 
     out = ''
     results.each { |e|
-      out += e[:class].split('.').last + "\n"
+      e_class = e[:class]
+      e_desc = e[:desc]
+      e_text = e[:text]
+      out += e_class.split('.').last + "\n"
 
-      out += "  class: #{e[:class]}\n"
-      if e[:text] == e[:desc]
-        out += "  text, name: #{e[:text]}\n" unless e[:text].nil?
+      out += "  class: #{e_class}\n"
+      if e_text == e_desc
+        out += "  text, name: #{e_text}\n" unless e_text.nil?
       else
-        out += "  text: #{e[:text]}\n" unless e[:text].nil?
-        out += "  name: #{e[:desc]}\n" unless e[:desc].nil?
+        out += "  text: #{e_text}\n" unless e_text.nil?
+        out += "  name: #{e_desc}\n" unless e_desc.nil?
       end
+
+      id_match = @strings_xml.detect do |kv|
+        value = kv.last
+        value == e_desc || value == e_text
+      end
+      # [0] = key, [1] = value
+      out += "  id: #{id_match[0]}\n" if id_match
     }
     out
   end
