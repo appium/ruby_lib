@@ -358,12 +358,21 @@ module Appium::Android
         out += "  name: #{e_desc}\n" unless e_desc.nil?
       end
 
-      id_match = @strings_xml.detect do |kv|
+      # there may be many ids with the same value.
+      # output all exact matches.
+      id_matches = @strings_xml.select do |kv|
         value = kv.last
         value == e_desc || value == e_text
       end
-      # [0] = key, [1] = value
-      out += "  id: #{id_match[0]}\n" if id_match
+
+      if id_matches && id_matches.length > 0
+        match_str = ''
+        # [0] = key, [1] = value
+        id_matches.each do |match|
+          match_str += ' ' * 6 + "#{match[0]}\n"
+        end
+        out += "  id: #{match_str.strip}\n"
+      end
     }
     out
   end
