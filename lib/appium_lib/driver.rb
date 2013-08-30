@@ -345,7 +345,6 @@ module Appium
     # https://github.com/jlipps/appium/blob/master/app/android.js
     def android_capabilities
       {
-        browserName: 'Android',
         platform: 'LINUX',
         version: '4.2',
         device: @device == :android ? 'Android' : 'selendroid',
@@ -360,7 +359,6 @@ module Appium
     # WebDriver capabilities. Must be valid for Sauce to work.
     def ios_capabilities
       {
-        browserName: 'iOS 6.0',
         platform: 'Mac 10.8',
         version: '6.0',
         device: @device_cap || 'iPhone Simulator',
