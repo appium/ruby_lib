@@ -194,7 +194,7 @@ module Appium
     attr_reader :default_wait, :app_path, :app_name, :device,
                 :app_package, :app_activity, :app_wait_activity,
                 :sauce_username, :sauce_access_key, :port, :debug,
-                :export_session, :device_cap
+                :export_session, :device_cap, :compress_xml
 
     # The amount to sleep in seconds before every webdriver http call.
     attr_accessor :global_webdriver_http_sleep
@@ -233,6 +233,8 @@ module Appium
       opts = {} if opts.nil?
       # convert to downcased symbols
       opts.each_pair { |k,v| opts[k.to_s.downcase.strip.intern] = v }
+
+      @compress_xml = opts[:compress_xml] ? true : false
 
       @export_session = opts.fetch :export_session, false
 
@@ -345,6 +347,7 @@ module Appium
     # https://github.com/jlipps/appium/blob/master/app/android.js
     def android_capabilities
       {
+        compressXml: @compress_xml,
         platform: 'LINUX',
         version: '4.2',
         device: @device == :android ? 'Android' : 'selendroid',
