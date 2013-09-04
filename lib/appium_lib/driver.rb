@@ -360,7 +360,7 @@ module Appium
     def ios_capabilities
       {
         platform: 'Mac 10.8',
-        version: '6.0',
+        version: '6.1',
         device: @device_cap || 'iPhone Simulator',
         name: @app_name || 'Ruby Console iOS Appium'
       }

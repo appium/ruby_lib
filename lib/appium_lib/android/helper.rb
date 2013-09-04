@@ -325,13 +325,20 @@ module Appium::Android
         keys = node.keys
         return if keys.empty?
 
+        n_content = '@content-desc'
+        n_text = '@text'
+        n_class = '@class'
+        n_resource = '@resource-id'
+        n_node = 'node'
+
         obj = {}
-        obj.merge!( { desc: node['@content-desc'] } ) if keys.include?('@content-desc') && !node['@content-desc'].empty?
-        obj.merge!( { text: node['@text'] } ) if keys.include?('@text') && !node['@text'].empty?
-        obj.merge!( { class: node['@class'] } ) if keys.include?('@class') && !obj.empty?
+        obj.merge!( { desc: node[n_content] } ) if keys.include?(n_content) && !node[n_content].empty?
+        obj.merge!( { text: node[n_text] } ) if keys.include?(n_text) && !node[n_text].empty?
+        obj.merge!( { class: node[n_class] } ) if keys.include?(n_class) && !obj.empty?
+        obj.merge!( { resource_id: node[n_resource] } ) if keys.include?(n_resource) && !obj.empty?
 
         r.push obj if !obj.empty?
-        run_internal.call node['node'] if keys.include?('node')
+        run_internal.call node[n_node] if keys.include?(n_node)
       end
 
       run_internal.call node
@@ -345,9 +352,10 @@ module Appium::Android
 
     out = ''
     results.each { |e|
-      e_class = e[:class]
       e_desc = e[:desc]
       e_text = e[:text]
+      e_class = e[:class]
+      e_resource_id = e[:resource_id]
       out += e_class.split('.').last + "\n"
 
       out += "  class: #{e_class}\n"
@@ -357,6 +365,8 @@ module Appium::Android
         out += "  text: #{e_text}\n" unless e_text.nil?
         out += "  name: #{e_desc}\n" unless e_desc.nil?
       end
+
+      out += "  resource_id: #{e_resource_id}\n" unless e_resource_id.nil?
 
       # there may be many ids with the same value.
       # output all exact matches.
