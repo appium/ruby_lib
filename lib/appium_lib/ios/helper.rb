@@ -83,11 +83,19 @@ module Appium::Ios
     nil
   end
 
+  def lazy_load_strings
+    @strings_xml ||= mobile(:getStrings)
+  end
+
   # Returns a string of interesting elements. iOS only.
+  #
+  # Defaults to inspecting the 1st windows source only.
+  # use get_page(get_source) for all window sources
   #
   # @param element [Object] the element to search. omit to search everything
   # @return [String]
-  def get_page element=get_source
+  def get_page element=source_window(0)
+    lazy_load_strings
 
     # @private
     def empty ele
@@ -122,6 +130,21 @@ module Appium::Ios
         puts "   name: #{name}" if name
         puts "  label: #{label}" if label
         puts "  value: #{value}" if value
+      end
+
+      # there may be many ids with the same value.
+      # output all exact matches.
+      id_matches = @strings_xml.select do |key, val|
+        val == name || val == label || val == value
+      end
+
+      if id_matches && id_matches.length > 0
+        match_str = ''
+        # [0] = key, [1] = value
+        id_matches.each do |match|
+          match_str += ' ' * 7 + "#{match[0]}\n"
+        end
+        puts "   id: #{match_str.strip}\n"
       end
     end
 
