@@ -1,3 +1,18 @@
+#### v0.7.0 2013-09-05
+
+- [c8f3041](https://github.com/appium/ruby_lib/commit/c8f3041049c2feb9ac85f67e85523118a6ce5a84) Release 0.7.0
+- [f98534d](https://github.com/appium/ruby_lib/commit/f98534dc92aa04a0afe05b6ed0e60c4be1d9394c) iOS page supports ids and defaults to 1st window
+- [ab6cb4f](https://github.com/appium/ruby_lib/commit/ab6cb4f66cb496a9c557b4c6246b8ecd7a3e06ed) strings.xml is now client side. compressed xml support
+- [e976552](https://github.com/appium/ruby_lib/commit/e9765527a8858d4d72e9372afdccbf0a2297f5c5) Add Android API 18 resource id to page output
+- [ddc5e36](https://github.com/appium/ruby_lib/commit/ddc5e3651e4920dab9198e33b77fcf570c7e5f8b) browserName is never used
+- [c5211e5](https://github.com/appium/ruby_lib/commit/c5211e52c51170653d85b9f2a249e4a346c17f7a) Print all matching ids in page
+- [8d19157](https://github.com/appium/ruby_lib/commit/8d1915732718864102cdfefcf4db0adb71377a74) Include strings.xml ids in page output on Android
+- [b615628](https://github.com/appium/ruby_lib/commit/b61562808624e1324be0934237dbef26a608aebf) Update readme.md
+- [adc4eba](https://github.com/appium/ruby_lib/commit/adc4ebaaade7778b975c166e1ab16f5c40cc2517) Add id example
+- [42d2a86](https://github.com/appium/ruby_lib/commit/42d2a860f8989a0d8df08815be1a5be4bd895ef6) Add more code examples
+- [fa45efd](https://github.com/appium/ruby_lib/commit/fa45efda445b7541f49f510ec08be9e99584ff72) Update docs.md
+
+
 #### v0.6.7 2013-08-23
 
 - [a1f5942](https://github.com/appium/ruby_lib/commit/a1f5942e907339f1c3968c5af03feb5bde6b1b7c) Release 0.6.7
