@@ -1,7 +1,7 @@
 #### appium_lib [![Gem Version](https://badge.fury.io/rb/appium_lib.png)](http://rubygems.org/gems/appium_lib)[![Dependency Status](https://gemnasium.com/appium/ruby_lib.png)](https://gemnasium.com/appium/ruby_lib)
 
 - [appium_lib on RubyGems](https://rubygems.org/gems/appium_lib)
-- [Documentation for appium_lib](http://www.rubydoc.info/github/appium/ruby_lib/master/frames)
+- [Documentation for appium_lib](https://github.com/appium/ruby_lib/tree/master/docs)
 - [Appium Ruby Console](https://github.com/appium/ruby_console)
 
 Helper methods for writing cross platform (iOS, Android) tests in Ruby using Appium. Note that user waits should not exceed 120 seconds if they're going to run on Sauce Labs.
