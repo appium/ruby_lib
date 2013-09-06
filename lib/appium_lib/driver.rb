@@ -194,7 +194,7 @@ module Appium
     attr_reader :default_wait, :app_path, :app_name, :device,
                 :app_package, :app_activity, :app_wait_activity,
                 :sauce_username, :sauce_access_key, :port, :debug,
-                :export_session, :device_cap, :compress_xml
+                :export_session, :device_cap, :compress_xml, :custom_url
 
     # The amount to sleep in seconds before every webdriver http call.
     attr_accessor :global_webdriver_http_sleep
@@ -233,6 +233,8 @@ module Appium
       opts = {} if opts.nil?
       # convert to downcased symbols
       opts.each_pair { |k,v| opts[k.to_s.downcase.strip.intern] = v }
+
+      @custom_url = opts.fetch :server_url, false
 
       @compress_xml = opts[:compress_xml] ? true : false
 
@@ -399,6 +401,7 @@ module Appium
     # Get the server url for sauce or local based on env vars.
     # @return [String] the server url
     def server_url
+      return @custom_url if @custom_url
       if !@sauce_username.nil? && !@sauce_access_key.nil?
         "http://#{@sauce_username}:#{@sauce_access_key}@ondemand.saucelabs.com:80/wd/hub"
       else
