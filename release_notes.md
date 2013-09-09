@@ -1,3 +1,12 @@
+#### v0.7.1 2013-09-09
+
+- [1e0f36e](https://github.com/appium/ruby_lib/commit/1e0f36e22833246873b6ecb8cc4d2bf3544de2c8) Release 0.7.1
+- [b611ac6](https://github.com/appium/ruby_lib/commit/b611ac6c361b7044d07d2501ae032784aa891c66) Fix typing on disabled textfield
+- [d887050](https://github.com/appium/ruby_lib/commit/d887050006dd4e18e8b558b542eb0a090fecf985) xml_keys, xml_values, resolve_id work on iOS
+- [e148f2a](https://github.com/appium/ruby_lib/commit/e148f2ad746795b7dcf3960ed8f837fad2b78f24) Allow custom URL. Fix #84
+- [8d6ae78](https://github.com/appium/ruby_lib/commit/8d6ae788006fd9430cc34fc0dc3e390876758a1a) Use our docs not rubydoc.info
+
+
 #### v0.7.0 2013-09-05
 
 - [c8f3041](https://github.com/appium/ruby_lib/commit/c8f3041049c2feb9ac85f67e85523118a6ce5a84) Release 0.7.0
