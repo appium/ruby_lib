@@ -307,10 +307,6 @@ module Appium::Android
     nil
   end
 
-  def lazy_load_strings
-    @strings_xml ||= mobile(:getStrings)
-  end
-
   # Android only.
   # Returns a string containing interesting elements.
   # If an element has no content desc or text, then it's not returned by this method.
@@ -414,30 +410,6 @@ module Appium::Android
   # We want steps to be exactly 1. If it's zero then a tap is used instead of a swipe.
   def fast_duration
     0.20
-  end
-
-  # Search strings.xml's values for target.
-  # @param target [String] the target to search for in strings.xml values
-  # @return [Array]
-  def xml_keys target
-    lazy_load_strings
-    @strings_xml.select { |key, value| key.downcase.include? target.downcase }
-  end
-
-  # Search strings.xml's keys for target.
-  # @param target [String] the target to search for in strings.xml keys
-  # @return [Array]
-  def xml_values target
-    lazy_load_strings
-    @strings_xml.select { |key, value| value.downcase.include? target.downcase }
-  end
-
-  # Resolve id in strings.xml and return the value.
-  # @param id [String] the id to resolve
-  # @return [String]
-  def resolve_id id
-    lazy_load_strings
-    @strings_xml[id]
   end
 
   # Lists package, activity, and adb shell am start -n value for current app.

@@ -83,10 +83,6 @@ module Appium::Ios
     nil
   end
 
-  def lazy_load_strings
-    @strings_xml ||= mobile(:getStrings)
-  end
-
   # Returns a string of interesting elements. iOS only.
   #
   # Defaults to inspecting the 1st windows source only.

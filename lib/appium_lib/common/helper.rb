@@ -232,4 +232,32 @@ module Appium::Common
     OpenStruct.new( x: x.to_f / w.width.to_f,
                     y: y.to_f / w.height.to_f )
   end
+
+  def lazy_load_strings
+    @strings_xml ||= mobile(:getStrings)
+  end
+
+  # Search strings.xml's values for target.
+  # @param target [String] the target to search for in strings.xml values
+  # @return [Array]
+  def xml_keys target
+    lazy_load_strings
+    @strings_xml.select { |key, value| key.downcase.include? target.downcase }
+  end
+
+  # Search strings.xml's keys for target.
+  # @param target [String] the target to search for in strings.xml keys
+  # @return [Array]
+  def xml_values target
+    lazy_load_strings
+    @strings_xml.select { |key, value| value.downcase.include? target.downcase }
+  end
+
+  # Resolve id in strings.xml and return the value.
+  # @param id [String] the id to resolve
+  # @return [String]
+  def resolve_id id
+    lazy_load_strings
+    @strings_xml[id]
+  end
 end # module Appium::Common
