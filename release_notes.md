@@ -1,3 +1,10 @@
+#### v0.9.1 2013-09-19
+
+- [cd9fc63](https://github.com/appium/ruby_lib/commit/cd9fc636c5fc1071ad95ea08a7ab5c077737e6a7) Release 0.9.1
+- [c5c2b83](https://github.com/appium/ruby_lib/commit/c5c2b832c5f535eacb657b4cfc5cb5d89e0ad8ee) XPath index starts at 1 for textfield
+- [511f76e](https://github.com/appium/ruby_lib/commit/511f76ea711516e5b2a95918343b8e903d17dc1a) Fix server_version path debug output
+
+
 #### v0.9.0 2013-09-19
 
 - [28f2161](https://github.com/appium/ruby_lib/commit/28f21615a435364246725e8f9adac62c0257dffa) Release 0.9.0
