@@ -13,7 +13,7 @@ def version
   @version = @version || File.read(version_file).match(version_rgx)[1]
 end
 
-def bump
+def bump major=false
   data = File.read version_file
 
   v_line = data.match version_rgx
@@ -25,6 +25,12 @@ def bump
   old_num = v_line[1]
   new_num = old_num.split('.')
   new_num[-1] = new_num[-1].to_i + 1
+
+  if major
+    new_num[-1] = 0 # x.y.Z -> x.y.0
+    new_num[-2] = new_num[-2].to_i + 1 # x.Y -> x.Y+1
+  end
+
   new_num = new_num.join '.'
 
   new_v = old_v.sub old_num, new_num
@@ -44,6 +50,11 @@ end
 desc 'Bump the version number and update the date.'
 task :bump do
   bump
+end
+
+desc 'Bump the y version number, set z to zero, update the date.'
+task :bumpy do
+  bump true
 end
 
 desc 'Install gems required for release task'
