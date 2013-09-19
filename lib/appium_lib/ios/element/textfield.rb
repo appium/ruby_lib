@@ -5,6 +5,13 @@ module Appium::Ios
   # Find textfield and then secure elements in one server call
   # to match Android.
 
+  def locate_single_textfield js
+    ele = execute_script(js)
+    ele = ele.first if ele.kind_of? Array
+    raise_no_element_error unless ele.kind_of? Selenium::WebDriver::Element
+    ele
+  end
+
   # Get an array of textfield texts.
   # @return [Array<String>]
   def textfields
@@ -21,14 +28,14 @@ module Appium::Ios
   # @return [Textfield]
   def first_textfield
     js = textfield_js 'r = r.length > 0 ? $(r[0]) : r;'
-    execute_script(js).first
+    locate_single_textfield js
   end
 
   # Get the last textfield element.
   # @return [Textfield]
   def last_textfield
     js = textfield_js 'r = r.length > 0 ? $(r[r.length - 1]) : r;'
-    execute_script(js).first
+    locate_single_textfield js
   end
 
   # Get the first textfield that matches text.
@@ -39,7 +46,7 @@ module Appium::Ios
     # iOS needs to combine textfield and secure to match Android.
     if text.is_a? Numeric
       js = textfield_js "r = r.length > 0 ? $(r[#{text}]) : r;"
-      return execute_script(js).first
+      return locate_single_textfield js
     end
 
     textfield_include text
@@ -54,8 +61,7 @@ module Appium::Ios
       var s = au.getElementsByXpath('secure[contains(@text, "#{text}")]').value;
       t.concat(s)[0];
     )
-
-    execute_script js
+    locate_single_textfield js
   end
 
   # Get the first textfield that exactly matches text.
@@ -68,15 +74,14 @@ module Appium::Ios
       var s = au.getElementsByXpath('secure[@text="#{text}"]').value;
       t.concat(s)[0];
     )
-
-    execute_script js
+    locate_single_textfield js
   end
 
   # @private
   # Return combined lookup of textfield and secure
   # with an optional filter. $() wrap is required for .each
   def textfield_js filter=''
-  %Q(
+    %Q(
     var t = au.lookup('textfield');
     var s = au.lookup('secure');
     var r = $(t.concat(s));

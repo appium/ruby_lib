@@ -424,4 +424,14 @@ module Appium::Android
                    activity: act,
                    am_start: pkg + '/' + act
   end
+
+  # Find by id. Useful for selendroid
+  # @param id [String] the id to search for
+  # @return [Element]
+  def id id
+    lazy_load_strings
+    # resource ids must include ':' and they're not contained in strings_xml
+    raise "Invalid id `#{id}`" unless @strings_xml[id] || id.include?(':')
+    find_element :id, id
+  end
 end # module Appium::Android

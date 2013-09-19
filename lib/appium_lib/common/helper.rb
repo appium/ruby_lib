@@ -63,13 +63,6 @@ module Appium::Common
     result
   end
 
-  # Find by id. Useful for selendroid
-  # @param id [String] the id to search for
-  # @return [Element]
-  def id id
-    find_element :id, id
-  end
-
   # Navigate back.
   # @return [void]
   def back
@@ -260,4 +253,10 @@ module Appium::Common
     lazy_load_strings
     @strings_xml[id]
   end
+
+  # Used to error when finding a single element fails.
+  def raise_no_element_error
+    raise Selenium::WebDriver::Error::NoSuchElementError, 'An element could not be located on the page using the given search parameters.'
+  end
+
 end # module Appium::Common

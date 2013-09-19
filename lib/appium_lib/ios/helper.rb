@@ -176,4 +176,13 @@ module Appium::Ios
   def fast_duration
     0.5
   end
+
+  # Find by id. Useful for selendroid
+  # @param id [String] the id to search for
+  # @return [Element]
+  def id id
+    lazy_load_strings
+    raise "Invalid id `#{id}`" unless @strings_xml[id]
+    find_element :id, id
+  end
 end # module Appium::Ios
