@@ -1,3 +1,9 @@
+#### v0.8.0 2013-09-19
+
+- [205e04a](https://github.com/appium/ruby_lib/commit/205e04a562e6606b583449cc285e5f4cc5ce9387) Release 0.8.0
+- [67f6361](https://github.com/appium/ruby_lib/commit/67f63614238507deac5e3d336f3217f7edc2cd62) Fix textfield methods on iOS
+
+
 #### v0.7.1 2013-09-09
 
 - [1e0f36e](https://github.com/appium/ruby_lib/commit/1e0f36e22833246873b6ecb8cc4d2bf3544de2c8) Release 0.7.1
