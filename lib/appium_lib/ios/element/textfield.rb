@@ -13,6 +13,7 @@ module Appium::Ios
   end
 
   # Get an array of textfield texts.
+  # Does not respect implicit wait because we're using execute_script.
   # @return [Array<String>]
   def textfields
     find_2_eles_attr :textfield, :secure, :text
@@ -21,21 +22,19 @@ module Appium::Ios
   # Get an array of textfield elements.
   # @return [Array<Textfield>]
   def e_textfields
-    execute_script textfield_js
+    xpaths 'textfield'
   end
 
   # Get the first textfield element.
   # @return [Textfield]
   def first_textfield
-    js = textfield_js 'r = r.length > 0 ? $(r[0]) : r;'
-    locate_single_textfield js
+    xpath 'textfield'
   end
 
   # Get the last textfield element.
   # @return [Textfield]
   def last_textfield
-    js = textfield_js 'r = r.length > 0 ? $(r[r.length - 1]) : r;'
-    locate_single_textfield js
+    xpath 'textfield[last()]'
   end
 
   # Get the first textfield that matches text.
@@ -45,8 +44,8 @@ module Appium::Ios
     # Don't use ele_index because that only works on one element type.
     # iOS needs to combine textfield and secure to match Android.
     if text.is_a? Numeric
-      js = textfield_js "r = r.length > 0 ? $(r[#{text}]) : r;"
-      return locate_single_textfield js
+      raise "#{text} is not a valid xpath index. Must be >= 1" if text <= 0
+      return xpath("textfield[#{text}]")
     end
 
     textfield_include text
@@ -56,37 +55,13 @@ module Appium::Ios
   # @param text [String] the text the textfield must include
   # @return [Textfield]
   def textfield_include text
-    js = %Q(
-      var t = au.getElementsByXpath('textfield[contains(@text, "#{text}")]').value;
-      var s = au.getElementsByXpath('secure[contains(@text, "#{text}")]').value;
-      t.concat(s)[0];
-    )
-    locate_single_textfield js
+    xpath "textfield[contains(@text,'#{text}')]"
   end
 
   # Get the first textfield that exactly matches text.
   # @param text [String] the text the textfield must exactly match
   # @return [Textfield]
   def textfield_exact text
-    # find_ele_by_text :textfield, text
-    js = %Q(
-      var t = au.getElementsByXpath('textfield[@text="#{text}"]').value;
-      var s = au.getElementsByXpath('secure[@text="#{text}"]').value;
-      t.concat(s)[0];
-    )
-    locate_single_textfield js
-  end
-
-  # @private
-  # Return combined lookup of textfield and secure
-  # with an optional filter. $() wrap is required for .each
-  def textfield_js filter=''
-    %Q(
-    var t = au.lookup('textfield');
-    var s = au.lookup('secure');
-    var r = $(t.concat(s));
-    #{filter}
-    au._returnElems(r);
-  )
+    xpath "textfield[@text='#{text}']"
   end
 end # module Appium::Ios
