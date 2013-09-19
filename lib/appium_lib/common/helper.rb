@@ -95,8 +95,9 @@ module Appium::Common
   # @param index [Integer] the index
   # @return [Element] the found element of type tag_name
   def ele_index tag_name, index
-    # XPath index starts at 1. ruby_lib index starts at 0
-    find_element :xpath, "//#{tag_name}[#{index + 1}]"
+    # XPath index starts at 1.
+    raise "#{index} is not a valid xpath index. Must be >= 1" if index <= 0
+    find_element :xpath, "//#{tag_name}[#{index}]"
   end
 
   # Get all elements exactly matching tag name
