@@ -1,6 +1,7 @@
 #### Documentation
 
 - find_elements returns an empty array [] when no elements are found.
+- button(int), textfield(int) use xpath so 1 is the first button, 2 the second etc. 0 is invalid.
 
 ##### [app_lib on rubydoc.info](http://www.rubydoc.info/github/appium/ruby_lib/master/toplevel)
 
