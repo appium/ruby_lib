@@ -1,3 +1,9 @@
+#### v0.9.0 2013-09-19
+
+- [28f2161](https://github.com/appium/ruby_lib/commit/28f21615a435364246725e8f9adac62c0257dffa) Release 0.9.0
+- [25837ae](https://github.com/appium/ruby_lib/commit/25837aeccf47623c1e4055d51238ac7e443a2d4f) iOS textfields use xpath now
+
+
 #### v0.8.0 2013-09-19
 
 - [205e04a](https://github.com/appium/ruby_lib/commit/205e04a562e6606b583449cc285e5f4cc5ce9387) Release 0.8.0
