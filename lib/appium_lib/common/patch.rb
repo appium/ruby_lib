@@ -100,7 +100,9 @@ def patch_webdriver_bridge
       # change path from session/efac972c-941a-499c-803c-d7d008749/execute
       # to /execute
       # path may be nil, session, or not have anything after the session_id.
-      path_str = ''
+      path_str = path
+      path_str = '/' + path_str unless path_str.nil? ||
+          path_str.length <= 0 || path_str[0] == '/'
       path_match = path.match /.*\h{8}-\h{4}-\h{4}-\h{4}-\h{12}/
       path_str = path.sub(path_match[0], '') unless path_match.nil?
 
