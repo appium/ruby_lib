@@ -58,8 +58,8 @@ module Appium::Common
     def location_rel
       xy = self.location
       w = $driver.window_size
-      OpenStruct.new( x: xy.x.to_f / w.width.to_f,
-                      y: xy.y.to_f / w.height.to_f )
+      OpenStruct.new( x: "#{xy.x.to_f} / #{w.width.to_f}",
+                      y: "#{xy.y.to_f} / #{w.height.to_f}" )
     end
   end
 end # module Appium::Common

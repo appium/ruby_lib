@@ -223,8 +223,8 @@ module Appium::Common
     x = opts.fetch :x, 0
     y = opts.fetch :y, 0
 
-    OpenStruct.new( x: x.to_f / w.width.to_f,
-                    y: y.to_f / w.height.to_f )
+    OpenStruct.new( x: "#{x.to_f} / #{w.width.to_f}",
+                    y: "#{y.to_f} / #{w.height.to_f}" )
   end
 
   def lazy_load_strings
