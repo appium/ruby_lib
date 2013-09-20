@@ -1,3 +1,14 @@
+#### v0.10.0 2013-09-20
+
+- [6ab8180](https://github.com/appium/ruby_lib/commit/6ab8180ca332239793c0abc5ee3a31b0b081b6c4) Release 0.10.0
+- [afb0b09](https://github.com/appium/ruby_lib/commit/afb0b09b54682fd497857a41affcdca531eb6911) Add promote_singleton_appium_methods(main_module)
+- [631c584](https://github.com/appium/ruby_lib/commit/631c5846373031a16cacb18bc0259663bd64b7b7) .location_rel now returns a fraction
+- [bf45140](https://github.com/appium/ruby_lib/commit/bf451407454853873305e25f7026e97a4119694d) page on iOS now takes window number
+- [cb38755](https://github.com/appium/ruby_lib/commit/cb38755ec824e139b40cf291eb0d3421cca3dfad) Fix Android fast duration
+- [c81bba8](https://github.com/appium/ruby_lib/commit/c81bba81bdba9a184b2fcc50fa1aabfdafd19e96) Sauce doesn't use dashes in the session id
+- [613c33e](https://github.com/appium/ruby_lib/commit/613c33ee22b389a3c42d96cb618a9858a6bc2e88) Add note about xpath index
+
+
 #### v0.9.1 2013-09-19
 
 - [cd9fc63](https://github.com/appium/ruby_lib/commit/cd9fc636c5fc1071ad95ea08a7ab5c077737e6a7) Release 0.9.1
