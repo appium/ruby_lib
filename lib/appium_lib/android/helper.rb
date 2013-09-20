@@ -292,12 +292,13 @@ module Appium::Android
     json = get_source
     run_internal.call json['hierarchy']
 
-    res = ''
+    res = []
     r = r.sort
     r.uniq.each do |ele|
-      res += "#{r.count(ele)}x #{ele}\n"
+      res.push "#{r.count(ele)}x #{ele}\n"
     end
-    res
+    count_sort = ->(one,two) { two.match(/(\d+)x/)[1].to_i <=> one.match(/(\d+)x/)[1].to_i }
+    res.sort(&count_sort).join ''
   end
 
   # Count all classes on screen and print to stdout.
