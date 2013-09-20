@@ -151,8 +151,8 @@ module Appium::Ios
 
   # Prints a string of interesting elements to the console.
   # @return [void]
-  def page
-    get_page
+  def page window_number = 0
+    get_page source_window window_number || 0
     nil
   end
 
