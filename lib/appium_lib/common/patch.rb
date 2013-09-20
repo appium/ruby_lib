@@ -103,7 +103,7 @@ def patch_webdriver_bridge
       path_str = path
       path_str = '/' + path_str unless path_str.nil? ||
           path_str.length <= 0 || path_str[0] == '/'
-      path_match = path.match /.*\h{8}-\h{4}-\h{4}-\h{4}-\h{12}/
+      path_match = path.match /.*\h{8}-?\h{4}-?\h{4}-?\h{4}-?\h{12}/
       path_str = path.sub(path_match[0], '') unless path_match.nil?
 
       puts "#{verb} #{path_str}"
