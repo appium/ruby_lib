@@ -151,6 +151,25 @@ module Appium
   require 'android/element/generic'
   require 'android/element/textfield'
 
+  def self.promote_singleton_appium_methods main_module
+    raise 'Driver is nil' if $driver.nil?
+    main_module.constants.each do |sub_module|
+      #noinspection RubyResolve
+      $driver.public_methods(false).each do |m|
+        const = Woven.const_get(sub_module)
+        const.send(:define_singleton_method, m) do |*args, &block|
+          begin
+            super(*args, &block) # promote.rb
+          rescue NoMethodError, ArgumentError
+            $driver.send m, *args, &block if $driver.respond_to?(m)
+          end
+          # override unless there's an existing method with matching arity
+        end unless const.respond_to?(m) &&
+            const.method(m).arity == $driver.method(m).arity
+      end
+    end
+  end
+
   ##
   # Promote appium methods to class instance methods
   #
