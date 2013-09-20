@@ -403,13 +403,12 @@ module Appium::Android
   # JavaScript code from https://github.com/appium/appium/blob/master/app/android.js
   #
   # ```javascript
-  # Math.round((duration * 1000) / 200)
-  # (.20 * 1000) / 200 = 1
+  # Math.round(1.0/28.0 * 28) = 1
   # ```
   #
   # We want steps to be exactly 1. If it's zero then a tap is used instead of a swipe.
   def fast_duration
-    0.20
+    0.0357 # 1.0/28.0
   end
 
   # Lists package, activity, and adb shell am start -n value for current app.
