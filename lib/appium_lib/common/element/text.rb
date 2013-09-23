@@ -35,10 +35,24 @@ module Appium::Common
     find_ele_by_text_include :text, text
   end
 
+  # Get all static textfields that include text.
+  # @param text [String] the text to find.
+  # @return [Array<Text>]
+  def s_texts text
+    find_eles_by_text_include :text, text
+  end
+
   # Get the first textfield that matches text.
   # @param text [String] the text that the tag must match
   # @return [Text]
   def s_text_exact text
     find_ele_by_text :text, text
+  end
+
+  # Get all static textfields that matches text.
+  # @param text [String] the text that the tag must match
+  # @return [Array<Text>]
+  def s_texts_exact text
+    find_eles_by_text :text, text
   end
 end # module Appium::Common
