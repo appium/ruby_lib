@@ -3,10 +3,16 @@
 module Appium::Common
   # s_ prefix for static_text to avoid conflict with generic text methods.
 
-  # Get an array of text texts.
-  # @return [Array<String>]
-  def s_texts
-    find_eles_attr :text, :text
+  # Get an array of text texts if text is nil else
+  # Get all static textfields that include text.
+  # @param text [String] the text to find.
+  # @return [Array]
+  def s_texts text=nil
+    if text
+      find_eles_by_text_include :text, text
+    else
+      find_eles_attr :text, :text
+    end
   end
 
   # Get an array of text elements.
@@ -33,13 +39,6 @@ module Appium::Common
   def s_text text
     return ele_index :text, text if text.is_a? Numeric
     find_ele_by_text_include :text, text
-  end
-
-  # Get all static textfields that include text.
-  # @param text [String] the text to find.
-  # @return [Array<Text>]
-  def s_texts text
-    find_eles_by_text_include :text, text
   end
 
   # Get the first textfield that matches text.
