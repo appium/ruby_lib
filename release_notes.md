@@ -1,3 +1,12 @@
+#### v0.11.0 2013-09-24
+
+- [948074c](https://github.com/appium/ruby_lib/commit/948074c44917029fb27b08ed582c90d7f73a7cde) Release 0.11.0
+- [a0dfe2c](https://github.com/appium/ruby_lib/commit/a0dfe2c5a99f9354b1c0f4fa766619505d4c85ae) Add s_texts, s_texts_exact
+- [5b3bb88](https://github.com/appium/ruby_lib/commit/5b3bb886951b8efe9845d423a4da310742a52bcb) wait and wait_true now respect default_wait
+- [5c3083b](https://github.com/appium/ruby_lib/commit/5c3083b819dc3dca66ee07fcb6e7aeadcfbc1d2c) Update Android tag maps
+- [c2b7098](https://github.com/appium/ruby_lib/commit/c2b70980ba80cefe82f776ac7c0e567a7dc93884) Sort page_class on Android
+
+
 #### v0.10.0 2013-09-20
 
 - [6ab8180](https://github.com/appium/ruby_lib/commit/6ab8180ca332239793c0abc5ee3a31b0b081b6c4) Release 0.10.0
