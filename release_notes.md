@@ -1,3 +1,9 @@
+#### v0.11.1 2013-09-24
+
+- [0551d9a](https://github.com/appium/ruby_lib/commit/0551d9a4de2cb3d62efe63a87b01c15526202336) Release 0.11.1
+- [283040e](https://github.com/appium/ruby_lib/commit/283040e7227b7838124e835578d549fadc101cdc) Fix s_texts method overloading
+
+
 #### v0.11.0 2013-09-24
 
 - [948074c](https://github.com/appium/ruby_lib/commit/948074c44917029fb27b08ed582c90d7f73a7cde) Release 0.11.0
