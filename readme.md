@@ -52,6 +52,19 @@ Appium::Driver.new(apk).start_driver
 Appium.promote_appium_methods Object
 ```
 
+```ruby
+# Example of automating Settings preinstalled app on Android
+# Find these values using arc then type current_app
+apk = { 
+        device: :android
+        app_path: '',
+        app_package: 'com.android.settings',
+        app_activity: '.Settings',
+        app_wait_activity: '.Settings'
+      }
+Appium::Driver.new(apk).start_driver
+```
+
 #### iOS env vars
 
 - `APP_PATH` Path to the .app folder
