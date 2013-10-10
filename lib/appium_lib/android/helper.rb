@@ -329,6 +329,10 @@ module Appium::Android
 
         keys = node.keys
         return if keys.empty?
+        if keys == %w(hierarchy)
+          run_internal.call node['hierarchy']
+          return
+        end
 
         n_content = '@content-desc'
         n_text = '@text'
@@ -336,11 +340,13 @@ module Appium::Android
         n_resource = '@resource-id'
         n_node = 'node'
 
+        # Store the object if it has a content description, text, or resource id.
+        # If it only has a class, then don't save it.
         obj = {}
         obj.merge!( { desc: node[n_content] } ) if keys.include?(n_content) && !node[n_content].empty?
         obj.merge!( { text: node[n_text] } ) if keys.include?(n_text) && !node[n_text].empty?
+        obj.merge!( { resource_id: node[n_resource] } ) if keys.include?(n_resource) && !node[n_resource].empty?
         obj.merge!( { class: node[n_class] } ) if keys.include?(n_class) && !obj.empty?
-        obj.merge!( { resource_id: node[n_resource] } ) if keys.include?(n_resource) && !obj.empty?
 
         r.push obj if !obj.empty?
         run_internal.call node[n_node] if keys.include?(n_node)
@@ -371,7 +377,7 @@ module Appium::Android
         out += "  name: #{e_desc}\n" unless e_desc.nil?
       end
 
-      out += "  resource_id: #{e_resource_id}\n" unless e_resource_id.nil?
+      out += "  resource_id: #{e_resource_id}\n" unless e_resource_id.nil? || e_resource_id.empty?
 
       # there may be many ids with the same value.
       # output all exact matches.
