@@ -1,3 +1,13 @@
+#### v0.12.0 2013-11-07
+
+- [c92bd37](https://github.com/appium/ruby_lib/commit/c92bd3710be09731aa8ba4547a3e19af9eeaceab) Release 0.12.0
+- [f1b7633](https://github.com/appium/ruby_lib/commit/f1b7633e5dcfcd6d0d21f003ce0d98de1d093a13) Add s_texts_names. Fix alert_dismiss_text and alert_accept_text for iOS 7
+- [6f2d698](https://github.com/appium/ruby_lib/commit/6f2d6981b1f12443c4079dba455b16d1f331f903) Fix page on iOS 7
+- [70dbac3](https://github.com/appium/ruby_lib/commit/70dbac321688dfbec1d5f0a8efe6a7282678b88b) set_wait and no_wait now update @default_wait
+- [1f31754](https://github.com/appium/ruby_lib/commit/1f31754386dfd282e1143e3386ba18b1c656bb9d) Restore readme
+- [1e7a4c3](https://github.com/appium/ruby_lib/commit/1e7a4c36d1ea0df0ed87a2decbf8793406673774) Update Android page to always output resource-ids
+
+
 #### v0.11.1 2013-09-24
 
 - [0551d9a](https://github.com/appium/ruby_lib/commit/0551d9a4de2cb3d62efe63a87b01c15526202336) Release 0.11.1
