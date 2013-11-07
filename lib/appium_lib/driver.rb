@@ -495,15 +495,17 @@ module Appium
       @driver
     end
 
-    # Set implicit wait to zero.
+    # Set implicit wait and default_wait to zero.
     def no_wait
+      @default_wait = 0
       @driver.manage.timeouts.implicit_wait = 0
     end
 
-    # Set implicit wait to timeout, defaults to 30.
+    # Set implicit wait and default_wait to timeout, defaults to 30.
     # @param timeout [Integer] the timeout in seconds
     # @return [void]
     def set_wait timeout=@default_wait
+      @default_wait = timeout
       @driver.manage.timeouts.implicit_wait = timeout
     end
 
