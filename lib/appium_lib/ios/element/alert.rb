@@ -34,13 +34,29 @@ module Appium::Ios
   end
 
   # Get the text of the alert's accept button.
-  # The last button is considered "accept."
+  # The last button is considered "accept." on iOS 6
+  # The first button is considered "accept." on iOS 7
   # @return [String]
   def alert_accept_text
-    a = @driver.find_element(:tag_name, :alert)
-    return if a.nil?
-    b = a.find_elements(:tag_name, :button)
-    b.last.text if b && b.size >= 1
+    old_wait = default_wait
+    set_wait 0
+    target_text = ''
+
+    a = ignore { @driver.find_element(:tag_name, :alert) }
+
+    begin
+      if a.nil? # either no alert or on iOS 7
+        b = xpaths 'actionsheet/button'
+        target_text = b.first.text if b && b.size >= 1
+      else # iOS 6 alert found
+        b = a.find_elements(:tag_name, :button)
+        target_text = b.last.text if b && b.size >= 1
+      end
+    rescue
+    ensure
+      set_wait old_wait
+      return target_text
+    end
   end
 
   # Dismiss the alert.
@@ -52,12 +68,28 @@ module Appium::Ios
   end
 
   # Get the text of the alert's dismiss button.
-  # The first button is considered "dismiss."
+  # The first button is considered "dismiss." on iOS 6
+  # The last button is considered "dismiss." on iOS 7
   # @return [String]
   def alert_dismiss_text
-    a = @driver.find_element(:tag_name, :alert)
-    return if a.nil?
-    b = a.find_elements(:tag_name, :button)
-    b.first.text if b && b.size >= 1
+    old_wait = default_wait
+    set_wait 0
+    target_text = ''
+
+    a = ignore { @driver.find_element(:tag_name, :alert) }
+
+    begin
+      if a.nil? # either no alert or on iOS 7
+        b = xpaths 'actionsheet/button'
+        target_text = b.last.text if b && b.size >= 1
+      else # iOS 6 alert found
+        b = a.find_elements(:tag_name, :button)
+        target_text = b.first.text if b && b.size >= 1
+      end
+    rescue
+    ensure
+      set_wait old_wait
+      return target_text
+    end
   end
 end # module Appium::Ios

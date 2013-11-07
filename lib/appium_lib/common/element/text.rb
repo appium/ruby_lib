@@ -15,6 +15,10 @@ module Appium::Common
     end
   end
 
+  def s_texts_names
+    find_eles_attr :text, :name
+  end
+
   # Get an array of text elements.
   # @return [Array<Text>]
   def e_s_texts
