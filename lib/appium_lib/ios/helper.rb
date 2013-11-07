@@ -74,7 +74,7 @@ module Appium::Ios
     r.uniq.each do |ele|
       res.push "#{r.count(ele)}x #{ele}\n"
     end
-    count_sort  = ->(one,two) { two.match(/(\d+)x/)[1].to_i <=> one.match(/(\d+)x/)[1].to_i }
+    count_sort = ->(one, two) { two.match(/(\d+)x/)[1].to_i <=> one.match(/(\d+)x/)[1].to_i }
     res.sort(&count_sort).join ''
   end
 
@@ -151,8 +151,15 @@ module Appium::Ios
 
   # Prints a string of interesting elements to the console.
   # @return [void]
-  def page window_number = 0
-    get_page source_window window_number || 0
+  def page window_number = -1
+    if window_number == -1
+      # if the 0th window has no children, find the next window that does.
+      target_window = source_window 0
+      target_window = source_window 1 if target_window['children'].empty?
+      get_page target_window
+    else
+      get_page source_window window_number || 0
+    end
     nil
   end
 
