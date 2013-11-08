@@ -15,6 +15,7 @@
 - [mechanic names of elements](https://github.com/jaykz52/mechanic/blob/8c490e1d225f384847e47ffdafb47cc2248bb96c/src/mechanic-core.js#L28)
 - [All methods supported by Appium](https://github.com/appium/appium/wiki/JSON-Wire-Protocol:-Supported-Methods)
 - [Appium's mobile gesture docs](https://github.com/appium/appium/wiki/Automating-mobile-gestures)
+- [MiniTest Expectations](http://ruby-doc.org/stdlib-2.0.0/libdoc/minitest/spec/rdoc/MiniTest/Expectations.html)
 
 --
 
