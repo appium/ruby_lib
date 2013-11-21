@@ -375,7 +375,8 @@ module Appium
         name: @app_name || 'Ruby Console Android Appium',
         :'app-package' => @app_package,
         :'app-activity' => @app_activity,
-        :'app-wait-activity' => @app_wait_activity || @app_activity
+        :'app-wait-activity' => @app_wait_activity || @app_activity,
+        fastClear: false # use adb uninstall/pm install not pm clear
       }
     end
 
