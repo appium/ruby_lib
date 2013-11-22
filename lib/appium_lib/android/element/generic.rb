@@ -98,7 +98,13 @@ the first element that matches.
   # @return [Element] the first matching element
   def name_exact name
     # exact description
-    mobile :find, [ [ [5, name] ] ]
+    result = mobile :find, [ [ [5, name] ] ]
+
+    if result.length > 0
+      result.first
+    else
+      Appium::Common.raise_no_element_error
+    end
   end
 
   # Return all elements matching name.

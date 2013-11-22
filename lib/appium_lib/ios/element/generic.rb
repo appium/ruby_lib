@@ -120,7 +120,13 @@ module Appium::Ios
 
   def name_exact name
     js = all_ele_js "name == '#{name}'"
-    execute_script js
+    result = execute_script js
+
+    if result.length > 0
+      result.first
+    else
+      Appium::Common.raise_no_element_error
+    end
   end
 
   # Return all elements matching name.
