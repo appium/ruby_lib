@@ -47,7 +47,7 @@ module Appium::Ios
   # Password character returned from value of UIASecureTextField
   # @param length [Integer] the length of the password to generate
   # @return [String] the returned string is of size length
-  def password length=1
+  def ios_password length=1
     '•' * length
   end
 
