@@ -1,3 +1,17 @@
+#### v0.13.0 2013-11-22
+
+- [647cb94](https://github.com/appium/ruby_lib/commit/647cb942f344c635e067f2ae563f4fae12685148) Release 0.13.0
+- [a235a2c](https://github.com/appium/ruby_lib/commit/a235a2c70d2c7dc1934c9fb403fb95cc3ae56e04) Update name_exact
+- [f1d2701](https://github.com/appium/ruby_lib/commit/f1d270120ae248beb6746a0149ebcbe4e34ebcca) names on Android will return the text values when no arg is passed
+- [7ac38c9](https://github.com/appium/ruby_lib/commit/7ac38c97b99178f6ae0bf8f7b5474a0cd3379e87) Fix return value of name_exact
+- [e6da4aa](https://github.com/appium/ruby_lib/commit/e6da4aa4937bfdc6f094f7895ecf172f8b96f32a) Add textfield_named for iOS
+- [789fc52](https://github.com/appium/ruby_lib/commit/789fc5276ad000dafd5a400f3d9aa8cfcd37e17d) Add ios_version method
+- [5447f4c](https://github.com/appium/ruby_lib/commit/5447f4cf3645459ddb4335b4a242b7639fc860f8) Rename password to ios_password
+- [a5b85de](https://github.com/appium/ruby_lib/commit/a5b85de11e413e301f94d41689658b01342bb1c8) Add scroll_to_exact for Android & more
+- [cc7e778](https://github.com/appium/ruby_lib/commit/cc7e778fd1532e5e15ea9933a300189ce8dc9e8a) Default to fastClear: false
+- [f54f145](https://github.com/appium/ruby_lib/commit/f54f14551e04517c71d9177fc0bd72797cd77781) Add link to minitest expectations
+
+
 #### v0.12.0 2013-11-07
 
 - [c92bd37](https://github.com/appium/ruby_lib/commit/c92bd3710be09731aa8ba4547a3e19af9eeaceab) Release 0.12.0
