@@ -112,10 +112,15 @@ the first element that matches.
   # on iOS name is the accessibility label or the text.
   # @param name [String] the name to search for
   # @return [Array<Element>] all matching elements
-  def names name
-    args = 'all',
-           [ [7, name] ]
-    mobile :find, args
+  def names name=''
+    if name.nil? || name.empty?
+      args = 'all', [ [7, ''], [100] ]
+      mobile :find, args
+    else
+      args = 'all',
+          [ [7, name] ]
+      mobile :find, args
+    end
   end
 
   # Scroll to an element containing target text or description.
