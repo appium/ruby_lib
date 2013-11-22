@@ -1,3 +1,13 @@
+#### v0.14.0 2013-11-22
+
+- [e7ed56b](https://github.com/appium/ruby_lib/commit/e7ed56b6304d7c9f6a24384915def1a3bc732c4e) Release 0.14.0
+- [eea5ef1](https://github.com/appium/ruby_lib/commit/eea5ef19bd7d52aac24e55e76544980b8c144a84) set_wait remembers the second to last wait
+- [7ef3406](https://github.com/appium/ruby_lib/commit/7ef34065982f4832584b12174fd491d5e1919c9b) Release 0.13.0
+- [e1632bc](https://github.com/appium/ruby_lib/commit/e1632bc88116996a5ed3983a0a9f3ec864d229d9) Release 0.13.0
+- [87c5e12](https://github.com/appium/ruby_lib/commit/87c5e120c51e3344241ca48ccb4ba4990dc76cbd) Release 0.13.0
+- [647cb94](https://github.com/appium/ruby_lib/commit/647cb942f344c635e067f2ae563f4fae12685148) Release 0.13.0
+
+
 #### v0.13.0 2013-11-22
 
 - [e1632bc](https://github.com/appium/ruby_lib/commit/e1632bc88116996a5ed3983a0a9f3ec864d229d9) Release 0.13.0
