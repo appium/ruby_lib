@@ -122,6 +122,8 @@ module Appium::Ios
     js = all_ele_js "name == '#{name}'"
     result = execute_script js
 
+    return result if result.kind_of? Selenium::WebDriver::Element
+
     if result.length > 0
       result.first
     else

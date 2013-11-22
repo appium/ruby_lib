@@ -100,6 +100,8 @@ the first element that matches.
     # exact description
     result = mobile :find, [ [ [5, name] ] ]
 
+    return result if result.kind_of? Selenium::WebDriver::Element
+
     if result.length > 0
       result.first
     else
