@@ -64,4 +64,14 @@ module Appium::Ios
   def textfield_exact text
     xpath "textfield[@text='#{text}']"
   end
+
+  # Get the first textfield that exactly matches name
+  # @return [Element]
+  def textfield_named target_name
+    wait do
+      target = e_textfields.detect { |e| e.name == target_name }
+      raise "Textfield named #{target_name} not found" unless target
+      target
+    end
+  end
 end # module Appium::Ios

@@ -193,6 +193,8 @@ module Appium::Ios
     find_element :id, id
   end
 
+  # Return the iOS version as an array of integers
+  # @return [Array<Integer>]
   def ios_version
     ios_version = execute_script 'UIATarget.localTarget().systemVersion()'
     ios_version.split('.').map { |e| e.to_i }
