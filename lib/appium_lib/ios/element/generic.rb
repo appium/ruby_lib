@@ -118,6 +118,11 @@ module Appium::Ios
     mobile :findElementNameContains, name: name
   end
 
+  def name_exact name
+    js = all_ele_js "name == '#{name}'"
+    execute_script js
+  end
+
   # Return all elements matching name.
   # on Android name is content description
   # on iOS name is the accessibility label or the text.

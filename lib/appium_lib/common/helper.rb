@@ -227,6 +227,14 @@ module Appium::Common
     find_element :tag_name, tag_name
   end
 
+  # Returns all elements matching tag_name
+  #
+  # @param tag_name [String] the tag_name to search for
+  # @return [Element]
+  def tags tag_name
+    find_elements :tag_name, tag_name
+  end
+
   # Converts pixel values to window relative values
   #
   # ```ruby

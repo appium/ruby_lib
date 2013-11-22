@@ -91,6 +91,16 @@ the first element that matches.
     mobile :find, [ [ [7, name] ] ]
   end
 
+  # Return the first element exactly matching name.
+  # on Android name is content description
+  # on iOS name is the accessibility label or the text.
+  # @param name [String] the name to search for
+  # @return [Element] the first matching element
+  def name_exact name
+    # exact description
+    mobile :find, [ [ [5, name] ] ]
+  end
+
   # Return all elements matching name.
   # on Android name is content description
   # on iOS name is the accessibility label or the text.
@@ -111,6 +121,19 @@ the first element that matches.
         [ [3, text] ],
         # descriptionContains(text)
         [ [7, text] ]
+
+    mobile :find, args
+  end
+
+  # Scroll to an element with the exact target text or description.
+  # @param text [String] the text to search for in the text value and content description
+  # @return [Element] the element scrolled to
+  def scroll_to_exact text
+    args = 'scroll',
+        # text(text)
+        [ [1, text] ],
+        # description(text)
+        [ [5, text] ]
 
     mobile :find, args
   end
