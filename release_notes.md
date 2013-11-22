@@ -1,5 +1,7 @@
 #### v0.13.0 2013-11-22
 
+- [e1632bc](https://github.com/appium/ruby_lib/commit/e1632bc88116996a5ed3983a0a9f3ec864d229d9) Release 0.13.0
+- [87c5e12](https://github.com/appium/ruby_lib/commit/87c5e120c51e3344241ca48ccb4ba4990dc76cbd) Release 0.13.0
 - [647cb94](https://github.com/appium/ruby_lib/commit/647cb942f344c635e067f2ae563f4fae12685148) Release 0.13.0
 - [a235a2c](https://github.com/appium/ruby_lib/commit/a235a2c70d2c7dc1934c9fb403fb95cc3ae56e04) Update name_exact
 - [f1d2701](https://github.com/appium/ruby_lib/commit/f1d270120ae248beb6746a0149ebcbe4e34ebcca) names on Android will return the text values when no arg is passed
