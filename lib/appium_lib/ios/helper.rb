@@ -192,4 +192,9 @@ module Appium::Ios
     raise "Invalid id `#{id}`" unless @strings_xml[id]
     find_element :id, id
   end
+
+  def ios_version
+    ios_version = execute_script 'UIATarget.localTarget().systemVersion()'
+    ios_version.split('.').map { |e| e.to_i }
+  end
 end # module Appium::Ios
