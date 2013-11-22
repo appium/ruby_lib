@@ -260,6 +260,7 @@ module Appium
       @export_session = opts.fetch :export_session, false
 
       @default_wait = opts.fetch :wait, 30
+      @last_waits = [@default_wait]
 
       # Path to the .apk, .app or .app.zip.
       # The path can be local or remote for Sauce.
@@ -498,15 +499,36 @@ module Appium
 
     # Set implicit wait and default_wait to zero.
     def no_wait
+      @last_waits = [@default_wait, 0]
       @default_wait = 0
       @driver.manage.timeouts.implicit_wait = 0
     end
 
     # Set implicit wait and default_wait to timeout, defaults to 30.
+    # if set_wait is called without a param then the second to last
+    # wait will be used.
+    #
+    # ```ruby`
+    # set_wait 2
+    # set_wait 3
+    # set_wait # 2
+    #
+    # ````
+    #
     # @param timeout [Integer] the timeout in seconds
     # @return [void]
-    def set_wait timeout=@default_wait
-      @default_wait = timeout
+    def set_wait timeout=nil
+      if timeout.nil?
+        # puts "timeout = @default_wait = @last_wait"
+        # puts "timeout = @default_wait = #{@last_waits}"
+        timeout = @default_wait = @last_waits.first
+      else
+        @default_wait = timeout
+        # puts "last waits before: #{@last_waits}"
+        @last_waits = [@last_waits.last, @default_wait]
+        # puts "last waits after: #{@last_waits}"
+      end
+
       @driver.manage.timeouts.implicit_wait = timeout
     end
 
