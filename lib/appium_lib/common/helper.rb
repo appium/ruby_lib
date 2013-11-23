@@ -39,7 +39,7 @@ module Appium::Common
       max_wait ||= 30
     end
 
-    # Rescue Timeout::Error: execution expired
+    max_wait = 1 if max_wait <= 0
     result = nil
     timeout max_wait do
       until (result = begin; block.call || true; rescue; end)
@@ -69,7 +69,7 @@ module Appium::Common
       max_wait ||= 30
     end
 
-    # Rescue Timeout::Error: execution expired
+    max_wait = 1 if max_wait <= 0
     result = nil
     timeout max_wait do
       until (result = begin; block.call; rescue; end)
