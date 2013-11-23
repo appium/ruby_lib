@@ -552,8 +552,10 @@ module Appium
     # @param search_block [Block] the block to call
     # @return [Boolean]
     def exists pre_check=0, post_check=@default_wait, &search_block
-      set_wait pre_check # set wait to zero
-
+      # do not uset set_wait here.
+      # it will cause problems with other methods reading the default_wait of 0
+      # which then gets converted to a 1 second wait.
+      @driver.manage.timeouts.implicit_wait = pre_check
       # the element exists unless an error is raised.
       exists = true
 
@@ -564,7 +566,7 @@ module Appium
       end
 
       # restore wait
-      set_wait post_check if post_check != pre_check
+      @driver.manage.timeouts.implicit_wait = post_check if post_check != pre_check
 
       exists
     end
