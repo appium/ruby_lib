@@ -1,3 +1,11 @@
+#### v0.15.0 2013-11-25
+
+- [c27ac6f](https://github.com/appium/ruby_lib/commit/c27ac6fc37cb0c1b52aa2b15af480d17745adcf8) Release 0.15.0
+- [77a7736](https://github.com/appium/ruby_lib/commit/77a7736c3589db6ba2f029b97beae3e0d383cee9) wait and wait_true no longer use default_wait
+- [18a4b94](https://github.com/appium/ruby_lib/commit/18a4b9472be56b533d01c9b2758d365b3c3129fe) Fix exists
+- [dd885bf](https://github.com/appium/ruby_lib/commit/dd885bffc04e6306b6b70162e58e7149280bee0b) timeout(0) waits forever so default to 1 as the min wait
+
+
 #### v0.14.0 2013-11-22
 
 - [e7ed56b](https://github.com/appium/ruby_lib/commit/e7ed56b6304d7c9f6a24384915def1a3bc732c4e) Release 0.14.0
