@@ -30,15 +30,7 @@ module Appium::Common
   # @param interval [Float] the time in seconds to wait after calling the block
   # @param block [Block] the block to call
   # @return [Object] the result of block.call
-  def wait max_wait=-1, interval=0.5, &block
-    if max_wait == -1
-      max_wait = begin
-        $driver.default_wait
-        rescue
-      end
-      max_wait ||= 30
-    end
-
+  def wait max_wait=30, interval=0.5, &block
     max_wait = 1 if max_wait <= 0
     result = nil
     timeout max_wait do
@@ -60,15 +52,7 @@ module Appium::Common
   # @param interval [Float] the time in seconds to wait after calling the block
   # @param block [Block] the block to call
   # @return [Object] the result of block.call
-  def wait_true max_wait=-1, interval=0.5, &block
-    if max_wait == -1
-      max_wait = begin
-        $driver.default_wait
-        rescue
-      end
-      max_wait ||= 30
-    end
-
+  def wait_true max_wait=30, interval=0.5, &block
     max_wait = 1 if max_wait <= 0
     result = nil
     timeout max_wait do
