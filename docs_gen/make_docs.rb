@@ -63,6 +63,8 @@ def run out_file, globs
       file.write mobj_to_md entry
     end
   end
+
+  raise 'Empty file generated' if File.size(out_file) <= 0
 end
 
 def globs paths
