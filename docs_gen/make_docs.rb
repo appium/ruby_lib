@@ -59,6 +59,10 @@ def run out_file, globs
   puts "Writing: #{out_file}"
   YARD::Parser::SourceParser.parse globs
   File.open(out_file, 'w') do | file |
+    entries = YARD::Registry.entries
+    entries_length = entries.length
+    puts "Processing: #{entries_length} entries"
+    raise 'No entries to process' if entries_length <= 0
     YARD::Registry.entries.each do | entry |
       file.write mobj_to_md entry
     end
@@ -71,7 +75,7 @@ def globs paths
   # Convert single string to array for map
   paths = [ paths ] unless paths.kind_of? Array
   # Adjust path based on system
-  paths.map! { |path| "#{ENV['HOME']}/Desktop/appium/ruby_lib#{path}" }
+  paths.map! { |path| "#{Dir.pwd}#{path}" }
 end
 
 common_globs = '/lib/appium_lib/*.rb', '/lib/appium_lib/common/**/*.rb'
