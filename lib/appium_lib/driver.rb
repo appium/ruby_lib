@@ -156,7 +156,7 @@ module Appium
     main_module.constants.each do |sub_module|
       #noinspection RubyResolve
       $driver.public_methods(false).each do |m|
-        const = Woven.const_get(sub_module)
+        const = main_module.const_get(sub_module)
         const.send(:define_singleton_method, m) do |*args, &block|
           begin
             super(*args, &block) # promote.rb
