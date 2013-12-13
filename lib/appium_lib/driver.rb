@@ -385,8 +385,8 @@ module Appium
     # WebDriver capabilities. Must be valid for Sauce to work.
     def ios_capabilities
       {
-        platform: 'Mac 10.8',
-        version: '6.1',
+        platform: 'OS X 10.9',
+        version: '7',
         device: @device_cap || 'iPhone Simulator',
         name: @app_name || 'Ruby Console iOS Appium'
       }
