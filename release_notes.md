@@ -1,3 +1,13 @@
+#### v0.15.1 2013-12-13
+
+- [8340d99](https://github.com/appium/ruby_lib/commit/8340d993185ec22f02ca4ce3a3d24e65f367f3e3) Release 0.15.1
+- [ee39131](https://github.com/appium/ruby_lib/commit/ee391317b38f9dc7a0c13d148746401545a1f21e) Default to OS X 10.9 & iOS 7 on Sauce
+- [9627036](https://github.com/appium/ruby_lib/commit/962703617a3050dddb0be9f6ec757ca4b5070ff0) Fix promote_singleton_appium_methods
+- [81ce5d0](https://github.com/appium/ruby_lib/commit/81ce5d063b927d785cad3111b1ec7c50def6bfca) Fix docs
+- [fe60570](https://github.com/appium/ruby_lib/commit/fe6057045fd4d9ee1eb77ec57108755b4d445592) Error if we're generating an empty file
+- [0162656](https://github.com/appium/ruby_lib/commit/0162656e90e7db9f33c84fe1273ec96d8efc745f) Prevent duplicate tags
+
+
 #### v0.15.0 2013-11-25
 
 - [c27ac6f](https://github.com/appium/ruby_lib/commit/c27ac6fc37cb0c1b52aa2b15af480d17745adcf8) Release 0.15.0
