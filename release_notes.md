@@ -1,3 +1,9 @@
+#### v0.15.2 2013-12-23
+
+- [35b84fd](https://github.com/appium/ruby_lib/commit/35b84fd4a0dcf37fe136451c9bcfa936e1017023) Release 0.15.2
+- [23504ea](https://github.com/appium/ruby_lib/commit/23504ea17c483650342832a204acac542a77b48b) Update selenium-webdriver for driver.manage.logs support
+
+
 #### v0.15.1 2013-12-13
 
 - [8340d99](https://github.com/appium/ruby_lib/commit/8340d993185ec22f02ca4ce3a3d24e65f367f3e3) Release 0.15.1
