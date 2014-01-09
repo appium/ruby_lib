@@ -1,3 +1,9 @@
+#### v0.16.0 2014-01-09
+
+- [b9264f6](https://github.com/appium/ruby_lib/commit/b9264f66b9dd04eb5221c3a4c4ea17c4eb9ef8aa) Release 0.16.0
+- [18466ea](https://github.com/appium/ruby_lib/commit/18466eae986647b27e3dbb041c591ce2dbc972a2) Hide invisible elements in iOS page output
+
+
 #### v0.15.2 2013-12-23
 
 - [35b84fd](https://github.com/appium/ruby_lib/commit/35b84fd4a0dcf37fe136451c9bcfa936e1017023) Release 0.15.2
