@@ -6,6 +6,12 @@ module Appium::Ios
   # will trigger only when invoked.
   def patch_webdriver_element
     Selenium::WebDriver::Element.class_eval do
+      # Enable access to iOS accessibility label
+      # accessiblity identifier is supported as 'name'
+      def label
+        self.attribute('label')
+      end
+
       # Cross platform way of entering text into a textfield
       def type text
         # enter text then tap window to hide the keyboard.

@@ -100,15 +100,22 @@ module Appium::Ios
 
     # @private
     def fix_space s
+      # if s is an int, we can't call .empty
+      return nil if s.nil? || (s.respond_to?(:empty) && s.empty?)
       # ints don't respond to force encoding
-      return s unless s.respond_to? :force_encoding
+      # ensure we're converting to a string
+      unless s.respond_to? :force_encoding
+        s_s = s.to_s
+        return s_s.empty? ? nil : s_s
+      end
       # char code 160 (name, label) vs 32 (value) will break comparison.
       # convert string to binary and remove 160.
       # \xC2\xA0
-      s.force_encoding('binary').gsub("\xC2\xA0".force_encoding('binary'), ' ') if s
+      s = s.force_encoding('binary').gsub("\xC2\xA0".force_encoding('binary'), ' ') if s
+      s.empty? ? nil : s
     end
 
-    unless empty(element)
+    unless empty(element) || element['visible'] == false
       puts "#{element['type']}"
       name = fix_space element['name']
       label = fix_space element['label']
