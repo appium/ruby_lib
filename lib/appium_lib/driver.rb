@@ -129,27 +129,29 @@ module Appium
   require 'selenium-webdriver'
 
   # common
-  require 'common/helper'
-  require 'common/patch'
-  require 'common/version'
-  require 'common/element/button'
-  require 'common/element/text'
-  require 'common/element/window'
+  require_relative 'common/helper'
+  require_relative 'common/patch'
+  require_relative 'common/version'
+  require_relative 'common/element/button'
+  require_relative 'common/element/text'
+  require_relative 'common/element/window'
 
   # ios
-  require 'ios/helper'
-  require 'ios/patch'
-  require 'ios/element/alert'
-  require 'ios/element/generic'
-  require 'ios/element/textfield'
+  require_relative 'ios/helper'
+  require_relative 'ios/patch'
+  require_relative 'ios/element/alert'
+  require_relative 'ios/element/generic'
+  require_relative 'ios/element/textfield'
 
   # android
-  require 'android/dynamic'
-  require 'android/helper'
-  require 'android/patch'
-  require 'android/element/alert'
-  require 'android/element/generic'
-  require 'android/element/textfield'
+  require_relative 'android/dynamic'
+  require_relative 'android/helper'
+  require_relative 'android/patch'
+  require_relative 'android/element/alert'
+  require_relative 'android/element/generic'
+  require_relative 'android/element/textfield'
+  require_relative 'android/webview/javascript'
+  require_relative 'android/webview/webview'
 
   def self.promote_singleton_appium_methods main_module
     raise 'Driver is nil' if $driver.nil?

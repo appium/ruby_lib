@@ -30,5 +30,5 @@ module Appium
 
   add_to_path __FILE__
 
-  require 'appium_lib/driver'
+  require_relative 'appium_lib/driver'
 end

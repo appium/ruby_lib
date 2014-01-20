@@ -28,10 +28,11 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'awesome_print', '~> 1.2.0'
   s.add_runtime_dependency 'json', '~> 1.8.1'
   s.add_runtime_dependency 'toml', '~> 0.0.4'
+  s.add_runtime_dependency 'posix-spawn', '~> 0.3.8'
+  s.add_runtime_dependency 'webkit_remote', '~> 0.4.1'
 
   s.add_development_dependency 'rake', '~> 10.0.4'
   s.add_development_dependency 'yard', '~> 0.8.7.3'
-  s.add_development_dependency 'posix-spawn', '~> 0.3.8'
 
   s.files = `git ls-files`.split "\n"
 end
