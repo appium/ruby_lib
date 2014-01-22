@@ -1,3 +1,13 @@
+#### v0.17.0 2014-01-22
+
+- [8571197](https://github.com/appium/ruby_lib/commit/8571197b04ea923db6e375bae808bf84dea52c98) Release 0.17.0
+- [1134b87](https://github.com/appium/ruby_lib/commit/1134b878791c0abb23d11250ad185c34708d54be) Fix fast clear. Fix #110
+- [f0bc0b5](https://github.com/appium/ruby_lib/commit/f0bc0b5229dc21f736ab17c533e1d073c3b44a3c) Update api_19_webview.md
+- [94657b4](https://github.com/appium/ruby_lib/commit/94657b45394bcd823955270529aee79b305383f3) Update api_19_webview.md
+- [3b93375](https://github.com/appium/ruby_lib/commit/3b933752f560af6cf7cf976e8f2511222d255068) Create api_19_webview.md
+- [9b838f4](https://github.com/appium/ruby_lib/commit/9b838f4dc280126e4468a177fa4dd83eb2417512) First attempt at webview automation for Android API 19
+
+
 #### v0.16.0 2014-01-09
 
 - [b9264f6](https://github.com/appium/ruby_lib/commit/b9264f66b9dd04eb5221c3a4c4ea17c4eb9ef8aa) Release 0.16.0
