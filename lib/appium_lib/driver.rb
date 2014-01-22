@@ -252,12 +252,16 @@ module Appium
       # quit last driver
       $driver.driver_quit if $driver
       opts = {} if opts.nil?
+      tmp_opts = {}
+
       # convert to downcased symbols
-      opts.each_pair { |k,v| opts[k.to_s.downcase.strip.intern] = v }
+      opts.each_pair { |k,v| tmp_opts[k.to_s.downcase.strip.intern] = v }
+      opts = tmp_opts
 
       @custom_url = opts.fetch :server_url, false
 
       @compress_xml = opts[:compress_xml] ? true : false
+      @fast_clear = opts[:fast_clear] ? true : false
 
       @export_session = opts.fetch :export_session, false
 
@@ -298,7 +302,7 @@ module Appium
 
       # :ios, :android, :selendroid
       @device = opts.fetch :device, ENV['DEVICE'] || :ios
-      @device = @device.intern # device must be a symbol
+      @device = @device.to_s.downcase.intern # device must be a symbol
 
       # load common methods
       extend Appium::Common
@@ -379,7 +383,7 @@ module Appium
         :'app-package' => @app_package,
         :'app-activity' => @app_activity,
         :'app-wait-activity' => @app_wait_activity || @app_activity,
-        fastClear: false # use adb uninstall/pm install not pm clear
+        fastClear: @fast_clear
       }
     end
 
