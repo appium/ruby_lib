@@ -41,7 +41,9 @@ webview.client.remote_eval js
 1. Load a webview. Exit the webview. From now on all webviews will have accessibility enabled.
 
 ```ruby
-first_textfield.type 'example@example.com'
-last_textfield.type 'example@example.com'
+textfield(1).type 'example@example.com'
+textfield(2).type 'password'
 name('sign in').click
+
+name("ok, i'll authorize it").click 
 ```
