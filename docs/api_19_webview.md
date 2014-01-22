@@ -38,9 +38,10 @@ webview.client.remote_eval js
 
 #### uiautomator accessibility
 
+1. Load a webview. Exit the webview. From now on all webviews will have accessibility enabled.
 
 ```ruby
-
-# todo: rewrite above using accessibility names
-
+first_textfield.type 'example@example.com'
+last_textfield.type 'example@example.com'
+name('sign in').click
 ```
