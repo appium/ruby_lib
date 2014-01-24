@@ -240,15 +240,17 @@ end
 
 at_exit do
   # selenium-webdriver (2.32.1) or better can use
-  # $driver.session_id
-  ID = $driver.send(:bridge).session_id
-  driver_quit
+  # $driver.driver.session_id
+  ID = $driver.driver.send(:bridge).session_id
+  
+  # end the test session. move on after 10 seconds.
+  ignore { wait(10) { $driver.x } }
 
   if !SAUCE_USERNAME.nil? && !SAUCE_ACCESS_KEY.nil?
     URL = "https://#{SAUCE_USERNAME}:#{SAUCE_ACCESS_KEY}@saucelabs.com/rest/v1/#{SAUCE_USERNAME}/jobs/#{ID}"
 
     # Keep trying until passed is set correctly. Give up after 30 seconds.
-    wait do
+    wait_true do
       response = RestClient.put URL, { 'passed' => $passed }.to_json, :content_type => :json, :accept => :json
       response = JSON.parse(response)
 
