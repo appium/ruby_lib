@@ -20,7 +20,6 @@ class AwesomePrint::Formatter
   end
 end
 
-
 # Load appium.txt (toml format) into system ENV
 # the basedir of this file + appium.txt is what's used
 # @param opts [Hash] file: '/path/to/appium.txt', verbose: true
@@ -298,11 +297,21 @@ module Appium
       #
       # Android is always Android or Selendroid so there's no
       # override required.
-      @device_cap = opts.fetch :device_cap, false
+      @device_cap = opts.fetch :device_cap, 'iPhone Simulator'
 
       # :ios, :android, :selendroid
       @device = opts.fetch :device, ENV['DEVICE'] || :ios
       @device = @device.to_s.downcase.intern # device must be a symbol
+
+      @version = opts[:version]
+      if @device == :android || @device == :selendroid
+        @version = '4.3' unless @version # default android to 4.3
+      else
+        @version = '7' unless @version # default ios to 7
+      end
+
+      @device_type = opts.fetch :device_type, 'tablet'
+      @device_orientation = opts.fetch :device_orientation, 'portrait'
 
       # load common methods
       extend Appium::Common
@@ -376,9 +385,11 @@ module Appium
     def android_capabilities
       {
         compressXml: @compress_xml,
-        platform: 'LINUX',
-        version: '4.2',
+        platform: 'Linux',
+        version: @version,
         device: @device == :android ? 'Android' : 'selendroid',
+        :'device-type' => @device_type,
+        :'device-orientation' => @device_orientation,
         name: @app_name || 'Ruby Console Android Appium',
         :'app-package' => @app_package,
         :'app-activity' => @app_activity,
@@ -392,9 +403,10 @@ module Appium
     def ios_capabilities
       {
         platform: 'OS X 10.9',
-        version: '7',
-        device: @device_cap || 'iPhone Simulator',
-        name: @app_name || 'Ruby Console iOS Appium'
+        version: @version,
+        device: @device_cap,
+        name: @app_name || 'Ruby Console iOS Appium',
+        :'device-orientation' => @device_orientation
       }
     end
 
