@@ -59,6 +59,7 @@ module Appium::Ios
   # @param text [String] the text to search for
   # @return [Element] the first matching element
   def find text
+    text = escape_single_quote text
     ele = nil
     # prefer value search. this may error with:
     # Can't use in/contains operator with collection 1
@@ -81,6 +82,7 @@ module Appium::Ios
   # @param text [String] the text to search for
   # @return [Array<Element>] all matching elements
   def finds text
+    text = escape_single_quote text
     eles = []
     # value contains may error
     js = all_ele_js "value contains[c] '#{text}'"
@@ -95,6 +97,7 @@ module Appium::Ios
   # @param text [String] the text to search for
   # @return [Element] the first matching element
   def text text
+    text = escape_single_quote text
     js = first_ele_js "value contains[c] '#{text}'"
     execute_script js
   end
@@ -103,6 +106,7 @@ module Appium::Ios
   # @param text [String] the text to search for
   # @return [Array<Element>] all matching elements
   def texts text
+    text = escape_single_quote text
     # XPath //* is not implemented on iOS
     # https://github.com/appium/appium/issues/430
     js = all_ele_js "value contains[c] '#{text}'"
@@ -115,10 +119,12 @@ module Appium::Ios
   # @param name [String] the name to search for
   # @return [Element] the first matching element
   def name name
+    name = escape_single_quote name
     mobile :findElementNameContains, name: name
   end
 
   def name_exact name
+    name = escape_single_quote name
     js = all_ele_js "name == '#{name}'"
     result = execute_script js
 
@@ -137,9 +143,14 @@ module Appium::Ios
   # @param name [String] the name to search for
   # @return [Array<Element>] all matching elements
   def names name
+    name = escape_single_quote name
     # :name is not consistent across iOS and Android so use custom JavaScript
     # https://github.com/appium/appium/issues/379
     js = all_ele_js "name contains[c] '#{name}' || label contains[c] '#{name}'"
     execute_script js
+  end
+
+  def escape_single_quote text_to_escape
+    text_to_escape.gsub("'", '\\' * 4 + "'")
   end
 end # module Appium::Ios
