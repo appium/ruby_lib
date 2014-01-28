@@ -401,7 +401,7 @@ module Appium::Android
   # Returns a string containing interesting elements.
   # @return [String]
   def get_inspect
-    @device == :selendroid ? get_selendroid_inspect : get_android_inspect
+    @device == 'Selendroid' ? get_selendroid_inspect : get_android_inspect
   end
 
   # Intended for use with console.

@@ -292,19 +292,24 @@ module Appium
 
       @port = opts.fetch :port, ENV['PORT'] || 4723
 
-      # device as used in device capabilities.
-      # iOS only.
+      # 'iPhone Simulator'
+      # 'iPad Simulator'
+      # 'Android'
+      # 'Selendroid'
       #
-      # Android is always Android or Selendroid so there's no
-      # override required.
-      @device_cap = opts.fetch :device_cap, 'iPhone Simulator'
-
       # :ios, :android, :selendroid
-      @device = opts.fetch :device, ENV['DEVICE'] || :ios
-      @device = @device.to_s.downcase.intern # device must be a symbol
+      @device = opts[:device]
+      raise 'Device must be set' unless @device
+
+      @device = 'Android' if @device.to_s == 'android'
+      @device = 'Selendroid' if @device.to_s == 'selendroid'
+      @device = 'iPhone Simulator' if @device.to_s == 'ios'
+
+      raise 'Device must be set iPhone Simulator, iPad Simulator, Android' unless @device &&
+          ['iPhone Simulator', 'iPad Simulator', 'Android', 'Selendroid'].include?(@device)
 
       @version = opts[:version]
-      if @device == :android || @device == :selendroid
+      if @device == 'Android' || @device == 'Selendroid'
         @version = '4.3' unless @version # default android to 4.3
       else
         @version = '7' unless @version # default ios to 7
@@ -315,7 +320,7 @@ module Appium
 
       # load common methods
       extend Appium::Common
-      if @device == :android
+      if @device == 'Android'
         raise 'APP_ACTIVITY must be set.' if @app_activity.nil?
 
         # load Android specific methods
@@ -387,7 +392,7 @@ module Appium
         compressXml: @compress_xml,
         platform: 'Linux',
         version: @version,
-        device: @device == :android ? 'Android' : 'selendroid',
+        device: @device,
         :'device-type' => @device_type,
         :'device-orientation' => @device_orientation,
         name: @app_name || 'Ruby Console Android Appium',
@@ -404,7 +409,7 @@ module Appium
       {
         platform: 'OS X 10.9',
         version: @version,
-        device: @device_cap,
+        device: @device,
         name: @app_name || 'Ruby Console iOS Appium',
         :'device-orientation' => @device_orientation
       }
@@ -412,7 +417,7 @@ module Appium
 
     # @private
     def capabilities
-      caps = @device == :ios ? ios_capabilities : android_capabilities
+      caps = ['iPhone Simulator', 'iPad Simulator'].include?(@device) ? ios_capabilities : android_capabilities
       caps[:app] = absolute_app_path unless @app_path.nil? || @app_path.empty?
       caps
     end
@@ -507,7 +512,7 @@ module Appium
       # Set timeout to a large number so that Appium doesn't quit
       # when no commands are entered after 60 seconds.
       # broken on selendroid: https://github.com/appium/appium/issues/513
-      mobile :setCommandTimeout, timeout: 9999 unless @device == :selendroid
+      mobile :setCommandTimeout, timeout: 9999 unless @device == 'Selendroid'
 
       # Set implicit wait by default unless we're using Pry.
       @driver.manage.timeouts.implicit_wait = @default_wait unless defined? Pry
