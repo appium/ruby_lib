@@ -1,3 +1,9 @@
+#### v0.18.1 2014-01-28
+
+- [d98aafc](https://github.com/appium/ruby_lib/commit/d98aafc1571c49d97f104ce5d275cf758f27e421) Release 0.18.1
+- [14bcd8f](https://github.com/appium/ruby_lib/commit/14bcd8fd50e6fc4f74c81d900c0c05a302d080b9) Fix device cap
+
+
 #### v0.18.0 2014-01-27
 
 - [e0ea2f2](https://github.com/appium/ruby_lib/commit/e0ea2f2d77875b9ffc88d8649b3652c39a1ab51a) Release 0.18.0
