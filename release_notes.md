@@ -1,3 +1,10 @@
+#### v0.18.0 2014-01-27
+
+- [e0ea2f2](https://github.com/appium/ruby_lib/commit/e0ea2f2d77875b9ffc88d8649b3652c39a1ab51a) Release 0.18.0
+- [c94bf57](https://github.com/appium/ruby_lib/commit/c94bf57dadf2049a3aace8ed35d978c1d4545be2) Update capabilities for Sauce
+- [2859c83](https://github.com/appium/ruby_lib/commit/2859c831916ef1541fe2a283c9afc6af55e43a25) Update session id example
+
+
 #### v0.17.0 2014-01-22
 
 - [8571197](https://github.com/appium/ruby_lib/commit/8571197b04ea923db6e375bae808bf84dea52c98) Release 0.17.0
