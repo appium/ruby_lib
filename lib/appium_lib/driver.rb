@@ -298,7 +298,7 @@ module Appium
       # 'Selendroid'
       #
       # :ios, :android, :selendroid
-      @device = opts[:device]
+      @device = opts.fetch :device, ENV['DEVICE']
       raise 'Device must be set' unless @device
 
       @device = 'Android' if @device.to_s == 'android'
