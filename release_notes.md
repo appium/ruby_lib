@@ -1,3 +1,9 @@
+#### v0.18.2 2014-01-28
+
+- [f7a2e26](https://github.com/appium/ruby_lib/commit/f7a2e26b623404b83b2bbd9065aa7b57ab0fd62d) Release 0.18.2
+- [b123321](https://github.com/appium/ruby_lib/commit/b12332186befb84b7ef6107a27db035ca2b65400) Check ENV['DEVICE'] when :device isn't set.
+
+
 #### v0.18.1 2014-01-28
 
 - [d98aafc](https://github.com/appium/ruby_lib/commit/d98aafc1571c49d97f104ce5d275cf758f27e421) Release 0.18.1
