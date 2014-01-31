@@ -116,6 +116,15 @@ module Appium::Ios
   # Return the first element matching name.
   # on Android name is content description
   # on iOS name is the accessibility label or the text.
+  # 
+  # ```ruby
+  # # find element with name or label containing example and access the name attribute.
+  # name('example').name 
+  #
+  # # find element with name or label containing example and access the label attribute.
+  # name('example').label 
+  # ```
+  #
   # @param name [String] the name to search for
   # @return [Element] the first matching element
   def name name
