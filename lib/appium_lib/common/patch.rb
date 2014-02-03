@@ -40,13 +40,6 @@ module Appium::Common
       self.attribute :name
     end
 
-    # Returns the type attribute
-    #
-    # Fixes Selenium::WebDriver::Error::UnknownError: Not yet implemented
-    def tag_name
-      self.attribute :type
-    end
-
     # For use with mobile tap.
     #
     # ```ruby
