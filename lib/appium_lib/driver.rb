@@ -434,6 +434,9 @@ module Appium
         return @app_path
       end
 
+      # if it starts with [A-Z]:\ then it's a windows absolute path
+      return @app_path if @app_path.match(/^[a-zA-Z]:\\/)
+
       # if it doesn't contain a slash then it's a bundle id
       return @app_path unless @app_path.match(/[\/\\]/)
 
