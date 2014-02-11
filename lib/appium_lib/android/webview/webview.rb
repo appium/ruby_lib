@@ -63,7 +63,7 @@ module Appium::Android::Webview
       raise 'Must provide package' unless package
       port = opts.fetch :port, 9000
 
-      unix_socket = pid_to_webview package_to_pid 'com.litl.Woven'
+      unix_socket = pid_to_webview package_to_pid package
       raise 'No webview found' unless unix_socket
       adb_cmd "adb forward tcp:#{port} localabstract:#{unix_socket}"
     end
