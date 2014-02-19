@@ -40,7 +40,7 @@ Appium::Driver.new(app).start_driver
 
 # Start Android driver
 apk = { 
-        device: :android
+        device: :android,
         app_path: '/path/to/the.apk',
         app_package: 'com.example.pkg',
         app_activity: '.act.Start',
@@ -56,7 +56,7 @@ Appium.promote_appium_methods Object
 # Example of automating Settings preinstalled app on Android
 # Find these values using arc then type current_app
 apk = { 
-        device: :android
+        device: :android,
         app_path: '',
         app_package: 'com.android.settings',
         app_activity: '.Settings',
