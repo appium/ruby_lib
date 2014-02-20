@@ -1,3 +1,19 @@
+#### v0.19.0 2014-02-20
+
+- [6fd332b](https://github.com/appium/ruby_lib/commit/6fd332b1715d7b8f4b3b3c99e7ca58e5d4d01b52) Release 0.19.0
+- [69f2058](https://github.com/appium/ruby_lib/commit/69f2058c3dffb60bb5040f920481da5fed571a6a) Merge pull request #119 from misttar/feature/appium_ruby_console_on_windows
+- [55ab536](https://github.com/appium/ruby_lib/commit/55ab536c8dfeafed43797675c82cc4c5d73d8454) Fix to enable appium ruby console (arc) on windows; Removed unnecessary ruby based absolute path conversion in load_appium_txt, as it is done later in Driver::initialize; Simplified absolute_app_path method for resolving windows paths;
+- [f529113](https://github.com/appium/ruby_lib/commit/f529113c3f54c351d668da9695b8a5a7e2377169) Merge pull request #118 from justingrammens/master
+- [297cdfc](https://github.com/appium/ruby_lib/commit/297cdfc8685c1752dbf9f6b2e07a9c4ac3f1ab87) Need to add the missing commas for the Android example in readme for it to work for me.
+- [d55a2f5](https://github.com/appium/ruby_lib/commit/d55a2f5beefb0b6e3068470769da64c8c47551ec) Fix webview
+- [da987f6](https://github.com/appium/ruby_lib/commit/da987f6b11b191ace34ea63764eb121c8ddae42e) Merge pull request #114 from misttar/app_path_on_windows
+- [488236e](https://github.com/appium/ruby_lib/commit/488236e8856e984f7d9285f33d7660d33fbd835d) Adding a small patch to fix loading the app with absolute windows paths;
+- [6e789d5](https://github.com/appium/ruby_lib/commit/6e789d54341979c412c9a6f3b956cf9b777c87ad) Fix tag_name
+- [af4517f](https://github.com/appium/ruby_lib/commit/af4517fa10a060e92c12bd49a93289ece709c0ac) Update MiniTest Expectations link
+- [8810bbe](https://github.com/appium/ruby_lib/commit/8810bbe640546f962325358d9ab763a0dc038057) Update name doc for iOS
+- [f08854a](https://github.com/appium/ruby_lib/commit/f08854a3cb498c12a00bdca8d0a3f9ffedf06bad) Escape single quotes for iOS JS selectors
+
+
 #### v0.18.2 2014-01-28
 
 - [f7a2e26](https://github.com/appium/ruby_lib/commit/f7a2e26b623404b83b2bbd9065aa7b57ab0fd62d) Release 0.18.2
