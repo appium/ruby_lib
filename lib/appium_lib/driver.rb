@@ -68,10 +68,6 @@ def load_appium_txt opts
            'APP_ACTIVITY', 'APP_WAIT_ACTIVITY',
            'DEVICE'
 
-    # Ensure app path is absolute
-    ENV['APP_PATH'] = File.expand_path ENV['APP_PATH'] if ENV['APP_PATH'] &&
-        !ENV['APP_PATH'].empty?
-
     # device is not case sensitive
     ENV['DEVICE'] = ENV['DEVICE'].strip.downcase if !ENV['DEVICE'].nil?
     if ! %w(ios android selendroid).include? ENV['DEVICE']
@@ -429,13 +425,10 @@ module Appium
       # Sauce storage API. http://saucelabs.com/docs/rest#storage
       return @app_path if @app_path.start_with? 'sauce-storage:'
       return @app_path if @app_path.match(/^http/) # public URL for Sauce
-      if @app_path.match(/^\//) # absolute file path
+      if @app_path.match(/^(\/|[a-zA-Z]:)/) # absolute file path
         raise "App doesn't exist. #{@app_path}" unless File.exist? @app_path
         return @app_path
       end
-
-      # if it starts with [A-Z]:\ then it's a windows absolute path
-      return @app_path if @app_path.match(/^[a-zA-Z]:\\/)
 
       # if it doesn't contain a slash then it's a bundle id
       return @app_path unless @app_path.match(/[\/\\]/)
