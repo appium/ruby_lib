@@ -68,6 +68,9 @@ def load_appium_txt opts
            'APP_ACTIVITY', 'APP_WAIT_ACTIVITY',
            'DEVICE'
 
+    # ensure app path is resolved correctly from the context of the .txt file
+    ENV['APP_PATH'] = Appium::Driver.absolute_app_path ENV['APP_PATH']
+
     # device is not case sensitive
     ENV['DEVICE'] = ENV['DEVICE'].strip.downcase if !ENV['DEVICE'].nil?
     if ! %w(ios android selendroid).include? ENV['DEVICE']
@@ -414,26 +417,29 @@ module Appium
     # @private
     def capabilities
       caps = ['iPhone Simulator', 'iPad Simulator'].include?(@device) ? ios_capabilities : android_capabilities
-      caps[:app] = absolute_app_path unless @app_path.nil? || @app_path.empty?
+      caps[:app] = self.class.absolute_app_path(@app_path) unless @app_path.nil? || @app_path.empty?
       caps
     end
 
     # Converts environment variable APP_PATH to an absolute path.
     # @return [String] APP_PATH as an absolute path
-    def absolute_app_path
-      raise 'APP_PATH not set!' if @app_path.nil? || @app_path.empty?
+    def self.absolute_app_path app_path
+      raise 'APP_PATH not set!' if app_path.nil? || app_path.empty?
       # Sauce storage API. http://saucelabs.com/docs/rest#storage
-      return @app_path if @app_path.start_with? 'sauce-storage:'
-      return @app_path if @app_path.match(/^http/) # public URL for Sauce
-      if @app_path.match(/^(\/|[a-zA-Z]:)/) # absolute file path
-        raise "App doesn't exist. #{@app_path}" unless File.exist? @app_path
-        return @app_path
+      return app_path if app_path.start_with? 'sauce-storage:'
+      return app_path if app_path.match(/^http/) # public URL for Sauce
+      if app_path.match(/^(\/|[a-zA-Z]:)/) # absolute file path
+        raise "App doesn't exist. #{app_path}" unless File.exist? app_path
+        return app_path
       end
 
       # if it doesn't contain a slash then it's a bundle id
-      return @app_path unless @app_path.match(/[\/\\]/)
+      return app_path unless app_path.match(/[\/\\]/)
 
-      file = File.join(File.dirname(__FILE__), @app_path)
+      # relative path that must be expanded.
+      # absolute_app_path is called from load_appium_txt
+      # and the txt file path is the base of the app path in that case.
+      file = File.expand_path app_path
       raise "App doesn't exist #{file}" unless File.exist? file
       file
     end
