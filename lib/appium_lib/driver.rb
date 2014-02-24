@@ -429,6 +429,7 @@ module Appium
       return app_path if app_path.start_with? 'sauce-storage:'
       return app_path if app_path.match(/^http/) # public URL for Sauce
       if app_path.match(/^(\/|[a-zA-Z]:)/) # absolute file path
+        app_path = File.expand_path app_path unless File.exist? app_path
         raise "App doesn't exist. #{app_path}" unless File.exist? app_path
         return app_path
       end
@@ -439,9 +440,9 @@ module Appium
       # relative path that must be expanded.
       # absolute_app_path is called from load_appium_txt
       # and the txt file path is the base of the app path in that case.
-      file = File.expand_path app_path
-      raise "App doesn't exist #{file}" unless File.exist? file
-      file
+      app_path = File.expand_path app_path
+      raise "App doesn't exist #{app_path}" unless File.exist? app_path
+      app_path
     end
 
     # Get the server url for sauce or local based on env vars.
