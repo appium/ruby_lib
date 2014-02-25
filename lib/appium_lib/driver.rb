@@ -283,6 +283,10 @@ module Appium
       # Android app waiting activity
       @app_wait_activity = opts.fetch :app_wait_activity, ENV['APP_WAIT_ACTIVITY']
 
+      @android_coverage = opts.fetch :android_coverage, ENV['ANDROID_COVERAGE']
+      # init to empty hash because it's merged later as an optional desired cap.
+      @android_coverage = @android_coverage ? { androidCoverage: @android_coverage} : {}
+
       # Sauce Username
       @sauce_username = opts.fetch :sauce_username, ENV['SAUCE_USERNAME']
 
@@ -399,7 +403,7 @@ module Appium
         :'app-activity' => @app_activity,
         :'app-wait-activity' => @app_wait_activity || @app_activity,
         fastClear: @fast_clear
-      }
+      }.merge(@android_coverage)
     end
 
     # @private
