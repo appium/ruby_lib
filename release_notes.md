@@ -1,3 +1,11 @@
+#### v0.19.1 2014-02-25
+
+- [efa2e3f](https://github.com/appium/ruby_lib/commit/efa2e3feb74319a19d1fe3ef49d5a7fe3a2eb59a) Release 0.19.1
+- [1aee2fc](https://github.com/appium/ruby_lib/commit/1aee2fcc5773cc92b1f83a80188f6cac50d2e206) Add android coverage cap
+- [ccb213f](https://github.com/appium/ruby_lib/commit/ccb213f3866672f2be7ea526e6deb1656d497e6e) Update path logic
+- [9772383](https://github.com/appium/ruby_lib/commit/97723833f1d888fa809d704801d98bdff8a3e2a4) Fix load_appium_txt relative path
+
+
 #### v0.19.0 2014-02-20
 
 - [6fd332b](https://github.com/appium/ruby_lib/commit/6fd332b1715d7b8f4b3b3c99e7ca58e5d4d01b52) Release 0.19.0
