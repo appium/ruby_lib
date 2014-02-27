@@ -49,10 +49,20 @@ module Appium::Common
     # https://github.com/appium/appium/wiki/Automating-mobile-gestures
     # @return [OpenStruct] the relative x, y in a struct. ex: { x: 0.50, y: 0.20 }
     def location_rel
-      xy = self.location
+      location = self.location
+      location_x = location.x.to_f
+      location_y = location.y.to_f
+
+      size = self.size
+      size_width = size.width.to_f
+      size_height = size.height.to_f
+
+      center_x = location_x + (size_width / 2.0)
+      center_y = location_y + (size_height / 2.0)
+
       w = $driver.window_size
-      OpenStruct.new( x: "#{xy.x.to_f} / #{w.width.to_f}",
-                      y: "#{xy.y.to_f} / #{w.height.to_f}" )
+      OpenStruct.new( x: "#{center_x} / #{w.width.to_f}",
+                      y: "#{center_y} / #{w.height.to_f}" )
     end
   end
 end # module Appium::Common
