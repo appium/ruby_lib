@@ -49,6 +49,8 @@ apk = {
 Appium::Driver.new(apk).start_driver
 
 # Define the methods on all objects.
+# Note that this can also be scoped to limit the potential for conflicts.
+# Example: Appium.promote_appium_methods ::Minitest::Spec
 Appium.promote_appium_methods Object
 ```
 
