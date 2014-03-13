@@ -324,8 +324,6 @@ module Appium
       # load common methods
       extend Appium::Common
       if @device == 'Android'
-        raise 'APP_ACTIVITY must be set.' if @app_activity.nil?
-
         # load Android specific methods
         extend Appium::Android
       else

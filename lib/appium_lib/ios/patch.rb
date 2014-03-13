@@ -30,13 +30,13 @@ Swiping inside the keyboard will not dismiss it.
           # setValue will work, however the keyboard will never display
           # because users are normally not allowed to type into it.
           $driver.wait_true(5) do
-            $driver.execute_script %(au.mainApp.keyboard().type() !== 'UIAElementNil')
+            $driver.execute_script %(au.mainApp().keyboard().type() !== 'UIAElementNil')
           end
 
           # dismiss keyboard
           js = <<-JS
-            if (au.mainApp.keyboard().type() !== "UIAElementNil") {
-              var startY = au.mainApp.keyboard().rect().origin.y - 10;
+            if (au.mainApp().keyboard().type() !== "UIAElementNil") {
+              var startY = au.mainApp().keyboard().rect().origin.y - 10;
               var endY = au.mainWindow.rect().size.height - 10;
               au.flickApp(0, startY, 0, endY);
             }

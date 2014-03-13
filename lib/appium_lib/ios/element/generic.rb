@@ -42,7 +42,7 @@ module Appium::Ios
   # @return [String] the completed JavaScript program
   def first_ele_js predicate
     (<<-JS).strip # remove trailing newline
-       au.mainApp.getFirstWithPredicateWeighted("#{predicate}");
+       au.mainApp().getFirstWithPredicateWeighted("#{predicate}");
     JS
   end
 
@@ -51,7 +51,7 @@ module Appium::Ios
   # @return [String] the completed JavaScript program
   def all_ele_js predicate
     (<<-JS).strip # remove trailing newline
-      au.mainApp.getAllWithPredicate("#{predicate}");
+      au.mainApp().getAllWithPredicate("#{predicate}");
     JS
   end
 
