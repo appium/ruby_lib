@@ -1,3 +1,13 @@
+#### v0.20.0 2014-03-13
+
+- [e79923f](https://github.com/appium/ruby_lib/commit/e79923f731c0f7ba85f280b512f5d82d365fd619) Release 0.20.0
+- [9a6c6ea](https://github.com/appium/ruby_lib/commit/9a6c6eaf798938f8a483466e718e53483e3c0f02) Add bundle update to release rake task
+- [093ba77](https://github.com/appium/ruby_lib/commit/093ba7712275b009d66146bcd9429ed9bf2f8d7f) Update readme.md
+- [8dbe853](https://github.com/appium/ruby_lib/commit/8dbe853909a3a2691d3cc510d9751cfe8179dc76) Fix mainApp
+- [347ae13](https://github.com/appium/ruby_lib/commit/347ae13cc78101875bb223fdfee97898f50a791b) Update readme.md
+- [ba4d51c](https://github.com/appium/ruby_lib/commit/ba4d51c44329db8a849f59bfeedfa1eb99538d3a) Update location_rel to use center point
+
+
 #### v0.19.1 2014-02-25
 
 - [efa2e3f](https://github.com/appium/ruby_lib/commit/efa2e3feb74319a19d1fe3ef49d5a7fe3a2eb59a) Release 0.19.1
