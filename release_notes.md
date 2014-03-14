@@ -1,3 +1,9 @@
+#### v0.21.0 2014-03-13
+
+- [db2df39](https://github.com/appium/ruby_lib/commit/db2df39eb6fc09e516e22334dd990699755c0509) Release 0.21.0
+- [bf74d7a](https://github.com/appium/ruby_lib/commit/bf74d7a70c0f7cab8e4cb115d53d86c3720e2df3) Remove webview. Update gemspec
+
+
 #### v0.20.0 2014-03-13
 
 - [e79923f](https://github.com/appium/ruby_lib/commit/e79923f731c0f7ba85f280b512f5d82d365fd619) Release 0.20.0
