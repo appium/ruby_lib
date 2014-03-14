@@ -148,8 +148,6 @@ module Appium
   require_relative 'android/element/alert'
   require_relative 'android/element/generic'
   require_relative 'android/element/textfield'
-  require_relative 'android/webview/javascript'
-  require_relative 'android/webview/webview'
 
   def self.promote_singleton_appium_methods main_module
     raise 'Driver is nil' if $driver.nil?
