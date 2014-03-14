@@ -78,6 +78,9 @@ task :release => :gem do
     exit!
   end
 
+  # ensure gems are installed
+  `bundle update`
+
   # Commit then pull before pushing.
   tag_name = "v#{version}"
   raise 'Tag already exists!' if tag_exists tag_name
