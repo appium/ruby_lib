@@ -95,6 +95,7 @@ task :release => :gem do
   sh "git commit --allow-empty -am 'Update release notes'"
   sh 'git push origin master'
   sh "git push origin #{tag_name}"
+  gem_build
   sh "gem push #{repo_name}-#{version}.gem"
 end
 
@@ -102,10 +103,14 @@ desc 'Build and release a new gem to rubygems.org (same as release)'
 task :publish => :release do
 end
 
-desc 'Build a new gem'
-task :gem do
+def gem_build
   `chmod 0600 ~/.gem/credentials`
   sh "gem build #{repo_name}.gemspec"
+end
+
+desc 'Build a new gem'
+task :gem do
+  gem_build
 end
 
 desc 'Build a new gem (same as gem task)'
