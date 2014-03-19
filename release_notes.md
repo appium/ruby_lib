@@ -1,3 +1,9 @@
+#### v0.22.0 2014-03-19
+
+- [4d88ecd](https://github.com/appium/ruby_lib/commit/4d88ecd87be7a2319dd0b7e437e230300269175f) Release 0.22.0
+- [347e81e](https://github.com/appium/ruby_lib/commit/347e81e2c3fae3b1b26bd707356c663a158198d4) Support all appium caps
+
+
 #### v0.21.0 2014-03-13
 
 - [db2df39](https://github.com/appium/ruby_lib/commit/db2df39eb6fc09e516e22334dd990699755c0509) Release 0.21.0
