@@ -254,6 +254,8 @@ module Appium
       opts.each_pair { |k,v| tmp_opts[k.to_s.downcase.strip.intern] = v }
       opts = tmp_opts
 
+      @raw_capabilities = opts.fetch(:raw, {})
+
       @custom_url = opts.fetch :server_url, false
 
       @compress_xml = opts[:compress_xml] ? true : false
@@ -398,8 +400,7 @@ module Appium
         :'app-package' => @app_package,
         :'app-activity' => @app_activity,
         :'app-wait-activity' => @app_wait_activity || @app_activity,
-        fastClear: @fast_clear
-      }.merge(@android_coverage)
+      }.merge(@android_coverage).merge(@raw_capabilities)
     end
 
     # @private
@@ -411,7 +412,7 @@ module Appium
         device: @device,
         name: @app_name || 'Ruby Console iOS Appium',
         :'device-orientation' => @device_orientation
-      }
+      }.merge(@raw_capabilities)
     end
 
     # @private

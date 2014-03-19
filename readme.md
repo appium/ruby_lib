@@ -35,8 +35,12 @@ require 'rubygems'
 require 'appium_lib'
 
 # Start iOS driver
-app = { device: :ios, app_path: '/path/to/MyiOS.app'}
-Appium::Driver.new(app).start_driver
+
+# use appium's specific capability names
+appium_capabilities = { launchTimeout: 123 }
+# there are also built in capabilities such as device that don't require 'raw'
+caps = { device: :ios, app_path: '/Users/user/woven/ruby_lib_ios/UICatalog.app', raw: appium_capabilities }
+Appium::Driver.new(caps).start_driver
 
 # Start Android driver
 apk = { 
