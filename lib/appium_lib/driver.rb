@@ -304,13 +304,6 @@ module Appium
       @device = opts.fetch :device, ENV['DEVICE']
       raise 'Device must be set' unless @device
 
-      @device = 'Android' if @device.to_s == 'android'
-      @device = 'Selendroid' if @device.to_s == 'selendroid'
-      @device = 'iPhone Simulator' if @device.to_s == 'ios'
-
-      raise 'Device must be set iPhone Simulator, iPad Simulator, Android' unless @device &&
-          ['iPhone Simulator', 'iPad Simulator', 'Android', 'Selendroid'].include?(@device)
-
       @version = opts[:version]
       if @device == 'Android' || @device == 'Selendroid'
         @version = '4.3' unless @version # default android to 4.3
