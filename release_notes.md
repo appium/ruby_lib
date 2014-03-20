@@ -1,3 +1,10 @@
+#### v0.22.1 2014-03-20
+
+- [82c40cd](https://github.com/appium/ruby_lib/commit/82c40cdd97eb7278d77b2b668cae554e55f1836d) Release 0.22.1
+- [c436daa](https://github.com/appium/ruby_lib/commit/c436daa916dfb7b3a824f498c98f4718d3aacca1) Disable device white list
+- [4cca152](https://github.com/appium/ruby_lib/commit/4cca152aa2519f5b3ae1292886c286f87d9fbbe8) Fix release rake task
+
+
 #### v0.22.0 2014-03-19
 
 - [4d88ecd](https://github.com/appium/ruby_lib/commit/4d88ecd87be7a2319dd0b7e437e230300269175f) Release 0.22.0
