@@ -70,9 +70,6 @@ def load_appium_txt opts
 
     # ensure app path is resolved correctly from the context of the .txt file
     ENV['APP_PATH'] = Appium::Driver.absolute_app_path ENV['APP_PATH']
-
-    # device is not case sensitive
-    ENV['DEVICE'] = ENV['DEVICE'].strip.downcase if !ENV['DEVICE'].nil?
   end
 
   # return list of require files as an array
@@ -300,19 +297,12 @@ module Appium
       @device = opts.fetch :device, ENV['DEVICE']
       raise 'Device must be set' unless @device
 
-      @version = opts[:version]
-      if @device == 'Android' || @device == 'Selendroid'
-        @version = '4.3' unless @version # default android to 4.3
-      else
-        @version = '7' unless @version # default ios to 7
-      end
-
       @device_type = opts.fetch :device_type, 'tablet'
       @device_orientation = opts.fetch :device_orientation, 'portrait'
 
       # load common methods
       extend Appium::Common
-      if @device == 'Android'
+      if @device.downcase == 'android'
         # load Android specific methods
         extend Appium::Android
       else
@@ -381,7 +371,6 @@ module Appium
       {
         compressXml: @compress_xml,
         platform: 'Linux',
-        version: @version,
         device: @device,
         :'device-type' => @device_type,
         :'device-orientation' => @device_orientation,
@@ -397,7 +386,6 @@ module Appium
     def ios_capabilities
       {
         platform: 'OS X 10.9',
-        version: @version,
         device: @device,
         name: @app_name || 'Ruby Console iOS Appium',
         :'device-orientation' => @device_orientation
@@ -406,7 +394,7 @@ module Appium
 
     # @private
     def capabilities
-      caps = ['iPhone Simulator', 'iPad Simulator'].include?(@device) ? ios_capabilities : android_capabilities
+      caps = @device.downcase === 'android' ? android_capabilities : ios_capabilities
       caps[:app] = self.class.absolute_app_path(@app_path) unless @app_path.nil? || @app_path.empty?
       caps
     end
