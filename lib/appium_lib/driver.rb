@@ -73,10 +73,6 @@ def load_appium_txt opts
 
     # device is not case sensitive
     ENV['DEVICE'] = ENV['DEVICE'].strip.downcase if !ENV['DEVICE'].nil?
-    if ! %w(ios android selendroid).include? ENV['DEVICE']
-      raise %(DEVICE="#{ENV['DEVICE']}" must be ios, android,
-or selendroid.)
-    end
   end
 
   # return list of require files as an array
