@@ -1,3 +1,10 @@
+#### v0.23.0 2014-03-21
+
+- [b6cda97](https://github.com/appium/ruby_lib/commit/b6cda9756f530d712f431df272cf5abdcd678131) Release 0.23.0
+- [8ce3009](https://github.com/appium/ruby_lib/commit/8ce3009ab6c8e957a7cee817df4a658b1ae3a834) Fix caps for new appium
+- [a6e7df2](https://github.com/appium/ruby_lib/commit/a6e7df258daf905c5dbaa6143aca9f5040e1308e) Remove device whitelist from appium.txt
+
+
 #### v0.22.1 2014-03-20
 
 - [82c40cd](https://github.com/appium/ruby_lib/commit/82c40cdd97eb7278d77b2b668cae554e55f1836d) Release 0.22.1
