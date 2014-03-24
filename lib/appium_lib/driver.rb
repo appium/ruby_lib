@@ -252,7 +252,6 @@ module Appium
       @custom_url = opts.fetch :server_url, false
 
       @compress_xml = opts[:compress_xml] ? true : false
-      @fast_clear = opts[:fast_clear] ? true : false
 
       @export_session = opts.fetch :export_session, false
 
@@ -299,6 +298,16 @@ module Appium
 
       @device_type = opts.fetch :device_type, 'tablet'
       @device_orientation = opts.fetch :device_orientation, 'portrait'
+
+      @full_reset = opts.fetch :full_reset, true
+      @no_reset = opts.fetch :no_reset, false
+
+      # handle reset dependencies
+      # when full reset is requested, then "no reset" should not be true
+      @no_reset = false if @full_reset
+      @full_reset = false if @no_reset
+      @fastReset = ! @full_reset && ! @no_reset
+      @skipUninstall = @fastReset || @no_reset
 
       # load common methods
       extend Appium::Common
@@ -371,7 +380,11 @@ module Appium
       {
         compressXml: @compress_xml,
         platform: 'Linux',
-        device: @device,
+        platformName: @device,
+        fullReset: @full_reset,
+        fastReset: @fast_reset,
+        noReset: @no_reset,
+        skipUninstall: @skip_uninstall,
         :'device-type' => @device_type,
         :'device-orientation' => @device_orientation,
         name: @app_name || 'Ruby Console Android Appium',
@@ -386,7 +399,7 @@ module Appium
     def ios_capabilities
       {
         platform: 'OS X 10.9',
-        device: @device,
+        platformName: @device,
         name: @app_name || 'Ruby Console iOS Appium',
         :'device-orientation' => @device_orientation
       }.merge(@raw_capabilities)
