@@ -302,12 +302,9 @@ module Appium
       @full_reset = opts.fetch :full_reset, true
       @no_reset = opts.fetch :no_reset, false
 
-      # handle reset dependencies
-      # when full reset is requested, then "no reset" should not be true
+      # no_reset/full_reset are mutually exclusive
       @no_reset = false if @full_reset
       @full_reset = false if @no_reset
-      @fastReset = ! @full_reset && ! @no_reset
-      @skipUninstall = @fastReset || @no_reset
 
       # load common methods
       extend Appium::Common
@@ -382,9 +379,7 @@ module Appium
         platform: 'Linux',
         platformName: @device,
         fullReset: @full_reset,
-        fastReset: @fast_reset,
         noReset: @no_reset,
-        skipUninstall: @skip_uninstall,
         :'device-type' => @device_type,
         :'device-orientation' => @device_orientation,
         name: @app_name || 'Ruby Console Android Appium',
