@@ -1,3 +1,9 @@
+#### v0.24.0 2014-03-25
+
+- [937f782](https://github.com/appium/ruby_lib/commit/937f7822bd5e248e2bdbc43a4602611d18df5d78) Release 0.24.0
+- [6e3fd72](https://github.com/appium/ruby_lib/commit/6e3fd720d90eda14f284c04ae4b8edb62ca7c010) fast_clear is no more
+
+
 #### v0.23.0 2014-03-21
 
 - [b6cda97](https://github.com/appium/ruby_lib/commit/b6cda9756f530d712f431df272cf5abdcd678131) Release 0.23.0
