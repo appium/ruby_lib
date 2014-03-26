@@ -1,3 +1,9 @@
+#### v0.24.1 2014-03-26
+
+- [a07da28](https://github.com/appium/ruby_lib/commit/a07da28de1e7133c77070859c2c35d7bd2635684) Release 0.24.1
+- [4718b0b](https://github.com/appium/ruby_lib/commit/4718b0b126748b14237ead15fd09812449512b12) Client should never send fastReset or skipUninstall
+
+
 #### v0.24.0 2014-03-25
 
 - [937f782](https://github.com/appium/ruby_lib/commit/937f7822bd5e248e2bdbc43a4602611d18df5d78) Release 0.24.0
