@@ -72,6 +72,11 @@ apk = {
 Appium::Driver.new(apk).start_driver
 ```
 
+#### Other capabilities
+
+- `no_reset` If true, the app will not be reset
+- `full_reset` If true, the app will be uninstalled. When false, fast reset is activated.
+
 #### iOS env vars
 
 - `APP_PATH` Path to the .app folder
