@@ -142,6 +142,9 @@ module Appium
   require_relative 'android/element/generic'
   require_relative 'android/element/textfield'
 
+  # device methods
+  require_relative 'device/device'
+
   def self.promote_singleton_appium_methods main_module
     raise 'Driver is nil' if $driver.nil?
     main_module.constants.each do |sub_module|
@@ -328,6 +331,9 @@ module Appium
         puts "Device is: #{@device}"
         patch_webdriver_bridge
       end
+
+      # load device methods
+      extend Appium::Device
 
       # Save global reference to last created Appium driver for top level methods.
       $driver = self
