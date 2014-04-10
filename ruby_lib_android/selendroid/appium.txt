@@ -1,0 +1,5 @@
+APP_PATH="../api.apk"
+APP_PACKAGE="com.example.android.apis"
+APP_ACTIVITY=".ApiDemos"
+APP_WAIT_ACTIVITY=".ApiDemos"
+DEVICE="selendroid"

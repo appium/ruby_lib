@@ -1,0 +1,2 @@
+DEVICE="ios"
+APP_PATH="./UICatalog.app"
