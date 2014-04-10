@@ -31,19 +31,19 @@ describe 'driver' do
     end
 
     t 'device attr' do
-      device.must_equal 'Android'
+      device.must_equal 'android'
     end
 
     t 'app_package attr' do
-      app_package.must_equal 'com.example.android.apis'
+      app_package.must_be_nil
     end
 
     t 'app_activity attr' do
-      app_activity.must_equal '.ApiDemos'
+      app_activity.must_be_nil
     end
 
     t 'app_wait_activity attr' do
-      app_wait_activity.must_equal '.ApiDemos'
+      app_wait_activity.must_be_nil
     end
 
     t 'sauce_username attr' do
@@ -126,18 +126,18 @@ describe 'driver' do
     end
 
     def expected_android_capabilities
-      {:compressXml => false,
-       :platform => 'Linux',
-       :version => '4.3',
-       :device => 'Android',
-       :'device-type' => 'tablet',
-       :'device-orientation' => 'portrait',
-       :name => 'Ruby Console Android Appium',
-       :'app-package' => 'com.example.android.apis',
-       :'app-activity' => '.ApiDemos',
-       :'app-wait-activity' => '.ApiDemos',
-       :fastClear => true,
-       :app => 'api.apk'}
+      { :compressXml => false,
+        :platform => 'Linux',
+        :platformName => 'android',
+        :fullReset => true,
+        :noReset => false,
+        :'device-type' => 'tablet',
+        :'device-orientation' => 'portrait',
+        :name => 'Ruby Console Android Appium',
+        :'app-package' => nil,
+        :'app-activity' => nil,
+        :'app-wait-activity' => nil,
+        app: 'api.apk' }
     end
 
     t 'capabilities' do
