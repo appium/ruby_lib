@@ -17,7 +17,7 @@ describe 'android/helper' do
 
   t 'find_eles_attr' do
     act = find_eles_attr :text
-    exp = ['API Demos', 'Action Bar', 'Activity', 'Alarm', 'Alert Dialogs', 'Device Admin', 'Fragment', 'Launcher Shortcuts', 'Loader', 'Menu', 'Notification', 'Search', 'Service', 'Text-To-Speech', 'Voice Recognition']
+    exp = ['API Demos', 'Accessibility', 'Animation', 'App', 'Content', 'Graphics', 'Media', 'NFC', 'OS', 'Preference', 'Text', 'Views']
     act.must_equal exp
   end
 

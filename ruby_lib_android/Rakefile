@@ -21,9 +21,18 @@ def bash cmd
   end
 end
 
+def wait_for_valid_device
+  while `adb shell echo "ping"`.strip != 'ping'
+    `adb kill-server`
+    `adb devices`
+    sleep 5
+  end
+end
+
 # rake android['single_text_name']
 # rake android
 def run_android test_file=nil
+  wait_for_valid_device
   path = File.expand_path('appium.txt', Rake.application.original_dir)
   ENV['APPIUM_TXT'] = path
   puts "Rake appium.txt path is: #{path}"
@@ -55,6 +64,7 @@ end
 
 desc 'ADB uninstall apk'
 task :adb_uninstall do
+  wait_for_valid_device
   # uninstall old api
   cmd = 'adb uninstall com.example.android.apis'
   run_sh cmd
