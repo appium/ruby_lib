@@ -4,6 +4,7 @@ module Appium
       extend Forwardable
       def_delegators :@logger, :warn, :error, :info
 
+      # @private
       def logger
         @logger ||= Logger.new
       end
