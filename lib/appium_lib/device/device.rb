@@ -4,7 +4,8 @@ module Appium
   module Device
     extend Forwardable
 
-    NoArgMethods = {
+    # @private
+    NoArgPostMethods = {
       shake: 'session/:session_id/appium/device/shake',
       launch: 'session/:session_id/appium/app/launch',
       closeApp: 'session/:session_id/appium/app/close',
@@ -14,7 +15,7 @@ module Appium
       def extended(mod)
         extend_webdriver_with_forwardable
         
-        NoArgMethods.each_pair do |m, p|
+        NoArgPostMethods.each_pair do |m, p|
           add_endpoint_method m, p
         end
 
@@ -36,22 +37,34 @@ module Appium
           end
         end
 
+        add_endpoint_method(:available_contexts, 'session/:session_id/contexts', :get)
+
+        add_endpoint_method(:current_context, 'session/:session_id/context', :get)
+        
+        add_endpoint_method(:current_context=, 'session/:session_id/context') do
+          def current_context=(context=null)
+            execute :current_context=, {}, :context => context
+          end
+        end
+
         extend_search_contexts
       end 
 
-      def add_endpoint_method(method, path)
+      # @private
+      def add_endpoint_method(method, path, verb=:post)
         if block_given?
           # &Proc.new with no args passes the passed_in block
           # Because creating Procs from blocks is slow
-          create_bridge_command method, path, &Proc.new
+          create_bridge_command method, verb, path, &Proc.new
         else
-          create_bridge_command method, path
+          create_bridge_command method, verb, path
         end
 
         delegate_driver_method method
         delegate_appium_driver_method method
       end 
 
+      # @private
       def extend_webdriver_with_forwardable
         return if Selenium::WebDriver::Driver.kind_of? Forwardable
         Selenium::WebDriver::Driver.class_eval do
@@ -59,16 +72,19 @@ module Appium
         end
       end
 
+      # @private
       def delegate_driver_method(method)
         return if Selenium::WebDriver::Driver.method_defined? method
         Selenium::WebDriver::Driver.class_eval { def_delegator :@bridge, method}
       end
 
+      # @private
       def delegate_appium_driver_method(method)
         def_delegator :@driver, method
       end
 
-      def create_bridge_command(method, path)
+      # @private
+      def create_bridge_command(method, verb, path)
         # Don't clobber methods that are moved into Selenium
         if selenium_has method
           log_reimplemented_warning(method, path)
@@ -76,7 +92,7 @@ module Appium
         end
 
         Selenium::WebDriver::Remote::Bridge.class_eval do
-          command method, :post, path
+          command method, verb, path
           if block_given?
             class_eval &Proc.new
           else
@@ -85,10 +101,12 @@ module Appium
         end
       end
 
+      # @private
       def selenium_has(method)
         Selenium::WebDriver::Remote::Bridge.method_defined? method
       end
 
+      # @private
       def log_reimplemented_warning(method, path)
         msg = "Selenium::WebDriver has now implemented the `#{method}` method."
         if Selenium::WebDriver::Remote::COMMANDS[method][1] == path
@@ -113,5 +131,37 @@ module Appium
         end
       end
     end
+
+    # Perform a block within the given context, then switch back to the starting context.
+    # @param context (String) The context to switch to for the duration of the block.
+    #
+    # ```ruby
+    # within_context('NATIVE_APP') do 
+    #   find_element [:tag, "button"]
+    # ```
+    def within_context(context)
+      existing_context = current_context
+      yield if block_given?
+      current_context = existing_context
+    end
+
+    # Change to the default context.  This is equivalent to `current_context= nil`.
+    def switch_to_default_context
+      current_context = nil
+    end
+
+    # @!method current_context=
+    #   Change the context to the given context.
+    #   @param [String] The context to change to
+    #
+    #   ```ruby
+    #   current_context= "NATIVE_APP"
+    #   ```
+
+    # @!method current_context
+    #   @return [String] The context currently being used.
+
+    # @!method available_contexts
+    # @return [Array<String>] All usable contexts, as an array of strings
   end
 end

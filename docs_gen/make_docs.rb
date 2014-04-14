@@ -78,7 +78,7 @@ def globs paths
   paths.map! { |path| "#{Dir.pwd}#{path}" }
 end
 
-common_globs = '/lib/appium_lib/*.rb', '/lib/appium_lib/common/**/*.rb'
+common_globs = '/lib/appium_lib/*.rb', '/lib/appium_lib/device/*.rb', '/lib/appium_lib/common/**/*.rb'
 android_globs = common_globs + [ '/lib/appium_lib/android/**/*.rb' ]
 ios_globs = common_globs + [ '/lib/appium_lib/ios/**/*.rb' ]
 
