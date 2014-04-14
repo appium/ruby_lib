@@ -30,5 +30,6 @@ module Appium
 
   add_to_path __FILE__
 
+  require_relative 'appium_lib/logger'
   require_relative 'appium_lib/driver'
 end

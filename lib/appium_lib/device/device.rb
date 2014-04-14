@@ -68,7 +68,11 @@ module Appium
 
       def create_bridge_command(method, path)
         # Don't clobber methods that are moved into Selenium
-        return if Selenium::WebDriver::Remote::Bridge.method_defined? method
+        if selenium_has method
+          log_reimplemented_warning(method, path)
+          return
+        end
+
         Selenium::WebDriver::Remote::Bridge.class_eval do
           command method, :post, path
           if block_given?
@@ -77,6 +81,22 @@ module Appium
             define_method(method) {execute method}
           end
         end
+      end
+
+      def selenium_has(method)
+        Selenium::WebDriver::Remote::Bridge.method_defined? method
+      end
+
+      def log_reimplemented_warning(method, path)
+        msg = "Selenium::WebDriver has now implemented the `#{method}` method."
+        if Selenium::WebDriver::Remote::COMMANDS[method][1] == path
+          msg << " It may no longer function as expected"
+        else
+          msg << " It no longer uses the same endpoint,"
+          msg << " so it probably won't do what you expect anymore."
+        end
+        msg << " Raise an issue at http://www.github.com/appium/ruby_lib if so."
+        Appium::Logger.warn msg
       end
     end
   end
