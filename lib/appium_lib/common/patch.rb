@@ -90,7 +90,14 @@ def patch_webdriver_bridge
 
       puts "#{verb} #{path_str}"
       unless command_hash.nil? || command_hash.length == 0
-        print_command = command_hash.clone
+        print_command = {}
+        # For complex_find, we pass a whole array
+        if command_hash.kind_of? Array
+          print_command[:args] = [command_hash.clone]
+          print_command[:script] = 'mobile: find' if command == :complex_find
+        else
+          print_command = command_hash.clone
+        end
         print_command.delete :args if print_command[:args] == []
 
         mobile_find = 'mobile: find'

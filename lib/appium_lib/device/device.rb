@@ -41,6 +41,18 @@ module Appium
     # @!method shake
     #   Cause the device to shake
 
+    #@!method complex_find
+    #  Find an element by a complex array of criteria.  Available criteria
+    #  are listed in [link here].  Criteria are formed by creating an array
+    #  of arrays, each containing a selector and that selector's value.
+    #
+    #  ```ruby
+    #  complex_find [[2, 'Sau'], [14, true]] # => Find a clickable element
+    #                                        #    whose names starts with 'Sau'
+    #  ```
+    #  @param all (Symbol) If not falsy, will use the 'all' option in your find
+    #  @param selectors (Array<Object>) The selectors to find elements with.
+
     # @!method hide_keyboard
     #   Hide the onscreen keyboard
     #   @param close_key (String) the name of the key which closes the keyboard.
@@ -97,6 +109,24 @@ module Appium
         add_endpoint_method(:hide_keyboard, 'session/:session_id/appium/device/hide_keyboard') do
           def hide_keyboard(close_key='Done')
             execute :hide_keyboard, {}, keyName: close_key
+
+        add_endpoint_method(:complex_find, 'session/:session_id/appium/app/complex_find') do
+          def complex_find(all, selectors=nil)
+            if selectors.nil?
+              selectors = all.dup
+              all = false
+            end
+
+            selector_array = all ? ['all'] : []
+            selector_array.push selectors
+
+            ids = execute :complex_find, {}, [selectors]      
+            if all && ids.length > 1
+
+              return ids.map {|id| Selenium::WebDriver::Element.new self, element_id_from(id)}
+            else
+              return Selenium::WebDriver::Element.new self, element_id_from(ids)
+            end
           end
         end
 
