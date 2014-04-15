@@ -41,6 +41,15 @@ module Appium
     # @!method shake
     #   Cause the device to shake
 
+    # @!method hide_keyboard
+    #   Hide the onscreen keyboard
+    #   @param close_key (String) the name of the key which closes the keyboard.
+    #     Defaults to 'Done'.
+    #  ```ruby
+    #  hide_keyboard # Close a keyboard with the 'Done' button
+    #  hide_keyboard('Finished') # Close a keyboard with the 'Finished' button
+    #  ```
+
     class << self
       def extended(mod)
         extend_webdriver_with_forwardable
@@ -82,6 +91,12 @@ module Appium
         add_endpoint_method(:current_context=, 'session/:session_id/context') do
           def current_context=(context=null)
             execute :current_context=, {}, :context => context
+          end
+        end
+
+        add_endpoint_method(:hide_keyboard, 'session/:session_id/appium/device/hide_keyboard') do
+          def hide_keyboard(close_key='Done')
+            execute :hide_keyboard, {}, keyName: close_key
           end
         end
 
