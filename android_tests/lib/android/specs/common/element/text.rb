@@ -2,8 +2,12 @@
 
 describe 'common/element/text' do
   t 's_texts' do
-    act = s_texts
     exp = ['API Demos', 'Accessibility', 'Animation', 'App', 'Content', 'Graphics', 'Media', 'NFC', 'OS', 'Preference', 'Text', 'Views']
+
+    # must wait for page to load
+    ignore { wait_true(10) { s_texts == exp } }
+    act = s_texts
+
     act.must_equal exp
   end
 
