@@ -1,12 +1,36 @@
 # encoding: utf-8
-=begin
-Based on simple_test.rb
-https://github.com/appium/appium/blob/82995f47408530c80c3376f4e07a1f649d96ba22/sample-code/examples/ruby/simple_test.rb
-https://github.com/appium/appium/blob/c58eeb66f2d6fa3b9a89d188a2e657cca7cb300f/LICENSE
-=end
-
 require 'rubygems'
 require 'ap'
+
+require 'selenium-webdriver'
+
+# common
+require_relative 'common/helper'
+require_relative 'common/patch'
+require_relative 'common/version'
+require_relative 'common/element/button'
+require_relative 'common/element/text'
+require_relative 'common/element/window'
+
+# ios
+require_relative 'ios/helper'
+require_relative 'ios/patch'
+require_relative 'ios/element/alert'
+require_relative 'ios/element/generic'
+require_relative 'ios/element/textfield'
+require_relative 'ios/mobile_methods'
+
+# android
+require_relative 'android/dynamic'
+require_relative 'android/helper'
+require_relative 'android/patch'
+require_relative 'android/element/alert'
+require_relative 'android/element/generic'
+require_relative 'android/element/textfield'
+require_relative 'android/mobile_methods'
+
+# device methods
+require_relative 'device/device'
 
 # Support OpenStruct in Awesome Print
 # /awesome_print/lib/awesome_print/formatter.rb
@@ -19,7 +43,6 @@ class AwesomePrint::Formatter
     awesome_hash target.marshal_dump
   end
 end
-
 
 # Fix uninitialized constant Minitest (NameError)
 module Minitest
@@ -57,7 +80,7 @@ module Appium
 
     file = opts[:file]
     raise 'Must pass file' unless file
-    verbose    = opts.fetch :verbose, false
+    verbose = opts.fetch :verbose, false
 
     parent_dir = File.dirname file
     toml       = File.expand_path File.join parent_dir, 'appium.txt'
@@ -113,36 +136,6 @@ module Appium
 
     Appium::symbolize_keys data
   end
-
-  require 'selenium-webdriver'
-
-  # common
-  require_relative 'common/helper'
-  require_relative 'common/patch'
-  require_relative 'common/version'
-  require_relative 'common/element/button'
-  require_relative 'common/element/text'
-  require_relative 'common/element/window'
-
-  # ios
-  require_relative 'ios/helper'
-  require_relative 'ios/patch'
-  require_relative 'ios/element/alert'
-  require_relative 'ios/element/generic'
-  require_relative 'ios/element/textfield'
-  require_relative 'ios/mobile_methods'
-
-  # android
-  require_relative 'android/dynamic'
-  require_relative 'android/helper'
-  require_relative 'android/patch'
-  require_relative 'android/element/alert'
-  require_relative 'android/element/generic'
-  require_relative 'android/element/textfield'
-  require_relative 'android/mobile_methods'
-
-  # device methods
-  require_relative 'device/device'
 
   # convert all keys (including nested) to symbols
   #

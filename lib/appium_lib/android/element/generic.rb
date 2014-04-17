@@ -1,5 +1,6 @@
 # encoding: utf-8
-module Appium::Android
+module Appium
+  module Android
 =begin
 name, names, text, text should match substring and case insensitive.
 
@@ -36,118 +37,119 @@ After looking for textfields and buttons, then we search all elements. Find will
 the first element that matches.
 =end
 
-  # Find the value contained in content description or text. Search elements
-  # in this order: EditText, Button, ImageButton
-  #
-  # @param val [String] the value to search for
-  # @return [Element]
-  def find val
-    # s.className('android.widget.EditText').descriptionContains(value);
-    args = [ [4, 'android.widget.EditText'], [7, val] ],
-    # s.className('android.widget.EditText').textContains(value);
-           [ [4, 'android.widget.EditText'], [3, val] ],
+    # Find the value contained in content description or text. Search elements
+    # in this order: EditText, Button, ImageButton
+    #
+    # @param val [String] the value to search for
+    # @return [Element]
+    def find val
+      # s.className('android.widget.EditText').descriptionContains(value);
+      args = [[4, 'android.widget.EditText'], [7, val]],
+          # s.className('android.widget.EditText').textContains(value);
+          [[4, 'android.widget.EditText'], [3, val]],
 
-           # s.className('android.widget.Button').descriptionContains(value);
-           [ [4, 'android.widget.Button'], [7, val] ],
-           # s.className('android.widget.Button').textContains(value);
-           [ [4, 'android.widget.Button'], [3, val] ],
+          # s.className('android.widget.Button').descriptionContains(value);
+          [[4, 'android.widget.Button'], [7, val]],
+          # s.className('android.widget.Button').textContains(value);
+          [[4, 'android.widget.Button'], [3, val]],
 
-           # s.className('android.widget.ImageButton').descriptionContains(value);
-           [ [4, 'android.widget.ImageButton'], [7, val] ],
-           # s.className('android.widget.ImageButton').textContains(value);
-           [ [4, 'android.widget.ImageButton'], [3, val] ],
+          # s.className('android.widget.ImageButton').descriptionContains(value);
+          [[4, 'android.widget.ImageButton'], [7, val]],
+          # s.className('android.widget.ImageButton').textContains(value);
+          [[4, 'android.widget.ImageButton'], [3, val]],
 
-           # s.descriptionContains(value);
-           [ [7, val] ],
-           # s.textContains(value);
-           [ [3, val] ]
-    mobile :find, args
-  end
-
-  # Return the first element matching text.
-  # @param text [String] the text to search for
-  # @return [Element] the first matching element
-  def text text
-    # Return the first element matching selector.
-    # s.textContains(value)
-    mobile :find, [ [ [3, text] ] ]
-  end
-
-  # Return all elements matching text.
-  # @param text [String] the text to search for
-  # @return [Array<Element>] all matching elements
-  def texts text
-    @driver.find_elements :xpath, "//*[contains(@text, '#{text}')]"
-  end
-
-  # Return the first element matching name.
-  # on Android name is content description
-  # on iOS name is the accessibility label or the text.
-  # @param name [String] the name to search for
-  # @return [Element] the first matching element
-  def name name
-    # work around https://github.com/appium/appium/issues/543
-    # @driver.find_element :name, name
-    mobile :find, [ [ [7, name] ] ]
-  end
-
-  # Return the first element exactly matching name.
-  # on Android name is content description
-  # on iOS name is the accessibility label or the text.
-  # @param name [String] the name to search for
-  # @return [Element] the first matching element
-  def name_exact name
-    # exact description
-    result = mobile :find, [ [ [5, name] ] ]
-
-    return result if result.kind_of? Selenium::WebDriver::Element
-
-    if result.length > 0
-      result.first
-    else
-      Appium::Common.raise_no_element_error
-    end
-  end
-
-  # Return all elements matching name.
-  # on Android name is content description
-  # on iOS name is the accessibility label or the text.
-  # @param name [String] the name to search for
-  # @return [Array<Element>] all matching elements
-  def names name=''
-    if name.nil? || name.empty?
-      args = 'all', [ [7, ''], [100] ]
-      mobile :find, args
-    else
-      args = 'all',
-          [ [7, name] ]
+          # s.descriptionContains(value);
+          [[7, val]],
+          # s.textContains(value);
+          [[3, val]]
       mobile :find, args
     end
+
+    # Return the first element matching text.
+    # @param text [String] the text to search for
+    # @return [Element] the first matching element
+    def text text
+      # Return the first element matching selector.
+      # s.textContains(value)
+      mobile :find, [[[3, text]]]
+    end
+
+    # Return all elements matching text.
+    # @param text [String] the text to search for
+    # @return [Array<Element>] all matching elements
+    def texts text
+      @driver.find_elements :xpath, "//*[contains(@text, '#{text}')]"
+    end
+
+    # Return the first element matching name.
+    # on Android name is content description
+    # on iOS name is the accessibility label or the text.
+    # @param name [String] the name to search for
+    # @return [Element] the first matching element
+    def name name
+      # work around https://github.com/appium/appium/issues/543
+      # @driver.find_element :name, name
+      mobile :find, [[[7, name]]]
+    end
+
+    # Return the first element exactly matching name.
+    # on Android name is content description
+    # on iOS name is the accessibility label or the text.
+    # @param name [String] the name to search for
+    # @return [Element] the first matching element
+    def name_exact name
+      # exact description
+      result = mobile :find, [[[5, name]]]
+
+      return result if result.kind_of? Selenium::WebDriver::Element
+
+      if result.length > 0
+        result.first
+      else
+        Appium::Common.raise_no_element_error
+      end
+    end
+
+    # Return all elements matching name.
+    # on Android name is content description
+    # on iOS name is the accessibility label or the text.
+    # @param name [String] the name to search for
+    # @return [Array<Element>] all matching elements
+    def names name=''
+      if name.nil? || name.empty?
+        args = 'all', [[7, ''], [100]]
+        mobile :find, args
+      else
+        args = 'all',
+            [[7, name]]
+        mobile :find, args
+      end
+    end
+
+    # Scroll to an element containing target text or description.
+    # @param text [String] the text to search for in the text value and content description
+    # @return [Element] the element scrolled to
+    def scroll_to text
+      args = 'scroll',
+          # textContains(text)
+          [[3, text]],
+          # descriptionContains(text)
+          [[7, text]]
+
+      mobile :find, args
+    end
+
+    # Scroll to an element with the exact target text or description.
+    # @param text [String] the text to search for in the text value and content description
+    # @return [Element] the element scrolled to
+    def scroll_to_exact text
+      args = 'scroll',
+          # text(text)
+          [[1, text]],
+          # description(text)
+          [[5, text]]
+
+      mobile :find, args
+    end
   end
-
-  # Scroll to an element containing target text or description.
-  # @param text [String] the text to search for in the text value and content description
-  # @return [Element] the element scrolled to
-  def scroll_to text
-    args = 'scroll',
-        # textContains(text)
-        [ [3, text] ],
-        # descriptionContains(text)
-        [ [7, text] ]
-
-    mobile :find, args
-  end
-
-  # Scroll to an element with the exact target text or description.
-  # @param text [String] the text to search for in the text value and content description
-  # @return [Element] the element scrolled to
-  def scroll_to_exact text
-    args = 'scroll',
-        # text(text)
-        [ [1, text] ],
-        # description(text)
-        [ [5, text] ]
-
-    mobile :find, args
-  end
-end # module Appium::Android
+end

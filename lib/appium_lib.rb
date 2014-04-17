@@ -21,17 +21,5 @@ def self.method_missing method, *args, &block
   end
 end
 
-module Appium
-  # @private
-  def self.add_to_path file, path=false
-    path = path ? "../#{path}/" : '..'
-    path = File.expand_path path, file
-
-    $:.unshift path unless $:.include? path
-  end
-
-  add_to_path __FILE__
-
-  require_relative 'appium_lib/logger'
-  require_relative 'appium_lib/driver'
-end
+require_relative 'appium_lib/logger'
+require_relative 'appium_lib/driver'
