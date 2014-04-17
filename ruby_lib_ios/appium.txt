@@ -1,2 +1,3 @@
-DEVICE="ios"
-APP_PATH="./UICatalog.app"
+[caps]
+platformName = "ios"
+app = "./UICatalog.app"

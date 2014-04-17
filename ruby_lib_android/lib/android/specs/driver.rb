@@ -1,12 +1,14 @@
 # encoding: utf-8
 # rake android[driver]
 describe 'driver' do
+  def is_sauce
+    ENV['UPLOAD_FILE'] && ENV['SAUCE_USERNAME']
+  end
+
   t 'load_appium_txt' do
     # __FILE__ is '(eval)' so use env var set by the Rakefile
-    path = ENV['APPIUM_TXT']
-    puts "appium.txt path in test is: #{path}"
-    load_appium_txt file: path, verbose: true
-    apk_name = File.basename(ENV['APP_PATH'])
+    parsed   = Appium.load_appium_txt file: ENV['APPIUM_TXT'], verbose: true
+    apk_name = File.basename parsed[:caps][:app]
     assert_equal apk_name, 'api.apk'
   end
 
@@ -21,45 +23,28 @@ describe 'driver' do
     end
 
     t 'app_path attr' do
-      apk_name = File.basename app_path
+      apk_name = File.basename driver_attributes[:caps][:app]
       apk_name.must_equal 'api.apk'
     end
 
     # Only used for Sauce Labs
-    t 'app_name attr' do
-      app_name.must_be_nil
-    end
+    t 'verify all attributes' do
+      2.times { set_wait 1 } # must set twice to validate last_waits
+      actual              = driver_attributes
+      actual[:caps][:app] = File.basename actual[:caps][:app]
+      expected            = { caps:             { platformName: 'android',
+                                                  app:          'api.apk' },
+                              custom_url:       false,
+                              export_session:   false,
+                              default_wait:     1,
+                              last_waits:       [1, 1],
+                              sauce_username:   nil,
+                              sauce_access_key: nil,
+                              port:             4723,
+                              device:           'android',
+                              debug:            true }
 
-    t 'device attr' do
-      device.must_equal 'android'
-    end
-
-    t 'app_package attr' do
-      app_package.must_be_nil
-    end
-
-    t 'app_activity attr' do
-      app_activity.must_be_nil
-    end
-
-    t 'app_wait_activity attr' do
-      app_wait_activity.must_be_nil
-    end
-
-    t 'sauce_username attr' do
-      sauce_username.must_be_nil
-    end
-
-    t 'sauce_access_key attr' do
-      sauce_access_key.must_be_nil
-    end
-
-    t 'port attr' do
-      port.must_equal 4723
-    end
-
-    t 'debug attr' do
-      debug.must_equal true
+      actual.must_equal expected
     end
   end
 
@@ -74,8 +59,13 @@ describe 'driver' do
     end
 
     t 'absolute_app_path' do
-      def absolute_app_path path; $driver.class.absolute_app_path path; end
-      def validate_path path;  absolute_app_path(path).must_equal path; end
+      def absolute_app_path path;
+        $driver.class.absolute_app_path path;
+      end
+
+      def validate_path path;
+        absolute_app_path(path).must_equal path;
+      end
 
       validate_path 'sauce-storage:some_storage_suffix'
       validate_path 'http://www.saucelabs.com'
@@ -107,7 +97,7 @@ describe 'driver' do
       # invalid path test
       invalid_path_errors = false
       begin
-      absolute_app_path('../../does_not_exist.apk')
+        absolute_app_path('../../does_not_exist.apk')
       rescue Exception
         invalid_path_errors = true
       ensure
@@ -118,34 +108,16 @@ describe 'driver' do
 
   describe 'methods' do
     t 'status' do
-      status.keys.sort.must_equal %w(sessionId status value)
+      appium_server_version['build'].keys.sort.must_equal %w(revision version)
     end
 
     t 'server_version' do
-      server_version.must_match /(\d+)\.(\d+).(\d+)/
-    end
-
-    def expected_android_capabilities
-      { :compressXml => false,
-        :platform => 'Linux',
-        :platformName => 'android',
-        :fullReset => true,
-        :noReset => false,
-        :'device-type' => 'tablet',
-        :'device-orientation' => 'portrait',
-        :name => 'Ruby Console Android Appium',
-        :'app-package' => nil,
-        :'app-activity' => nil,
-        :'app-wait-activity' => nil,
-        app: 'api.apk' }
-    end
-
-    t 'capabilities' do
-      exp = expected_android_capabilities
-
-      act = capabilities
-      act[:app] = File.basename act[:app]
-      act.must_equal exp
+      server_version = appium_server_version['build']['version']
+      if is_sauce
+        server_version.must_match 'Sauce OnDemand'
+      else
+        server_version.must_match /(\d+)\.(\d+).(\d+)/
+      end
     end
 
 =begin
@@ -173,6 +145,7 @@ describe 'driver' do
     set_wait # posts value to server, it's not stored locally
 =end
     t 'default_wait' do
+      set_wait 1
       default_wait.must_equal 1
     end
 

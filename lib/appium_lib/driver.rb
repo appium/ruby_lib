@@ -12,110 +12,107 @@ require 'ap'
 # /awesome_print/lib/awesome_print/formatter.rb
 # upstream issue: https://github.com/michaeldv/awesome_print/pull/36
 class AwesomePrint::Formatter
-    remove_const :CORE if defined?(CORE)
-    CORE = [ :array, :hash, :class, :file, :dir, :bigdecimal, :rational, :struct, :openstruct, :method, :unboundmethod ]
+  remove_const :CORE if defined?(CORE)
+  CORE = [:array, :hash, :class, :file, :dir, :bigdecimal, :rational, :struct, :openstruct, :method, :unboundmethod]
 
   def awesome_openstruct target
     awesome_hash target.marshal_dump
   end
 end
 
-# Load appium.txt (toml format) into system ENV
-# the basedir of this file + appium.txt is what's used
-# @param opts [Hash] file: '/path/to/appium.txt', verbose: true
-# @return [Array<String>] the require files. nil if require doesn't exist
-def load_appium_txt opts
-  raise 'opts must be a hash' unless opts.kind_of? Hash
-  opts.each_pair { |k,v| opts[k.to_s.downcase.strip.intern] = v }
-  opts = {} if opts.nil?
-  file = opts.fetch :file, nil
-  raise 'Must pass file' unless file
-  verbose = opts.fetch :verbose, false
-  # Check for env vars in .txt
-  parent_dir = File.dirname file
-  toml = File.expand_path File.join parent_dir, 'appium.txt'
-  puts "appium.txt path: #{toml}" if verbose
-  # @private
-  def update data, *args
-    args.each do |name|
-      var = data[name]
-      ENV[name] = var if var
-    end
-  end
-
-  toml_exists = File.exists? toml
-  puts "Exists? #{toml_exists}" if verbose
-  data = nil
-
-  if toml_exists
-    require 'toml'
-    puts "Loading #{toml}" if verbose
-
-    # bash requires A="OK"
-    # toml requires A = "OK"
-    #
-    # A="OK" => A = "OK"
-    data = File.read toml
-
-    data = data.split("\n").map do |line|
-      line.sub /([^\s])\=/, "\\1 = "
-    end.join "\n"
-
-    data = TOML::Parser.new(data).parsed
-    ap data unless data.empty? if verbose
-
-    update data, 'APP_PATH', 'APP_APK', 'APP_PACKAGE',
-           'APP_ACTIVITY', 'APP_WAIT_ACTIVITY',
-           'DEVICE'
-
-    # ensure app path is resolved correctly from the context of the .txt file
-    ENV['APP_PATH'] = Appium::Driver.absolute_app_path ENV['APP_PATH']
-  end
-
-  # return list of require files as an array
-  # nil if require doesn't exist
-  if data && data['require']
-    r = data['require']
-    r = r.kind_of?(Array) ? r : [ r ]
-    # ensure files are absolute
-    r.map! do |file|
-      file = file.include?(File::Separator) ? file :
-             File.join(parent_dir, file)
-      file = File.expand_path file
-
-      File.exists?(file) ? file : nil
-    end
-    r.compact! # remove nils
-
-    files = []
-
-    # now expand dirs
-    r.each do |item|
-      unless File.directory? item
-        # save file
-        files << item
-        next # only look inside folders
-      end
-      Dir.glob(File.join(item, '**/*.rb')) do |file|
-        # do not add folders to the file list
-        files << File.expand_path(file) unless File.directory? file
-      end
-    end
-
-    files
-  end
-end
 
 # Fix uninitialized constant Minitest (NameError)
 module Minitest
   # Fix superclass mismatch for class Spec
-  class Runnable; end
-  class Test < Runnable; end
-  class Spec < Test; end
+  class Runnable
+  end
+  class Test < Runnable
+  end
+  class Spec < Test
+  end
 end
 
 module Appium
   add_to_path __FILE__
+# Load appium.txt (toml format)
+# the basedir of this file + appium.txt is what's used
+#
+# ```
+# [caps]
+# app = "path/to/app"
+#
+# [appium_lib]
+# port = 8080
+# ```
+#
+# :app is expanded
+# :requires are expanded
+# all keys are converted to symbols
+#
+# @param opts [Hash] file: '/path/to/appium.txt', verbose: true
+# @return [hash] the symbolized hash with updated :app and :require keys
+  def self.load_appium_txt opts={}
+    raise 'opts must be a hash' unless opts.kind_of? Hash
+    raise 'opts must not be empty' if opts.empty?
+
+    file = opts[:file]
+    raise 'Must pass file' unless file
+    verbose    = opts.fetch :verbose, false
+
+    parent_dir = File.dirname file
+    toml       = File.expand_path File.join parent_dir, 'appium.txt'
+    puts "appium.txt path: #{toml}" if verbose
+
+    toml_exists = File.exists? toml
+    puts "Exists? #{toml_exists}" if verbose
+
+    raise "toml doesn't exist ##{toml}" unless toml_exists
+    require 'toml'
+    puts "Loading #{toml}" if verbose
+
+    data = File.read toml
+    data = TOML::Parser.new(data).parsed
+    ap data unless data.empty? if verbose
+
+    if data && data[:caps] && data[:caps][:app]
+      data[:caps][:app] = Appium::Driver.absolute_app_path data[:caps][:app]
+    end
+
+    # return list of require files as an array
+    # nil if require doesn't exist
+    if data && data[:appium_lib] && data[:appium_lib][:require]
+      r = data[:appium_lib][:require]
+      r = r.kind_of?(Array) ? r : [r]
+      # ensure files are absolute
+      r.map! do |file|
+        file = file.include?(File::Separator) ? file :
+            File.join(parent_dir, file)
+        file = File.expand_path file
+
+        File.exists?(file) ? file : nil
+      end
+      r.compact! # remove nils
+
+      files = []
+
+      # now expand dirs
+      r.each do |item|
+        unless File.directory? item
+          # save file
+          files << item
+          next # only look inside folders
+        end
+        Dir.glob(File.join(item, '**/*.rb')) do |file|
+          # do not add folders to the file list
+          files << File.expand_path(file) unless File.directory? file
+        end
+      end
+
+      data[:appium_lib][:require] = files
+    end
+
+    Appium::symbolize_keys data
+  end
 
   require 'selenium-webdriver'
 
@@ -146,6 +143,20 @@ module Appium
 
   # device methods
   require_relative 'device/device'
+
+  # convert all keys (including nested) to symbols
+  #
+  # based on deep_symbolize_keys & deep_transform_keys from rails
+  # https://github.com/rails/docrails/blob/a3b1105ada3da64acfa3843b164b14b734456a50/activesupport/lib/active_support/core_ext/hash/keys.rb#L84
+  def self.symbolize_keys hash
+    raise 'symbolize_keys requires a hash' unless hash.is_a? Hash
+    result = {}
+    hash.each do |key, value|
+      key = key.to_sym rescue key
+      result[key] = value.is_a?(Hash) ? symbolize_keys(value) : value
+    end
+    result
+  end
 
   def self.promote_singleton_appium_methods main_module
     raise 'Driver is nil' if $driver.nil?
@@ -190,9 +201,9 @@ module Appium
               # Prefer existing method.
               # super will invoke method missing on driver
               super(*args, &block)
-              # minitest also defines a name method,
-              # so rescue argument error
-              # and call the name method on $driver
+                # minitest also defines a name method,
+                # so rescue argument error
+                # and call the name method on $driver
             rescue NoMethodError, ArgumentError
               $driver.send m, *args, &block if $driver.respond_to?(m)
             end
@@ -206,10 +217,8 @@ module Appium
   class Driver
     @@loaded = false
 
-    attr_reader :default_wait, :app_path, :app_name, :device,
-                :app_package, :app_activity, :app_wait_activity,
-                :sauce_username, :sauce_access_key, :port, :debug,
-                :export_session, :device_cap, :compress_xml, :custom_url
+    # attr readers are promoted to global scope. To avoid clobbering, they're
+    # made available via the driver_attributes method
 
     # The amount to sleep in seconds before every webdriver http call.
     attr_accessor :global_webdriver_http_sleep
@@ -245,75 +254,36 @@ module Appium
     def initialize opts={}
       # quit last driver
       $driver.driver_quit if $driver
-      opts = {} if opts.nil?
-      tmp_opts = {}
+      raise 'opts must be a hash' unless opts.kind_of? Hash
 
-      # convert to downcased symbols
-      opts.each_pair { |k,v| tmp_opts[k.to_s.downcase.strip.intern] = v }
-      opts = tmp_opts
+      opts              = Appium::symbolize_keys opts
 
-      @raw_capabilities = opts.fetch(:raw, {})
+      # default to {} to prevent nil.fetch and other nil errors
+      @caps             = opts[:caps] || {}
+      appium_lib_opts   = opts[:appium_lib] || {}
 
-      @custom_url = opts.fetch :server_url, false
-
-      @compress_xml = opts[:compress_xml] ? true : false
-
-      @export_session = opts.fetch :export_session, false
-
-      @default_wait = opts.fetch :wait, 30
-      @last_waits = [@default_wait]
+      # appium_lib specific values
+      @custom_url       = appium_lib_opts.fetch :server_url, false
+      @export_session   = appium_lib_opts.fetch :export_session, false
+      @default_wait     = appium_lib_opts.fetch :wait, 30
+      @last_waits       = [@default_wait]
+      @sauce_username   = appium_lib_opts.fetch :sauce_username, ENV['SAUCE_USERNAME']
+      @sauce_access_key = appium_lib_opts.fetch :sauce_access_key, ENV['SAUCE_ACCESS_KEY']
+      @port             = appium_lib_opts.fetch :port, 4723
 
       # Path to the .apk, .app or .app.zip.
       # The path can be local or remote for Sauce.
-      @app_path = opts.fetch :app_path, ENV['APP_PATH']
-      raise 'APP_PATH must be set.' if @app_path.nil?
+      unless !@caps || @caps[:app].nil? || @caps[:app].empty?
+        @caps[:app] = self.class.absolute_app_path @caps[:app]
+      end
 
-      # The name to use for the test run on Sauce.
-      @app_name = opts.fetch :app_name, ENV['APP_NAME']
-
-      # Android app package
-      @app_package = opts.fetch :app_package, ENV['APP_PACKAGE']
-
-      # Android app starting activity.
-      @app_activity = opts.fetch :app_activity, ENV['APP_ACTIVITY']
-
-      # Android app waiting activity
-      @app_wait_activity = opts.fetch :app_wait_activity, ENV['APP_WAIT_ACTIVITY']
-
-      @android_coverage = opts.fetch :android_coverage, ENV['ANDROID_COVERAGE']
-      # init to empty hash because it's merged later as an optional desired cap.
-      @android_coverage = @android_coverage ? { androidCoverage: @android_coverage} : {}
-
-      # Sauce Username
-      @sauce_username = opts.fetch :sauce_username, ENV['SAUCE_USERNAME']
-
-      # Sauce Key
-      @sauce_access_key = opts.fetch :sauce_access_key, ENV['SAUCE_ACCESS_KEY']
-
-      @port = opts.fetch :port, ENV['PORT'] || 4723
-
-      # 'iPhone Simulator'
-      # 'iPad Simulator'
-      # 'Android'
-      # 'Selendroid'
-      #
-      # :ios, :android, :selendroid
-      @device = opts.fetch :device, ENV['DEVICE']
-      raise 'Device must be set' unless @device
-
-      @device_type = opts.fetch :device_type, 'tablet'
-      @device_orientation = opts.fetch :device_orientation, 'portrait'
-
-      @full_reset = opts.fetch :full_reset, true
-      @no_reset = opts.fetch :no_reset, false
-
-      # no_reset/full_reset are mutually exclusive
-      @no_reset = false if @full_reset
-      @full_reset = false if @no_reset
+      # https://code.google.com/p/selenium/source/browse/spec-draft.md?repo=mobile
+      @device = @caps[:platformName]
+      raise "Device must be set. Not found in options: #{opts}" unless @device
 
       # load common methods
       extend Appium::Common
-      if @device.downcase == 'android'
+      if @device.downcase.strip == 'android'
         # load Android specific methods
         extend Appium::Android
       else
@@ -326,7 +296,7 @@ module Appium
 
       # enable debug patch
       # !!'constant' == true
-      @debug = opts.fetch :debug, !!defined?(Pry)
+      @debug = appium_lib_opts.fetch :debug, !!defined?(Pry)
       puts "Debug is: #{@debug}"
       if @debug
         ap opts unless opts.empty?
@@ -349,73 +319,46 @@ module Appium
       end
 
       self # return newly created driver
-    end # def initialize
+    end
 
-    # Returns the status payload
+    # Returns a hash of the driver attributes
+    def driver_attributes
+      attributes = { caps:             @caps,
+                     custom_url:       @custom_url,
+                     export_session:   @export_session,
+                     default_wait:     @default_wait,
+                     last_waits:       @last_waits,
+                     sauce_username:   @sauce_username,
+                     sauce_access_key: @sauce_access_key,
+                     port:             @port,
+                     device:           @device,
+                     debug:            @debug,
+      }
+
+      # Return duplicates so attributes are immutable
+      attributes.each do |key, value|
+        attributes[key] = value.duplicable? ? value.dup : value
+      end
+      attributes
+    end
+
+    # Returns the server's version info
     #
     # ```ruby
-    # {"status"=>0,
-    #  "value"=>
-    #   {"build"=>
-    #     {"version"=>"0.8.2",
-    #      "revision"=>"f2a2bc3782e4b0370d97a097d7e04913cf008995"}},
-    #  "sessionId"=>"8f4b34a7-a9a9-4ac5-b125-36258143446a"}
+    # {
+    #     "build" => {
+    #         "version" => "0.18.1",
+    #         "revision" => "d242ebcfd92046a974347ccc3a28f0e898595198"
+    #     }
+    # }
     # ```
     #
-    #  Discover the Appium rev running on the server.
-    #
-    # `status["value"]["build"]["revision"]`
-    # `f2a2bc3782e4b0370d97a097d7e04913cf008995`
-    #
-    # @return [JSON]
-    def status
-      driver.status.payload
+    # @return [Hash]
+    def appium_server_version
+      driver.remote_status
     end
 
-    # Returns the server's version string
-    # @return [String]
-    def server_version
-      status['value']['build']['version']
-    end
-
-    # @private
-    # WebDriver capabilities. Must be valid for Sauce to work.
-    # https://github.com/jlipps/appium/blob/master/app/android.js
-    def android_capabilities
-      {
-        compressXml: @compress_xml,
-        platform: 'Linux',
-        platformName: @device,
-        fullReset: @full_reset,
-        noReset: @no_reset,
-        :'device-type' => @device_type,
-        :'device-orientation' => @device_orientation,
-        name: @app_name || 'Ruby Console Android Appium',
-        :'app-package' => @app_package,
-        :'app-activity' => @app_activity,
-        :'app-wait-activity' => @app_wait_activity || @app_activity,
-      }.merge(@android_coverage).merge(@raw_capabilities)
-    end
-
-    # @private
-    # WebDriver capabilities. Must be valid for Sauce to work.
-    def ios_capabilities
-      {
-        platform: 'OS X 10.9',
-        platformName: @device,
-        name: @app_name || 'Ruby Console iOS Appium',
-        :'device-orientation' => @device_orientation
-      }.merge(@raw_capabilities)
-    end
-
-    # @private
-    def capabilities
-      caps = @device.downcase === 'android' ? android_capabilities : ios_capabilities
-      caps[:app] = self.class.absolute_app_path(@app_path) unless @app_path.nil? || @app_path.empty?
-      caps
-    end
-
-    # Converts environment variable APP_PATH to an absolute path.
+    # Converts app_path to an absolute path.
     # @return [String] APP_PATH as an absolute path
     def self.absolute_app_path app_path
       raise 'APP_PATH not set!' if app_path.nil? || app_path.empty?
@@ -439,7 +382,7 @@ module Appium
       app_path
     end
 
-    # Get the server url for sauce or local based on env vars.
+    # Get the server url
     # @return [String] the server url
     def server_url
       return @custom_url if @custom_url
@@ -477,30 +420,27 @@ module Appium
     # Quits the driver
     # @return [void]
     def driver_quit
-      # rescue NoSuchDriverError
-      begin; @driver.quit unless @driver.nil?; rescue; end
+      # rescue NoSuchDriverError or nil driver
+      @driver.quit rescue nil
     end
 
     # Creates a new global driver and quits the old one if it exists.
     #
     # @return [Selenium::WebDriver] the new global driver
     def start_driver
-      @client = @client || Selenium::WebDriver::Remote::Http::Default.new
+      @client         = @client || Selenium::WebDriver::Remote::Http::Default.new
       @client.timeout = 999999
 
       begin
-        @driver = Selenium::WebDriver.for :remote, http_client: @client, desired_capabilities: capabilities, url: server_url
+        @driver = Selenium::WebDriver.for :remote, http_client: @client, desired_capabilities: @caps, url: server_url
         # Load touch methods. Required for Selendroid.
         @driver.extend Selenium::WebDriver::DriverExtensions::HasTouchScreen
 
         # export session
         if @export_session
-          begin
-            File.open('/tmp/appium_lib_session', 'w') do |f|
-              f.puts @driver.session_id
-            end
-          rescue
-          end
+          File.open('/tmp/appium_lib_session', 'w') do |f|
+            f.puts @driver.session_id
+          end rescue nil
         end
       rescue Errno::ECONNREFUSED
         raise 'ERROR: Unable to connect to Appium. Is the server running?'
@@ -519,8 +459,8 @@ module Appium
 
     # Set implicit wait and default_wait to zero.
     def no_wait
-      @last_waits = [@default_wait, 0]
-      @default_wait = 0
+      @last_waits                           = [@default_wait, 0]
+      @default_wait                         = 0
       @driver.manage.timeouts.implicit_wait = 0
     end
 
@@ -545,7 +485,7 @@ module Appium
       else
         @default_wait = timeout
         # puts "last waits before: #{@last_waits}"
-        @last_waits = [@last_waits.last, @default_wait]
+        @last_waits   = [@last_waits.last, @default_wait]
         # puts "last waits after: #{@last_waits}"
       end
 
@@ -577,7 +517,7 @@ module Appium
       # which then gets converted to a 1 second wait.
       @driver.manage.timeouts.implicit_wait = pre_check
       # the element exists unless an error is raised.
-      exists = true
+      exists                                = true
 
       begin
         search_block.call # search for element
