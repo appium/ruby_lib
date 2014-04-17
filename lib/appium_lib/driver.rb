@@ -66,7 +66,7 @@ module Appium
     toml_exists = File.exists? toml
     puts "Exists? #{toml_exists}" if verbose
 
-    raise "toml doesn't exist ##{toml}" unless toml_exists
+    raise "toml doesn't exist #{toml}" unless toml_exists
     require 'toml'
     puts "Loading #{toml}" if verbose
 
