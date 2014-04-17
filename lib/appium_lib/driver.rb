@@ -56,7 +56,6 @@ module Minitest
 end
 
 module Appium
-  add_to_path __FILE__
 # Load appium.txt (toml format)
 # the basedir of this file + appium.txt is what's used
 #
