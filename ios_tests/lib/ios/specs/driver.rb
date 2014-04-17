@@ -13,16 +13,41 @@ describe 'driver' do
     skip if is_sauce
     # __FILE__ is '(eval)' so use env var set by the Rakefile
     path = ENV['APPIUM_TXT']
-    puts "appium.txt path in test is: #{path}"
-    load_appium_txt file: path, verbose: true
-    apk_name = File.basename(ENV['APP_PATH'])
-    assert_equal apk_name, 'UICatalog.app'
+    opts = Appium.load_appium_txt file: path, verbose: true
+
+    actual   = ''
+    actual   = File.basename opts[:caps][:app] if opts && opts[:caps]
+    expected = 'UICatalog.app'
+    assert_equal expected, actual
   end
 
   describe 'Appium::Driver attributes' do
-    # attr_reader :default_wait, :app_path, :app_name, :selendroid,
-    #            :app_package, :app_activity, :app_wait_activity,
-    #            :sauce_username, :sauce_access_key, :port, :os, :debug
+    t 'verify all attributes' do
+      2.times { set_wait 30 } # must set twice to validate last_waits
+      actual              = driver_attributes
+      actual[:caps][:app] = File.basename actual[:caps][:app]
+      expected            = { caps:             { platformName: 'ios',
+                                                  app:          'UICatalog.app' },
+                              custom_url:       false,
+                              export_session:   false,
+                              default_wait:     30,
+                              last_waits:       [30, 30],
+                              sauce_username:   nil,
+                              sauce_access_key: nil,
+                              port:             4723,
+                              device:           'ios',
+                              debug:            true }
+
+      actual.must_equal expected
+    end
+
+    t 'verify attributes are immutable' do
+      driver_attributes[:caps][:app] = 'fake'
+      actual = File.basename driver_attributes[:caps][:app]
+      expected = 'UICatalog.app'
+      actual.must_equal expected
+    end
+
     t 'no_wait' do
       no_wait
       default_wait.must_equal 0
@@ -36,7 +61,7 @@ describe 'driver' do
     end
 
     t 'app_path attr' do
-      apk_name = File.basename app_path
+      apk_name = File.basename driver_attributes[:caps][:app]
 
       if is_sauce
         apk_name.must_equal 'sauce-storage:UICatalog6.1.app.zip'
@@ -47,22 +72,16 @@ describe 'driver' do
 
     # Only used for Sauce Labs
     t 'app_name attr' do
+      name_attr = driver_attributes[:caps][:name]
       if is_sauce
-        app_name.must_equal 'appium_lib_ios'
+        name_attr.must_equal 'appium_lib_ios'
       else
-        app_name.must_be_nil
+        name_attr.must_be_nil
       end
     end
 
-    t 'device attr' do
-      device.must_equal 'ios'
-    end
-
-    # t 'app_package attr' do # iOS does not have this attr
-    # t 'app_activity attr' do # iOS does not have this attr
-    # t 'app_wait_activity attr' do # iOS does not have this attr
-
     t 'sauce_username attr' do
+      sauce_username = driver_attributes[:sauce_username]
       if is_sauce
         sauce_username.must_equal 'appiumci'
       else
@@ -71,19 +90,12 @@ describe 'driver' do
     end
 
     t 'sauce_access_key attr' do
+      sauce_access_key = driver_attributes[:sauce_access_key]
       if is_sauce
         sauce_access_key.must_match /\h{8}-\h{4}-\h{4}-\h{4}-\h{12}/
       else
         sauce_access_key.must_be_nil
       end
-    end
-
-    t 'port attr' do
-      port.must_equal 4723
-    end
-
-    t 'debug attr' do
-      debug.must_equal true
     end
   end
 
@@ -100,10 +112,11 @@ describe 'driver' do
 
   describe 'methods' do
     t 'status' do
-      status.keys.sort.must_equal %w(sessionId status value)
+      appium_server_version['build'].keys.sort.must_equal %w(revision version)
     end
 
     t 'server_version' do
+      server_version = appium_server_version['build']['version']
       if is_sauce
         server_version.must_match 'Sauce OnDemand'
       else
@@ -111,42 +124,6 @@ describe 'driver' do
       end
     end
 
-    def expected_ios_capabilities
-      {
-          :platform             => 'OS X 10.9',
-          :platformName         => 'ios',
-          :name                 => 'Ruby Console iOS Appium',
-          :'device-orientation' => 'portrait',
-          :app                  => 'UICatalog.app'
-      }
-    end
-
-    def expected_ios_capabilities_sauce
-      {
-          platform: 'Mac 10.8',
-          version: '6.1',
-          device: 'iPhone Simulator',
-          name: 'appium_lib_ios',
-          app: 'sauce-storage:UICatalog6.1.app.zip'
-      }
-    end
-
-    # capabilities calls ios_capabilities when device is :ios
-    t 'capabilities' do
-      exp = is_sauce ? expected_ios_capabilities_sauce :
-      expected_ios_capabilities
-
-      act = capabilities
-      act[:app] = File.basename act[:app]
-      act.must_equal exp
-    end
-
-=begin
-  Skip:
-    ios_capabilities # save for iOS tests
-    absolute_app_path # tested already by starting the driver for this test
-    server_url # sauce labs only
-=end
     t 'restart' do
       restart
       s_text 'buttons'

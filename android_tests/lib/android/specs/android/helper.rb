@@ -1,5 +1,5 @@
 # encoding: utf-8
-
+# rake android[android/helper]
 describe 'android/helper' do
   t 'tag_name_to_android' do
     act = tag_name_to_android 'abslist'
@@ -16,8 +16,12 @@ describe 'android/helper' do
   end
 
   t 'find_eles_attr' do
+    exp = ["API Demos", "Accessibility", "Animation", "App", "Content", "Graphics", "Media", "NFC", "OS", "Preference", "Text", "Views"]
+
+    # must wait for page to load
+    ignore { wait_true(10) { find_eles_attr(:text) == exp } }
     act = find_eles_attr :text
-    exp = ['API Demos', 'Accessibility', 'Animation', 'App', 'Content', 'Graphics', 'Media', 'NFC', 'OS', 'Preference', 'Text', 'Views']
+
     act.must_equal exp
   end
 
@@ -53,7 +57,6 @@ describe 'android/helper' do
   t 'fast_duration' do
     fast_duration.must_equal 0.0357
   end
-
 
   def id_key
     'animation_2_instructions'

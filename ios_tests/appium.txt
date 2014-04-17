@@ -1,0 +1,3 @@
+[caps]
+platformName = "ios"
+app = "./UICatalog.app"

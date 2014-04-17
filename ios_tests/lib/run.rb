@@ -65,7 +65,8 @@ def catalog
 end
 ##
 
-load_appium_txt file: File.expand_path('..',__FILE__), verbose: true
+caps = Appium.load_appium_txt file: File.expand_path('..',__FILE__), verbose: true
+caps = caps.merge({ appium_lib: { debug: true, wait: 30 } })
 
 dir = File.expand_path '..', __FILE__
 device = ARGV[0].downcase.strip
@@ -75,14 +76,9 @@ raise 'Expected android, selendroid or ios as first argument' unless devices.inc
 one_test = ARGV[1]
 test_dir = "/#{device}/"
 
-puts 'Start driver'
-use_selendroid = device == 'selendroid'
-puts "Use selendroid? #{use_selendroid}"
+caps[:app] = ENV['SAUCE_PATH'] if ENV['SAUCE_USERNAME'] && ENV['SAUCE_ACCESS_KEY']
 
-
-ENV['APP_PATH'] = ENV['SAUCE_PATH'] if ENV['SAUCE_USERNAME'] && ENV['SAUCE_ACCESS_KEY']
-
-Appium::Driver.new(debug: true, wait: 30).start_driver
+Appium::Driver.new(caps).start_driver
 
 =begin
 # Android doesn't like to be reset before booting up

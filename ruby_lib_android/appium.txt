@@ -1,2 +1,0 @@
-APP_PATH="./api.apk"
-DEVICE="android"

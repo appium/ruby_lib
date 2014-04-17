@@ -24,7 +24,7 @@ The tests are now run against `iPhone Simulator 7.0.3 (11B508)`
 --
 
 ```java
-Finished in 2 mins 3 secs
+Finished in 1 min 49 secs
 
-103 runs, 132 assertions, 0 failures, 0 errors, 0 skips
+101 runs, 130 assertions, 0 failures, 0 errors, 0 skips
 ```

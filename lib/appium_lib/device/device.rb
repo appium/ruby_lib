@@ -1,5 +1,3 @@
-require 'Forwardable'
-
 module Appium
   module Device
     extend Forwardable
