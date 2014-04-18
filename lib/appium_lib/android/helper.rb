@@ -217,71 +217,6 @@ module Appium
       mobile :find, array
     end
 
-    # Selendroid only.
-    # Returns a string containing interesting elements.
-    # @return [String]
-    def get_selendroid_inspect
-      # @private
-      def run node
-        r = []
-
-        run_internal = lambda do |node|
-          if node.kind_of? Array
-            node.each { |node| run_internal.call node }
-            return
-          end
-
-          keys = node.keys
-          return if keys.empty?
-
-          obj = {}
-          # name is id
-          obj.merge!({ id: node['name'] }) if keys.include?('name') && !node['name'].empty?
-          obj.merge!({ text: node['value'] }) if keys.include?('value') && !node['value'].empty?
-          # label is name
-          obj.merge!({ name: node['label'] }) if keys.include?('label') && !node['label'].empty?
-          obj.merge!({ class: node['type'] }) if keys.include?('type') && !obj.empty?
-          obj.merge!({ shown: node['shown'] }) if keys.include?('shown')
-
-          r.push obj if !obj.empty?
-          run_internal.call node['children'] if keys.include?('children')
-        end
-
-        run_internal.call node
-        r
-      end
-
-      json    = get_source
-      node    = json['children']
-      results = run node
-
-      out = ''
-      results.each { |e|
-        no_text = e[:text].nil?
-        no_name = e[:name].nil? || e[:name] == 'null'
-        next unless e[:shown] # skip invisible
-        # Ignore elements with id only.
-        next if no_text && no_name
-
-        out += e[:class].split('.').last + "\n"
-
-        # name is id when using selendroid.
-        # remove id/ prefix
-        e[:id].sub!(/^id\//, '') if e[:id]
-
-        out += "  class: #{e[:class]}\n"
-        # id('back_button').click
-        out += "  id: #{e[:id]}\n" unless e[:id].nil?
-        # find_element(:link_text, 'text')
-        out += "  text: #{e[:text]}\n" unless no_text
-        # label is name. default is 'null'
-        # find_element(:link_text, 'Facebook')
-        out += "  name: #{e[:name]}\n" unless no_name
-        # out += "  visible: #{e[:shown]}\n" unless e[:shown].nil?
-      }
-      out
-    end
-
     def get_page_class
       r            = []
       run_internal = lambda do |node|
@@ -404,7 +339,7 @@ module Appium
     # Returns a string containing interesting elements.
     # @return [String]
     def get_inspect
-      @device == 'Selendroid' ? get_selendroid_inspect : get_android_inspect
+      get_android_inspect
     end
 
     # Intended for use with console.
@@ -438,7 +373,7 @@ module Appium
                      am_start: pkg + '/' + act
     end
 
-    # Find by id. Useful for selendroid
+    # Find by id
     # @param id [String] the id to search for
     # @return [Element]
     def id id

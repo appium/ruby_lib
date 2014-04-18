@@ -205,7 +205,7 @@ module Appium
     attr_accessor :global_webdriver_http_sleep
 
     # Creates a new driver.
-    # :device is :android, :ios, or :selendroid
+    # :device is :android or :ios
     #
     # ```ruby
     # # Options include:
@@ -417,7 +417,7 @@ module Appium
 
       begin
         @driver = Selenium::WebDriver.for :remote, http_client: @client, desired_capabilities: @caps, url: server_url
-        # Load touch methods. Required for Selendroid.
+        # Load touch methods.
         @driver.extend Selenium::WebDriver::DriverExtensions::HasTouchScreen
 
         # export session
@@ -430,10 +430,7 @@ module Appium
         raise 'ERROR: Unable to connect to Appium. Is the server running?'
       end
 
-      # Set timeout to a large number so that Appium doesn't quit
-      # when no commands are entered after 60 seconds.
-      # broken on selendroid: https://github.com/appium/appium/issues/513
-      mobile :setCommandTimeout, timeout: 9999 unless @device == 'Selendroid'
+      mobile :setCommandTimeout, timeout: 9999
 
       # Set implicit wait by default unless we're using Pry.
       @driver.manage.timeouts.implicit_wait = @default_wait unless defined? Pry

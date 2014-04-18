@@ -195,7 +195,7 @@ module Appium
     # Gets a JSON view of the current page
     # @return [JSON]
     def get_source
-      # must set max nesting. default limit of 20 is too low for selendroid
+      # must set max nesting. default limit of 20 is too low
       JSON.parse @driver.page_source, max_nesting: 9999
     end
 

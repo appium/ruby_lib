@@ -192,7 +192,7 @@ module Appium
       0.5
     end
 
-    # Find by id. Useful for selendroid
+    # Find by id
     # @param id [String] the id to search for
     # @return [Element]
     def id id
