@@ -1,46 +1,56 @@
 # encoding: utf-8
+# rake ios[common/helper]
 describe 'common/helper.rb' do
   before_first { screen.must_equal catalog }
   wait_time = [0.2, 0.2] # max_wait, interval
+
+=begin
+There's no `must_not_raise` as the opposite of must_raise
+
+By default code is expected to not raise exceptions.
+must_not_raise is a no-op.
+=end
+
   # wait is a success unless an error is raised
   # max_wait=0 is infinity to use 0.1
   t 'wait' do
-    # successful wait should not error
-    message = nil
-    begin
-      wait(*wait_time) { true }
-    rescue Exception => e
-      message = e.message
-    end
-    message.must_equal nil
+    # successful wait should not raise error
+    wait(*wait_time) { true }
+    wait(*wait_time) { false }
+    wait(*wait_time) { nil }
 
     # failed wait should error
-    begin
-      wait(*wait_time) { raise 'error' }
-    rescue Exception => e
-      message = e.message
-    end
-    message.must_equal 'execution expired'
+    proc { wait(*wait_time) { raise } }.must_raise Timeout::Error
+
+    # regular rescue will not handle exceptions outside of StandardError hierarchy
+    # must rescue Exception explicitly to rescue everything
+    proc { wait(*wait_time) { raise NoMemoryError } }.must_raise Timeout::Error
   end
 
   # wait_true is a success unless the value is not true
   t 'wait_true' do
     # successful wait should not error
-    message = nil
-    begin
-      wait_true(*wait_time) { true }
-    rescue Exception => e
-      message = e.message
-    end
-    message.must_equal nil
+    wait_true(*wait_time) { true }
 
     # failed wait should error
-    begin
-      wait_true(*wait_time) { false }
-    rescue Exception => e
-      message = e.message
-    end
-    message.must_equal 'execution expired'
+    proc { wait_true(*wait_time) { false } }.must_raise Timeout::Error
+    proc { wait_true(*wait_time) { nil } }.must_raise Timeout::Error
+
+    # raise should error
+    proc { wait_true(*wait_time) { raise } }.must_raise Timeout::Error
+
+    # regular rescue will not handle exceptions outside of StandardError hierarchy
+    # must rescue Exception explicitly to rescue everything
+    proc { wait(*wait_time) { raise NoMemoryError } }.must_raise Timeout::Error
+  end
+
+  t 'ignore' do
+    # ignore should rescue all exceptions
+    ignore { true }
+    ignore { false }
+    ignore { nil }
+    ignore { raise }
+    ignore { raise NoMemoryError }
   end
 
   # t 'id' # id is for Selendroid

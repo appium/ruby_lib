@@ -35,9 +35,9 @@ module Appium
       max_wait = 1 if max_wait <= 0
       result   = nil
       timeout max_wait do
-        until (result = begin
-          ; block.call || true;
-        rescue;
+        until (begin
+          result = block.call || true
+        rescue Exception
         end)
           sleep interval
         end
@@ -48,8 +48,8 @@ module Appium
     # Return block.call and ignore any exceptions.
     def ignore &block
       begin
-        ; block.call;
-      rescue;
+        block.call
+      rescue Exception
       end
     end
 
@@ -63,9 +63,9 @@ module Appium
       max_wait = 1 if max_wait <= 0
       result   = nil
       timeout max_wait do
-        until (result = begin
-          ; block.call;
-        rescue;
+        until (begin
+          result = block.call
+        rescue Exception
         end)
           sleep interval
         end
