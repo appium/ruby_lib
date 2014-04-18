@@ -204,30 +204,20 @@ module Appium
     # The amount to sleep in seconds before every webdriver http call.
     attr_accessor :global_webdriver_http_sleep
 
-    # Creates a new driver.
-    # :device is :android or :ios
+    # Creates a new driver
     #
     # ```ruby
-    # # Options include:
-    # :app_path, :app_name, :app_package, :app_activity,
-    # :app_wait_activity, :sauce_username, :sauce_access_key,
-    # :port, :os, :debug
-    #
     # require 'rubygems'
     # require 'appium_lib'
     #
+    # # platformName can be a string or a symbol.
+    #
     # # Start iOS driver
-    # app = { device: :ios, app_path: '/path/to/MyiOS.app'}
-    # Appium::Driver.new(app).start_driver
+    # opts = { caps: { platformName: :ios, app: '/path/to/MyiOS.app' } }
+    # Appium::Driver.new(opts).start_driver
     #
     # # Start Android driver
-    # apk = { device: :android
-    #         app_path: '/path/to/the.apk',
-    #         app_package: 'com.example.pkg',
-    #         app_activity: 'act.Start',
-    #         app_wait_activity: 'act.Start'
-    # }
-    #
+    # opts = { caps: { platformName: :android, app: '/path/to/my.apk' } }
     # Appium::Driver.new(apk).start_driver
     # ```
     #
@@ -261,13 +251,13 @@ module Appium
 
       # https://code.google.com/p/selenium/source/browse/spec-draft.md?repo=mobile
       @device = @caps[:platformName]
-      @device = @device.downcase.strip if @device
+      @device = @device.is_a?(Symbol) ? @device : @device.downcase.strip.intern if @device
       raise "Device must be set. Not found in options: #{opts}" unless @device
-      raise 'platformName must be Android or iOS' unless %w[android ios].include?(@device)
+      raise 'platformName must be Android or iOS' unless [:android, :ios].include?(@device)
 
       # load common methods
       extend Appium::Common
-      if @device == 'android'
+      if @device == :android
         # load Android specific methods
         extend Appium::Android
       else
