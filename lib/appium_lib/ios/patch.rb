@@ -22,13 +22,23 @@ now swipe down until the end of the window - 10 pixels.
 -10 to ensure we're not going outside the window bounds.
 
 Swiping inside the keyboard will not dismiss it.
+
+var startY = au.mainApp().keyboard().rect().origin.y - 10;
+var endY = au.mainWindow().rect().size.height - 10;
+au.flickApp(0, startY, 0, endY);
+
+The above logic has been accepted as part of appium's au.hideKeyboard
+https://github.com/appium/appium-uiauto/blob/dbeb4eedbdea2104751a0d547ac9b2894e0dc567/uiauto/appium/app.js#L902
+
+If the 'Done' key exists then that should be pressed to dismiss the keyboard
+because swiping to dismiss works only if such key doesn't exist.
 =end
           # type
           $driver.execute_script %(au.getElement('#{self.ref}').setValue('#{text}');)
 
           $driver.ignore {
-            # wait 5 seconds for keyboard. if the textfield is disabled then
-            # setValue will work, however the keyboard will never display
+            # wait 5 seconds for a wild keyboard to appear. if the textfield is disabled
+            # then setValue will work, however the keyboard will never display
             # because users are normally not allowed to type into it.
             $driver.wait_true(5) do
               $driver.execute_script %(au.mainApp().keyboard().type() !== 'UIAElementNil')
@@ -37,13 +47,16 @@ Swiping inside the keyboard will not dismiss it.
             # dismiss keyboard
             js = <<-JS
             if (au.mainApp().keyboard().type() !== "UIAElementNil") {
-              var startY = au.mainApp().keyboard().rect().origin.y - 10;
-              var endY = au.mainWindow().rect().size.height - 10;
-              au.flickApp(0, startY, 0, endY);
+              au.hideKeyboard('Done');
             }
             JS
 
             $driver.execute_script js
+
+            # wait 5 seconds for keyboard to go away
+            $driver.wait_true(5) do
+              $driver.execute_script %(au.mainApp().keyboard().type() === 'UIAElementNil')
+            end
           }
         end # def type
       end # Selenium::WebDriver::Element.class_eval

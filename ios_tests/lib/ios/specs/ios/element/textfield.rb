@@ -1,4 +1,5 @@
 # encoding: utf-8
+# rake ios[ios/element/textfield]
 describe 'ios/element/textfield' do
   before_first { go_to_textfields }
   after_last { set_wait 30 }
@@ -39,6 +40,31 @@ describe 'ios/element/textfield' do
 
   t 'textfield_exact' do
     textfield_exact(enter_password).text.must_equal enter_password
+  end
+
+  def keyboard_exists?
+    !! ignore { wait_true(3) { execute_script 'au.mainApp().keyboard().type() !== "UIAElementNil"' } }
+  end
+
+  def keyboard_must_not_exist
+    keyboard_exists?.must_equal false
+  end
+
+  def keyboard_must_exist
+    keyboard_exists?.must_equal true
+  end
+
+  t 'textfield type' do
+    # Regular send keys triggers the keyboard and doesn't dismiss
+    keyboard_must_not_exist
+    textfield(1).send_keys 'ok'
+    keyboard_must_exist
+
+    # type will dismiss the keyboard
+    message = 'type test type'
+    textfield(1).type message
+    keyboard_must_not_exist
+    textfield(1).text.must_equal message
   end
 
   def must_raise_no_element &block
