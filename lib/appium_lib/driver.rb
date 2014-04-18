@@ -278,8 +278,6 @@ module Appium
         patch_webdriver_bridge
       end
 
-      # load device methods
-      extend Appium::Device
 
       # Save global reference to last created Appium driver for top level methods.
       $driver = self
@@ -290,6 +288,9 @@ module Appium
         @@loaded = true
         # Promote only on Minitest::Spec (minitest 5) by default
         Appium.promote_appium_methods ::Minitest::Spec
+
+        # load device methods exactly once
+        extend Appium::Device
       end
 
       self # return newly created driver
