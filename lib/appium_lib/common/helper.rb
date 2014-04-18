@@ -53,7 +53,9 @@ module Appium
       end
     end
 
-    # Check every 0.5 seconds to see if block.call returns true. nil is considered a failure.
+    # Check every 0.5 seconds to see if block.call returns a truthy value.
+    # Note this isn't a strict boolean true, any truthy value is accepted.
+    # false and nil are considered failures.
     # Give up after 30 seconds.
     # @param max_wait [Integer] the maximum time in seconds to wait for
     # @param interval [Float] the time in seconds to wait after calling the block
