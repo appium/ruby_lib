@@ -1,8 +1,10 @@
 # encoding: utf-8
 require 'rubygems'
 require 'ap'
-
 require 'selenium-webdriver'
+
+# patch ap
+require_relative 'awesome_print/ostruct'
 
 # common
 require_relative 'common/helper'
@@ -31,18 +33,6 @@ require_relative 'android/mobile_methods'
 
 # device methods
 require_relative 'device/device'
-
-# Support OpenStruct in Awesome Print
-# /awesome_print/lib/awesome_print/formatter.rb
-# upstream issue: https://github.com/michaeldv/awesome_print/pull/36
-class AwesomePrint::Formatter
-  remove_const :CORE if defined?(CORE)
-  CORE = [:array, :hash, :class, :file, :dir, :bigdecimal, :rational, :struct, :openstruct, :method, :unboundmethod]
-
-  def awesome_openstruct target
-    awesome_hash target.marshal_dump
-  end
-end
 
 # Fix uninitialized constant Minitest (NameError)
 module Minitest
