@@ -210,7 +210,7 @@ module Appium
     # require 'rubygems'
     # require 'appium_lib'
     #
-    # # platformName can be a string or a symbol.
+    # # platformName takes a string or a symbol.
     #
     # # Start iOS driver
     # opts = { caps: { platformName: :ios, app: '/path/to/MyiOS.app' } }
