@@ -46,23 +46,23 @@ module Minitest
 end
 
 module Appium
-# Load appium.txt (toml format)
-# the basedir of this file + appium.txt is what's used
-#
-# ```
-# [caps]
-# app = "path/to/app"
-#
-# [appium_lib]
-# port = 8080
-# ```
-#
-# :app is expanded
-# :requires are expanded
-# all keys are converted to symbols
-#
-# @param opts [Hash] file: '/path/to/appium.txt', verbose: true
-# @return [hash] the symbolized hash with updated :app and :require keys
+  # Load appium.txt (toml format)
+  # the basedir of this file + appium.txt is what's used
+  #
+  # ```
+  # [caps]
+  # app = "path/to/app"
+  #
+  # [appium_lib]
+  # port = 8080
+  # ```
+  #
+  # :app is expanded
+  # :requires are expanded
+  # all keys are converted to symbols
+  #
+  # @param opts [Hash] file: '/path/to/appium.txt', verbose: true
+  # @return [hash] the symbolized hash with updated :app and :require keys
   def self.load_appium_txt opts={}
     raise 'opts must be a hash' unless opts.kind_of? Hash
     raise 'opts must not be empty' if opts.empty?
@@ -169,7 +169,6 @@ module Appium
   # ```ruby
   # Appium.promote_appium_methods Object
   # ```
-
   def self.promote_appium_methods class_array
     raise 'Driver is nil' if $driver.nil?
     # Wrap single class into an array
@@ -204,6 +203,7 @@ module Appium
 
     # The amount to sleep in seconds before every webdriver http call.
     attr_accessor :global_webdriver_http_sleep
+
     # Creates a new driver.
     # :device is :android, :ios, or :selendroid
     #
@@ -563,8 +563,8 @@ module Appium
       driver_quit
       exit # exit pry
     end
-  end # end class Driver
-end # end module Appium
+  end # class Driver
+end # module Appium
 
 # Paging in Pry is annoying :q required to exit.
 # With pager disabled, the output is similar to IRB

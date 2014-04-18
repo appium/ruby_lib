@@ -75,5 +75,5 @@ module Appium
         target
       end
     end
-  end
-end
+  end # module Ios
+end # module Appium

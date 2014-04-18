@@ -13,5 +13,5 @@ module Appium
         end
       end
     end
-  end
-end
+  end # Android
+end # Appium

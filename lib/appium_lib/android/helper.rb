@@ -447,5 +447,5 @@ module Appium
       raise "Invalid id `#{id}`" unless @strings_xml[id] || id.include?(':')
       find_element :id, id
     end
-  end
-end
+  end # module Android
+end # module Appium

@@ -26,8 +26,8 @@ if defined?(OpenStruct)
       def awesome_open_struct_instance(object)
         "#{object.class} #{awesome_hash(object.marshal_dump)}"
       end
-    end
-  end
+    end # module OpenStruct
+  end # module AwesomePrint
 
   AwesomePrint::Formatter.send(:include, AwesomePrint::OpenStruct)
 end

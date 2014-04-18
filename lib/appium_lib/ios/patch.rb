@@ -45,8 +45,8 @@ Swiping inside the keyboard will not dismiss it.
 
             $driver.execute_script js
           }
-        end
-      end
-    end
-  end
-end
+        end # def type
+      end # Selenium::WebDriver::Element.class_eval
+    end # def patch_webdriver_element
+  end # module Ios
+end # module Appium

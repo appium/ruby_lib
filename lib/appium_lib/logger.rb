@@ -8,6 +8,6 @@ module Appium
       def logger
         @logger ||= Logger.new
       end
-    end
-  end
-end
+    end # class << self
+  end # module Logger
+end # module Appium

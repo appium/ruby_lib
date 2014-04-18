@@ -81,5 +81,5 @@ module Appium
 
       result
     end
-  end
-end
+  end # module Common
+end # module Appium

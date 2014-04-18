@@ -35,5 +35,5 @@ module Appium
     def alert_dismiss_text
       first_button.text
     end
-  end
-end
+  end # module Android
+end # module Appium

@@ -46,5 +46,5 @@ module Appium
     def textfield_exact text
       find_ele_by_text :textfield, text
     end
-  end
-end
+  end # module Android
+end # module Appium

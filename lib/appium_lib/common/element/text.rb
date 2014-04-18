@@ -59,5 +59,5 @@ module Appium
     def s_texts_exact text
       find_eles_by_text :text, text
     end
-  end
-end
+  end # module Common
+end # module Appium

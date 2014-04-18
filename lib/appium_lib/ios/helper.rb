@@ -207,5 +207,5 @@ module Appium
       ios_version = execute_script 'UIATarget.localTarget().systemVersion()'
       ios_version.split('.').map { |e| e.to_i }
     end
-  end
-end
+  end # module Ios
+end # module Appium

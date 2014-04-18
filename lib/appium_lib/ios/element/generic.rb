@@ -163,5 +163,5 @@ module Appium
     def escape_single_quote text_to_escape
       text_to_escape.gsub("'", '\\' * 4 + "'")
     end
-  end
-end
+  end # module Ios
+end # module Appium

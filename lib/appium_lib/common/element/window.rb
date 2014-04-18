@@ -7,5 +7,5 @@ module Appium
       return nil if @driver.nil?
       @driver.manage.window.size
     end
-  end
-end
+  end # module Common
+end # module Appium

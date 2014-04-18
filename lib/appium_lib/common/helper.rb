@@ -277,6 +277,5 @@ module Appium
     def raise_no_element_error
       raise Selenium::WebDriver::Error::NoSuchElementError, 'An element could not be located on the page using the given search parameters.'
     end
-
-  end
-end
+  end # module Common
+end # module Appium

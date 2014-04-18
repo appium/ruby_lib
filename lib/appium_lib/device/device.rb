@@ -245,7 +245,7 @@ module Appium
       #   @return [String] The context currently being used.
 
       # @!method available_contexts
-# @return [Array<String>] All usable contexts, as an array of strings
+      # @return [Array<String>] All usable contexts, as an array of strings
     end # class << self
   end # module Device
 end # module Appium

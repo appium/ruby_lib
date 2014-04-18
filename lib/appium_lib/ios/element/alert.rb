@@ -93,5 +93,5 @@ module Appium
         return target_text
       end
     end
-  end
-end
+  end # module Ios
+end # module Appium

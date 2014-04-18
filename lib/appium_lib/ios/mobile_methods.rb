@@ -12,6 +12,6 @@ module Appium
           Selenium::WebDriver::SearchContext::FINDERS[:uiautomation] = '-ios uiautomation'
         end
       end
-    end
-  end
-end
+    end # class << self
+  end # module Ios
+end # module Appium

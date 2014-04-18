@@ -151,5 +151,5 @@ the first element that matches.
 
       mobile :find, args
     end
-  end
-end
+  end # module Android
+end # module Appium

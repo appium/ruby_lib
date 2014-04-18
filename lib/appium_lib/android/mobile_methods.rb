@@ -12,6 +12,6 @@ module Appium
           Selenium::WebDriver::SearchContext::FINDERS[:uiautomator] = '-android uiautomator'
         end
       end
-    end
-  end
-end
+    end # class << self
+  end # module Android
+end # module Appium
