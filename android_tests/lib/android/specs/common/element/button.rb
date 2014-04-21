@@ -1,14 +1,14 @@
 # encoding: utf-8
 
 describe 'common/element/button' do
-  before_first do
+  def before_first
     # nav to buttons activity
     text('App').click
     text('Activity').click
     text('Animation').click
   end
 
-  after_last do
+  def after_last
     # nav back to home activity
     3.times { back }
   end
@@ -16,6 +16,8 @@ describe 'common/element/button' do
   def fade_in
     'Fade in'
   end
+
+  t { before_first }
 
   t 'button' do
     # by index
@@ -54,4 +56,6 @@ describe 'common/element/button' do
     # select the second button containing 'in'
     button_num('in', 2).name.must_equal 'Zoom in'
   end
+
+  t { after_last }
 end

@@ -1,8 +1,15 @@
 # encoding: utf-8
 # rake ios[ios/element/textfield]
 describe 'ios/element/textfield' do
-  before_first { go_to_textfields }
-  after_last { set_wait 30 }
+  def before_first
+    go_to_textfields
+  end
+
+  def after_last
+    set_wait 30
+  end
+
+  t { before_first }
 
   t 'textfields' do
     textfields.include?('<enter text>').must_equal true
@@ -103,4 +110,6 @@ describe 'ios/element/textfield' do
   t 'no textfield_exact' do
     must_raise_no_element { textfield_exact('does not exist') }
   end
+
+  t { after_last }
 end

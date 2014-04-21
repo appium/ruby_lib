@@ -1,6 +1,6 @@
 # encoding: utf-8
 describe 'ios/element/generic' do
-  before_first do
+  def before_first
     screen.must_equal catalog
     wait { mobile :flick, endX: 0.5, endY: 0.9 } # scroll up
     sleep 1
@@ -13,6 +13,8 @@ describe 'ios/element/generic' do
   def search_text
     'TextFields'
   end
+
+  t { before_first }
 
   t 'find' do
     el = find search_text
