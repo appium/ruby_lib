@@ -64,6 +64,10 @@ describe 'common/device' do
     act.class.must_equal Selenium::WebDriver::Element
   end
 
+  t 'keyevent' do
+    keyevent key: 176
+  end 
+
   t 'action_chain' do
     e = find_element(:name, "Accessibility")
     Appium::TouchAction.new.press(:element => e, x: 0.5, y: 0.5).release(:element => e).perform

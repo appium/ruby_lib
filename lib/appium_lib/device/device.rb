@@ -62,6 +62,11 @@ module Appium
     #  hide_keyboard('Finished') # Close a keyboard with the 'Finished' button
     #  ```
 
+    # @!method key_event
+    # Send a key event to the device.
+    # @param key (integer) The key to send.
+    # @param metastate (String) The state the metakeys should be in when sending the key.
+
     # @!method push_file
     #   Place a file in a specific location on the device.
     #   @param path (String) The absolute path on the device to store data at.
@@ -123,6 +128,14 @@ module Appium
         add_endpoint_method(:hide_keyboard, 'session/:session_id/appium/device/hide_keyboard') do
           def hide_keyboard(close_key='Done')
             execute :hide_keyboard, {}, keyName: close_key
+          end
+        end
+
+        add_endpoint_method(:key_event, 'session/:session_id/appium/device/keyevent') do
+          def key_event(key, metastate=nil)
+            args = {keycode: key}
+            args[:metastate] = metastate if metastate
+            execute :key_event, {}, args
           end
         end
 
