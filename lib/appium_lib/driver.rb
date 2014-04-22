@@ -288,11 +288,11 @@ module Appium
       # Subsequent drivers do not trigger promotion.
       unless @@loaded
         @@loaded = true
-        # Promote only on Minitest::Spec (minitest 5) by default
-        Appium.promote_appium_methods ::Minitest::Spec
-
         # load device methods exactly once
         extend Appium::Device
+        
+        # Promote only on Minitest::Spec (minitest 5) by default
+        Appium.promote_appium_methods ::Minitest::Spec
       end
 
       self # return newly created driver
