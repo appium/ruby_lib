@@ -67,13 +67,12 @@ module Appium
     end
 
     # Get the first textfield that exactly matches name
+    # https://github.com/appium/ruby_lib/issues/100
     # @return [Element]
     def textfield_named target_name
-      wait do
-        target = e_textfields.detect { |e| e.name == target_name }
-        raise "Textfield named #{target_name} not found" unless target
-        target
-      end
+      result = find_element :name, target_name
+      return result if result.tag_name == 'UIATextField'
+      result.find_element :name, target_name
     end
   end # module Ios
 end # module Appium
