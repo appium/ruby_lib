@@ -1,3 +1,5 @@
+require 'base64'
+
 module Appium
   module Device
     extend Forwardable
@@ -59,6 +61,21 @@ module Appium
     #  hide_keyboard # Close a keyboard with the 'Done' button
     #  hide_keyboard('Finished') # Close a keyboard with the 'Finished' button
     #  ```
+
+    # @!method push_file
+    #   Place a file in a specific location on the device.
+    #   @param path (String) The absolute path on the device to store data at.
+    #   @param data (String) Raw file data to be sent to the device.
+
+    # @!method pull_file
+    #   Retrieve a file from the device.  This can retrieve an absolute path or
+    #   a path relative to the installed app (iOS only).
+    #   @param path (String) Either an absolute path OR, for iOS devices, a path relative to the app, as described.
+    #
+    #   ```ruby
+    #   pull_file '/local/data/some/path' #=> Get the file at that path
+    #   pull_file 'Shenanigans.app/some/file' #=> Get 'some/file' from the install location of Shenanigans.app
+    #   ```
     class << self
       def extended(mod)
         extend_webdriver_with_forwardable
@@ -126,6 +143,20 @@ module Appium
             else
               return Selenium::WebDriver::Element.new self, element_id_from(ids)
             end
+          end
+        end
+
+        add_endpoint_method(:push_file,'session/:session_id/appium/device/push_file') do
+          def push_file(path, filedata)
+            encoded_data = Base64.encode64 filedata
+            execute :push_file, {}, path: path, data: encoded_data 
+          end
+        end
+
+        add_endpoint_method(:pull_file, 'session/:session_id/appium/device/pull_file') do
+          def pull_file(path)
+            data = execute :pull_file, {}, path: path
+            Base64.decode64 data
           end
         end
 
