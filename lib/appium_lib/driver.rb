@@ -33,6 +33,8 @@ require_relative 'android/mobile_methods'
 
 # device methods
 require_relative 'device/device'
+require_relative 'device/touch_actions'
+require_relative 'device/multi_touch'
 
 # Fix uninitialized constant Minitest (NameError)
 module Minitest

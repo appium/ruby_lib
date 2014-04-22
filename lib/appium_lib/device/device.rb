@@ -102,7 +102,7 @@ module Appium
           end
         end
 
-        add_endpoint_method(:is_installed?, 'session/:session_id?/appium/device/app_installed') do
+        add_endpoint_method(:is_installed?, 'session/:session_id/appium/device/app_installed') do
           def is_installed?(app_id)
             execute :is_installed?, {}, :bundleId => app_id
           end
@@ -160,6 +160,7 @@ module Appium
           end
         end
 
+        add_touch_actions
         extend_search_contexts
       end
 
@@ -176,8 +177,8 @@ module Appium
         end
 
         delegate_driver_method method
-        delegate_appium_driver_method method
-      end
+        delegate_from_appium_driver method
+      end 
 
       # @private
       def extend_webdriver_with_forwardable
@@ -194,8 +195,8 @@ module Appium
       end
 
       # @private
-      def delegate_appium_driver_method(method)
-        def_delegator :@driver, method
+      def delegate_from_appium_driver(method, delegation_target=:driver)
+        def_delegator delegation_target, method
       end
 
       # @private
@@ -246,37 +247,60 @@ module Appium
         end
       end
 
-      # Perform a block within the given context, then switch back to the starting context.
-      # @param context (String) The context to switch to for the duration of the block.
-      #
-      # ```ruby
-      # within_context('NATIVE_APP') do
-      #   find_element [:tag, "button"]
-      # ```
-      def within_context(context)
-        existing_context = current_context
-        yield if block_given?
-        current_context = existing_context
+      def add_touch_actions
+        add_endpoint_method(:touch_actions, 'session/:session_id/touch/perform') do
+          def touch_actions(actions)
+            actions = [actions].flatten
+            execute :touch_actions, {}, actions
+          end
+        end
+
+        add_endpoint_method(:multi_touch, 'session/:session_id/touch/multi/perform') do
+          def multi_touch(actions)
+            execute :multi_touch, {}, actions: actions
+          end
+        end
+
+        actions = Appium::TouchAction::ACTIONS + Appium::TouchAction::COMPLEX_ACTIONS
+        actions.each do |method|
+          delegate_from_appium_driver(method, Appium::TouchAction)
+        end
+
+        delegate_from_appium_driver(:pinch, Appium::MultiTouch)
+        delegate_from_appium_driver(:zoom, Appium::MultiTouch)
       end
-
-      # Change to the default context.  This is equivalent to `current_context= nil`.
-      def switch_to_default_context
-        current_context = nil
-      end
-
-      # @!method current_context=
-      #   Change the context to the given context.
-      #   @param [String] The context to change to
-      #
-      #   ```ruby
-      #   current_context= "NATIVE_APP"
-      #   ```
-
-      # @!method current_context
-      #   @return [String] The context currently being used.
-
-      # @!method available_contexts
-      # @return [Array<String>] All usable contexts, as an array of strings
     end # class << self
+        
+    # @!method current_context=
+    #   Change the context to the given context.
+    #   @param [String] The context to change to
+    #
+    #   ```ruby
+    #   current_context= "NATIVE_APP"
+    #   ```
+
+    # @!method current_context
+    #   @return [String] The context currently being used.
+
+    # @!method available_contexts
+    # @return [Array<String>] All usable contexts, as an array of strings.
+
+    # Perform a block within the given context, then switch back to the starting context.
+    # @param context (String) The context to switch to for the duration of the block.
+    #
+    # ```ruby
+    # within_context('NATIVE_APP') do
+    #   find_element [:tag, "button"]
+    # ```
+    def within_context(context)
+      existing_context = current_context
+      yield if block_given?
+      current_context = existing_context
+    end
+
+    # Change to the default context.  This is equivalent to `current_context= nil`.
+    def switch_to_default_context
+      current_context = nil
+    end
   end # module Device
 end # module Appium
