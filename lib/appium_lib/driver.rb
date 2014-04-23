@@ -512,25 +512,6 @@ module Appium
       @driver.execute_script script, *args
     end
 
-    # Helper method for mobile gestures
-    #
-    # https://github.com/appium/appium/wiki/Automating-mobile-gestures
-    #
-    # driver.execute_script 'mobile: swipe', endX: 100, endY: 100, duration: 0.01
-    #
-    # becomes
-    #
-    # mobile :swipe, endX: 100, endY: 100, duration: 0.01
-    # @param method [String, Symbol] the method to execute
-    # @param args [*args] the args to pass to the method
-    # @return [Object]
-    def mobile method, *args
-      raise 'Method must not be nil' if method.nil?
-      raise 'Method must have .to_s' unless method.respond_to? :to_s
-
-      @driver.execute_script "mobile: #{method.to_s}", *args
-    end
-
     # Calls @driver.find_elements
     #
     # @param args [*args] the args to use

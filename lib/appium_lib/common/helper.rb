@@ -298,7 +298,7 @@ module Appium
     end
 
     def lazy_load_strings
-      @strings_xml ||= mobile(:getStrings)
+      @strings_xml ||= app_strings
     end
 
     # Search strings.xml's values for target.

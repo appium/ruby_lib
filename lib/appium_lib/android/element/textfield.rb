@@ -37,7 +37,7 @@ module Appium
       args = [[4, 'android.widget.EditText'], [7, text]],
           # s.className('android.widget.EditText').textContains(value);
           [[4, 'android.widget.EditText'], [3, text]]
-      mobile :find, args
+      complex_find args
     end
 
     # Get the first textfield that matches text.

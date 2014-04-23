@@ -130,9 +130,14 @@ module Appium
     # @return [Element] the first matching element
     def name name
       name = escape_single_quote name
-      mobile :findElementNameContains, name: name
+      execute_script(%Q(au.mainApp().getNameContains('#{name}')))
     end
 
+    # Return first element exactly matching name.
+    # on Android name is content description
+    # on iOS name is the accessibility label or the text.
+    # @param name [String] the name to search for
+    # @return [Element] the matching element
     def name_exact name
       name   = escape_single_quote name
       js     = all_ele_js "name == '#{name}'"

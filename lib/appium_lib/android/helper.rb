@@ -205,7 +205,7 @@ module Appium
 
     args = [ 'all', sel1, sel2 ]
 
-    mobile :find, args
+    complex_find args
 =end
       array = ['all']
 
@@ -214,7 +214,7 @@ module Appium
         array.push [[4, name], [100]]
       end
 
-      mobile :find, array
+      complex_find array
     end
 
     # Android only.

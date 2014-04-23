@@ -62,7 +62,7 @@ the first element that matches.
           [[7, val]],
           # s.textContains(value);
           [[3, val]]
-      mobile :find, args
+      complex_find args
     end
 
     # Return the first element matching text.
@@ -71,7 +71,7 @@ the first element that matches.
     def text text
       # Return the first element matching selector.
       # s.textContains(value)
-      mobile :find, [[[3, text]]]
+      complex_find [[[3, text]]]
     end
 
     # Return all elements matching text.
@@ -89,7 +89,7 @@ the first element that matches.
     def name name
       # work around https://github.com/appium/appium/issues/543
       # @driver.find_element :name, name
-      mobile :find, [[[7, name]]]
+      complex_find [[[7, name]]]
     end
 
     # Return the first element exactly matching name.
@@ -99,7 +99,7 @@ the first element that matches.
     # @return [Element] the first matching element
     def name_exact name
       # exact description
-      result = mobile :find, [[[5, name]]]
+      result = complex_find [[[5, name]]]
 
       return result if result.kind_of? Selenium::WebDriver::Element
 
@@ -118,11 +118,11 @@ the first element that matches.
     def names name=''
       if name.nil? || name.empty?
         args = 'all', [[7, ''], [100]]
-        mobile :find, args
+        complex_find args
       else
         args = 'all',
             [[7, name]]
-        mobile :find, args
+        complex_find args
       end
     end
 
@@ -136,7 +136,7 @@ the first element that matches.
           # descriptionContains(text)
           [[7, text]]
 
-      mobile :find, args
+      complex_find args
     end
 
     # Scroll to an element with the exact target text or description.
@@ -149,7 +149,7 @@ the first element that matches.
           # description(text)
           [[5, text]]
 
-      mobile :find, args
+      complex_find args
     end
   end # module Android
 end # module Appium
