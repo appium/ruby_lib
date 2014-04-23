@@ -192,11 +192,10 @@ module Appium
       ap get_source
     end
 
-    # Gets a JSON view of the current page
-    # @return [JSON]
+    # Returns XML for the current page
+    # @return [Nokogiri::XML]
     def get_source
-      # must set max nesting. default limit of 20 is too low
-      JSON.parse @driver.page_source, max_nesting: 9999
+      Nokogiri::XML @driver.page_source
     end
 
     # Returns the first element that exactly matches name

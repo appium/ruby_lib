@@ -5,7 +5,7 @@
     status # status patches are already tested in driver.rb
     raw_execute # debug output for Pry
 =end
-
+# rake ios[common/patch]
 describe 'common/patch.rb' do
   def before_first
     screen.must_equal catalog
