@@ -189,11 +189,6 @@ describe 'driver' do
       execute_script %q(au.mainApp().getFirstWithPredicate("name contains[c] 'button'");)
     end
 
-    # any mobile method
-    t 'mobile' do
-      mobile(:getCommandTimeout).must_equal 9999
-    end
-
     # any elements
     t 'find_elements' do
       find_elements(:tag_name, :text).length.must_equal 13

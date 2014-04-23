@@ -14,7 +14,6 @@ describe 'ios/element/alert' do
     ignore { wait(4) { alert_accept } }
     back_click
     screen.must_equal catalog
-    mobile :flick, endX: 0.5, endY: 0.9
     sleep 1
   end
 

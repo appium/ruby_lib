@@ -83,15 +83,6 @@ caps[:app] = ENV['SAUCE_PATH'] if ENV['SAUCE_USERNAME'] && ENV['SAUCE_ACCESS_KEY
 
 Appium::Driver.new(caps).start_driver
 
-=begin
-# Android doesn't like to be reset before booting up
-case device
-  when 'android'
-    button 'start button'
-    mobile :reset
-end
-=end
-
 trace_files = []
 
 if one_test
