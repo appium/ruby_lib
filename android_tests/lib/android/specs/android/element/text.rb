@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-describe 'common/element/text' do
+describe 'android/element/text' do
   t 's_texts' do
     exp = ['API Demos', 'Accessibility', 'Animation', 'App', 'Content', 'Graphics', 'Media', 'NFC', 'OS', 'Preference', 'Text', 'Views']
 

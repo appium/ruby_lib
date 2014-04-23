@@ -60,7 +60,7 @@ def go_to_textfields
 end
 
 def screen
-  $driver.find_element(:tag_name, 'navigationBar').name
+  $driver.find_element(:class, 'UIANavigationBar').name
 end
 
 def catalog

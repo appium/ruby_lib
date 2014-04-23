@@ -12,7 +12,6 @@ require_relative 'common/helper'
 require_relative 'common/patch'
 require_relative 'common/version'
 require_relative 'common/element/button'
-require_relative 'common/element/text'
 require_relative 'common/element/window'
 
 # ios
@@ -21,6 +20,7 @@ require_relative 'ios/patch'
 require_relative 'ios/element/alert'
 require_relative 'ios/element/generic'
 require_relative 'ios/element/textfield'
+require_relative 'ios/element/text'
 require_relative 'ios/mobile_methods'
 
 # android
@@ -30,6 +30,7 @@ require_relative 'android/patch'
 require_relative 'android/element/alert'
 require_relative 'android/element/generic'
 require_relative 'android/element/textfield'
+require_relative 'android/element/text'
 require_relative 'android/mobile_methods'
 
 # device methods
