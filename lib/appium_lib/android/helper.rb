@@ -217,39 +217,6 @@ module Appium
       mobile :find, array
     end
 
-    def get_page_class
-      r            = []
-      run_internal = lambda do |node|
-        if node.kind_of? Array
-          node.each { |node| run_internal.call node }
-          return
-        end
-
-        keys = node.keys
-        return if keys.empty?
-        r.push node['@class'] if keys.include?('@class')
-
-        run_internal.call node['node'] if keys.include?('node')
-      end
-      json         = get_source
-      run_internal.call json['hierarchy']
-
-      res = []
-      r   = r.sort
-      r.uniq.each do |ele|
-        res.push "#{r.count(ele)}x #{ele}\n"
-      end
-      count_sort = ->(one, two) { two.match(/(\d+)x/)[1].to_i <=> one.match(/(\d+)x/)[1].to_i }
-      res.sort(&count_sort).join ''
-    end
-
-    # Count all classes on screen and print to stdout.
-    # Useful for appium_console.
-    def page_class
-      puts get_page_class
-      nil
-    end
-
     # Android only.
     # Returns a string containing interesting elements.
     # If an element has no content desc or text, then it's not returned by this method.

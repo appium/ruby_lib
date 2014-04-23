@@ -35,7 +35,8 @@ module Appium
       max_wait = 1 if max_wait <= 0
       result   = nil
       timeout max_wait do
-        until (begin
+        until (
+        begin
           result = block.call || true
         rescue Exception
         end)
@@ -65,7 +66,8 @@ module Appium
       max_wait = 1 if max_wait <= 0
       result   = nil
       timeout max_wait do
-        until (begin
+        until (
+        begin
           result = block.call
         rescue Exception
         end)
@@ -186,16 +188,65 @@ module Appium
       xpath "//#{tag_name}[last()]"
     end
 
-    # Prints a JSON view of the current page
+    # Prints xml of the current page
     # @return [void]
     def source
-      ap get_source
+      doc = Nokogiri::XML(@driver.page_source) do |config|
+        config.options = Nokogiri::XML::ParseOptions::NOBLANKS | Nokogiri::XML::ParseOptions::NONET
+      end
+      puts doc.to_xml indent: 2
     end
 
-    # Returns XML for the current page
-    # @return [Nokogiri::XML]
+
+    # Returns XML string for the current page
+    # Same as driver.page_source
+    # @return [String]
     def get_source
-      Nokogiri::XML @driver.page_source
+      @driver.page_source
+    end
+
+    # http://nokogiri.org/Nokogiri/XML/SAX.html
+    class CountElements < Nokogiri::XML::SAX::Document
+      attr_reader :result
+
+      def initialize
+        reset
+      end
+
+      def reset
+        @result = Hash.new 0
+      end
+
+      # http://nokogiri.org/Nokogiri/XML/SAX/Document.html
+      def start_element name, attrs = []
+        @result[name] += 1
+      end
+
+      def formatted_result
+        message = ''
+        sorted  = @result.sort_by { |element, count| count }.reverse
+        sorted.each do |element, count|
+          message += "#{count}x #{element}\n"
+        end
+        message.strip
+      end
+    end # class CountElements
+
+    # Returns a string of class counts.
+    def get_page_class
+      parser = @count_elements_parser ||= Nokogiri::XML::SAX::Parser.new(CountElements.new)
+
+      parser.document.reset
+      parser.parse get_source
+
+      parser.document.formatted_result
+    end
+
+    # Count all classes on screen and print to stdout.
+    # Useful for appium_console.
+    def page_class
+      puts get_page_class
+      nil
     end
 
     # Returns the first element that exactly matches name
