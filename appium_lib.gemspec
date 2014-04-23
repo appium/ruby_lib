@@ -30,6 +30,10 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'toml', '~> 0.0', '>= 0.0.4'
   s.add_runtime_dependency 'posix-spawn', '~> 0.3', '>= 0.3.8'
 
+  s.add_development_dependency 'hashdiff', '~> 0.2.0'
+  s.add_development_dependency 'spec', '~> 5.3.4'
+  s.add_development_dependency 'fakefs', '~> 0.5.0'
+
   s.add_development_dependency 'rake', '~> 10.2', '>= 10.2.2'
   s.add_development_dependency 'yard', '~> 0.8', '>= 0.8.7.3'
 

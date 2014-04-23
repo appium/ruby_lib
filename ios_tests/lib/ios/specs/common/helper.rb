@@ -1,7 +1,12 @@
 # encoding: utf-8
 # rake ios[common/helper]
 describe 'common/helper.rb' do
-  before_first { screen.must_equal catalog }
+  def before_first
+    screen.must_equal catalog
+  end
+
+  t { before_first }
+
   wait_time = [0.2, 0.2] # max_wait, interval
 
 =begin

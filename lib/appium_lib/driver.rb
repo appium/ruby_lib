@@ -423,8 +423,6 @@ module Appium
         raise 'ERROR: Unable to connect to Appium. Is the server running?'
       end
 
-      mobile :setCommandTimeout, timeout: 9999
-
       # Set implicit wait by default unless we're using Pry.
       @driver.manage.timeouts.implicit_wait = @default_wait unless defined? Pry
 

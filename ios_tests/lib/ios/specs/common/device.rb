@@ -1,75 +1,79 @@
 describe 'common/device' do
-  before_first { screen.must_equal catalog }
+  def before_first
+    screen.must_equal catalog
+  end
 
-    t 'lock' do
-      lock 5
-      tag('button').name.must_equal 'SlideToUnlock'
+  t { before_first }
 
-      # It appears that lockForDuration doesn't.
-      closeApp
-      launch
-    end
+  t 'lock' do
+    lock 5
+    tag('button').name.must_equal 'SlideToUnlock'
 
-    t 'background_app' do
-      background_app 5
-      screen.must_equal catalog
-    end
+    # It appears that lockForDuration doesn't.
+    closeApp
+    launch
+  end
 
-    t 'is_installed' do
-      installed = is_installed? "Derrp"
-      installed.must_equal false
-    end
+  t 'background_app' do
+    background_app 5
+    screen.must_equal catalog
+  end
 
-    t 'shake' do
-      shake
-    end
+  t 'is_installed' do
+    installed = is_installed? "Derrp"
+    installed.must_equal false
+  end
 
-    t 'close and launch' do
-      closeApp
-      launch
-      tag('navigationBar').name.must_equal 'UICatalog'
-    end
+  t 'shake' do
+    shake
+  end
 
-    t 'reset' do
-      reset
-    end
+  t 'close and launch' do
+    closeApp
+    launch
+    tag('navigationBar').name.must_equal 'UICatalog'
+  end
 
-    t 'available_contexts' do
-      available_contexts.must_equal ["NATIVE_APP"]
-    end
+  t 'reset' do
+    reset
+  end
 
-    t 'current_context' do
-      current_context.must_equal nil
-    end
+  t 'available_contexts' do
+    available_contexts.must_equal ["NATIVE_APP"]
+  end
 
-    t 'switch_to_default_context' do
-      switch_to_default_context
-      current_context.must_equal nil
-    end
+  t 'current_context' do
+    current_context.must_equal nil
+  end
 
-    t 'app_strings' do
-      app_strings.must_include "SearchBarExplain"
-    end
+  t 'switch_to_default_context' do
+    switch_to_default_context
+    current_context.must_equal nil
+  end
 
-    t 'action_chain' do
-      ac = Appium::TouchAction.new
-      e = find_element(:name, 'Buttons, Various uses of UIButton')
-      ac.press element: e, x: 10, y: 10
-      ac.perform
-      back
-    end
+  t 'app_strings' do
+    app_strings.must_include "SearchBarExplain"
+  end
 
-   t 'swipe' do
-      swipe start_x: 75, start_y: 500, end_x: 75, end_y: 0, duration: 0.8
-    end
+  t 'action_chain' do
+    ac = Appium::TouchAction.new
+    e  = find_element(:name, 'Buttons, Various uses of UIButton')
+    ac.press element: e, x: 10, y: 10
+    ac.perform
+    back
+  end
 
-    t 'pinch & zoom' do
-      s_text('Images, Use of UIImageView').click
-      zoom 200
-      pinch 75
-    end
+  t 'swipe' do
+    swipe start_x: 75, start_y: 500, end_x: 75, end_y: 0, duration: 0.8
+  end
 
-   t 'file movement' do
+  t 'pinch & zoom' do
+    s_text('Images, Use of UIImageView').click
+    zoom 200
+    pinch 75
+  end
+
+  t 'file movement' do
     read_file = pull_file 'Library/AddressBook/AddressBook.sqlitedb'
     read_file.start_with?('SQLite format').must_equal true
   end

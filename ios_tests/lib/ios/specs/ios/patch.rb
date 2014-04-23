@@ -1,12 +1,16 @@
 # encoding: utf-8
 
 describe 'ios/patch' do
-  before_first do
+  def before_first
     screen.must_equal catalog
     go_to_textfields
   end
 
-  after_last { leave_textfields }
+  def after_last
+    leave_textfields
+  end
+
+  t { before_first }
 
   t 'type' do
     # nav to textfield
@@ -16,4 +20,6 @@ describe 'ios/patch' do
     ele.type 'ok'
     ele.text.must_equal 'ok'
   end
+
+  t { after_last }
 end

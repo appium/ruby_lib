@@ -1,16 +1,18 @@
 # encoding: utf-8
 
 describe 'common/element/button' do
-  before_first do
+  def before_first
     screen.must_equal catalog
     # nav to buttons activity
     wait { name('buttons').click }
   end
 
-  after_last do
+  def after_last
     # nav back to start
     back_click
   end
+
+  t { before_first }
 
   def gray
     'Gray'
@@ -53,4 +55,6 @@ describe 'common/element/button' do
     # select the second button containing 'in'
     button_num('in', 2).name.must_equal 'More info'
   end
+
+  t { after_last }
 end

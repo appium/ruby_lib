@@ -1,7 +1,10 @@
 # encoding: utf-8
 require 'rubygems'
-require 'test_runner'
 require 'spec'
+require 'hashdiff'
+
+require_relative '../../lib/appium_lib'
+
 =begin
 node server.js -V --fast-reset --without-delay
 

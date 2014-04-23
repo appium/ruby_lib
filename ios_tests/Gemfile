@@ -1,4 +1,1 @@
-source 'https://rubygems.org'
-gem 'test_runner', '>= 0.9.37'
-gem 'rake', '~> 10.2.2'
-gem 'selenium-webdriver', '>= 2.41.0'
+eval File.read('../Gemfile')

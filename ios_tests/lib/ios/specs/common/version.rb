@@ -1,7 +1,12 @@
 # encoding: utf-8
 
 describe 'version.rb' do
-  before_first { screen.must_equal catalog }
+  def before_first
+    screen.must_equal catalog
+  end
+
+  t { before_first }
+
   t '::Appium::VERSION' do
     ::Appium::VERSION.must_match /(\d+)\.(\d+).(\d+)/
   end

@@ -1,7 +1,12 @@
 # encoding: utf-8
 
 describe 'common/element/window' do
-  before_first { screen.must_equal catalog }
+  def before_first
+    screen.must_equal catalog
+  end
+
+  t { before_first }
+
   t 'window_size' do
     size = window_size
     size.width.class.must_equal Fixnum

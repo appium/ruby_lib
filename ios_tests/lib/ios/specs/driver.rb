@@ -1,7 +1,11 @@
 # encoding: utf-8
 # rake ios[driver]
 describe 'driver' do
-  before_first { screen.must_equal catalog }
+  def before_first
+    screen.must_equal catalog
+  end
+
+  t { before_first }
 
   def is_sauce
     ENV['UPLOAD_FILE'] && ENV['SAUCE_USERNAME']
@@ -35,10 +39,18 @@ describe 'driver' do
                               sauce_username:   nil,
                               sauce_access_key: nil,
                               port:             4723,
-                              device:           'ios',
+                              device:           :ios,
                               debug:            true }
 
-      actual.must_equal expected
+      if actual != expected
+        diff = HashDiff.diff expected, actual
+        diff = "diff (expected, actual):\n#{diff}"
+        # example:
+        # change :ios in expected to match 'ios' in actual
+        # [["~", "caps.platformName", :ios, "ios"]]
+        message = "\n\nactual:\n\n: #{actual.ai}expected:\n\n#{expected.ai}\n\n#{diff}"
+        fail message
+      end
     end
 
     t 'verify attributes are immutable' do

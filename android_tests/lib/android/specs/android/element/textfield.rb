@@ -9,17 +9,19 @@ describe 'android/element/textfield' do
     'Right is always right'
   end
 
-  before_first do
+  def before_first
     # nav to activity
     text('app').click
     text('activity').click
     text('custom title').click
   end
 
-  after_last do
+  def after_last
     # back to start
     3.times { back }
   end
+
+  t { before_first }
 
   t 'textfields' do
     exp = [left, right]
@@ -50,4 +52,6 @@ describe 'android/element/textfield' do
     res = textfield_exact left
     res.text.must_equal left
   end
+
+  t { after_last }
 end

@@ -1,14 +1,17 @@
 # encoding: utf-8
 # rake ios[ios/element/alert]
 describe 'ios/element/alert' do
-
-  before_first do
+  def nav_once
     screen.must_equal catalog
     wait_true { s_text('alerts').click; tag('navigationBar').name == 'Alerts' } # wait for true
     tag('navigationBar').name.must_equal 'Alerts'
+
+    # redefine method as no-op after it's invoked once
+    self.class.send :define_method, :nav_once, proc {}
   end
 
-  after_last do
+  def after_last
+    ignore { wait(4) { alert_accept } }
     back_click
     screen.must_equal catalog
     mobile :flick, endX: 0.5, endY: 0.9
@@ -16,6 +19,7 @@ describe 'ios/element/alert' do
   end
 
   before do
+    nav_once
     open_alert
   end
 
@@ -69,4 +73,6 @@ describe 'ios/element/alert' do
     alert_dismiss_text.must_equal 'Cancel'
     alert_dismiss
   end
+
+  t { after_last }
 end

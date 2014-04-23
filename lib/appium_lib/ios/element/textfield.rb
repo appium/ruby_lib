@@ -72,7 +72,9 @@ module Appium
     def textfield_named target_name
       result = find_element :name, target_name
       return result if result.tag_name == 'UIATextField'
-      result.find_element :name, target_name
+      result = result.find_element :name, target_name
+      raise "Name #{target_name} didn't match a textfield" if result.tag_name != 'UIATextField'
+      result
     end
   end # module Ios
 end # module Appium
