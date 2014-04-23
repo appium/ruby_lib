@@ -143,6 +143,10 @@ module Appium
     # @param window_number [Integer] the int index of the target window
     # @return [JSON]
     def source_window window_number=0
+      # appium 1.0 still returns JSON when getTree() is invoked so this
+      # doesn't need to change to XML. If getTree() is removed then
+      # source_window will need to parse the results of getTreeForXML()\
+      # https://github.com/appium/appium-uiauto/blob/247eb71383fa1a087ff8f8fc96fac25025731f3f/uiauto/appium/element.js#L145
       execute_script "UIATarget.localTarget().frontMostApp().windows()[#{window_number}].getTree()"
     end
 
