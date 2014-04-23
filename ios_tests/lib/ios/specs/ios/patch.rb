@@ -10,7 +10,9 @@ describe 'ios/patch' do
     leave_textfields
   end
 
-  t { before_first }
+  t 'before_first' do
+    before_first
+  end
 
   t 'type' do
     # nav to textfield
@@ -21,5 +23,7 @@ describe 'ios/patch' do
     ele.text.must_equal 'ok'
   end
 
-  t { after_last }
+  t 'after_last' do
+    after_last
+  end
 end

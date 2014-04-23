@@ -5,7 +5,9 @@ describe 'ios/element/text' do
     screen.must_equal catalog
   end
 
-  t { before_first }
+  t 'before_first' do
+    before_first
+  end
 
   t 's_texts' do
     exp = ['UICatalog', 'Buttons, Various uses of UIButton', 'Controls, Various uses of UIControl', 'TextFields, Uses of UITextField', 'SearchBar, Use of UISearchBar', 'TextView, Use of UITextField', 'Pickers, Uses of UIDatePicker, UIPickerView', 'Images, Use of UIImageView', 'Web, Use of UIWebView', 'Segments, Various uses of UISegmentedControl', 'Toolbar, Uses of UIToolbar', 'Alerts, Various uses of UIAlertView, UIActionSheet', 'Transitions, Shows UIViewAnimationTransitions']

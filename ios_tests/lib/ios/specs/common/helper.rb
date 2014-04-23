@@ -5,7 +5,9 @@ describe 'common/helper.rb' do
     screen.must_equal catalog
   end
 
-  t { before_first }
+  t 'before_first' do
+    before_first
+  end
 
   wait_time = [0.2, 0.2] # max_wait, interval
 

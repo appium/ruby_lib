@@ -5,7 +5,9 @@ describe 'driver' do
     screen.must_equal catalog
   end
 
-  t { before_first }
+  t 'before_first' do
+    before_first
+  end
 
   def is_sauce
     ENV['UPLOAD_FILE'] && ENV['SAUCE_USERNAME']

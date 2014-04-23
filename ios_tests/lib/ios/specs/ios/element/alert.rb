@@ -74,5 +74,7 @@ describe 'ios/element/alert' do
     alert_dismiss
   end
 
-  t { after_last }
+  t 'after_last' do
+    after_last
+  end
 end

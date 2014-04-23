@@ -3,7 +3,9 @@ describe 'common/device' do
     screen.must_equal catalog
   end
 
-  t { before_first }
+  t 'before_first' do
+    before_first
+  end
 
   t 'lock' do
     lock 5

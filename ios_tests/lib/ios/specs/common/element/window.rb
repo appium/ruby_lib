@@ -5,7 +5,9 @@ describe 'common/element/window' do
     screen.must_equal catalog
   end
 
-  t { before_first }
+  t 'before_first' do
+    before_first
+  end
 
   t 'window_size' do
     size = window_size

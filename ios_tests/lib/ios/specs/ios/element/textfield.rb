@@ -9,7 +9,9 @@ describe 'ios/element/textfield' do
     set_wait 30
   end
 
-  t { before_first }
+  t 'before_first' do
+    before_first
+  end
 
   t 'textfields' do
     textfields.include?('<enter text>').must_equal true
@@ -111,5 +113,7 @@ describe 'ios/element/textfield' do
     must_raise_no_element { textfield_exact('does not exist') }
   end
 
-  t { after_last }
+  t 'after_last' do
+    after_last
+  end
 end

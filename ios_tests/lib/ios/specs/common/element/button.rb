@@ -12,7 +12,9 @@ describe 'common/element/button' do
     back_click
   end
 
-  t { before_first }
+  t 'before_first' do
+    before_first
+  end
 
   def gray
     'Gray'
@@ -56,5 +58,7 @@ describe 'common/element/button' do
     button_num('in', 2).name.must_equal 'More info'
   end
 
-  t { after_last }
+  t 'after_last' do
+    after_last
+  end
 end

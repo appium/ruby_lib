@@ -5,7 +5,9 @@ describe 'ios/helper' do
     screen.must_equal catalog
   end
 
-  t { before_first }
+  t 'before_first' do
+    before_first
+  end
 
   t 'find_eles_attr' do
     find_eles_attr(:text, :text).length.must_equal 13
