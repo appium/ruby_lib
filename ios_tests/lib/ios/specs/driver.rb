@@ -191,12 +191,12 @@ describe 'driver' do
 
     # any elements
     t 'find_elements' do
-      find_elements(:tag_name, :text).length.must_equal 13
+      find_elements(:class, 'UIAStaticText').length.must_equal 13
     end
 
     # any element
     t 'find_element' do
-      find_element(:tag_name, :text).class.must_equal Selenium::WebDriver::Element
+      find_element(:class, 'UIAStaticText').class.must_equal Selenium::WebDriver::Element
     end
 
     # Skip: x # x is only used in Pry

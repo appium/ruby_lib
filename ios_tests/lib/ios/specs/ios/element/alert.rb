@@ -3,8 +3,8 @@
 describe 'ios/element/alert' do
   def nav_once
     screen.must_equal catalog
-    wait_true { s_text('alerts').click; tag('navigationBar').name == 'Alerts' } # wait for true
-    tag('navigationBar').name.must_equal 'Alerts'
+    wait_true { s_text('alerts').click; tag('UIANavigationBar').name == 'Alerts' } # wait for true
+    tag('UIANavigationBar').name.must_equal 'Alerts'
 
     # redefine method as no-op after it's invoked once
     self.class.send :define_method, :nav_once, proc {}

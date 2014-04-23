@@ -9,7 +9,7 @@ describe 'common/device' do
 
   t 'lock' do
     lock 5
-    tag('button').name.must_equal 'SlideToUnlock'
+    tag('UIAButton').name.must_equal 'SlideToUnlock'
 
     # It appears that lockForDuration doesn't.
     closeApp
@@ -33,7 +33,7 @@ describe 'common/device' do
   t 'close and launch' do
     closeApp
     launch
-    tag('navigationBar').name.must_equal 'UICatalog'
+    tag('UIANavigationBar').name.must_equal 'UICatalog'
   end
 
   t 'reset' do

@@ -64,14 +64,14 @@ must_not_raise is a no-op.
 
   t 'back' do
     # start page
-    tag('navigationBar').name.must_equal 'UICatalog'
+    tag('UIANavigationBar').name.must_equal 'UICatalog'
     # nav to new page.
-    wait_true { s_text('buttons').click; tag('navigationBar').name == 'Buttons' }
-    tag('navigationBar').name.must_equal 'Buttons'
+    wait_true { s_text('buttons').click; tag('UIANavigationBar').name == 'Buttons' }
+    tag('UIANavigationBar').name.must_equal 'Buttons'
     # go back
     back_click
     # start page
-    tag('navigationBar').name.must_equal 'UICatalog'
+    tag('UIANavigationBar').name.must_equal 'UICatalog'
   end
 
   t 'session_id' do
