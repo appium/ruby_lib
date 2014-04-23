@@ -260,7 +260,7 @@ module Appium
 
       # load common methods
       extend Appium::Common
-      if @device == :android
+      if device_is_android?
         # load Android specific methods
         extend Appium::Android
       else
@@ -318,6 +318,10 @@ module Appium
         attributes[key] = value.duplicable? ? value.dup : value
       end
       attributes
+    end
+
+    def device_is_android?
+      @device == :android
     end
 
     # Returns the server's version info
