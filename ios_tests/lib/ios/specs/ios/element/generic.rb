@@ -1,9 +1,8 @@
 # encoding: utf-8
+# rake ios['ios/element/generic']
 describe 'ios/element/generic' do
   def before_first
     screen.must_equal catalog
-    wait { mobile :flick, endX: 0.5, endY: 0.9 } # scroll up
-    sleep 1
   end
 
   def exp_text
@@ -14,7 +13,9 @@ describe 'ios/element/generic' do
     'TextFields'
   end
 
-  t { before_first }
+  t 'before_first' do
+    before_first
+  end
 
   t 'find' do
     el = find search_text
