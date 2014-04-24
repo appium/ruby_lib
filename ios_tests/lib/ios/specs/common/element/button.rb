@@ -1,5 +1,5 @@
 # encoding: utf-8
-
+# rake ios['common/element/button']
 describe 'common/element/button' do
   def before_first
     screen.must_equal catalog

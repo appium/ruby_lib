@@ -39,7 +39,7 @@ def back_displayed
 end
 
 def back_click(opts={})
-  opts ||= {}
+  opts        ||= {}
   search_wait = opts.fetch(:wait, 60 * 1.7)
   # iOS may have multiple 'back' buttons
   # select the first displayed? back button.
@@ -66,18 +66,19 @@ end
 def catalog
   'UICatalog'
 end
+
 ##
 
-caps = Appium.load_appium_txt file: File.expand_path('..',__FILE__), verbose: true
+caps = Appium.load_appium_txt file: File.expand_path('..', __FILE__), verbose: true
 caps = caps.merge({ appium_lib: { debug: true, wait: 30 } })
 
-dir = File.expand_path '..', __FILE__
-device = ARGV[0].downcase.strip
+dir     = File.expand_path '..', __FILE__
+device  = ARGV[0].downcase.strip
 devices = %w[ android selendroid ios ]
 raise 'Expected android, selendroid or ios as first argument' unless devices.include? device
 
-one_test = ARGV[1]
-test_dir = "/#{device}/"
+one_test   = ARGV[1]
+test_dir   = "/#{device}/"
 
 caps[:app] = ENV['SAUCE_PATH'] if ENV['SAUCE_USERNAME'] && ENV['SAUCE_ACCESS_KEY']
 
@@ -86,10 +87,14 @@ Appium::Driver.new(caps).start_driver
 trace_files = []
 
 if one_test
-  # ensure ext is .rb
-  one_test = File.join(File.dirname(one_test),
-                       File.basename(one_test, '.*') + '.rb')
-  one_test = File.join(dir, test_dir + 'specs/', one_test)
+  unless one_test.include? File::SEPARATOR
+    # ensure ext is .rb
+    one_test = File.join(File.dirname(one_test),
+                         File.basename(one_test, '.*') + '.rb')
+    one_test = File.join(dir, test_dir + 'specs/', one_test)
+  else
+    one_test = File.expand_path one_test
+  end
   raise "\nTest #{one_test} does not exist.\n" unless File.exists?(one_test)
   # require support (common.rb)
   Dir.glob(File.join dir, test_dir + '/*.rb') do |test|

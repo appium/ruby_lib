@@ -81,6 +81,8 @@ module Appium
       case tag_name
         when 'text', :text
           device_is_android? ? 'android.widget.TextView' : 'UIAStaticText'
+        when 'button', :button
+          device_is_android? ? 'android.widget.Button' : 'UIAButton'
         else
           tag_name
       end
