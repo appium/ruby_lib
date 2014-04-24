@@ -87,7 +87,7 @@ Appium::Driver.new(caps).start_driver
 trace_files = []
 
 if one_test
-  unless one_test.include? File::SEPARATOR
+  unless File.exists? one_test
     # ensure ext is .rb
     one_test = File.join(File.dirname(one_test),
                          File.basename(one_test, '.*') + '.rb')
