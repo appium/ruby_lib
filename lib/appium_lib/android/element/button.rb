@@ -1,7 +1,7 @@
 # encoding: utf-8
 # UIAButton methods
 module Appium
-  module Common
+  module Android
     # Find a button by text and optionally number.
     # @param text [String, Integer] the text to exactly match. If int then the button at that index is returned.
     # @param number [Integer] the occurrence of the button matching text. Defaults to the first button.

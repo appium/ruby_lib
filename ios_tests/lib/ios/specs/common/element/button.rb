@@ -29,7 +29,7 @@ describe 'common/element/button' do
   end
 
   t 'buttons' do
-    exp = ['Back', 'Back', 'Gray', 'Right pointing arrow', 'Rounded', 'Custom Text', 'More info', 'More info', 'More info', 'Add contact']
+    exp = ['Back', 'UINavigationBarBackIndicatorDefault.png', 'Gray', 'Right pointing arrow', 'Rounded', 'Custom Text', 'More info', 'More info', 'More info', 'Add contact']
     buttons.must_equal exp
   end
 
@@ -54,8 +54,10 @@ describe 'common/element/button' do
   end
 
   t 'button_num' do
-    # select the second button containing 'in'
-    button_num('in', 2).name.must_equal 'More info'
+    # select x button containing 'in'
+    button_num('in', 1).name.must_equal 'UINavigationBarBackIndicatorDefault.png'
+    button_num('in', 2).name.must_equal 'Right pointing arrow'
+    button_num('in', 3).name.must_equal 'More info'
   end
 
   t 'after_last' do
