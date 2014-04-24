@@ -82,8 +82,6 @@ test_dir   = "/#{device}/"
 
 caps[:app] = ENV['SAUCE_PATH'] if ENV['SAUCE_USERNAME'] && ENV['SAUCE_ACCESS_KEY']
 
-Appium::Driver.new(caps).start_driver
-
 trace_files = []
 
 if one_test
@@ -96,6 +94,7 @@ if one_test
     one_test = File.expand_path one_test
   end
   raise "\nTest #{one_test} does not exist.\n" unless File.exists?(one_test)
+  Appium::Driver.new(caps).start_driver
   # require support (common.rb)
   Dir.glob(File.join dir, test_dir + '/*.rb') do |test|
     require test
@@ -112,6 +111,7 @@ else
     puts "  #{File.basename(test, '.*')}"
     require test
   end
+  Appium::Driver.new(caps).start_driver
 end
 
 trace_files.map! do |f|

@@ -11,7 +11,7 @@ describe 'ios/element/alert' do
   end
 
   def after_last
-    ignore { wait(4) { alert_accept } }
+    alert_accept if exists { s_text('UIActionSheet <title>') }
     back_click
     screen.must_equal catalog
     sleep 1
@@ -23,53 +23,23 @@ describe 'ios/element/alert' do
   end
 
   def open_alert
-    wait_true { s_text('Show OK-Cancel').click; alert_accept_text == 'OK' }
+    wait_true do
+      return true if exists { s_text('UIActionSheet <title>') }
+      s_text('Show OK-Cancel').click
+      s_text('UIActionSheet <title>').displayed?
+    end
   end
 
+  # iOS 7 is not using the alert methods. alert is nil.
   def ios7_alert_detected
-    # iOS 7 doesn't use the standard .alert() method
     execute_script 'UIATarget.localTarget().frontMostApp().alert().isNil()'
-  end
-
-  # UIAlertView
-  t 'alert_click' do
-    if ios7_alert_detected
-      # iOS 7 is not using the alert methods anymore so alert_click
-      # is not possible to implement in a meaningful way
-      # for this test, we're going to skip testing alert_click on iOS 7
-      alert_accept
-    else
-      alert_click 'OK'
-    end
-  end
-
-  t 'alert_text' do
-    if ios7_alert_detected
-      # iOS 7 is not using the alert methods anymore so alert_text
-      # is not possible to implement in a meaningful way
-      # for this test, we're going to skip testing alert_text on iOS 7
-      alert_accept
-    else
-      alert_text.must_equal 'UIAlertView'
-      alert_accept
-    end
   end
 
   t 'alert_accept' do
     alert_accept
   end
 
-  t 'alert_accept_text' do
-    alert_accept_text.must_equal 'OK'
-    alert_accept
-  end
-
   t 'alert_dismiss' do
-    alert_dismiss
-  end
-
-  t 'alert_dismiss_text' do
-    alert_dismiss_text.must_equal 'Cancel'
     alert_dismiss
   end
 
