@@ -7,19 +7,12 @@ module Appium
   #
   # ```ruby
   # action = TouchAction.new.press(x: 45, y: 100).wait(5).release
+  # action.perform
   class TouchAction
-    ACTIONS = [:moveTo, :longPress, :press, :release, :tap, :wait, :perform]
+    ACTIONS = [:move_to, :press_for_duration, :press, :release, :tap, :wait, :perform]
     COMPLEX_ACTIONS = [:swipe]
     
     class << self
-      ACTIONS.each do |action|
-        define_method(action) do |*args|
-          ta = TouchAction.new
-          ta.send(action, args)
-          ta.perform
-        end
-      end
-
       COMPLEX_ACTIONS.each do |action|
         define_method(action) do |opts|
           auto_perform = opts.delete(:auto_perform) {|k| true}
@@ -41,7 +34,7 @@ module Appium
     # @option opts (integer) :x x co-ordinate to move to.
     # @option opts (integer) :y y co-ordinate to move to.
     # @option opts (WebDriver::Element) Element to scope this move within.
-    def moveTo(opts)
+    def move_to(opts)
       opts = args_with_ele_ref(opts)
       chain_method(:moveTo, opts)
     end
@@ -112,7 +105,7 @@ module Appium
 
       self.press x: start_x, y: start_y
       self.wait(duration) if duration
-      self.moveTo x: end_x, y: end_y
+      self.move_to x: end_x, y: end_y
       self.release
       self
     end
