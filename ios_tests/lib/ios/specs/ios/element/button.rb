@@ -1,10 +1,10 @@
 # encoding: utf-8
-# rake ios['common/element/button']
-describe 'common/element/button' do
+# rake ios['ios/element/button']
+describe 'ios/element/button' do
   def before_first
     screen.must_equal catalog
     # nav to buttons activity
-    wait { name('buttons').click }
+    wait { s_text('buttons').click }
   end
 
   def after_last
@@ -29,8 +29,8 @@ describe 'common/element/button' do
   end
 
   t 'buttons' do
-    exp = ['Back', 'UINavigationBarBackIndicatorDefault.png', 'Gray', 'Right pointing arrow', 'Rounded', 'Custom Text', 'More info', 'More info', 'More info', 'Add contact']
-    buttons.must_equal exp
+    exp = ['Back', 'Gray', 'Right pointing arrow']
+    buttons('a').map { |e| e.name }.must_equal exp
   end
 
   t 'first_button' do
@@ -51,13 +51,6 @@ describe 'common/element/button' do
 
   t 'e_buttons' do
     e_buttons.length.must_equal 10
-  end
-
-  t 'button_num' do
-    # select x button containing 'in'
-    button_num('in', 1).name.must_equal 'UINavigationBarBackIndicatorDefault.png'
-    button_num('in', 2).name.must_equal 'Right pointing arrow'
-    button_num('in', 3).name.must_equal 'More info'
   end
 
   t 'after_last' do

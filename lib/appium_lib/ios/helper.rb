@@ -59,7 +59,7 @@ module Appium
     #
     # @param element [Object] the element to search. omit to search everything
     # @return [String]
-    def get_page element=source_window(0)
+    def get_page element=source_window(0), class_name=nil
       lazy_load_strings
 
       # @private
@@ -85,24 +85,37 @@ module Appium
       end
 
       unless empty(element) || element['visible'] == false
-        puts "#{element['type']}"
         name  = fix_space element['name']
         label = fix_space element['label']
         value = fix_space element['value']
+        hint = fix_space element['hint']
+        visible = fix_space element['visible']
+        type = fix_space element['type']
+
+        # if class_name is set, mark non-matches as invisible
+        visible = (type == class_name).to_s if class_name
 
         if name == label && name == value
+          puts "#{type}" if name || label || value || hint
           puts "   name, label, value: #{name}" if name
+          puts "   hint: #{hint}" if hint
         elsif name == label
+          puts "#{type}" if name || label || value || hint
           puts "   name, label: #{name}" if name
           puts "   value: #{value}" if value
+          puts "   hint: #{hint}" if hint
         elsif name == value
+          puts "#{type}" if name || label || value || hint
           puts "   name, value: #{name}" if name
           puts "  label: #{label}" if label
+          puts "   hint: #{hint}" if hint
         else
+          puts "#{type}" if name || label || value || hint
           puts "   name: #{name}" if name
           puts "  label: #{label}" if label
           puts "  value: #{value}" if value
-        end
+          puts "   hint: #{hint}" if hint
+        end if visible && visible == 'true'
 
         # there may be many ids with the same value.
         # output all exact matches.
@@ -121,20 +134,20 @@ module Appium
       end
 
       children = element['children']
-      children.each { |c| get_page c } if children
+      children.each { |c| get_page c, class_name } if children
       nil
     end
 
     # Prints a string of interesting elements to the console.
     # @return [void]
-    def page window_number = -1
+    def page window_number = -1, class_name=nil
       if window_number == -1
         # if the 0th window has no children, find the next window that does.
         target_window = source_window 0
         target_window = source_window 1 if target_window['children'].empty?
-        get_page target_window
+        get_page target_window, class_name
       else
-        get_page source_window window_number || 0
+        get_page source_window(window_number || 0), class_name
       end
       nil
     end

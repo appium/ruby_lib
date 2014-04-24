@@ -5,12 +5,13 @@ describe 'ios/element/generic' do
     screen.must_equal catalog
   end
 
-  def exp_text
-    'TextFields, Uses of UITextField'
+  def uibutton_text
+    'Buttons, Various uses of UIButton'
   end
 
-  def search_text
-    'TextFields'
+  def verify element
+    element = element.first if element.is_a? Array
+    element.name.must_equal uibutton_text
   end
 
   t 'before_first' do
@@ -18,45 +19,18 @@ describe 'ios/element/generic' do
   end
 
   t 'find' do
-    el = find search_text
-    el_text = el.text
-    el = el_text.empty? ? el.name : el_text
-    el.must_equal exp_text
+    verify find 'tons'
   end
 
   t 'finds' do
-    el = finds(search_text).first
-    el_text = el.text
-    el = el_text.empty? ? el.name : el_text
-
-    el.must_equal exp_text
+    verify finds 'tons'
   end
 
-  t 'text' do
-    el = text 'rows'
-    el_text = el.text
-    el = el_text.empty? ? el.name : el_text
-
-    el.include?('rows').must_equal true
+  t 'find_exact' do
+    verify find_exact uibutton_text
   end
 
-  t 'texts' do
-    el = texts('rows').first
-    el_text = el.text
-    el = el_text.empty? ? el.name : el_text
-
-    el.include?('rows').must_equal true
-  end
-
-  t 'name' do
-    name(search_text).name.must_equal exp_text
-  end
-
-  t 'names' do
-    names(search_text).first.name.must_equal exp_text
-  end
-
-  t 'name_exact' do
-    name_exact(exp_text).name.must_equal exp_text
+  t 'finds_exact' do
+    verify finds_exact uibutton_text
   end
 end

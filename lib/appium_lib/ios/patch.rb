@@ -8,7 +8,7 @@ module Appium
     def patch_webdriver_element
       Selenium::WebDriver::Element.class_eval do
         # Enable access to iOS accessibility label
-        # accessiblity identifier is supported as 'name'
+        # accessibility identifier is supported as 'name'
         def label
           self.attribute('label')
         end

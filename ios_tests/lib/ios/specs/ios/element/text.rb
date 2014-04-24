@@ -10,8 +10,8 @@ describe 'ios/element/text' do
   end
 
   t 's_texts' do
-    exp = ['UICatalog', 'Buttons, Various uses of UIButton', 'Controls, Various uses of UIControl', 'TextFields, Uses of UITextField', 'SearchBar, Use of UISearchBar', 'TextView, Use of UITextField', 'Pickers, Uses of UIDatePicker, UIPickerView', 'Images, Use of UIImageView', 'Web, Use of UIWebView', 'Segments, Various uses of UISegmentedControl', 'Toolbar, Uses of UIToolbar', 'Alerts, Various uses of UIAlertView, UIActionSheet', 'Transitions, Shows UIViewAnimationTransitions']
-    s_texts_names.must_equal exp
+    exp = ['Controls, Various uses of UIControl', 'Segments, Various uses of UISegmentedControl']
+    s_texts('trol').map { |e| e.name }.must_equal exp
   end
 
   t 'e_s_texts' do

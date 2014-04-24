@@ -365,6 +365,37 @@ module Appium
       @strings_xml[id]
     end
 
+    # xpath fragment helper
+    # example: xpath_visible_contains 'UIATextField', text
+    def xpath_visible_contains element, value
+      result = []
+      attributes = %w[name hint label value]
+
+      value_up = value.upcase
+      value_down = value.downcase
+
+      attributes.each do |attribute|
+        result << %Q(contains(translate(@#{attribute},"#{value_up}","#{value_down}"), "#{value_down}"))
+      end
+
+      result = result.join(' or ')
+      result = %Q(@visible="true" and (#{result}))
+      "//#{element}[#{result}]"
+    end
+
+    def xpath_visible_exact element, value
+      result = []
+      attributes = %w[name hint label value]
+
+      attributes.each do |attribute|
+        result << %Q(@#{attribute}="#{value}")
+      end
+
+      result = result.join(' or ')
+      result = %Q(@visible="true" and (#{result}))
+      "//#{element}[#{result}]"
+    end
+
     # Used to error when finding a single element fails.
     def raise_no_element_error
       raise Selenium::WebDriver::Error::NoSuchElementError, 'An element could not be located on the page using the given search parameters.'

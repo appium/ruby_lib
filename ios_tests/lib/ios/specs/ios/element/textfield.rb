@@ -14,8 +14,9 @@ describe 'ios/element/textfield' do
   end
 
   t 'textfields' do
-    textfields.include?('<enter text>').must_equal true
-    textfields.include?('<enter password>').must_equal true
+    values = textfields('enter').map { |e| e.value }
+    values.include?('<enter text>').must_equal true
+    values.include?('<enter password>').must_equal true
   end
 
   t 'e_textfields' do
@@ -85,7 +86,7 @@ describe 'ios/element/textfield' do
     set_wait 1
     # must leave textfield screen for the rest of the tests
     leave_textfields
-    textfields.must_equal []
+    e_textfields.must_equal []
   end
 
   t 'no e_textfields' do
