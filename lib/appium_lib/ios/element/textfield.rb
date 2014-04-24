@@ -1,18 +1,6 @@
 # encoding: utf-8
 module Appium
   module Ios
-    # UIATextField & UIASecureTextField methods
-    #
-    # Find textfield and then secure elements in one server call
-    # to match Android.
-
-    def locate_single_textfield js
-      ele = execute_script(js)
-      ele = ele.first if ele.kind_of? Array
-      raise_no_element_error unless ele.kind_of? Selenium::WebDriver::Element
-      ele
-    end
-
     # Get an array of textfield texts.
     # Does not respect implicit wait because we're using execute_script.
     # @return [Array<String>]
@@ -23,19 +11,19 @@ module Appium
     # Get an array of textfield elements.
     # @return [Array<Textfield>]
     def e_textfields
-      xpaths 'textfield'
+      xpaths '//UIATextField | //UIASecureTextField'
     end
 
     # Get the first textfield element.
     # @return [Textfield]
     def first_textfield
-      xpath 'textfield'
+      xpath '//UIATextField | //UIASecureTextField'
     end
 
     # Get the last textfield element.
     # @return [Textfield]
     def last_textfield
-      xpath 'textfield[last()]'
+      xpath '//UIATextField[last()] | //UIASecureTextField[last()]'
     end
 
     # Get the first textfield that matches text.
@@ -46,7 +34,7 @@ module Appium
       # iOS needs to combine textfield and secure to match Android.
       if text.is_a? Numeric
         raise "#{text} is not a valid xpath index. Must be >= 1" if text <= 0
-        return xpath("textfield[#{text}]")
+        return xpath("//UIATextField[#{text}] | //UIASecureTextField[#{text}]")
       end
 
       textfield_include text
@@ -56,14 +44,19 @@ module Appium
     # @param text [String] the text the textfield must include
     # @return [Textfield]
     def textfield_include text
-      xpath "textfield[contains(@text,'#{text}')]"
+      value = text.downcase
+      attr = 'value' # not 'text'
+
+      xpath "//UIATextField[contains(translate(@#{attr},'#{value.upcase}','#{value}'), '#{value}')] | " +
+            "//UIASecureTextField[contains(translate(@#{attr},'#{value.upcase}', '#{value}'), '#{value}')]"
     end
 
     # Get the first textfield that exactly matches text.
     # @param text [String] the text the textfield must exactly match
     # @return [Textfield]
     def textfield_exact text
-      xpath "textfield[@text='#{text}']"
+      attr = 'value'
+      xpath "//UIATextField[@#{attr}='#{text}'] | //UIASecureTextField[@#{attr}='#{text}']"
     end
 
     # Get the first textfield that exactly matches name
