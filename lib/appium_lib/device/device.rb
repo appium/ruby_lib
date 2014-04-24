@@ -274,7 +274,7 @@ module Appium
           end
         end
 
-        actions = Appium::TouchAction::ACTIONS + Appium::TouchAction::COMPLEX_ACTIONS
+        actions = Appium::TouchAction::COMPLEX_ACTIONS
         actions.each do |method|
           delegate_from_appium_driver(method, Appium::TouchAction)
         end
