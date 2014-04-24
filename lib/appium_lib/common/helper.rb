@@ -292,7 +292,7 @@ module Appium
     #
     # @param name [String] the name to exactly match
     # @return [Element]
-    def find_name name
+    def name_exact name
       find_element :name, name
     end
 
@@ -300,7 +300,7 @@ module Appium
     #
     # @param name [String] the name to exactly match
     # @return [Array<Element>]
-    def find_names name
+    def names_exact name
       find_elements :name, name
     end
 

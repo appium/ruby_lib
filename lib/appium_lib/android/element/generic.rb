@@ -92,24 +92,6 @@ the first element that matches.
       complex_find [[[7, name]]]
     end
 
-    # Return the first element exactly matching name.
-    # on Android name is content description
-    # on iOS name is the accessibility label or the text.
-    # @param name [String] the name to search for
-    # @return [Element] the first matching element
-    def name_exact name
-      # exact description
-      result = complex_find [[[5, name]]]
-
-      return result if result.kind_of? Selenium::WebDriver::Element
-
-      if result.length > 0
-        result.first
-      else
-        Appium::Common.raise_no_element_error
-      end
-    end
-
     # Return all elements matching name.
     # on Android name is content description
     # on iOS name is the accessibility label or the text.

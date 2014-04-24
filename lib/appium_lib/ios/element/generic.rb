@@ -133,25 +133,6 @@ module Appium
       execute_script(%Q(au.mainApp().getNameContains('#{name}')))
     end
 
-    # Return first element exactly matching name.
-    # on Android name is content description
-    # on iOS name is the accessibility label or the text.
-    # @param name [String] the name to search for
-    # @return [Element] the matching element
-    def name_exact name
-      name   = escape_single_quote name
-      js     = all_ele_js "name == '#{name}'"
-      result = execute_script js
-
-      return result if result.kind_of? Selenium::WebDriver::Element
-
-      if result.length > 0
-        result.first
-      else
-        Appium::Common.raise_no_element_error
-      end
-    end
-
     # Return all elements matching name.
     # on Android name is content description
     # on iOS name is the accessibility label or the text.

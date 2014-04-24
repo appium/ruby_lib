@@ -80,11 +80,11 @@ must_not_raise is a no-op.
   end
 
   t 'xpath' do
-    xpath('//text').name.must_equal 'UICatalog'
+    xpath('//UIAStaticText').name.must_equal 'UICatalog'
   end
 
   t 'xpaths' do
-    xpaths('//text').length.must_equal 13
+    xpaths('//UIAStaticText').length.must_equal 13
   end
 
   def uibutton_text
@@ -99,26 +99,26 @@ must_not_raise is a no-op.
     find_eles('text').length.must_equal 13
   end
 
-  t 'find_ele_by_text' do
-    el_id = find_ele_by_text(:text, uibutton_text).instance_variable_get :@id
+  t 'find_ele_by_name' do
+    el_id = find_ele_by_name(:text, uibutton_text).instance_variable_get :@id
     el_id.must_match /\d+/
   end
 
-  t 'find_eles_by_text' do
+  t 'find_eles_by_name' do
     # '!' clears the input buffer in Pry so make sure there's
     # no space after the !
     set_wait 1
     # empty array returned when no match
-    found = !find_eles_by_text(:text, uibutton_text).empty?
+    found = !find_eles_by_name(:text, uibutton_text).empty?
     found.must_equal true
 
-    found = !find_eles_by_text(:text, 'zz').empty?
+    found = !find_eles_by_name(:text, 'zz').empty?
     found.must_equal false
     set_wait
   end
 
   t 'find_ele_by_attr_include' do
-    el_text = find_ele_by_attr_include(:text, :text, 'button').text
+    el_text = find_ele_by_attr_include(:text, :name, 'button').text
     el_text.must_equal ''
 
     el_name = find_ele_by_attr_include(:text, :name, 'button').name
@@ -126,25 +126,25 @@ must_not_raise is a no-op.
   end
 
   t 'find_eles_by_attr_include' do
-    ele_count = find_eles_by_attr_include(:text, :text, 'e').length
+    ele_count = find_eles_by_attr_include(:text, :name, 'e').length
     ele_count.must_equal 12
   end
 
-  t 'find_ele_by_text_include' do
-    el = find_ele_by_text_include(:text, 'bu')
+  t 'find_ele_by_name_include' do
+    el = find_ele_by_name_include(:text, 'bu')
     el_text = el.text
     el_text = el.name if el_text.nil? || el_text.empty?
 
     el_text.must_equal uibutton_text
   end
 
-  t 'find_eles_by_text_include' do
-    ele_count = find_eles_by_text_include(:text, 'e').length
+  t 'find_eles_by_name_include' do
+    ele_count = find_eles_by_name_include(:text, 'e').length
     ele_count.must_equal 12
   end
 
   t 'first_ele' do
-    first_ele(:text).text.must_equal 'UICatalog'
+    first_ele(:text).name.must_equal 'UICatalog'
   end
 
   t 'last_ele' do
@@ -156,15 +156,15 @@ must_not_raise is a no-op.
   # t 'source' do # tested by get_source
 
   t 'get_source' do
-    get_source.class.must_equal Hash
+    get_source.class.must_equal String
   end
 
-  t 'find_name' do
-    find_name(uibutton_text).name.must_equal uibutton_text
+  t 'name_exact' do
+    name_exact(uibutton_text).name.must_equal uibutton_text
   end
 
-  t 'find_names' do
-    find_names(uibutton_text).first.name.must_equal uibutton_text
+  t 'names_exact' do
+    names_exact(uibutton_text).first.name.must_equal uibutton_text
   end
 
   t 'id' do
