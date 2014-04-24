@@ -33,8 +33,9 @@ module Appium
       # Don't use ele_index because that only works on one element type.
       # iOS needs to combine textfield and secure to match Android.
       if text.is_a? Numeric
-        raise "#{text} is not a valid xpath index. Must be >= 1" if text <= 0
-        return xpath("//UIATextField[#{text}] | //UIASecureTextField[#{text}]")
+        index = text
+        raise "#{index} is not a valid xpath index. Must be >= 1" if index <= 0
+        return xpath("//UIATextField[#{index}] | //UIASecureTextField[#{index}]")
       end
 
       textfield_include text
