@@ -254,9 +254,20 @@ module Appium
       #   ```ruby
       #    find_elements :accessibility_id, 'Animation'
       #   ```
+
+      # @!method fake_xpath_find
+      #   Finding by XPath was using a bespoke, artisinal XPath engine.  It's
+      #   now been updated to be actual xpath.  To use the older form, use
+      #   `:fake_xpath`
+      #
+      #   ``` ruby
+      #   find_elements :fake_xpath, '//XPath/SomeElement
+      #   ```
       def extend_search_contexts
         Selenium::WebDriver::SearchContext.class_eval do
           Selenium::WebDriver::SearchContext::FINDERS[:accessibility_id] = 'accessibility id'
+          Selenium::WebDriver::SearchContext::FINDERS[:xpath] = '-real xpath'
+          Selenium::WebDriver::SearchContext::FINDERS[:fake_xpath] = 'xpath'
         end
       end
 
