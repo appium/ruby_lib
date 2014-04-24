@@ -1,0 +1,2 @@
+ios = "lib/ios/specs/"
+android = "lib/android/specs/"
