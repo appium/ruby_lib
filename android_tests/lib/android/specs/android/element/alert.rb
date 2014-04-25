@@ -1,4 +1,3 @@
-# encoding: utf-8
 describe 'android/element/alert.rb' do
   def open_alert
     # trigger the alert

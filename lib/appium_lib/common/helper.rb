@@ -1,4 +1,3 @@
-# encoding: utf-8
 # Generic helper methods not specific
 # to a particular tag name
 module Appium

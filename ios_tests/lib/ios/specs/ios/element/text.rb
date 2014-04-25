@@ -1,4 +1,3 @@
-# encoding: utf-8
 # rake ios['ios/element/text']
 describe 'ios/element/text' do
   def ui_catalog

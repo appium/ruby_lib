@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 describe 'android/patch.rb' do
   t 'type' do
     # nav to textfield

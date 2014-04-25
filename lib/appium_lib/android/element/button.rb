@@ -1,4 +1,3 @@
-# encoding: utf-8
 # UIAButton methods
 module Appium
   module Android

@@ -1,4 +1,3 @@
-# encoding: utf-8
 module Appium
   module Android
     # UIATextField methods

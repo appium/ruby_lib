@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 describe 'version.rb' do
   t '::Appium::VERSION' do
     ::Appium::VERSION.must_match /(\d+)\.(\d+).(\d+)/

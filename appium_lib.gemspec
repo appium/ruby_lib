@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 def self.add_to_path path
  path = File.expand_path "../#{path}/", __FILE__
 

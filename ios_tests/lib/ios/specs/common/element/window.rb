@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 describe 'common/element/window' do
   def before_first
     screen.must_equal catalog

@@ -1,4 +1,3 @@
-# encoding: utf-8
 # rake android[driver]
 describe 'driver' do
   def is_sauce

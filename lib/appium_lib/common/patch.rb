@@ -1,4 +1,3 @@
-# encoding: utf-8
 module Appium
   module Common
     # Implement useful features for element.

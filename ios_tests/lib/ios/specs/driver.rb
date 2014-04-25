@@ -1,4 +1,3 @@
-# encoding: utf-8
 # rake ios[driver]
 describe 'driver' do
   def before_first

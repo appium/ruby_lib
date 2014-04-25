@@ -1,6 +1,4 @@
-# encoding: utf-8
-
-describe 'common/element/button' do
+describe 'android/element/button' do
   def before_first
     # nav to buttons activity
     text('App').click

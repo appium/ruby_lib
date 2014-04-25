@@ -1,4 +1,3 @@
-# encoding: utf-8
 describe 'common/helper' do
   # wait is a success unless an error is raised
   # max_wait=0 is infinity to use 0.1

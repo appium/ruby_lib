@@ -1,4 +1,3 @@
-# encoding: utf-8
 # rake ios['ios/element/button']
 describe 'ios/element/button' do
   def before_first

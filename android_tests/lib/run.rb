@@ -1,12 +1,9 @@
-# encoding: utf-8
 require 'rubygems'
 require 'spec'
 require 'fakefs/safe'
 require_relative '../../lib/appium_lib'
 
 =begin
-node server.js -V --fast-reset --without-delay
-
 Run all Android tests:
   ruby run.rb android
 
@@ -30,26 +27,19 @@ caps = Appium.load_appium_txt file: ENV['APPIUM_TXT'], verbose: true
 caps = caps.merge({ appium_lib: { debug: true, wait: 1 } })
 caps[:app] = ENV['SAUCE_PATH'] if ENV['SAUCE_USERNAME'] && ENV['SAUCE_ACCESS_KEY']
 
-Appium::Driver.new(caps).start_driver
-
-=begin
-# Android doesn't like to be reset before booting up
-case device
-  when 'android'
-    button 'start button'
-    mobile :reset
-end
-=end
-
 trace_files = []
 
 if one_test
-  # ensure ext is .rb
-  one_test = File.join(File.dirname(one_test),
-                       File.basename(one_test, '.*') + '.rb')
-  one_test = File.join(dir, test_dir + 'specs/', one_test)
-  one_test = File.expand_path one_test
+  unless File.exists? one_test
+    # ensure ext is .rb
+    one_test = File.join(File.dirname(one_test),
+                         File.basename(one_test, '.*') + '.rb')
+    one_test = File.join(dir, test_dir + 'specs/', one_test)
+  else
+    one_test = File.expand_path one_test
+  end
   raise "\nTest #{one_test} does not exist.\n" unless File.exists?(one_test)
+  Appium::Driver.new(caps).start_driver
   # require support (common.rb)
   Dir.glob(File.join dir, test_dir + '/*.rb') do |test|
     require test
@@ -66,6 +56,7 @@ else
     puts "  #{File.basename(test, '.*')}"
     require test
   end
+  Appium::Driver.new(caps).start_driver
 end
 
 trace_files.map! do |f|

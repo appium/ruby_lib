@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 describe 'version.rb' do
   def before_first
     screen.must_equal catalog

@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'Forwardable' unless defined? Forwardable
 require_relative 'appium_lib/rails/duplicable'
 

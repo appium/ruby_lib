@@ -1,4 +1,3 @@
-# encoding: utf-8
 module Appium
   module Ios
     # iOS only. On Android uiautomator always returns an empty string for EditText password.
@@ -134,8 +133,9 @@ module Appium
     # @return [Element]
     def id id
       lazy_load_strings
-      raise "Invalid id `#{id}`" unless @strings_xml[id]
-      find_element :id, id
+      value = @strings_xml[id]
+      raise "Invalid id `#{id}`" unless value
+      xpath_visible_exact '*', value
     end
 
     # Return the iOS version as an array of integers

@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 describe 'android/element/generic' do
   def m method
     r = method(method).call 'tent'

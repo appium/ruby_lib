@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 describe 'android/element/textfield' do
   def left
     'Left is best'

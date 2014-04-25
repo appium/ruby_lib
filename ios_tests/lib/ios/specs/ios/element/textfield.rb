@@ -1,4 +1,3 @@
-# encoding: utf-8
 # rake ios[ios/element/textfield]
 describe 'ios/element/textfield' do
   def enter_text

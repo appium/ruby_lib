@@ -1,4 +1,3 @@
-# encoding: utf-8
 # UIAStaticText methods
 module Appium
   module Ios

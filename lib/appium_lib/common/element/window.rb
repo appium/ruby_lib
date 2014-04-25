@@ -1,4 +1,3 @@
-# encoding: utf-8
 # UIAWindow methods
 module Appium
   module Common

@@ -1,4 +1,3 @@
-# encoding: utf-8
 # rake ios['ios/element/generic']
 describe 'ios/element/generic' do
   def before_first

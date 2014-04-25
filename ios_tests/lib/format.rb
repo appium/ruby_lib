@@ -1,4 +1,3 @@
-# encoding: utf-8
 # helper code useful for writing and verifying tests using Pry
 list = <<TXT
 alert_click

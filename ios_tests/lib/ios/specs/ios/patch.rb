@@ -1,4 +1,3 @@
-# encoding: utf-8
 # rake ios[ios/patch]
 describe 'ios/patch' do
   def before_first

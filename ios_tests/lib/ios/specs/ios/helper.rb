@@ -1,4 +1,3 @@
-# encoding: utf-8
 # rake ios[ios/helper]
 describe 'ios/helper' do
   def before_first

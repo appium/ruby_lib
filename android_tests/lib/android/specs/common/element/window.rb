@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 describe 'common/element/window' do
   t 'window_size' do
     size = window_size

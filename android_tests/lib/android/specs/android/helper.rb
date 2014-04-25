@@ -1,4 +1,3 @@
-# encoding: utf-8
 # rake android[android/helper]
 describe 'android/helper' do
   t 'tag_name_to_android' do

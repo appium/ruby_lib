@@ -1,4 +1,3 @@
-# encoding: utf-8
 # rake ios[ios/element/alert]
 describe 'ios/element/alert' do
   def nav_once

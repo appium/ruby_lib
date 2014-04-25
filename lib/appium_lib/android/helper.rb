@@ -1,4 +1,3 @@
-# encoding: utf-8
 module Appium
   module Android
     # Returns an array of android classes that match the tag name
