@@ -15,7 +15,7 @@ module Appium
     # Android and iOS have proper accessibility attributes.
     # .text and .value should be the same so use .text over .value.
     #
-    # secure tag_name is iOS only because it can't be implemented using uiautomator for Android.
+    # secure class_name is iOS only because it can't be implemented using uiautomator for Android.
     #
     # find_element :text doesn't work so use XPath to find by text.
 
@@ -77,17 +77,6 @@ module Appium
       result
     end
 
-    def tag_to_class tag_name
-      case tag_name
-        when 'text', :text
-          device_is_android? ? 'android.widget.TextView' : 'UIAStaticText'
-        when 'button', :button
-          device_is_android? ? 'android.widget.Button' : 'UIAButton'
-        else
-          tag_name
-      end
-    end
-
     # Navigate back.
     # @return [void]
     def back
@@ -115,115 +104,62 @@ module Appium
       find_elements :xpath, xpath_str
     end
 
-    # Get the element of type tag_name at matching index.
-    # @param tag_name [String] the tag name to find
+    # Get the element of type class_name at matching index.
+    # @param class_name [String] the class name to find
     # @param index [Integer] the index
-    # @return [Element] the found element of type tag_name
-    def ele_index tag_name, index
-      class_name = tag_to_class tag_name
+    # @return [Element] the found element of type class_name
+    def ele_index class_name, index
       # XPath index starts at 1.
       raise "#{index} is not a valid xpath index. Must be >= 1" if index <= 0
       find_element :xpath, "//#{class_name}[#{index}]"
     end
 
-    # Get all elements exactly matching tag name
-    # @param tag_name [String] the tag name to find
-    # @return [Array<Element>] the found elements of type tag_name
-    def find_eles tag_name
-      class_name = tag_to_class tag_name
-      @driver.find_elements :class, class_name
+    def string_attr_exact class_name, attr, value
+      %Q(//#{class_name}[@visible="true" and @#{attr}='#{value}'])
     end
 
-    # Get the first tag that exactly matches tag and text.
-    # @param tag_name [String] the tag name to match
-    # @param text [String] the text to exactly match
-    # @return [Element] the element of type tag exactly matching text
-    def find_ele_by_text tag_name, text
-      class_name = tag_to_class tag_name
-      @driver.find_element :xpath, %Q(//#{class_name}[@text='#{text}'])
+    def find_ele_by_attr class_name, attr, value
+      @driver.find_element :xpath, string_attr_exact(class_name, attr, value)
     end
 
-    # Get all tags that exactly match tag and text.
-    # @param tag_name [String] the tag name to match
-    # @param text [String] the text to exactly match
-    # @return [Array<Element>] the elements of type tag exactly matching text
-    def find_eles_by_text tag_name, text
-      class_name = tag_to_class tag_name
-      @driver.find_elements :xpath, %Q(//#{class_name}[@text='#{text}'])
+    def find_eles_by_attr class_name, attr, value
+      @driver.find_elements :xpath, string_attr_exact(class_name, attr, value)
     end
 
-    def find_ele_by_name tag_name, name
-      class_name = tag_to_class tag_name
-      @driver.find_element :xpath, %Q(//#{class_name}[@name='#{name}'])
-    end
-
-    def find_eles_by_name tag_name, name
-      class_name = tag_to_class tag_name
-      @driver.find_elements :xpath, %Q(//#{class_name}[@name='#{name}'])
+    def string_attr_include class_name, attr, value
+      %Q(//#{class_name}[@visible="true" and contains(translate(@#{attr},'#{value.upcase}', '#{value}'), '#{value}')])
     end
 
     # Get the first tag by attribute that exactly matches value.
-    # @param tag_name [String] the tag name to match
+    # @param class_name [String] the tag name to match
     # @param attr [String] the attribute to compare
     # @param value [String] the value of the attribute that the element must include
     # @return [Element] the element of type tag who's attribute includes value
-    def find_ele_by_attr_include tag_name, attr, value
-      class_name = tag_to_class tag_name
-      value.downcase!
-      @driver.find_element :xpath, %Q(//#{class_name}[contains(translate(@#{attr},'#{value.upcase}', '#{value}'), '#{value}')])
+    def find_ele_by_attr_include class_name, attr, value
+      @driver.find_element :xpath, string_attr_include(class_name, attr, value)
     end
 
     # Get tags by attribute that include value.
-    # @param tag_name [String] the tag name to match
+    # @param class_name [String] the tag name to match
     # @param attr [String] the attribute to compare
     # @param value [String] the value of the attribute that the element must include
     # @return [Array<Element>] the elements of type tag who's attribute includes value
-    def find_eles_by_attr_include tag_name, attr, value
-      class_name = tag_to_class tag_name
-      value.downcase!
-      @driver.find_elements :xpath, %Q(//#{class_name}[contains(translate(@#{attr},'#{value.upcase}', '#{value}'), '#{value}')])
+    def find_eles_by_attr_include class_name, attr, value
+      @driver.find_elements :xpath, string_attr_include(class_name, attr, value)
     end
 
-    # Get the first tag that includes text.
-    # @param tag_name [String] the tag name to match
-    # @param text [String] the text the element must include
-    # @return [Element] the element of type tag that includes text
-    # element.attribute(:text).include? text
-    def find_ele_by_text_include tag_name, text
-      find_ele_by_attr_include tag_name, :text, text
-    end
-
-    # Get the tags that include text.
-    # @param tag_name [String] the tag name to match
-    # @param text [String] the text the element must include
-    # @return [Array<Element>] the elements of type tag that includes text
-    # element.attribute(:text).include? text
-    def find_eles_by_text_include tag_name, text
-      find_eles_by_attr_include tag_name, :text, text
-    end
-
-    def find_ele_by_name_include tag_name, text
-      find_ele_by_attr_include tag_name, :name, text
-    end
-    
-    def find_eles_by_name_include tag_name, text
-      find_eles_by_attr_include tag_name, :name, text
-    end
-
-    # Get the first tag that matches tag_name
-    # @param tag_name [String] the tag to match
+    # Get the first tag that matches class_name
+    # @param class_name [String] the tag to match
     # @return [Element]
-    def first_ele tag_name
+    def first_ele class_name
       # XPath index starts at 1
-      class_name = tag_to_class tag_name
       find_element :xpath, "//#{class_name}[1]"
     end
 
-    # Get the last tag that matches tag_name
-    # @param tag_name [String] the tag to match
+    # Get the last tag that matches class_name
+    # @param class_name [String] the tag to match
     # @return [Element]
-    def last_ele tag_name
-      class_name = tag_to_class tag_name
+    def last_ele class_name
       xpath "//#{class_name}[last()]"
     end
 
@@ -235,7 +171,6 @@ module Appium
       end
       puts doc.to_xml indent: 2
     end
-
 
     # Returns XML string for the current page
     # Same as driver.page_source
@@ -288,37 +223,19 @@ module Appium
       nil
     end
 
-    # Returns the first element that exactly matches name
+    # Returns the first element matching class_name
     #
-    # @param name [String] the name to exactly match
+    # @param class_name [String] the class_name to search for
     # @return [Element]
-    def name_exact name
-      find_element :name, name
-    end
-
-    # Returns all elements that exactly match name
-    #
-    # @param name [String] the name to exactly match
-    # @return [Array<Element>]
-    def names_exact name
-      find_elements :name, name
-    end
-
-    # Returns the first element matching tag_name
-    #
-    # @param tag_name [String] the tag_name to search for
-    # @return [Element]
-    def tag tag_name
-      class_name = tag_to_class tag_name
+    def tag class_name
       find_element :class, class_name
     end
 
-    # Returns all elements matching tag_name
+    # Returns all elements matching class_name
     #
-    # @param tag_name [String] the tag_name to search for
+    # @param class_name [String] the class_name to search for
     # @return [Element]
-    def tags tag_name
-      class_name = tag_to_class tag_name
+    def tags class_name
       find_elements :class, class_name
     end
 
@@ -367,7 +284,7 @@ module Appium
 
     # xpath fragment helper
     # example: xpath_visible_contains 'UIATextField', text
-    def xpath_visible_contains element, value
+    def string_visible_contains element, value
       result = []
       attributes = %w[name hint label value]
 
@@ -383,7 +300,15 @@ module Appium
       "//#{element}[#{result}]"
     end
 
-    def xpath_visible_exact element, value
+    def xpath_visible_contains element, value
+      xpath string_visible_contains element, value
+    end
+
+    def xpaths_visible_contains element, value
+      xpaths string_visible_contains element, value
+    end
+
+    def string_visible_exact element, value
       result = []
       attributes = %w[name hint label value]
 
@@ -394,6 +319,14 @@ module Appium
       result = result.join(' or ')
       result = %Q(@visible="true" and (#{result}))
       "//#{element}[#{result}]"
+    end
+
+    def xpath_visible_exact element, value
+      xpath string_visible_exact element, value
+    end
+
+    def xpaths_visible_exact element, value
+      xpaths string_visible_exact element, value
     end
 
     # Used to error when finding a single element fails.

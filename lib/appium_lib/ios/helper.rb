@@ -1,48 +1,6 @@
 # encoding: utf-8
 module Appium
   module Ios
-    # iOS only. Android uses uiautomator instead of uiautomation.
-    # Get an array of attribute values from elements exactly matching tag name.
-    # @param tag_name [String] the tag name to find
-    # @param attribute [String] the attribute to collect
-    # @return [Array<String>] an array of strings containing the attribute from found elements of type tag_name.
-    def find_eles_attr tag_name, attribute
-      # Use au.lookup(tag_name) instead of $(tag_name)
-      # See https://github.com/appium/appium/issues/214
-      js = %Q(
-        var eles = au.lookup('#{tag_name}');
-        var result = [];
-        for (var a = 0, length = eles.length; a < length; a++) {
-          result.push(eles[a].#{attribute}());
-        }
-        result
-      )
-
-      @driver.execute_script js
-    end
-
-    # iOS only. Android doesn't use find_2_eles_attr.
-    # Get an array of attribute values from elements exactly matching tag name.
-    # @param tag_name_1 [String] the 1st tag name to find
-    # @param tag_name_2 [String] the 2nd tag name to find
-    # @param attribute [String] the attribute to collect
-    # @return [Array<String>] an array of strings containing the attribute from found elements of type tag_name.
-    def find_2_eles_attr tag_name_1, tag_name_2, attribute
-      # Use au.lookup(tag_name) instead of $(tag_name)
-      # See https://github.com/appium/appium/issues/214
-      js = %Q(
-        var eles = au.lookup('#{tag_name_1}');
-        eles = $(eles.concat(au.lookup('#{tag_name_2}')));
-        var result = [];
-        for (var a = 0, length = eles.length; a < length; a++) {
-          result.push(eles[a].#{attribute}());
-        }
-        result
-      )
-
-      @driver.execute_script js
-    end
-
     # iOS only. On Android uiautomator always returns an empty string for EditText password.
     #
     # Password character returned from value of UIASecureTextField
@@ -169,12 +127,6 @@ module Appium
     def page_window window_number=0
       get_page source_window window_number
       nil
-    end
-
-    # The fastest duration that can be used on iOS.
-    # @return [Float]
-    def fast_duration
-      0.5
     end
 
     # Find by id

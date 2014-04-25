@@ -1,22 +1,24 @@
 # encoding: utf-8
 module Appium
   module Ios
+    UIATextField = 'UIATextField'
+    UIASecureTextField = 'UIASecureTextField'
     # Get an array of textfield elements.
     # @return [Array<Textfield>]
     def e_textfields
-      xpaths '//UIATextField | //UIASecureTextField'
+      xpaths "//#{UIATextField} | //#{UIASecureTextField}"
     end
 
     # Get the first textfield element.
     # @return [Textfield]
     def first_textfield
-      xpath '//UIATextField | //UIASecureTextField'
+      xpath "//#{UIATextField} | //#{UIASecureTextField}"
     end
 
     # Get the last textfield element.
     # @return [Textfield]
     def last_textfield
-      xpath '//UIATextField[last()] | //UIASecureTextField[last()]'
+      xpath "//#{UIATextField}[last()] | //#{UIASecureTextField}[last()]"
     end
 
     # Get the first textfield that matches text.
@@ -29,15 +31,15 @@ module Appium
         index = value
         raise "#{index} is not a valid xpath index. Must be >= 1" if index <= 0
 
-        return xpath("//UIATextField[#{index}] | //UIASecureTextField[#{index}]")
+        return xpath("//#{UIATextField}[#{index}] | //#{UIASecureTextField}[#{index}]")
       end
 
       textfield_include value
     end
 
     def textfields value
-      textfield = xpath_visible_contains 'UIATextField', value
-      secure = xpath_visible_contains 'UIASecureTextField', value
+      textfield = string_visible_contains UIATextField, value
+      secure = string_visible_contains UIASecureTextField, value
       xpaths "#{textfield} | #{secure}"
     end
 
@@ -45,8 +47,8 @@ module Appium
     # @param value [String] the value the textfield must include
     # @return [Textfield]
     def textfield_include value
-      textfield = xpath_visible_contains 'UIATextField', value
-      secure = xpath_visible_contains 'UIASecureTextField', value
+      textfield = string_visible_contains UIATextField, value
+      secure = string_visible_contains UIASecureTextField, value
       xpath "#{textfield} | #{secure}"
     end
 
@@ -54,8 +56,8 @@ module Appium
     # @param value [String] the value the textfield must exactly match
     # @return [Textfield]
     def textfield_exact value
-      textfield = xpath_visible_exact 'UIATextField', value
-      secure = xpath_visible_exact 'UIASecureTextField', value
+      textfield = string_visible_exact UIATextField, value
+      secure = string_visible_exact UIASecureTextField, value
       xpath "#{textfield} | #{secure}"
     end
   end # module Ios

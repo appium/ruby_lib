@@ -9,15 +9,8 @@ describe 'ios/helper' do
     before_first
   end
 
-  t 'find_eles_attr' do
-    find_eles_attr(:text, :text).length.must_equal 13
-  end
-
-  t 'find_2_eles_attr' do
-    # find all elements of tag type :text and return the :text value plus
-    # find all elements of tag type :text and return the :text value
-    # use case is: find_2_eles_attr :textfield, :secure, :text
-    find_2_eles_attr(:text, :text, :text).length.must_equal 26
+  t 'find_eles_by_attr_include' do
+    find_eles_by_attr_include('UIATableCell', 'name', 'Use').length.must_equal 7
   end
 
   t 'ios_password' do
@@ -39,8 +32,4 @@ describe 'ios/helper' do
   end
 
   # t 'page_window' do # prints to stdout
-
-  t 'fast_duration' do
-    fast_duration.must_equal 0.5
-  end
 end
