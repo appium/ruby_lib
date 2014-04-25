@@ -110,7 +110,7 @@ module Appium
     def ele_index class_name, index
       # XPath index starts at 1.
       raise "#{index} is not a valid xpath index. Must be >= 1" if index <= 0
-      find_element :xpath, "//#{class_name}[#{index}]"
+      find_element :xpath, %Q(//#{class_name}[@visible="true"][#{index}])
     end
 
     def string_attr_exact class_name, attr, value
@@ -152,14 +152,14 @@ module Appium
     # @return [Element]
     def first_ele class_name
       # XPath index starts at 1
-      find_element :xpath, "//#{class_name}[1]"
+      find_element :xpath, %Q(//#{class_name}[@visible="true"][1])
     end
 
     # Get the last tag that matches class_name
     # @param class_name [String] the tag to match
     # @return [Element]
     def last_ele class_name
-      xpath "//#{class_name}[last()]"
+      xpath %Q(//#{class_name}[@visible="true"][last()])
     end
 
     # Prints xml of the current page
@@ -227,7 +227,7 @@ module Appium
     # @param class_name [String] the class_name to search for
     # @return [Element]
     def tag class_name
-      find_element :class, class_name
+      xpath %Q(//#{class_name}[@visible="true"])
     end
 
     # Returns all elements matching class_name
@@ -235,7 +235,7 @@ module Appium
     # @param class_name [String] the class_name to search for
     # @return [Element]
     def tags class_name
-      find_elements :class, class_name
+      xpaths %Q(//#{class_name}[@visible="true"])
     end
 
     # Converts pixel values to window relative values
@@ -283,7 +283,7 @@ module Appium
 
     # xpath fragment helper
     # example: xpath_visible_contains 'UIATextField', text
-    def string_visible_contains element, value
+    def string_visible_include element, value
       result = []
       attributes = %w[name hint label value]
 
@@ -300,11 +300,11 @@ module Appium
     end
 
     def xpath_visible_contains element, value
-      xpath string_visible_contains element, value
+      xpath string_visible_include element, value
     end
 
     def xpaths_visible_contains element, value
-      xpaths string_visible_contains element, value
+      xpaths string_visible_include element, value
     end
 
     def string_visible_exact element, value

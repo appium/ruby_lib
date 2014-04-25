@@ -1,5 +1,3 @@
-
-
 =begin
   Skip:
     status # status patches are already tested in driver.rb

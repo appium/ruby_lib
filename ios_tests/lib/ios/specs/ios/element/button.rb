@@ -21,7 +21,7 @@ describe 'ios/element/button' do
 
   t 'button' do
     # by index
-    button(3).name.must_equal gray
+    button(2).name.must_equal gray
 
     # by name contains
     button('ray').name.must_equal gray
@@ -37,7 +37,7 @@ describe 'ios/element/button' do
   end
 
   t 'last_button' do
-    last_button.name.must_equal 'Add contact'
+    last_button.name.must_equal 'Rounded'
   end
 
   t 'button_exact' do
@@ -49,7 +49,7 @@ describe 'ios/element/button' do
   end
 
   t 'e_buttons' do
-    e_buttons.length.must_equal 10
+    e_buttons.length.must_equal 4
   end
 
   t 'after_last' do

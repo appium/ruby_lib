@@ -5,19 +5,19 @@ module Appium
     # Get an array of textfield elements.
     # @return [Array<Textfield>]
     def e_textfields
-      xpaths "//#{UIATextField} | //#{UIASecureTextField}"
+      xpaths %Q(//#{UIATextField}[@visible="true"] | //#{UIASecureTextField}[@visible="true"])
     end
 
     # Get the first textfield element.
     # @return [Textfield]
     def first_textfield
-      xpath "//#{UIATextField} | //#{UIASecureTextField}"
+      xpath %Q(//#{UIATextField}[@visible="true"] | //#{UIASecureTextField}[@visible="true"])
     end
 
     # Get the last textfield element.
     # @return [Textfield]
     def last_textfield
-      xpath "//#{UIATextField}[last()] | //#{UIASecureTextField}[last()]"
+      xpath %Q(//#{UIATextField}[@visible="true"][last()] | //#{UIASecureTextField}[@visible="true"][last()])
     end
 
     # Get the first textfield that matches text.
@@ -30,15 +30,15 @@ module Appium
         index = value
         raise "#{index} is not a valid xpath index. Must be >= 1" if index <= 0
 
-        return xpath("//#{UIATextField}[#{index}] | //#{UIASecureTextField}[#{index}]")
+        return xpath(%Q(//#{UIATextField}[@visible="true"][#{index}] | //#{UIASecureTextField}[@visible="true"][#{index}]))
       end
 
       textfield_include value
     end
 
     def textfields value
-      textfield = string_visible_contains UIATextField, value
-      secure = string_visible_contains UIASecureTextField, value
+      textfield = string_visible_include UIATextField, value
+      secure = string_visible_include UIASecureTextField, value
       xpaths "#{textfield} | #{secure}"
     end
 
@@ -46,8 +46,8 @@ module Appium
     # @param value [String] the value the textfield must include
     # @return [Textfield]
     def textfield_include value
-      textfield = string_visible_contains UIATextField, value
-      secure = string_visible_contains UIASecureTextField, value
+      textfield = string_visible_include UIATextField, value
+      secure = string_visible_include UIASecureTextField, value
       xpath "#{textfield} | #{secure}"
     end
 

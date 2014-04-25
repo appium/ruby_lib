@@ -97,7 +97,10 @@ module Appium
 
     # Prints a string of interesting elements to the console.
     # @return [void]
-    def page window_number = -1, class_name=nil
+    def page opts={}
+      window_number = opts.fetch :window, -1
+      class_name = opts.fetch :class, nil
+
       if window_number == -1
         # if the 0th window has no children, find the next window that does.
         target_window = source_window 0
@@ -135,7 +138,9 @@ module Appium
       lazy_load_strings
       value = @strings_xml[id]
       raise "Invalid id `#{id}`" unless value
-      xpath_visible_exact '*', value
+      exact = string_visible_exact '*', value
+      contains = string_visible_include  '*', value
+      xpath "#{exact} | #{contains}"
     end
 
     # Return the iOS version as an array of integers
