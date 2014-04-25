@@ -1,6 +1,14 @@
 # encoding: utf-8
 # rake ios[ios/element/textfield]
 describe 'ios/element/textfield' do
+  def enter_text
+    '<enter text>'
+  end
+
+  def enter_password
+    '<enter password>'
+  end
+
   def before_first
     go_to_textfields
   end
@@ -13,26 +21,12 @@ describe 'ios/element/textfield' do
     before_first
   end
 
-  t 'textfields' do
-    values = textfields('enter').map { |e| e.value }
-    values.include?('<enter text>').must_equal true
-    values.include?('<enter password>').must_equal true
-  end
-
   t 'e_textfields' do
     e_textfields.length.must_equal 4
   end
 
-  def enter_text
-    '<enter text>'
-  end
-
   t 'first_textfield' do
     first_textfield.text.must_equal enter_text
-  end
-
-  def enter_password
-    '<enter password>'
   end
 
   t 'last_textfield' do
@@ -42,6 +36,12 @@ describe 'ios/element/textfield' do
   t 'textfield' do
     textfield(1).text.must_equal(enter_text)
     textfield(enter_text).text.must_equal(enter_text)
+  end
+
+  t 'textfields' do
+    values = textfields('enter').map { |e| e.value }
+    values.include?('<enter text>').must_equal true
+    values.include?('<enter password>').must_equal true
   end
 
   t 'textfield_include' do

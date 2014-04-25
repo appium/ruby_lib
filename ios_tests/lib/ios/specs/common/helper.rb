@@ -34,6 +34,15 @@ must_not_raise is a no-op.
     proc { wait(*wait_time) { raise NoMemoryError } }.must_raise Timeout::Error
   end
 
+  t 'ignore' do
+    # ignore should rescue all exceptions
+    ignore { true }
+    ignore { false }
+    ignore { nil }
+    ignore { raise }
+    ignore { raise NoMemoryError }
+  end
+
   # wait_true is a success unless the value is not true
   t 'wait_true' do
     # successful wait should not error
@@ -49,15 +58,6 @@ must_not_raise is a no-op.
     # regular rescue will not handle exceptions outside of StandardError hierarchy
     # must rescue Exception explicitly to rescue everything
     proc { wait(*wait_time) { raise NoMemoryError } }.must_raise Timeout::Error
-  end
-
-  t 'ignore' do
-    # ignore should rescue all exceptions
-    ignore { true }
-    ignore { false }
-    ignore { nil }
-    ignore { raise }
-    ignore { raise NoMemoryError }
   end
 
   # t 'id' # id is for Selendroid
@@ -95,6 +95,8 @@ must_not_raise is a no-op.
     ele_index('UIAStaticText', 2).name.must_equal uibutton_text
   end
 
+  # todo: 'string_attr_exact'
+
   t 'find_ele_by_attr' do
     el_id = find_ele_by_attr('UIAStaticText', 'name', uibutton_text).instance_variable_get :@id
     el_id.must_match /\d+/
@@ -112,6 +114,8 @@ must_not_raise is a no-op.
     found.must_equal false
     set_wait
   end
+
+  # todo: 'string_attr_include'
 
   t 'find_ele_by_attr_include' do
     el_text = find_ele_by_attr_include('UIAStaticText', :name, 'button').text
@@ -170,4 +174,32 @@ must_not_raise is a no-op.
   t 'tags' do
     tags('UIATableCell').length.must_equal 12
   end
+
+  t 'find_eles_by_attr_include' do
+    find_eles_by_attr_include('UIATableCell', 'name', 'Use').length.must_equal 7
+  end
+
+  t 'get_page_class' do
+    # 8 local. 9 on sauce.
+    get_page_class.split("\n").length.must_be :>=, 8
+  end
+=begin
+todo:
+get_page_class
+page_class
+tag
+tags
+px_to_window_rel
+lazy_load_strings
+xml_keys
+xml_values
+resolve_id
+string_visible_contains
+xpath_visible_contains
+xpaths_visible_contains
+string_visible_exact
+xpath_visible_exact
+xpaths_visible_exact
+raise_no_element_error
+=end
 end

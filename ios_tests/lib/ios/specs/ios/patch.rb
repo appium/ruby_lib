@@ -14,6 +14,8 @@ describe 'ios/patch' do
     before_first
   end
 
+  # todo: test 'label'
+
   t 'type' do
     # nav to textfield
     s_text('textfields').click

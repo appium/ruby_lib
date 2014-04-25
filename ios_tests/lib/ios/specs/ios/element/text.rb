@@ -1,6 +1,10 @@
 # encoding: utf-8
 # rake ios['ios/element/text']
 describe 'ios/element/text' do
+  def ui_catalog
+    'UICatalog'
+  end
+
   def before_first
     screen.must_equal catalog
   end
@@ -9,17 +13,8 @@ describe 'ios/element/text' do
     before_first
   end
 
-  t 's_texts' do
-    exp = ['Controls, Various uses of UIControl', 'Segments, Various uses of UISegmentedControl']
-    s_texts('trol').map { |e| e.name }.must_equal exp
-  end
-
   t 'e_s_texts' do
     e_s_texts.length.must_equal 13
-  end
-
-  def ui_catalog
-    'UICatalog'
   end
 
   t 'first_s_text' do
@@ -36,6 +31,12 @@ describe 'ios/element/text' do
     s_text('mat').name.must_equal 'Transitions, Shows UIViewAnimationTransitions'
   end
 
+  t 's_texts' do
+    exp = ['Controls, Various uses of UIControl', 'Segments, Various uses of UISegmentedControl']
+    s_texts('trol').map { |e| e.name }.must_equal exp
+    s_texts('uses').length.must_equal 7
+  end
+
   t 's_text_exact' do
     # should fail
     set_wait 0
@@ -45,10 +46,6 @@ describe 'ios/element/text' do
 
     # should pass
     s_text_exact(ui_catalog).text.must_equal ui_catalog
-  end
-
-  t 's_texts' do
-    s_texts('uses').length.must_equal 7
   end
 
   t 's_texts_exact' do

@@ -1,4 +1,4 @@
-describe 'common/device' do
+describe 'device/device' do
   def before_first
     screen.must_equal catalog
   end
