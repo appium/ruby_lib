@@ -40,7 +40,7 @@ describe 'driver' do
                               sauce_username:   nil,
                               sauce_access_key: nil,
                               port:             4723,
-                              device:           'android',
+                              device:           :android,
                               debug:            true }
 
       actual.must_equal expected
@@ -128,7 +128,7 @@ describe 'driver' do
     t 'restart' do
       set_wait 1 # ensure wait is 1 before we restart.
       restart
-      mobile(:currentActivity).must_equal '.ApiDemos'
+      current_activity.must_equal '.ApiDemos'
     end
 
     t 'driver' do
@@ -142,6 +142,7 @@ describe 'driver' do
     start_driver # tested by restart
     no_wait  # posts value to server, it's not stored locally
     set_wait # posts value to server, it's not stored locally
+    execute_script # 'mobile: ' is deprecated and plain executeScript unsupported
 =end
     t 'default_wait' do
       set_wait 1
@@ -154,24 +155,14 @@ describe 'driver' do
       exists(0, 0) { raise 'error' }.must_equal false
     end
 
-    # any script
-    t 'execute_script' do
-      execute_script('mobile: currentActivity').must_equal '.ApiDemos'
-    end
-
-    # any mobile method
-    t 'mobile' do
-      mobile(:currentActivity).must_equal '.ApiDemos'
-    end
-
     # any elements
     t 'find_elements' do
-      find_elements(:tag_name, :text).length.must_equal 12
+      find_elements(:class_name, 'android.widget.TextView').length.must_equal 12
     end
 
     # any element
     t 'find_element' do
-      find_element(:tag_name, :text).class.must_equal Selenium::WebDriver::Element
+      find_element(:class_name, 'android.widget.TextView').class.must_equal Selenium::WebDriver::Element
     end
 
     # Skip: x # x is only used in Pry
