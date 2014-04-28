@@ -140,18 +140,15 @@ module Appium
         end
 
         add_endpoint_method(:complex_find, 'session/:session_id/appium/app/complex_find') do
-          def complex_find(mode, selectors=nil)
-            if selectors.nil?
-              selectors = mod.dup
-              mod       = false
-            end
-
-            selector_array = mod ? [mod] : []
-            selector_array.push selectors
+          def complex_find(opts)
+            mode = opts.fetch :mode, false
+            selectors = opts.fetch :selectors, false
+            raise 'Complex find must have selectors' unless selectors
+            selectors.insert(0, mode) if mode
 
             ids = execute :complex_find, {}, selectors
-            if mod && ids.length > 1
 
+            if mode == 'all' && ids.length > 1
               return ids.map { |id| Selenium::WebDriver::Element.new self, element_id_from(id) }
             else
               return Selenium::WebDriver::Element.new self, element_id_from(ids)

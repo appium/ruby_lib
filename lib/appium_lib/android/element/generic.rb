@@ -27,7 +27,7 @@ module Appium
           # descriptionContains(text)
           [[7, text]]
 
-      complex_find 'scroll', args
+      complex_find mode: 'scroll', selectors: args
     end
 
     # Scroll to an element with the exact target text or description.
@@ -40,7 +40,7 @@ module Appium
           # description(text)
           [[5, text]]
 
-      complex_find 'scroll', args
+      complex_find mode: 'scroll', selectors: args
     end
   end # module Android
 end # module Appium
