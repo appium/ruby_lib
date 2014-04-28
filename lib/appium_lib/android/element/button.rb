@@ -1,84 +1,87 @@
 # UIAButton methods
 module Appium
   module Android
-    # Find a button by text and optionally number.
-    # @param text [String, Integer] the text to exactly match. If int then the button at that index is returned.
-    # @param number [Integer] the occurrence of the button matching text. Defaults to the first button.
-    # @return [Button] the button found with text and matching number
-    def button text, number=0
-      # return button at index.
-      return ele_index :button, text if text.is_a? Numeric
+    Button      = 'android.widget.Button'
+    ImageButton = 'android.widget.ImageButton'
 
-      number >= 1 ? button_num(text, number) :
-          find_ele_by_text_include(:button, text)
+    private
+
+    # @private
+    def _button_visible_string opts={}
+      index = opts.fetch :index, false
+      if index
+        %Q(//#{Button}[#{index}] | //#{ImageButton}[#{index}])
+      else
+        %Q(//#{Button} | //#{ImageButton})
+      end
     end
 
-    # Get an array of button texts or button elements if text is provided.
-    # @param text [String] the text to exactly match
-    # @return [Array<String>, Array<Buttons>] either an array of button texts or an array of button elements if text is provided.
-    def buttons text=nil
-      text == nil ? find_eles_attr(:button, :text) :
-          find_eles_by_text_include(:button, text)
+    # @private
+    def _button_exact_string value
+      button       = string_visible_exact Button, value
+      image_button = string_visible_exact ImageButton, value
+      "#{button} | #{image_button}"
+    end
+
+    # @private
+    def _button_contains_string value
+      button       = string_visible_contains Button, value
+      image_button = string_visible_contains ImageButton, value
+      "#{button} | #{image_button}"
+    end
+    
+    public
+
+    # Find a button by text and optionally number.
+    # @param value [String, Integer] the value to exactly match. If int then the button at that index is returned.
+    # @return [Button] the button found with text and matching number
+    def button value
+      # Don't use ele_index because that only works on one element type.
+      # Android needs to combine button and image button to match iOS.
+      if value.is_a? Numeric
+        index = value
+        raise "#{index} is not a valid xpath index. Must be >= 1" if index <= 0
+
+        return xpath _button_visible_string index: index
+      end
+
+      xpath _button_contains_string value
+    end
+
+    def buttons value
+     xpaths _button_contains_string value
     end
 
     # Get the first button element.
     # @return [Button]
     def first_button
-      first_ele :button
+      xpath _button_visible_string
     end
 
     # Get the last button element.
     # @return [Button]
     def last_button
-      last_ele :button
+       xpath _button_visible_string index: 'last()'
     end
 
     # Get the first button element that exactly matches text.
-    # @param text [String] the text to match exactly
+    # @param value [String] the value to match exactly
     # @return [Button]
-    def button_exact text
-      find_ele_by_text :button, text
+    def button_exact value
+      xpath _button_exact_string value
     end
 
     # Get all button elements that exactly match text.
-    # @param text [String] the text to match exactly
+    # @param value [String] the value to match exactly
     # @return [Array<Button>]
-    def buttons_exact text
-      find_eles_by_text :button, text
+    def buttons_exact value
+      xpaths _button_exact_string value
     end
 
     # Get an array of button elements.
     # @return [Array<Button>]
     def e_buttons
-      find_eles :button
+      xpaths _button_visible_string
     end
-
-    # Expected to be called via button method.
-    #
-    # Get the button element exactly matching text and
-    # occurrence. number=2 means the 2nd occurrence.
-    #
-    # find the second Sign In button
-    #
-    # b = e_button 'Sign In', 2
-    #
-    # Button order will change in iOS vs Android
-    # so if there's no button found at number then
-    # return the first button.
-    #
-    # @param text [String] the text to match
-    # @param number [Integer] the button occurance to return. 1 = first button
-    # @return [Button] the button that matches text and number
-    def button_num text, number=1
-      raise 'Number must be >= 1' if number <= 0
-      number = number - 1 # zero indexed
-      result = nil
-
-      elements = buttons text
-      elements.size > number ? result = elements[number]
-      : result = elements.first
-
-      result
-    end
-  end # module Common
+  end # module Android
 end # module Appium

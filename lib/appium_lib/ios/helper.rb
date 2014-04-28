@@ -154,8 +154,10 @@ module Appium
     # @param index [Integer] the index
     # @return [Element] the found element of type class_name
     def ele_index class_name, index
-      # XPath index starts at 1.
-      raise "#{index} is not a valid xpath index. Must be >= 1" if index <= 0
+      unless index == 'last()'
+        # XPath index starts at 1.
+        raise "#{index} is not a valid xpath index. Must be >= 1" if index <= 0
+      end
       find_element :xpath, %Q(//#{class_name}[@visible="true"][#{index}])
     end
 
@@ -198,14 +200,14 @@ module Appium
     # @return [Element]
     def first_ele class_name
       # XPath index starts at 1
-      find_element :xpath, %Q(//#{class_name}[@visible="true"][1])
+      ele_index class_name, 1
     end
 
     # Get the last tag that matches class_name
     # @param class_name [String] the tag to match
     # @return [Element]
     def last_ele class_name
-      xpath %Q(//#{class_name}[@visible="true"][last()])
+      ele_index class_name, 'last()'
     end
 
     # Returns the first element matching class_name

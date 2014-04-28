@@ -46,5 +46,5 @@ module Appium
     def e_buttons
       tags UIAButton
     end
-  end # module Common
+  end # module Ios
 end # module Appium

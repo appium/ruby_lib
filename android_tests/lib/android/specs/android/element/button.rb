@@ -1,9 +1,10 @@
+# rake android['android/element/button']
 describe 'android/element/button' do
   def before_first
     # nav to buttons activity
-    text('App').click
-    text('Activity').click
-    text('Animation').click
+    find('App').click
+    find('Activity').click
+    find('Animation').click
   end
 
   def after_last
@@ -26,8 +27,8 @@ describe 'android/element/button' do
   end
 
   t 'buttons' do
-    exp = ['Fade in', 'Zoom in', 'Modern fade in', 'Modern zoom in', 'Scale up', 'Thumbnail zoom']
-    buttons.must_equal exp
+    exp = ['Zoom in', 'Modern zoom in', 'Thumbnail zoom']
+    buttons('zoom').map { |e| e.text }.must_equal exp
   end
 
   t 'first_button' do
@@ -48,11 +49,6 @@ describe 'android/element/button' do
 
   t 'e_buttons' do
     e_buttons.length.must_equal 6
-  end
-
-  t 'button_num' do
-    # select the second button containing 'in'
-    button_num('in', 2).name.must_equal 'Zoom in'
   end
 
   t { after_last }
