@@ -3,6 +3,8 @@ module Appium
     UIATextField       = 'UIATextField'
     UIASecureTextField = 'UIASecureTextField'
 
+    private
+
     # @private
     def _textfield_visible_string opts={}
       index = opts.fetch :index, false
@@ -26,6 +28,8 @@ module Appium
       secure    = string_visible_contains UIASecureTextField, value
       "#{textfield} | #{secure}"
     end
+
+    public
 
     # Get the first textfield that matches text.
     # @param value [String, Integer] the text to match exactly. If int then the textfield at that index is returned.
