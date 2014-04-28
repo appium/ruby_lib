@@ -116,7 +116,7 @@ module Appium
     end
 
     def string_attr_exact class_name, attr, value
-      %Q(//#{class_name}[@visible="true" and @#{attr}='#{value}'])
+      %Q(//#{class_name}[@#{attr}='#{value}'])
     end
 
     def find_ele_by_attr class_name, attr, value
@@ -128,7 +128,7 @@ module Appium
     end
 
     def string_attr_include class_name, attr, value
-      %Q(//#{class_name}[@visible="true" and contains(translate(@#{attr},'#{value.upcase}', '#{value}'), '#{value}')])
+      %Q(//#{class_name}[contains(translate(@#{attr},'#{value.upcase}', '#{value}'), '#{value}')])
     end
 
     # Get the first tag by attribute that exactly matches value.
