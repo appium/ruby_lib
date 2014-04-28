@@ -1,9 +1,9 @@
 describe 'android/patch.rb' do
   t 'type' do
     # nav to textfield
-    text('app').click
-    text('search').click
-    text('invoke').click
+    find('app').click
+    find('search').click
+    find('invoke').click
 
     ele = first_textfield
     ele.type 'ok'

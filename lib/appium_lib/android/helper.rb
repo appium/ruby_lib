@@ -106,7 +106,9 @@ module Appium
     # @return [Element]
     def id id
       value = resolve_id id
-      raise "Invalid id `#{id}`" unless value
+      # If the id doesn't resolve in strings.xml then use it as is
+      # It's probably a resource id which won't be in strings.xml
+      value = id unless value
       exact    = string_visible_exact '*', value
       contains = string_visible_contains '*', value
       xpath "#{exact} | #{contains}"
