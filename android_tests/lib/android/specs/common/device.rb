@@ -61,9 +61,16 @@ describe 'common/device' do
     strs.has_key?("activity_save_restore").must_equal true
   end
 
+  def must_return_element element
+    element.class.must_equal Selenium::WebDriver::Element
+  end
+
   t 'complex_find' do
-    act = complex_find [[[3, 'Accessibility'], [14, true]]]
-    act.class.must_equal Selenium::WebDriver::Element
+    find('Views').click
+    must_return_element complex_find(mode: 'scroll', selectors: [[[3, 'tabs']]])
+    must_return_element complex_find(mode: 'all', selectors: [[[3, 'i']]]).first
+    must_return_element complex_find(selectors: [[[3, 'tabs']]])
+    back
   end
 
   t 'key_event' do
