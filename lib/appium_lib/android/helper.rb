@@ -216,102 +216,79 @@ module Appium
       complex_find array
     end
 
+    # http://nokogiri.org/Nokogiri/XML/SAX.html
+    class AndroidElements < Nokogiri::XML::SAX::Document
+      # TODO: Support strings.xml ids
+      attr_reader :result, :keys
+
+      def filter
+        @filter
+      end
+
+      # convert to string to support symbols
+      def filter= value
+        # nil and false disable the filter
+        return @filter = false unless value
+        @filter = value.to_s.downcase
+      end
+
+      def initialize
+        reset
+        @filter = false
+      end
+
+      def reset
+        @result = ''
+        @keys   = %w[text resource-id content-desc]
+      end
+
+      # http://nokogiri.org/Nokogiri/XML/SAX/Document.html
+      def start_element name, attrs = []
+        return if filter && !name.downcase.include?(filter)
+
+        attributes = {}
+
+        attrs.each do |key, value|
+          if keys.include?(key) && !value.empty?
+            attributes[key] = value
+          end
+        end
+
+        string = ''
+        text   = attributes['text']
+        desc   = attributes['content-desc']
+        id     = attributes['resource-id']
+
+        if !text.nil? && text == desc
+          string += "  text, desc: #{text}\n"
+        else
+          string += "  text: #{text}\n" unless text.nil?
+          string += "  desc: #{desc}\n" unless desc.nil?
+        end
+        string  += "  id: #{id}\n" unless id.nil?
+
+        @result += "\n#{name}\n#{string}" unless attributes.empty?
+      end
+    end # class AndroidElements
+
     # Android only.
     # Returns a string containing interesting elements.
     # If an element has no content desc or text, then it's not returned by this method.
     # @return [String]
-    def get_android_inspect
-      # @private
-      def run node
-        r = []
+    def get_android_inspect class_name=false
+      parser = @android_elements_parser ||= Nokogiri::XML::SAX::Parser.new(AndroidElements.new)
 
-        run_internal = lambda do |node|
-          if node.kind_of? Array
-            node.each { |node| run_internal.call node }
-            return
-          end
+      parser.document.reset
+      parser.document.filter = class_name
+      parser.parse get_source
 
-          keys = node.keys
-          return if keys.empty?
-          if keys == %w(hierarchy)
-            run_internal.call node['hierarchy']
-            return
-          end
-
-          n_content  = '@content-desc'
-          n_text     = '@text'
-          n_class    = '@class'
-          n_resource = '@resource-id'
-          n_node     = 'node'
-
-          # Store the object if it has a content description, text, or resource id.
-          # If it only has a class, then don't save it.
-          obj        = {}
-          obj.merge!({ desc: node[n_content] }) if keys.include?(n_content) && !node[n_content].empty?
-          obj.merge!({ text: node[n_text] }) if keys.include?(n_text) && !node[n_text].empty?
-          obj.merge!({ resource_id: node[n_resource] }) if keys.include?(n_resource) && !node[n_resource].empty?
-          obj.merge!({ class: node[n_class] }) if keys.include?(n_class) && !obj.empty?
-
-          r.push obj if !obj.empty?
-          run_internal.call node[n_node] if keys.include?(n_node)
-        end
-
-        run_internal.call node
-        r
-      end
-
-      lazy_load_strings
-      json    = get_source
-      node    = json['hierarchy']
-      results = run node
-
-      out = ''
-      results.each { |e|
-        e_desc        = e[:desc]
-        e_text        = e[:text]
-        e_class       = e[:class]
-        e_resource_id = e[:resource_id]
-        out           += e_class.split('.').last + "\n"
-
-        out += "  class: #{e_class}\n"
-        if e_text == e_desc
-          out += "  text, name: #{e_text}\n" unless e_text.nil?
-        else
-          out += "  text: #{e_text}\n" unless e_text.nil?
-          out += "  name: #{e_desc}\n" unless e_desc.nil?
-        end
-
-        out        += "  resource_id: #{e_resource_id}\n" unless e_resource_id.nil? || e_resource_id.empty?
-
-        # there may be many ids with the same value.
-        # output all exact matches.
-        id_matches = @strings_xml.select do |key, value|
-          value == e_desc || value == e_text
-        end
-
-        if id_matches && id_matches.length > 0
-          match_str = ''
-          # [0] = key, [1] = value
-          id_matches.each do |match|
-            match_str += ' ' * 6 + "#{match[0]}\n"
-          end
-          out += "  id: #{match_str.strip}\n"
-        end
-      }
-      out
-    end
-
-    # Automatically detects selendroid or android.
-    # Returns a string containing interesting elements.
-    # @return [String]
-    def get_inspect
-      get_android_inspect
+      parser.document.result
     end
 
     # Intended for use with console.
     # Inspects and prints the current page.
-    def page
-      puts get_inspect
+    def page class_name=false
+      puts get_android_inspect class_name
       nil
     end
 
@@ -431,7 +408,7 @@ module Appium
     # example: xpath_visible_contains 'UIATextField', text
     def string_visible_contains element, value
       result     = []
-      attributes = %w[content-desc resource-id text]
+      attributes = %w[content-desc text]
 
       value_up   = value.upcase
       value_down = value.downcase
@@ -439,6 +416,9 @@ module Appium
       attributes.each do |attribute|
         result << %Q(contains(translate(@#{attribute},"#{value_up}","#{value_down}"), "#{value_down}"))
       end
+
+      # never partial match on a resource id
+      result << %Q(@resource-id="#{value}")
 
       result = result.join(' or ')
 

@@ -47,7 +47,6 @@ end
 # rake android
 desc 'Run the Android tests'
 task :android, :args, :test_file do |args, test_file|
-  Rake::Task[:adb_uninstall].execute
   run_android test_file[:args]
 end
 
@@ -59,12 +58,4 @@ end
 desc 'Run bundle install'
 task :install do
   sh 'bundle install'
-end
-
-desc 'ADB uninstall apk'
-task :adb_uninstall do
-  wait_for_valid_device
-  # uninstall old api
-  cmd = 'adb uninstall com.example.android.apis'
-  run_sh cmd
 end

@@ -1,45 +1,39 @@
+# rake android['android/element/generic']
 describe 'android/element/generic' do
-  def m method
-    r = method(method).call 'tent'
-    r = r.first if r.kind_of? Array
-    r.class.must_equal Selenium::WebDriver::Element
-    r.text.must_equal 'Content'
+
+  def content
+    'Content'
+  end
+
+  def partial
+    'tent'
+  end
+
+  t 'find works before and after get_source' do
+    find(partial).text.must_equal content
+    get_source.class.must_equal String
+    find(partial).text.must_equal content
   end
 
   t 'find' do
-    m :find
+    find(partial).text.must_equal content
   end
 
-  t 'tag' do
-    tag 'TextView'
+  t 'finds' do
+    finds(partial).first.text.must_equal content
   end
 
-  t 'tags' do
-    tags('TextView').length
+  t 'find_exact' do
+    find_exact(content).text.must_equal content
   end
 
-  t 'text' do
-    m :text
+  t 'finds_exact' do
+    finds_exact(content).first.text.must_equal content
   end
 
-  t 'texts' do
-    m :texts
-  end
-
-  t 'name' do
-    m :name
-  end
-
-  t 'name_exact' do
-    name_exact 'App'
-  end
-
-  t 'names' do
-    names('a').length.must_be :>=, 5
-  end
-
+  # scroll_to is broken
   t 'scroll_to' do
-    text('Views').click
+    find('Views').click
     e = scroll_to 'rotating button'
     e.text.must_equal 'Rotating Button'
     # back to start activity
@@ -47,16 +41,10 @@ describe 'android/element/generic' do
   end
 
   t 'scroll_to_exact' do
-    text('Views').click
+    find('Views').click
     e = scroll_to_exact 'Rotating Button'
     e.text.must_equal 'Rotating Button'
     # back to start activity
     back
-  end
-
-  t 'mobile find works before and after source' do
-    m :text
-    get_source.class.must_equal Hash
-    m :text
   end
 end
