@@ -62,7 +62,7 @@ describe 'common/device' do
   end
 
   t 'complex_find' do
-    act = complex_find [[3, 'Accessibility'], [14, true]]
+    act = complex_find [[[3, 'Accessibility'], [14, true]]]
     act.class.must_equal Selenium::WebDriver::Element
   end
 

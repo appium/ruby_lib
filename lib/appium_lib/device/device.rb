@@ -47,10 +47,10 @@ module Appium
     #  of arrays, each containing a selector and that selector's value.
     #
     #  ```ruby
-    #  complex_find [[2, 'Sau'], [14, true]] # => Find a clickable element
-    #                                        #    whose names starts with 'Sau'
+    #  complex_find [[[2, 'Sau'], [14, true]]] # => Find a clickable element
+    #                                          #    whose names starts with 'Sau'
     #  ```
-    #  @param all (Symbol) If not falsy, will use the 'all' option in your find
+    #  @param mod (Symbol) If present, will be the 0th element in the selector array.
     #  @param selectors (Array<Object>) The selectors to find elements with.
 
     # @!method hide_keyboard
@@ -140,17 +140,17 @@ module Appium
         end
 
         add_endpoint_method(:complex_find, 'session/:session_id/appium/app/complex_find') do
-          def complex_find(all, selectors=nil)
+          def complex_find(mode, selectors=nil)
             if selectors.nil?
-              selectors = all.dup
-              all       = false
+              selectors = mod.dup
+              mod       = false
             end
 
-            selector_array = all ? ['all'] : []
+            selector_array = mod ? [mod] : []
             selector_array.push selectors
 
-            ids = execute :complex_find, {}, [selectors]
-            if all && ids.length > 1
+            ids = execute :complex_find, {}, selectors
+            if mod && ids.length > 1
 
               return ids.map { |id| Selenium::WebDriver::Element.new self, element_id_from(id) }
             else
