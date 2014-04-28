@@ -6,8 +6,8 @@ describe 'android/element/alert.rb' do
 
   t 'alert_click' do
     # nav to alert activity
-    text('app').click
-    text('alert').click
+    find('app').click
+    find('alert').click
 
     # test
     open_alert

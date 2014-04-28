@@ -7,7 +7,7 @@ module Appium
     # @param value [String, Integer] the value to find. If int then the text at that index is returned.
     # @return [Text]
     def s_text value
-      return ele_index :text, value if value.is_a? Numeric
+      return ele_index UIAStaticText, value if value.is_a? Numeric
       xpath_visible_contains UIAStaticText, value
     end
 

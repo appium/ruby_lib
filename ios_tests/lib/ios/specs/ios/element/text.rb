@@ -27,6 +27,7 @@ describe 'ios/element/text' do
 
   t 's_text' do
     s_text('mat').text.must_equal ''
+    s_text(0).text.must_equal ui_catalog
     s_text('mat').name.must_equal 'Transitions, Shows UIViewAnimationTransitions'
   end
 

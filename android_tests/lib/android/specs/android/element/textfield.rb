@@ -1,4 +1,8 @@
 describe 'android/element/textfield' do
+  def must_raise_no_element &block
+    proc { block.call }.must_raise Selenium::WebDriver::Error::NoSuchElementError
+  end
+
   def left
     'Left is best'
   end
@@ -9,9 +13,9 @@ describe 'android/element/textfield' do
 
   def before_first
     # nav to activity
-    text('app').click
-    text('activity').click
-    text('custom title').click
+    find('app').click
+    find('activity').click
+    find('custom title').click
   end
 
   def after_last
@@ -21,13 +25,13 @@ describe 'android/element/textfield' do
 
   t { before_first }
 
-  t 'textfields' do
-    exp = [left, right]
-    textfields.must_equal exp
+  t 'textfield' do
+    textfield(1).text.must_equal left
+    textfield('right').text.must_equal right
   end
 
-  t 'e_textfields' do
-    e_textfields.length.must_equal 2
+  t 'textfields' do
+    textfields('right').first.text.must_equal right
   end
 
   t 'first_textfield' do
@@ -38,17 +42,18 @@ describe 'android/element/textfield' do
     last_textfield.text.must_equal right
   end
 
-  t 'textfield' do
-    textfield('right').text.must_equal right
-    textfield(1).text.must_equal left
+  t 'textfield_exact' do
+    must_raise_no_element { textfield_exact 'zz' }
+    textfield_exact(left).text.must_equal left
   end
 
-  t 'textfield_exact' do
-    res = begin; textfield_exact 'zz'; rescue; end
-    res.must_be_nil
+  t 'textfields_exact' do
+    textfields_exact('zz').must_equal []
+    textfields_exact(left).first.text.must_equal left
+  end
 
-    res = textfield_exact left
-    res.text.must_equal left
+  t 'e_textfields' do
+    e_textfields.length.must_equal 2
   end
 
   t { after_last }
