@@ -17,7 +17,7 @@ module Appium
     # @param element [Object] the element to search. omit to search everything
     # @return [String]
     def get_page element=source_window(0), class_name=nil
-      lazy_load_strings
+      lazy_load_strings # populate @strings_xml
 
       # @private
       def empty ele
@@ -42,12 +42,12 @@ module Appium
       end
 
       unless empty(element) || element['visible'] == false
-        name  = fix_space element['name']
-        label = fix_space element['label']
-        value = fix_space element['value']
-        hint = fix_space element['hint']
+        name    = fix_space element['name']
+        label   = fix_space element['label']
+        value   = fix_space element['value']
+        hint    = fix_space element['hint']
         visible = fix_space element['visible']
-        type = fix_space element['type']
+        type    = fix_space element['type']
 
         # if class_name is set, mark non-matches as invisible
         visible = (type == class_name).to_s if class_name
@@ -99,7 +99,7 @@ module Appium
     # @return [void]
     def page opts={}
       window_number = opts.fetch :window, -1
-      class_name = opts.fetch :class, nil
+      class_name    = opts.fetch :class, nil
 
       if window_number == -1
         # if the 0th window has no children, find the next window that does.
@@ -135,11 +135,10 @@ module Appium
     # @param id [String] the id to search for
     # @return [Element]
     def id id
-      lazy_load_strings
-      value = @strings_xml[id]
+      value = resolve_id id
       raise "Invalid id `#{id}`" unless value
-      exact = string_visible_exact '*', value
-      contains = string_visible_include  '*', value
+      exact    = string_visible_exact '*', value
+      contains = string_visible_include '*', value
       xpath "#{exact} | #{contains}"
     end
 
@@ -148,6 +147,128 @@ module Appium
     def ios_version
       ios_version = execute_script 'UIATarget.localTarget().systemVersion()'
       ios_version.split('.').map { |e| e.to_i }
+    end
+
+    # Get the element of type class_name at matching index.
+    # @param class_name [String] the class name to find
+    # @param index [Integer] the index
+    # @return [Element] the found element of type class_name
+    def ele_index class_name, index
+      # XPath index starts at 1.
+      raise "#{index} is not a valid xpath index. Must be >= 1" if index <= 0
+      find_element :xpath, %Q(//#{class_name}[@visible="true"][#{index}])
+    end
+
+    def string_attr_exact class_name, attr, value
+      %Q(//#{class_name}[@visible="true" and @#{attr}='#{value}'])
+    end
+
+    def find_ele_by_attr class_name, attr, value
+      @driver.find_element :xpath, string_attr_exact(class_name, attr, value)
+    end
+
+    def find_eles_by_attr class_name, attr, value
+      @driver.find_elements :xpath, string_attr_exact(class_name, attr, value)
+    end
+
+    def string_attr_include class_name, attr, value
+      %Q(//#{class_name}[@visible="true" and contains(translate(@#{attr},'#{value.upcase}', '#{value}'), '#{value}')])
+    end
+
+    # Get the first tag by attribute that exactly matches value.
+    # @param class_name [String] the tag name to match
+    # @param attr [String] the attribute to compare
+    # @param value [String] the value of the attribute that the element must include
+    # @return [Element] the element of type tag who's attribute includes value
+    def find_ele_by_attr_include class_name, attr, value
+      @driver.find_element :xpath, string_attr_include(class_name, attr, value)
+    end
+
+    # Get tags by attribute that include value.
+    # @param class_name [String] the tag name to match
+    # @param attr [String] the attribute to compare
+    # @param value [String] the value of the attribute that the element must include
+    # @return [Array<Element>] the elements of type tag who's attribute includes value
+    def find_eles_by_attr_include class_name, attr, value
+      @driver.find_elements :xpath, string_attr_include(class_name, attr, value)
+    end
+
+    # Get the first tag that matches class_name
+    # @param class_name [String] the tag to match
+    # @return [Element]
+    def first_ele class_name
+      # XPath index starts at 1
+      find_element :xpath, %Q(//#{class_name}[@visible="true"][1])
+    end
+
+    # Get the last tag that matches class_name
+    # @param class_name [String] the tag to match
+    # @return [Element]
+    def last_ele class_name
+      xpath %Q(//#{class_name}[@visible="true"][last()])
+    end
+
+    # Returns the first element matching class_name
+    #
+    # @param class_name [String] the class_name to search for
+    # @return [Element]
+    def tag class_name
+      xpath %Q(//#{class_name}[@visible="true"])
+    end
+
+    # Returns all elements matching class_name
+    #
+    # @param class_name [String] the class_name to search for
+    # @return [Element]
+    def tags class_name
+      xpaths %Q(//#{class_name}[@visible="true"])
+    end
+
+    # xpath fragment helper
+    # example: xpath_visible_contains 'UIATextField', text
+    def string_visible_include element, value
+      result     = []
+      attributes = %w[name hint label value]
+
+      value_up   = value.upcase
+      value_down = value.downcase
+
+      attributes.each do |attribute|
+        result << %Q(contains(translate(@#{attribute},"#{value_up}","#{value_down}"), "#{value_down}"))
+      end
+
+      result = result.join(' or ')
+      result = %Q(@visible="true" and (#{result}))
+      "//#{element}[#{result}]"
+    end
+
+    def xpath_visible_contains element, value
+      xpath string_visible_include element, value
+    end
+
+    def xpaths_visible_contains element, value
+      xpaths string_visible_include element, value
+    end
+
+    def string_visible_exact element, value
+      result     = []
+      attributes = %w[name hint label value]
+
+      attributes.each do |attribute|
+        result << %Q(@#{attribute}="#{value}")
+      end
+
+      result = result.join(' or ')
+      result = %Q(@visible="true" and (#{result}))
+      "//#{element}[#{result}]"
+    end
+
+    def xpath_visible_exact element, value
+      xpath string_visible_exact element, value
+    end
+
+    def xpaths_visible_exact element, value
+      xpaths string_visible_exact element, value
     end
   end # module Ios
 end # module Appium
