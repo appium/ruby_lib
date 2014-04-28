@@ -138,7 +138,7 @@ module Appium
       value = resolve_id id
       raise "Invalid id `#{id}`" unless value
       exact    = string_visible_exact '*', value
-      contains = string_visible_include '*', value
+      contains = string_visible_contains '*', value
       xpath "#{exact} | #{contains}"
     end
 
@@ -226,7 +226,7 @@ module Appium
 
     # xpath fragment helper
     # example: xpath_visible_contains 'UIATextField', text
-    def string_visible_include element, value
+    def string_visible_contains element, value
       result     = []
       attributes = %w[name hint label value]
 
@@ -243,11 +243,11 @@ module Appium
     end
 
     def xpath_visible_contains element, value
-      xpath string_visible_include element, value
+      xpath string_visible_contains element, value
     end
 
     def xpaths_visible_contains element, value
-      xpaths string_visible_include element, value
+      xpaths string_visible_contains element, value
     end
 
     def string_visible_exact element, value
@@ -260,6 +260,7 @@ module Appium
 
       result = result.join(' or ')
       result = %Q(@visible="true" and (#{result}))
+
       "//#{element}[#{result}]"
     end
 

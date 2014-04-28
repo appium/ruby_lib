@@ -20,8 +20,16 @@ describe 'ios/element/textfield' do
     before_first
   end
 
-  t 'e_textfields' do
-    e_textfields.length.must_equal 4
+  t 'textfield' do
+    textfield(1).text.must_equal(enter_text)
+    textfield(enter_text).text.must_equal(enter_text)
+    textfield('word').text.must_equal enter_password
+  end
+
+  t 'textfields' do
+    values = textfields('enter').map { |e| e.value }
+    values.include?('<enter text>').must_equal true
+    values.include?('<enter password>').must_equal true
   end
 
   t 'first_textfield' do
@@ -32,27 +40,20 @@ describe 'ios/element/textfield' do
     last_textfield.text.must_equal enter_password
   end
 
-  t 'textfield' do
-    textfield(1).text.must_equal(enter_text)
-    textfield(enter_text).text.must_equal(enter_text)
-  end
-
-  t 'textfields' do
-    values = textfields('enter').map { |e| e.value }
-    values.include?('<enter text>').must_equal true
-    values.include?('<enter password>').must_equal true
-  end
-
-  t 'textfield_include' do
-    textfield_include('word').text.must_equal enter_password
-  end
-
   t 'textfield_exact' do
     textfield_exact(enter_password).text.must_equal enter_password
   end
 
+  t 'textfields_exact' do
+    textfields_exact(enter_password).first.text.must_equal enter_password
+  end
+
+  t 'e_textfields' do
+    e_textfields.length.must_equal 4
+  end
+
   def keyboard_exists?
-    !! ignore { wait_true(3) { execute_script 'au.mainApp().keyboard().type() !== "UIAElementNil"' } }
+    !!ignore { wait_true(3) { execute_script 'au.mainApp().keyboard().type() !== "UIAElementNil"' } }
   end
 
   def keyboard_must_not_exist
@@ -81,15 +82,19 @@ describe 'ios/element/textfield' do
   end
 
   # test textfield methods with no textfields
-  t 'no textfields' do
+
+  t 'leave textfields' do
     set_wait 1
-    # must leave textfield screen for the rest of the tests
     leave_textfields
-    e_textfields.must_equal []
   end
 
-  t 'no e_textfields' do
-    e_textfields.length.must_equal 0
+  t 'no textfield' do
+    must_raise_no_element { textfield(1) }
+    must_raise_no_element { textfield('does not exist') }
+  end
+
+  t 'no textfields' do
+    textfields('does not exist').length.must_equal 0
   end
 
   t 'no first_textfield' do
@@ -100,17 +105,16 @@ describe 'ios/element/textfield' do
     must_raise_no_element { last_textfield }
   end
 
-  t 'no textfield' do
-    must_raise_no_element { textfield(1) }
-    must_raise_no_element { textfield('does not exist') }
-  end
-
-  t 'no textfield_include' do
-    must_raise_no_element { textfield_include('does not exist') }
-  end
-
   t 'no textfield_exact' do
     must_raise_no_element { textfield_exact('does not exist') }
+  end
+
+  t 'no textfields_exact' do
+    textfields_exact('does not exist').length.must_equal 0
+  end
+
+  t 'no e_textfields' do
+    e_textfields.length.must_equal 0
   end
 
   t 'after_last' do
