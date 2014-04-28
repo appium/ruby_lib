@@ -138,5 +138,5 @@ module Appium
       args[:element] = args[:element].ref if args.has_key? :element
       args
     end
-  end
-end
+  end # class TouchAction
+end # module Appium

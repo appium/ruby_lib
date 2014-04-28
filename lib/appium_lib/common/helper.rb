@@ -205,10 +205,5 @@ module Appium
       lazy_load_strings
       @strings_xml[id]
     end
-
-    # Used to error when finding a single element fails.
-    def raise_no_element_error
-      raise Selenium::WebDriver::Error::NoSuchElementError, 'An element could not be located on the page using the given search parameters.'
-    end
   end # module Common
 end # module Appium

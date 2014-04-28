@@ -46,5 +46,5 @@ module Appium
     def e_s_texts
       tags UIAStaticText
     end
-  end # module Common
+  end # module Ios
 end # module Appium
