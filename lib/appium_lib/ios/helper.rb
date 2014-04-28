@@ -1,4 +1,4 @@
-module Appium
+﻿module Appium
   module Ios
     # iOS only. On Android uiautomator always returns an empty string for EditText password.
     #

@@ -21,26 +21,26 @@ module Appium
     # @param text [String] the text to search for in the text value and content description
     # @return [Element] the element scrolled to
     def scroll_to text
-      args = 'scroll',
+      args =
           # textContains(text)
           [[3, text]],
           # descriptionContains(text)
           [[7, text]]
 
-      complex_find args
+      complex_find 'scroll', args
     end
 
     # Scroll to an element with the exact target text or description.
     # @param text [String] the text to search for in the text value and content description
     # @return [Element] the element scrolled to
     def scroll_to_exact text
-      args = 'scroll',
+      args = 
           # text(text)
           [[1, text]],
           # description(text)
           [[5, text]]
 
-      complex_find args
+      complex_find 'scroll', args
     end
   end # module Android
 end # module Appium
