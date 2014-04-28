@@ -1,9 +1,11 @@
 describe 'common/device' do
   # Not yet implemented
   t 'shake' do
+    # todo: write test
   end
 
   t 'remove & install' do
+    # todo: write test
     #remove 'com.example.android.apis'
     #install ENV['APP_PATH']
   end
@@ -18,7 +20,7 @@ describe 'common/device' do
 
   t 'reset' do
     reset
-    s_texts[0].must_equal 'API Demos'
+    s_text(1).text.must_equal 'API Demos'
   end
 
   t 'close & launch' do
@@ -64,9 +66,9 @@ describe 'common/device' do
     act.class.must_equal Selenium::WebDriver::Element
   end
 
-  t 'keyevent' do
-    keyevent key: 176
-  end 
+  t 'key_event' do
+    key_event key: 176
+  end
 
   t 'action_chain' do
     e = find_element(:name, "Accessibility")
