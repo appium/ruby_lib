@@ -26,8 +26,8 @@ list = <<TXT
 TXT
 
 list.split("\n").each do |method|
-  pair = method.match /"([^"]+)"[^"]+"([^"]+)"/
-  tag = pair[1]
+  pair  = method.match /"([^"]+)"[^"]+"([^"]+)"/
+  tag   = pair[1]
   klass = pair[2]
 
   indent = 6

@@ -6,34 +6,34 @@ describe 'android/element/text' do
   end
 
   t 's_text' do
-    s_text(1).text.must_equal 'API Demos'
-    s_text('mos').text.must_equal 'API Demos'
+    wait { s_text(1).text.must_equal 'API Demos' }
+    wait { s_text('mos').text.must_equal 'API Demos' }
   end
 
   t 's_texts' do
-    s_texts('i').length.must_equal 6
+    wait { s_texts('i').length.must_equal 7 }
   end
 
   t 'first_s_text' do
-    first_s_text.text.must_equal 'API Demos'
+    wait { first_s_text.text.must_equal 'API Demos' }
   end
 
   t 'last_s_text' do
-    last_s_text.text.must_equal 'Views'
+    wait { last_s_text.text.must_equal 'Views' }
   end
 
   t 's_text_exact' do
     must_raise_no_element { s_text_exact 'mos' }
 
     # should pass
-    s_text_exact('API Demos').text.must_equal 'API Demos'
+    wait { s_text_exact('API Demos').text.must_equal 'API Demos' }
   end
 
   t 's_texts_exact' do
-    s_texts_exact('API Demos').length.must_equal 1
+    wait { s_texts_exact('API Demos').length.must_equal 1 }
   end
 
   t 'e_s_texts' do
-    e_s_texts.length.must_equal 12
+    wait { e_s_texts.length.must_equal 14 }
   end
 end

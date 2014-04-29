@@ -13,9 +13,9 @@ describe 'android/element/textfield' do
 
   def before_first
     # nav to activity
-    find('app').click
-    find('activity').click
-    find('custom title').click
+    wait { find('app').click }
+    wait { find('activity').click }
+    wait { find('custom title').click }
   end
 
   def after_last
@@ -26,34 +26,34 @@ describe 'android/element/textfield' do
   t { before_first }
 
   t 'textfield' do
-    textfield(1).text.must_equal left
-    textfield('right').text.must_equal right
+    wait { textfield(1).text.must_equal left }
+    wait { textfield('right').text.must_equal right }
   end
 
   t 'textfields' do
-    textfields('right').first.text.must_equal right
+    wait { textfields('right').first.text.must_equal right }
   end
 
   t 'first_textfield' do
-    first_textfield.text.must_equal left
+    wait { first_textfield.text.must_equal left }
   end
 
   t 'last_textfield' do
-    last_textfield.text.must_equal right
+    wait { last_textfield.text.must_equal right }
   end
 
   t 'textfield_exact' do
     must_raise_no_element { textfield_exact 'zz' }
-    textfield_exact(left).text.must_equal left
+    wait { textfield_exact(left).text.must_equal left }
   end
 
   t 'textfields_exact' do
-    textfields_exact('zz').must_equal []
-    textfields_exact(left).first.text.must_equal left
+    wait { textfields_exact('zz').must_equal [] }
+    wait { textfields_exact(left).first.text.must_equal left }
   end
 
   t 'e_textfields' do
-    e_textfields.length.must_equal 2
+    wait { e_textfields.length.must_equal 2 }
   end
 
   t { after_last }

@@ -13,15 +13,17 @@ describe 'common/patch' do
     # t 'value' do; end # Doesn't work on Android
 
     t 'name' do
-      first_s_text.name.must_equal 'API Demos'
+      wait { first_s_text.name.must_equal 'API Demos' }
     end
 
     # t 'tag_name' do; end # Doesn't work on Android
 
     t 'location_rel' do
-      loc = first_s_text.location_rel
-      loc.x.class.must_equal String
-      loc.y.class.must_equal String
+      wait do
+        loc = first_s_text.location_rel
+        loc.x.class.must_equal String
+        loc.y.class.must_equal String
+      end
     end
   end
 
@@ -35,25 +37,33 @@ describe 'common/patch' do
         find_element(:id, 'ok')
       rescue Exception => e;
         value = e.message
+      ensure
+        set_wait 30
       end
       value = value.split("\n").first.strip
-      exp = "Could not find an element using supplied strategy. ID `ok` doesn't exist as text or content desc."
+      exp   = "Could not find an element using supplied strategy. ID `ok` doesn't exist as text or content desc."
       value.must_equal exp
     end
 
     t 'id success' do
-      el = id 'autocomplete_3_button_7'  # <string name="autocomplete_3_button_7">Text</string>
-      el.name.must_equal 'Text'
+      wait do
+        el = id 'autocomplete_3_button_7' # <string name="autocomplete_3_button_7">Text</string>
+        el.name.must_equal 'Text'
+      end
     end
 
     t 'find many elements by resource id' do
-      value = find_elements(:id, 'android:id/text1').length
-      value.must_equal 11
+      wait do
+        value = find_elements(:id, 'android:id/text1').length
+        value.must_equal 13
+      end
     end
 
     t 'find single element by resource id' do
-      value = id('android:id/text1').text
-      value.must_equal 'Accessibility'
+      wait do
+        value = id('android:id/text1').text
+        value.must_equal 'Accessibility'
+      end
     end
   end
 end

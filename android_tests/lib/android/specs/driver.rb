@@ -157,12 +157,16 @@ describe 'driver' do
 
     # any elements
     t 'find_elements' do
-      find_elements(:class_name, 'android.widget.TextView').length.must_equal 12
+      wait do
+        find_elements(:class_name, 'android.widget.TextView').length.must_equal 14
+      end
     end
 
     # any element
     t 'find_element' do
-      find_element(:class_name, 'android.widget.TextView').class.must_equal Selenium::WebDriver::Element
+      wait do
+        find_element(:class_name, 'android.widget.TextView').class.must_equal Selenium::WebDriver::Element
+      end
     end
 
     # Skip: x # x is only used in Pry

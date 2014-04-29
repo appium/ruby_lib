@@ -2,9 +2,9 @@
 describe 'android/element/button' do
   def before_first
     # nav to buttons activity
-    find('App').click
-    find('Activity').click
-    find('Animation').click
+    wait { find('App').click }
+    wait { find('Activity').click }
+    wait { find('Animation').click }
   end
 
   def after_last
@@ -20,35 +20,35 @@ describe 'android/element/button' do
 
   t 'button' do
     # by index
-    button(1).name.must_equal fade_in
+    wait { button(1).name.must_equal fade_in }
 
     # by name contains
-    button('ade').name.must_equal fade_in
+    wait { button('ade').name.must_equal fade_in }
   end
 
   t 'buttons' do
     exp = ['Zoom in', 'Modern zoom in', 'Thumbnail zoom']
-    buttons('zoom').map { |e| e.text }.must_equal exp
+    wait { buttons('zoom').map { |e| e.text }.must_equal exp }
   end
 
   t 'first_button' do
-    first_button.name.must_equal fade_in
+    wait { first_button.name.must_equal fade_in }
   end
 
   t 'last_button' do
-    last_button.name.must_equal 'Thumbnail zoom'
+    wait { last_button.name.must_equal 'Thumbnail zoom' }
   end
 
   t 'button_exact' do
-    button_exact(fade_in).name.must_equal fade_in
+    wait { button_exact(fade_in).name.must_equal fade_in }
   end
 
   t 'buttons_exact' do
-    buttons_exact(fade_in).first.name.must_equal fade_in
+    wait { buttons_exact(fade_in).first.name.must_equal fade_in }
   end
 
   t 'e_buttons' do
-    e_buttons.length.must_equal 6
+    wait { e_buttons.length.must_equal 6 }
   end
 
   t { after_last }

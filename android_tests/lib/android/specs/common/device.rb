@@ -11,16 +11,16 @@ describe 'common/device' do
   end
 
   t 'background_app' do
-    background_app 5
+    wait { background_app 5 }
   end
 
   t 'is_installed' do
-    is_installed?('fake_app').must_equal false
+    wait { is_installed?('fake_app').must_equal false }
   end
 
   t 'reset' do
     reset
-    s_text(1).text.must_equal 'API Demos'
+    wait { s_text(1).text.must_equal 'API Demos' }
   end
 
   t 'close & launch' do
@@ -29,36 +29,42 @@ describe 'common/device' do
   end
 
   t 'current_activity' do
-    current_activity.must_equal '.ApiDemos'
+    wait { current_activity.must_equal '.ApiDemos' }
   end
 
   t 'available_contexts' do
-    available_contexts.must_equal ["NATIVE_APP"]
+    wait { available_contexts.must_equal ['NATIVE_APP'] }
   end
 
   t 'current_context' do
-    current_context.must_equal "NATIVE_APP"
+    wait { current_context.must_equal 'NATIVE_APP' }
   end
 
   t 'current_context=' do
-    current_context= "WEBVIEW"
-    current_context.must_equal "WEBVIEW"
+    wait do
+      current_context= 'WEBVIEW'
+      current_context.must_equal 'WEBVIEW'
+    end
   end
 
   t 'within_context' do
-    $driver.within_context "NATIVE_APP" do
-      current_context.must_equal "NATIVE_APP"
+    $driver.within_context 'NATIVE_APP' do
+      wait { current_context.must_equal 'NATIVE_APP' }
     end
   end
 
   t 'switch_to_default_context' do
-    switch_to_default_context
-    current_context.must_equal 'NATIVE_APP'
+    wait do
+      switch_to_default_context
+      current_context.must_equal 'NATIVE_APP'
+    end
   end
 
   t 'app_strings' do
-    strs = app_strings
-    strs.has_key?("activity_save_restore").must_equal true
+    wait do
+      strs = app_strings
+      strs.has_key?('activity_save_restore').must_equal true
+    end
   end
 
   def must_return_element element
@@ -66,10 +72,10 @@ describe 'common/device' do
   end
 
   t 'complex_find' do
-    find('Views').click
-    must_return_element complex_find(mode: 'scroll', selectors: [[[3, 'tabs']]])
-    must_return_element complex_find(mode: 'all', selectors: [[[3, 'i']]]).first
-    must_return_element complex_find(selectors: [[[3, 'tabs']]])
+    wait { find('Views').click }
+    wait { must_return_element complex_find(mode: 'scroll', selectors: [[[3, 'tabs']]]) }
+    wait { must_return_element complex_find(mode: 'all', selectors: [[[3, 'i']]]).first }
+    wait { must_return_element complex_find(selectors: [[[3, 'tabs']]]) }
     back
   end
 
@@ -78,28 +84,34 @@ describe 'common/device' do
   end
 
   t 'action_chain' do
-    e = find_element(:name, 'Accessibility')
-    Appium::TouchAction.new.press(:element => e, x: 0.5, y: 0.5).release(:element => e).perform
+    wait do
+      e = find_element(:name, 'Accessibility')
+      Appium::TouchAction.new.press(:element => e, x: 0.5, y: 0.5).release(:element => e).perform
+    end
     wait { find_element(:name, 'Custom View') }
     back
   end
 
   t 'swipe' do
-    Appium::TouchAction.new.swipe(start_x: 0.75, start_y: 0.25, end_x: 0.75, end_y: 0.5, duration: 1.5).perform
+    wait { Appium::TouchAction.new.swipe(start_x: 0.75, start_y: 0.25, end_x: 0.75, end_y: 0.5, duration: 1.5).perform }
   end
 
   t 'pinch & zoom' do
-    s_text('Graphics').click
-    s_text('BitmapMesh').click
-    zoom 200
-    pinch 75
+    wait do
+      s_text('Graphics').click
+      s_text('BitmapMesh').click
+      zoom 200
+      pinch 75
+    end
   end
 
   t 'push and pull file' do
-    file = "A Fine Day"
-    path = "/data/local/tmp/remote.txt"
-    push_file path, file
-    read_file = pull_file path
-    read_file.must_equal file
+    wait do
+      file = "A Fine Day"
+      path = "/data/local/tmp/remote.txt"
+      push_file path, file
+      read_file = pull_file path
+      read_file.must_equal file
+    end
   end
 end

@@ -45,13 +45,11 @@ describe 'common/helper' do
 
   t 'back' do
     # start page
-    eles = e_s_texts
-    wait { eles.length.must_equal 12 }
+    wait { e_s_texts.length.must_equal 14 }
     # nav to new page.
     # ele 0 is the title and can't be clicked.
-    eles[1].click
-    eles = e_s_texts
-    wait { eles.length.must_equal 5 }
+    wait { s_text(2).click }
+    wait { e_s_texts.length.must_equal 8 }
     # go back
     back
     # start page
@@ -59,46 +57,56 @@ describe 'common/helper' do
   end
 
   t 'session_id' do
-    session_id.must_match /\h{8}-\h{4}-\h{4}-\h{4}-\h{12}/
+    wait { session_id.must_match /\h{8}-\h{4}-\h{4}-\h{4}-\h{12}/ }
   end
 
   t 'xpath' do
-    xpath('//android.widget.TextView').name.must_equal 'API Demos'
+    wait { xpath('//android.widget.TextView').name.must_equal 'API Demos' }
   end
 
   t 'xpaths' do
-    xpaths('//android.widget.TextView').length.must_equal 12
+    wait { xpaths('//android.widget.TextView').length.must_equal 14 }
   end
 
   t 'ele_index' do
-    ele_index('android.widget.TextView', 2).name.must_equal 'Accessibility'
+    wait { ele_index('android.widget.TextView', 2).name.must_equal 'Accessibility' }
   end
 
   t 'tags' do
-    tags('android.widget.TextView').length.must_equal 12
+    wait { tags('android.widget.TextView').length.must_equal 14 }
   end
 
   t 'find_ele_by_attr_include' do
-    el_text = find_ele_by_attr_include('android.widget.TextView', :text,  'acc').text
-    el_text.must_equal 'Accessibility'
+    wait do
+      el_text = find_ele_by_attr_include('android.widget.TextView', :text, 'acc').text
+      el_text.must_equal 'Accessibility'
+    end
   end
 
   t 'find_eles_by_attr_include' do
-    ele_count = find_eles_by_attr_include('android.widget.TextView', :text,  'e').length
-    ele_count.must_equal 7
+    wait do
+      ele_count = find_eles_by_attr_include('android.widget.TextView', :text, 'e').length
+      ele_count.must_equal 9
+    end
   end
 
   t 'first_ele' do
-    first_ele('android.widget.TextView').text.must_equal 'API Demos'
+    wait do
+      first_ele('android.widget.TextView').text.must_equal 'API Demos'
+    end
   end
 
   t 'last_ele' do
-    last_ele('android.widget.TextView').text.must_equal 'Views'
+    wait do
+      last_ele('android.widget.TextView').text.must_equal 'Views'
+    end
   end
 
   # t 'source' do # tested by get_source
 
   t 'get_source' do
-    get_source.class.must_equal String
+    wait do
+      get_source.class.must_equal String
+    end
   end
 end

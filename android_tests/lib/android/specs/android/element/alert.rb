@@ -1,39 +1,39 @@
 describe 'android/element/alert.rb' do
   def open_alert
     # trigger the alert
-    button('OK Cancel dialog with a long message').click
+    wait { button('OK Cancel dialog with a long message').click }
   end
 
   t 'alert_click' do
     # nav to alert activity
-    find('app').click
-    find('alert').click
+    wait { find('app').click }
+    wait { find('alert').click }
 
     # test
-    open_alert
-    alert_click('Something')
+    wait { open_alert }
+    wait { alert_click('Something') }
   end
 
   t 'alert_accept' do
-    open_alert
-    alert_accept
+    wait { open_alert }
+    wait { alert_accept }
   end
 
   t 'alert_accept_text' do
-    open_alert
-    alert_accept_text.must_equal 'OK'
-    alert_accept
+    wait { open_alert }
+    wait { alert_accept_text.must_equal 'OK' }
+    wait { alert_accept }
   end
 
   t 'alert_dismiss' do
-    open_alert
-    alert_dismiss
+    wait { open_alert }
+    wait { alert_dismiss }
   end
 
   t 'alert_dismiss_text' do
-    open_alert
-    alert_dismiss_text.must_equal 'Cancel'
-    alert_dismiss
+    wait { open_alert }
+    wait { alert_dismiss_text.must_equal 'Cancel' }
+    wait { alert_dismiss }
 
     # nav to start activity
     2.times { back }

@@ -15,16 +15,16 @@ Run only the view album test:
 a = OpenStruct.new x: 'ok'
 raise 'x issue' unless a.x == 'ok'
 
-dir = File.expand_path '..', __FILE__
-device = ARGV[0].downcase.strip
+dir     = File.expand_path '..', __FILE__
+device  = ARGV[0].downcase.strip
 devices = %w[ android selendroid ios ]
 raise 'Expected android, selendroid or ios as first argument' unless devices.include? device
 
 one_test = ARGV[1]
 test_dir = "/#{device}/"
 
-caps = Appium.load_appium_txt file: ENV['APPIUM_TXT'], verbose: true
-caps = caps.merge({ appium_lib: { debug: true, wait: 1 } })
+caps       = Appium.load_appium_txt file: ENV['APPIUM_TXT'], verbose: true
+caps       = caps.merge({ appium_lib: { debug: true, wait: 1 } })
 caps[:app] = ENV['SAUCE_PATH'] if ENV['SAUCE_USERNAME'] && ENV['SAUCE_ACCESS_KEY']
 
 trace_files = []
