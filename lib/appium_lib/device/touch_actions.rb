@@ -31,19 +31,19 @@ module Appium
     end
 
     # Move to the given co-ordinates.
-    # @option opts (integer) :x x co-ordinate to move to.
-    # @option opts (integer) :y y co-ordinate to move to.
-    # @option opts (WebDriver::Element) Element to scope this move within.
+    # @option opts [integer] :x x co-ordinate to move to.
+    # @option opts [integer] :y y co-ordinate to move to.
+    # @option opts [WebDriver::Element] Element to scope this move within.
     def move_to(opts)
       opts = args_with_ele_ref(opts)
       chain_method(:moveTo, opts)
     end
 
     # Press down for a specific duration.
-    # @param element (WebDriver::Element) the element to press.
-    # @param x (integer) x co-ordinate to press on.
-    # @param y (integer) y co-ordinate to press on.
-    # @param (integer) Number of seconds to press.
+    # @param element [WebDriver::Element] the element to press.
+    # @param x [integer] x co-ordinate to press on.
+    # @param y [integer] y co-ordinate to press on.
+    # @param duration [integer] Number of seconds to press.
     def press_for_duration(element, x, y, duration)
       @actions << {element: element.ref, x: x, y: y, duration: duration}
       chain_method(:longPress, args)
@@ -84,7 +84,7 @@ module Appium
     end
 
     # Pause for a number of seconds before the next action
-    # @params seconds (integer) Number of seconds to pause for
+    # @param seconds [integer] Number of seconds to pause for
     def wait(seconds)
       args = {ms: seconds}
       chain_method(:wait, args)

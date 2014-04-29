@@ -124,8 +124,11 @@
     end
 
     # Prints parsed page source to console.
-    # @param window_number [Integer] the int index of the target window
+    #
     # example: page_window 0
+    #
+    # @param window_number [Integer] the int index of the target window
+    # @return [void]
     def page_window window_number=0
       get_page source_window window_number
       nil
@@ -152,7 +155,7 @@
     # Get the element of type class_name at matching index.
     # @param class_name [String] the class name to find
     # @param index [Integer] the index
-    # @return [Element] the found element of type class_name
+    # @return [Element]
     def ele_index class_name, index
       unless index == 'last()'
         # XPath index starts at 1.

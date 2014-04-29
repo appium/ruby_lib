@@ -1,386 +1,362 @@
-##### [s_texts](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/element/text.rb#L10) 
+##### [load_appium_txt](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/driver.rb#L71) 
 
-> def s_texts text=nil
+> def self.load_appium_txt opts={}
 
-Get an array of text texts if text is nil else
-Get all static textfields that include text.
+Load appium.txt (toml format)
+the basedir of this file + appium.txt is what's used
 
-__Parameters:__
+```
+[caps]
+app = "path/to/app"
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] text - the text to find.
+[appium_lib]
+port = 8080
+```
 
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array] 
-
---
-
-##### [s_texts_names](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/element/text.rb#L18) 
-
-> def s_texts_names
-
-
-
---
-
-##### [e_s_texts](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/element/text.rb#L24) 
-
-> def e_s_texts
-
-Get an array of text elements.
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Text>] 
-
---
-
-##### [first_s_text](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/element/text.rb#L30) 
-
-> def first_s_text
-
-Get the first text element.
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Text] 
-
---
-
-##### [last_s_text](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/element/text.rb#L36) 
-
-> def last_s_text
-
-Get the last text element
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Text] 
-
---
-
-##### [s_text](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/element/text.rb#L43) 
-
-> def s_text text
-
-Get the first element that includes text.
+:app is expanded
+:require is expanded
+all keys are converted to symbols
 
 __Parameters:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String, Integer] text - the text to find. If int then the text at that index is returned.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Hash] opts - file: '/path/to/appium.txt', verbose: true
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Text] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[hash] the symbolized hash with updated :app and :require keys
 
 --
 
-##### [s_text_exact](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/element/text.rb#L51) 
+##### [symbolize_keys](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/driver.rb#L141) 
 
-> def s_text_exact text
+> def self.symbolize_keys hash
 
-Get the first textfield that matches text.
+convert all keys (including nested) to symbols
 
-__Parameters:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] text - the text that the tag must match
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Text] 
+based on deep_symbolize_keys & deep_transform_keys from rails
+https://github.com/rails/docrails/blob/a3b1105ada3da64acfa3843b164b14b734456a50/activesupport/lib/active_support/core_ext/hash/keys.rb#L84
 
 --
 
-##### [s_texts_exact](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/element/text.rb#L58) 
+##### [promote_singleton_appium_methods](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/driver.rb#L151) 
 
-> def s_texts_exact text
+> def self.promote_singleton_appium_methods main_module
 
-Get all static textfields that matches text.
 
-__Parameters:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] text - the text that the tag must match
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Text>] 
 
 --
 
-##### [window_size](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/element/window.rb#L5) 
+##### [promote_appium_methods](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/driver.rb#L180) 
 
-> def window_size
+> def self.promote_appium_methods class_array
 
-Get the window's size
+Promote appium methods to class instance methods
 
---
-
-##### [button](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/element/button.rb#L8) 
-
-> def button text, number=0
-
-Find a button by text and optionally number.
-
-__Parameters:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String, Integer] text - the text to exactly match. If int then the button at that index is returned.
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Integer] number - the occurrence of the button matching text. Defaults to the first button.
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Button] the button found with text and matching number
-
---
-
-##### [buttons](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/element/button.rb#L19) 
-
-> def buttons text=nil
-
-Get an array of button texts or button elements if text is provided.
-
-__Parameters:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] text - the text to exactly match
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<String>, Array<Buttons>] either an array of button texts or an array of button elements if text is provided.
-
---
-
-##### [first_button](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/element/button.rb#L26) 
-
-> def first_button
-
-Get the first button element.
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Button] 
-
---
-
-##### [last_button](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/element/button.rb#L32) 
-
-> def last_button
-
-Get the last button element.
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Button] 
-
---
-
-##### [button_exact](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/element/button.rb#L39) 
-
-> def button_exact text
-
-Get the first button element that exactly matches text.
-
-__Parameters:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] text - the text to match exactly
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Button] 
-
---
-
-##### [buttons_exact](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/element/button.rb#L46) 
-
-> def buttons_exact text
-
-Get all button elements that exactly match text.
-
-__Parameters:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] text - the text to match exactly
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Button>] 
-
---
-
-##### [e_buttons](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/element/button.rb#L52) 
-
-> def e_buttons
-
-Get an array of button elements.
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Button>] 
-
---
-
-##### [button_num](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/element/button.rb#L72) 
-
-> def button_num text, number=1
-
-Expected to be called via button method.
-
-Get the button element exactly matching text and
-occurrence. number=2 means the 2nd occurrence.
-
-find the second Sign In button
-
-b = e_button 'Sign In', 2
-
-Button order will change in iOS vs Android
-so if there's no button found at number then
-return the first button.
-
-__Parameters:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] text - the text to match
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Integer] number - the button occurance to return. 1 = first button
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Button] the button that matches text and number
-
---
-
-##### [tag_name_to_android](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/android/helper.rb#L6) android
-
-> def tag_name_to_android tag_name
-
-Returns an array of android classes that match the tag name
-
-__Parameters:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] tag_name - the tag name to convert to an android class
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] 
-
---
-
-##### [find_eles_attr](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/android/helper.rb#L198) android
-
-> def find_eles_attr tag_name, attribute=nil
-
-Find all elements matching the attribute
-On android, assume the attr is name (which falls back to text).
+To promote methods to all classes:
 
 ```ruby
-  find_eles_attr :text
+Appium.promote_appium_methods Object
 ```
 
 __Parameters:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] tag_name - the tag name to search for
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Class>] class_array - An array of classes
 
 --
 
-##### [get_selendroid_inspect](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/android/helper.rb#L220) android
+##### [global_webdriver_http_sleep](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/driver.rb#L213) 
 
-> def get_selendroid_inspect
+> def global_webdriver_http_sleep
 
-Selendroid only.
-Returns a string containing interesting elements.
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] 
+The amount to sleep in seconds before every webdriver http call.
 
 --
 
-##### [get_page_class](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/android/helper.rb#L282) android
+##### [global_webdriver_http_sleep=](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/driver.rb#L213) 
 
-> def get_page_class
+> def global_webdriver_http_sleep=(value)
 
-
-
---
-
-##### [page_class](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/android/helper.rb#L310) android
-
-> def page_class
-
-Count all classes on screen and print to stdout.
-Useful for appium_console.
+The amount to sleep in seconds before every webdriver http call.
 
 --
 
-##### [get_android_inspect](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/android/helper.rb#L319) android
+##### [initialize](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/driver.rb#L234) 
 
-> def get_android_inspect
+> def initialize opts={}
 
-Android only.
-Returns a string containing interesting elements.
-If an element has no content desc or text, then it's not returned by this method.
+Creates a new driver
 
-__Returns:__
+```ruby
+require 'rubygems'
+require 'appium_lib'
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] 
+# platformName takes a string or a symbol.
 
---
+# Start iOS driver
+opts = { caps: { platformName: :ios, app: '/path/to/MyiOS.app' } }
+Appium::Driver.new(opts).start_driver
 
-##### [get_inspect](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/android/helper.rb#L403) android
-
-> def get_inspect
-
-Automatically detects selendroid or android.
-Returns a string containing interesting elements.
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] 
-
---
-
-##### [page](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/android/helper.rb#L409) android
-
-> def page
-
-Intended for use with console.
-Inspects and prints the current page.
-
---
-
-##### [fast_duration](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/android/helper.rb#L421) android
-
-> def fast_duration
-
-JavaScript code from https://github.com/appium/appium/blob/master/app/android.js
-
-```javascript
-Math.round(1.0/28.0 * 28) = 1
+# Start Android driver
+opts = { caps: { platformName: :android, app: '/path/to/my.apk' } }
+Appium::Driver.new(apk).start_driver
 ```
 
-We want steps to be exactly 1. If it's zero then a tap is used instead of a swipe.
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Object] opts - A hash containing various options.
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Driver] 
 
 --
 
-##### [current_app](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/android/helper.rb#L427) android
+##### [driver_attributes](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/driver.rb#L308) 
 
-> def current_app
+> def driver_attributes
 
-Lists package, activity, and adb shell am start -n value for current app.
-Works on local host only (not remote).
+Returns a hash of the driver attributes
 
 --
 
-##### [id](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/android/helper.rb#L441) android
+##### [device_is_android?](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/driver.rb#L328) 
 
-> def id id
+> def device_is_android?
 
-Find by id. Useful for selendroid
+
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Boolean] 
+
+--
+
+##### [appium_server_version](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/driver.rb#L344) 
+
+> def appium_server_version
+
+Returns the server's version info
+
+```ruby
+{
+    "build" => {
+        "version" => "0.18.1",
+        "revision" => "d242ebcfd92046a974347ccc3a28f0e898595198"
+    }
+}
+```
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Hash] 
+
+--
+
+##### [absolute_app_path](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/driver.rb#L350) 
+
+> def self.absolute_app_path app_path
+
+Converts app_path to an absolute path.
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] APP_PATH as an absolute path
+
+--
+
+##### [server_url](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/driver.rb#L374) 
+
+> def server_url
+
+Get the server url
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] the server url
+
+--
+
+##### [restart](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/driver.rb#L385) 
+
+> def restart
+
+Restarts the driver
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Driver] the driver
+
+--
+
+##### [driver](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/driver.rb#L392) 
+
+> def driver
+
+Returns the driver
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Driver] the driver
+
+--
+
+##### [screenshot](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/driver.rb#L402) 
+
+> def screenshot png_save_path
+
+Takes a png screenshot and saves to the target path.
+
+Example: screenshot '/tmp/hi.png'
 
 __Parameters:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] id - the id to search for
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] png_save_path - the full path to save the png
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[nil] 
+
+--
+
+##### [driver_quit](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/driver.rb#L409) 
+
+> def driver_quit
+
+Quits the driver
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[void] 
+
+--
+
+##### [start_driver](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/driver.rb#L417) 
+
+> def start_driver
+
+Creates a new global driver and quits the old one if it exists.
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Selenium::WebDriver] the new global driver
+
+--
+
+##### [no_wait](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/driver.rb#L443) 
+
+> def no_wait
+
+Set implicit wait and default_wait to zero.
+
+--
+
+##### [set_wait](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/driver.rb#L462) 
+
+> def set_wait timeout=nil
+
+Set implicit wait and default_wait to timeout, defaults to 30.
+if set_wait is called without a param then the second to last
+wait will be used.
+
+```ruby`
+set_wait 2
+set_wait 3
+set_wait # 2
+
+````
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Integer] timeout - the timeout in seconds
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[void] 
+
+--
+
+##### [default_wait](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/driver.rb#L480) 
+
+> def default_wait
+
+Returns the default client side wait.
+This value is independent of what the server is using
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Integer] 
+
+--
+
+##### [exists](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/driver.rb#L496) 
+
+> def exists pre_check=0, post_check=@default_wait, &search_block
+
+Returns existence of element.
+
+Example:
+
+exists { button('sign in') } ? puts('true') : puts('false')
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Integer] pre_check - the amount in seconds to set the
+wait to before checking existance
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Integer] post_check - the amount in seconds to set the
+wait to after checking existance
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Block] search_block - the block to call
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Boolean] 
+
+--
+
+##### [execute_script](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/driver.rb#L520) 
+
+> def execute_script script, *args
+
+The same as @driver.execute_script
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] script - the script to execute
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[*args] args - the args to pass to the script
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Object] 
+
+--
+
+##### [find_elements](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/driver.rb#L528) 
+
+> def find_elements *args
+
+Calls @driver.find_elements
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[*args] args - the args to use
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Element>] Array is empty when no elements are found.
+
+--
+
+##### [find_element](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/driver.rb#L536) 
+
+> def find_element *args
+
+Calls @driver.find_elements
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[*args] args - the args to use
 
 __Returns:__
 
@@ -388,15 +364,12 @@ __Returns:__
 
 --
 
-##### [alert_click](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/android/element/alert.rb#L6) android
+##### [x](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/driver.rb#L543) 
 
-> def alert_click value
+> def x
 
-Tap the alert button identified by value.
-
-__Parameters:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Integer, String] value - either an integer index of the button or the button's name
+Quit the driver and Pry.
+quit and exit are reserved by Pry.
 
 __Returns:__
 
@@ -404,274 +377,449 @@ __Returns:__
 
 --
 
-##### [alert_accept](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/android/element/alert.rb#L13) android
+##### [NoArgMethods](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/device/device.rb#L7) 
 
-> def alert_accept
+> NoArgMethods = {
 
-Accept the alert.
-The last button is considered "accept."
 
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[void] 
 
 --
 
-##### [alert_accept_text](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/android/element/alert.rb#L20) android
+##### [app_strings](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/device/device.rb#L22) 
 
-> def alert_accept_text
+> def app_strings
 
-Get the text of the alert's accept button.
-The last button is considered "accept."
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] 
+Return the hash of all localization strings.
+```ruby
+app_strings #=> "TransitionsTitle"=>"Transitions", "WebTitle"=>"Web"
+```
 
 --
 
-##### [alert_dismiss](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/android/element/alert.rb#L27) android
+##### [background_app](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/device/device.rb#L28) 
 
-> def alert_dismiss
+> def background_app
 
-Dismiss the alert.
-The first button is considered "dismiss."
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[void] 
+Backgrounds the app for a set number of seconds.
+This is a blocking application
 
 --
 
-##### [alert_dismiss_text](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/android/element/alert.rb#L34) android
+##### [current_activity](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/device/device.rb#L33) 
 
-> def alert_dismiss_text
+> def current_activity
 
-Get the text of the alert's dismiss button.
-The first button is considered "dismiss."
 
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] 
 
 --
 
-##### [find](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/android/element/generic.rb#L44) android
+##### [launch](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/device/device.rb#L35) 
 
-> def find val
+> def launch
 
-Find the value contained in content description or text. Search elements
-in this order: EditText, Button, ImageButton
+Start the simulator and applicaton configured with desired capabilities
+
+--
+
+##### [reset](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/device/device.rb#L38) 
+
+> def reset
+
+Reset the device, relaunching the application.
+
+--
+
+##### [shake](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/device/device.rb#L41) 
+
+> def shake
+
+Cause the device to shake
+
+--
+
+##### [complex_find](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/device/device.rb#L44) 
+
+> def complex_find
+
+Find an element by a complex array of criteria.  Available criteria
+are listed in [link here].  Criteria are formed by creating an array
+of arrays, each containing a selector and that selector's value.
+
+```ruby
+complex_find [[[2, 'Sau'], [14, true]]] # => Find a clickable element
+                                        #    whose names starts with 'Sau'
+```
 
 __Parameters:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] val - the value to search for
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Symbol] mod - If present, will be the 0th element in the selector array.
 
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Object>] selectors - The selectors to find elements with.
 
 --
 
-##### [text](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/android/element/generic.rb#L70) android
+##### [hide_keyboard](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/device/device.rb#L56) 
 
-> def text text
+> def hide_keyboard
 
-Return the first element matching text.
+Hide the onscreen keyboard
 
 __Parameters:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] text - the text to search for
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] the first matching element
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] close_key - the name of the key which closes the keyboard.
+Defaults to 'Done'.
 
 --
 
-##### [texts](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/android/element/generic.rb#L79) android
+##### [key_event](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/device/device.rb#L65) 
 
-> def texts text
+> def key_event
 
-Return all elements matching text.
+Send a key event to the device.
 
 __Parameters:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] text - the text to search for
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[integer] key - The key to send.
 
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Element>] all matching elements
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] metastate - The state the metakeys should be in when sending the key.
 
 --
 
-##### [name](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/android/element/generic.rb#L88) android
+##### [push_file](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/device/device.rb#L70) 
 
-> def name name
+> def push_file
 
-Return the first element matching name.
-on Android name is content description
-on iOS name is the accessibility label or the text.
+Place a file in a specific location on the device.
 
 __Parameters:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] name - the name to search for
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] path - The absolute path on the device to store data at.
 
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] the first matching element
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] data - Raw file data to be sent to the device.
 
 --
 
-##### [name_exact](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/android/element/generic.rb#L99) android
+##### [extend_search_contexts](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/device/device.rb#L254) 
 
-> def name_exact name
+> def extend_search_contexts
 
-Return the first element exactly matching name.
-on Android name is content description
-on iOS name is the accessibility label or the text.
+
+
+--
+
+##### [accessiblity_id_find](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/device/device.rb#L254) 
+
+> def accessiblity_id_find
+
+find_element/s with their accessibility_id
+
+```ruby
+ find_elements :accessibility_id, 'Animation'
+```
+
+--
+
+##### [add_touch_actions](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/device/device.rb#L260) 
+
+> def add_touch_actions
+
+
+
+--
+
+##### [current_context=](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/device/device.rb#L284) 
+
+> def current_context=
+
+Change the context to the given context.
+```ruby
+current_context= "NATIVE_APP"
+```
 
 __Parameters:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] name - the name to search for
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] the first matching element
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] The - context to change to
 
 --
 
-##### [names](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/android/element/generic.rb#L117) android
+##### [current_context](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/device/device.rb#L292) 
 
-> def names name=''
+> def current_context
 
-Return all elements matching name.
-on Android name is content description
-on iOS name is the accessibility label or the text.
+
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] The context currently being used.
+
+--
+
+##### [available_contexts](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/device/device.rb#L295) 
+
+> def available_contexts
+
+
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<String>] All usable contexts, as an array of strings.
+
+--
+
+##### [within_context](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/device/device.rb#L305) 
+
+> def within_context(context)
+
+Perform a block within the given context, then switch back to the starting context.
+```ruby
+within_context('NATIVE_APP') do
+  find_element [:tag, "button"]
+```
 
 __Parameters:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] name - the name to search for
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Element>] all matching elements
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] context - The context to switch to for the duration of the block.
 
 --
 
-##### [scroll_to](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/android/element/generic.rb#L131) android
+##### [switch_to_default_context](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/device/device.rb#L312) 
 
-> def scroll_to text
+> def switch_to_default_context
 
-Scroll to an element containing target text or description.
+Change to the default context.  This is equivalent to `current_context= nil`.
+
+--
+
+##### [pinch](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/device/multi_touch.rb#L30) 
+
+> def pinch(percentage=25, auto_perform=true)
+
+Convenience method for pinching the screen.
+Places two fingers at the edges of the screen and brings them together.
+```ruby
+action = pinch 75 #=> Pinch the screen from the top right and bottom left corners
+action.perform    #=> to 25% of its size.
+```
 
 __Parameters:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] text - the text to search for in the text value and content description
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[int] percentage - The percent size by which to shrink the screen when pinched.
 
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] the element scrolled to
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[boolean] auto_perform - Whether to perform the action immediately (default true)
 
 --
 
-##### [scroll_to_exact](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/android/element/generic.rb#L144) android
+##### [zoom](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/device/multi_touch.rb#L58) 
 
-> def scroll_to_exact text
+> def zoom(percentage=200, auto_perform=true)
 
-Scroll to an element with the exact target text or description.
+Convenience method for zooming the screen.
+Places two fingers at the edges of the screen and brings them together.
+```ruby
+action = zoom 200 #=> Zoom in the screen from the center until it doubles in size.
+action.perform
+```
 
 __Parameters:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] text - the text to search for in the text value and content description
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[int] percentage - The percent size by which to shrink the screen when pinched.
 
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] the element scrolled to
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[boolean] auto_perform - Whether to perform the action immediately (default true)
 
 --
 
-##### [textfields](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/android/element/textfield.rb#L7) android
+##### [initialize](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/device/multi_touch.rb#L79) 
 
-> def textfields
+> def initialize
 
-Get an array of textfield texts.
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<String>] 
-
---
-
-##### [e_textfields](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/android/element/textfield.rb#L13) android
-
-> def e_textfields
-
-Get an array of textfield elements.
+Create a new multi-action
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Textfield>] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[MultiTouch] a new instance of MultiTouch
 
 --
 
-##### [first_textfield](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/android/element/textfield.rb#L19) android
+##### [add](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/device/multi_touch.rb#L85) 
 
-> def first_textfield
+> def add(chain)
 
-Get the first textfield element.
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Textfield] 
-
---
-
-##### [last_textfield](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/android/element/textfield.rb#L25) android
-
-> def last_textfield
-
-Get the last textfield element.
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Textfield] 
-
---
-
-##### [textfield](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/android/element/textfield.rb#L32) android
-
-> def textfield text
-
-Get the first textfield that includes text or name (content description).
+Add a touch_action to be performed
 
 __Parameters:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String, Integer] text - the text to search for. If int then the textfield at that index is returned.
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Textfield] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[TouchAction] chain - The action to add to the chain
 
 --
 
-##### [textfield_exact](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/android/element/textfield.rb#L45) android
+##### [perform](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/device/multi_touch.rb#L90) 
 
-> def textfield_exact text
+> def perform
 
-Get the first textfield that matches text.
+Ask Appium to perform the actions
+
+--
+
+##### [ACTIONS](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/device/touch_actions.rb#L12) 
+
+> ACTIONS = [:move_to, :press_for_duration, :press, :release, :tap, :wait, :perform]
+
+
+
+--
+
+##### [COMPLEX_ACTIONS](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/device/touch_actions.rb#L13) 
+
+> COMPLEX_ACTIONS = [:swipe]
+
+
+
+--
+
+##### [actions](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/device/touch_actions.rb#L27) 
+
+> def actions
+
+Returns the value of attribute actions
+
+--
+
+##### [initialize](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/device/touch_actions.rb#L29) 
+
+> def initialize
+
+
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[TouchAction] a new instance of TouchAction
+
+--
+
+##### [move_to](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/device/touch_actions.rb#L37) 
+
+> def move_to(opts)
+
+Move to the given co-ordinates.
 
 __Parameters:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] text - the text to match
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Textfield] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Hash] opts - a customizable set of options
 
 --
 
-##### [wait](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/helper.rb#L33) 
+##### [press_for_duration](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/device/touch_actions.rb#L47) 
+
+> def press_for_duration(element, x, y, duration)
+
+Press down for a specific duration.
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[WebDriver::Element] element - the element to press.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[integer] x - x co-ordinate to press on.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[integer] y - y co-ordinate to press on.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[integer] duration - Number of seconds to press.
+
+--
+
+##### [press](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/device/touch_actions.rb#L58) 
+
+> def press(opts)
+
+Press a finger onto the screen.  Finger will stay down until you call
+`release`.
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Hash] opts - a customizable set of options
+
+--
+
+##### [release](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/device/touch_actions.rb#L69) 
+
+> def release(opts=nil)
+
+Remove a finger from the screen.
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Hash] opts - a customizable set of options
+
+--
+
+##### [tap](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/device/touch_actions.rb#L80) 
+
+> def tap(opts)
+
+Touch a point on the screen
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Hash] opts - a customizable set of options
+
+--
+
+##### [wait](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/device/touch_actions.rb#L88) 
+
+> def wait(seconds)
+
+Pause for a number of seconds before the next action
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[integer] seconds - Number of seconds to pause for
+
+--
+
+##### [swipe](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/device/touch_actions.rb#L99) 
+
+> def swipe(opts)
+
+Convenience method to peform a swipe.
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Hash] opts - a customizable set of options
+
+--
+
+##### [perform](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/device/touch_actions.rb#L114) 
+
+> def perform
+
+Ask the driver to perform all actions in this action chain.
+
+--
+
+##### [cancel](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/device/touch_actions.rb#L120) 
+
+> def cancel
+
+Does nothing, currently.
+
+--
+
+##### [chain_method](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/device/touch_actions.rb#L128) 
+
+> def chain_method(method, args=nil)
+
+
+
+--
+
+##### [args_with_ele_ref](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/device/touch_actions.rb#L137) 
+
+> def args_with_ele_ref(args)
+
+
+
+--
+
+##### [wait](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/common/helper.rb#L33) 
 
 > def wait max_wait=30, interval=0.5, &block
 
@@ -698,7 +846,7 @@ __Returns:__
 
 --
 
-##### [ignore](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/helper.rb#L45) 
+##### [ignore](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/common/helper.rb#L49) 
 
 > def ignore &block
 
@@ -706,11 +854,13 @@ Return block.call and ignore any exceptions.
 
 --
 
-##### [wait_true](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/helper.rb#L55) 
+##### [wait_true](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/common/helper.rb#L64) 
 
 > def wait_true max_wait=30, interval=0.5, &block
 
-Check every 0.5 seconds to see if block.call returns true. nil is considered a failure.
+Check every 0.5 seconds to see if block.call returns a truthy value.
+Note this isn't a strict boolean true, any truthy value is accepted.
+false and nil are considered failures.
 Give up after 30 seconds.
 
 __Parameters:__
@@ -727,7 +877,7 @@ __Returns:__
 
 --
 
-##### [back](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/helper.rb#L68) 
+##### [back](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/common/helper.rb#L81) 
 
 > def back
 
@@ -739,7 +889,7 @@ __Returns:__
 
 --
 
-##### [session_id](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/helper.rb#L73) 
+##### [session_id](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/common/helper.rb#L86) 
 
 > def session_id
 
@@ -747,7 +897,7 @@ For Sauce Labs reporting. Returns the current session id.
 
 --
 
-##### [xpath](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/helper.rb#L81) 
+##### [xpath](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/common/helper.rb#L94) 
 
 > def xpath xpath_str
 
@@ -763,7 +913,7 @@ __Returns:__
 
 --
 
-##### [xpaths](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/helper.rb#L89) 
+##### [xpaths](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/common/helper.rb#L102) 
 
 > def xpaths xpath_str
 
@@ -779,191 +929,11 @@ __Returns:__
 
 --
 
-##### [ele_index](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/helper.rb#L97) 
-
-> def ele_index tag_name, index
-
-Get the element of type tag_name at matching index.
-
-__Parameters:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] tag_name - the tag name to find
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Integer] index - the index
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] the found element of type tag_name
-
---
-
-##### [find_eles](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/helper.rb#L106) 
-
-> def find_eles tag_name
-
-Get all elements exactly matching tag name
-
-__Parameters:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] tag_name - the tag name to find
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Element>] the found elements of type tag_name
-
---
-
-##### [find_ele_by_text](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/helper.rb#L114) 
-
-> def find_ele_by_text tag, text
-
-Get the first tag that exactly matches tag and text.
-
-__Parameters:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] tag - the tag name to match
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] text - the text to exactly match
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] the element of type tag exactly matching text
-
---
-
-##### [find_eles_by_text](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/helper.rb#L122) 
-
-> def find_eles_by_text tag, text
-
-Get all tags that exactly match tag and text.
-
-__Parameters:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] tag - the tag name to match
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] text - the text to exactly match
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Element>] the elements of type tag exactly matching text
-
---
-
-##### [find_ele_by_attr_include](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/helper.rb#L131) 
-
-> def find_ele_by_attr_include tag, attr, value
-
-Get the first tag by attribute that exactly matches value.
-
-__Parameters:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] tag - the tag name to match
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] attr - the attribute to compare
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] value - the value of the attribute that the element must include
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] the element of type tag who's attribute includes value
-
---
-
-##### [find_eles_by_attr_include](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/helper.rb#L140) 
-
-> def find_eles_by_attr_include tag, attr, value
-
-Get tags by attribute that include value.
-
-__Parameters:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] tag - the tag name to match
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] attr - the attribute to compare
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] value - the value of the attribute that the element must include
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Element>] the elements of type tag who's attribute includes value
-
---
-
-##### [find_ele_by_text_include](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/helper.rb#L149) 
-
-> def find_ele_by_text_include tag, text
-
-Get the first tag that includes text.
-element.attribute(:text).include? text
-
-__Parameters:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] tag - the tag name to match
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] text - the text the element must include
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] the element of type tag that includes text
-
---
-
-##### [find_eles_by_text_include](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/helper.rb#L158) 
-
-> def find_eles_by_text_include tag, text
-
-Get the tags that include text.
-element.attribute(:text).include? text
-
-__Parameters:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] tag - the tag name to match
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] text - the text the element must include
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Element>] the elements of type tag that includes text
-
---
-
-##### [first_ele](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/helper.rb#L165) 
-
-> def first_ele tag_name
-
-Get the first tag that matches tag_name
-
-__Parameters:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] tag_name - the tag to match
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] 
-
---
-
-##### [last_ele](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/helper.rb#L173) 
-
-> def last_ele tag_name
-
-Get the last tag that matches tag_name
-
-__Parameters:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] tag_name - the tag to match
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] 
-
---
-
-##### [source](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/helper.rb#L179) 
+##### [source](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/common/helper.rb#L108) 
 
 > def source
 
-Prints a JSON view of the current page
+Prints xml of the current page
 
 __Returns:__
 
@@ -971,83 +941,81 @@ __Returns:__
 
 --
 
-##### [get_source](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/helper.rb#L185) 
+##### [get_source](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/common/helper.rb#L118) 
 
 > def get_source
 
-Gets a JSON view of the current page
+Returns XML string for the current page
+Same as driver.page_source
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[JSON] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] 
 
 --
 
-##### [find_name](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/helper.rb#L194) 
+##### [result](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/common/helper.rb#L125) 
 
-> def find_name name
+> def result
 
-Returns the first element that exactly matches name
+Returns the value of attribute result
 
-__Parameters:__
+--
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] name - the name to exactly match
+##### [initialize](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/common/helper.rb#L127) 
+
+> def initialize
+
+
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[CountElements] a new instance of CountElements
 
 --
 
-##### [find_names](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/helper.rb#L202) 
+##### [reset](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/common/helper.rb#L131) 
 
-> def find_names name
+> def reset
 
-Returns all elements that exactly match name
 
-__Parameters:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] name - the name to exactly match
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Element>] 
 
 --
 
-##### [tag](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/helper.rb#L210) 
+##### [start_element](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/common/helper.rb#L136) 
 
-> def tag tag_name
+> def start_element name, attrs = []
 
-Returns the first element matching tag_name
-
-__Parameters:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] tag_name - the tag_name to search for
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] 
+http://nokogiri.org/Nokogiri/XML/SAX/Document.html
 
 --
 
-##### [tags](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/helper.rb#L218) 
+##### [formatted_result](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/common/helper.rb#L140) 
 
-> def tags tag_name
+> def formatted_result
 
-Returns all elements matching tag_name
 
-__Parameters:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] tag_name - the tag_name to search for
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] 
 
 --
 
-##### [px_to_window_rel](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/helper.rb#L228) 
+##### [get_page_class](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/common/helper.rb#L151) 
+
+> def get_page_class
+
+Returns a string of class counts.
+
+--
+
+##### [page_class](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/common/helper.rb#L162) 
+
+> def page_class
+
+Count all classes on screen and print to stdout.
+Useful for appium_console.
+
+--
+
+##### [px_to_window_rel](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/common/helper.rb#L172) 
 
 > def px_to_window_rel opts={}
 
@@ -1059,15 +1027,7 @@ px_to_window_rel x: 50, y: 150
 
 --
 
-##### [lazy_load_strings](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/helper.rb#L238) 
-
-> def lazy_load_strings
-
-
-
---
-
-##### [xml_keys](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/helper.rb#L245) 
+##### [xml_keys](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/common/helper.rb#L189) 
 
 > def xml_keys target
 
@@ -1083,7 +1043,7 @@ __Returns:__
 
 --
 
-##### [xml_values](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/helper.rb#L253) 
+##### [xml_values](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/common/helper.rb#L197) 
 
 > def xml_values target
 
@@ -1099,7 +1059,7 @@ __Returns:__
 
 --
 
-##### [resolve_id](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/helper.rb#L261) 
+##### [resolve_id](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/common/helper.rb#L205) 
 
 > def resolve_id id
 
@@ -1115,15 +1075,883 @@ __Returns:__
 
 --
 
-##### [raise_no_element_error](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/helper.rb#L267) 
+##### [window_size](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/common/element/window.rb#L5) 
 
-> def raise_no_element_error
+> def window_size
 
-Used to error when finding a single element fails.
+Get the window's size
 
 --
 
-##### [value](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/patch.rb#L32) 
+##### [result](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/helper.rb#L7) android
+
+> def result
+
+TODO: Support strings.xml ids
+
+--
+
+##### [keys](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/helper.rb#L7) android
+
+> def keys
+
+TODO: Support strings.xml ids
+
+--
+
+##### [filter](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/helper.rb#L9) android
+
+> def filter
+
+
+
+--
+
+##### [filter=](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/helper.rb#L14) android
+
+> def filter= value
+
+convert to string to support symbols
+
+--
+
+##### [initialize](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/helper.rb#L20) android
+
+> def initialize
+
+
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[AndroidElements] a new instance of AndroidElements
+
+--
+
+##### [reset](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/helper.rb#L25) android
+
+> def reset
+
+
+
+--
+
+##### [start_element](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/helper.rb#L31) android
+
+> def start_element name, attrs = []
+
+http://nokogiri.org/Nokogiri/XML/SAX/Document.html
+
+--
+
+##### [get_android_inspect](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/helper.rb#L65) android
+
+> def get_android_inspect class_name=false
+
+Android only.
+Returns a string containing interesting elements.
+The text, content description, and id are returned.
+if false (default) then all classes will be inspected
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] class_name - the class name to filter on.
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] 
+
+--
+
+##### [page](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/helper.rb#L80) android
+
+> def page class_name=false
+
+Intended for use with console.
+Inspects and prints the current page.
+if false (default) then all classes will be inspected
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] class_name - the class name to filter on.
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[void] 
+
+--
+
+##### [current_app](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/helper.rb#L88) android
+
+> def current_app
+
+Lists package, activity, and adb shell am start -n value for current app.
+Works on local host only (not remote).
+noinspection RubyArgCount
+
+--
+
+##### [id](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/helper.rb#L102) android
+
+> def id id
+
+Find by id
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] id - the id to search for
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] 
+
+--
+
+##### [ele_index](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/helper.rb#L116) android
+
+> def ele_index class_name, index
+
+Find the element of type class_name at matching index.
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] class_name - the class name to find
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Integer] index - the index
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] the found element of type class_name
+
+--
+
+##### [find_ele_by_attr](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/helper.rb#L134) android
+
+> def find_ele_by_attr class_name, attr, value
+
+Find the first element exactly matching class and attribute value.
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] class_name - the class name to search for
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] attr - the attribute to inspect
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] value - the expected value of the attribute
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] 
+
+--
+
+##### [find_eles_by_attr](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/helper.rb#L143) android
+
+> def find_eles_by_attr class_name, attr, value
+
+Find all elements exactly matching class and attribute value.
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] class_name - the class name to match
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] attr - the attribute to compare
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] value - the value of the attribute that the element must have
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Element>] 
+
+--
+
+##### [find_ele_by_attr_include](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/helper.rb#L157) android
+
+> def find_ele_by_attr_include class_name, attr, value
+
+Find the first element by attribute that exactly matches value.
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] class_name - the class name to match
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] attr - the attribute to compare
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] value - the value of the attribute that the element must include
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] the element of type tag who's attribute includes value
+
+--
+
+##### [find_eles_by_attr_include](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/helper.rb#L166) android
+
+> def find_eles_by_attr_include class_name, attr, value
+
+Find elements by attribute that include value.
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] class_name - the tag name to match
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] attr - the attribute to compare
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] value - the value of the attribute that the element must include
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Element>] the elements of type tag who's attribute includes value
+
+--
+
+##### [first_ele](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/helper.rb#L173) android
+
+> def first_ele class_name
+
+Find the first element that matches class_name
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] class_name - the tag to match
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] 
+
+--
+
+##### [last_ele](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/helper.rb#L181) android
+
+> def last_ele class_name
+
+Find the last element that matches class_name
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] class_name - the tag to match
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] 
+
+--
+
+##### [tag](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/helper.rb#L189) android
+
+> def tag class_name
+
+Find the first element of type class_name
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] class_name - the class_name to search for
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] 
+
+--
+
+##### [tags](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/helper.rb#L197) android
+
+> def tags class_name
+
+Find all elements of type class_name
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] class_name - the class_name to search for
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] 
+
+--
+
+##### [xpath_visible_contains](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/helper.rb#L232) android
+
+> def xpath_visible_contains element, value
+
+Find the first element that contains value
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] element - the class name for the element
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] value - the value to search for
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] 
+
+--
+
+##### [xpaths_visible_contains](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/helper.rb#L240) android
+
+> def xpaths_visible_contains element, value
+
+Find all elements containing value
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] element - the class name for the element
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] value - the value to search for
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Element>] 
+
+--
+
+##### [xpath_visible_exact](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/helper.rb#L266) android
+
+> def xpath_visible_exact element, value
+
+Find the first element exactly matching value
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] element - the class name for the element
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] value - the value to search for
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] 
+
+--
+
+##### [xpaths_visible_exact](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/helper.rb#L274) android
+
+> def xpaths_visible_exact element, value
+
+Find all elements exactly matching value
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] element - the class name for the element
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] value - the value to search for
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] 
+
+--
+
+##### [TextView](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/element/text.rb#L4) android
+
+> TextView = 'android.widget.TextView'
+
+
+
+--
+
+##### [s_text](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/element/text.rb#L10) android
+
+> def s_text value
+
+Find the first TextView that contains value or by index.
+If int then the TextView at that index is returned.
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String, Integer] value - the value to find.
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[TextView] 
+
+--
+
+##### [s_texts](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/element/text.rb#L18) android
+
+> def s_texts value
+
+Find all TextViews containing value.
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] value - the value to search for
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<TextView>] 
+
+--
+
+##### [first_s_text](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/element/text.rb#L24) android
+
+> def first_s_text
+
+Find the first TextView.
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[TextView] 
+
+--
+
+##### [last_s_text](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/element/text.rb#L30) android
+
+> def last_s_text
+
+Find the last TextView.
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[TextView] 
+
+--
+
+##### [s_text_exact](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/element/text.rb#L37) android
+
+> def s_text_exact value
+
+Find the first TextView that exactly matches value.
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] value - the value to match exactly
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[TextView] 
+
+--
+
+##### [s_texts_exact](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/element/text.rb#L44) android
+
+> def s_texts_exact value
+
+Find all TextViews that exactly match value.
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] value - the value to match exactly
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<TextView>] 
+
+--
+
+##### [e_s_texts](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/element/text.rb#L50) android
+
+> def e_s_texts
+
+Find all TextViews.
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<TextView>] 
+
+--
+
+##### [alert_click](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/element/alert.rb#L6) android
+
+> def alert_click value
+
+Click the first alert button that contains value or by index.
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Integer, String] value - either an integer index of the button or the button's name
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[void] 
+
+--
+
+##### [alert_accept](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/element/alert.rb#L13) android
+
+> def alert_accept
+
+Accept the alert.
+The last button is considered "accept."
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[void] 
+
+--
+
+##### [alert_accept_text](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/element/alert.rb#L20) android
+
+> def alert_accept_text
+
+Get the text of the alert's accept button.
+The last button is considered "accept."
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] 
+
+--
+
+##### [alert_dismiss](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/element/alert.rb#L27) android
+
+> def alert_dismiss
+
+Dismiss the alert.
+The first button is considered "dismiss."
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[void] 
+
+--
+
+##### [alert_dismiss_text](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/element/alert.rb#L34) android
+
+> def alert_dismiss_text
+
+Get the text of the alert's dismiss button.
+The first button is considered "dismiss."
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] 
+
+--
+
+##### [uiautomator_find](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/mobile_methods.rb#L10) android
+
+> def uiautomator_find
+
+find_element/s can be used with a [UISelector](http://developer.android.com/tools/help/uiautomator/UiSelector.html).
+
+```ruby
+ find_elements :uiautomator, 'new UiSelector().clickable(true)'
+```
+
+--
+
+##### [Button](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/element/button.rb#L4) android
+
+> Button      = 'android.widget.Button'
+
+
+
+--
+
+##### [ImageButton](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/element/button.rb#L5) android
+
+> ImageButton = 'android.widget.ImageButton'
+
+
+
+--
+
+##### [button](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/element/button.rb#L39) android
+
+> def button value
+
+Find the first button that contains value or by index.
+If int then the button at that index is returned.
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String, Integer] value - the value to exactly match.
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Button] 
+
+--
+
+##### [buttons](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/element/button.rb#L55) android
+
+> def buttons value
+
+Find all buttons containing value
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] value - the value to search for
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Button>] 
+
+--
+
+##### [first_button](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/element/button.rb#L61) android
+
+> def first_button
+
+Find the first button.
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Button] 
+
+--
+
+##### [last_button](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/element/button.rb#L67) android
+
+> def last_button
+
+Find the last button.
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Button] 
+
+--
+
+##### [button_exact](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/element/button.rb#L74) android
+
+> def button_exact value
+
+Find the first button that exactly matches value.
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] value - the value to match exactly
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Button] 
+
+--
+
+##### [buttons_exact](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/element/button.rb#L81) android
+
+> def buttons_exact value
+
+Find all buttons that exactly match value.
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] value - the value to match exactly
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Button>] 
+
+--
+
+##### [e_buttons](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/element/button.rb#L87) android
+
+> def e_buttons
+
+Find all buttons.
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Button>] 
+
+--
+
+##### [find](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/element/generic.rb#L7) android
+
+> def find value
+
+Find the first element containing value
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] value - the value to search for
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] 
+
+--
+
+##### [finds](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/element/generic.rb#L14) android
+
+> def finds value
+
+Find all elements containing value
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] value - the value to search for
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Element>] 
+
+--
+
+##### [find_exact](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/element/generic.rb#L21) android
+
+> def find_exact value
+
+Find the first element exactly matching value
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] value - the value to search for
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] 
+
+--
+
+##### [finds_exact](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/element/generic.rb#L28) android
+
+> def finds_exact value
+
+Find all elements exactly matching value
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] value - the value to search for
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Element>] 
+
+--
+
+##### [scroll_to](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/element/generic.rb#L35) android
+
+> def scroll_to text
+
+Scroll to the first element containing target text or description.
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] text - the text to search for in the text value and content description
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] the element scrolled to
+
+--
+
+##### [scroll_to_exact](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/element/generic.rb#L48) android
+
+> def scroll_to_exact text
+
+Scroll to the first element with the exact target text or description.
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] text - the text to search for in the text value and content description
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] the element scrolled to
+
+--
+
+##### [EditText](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/element/textfield.rb#L3) android
+
+> EditText = 'android.widget.EditText'
+
+
+
+--
+
+##### [textfield](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/element/textfield.rb#L9) android
+
+> def textfield value
+
+Find the first EditText that contains value or by index.
+If int then the EditText at that index is returned.
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String, Integer] value - the text to match exactly.
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[EditText] 
+
+--
+
+##### [textfields](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/element/textfield.rb#L17) android
+
+> def textfields value
+
+Find all EditTexts containing value.
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] value - the value to search for
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<EditText>] 
+
+--
+
+##### [first_textfield](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/element/textfield.rb#L23) android
+
+> def first_textfield
+
+Find the first EditText.
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[EditText] 
+
+--
+
+##### [last_textfield](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/element/textfield.rb#L29) android
+
+> def last_textfield
+
+Find the last EditText.
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[EditText] 
+
+--
+
+##### [textfield_exact](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/element/textfield.rb#L36) android
+
+> def textfield_exact value
+
+Find the first EditText that exactly matches value.
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] value - the value to match exactly
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[EditText] 
+
+--
+
+##### [textfields_exact](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/element/textfield.rb#L43) android
+
+> def textfields_exact value
+
+Find all EditTexts that exactly match value.
+
+__Parameters:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] value - the value to match exactly
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<EditText>] 
+
+--
+
+##### [e_textfields](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/android/element/textfield.rb#L49) android
+
+> def e_textfields
+
+Find all EditTexts.
+
+__Returns:__
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<EditText>] 
+
+--
+
+##### [value](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/common/patch.rb#L10) 
 
 > def value
 
@@ -1133,7 +1961,7 @@ Fixes NoMethodError: undefined method `value' for Selenium::WebDriver::Element
 
 --
 
-##### [name](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/patch.rb#L39) 
+##### [name](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/common/patch.rb#L17) 
 
 > def name
 
@@ -1143,7 +1971,7 @@ Fixes NoMethodError: undefined method `name' for Selenium::WebDriver::Element
 
 --
 
-##### [location_rel](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/common/patch.rb#L51) 
+##### [location_rel](https://github.com/appium/ruby_lib/blob/b5414b7885804ccabddb53315a12c3b525924654/lib/appium_lib/common/patch.rb#L29) 
 
 > def location_rel
 
@@ -1158,523 +1986,6 @@ https://github.com/appium/appium/wiki/Automating-mobile-gestures
 __Returns:__
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[OpenStruct] the relative x, y in a struct. ex: { x: 0.50, y: 0.20 }
-
---
-
-##### [CORE](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/driver.rb#L16) 
-
-> CORE = [ :array, :hash, :class, :file, :dir, :bigdecimal, :rational, :struct, :openstruct, :method, :unboundmethod ]
-
-
-
---
-
-##### [awesome_openstruct](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/driver.rb#L18) 
-
-> def awesome_openstruct target
-
-
-
---
-
-##### [load_appium_txt](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/driver.rb#L27) 
-
-> def load_appium_txt opts
-
-Load appium.txt (toml format) into system ENV
-the basedir of this file + appium.txt is what's used
-
-__Parameters:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Hash] opts - file: '/path/to/appium.txt', verbose: true
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<String>] the require files. nil if require doesn't exist
-
---
-
-##### [promote_singleton_appium_methods](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/driver.rb#L145) 
-
-> def self.promote_singleton_appium_methods main_module
-
-
-
---
-
-##### [promote_appium_methods](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/driver.rb#L175) 
-
-> def self.promote_appium_methods class_array
-
-Promote appium methods to class instance methods
-
-To promote methods to all classes:
-
-```ruby
-Appium.promote_appium_methods Object
-```
-
-__Parameters:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Class>] class_array - An array of classes
-
---
-
-##### [default_wait](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/driver.rb#L550) 
-
-> def default_wait
-
-Returns the default client side wait.
-This value is independent of what the server is using
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Integer] 
-
---
-
-##### [app_path](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/driver.rb#L204) 
-
-> def app_path
-
-Returns the value of attribute app_path
-
---
-
-##### [app_name](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/driver.rb#L204) 
-
-> def app_name
-
-Returns the value of attribute app_name
-
---
-
-##### [device](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/driver.rb#L204) 
-
-> def device
-
-Returns the value of attribute device
-
---
-
-##### [app_package](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/driver.rb#L204) 
-
-> def app_package
-
-Returns the value of attribute app_package
-
---
-
-##### [app_activity](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/driver.rb#L204) 
-
-> def app_activity
-
-Returns the value of attribute app_activity
-
---
-
-##### [app_wait_activity](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/driver.rb#L204) 
-
-> def app_wait_activity
-
-Returns the value of attribute app_wait_activity
-
---
-
-##### [sauce_username](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/driver.rb#L204) 
-
-> def sauce_username
-
-Returns the value of attribute sauce_username
-
---
-
-##### [sauce_access_key](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/driver.rb#L204) 
-
-> def sauce_access_key
-
-Returns the value of attribute sauce_access_key
-
---
-
-##### [port](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/driver.rb#L204) 
-
-> def port
-
-Returns the value of attribute port
-
---
-
-##### [debug](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/driver.rb#L204) 
-
-> def debug
-
-Returns the value of attribute debug
-
---
-
-##### [export_session](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/driver.rb#L204) 
-
-> def export_session
-
-Returns the value of attribute export_session
-
---
-
-##### [device_cap](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/driver.rb#L204) 
-
-> def device_cap
-
-Returns the value of attribute device_cap
-
---
-
-##### [compress_xml](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/driver.rb#L204) 
-
-> def compress_xml
-
-Returns the value of attribute compress_xml
-
---
-
-##### [custom_url](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/driver.rb#L204) 
-
-> def custom_url
-
-Returns the value of attribute custom_url
-
---
-
-##### [global_webdriver_http_sleep](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/driver.rb#L210) 
-
-> def global_webdriver_http_sleep
-
-The amount to sleep in seconds before every webdriver http call.
-
---
-
-##### [global_webdriver_http_sleep=](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/driver.rb#L210) 
-
-> def global_webdriver_http_sleep=(value)
-
-The amount to sleep in seconds before every webdriver http call.
-
---
-
-##### [initialize](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/driver.rb#L240) 
-
-> def initialize opts={}
-
-Creates a new driver.
-:device is :android, :ios, or :selendroid
-
-```ruby
-# Options include:
-:app_path, :app_name, :app_package, :app_activity,
-:app_wait_activity, :sauce_username, :sauce_access_key,
-:port, :os, :debug
-
-require 'rubygems'
-require 'appium_lib'
-
-# Start iOS driver
-app = { device: :ios, app_path: '/path/to/MyiOS.app'}
-Appium::Driver.new(app).start_driver
-
-# Start Android driver
-apk = { device: :android
-        app_path: '/path/to/the.apk',
-        app_package: 'com.example.pkg',
-        app_activity: 'act.Start',
-        app_wait_activity: 'act.Start'
-}
-
-Appium::Driver.new(apk).start_driver
-```
-
-__Parameters:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Object] opts - A hash containing various options.
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Driver] 
-
---
-
-##### [status](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/driver.rb#L363) 
-
-> def status
-
-Returns the status payload
-
-```ruby
-{"status"=>0,
- "value"=>
-  {"build"=>
-    {"version"=>"0.8.2",
-     "revision"=>"f2a2bc3782e4b0370d97a097d7e04913cf008995"}},
- "sessionId"=>"8f4b34a7-a9a9-4ac5-b125-36258143446a"}
-```
-
- Discover the Appium rev running on the server.
-
-`status["value"]["build"]["revision"]`
-`f2a2bc3782e4b0370d97a097d7e04913cf008995`
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[JSON] 
-
---
-
-##### [server_version](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/driver.rb#L369) 
-
-> def server_version
-
-Returns the server's version string
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] 
-
---
-
-##### [absolute_app_path](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/driver.rb#L412) 
-
-> def self.absolute_app_path app_path
-
-Converts environment variable APP_PATH to an absolute path.
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] APP_PATH as an absolute path
-
---
-
-##### [server_url](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/driver.rb#L436) 
-
-> def server_url
-
-Get the server url for sauce or local based on env vars.
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] the server url
-
---
-
-##### [restart](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/driver.rb#L447) 
-
-> def restart
-
-Restarts the driver
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Driver] the driver
-
---
-
-##### [driver](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/driver.rb#L454) 
-
-> def driver
-
-Returns the driver
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Driver] the driver
-
---
-
-##### [screenshot](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/driver.rb#L464) 
-
-> def screenshot png_save_path
-
-Takes a png screenshot and saves to the target path.
-
-Example: screenshot '/tmp/hi.png'
-
-__Parameters:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] png_save_path - the full path to save the png
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[nil] 
-
---
-
-##### [driver_quit](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/driver.rb#L471) 
-
-> def driver_quit
-
-Quits the driver
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[void] 
-
---
-
-##### [start_driver](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/driver.rb#L479) 
-
-> def start_driver
-
-Creates a new global driver and quits the old one if it exists.
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Selenium::WebDriver] the new global driver
-
---
-
-##### [no_wait](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/driver.rb#L513) 
-
-> def no_wait
-
-Set implicit wait and default_wait to zero.
-
---
-
-##### [set_wait](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/driver.rb#L532) 
-
-> def set_wait timeout=nil
-
-Set implicit wait and default_wait to timeout, defaults to 30.
-if set_wait is called without a param then the second to last
-wait will be used.
-
-```ruby`
-set_wait 2
-set_wait 3
-set_wait # 2
-
-````
-
-__Parameters:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Integer] timeout - the timeout in seconds
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[void] 
-
---
-
-##### [exists](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/driver.rb#L566) 
-
-> def exists pre_check=0, post_check=@default_wait, &search_block
-
-Returns existence of element.
-
-Example:
-
-exists { button('sign in') } ? puts('true') : puts('false')
-
-__Parameters:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Integer] pre_check - the amount in seconds to set the
-wait to before checking existance
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Integer] post_check - the amount in seconds to set the
-wait to after checking existance
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Block] search_block - the block to call
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Boolean] 
-
---
-
-##### [execute_script](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/driver.rb#L590) 
-
-> def execute_script script, *args
-
-The same as @driver.execute_script
-
-__Parameters:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] script - the script to execute
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[*args] args - the args to pass to the script
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Object] 
-
---
-
-##### [mobile](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/driver.rb#L606) 
-
-> def mobile method, *args
-
-Helper method for mobile gestures
-
-https://github.com/appium/appium/wiki/Automating-mobile-gestures
-
-driver.execute_script 'mobile: swipe', endX: 100, endY: 100, duration: 0.01
-
-becomes
-
-mobile :swipe, endX: 100, endY: 100, duration: 0.01
-
-__Parameters:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String, Symbol] method - the method to execute
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[*args] args - the args to pass to the method
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Object] 
-
---
-
-##### [find_elements](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/driver.rb#L617) 
-
-> def find_elements *args
-
-Calls @driver.find_elements
-
-__Parameters:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[*args] args - the args to use
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Element>] Array is empty when no elements are found.
-
---
-
-##### [find_element](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/driver.rb#L625) 
-
-> def find_element *args
-
-Calls @driver.find_elements
-
-__Parameters:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[*args] args - the args to use
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] 
-
---
-
-##### [x](https://github.com/appium/ruby_lib/blob/a07da28de1e7133c77070859c2c35d7bd2635684/lib/appium_lib/driver.rb#L632) 
-
-> def x
-
-Quit the driver and Pry.
-quit and exit are reserved by Pry.
-
-__Returns:__
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[void] 
 
 --
 
