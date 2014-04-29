@@ -24,7 +24,7 @@ describe 'common/device' do
   end
 
   t 'close & launch' do
-    closeApp
+    close_app
     launch
   end
 
@@ -74,14 +74,13 @@ describe 'common/device' do
   end
 
   t 'key_event' do
-    key_event key: 176
+    key_event 176
   end
 
   t 'action_chain' do
-    e = find_element(:name, "Accessibility")
+    e = find_element(:name, 'Accessibility')
     Appium::TouchAction.new.press(:element => e, x: 0.5, y: 0.5).release(:element => e).perform
-    sleep 2
-    find_element(:name, "Custom View")
+    wait { find_element(:name, 'Custom View') }
     back
   end
 

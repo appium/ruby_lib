@@ -8,7 +8,7 @@ module Appium
         post: {
             shake:    'session/:session_id/appium/device/shake',
             launch:   'session/:session_id/appium/app/launch',
-            closeApp: 'session/:session_id/appium/app/close',
+            close_app: 'session/:session_id/appium/app/close',
             reset:    'session/:session_id/appium/app/reset'
         },
         get:  {

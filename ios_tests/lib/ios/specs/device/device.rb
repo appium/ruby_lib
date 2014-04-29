@@ -12,7 +12,7 @@ describe 'device/device' do
     tag('UIAButton').name.must_equal 'SlideToUnlock'
 
     # It appears that lockForDuration doesn't.
-    closeApp
+    close_app
     launch
   end
 
@@ -31,7 +31,7 @@ describe 'device/device' do
   end
 
   t 'close and launch' do
-    closeApp
+    close_app
     launch
     tag('UIANavigationBar').name.must_equal 'UICatalog'
   end
