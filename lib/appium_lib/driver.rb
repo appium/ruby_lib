@@ -63,7 +63,7 @@ module Appium
   # ```
   #
   # :app is expanded
-  # :requires are expanded
+  # :require is expanded
   # all keys are converted to symbols
   #
   # @param opts [Hash] file: '/path/to/appium.txt', verbose: true
