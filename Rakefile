@@ -30,6 +30,10 @@ def bump value
   if value == :y
     new_num[-1] = 0 # x.y.Z -> x.y.0
     new_num[-2] = new_num[-2].to_i + 1 # x.Y -> x.Y+1
+  elsif value == :x
+    new_num[-1] = 0 # x.y.Z -> x.y.0
+    new_num[-2] = 0 # x.Y.z -> x.0.z
+    new_num[-3]= new_num[-3].to_i + 1
   end
 
   new_num = new_num.join '.'
