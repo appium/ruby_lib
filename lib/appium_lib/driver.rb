@@ -89,6 +89,8 @@ module Appium
 
     data = File.read toml
     data = TOML::Parser.new(data).parsed
+    # TOML creates string keys. must symbolize
+    data = Appium::symbolize_keys data
     ap data unless data.empty? if verbose
 
     if data && data[:caps] && data[:caps][:app]
@@ -102,7 +104,7 @@ module Appium
       r = r.kind_of?(Array) ? r : [r]
       # ensure files are absolute
       r.map! do |file|
-        file = file.include?(File::Separator) ? file :
+        file = File.exists?(file) ? file :
             File.join(parent_dir, file)
         file = File.expand_path file
 
@@ -119,16 +121,16 @@ module Appium
           files << item
           next # only look inside folders
         end
-        Dir.glob(File.join(item, '**/*.rb')) do |file|
+        Dir.glob(File.expand_path(File.join(item, '**', '*.rb'))) do |file|
           # do not add folders to the file list
           files << File.expand_path(file) unless File.directory? file
         end
       end
 
-      data[:appium_lib][:require] = files
+      data[:appium_lib][:require] = files.sort
     end
 
-    Appium::symbolize_keys data
+    data
   end
 
   # convert all keys (including nested) to symbols
