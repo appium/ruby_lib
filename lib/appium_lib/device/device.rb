@@ -9,7 +9,8 @@ module Appium
             shake:    'session/:session_id/appium/device/shake',
             launch:   'session/:session_id/appium/app/launch',
             close_app: 'session/:session_id/appium/app/close',
-            reset:    'session/:session_id/appium/app/reset'
+            reset:    'session/:session_id/appium/app/reset',
+            toggle_airplane_mode: 'session/:session_id/appium/device/toggle_airplane_mode' 
         },
         get:  {
             current_activity:   'session/:session_id/appium/device/current_activity',
@@ -40,6 +41,9 @@ module Appium
 
     # @!method shake
     #   Cause the device to shake
+
+    # @!method toggle_flight_mode
+    #   toggle flight mode on or off
 
     #@!method complex_find
     #  Find an element by a complex array of criteria.  Available criteria
@@ -81,6 +85,11 @@ module Appium
     #   pull_file '/local/data/some/path' #=> Get the file at that path
     #   pull_file 'Shenanigans.app/some/file' #=> Get 'some/file' from the install location of Shenanigans.app
     #   ```
+
+    # @!method end_coverage
+    #   Android only;  Ends the test coverage and writes the results to the given path on device.
+    #   @param path (String) Path on the device to write too.
+    #   @param intent (String) Intent to broadcast when ending coverage.
     class << self
       def extended(mod)
         extend_webdriver_with_forwardable
@@ -139,6 +148,13 @@ module Appium
           end
         end
 
+        # TODO TEST ME
+        add_endpoint_method(:set_immediate_value, 'session/:session_id/appium/element/:id/value') do
+          def set_immediate_value(element, value)
+            execute :set_immediate_value, { :id => element.ref }, value
+          end
+        end
+
         add_endpoint_method(:complex_find, 'session/:session_id/appium/app/complex_find') do
           def complex_find(opts)
             mode = opts.fetch :mode, false
@@ -167,6 +183,13 @@ module Appium
           def pull_file(path)
             data = execute :pull_file, {}, path: path
             Base64.decode64 data
+          end
+        end
+
+        # TODO TEST ME
+        add_endpoint_method(:end_coverage, 'session/:session_id/appium/app/end_test_coverage') do
+          def end_coverage(path, intent)
+            execute :end_coverage, {}, path: path, intent: intent
           end
         end
 
