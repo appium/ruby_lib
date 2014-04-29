@@ -1,3 +1,121 @@
+#### v1.0.0 2014-04-29
+
+- [5a3ecbb](https://github.com/appium/ruby_lib/commit/5a3ecbb4147693ce3c2c6b693e64074022d03511) Release 1.0.0
+- [4b6989a](https://github.com/appium/ruby_lib/commit/4b6989a51c25b3b01398fe6bee2da908ab61a7e2) Merge pull request #172 from DylanLacey/flight
+- [0824188](https://github.com/appium/ruby_lib/commit/0824188043f76f5243de4d3753ef9e036fcb5ba6) Airline mode.
+- [7935fc0](https://github.com/appium/ruby_lib/commit/7935fc02afb7720306c7a273d205a2db9bdfb417) Prepare for release
+- [583a0a6](https://github.com/appium/ruby_lib/commit/583a0a6b7b67cdce4e533f06d98968021c0ed5d9) Update version helper
+- [982b102](https://github.com/appium/ruby_lib/commit/982b1021ed5e202ae2249791aa9ab091e7cb1b24) Update docs
+- [74f9e5e](https://github.com/appium/ruby_lib/commit/74f9e5ec97059f036c5c935bc9dcb5fb0000d813) Improve docs
+- [b5414b7](https://github.com/appium/ruby_lib/commit/b5414b7885804ccabddb53315a12c3b525924654) Update documentation for appium 1.0
+- [de25322](https://github.com/appium/ruby_lib/commit/de25322395c233e69c70cc2c9417913e8f393dbd) Fix ios test
+- [3943f19](https://github.com/appium/ruby_lib/commit/3943f194cd82bcc6880c13fd712041e111440aa5) Do not sort files
+- [e7bd82a](https://github.com/appium/ruby_lib/commit/e7bd82a133edcf27fa5c8d5cf850d1783ef4cd4c) Fix load_appium_txt
+- [fe792a5](https://github.com/appium/ruby_lib/commit/fe792a573ffb4ce5cfb3bd4f67cb0506a61dbf21) Fix comment
+- [bb9f44a](https://github.com/appium/ruby_lib/commit/bb9f44af04add6f4c1007f3641417f6366ae0b3e) Fix error message about missing platformName
+- [45e56b9](https://github.com/appium/ruby_lib/commit/45e56b9326d2ab9fad29d04626e34fdaf58f9659) Fix flaky android tests by using wait
+- [723b304](https://github.com/appium/ruby_lib/commit/723b30414719a2e728cfd32b0a43d09daa21c69b) Rename closeApp to close_app
+- [ec2f6ea](https://github.com/appium/ruby_lib/commit/ec2f6eab1f8f8ab40ef41a82d0c6de1a11705bf0) Improve android/patch test
+- [e3a7ad5](https://github.com/appium/ruby_lib/commit/e3a7ad5b4cb65a351bf2f61587fe35c0af465042) Merge pull request #169 from bootstraponline/master
+- [bbcd38b](https://github.com/appium/ruby_lib/commit/bbcd38b184ec047adc73188a1ec86e8cfb09de61) Fix complex find
+- [684aa0d](https://github.com/appium/ruby_lib/commit/684aa0df432e2c618637c873ca62f5a31626beb2) Merge pull request #168 from DylanLacey/master
+- [7475d38](https://github.com/appium/ruby_lib/commit/7475d38f069425e69bc81e9c7157734abfb780da) Remove unused error method
+- [6875a48](https://github.com/appium/ruby_lib/commit/6875a48705114d3d651f509d1e2f4f484e9650f3) Use new complex_find method.
+- [86371c3](https://github.com/appium/ruby_lib/commit/86371c3c74fd50666aee96bd575adefe3d4618e8) Fix common/helper
+- [e765488](https://github.com/appium/ruby_lib/commit/e765488f3dc3698092b8751ad400ba67bdcae220) Update Android common/device
+- [79de9b5](https://github.com/appium/ruby_lib/commit/79de9b59a604f7fc6c74fefb6743c5ede52b6193) Fix android common/helper
+- [7ac67e3](https://github.com/appium/ruby_lib/commit/7ac67e33655898446b75d4c7ca17bd26bf21fa35) Fix android/helper
+- [4754137](https://github.com/appium/ruby_lib/commit/47541378b4fdcf2daf36109be59b9e591d5f5666) Fix id resolution. Fix patch and helper
+- [38af1aa](https://github.com/appium/ruby_lib/commit/38af1aafb8525186f3ae10ee888ae52945753f6e) Fix android alert, text and textfield
+- [1f82df4](https://github.com/appium/ruby_lib/commit/1f82df4543e2de54564bd89e2ed8275612beb770) Fix page commnand on Android
+- [b3cd998](https://github.com/appium/ruby_lib/commit/b3cd9987f391447dc7bf86f97cc99b75f166b969) Fix android/element/button
+- [6e215ff](https://github.com/appium/ruby_lib/commit/6e215ff60752fbdc43b23829676215d10d0004d1) Reorder iOS text methods
+- [ead35f9](https://github.com/appium/ruby_lib/commit/ead35f99908ea5e9eac298308979a46dc0028751) Refactor iOS textfield xpath
+- [b26d77d](https://github.com/appium/ruby_lib/commit/b26d77d70967c14aef227dc651252f3ff675850e) Move iOS specific helpers out of common
+- [a97c1cd](https://github.com/appium/ruby_lib/commit/a97c1cdfa4b545283e463f5e792f7c413654043f) Merge pull request #163 from DylanLacey/master
+- [537099d](https://github.com/appium/ruby_lib/commit/537099d3afd5e950ef0a1042890c3134ee125578) Update tests to meet new code requirements.
+- [c7c6d10](https://github.com/appium/ruby_lib/commit/c7c6d10152dd61b856c1dfe828aa70dc4e4e48c3) Ensure elements on iOS are visible
+- [e0cb0c9](https://github.com/appium/ruby_lib/commit/e0cb0c911f831c4f8288d9c467b5546128c4e467) Update Rakefile
+- [6a174e2](https://github.com/appium/ruby_lib/commit/6a174e2a05fd6612f2592e0734122d60c2101d86) Modern ruby defaults to utf-8
+- [5540ffc](https://github.com/appium/ruby_lib/commit/5540ffc0f93abc85cefd7e397e39c8022071e171) Update ios_tests
+- [ecc7d02](https://github.com/appium/ruby_lib/commit/ecc7d0262e902f0e46e49f6395a00aa88558978c) Update iOS support
+- [8845a1e](https://github.com/appium/ruby_lib/commit/8845a1ed82d06ad3164dadc6fcc57c23482f5ca9) Rewrite iOS support for appium 1.0
+- [b0e0bfd](https://github.com/appium/ruby_lib/commit/b0e0bfd43edd011f2f628d588de7bef7829e0db6) Update textfield and flaky.txt
+- [7c40873](https://github.com/appium/ruby_lib/commit/7c40873ed4521c004b5033378fd87b44714264af) Fix ios[ios/element/textfield]
+- [ee0ccd2](https://github.com/appium/ruby_lib/commit/ee0ccd2f443c4f2ce80b1ea80f17b2d11d870a08) Fix ios[ios/element/alert]
+- [f439730](https://github.com/appium/ruby_lib/commit/f4397302cc9ffc42759fe946e0da643df2c89100) Fix ios[common/helper]
+- [3582d34](https://github.com/appium/ruby_lib/commit/3582d3495976bb724b39febf92d850dd5fd08508) Fix iOS common/element/button
+- [67f719e](https://github.com/appium/ruby_lib/commit/67f719eca1812f143e8b2445ceac154c87ec13c5) Add flaky.txt
+- [7847df2](https://github.com/appium/ruby_lib/commit/7847df21888ce5e089e81be24d035d4f8d1d7b92) Merge pull request #159 from DylanLacey/master
+- [4c816e2](https://github.com/appium/ruby_lib/commit/4c816e252a2e018e3db9730ea56a7a23eb7adbdd) Fix wait
+- [b58f283](https://github.com/appium/ruby_lib/commit/b58f283503af8ed3a16e054dd589b1662be533cb) Update one_test runner
+- [52b2a5c](https://github.com/appium/ruby_lib/commit/52b2a5cff30cae5c27e878071fd9a2c4ce16c48f) Enable running with flake
+- [9861a88](https://github.com/appium/ruby_lib/commit/9861a885b9bbdc45eaddf00589f854ec2355b24e) Update tag references
+- [326aeb5](https://github.com/appium/ruby_lib/commit/326aeb50375300662167f0f9f23211efa59fb052) Don't call mobile methods
+- [09329d1](https://github.com/appium/ruby_lib/commit/09329d1d0fb583733b7530d6fc1161611e2b16d3) Name before_first/after_last for better error messages
+- [5302418](https://github.com/appium/ruby_lib/commit/5302418d5180d02c87139662b7b97d53042faf24) Fix ios/element/generic
+- [9bf869f](https://github.com/appium/ruby_lib/commit/9bf869f889e80754132741bce4776d1e2bf0bf14) ios/element/text is passing
+- [2e10eb3](https://github.com/appium/ruby_lib/commit/2e10eb3407408c2979384c73a31c4ddbe8fc2dd3) Start updating for new XPath
+- [62c977a](https://github.com/appium/ruby_lib/commit/62c977a158ebb85bac2603be1321723d5c785931) Add note about source_window + appium 1.0
+- [2bb509f](https://github.com/appium/ruby_lib/commit/2bb509ff60733c950c4edba1754bddbfa1855003) Replace mobile methods for appium 1.0
+- [2c8142b](https://github.com/appium/ruby_lib/commit/2c8142b0026c0222d635c936448564002ca5eadb) Fix page_class to work with Appium 1.0
+- [265b658](https://github.com/appium/ruby_lib/commit/265b65833ed3971a1bf41b647edf0613786258bd) Use nokogiri to parse XML
+- [8c96eae](https://github.com/appium/ruby_lib/commit/8c96eaeab594d940ce30ede29f6253e1e5fd7370) Merge pull request #157 from appium/update_spec
+- [5c9e840](https://github.com/appium/ruby_lib/commit/5c9e840b7edafd083f3d5f3003086550baf3c242) Update tests to work with new spec gem
+- [0331fe0](https://github.com/appium/ruby_lib/commit/0331fe0f4c897b4cd41b67eecd6357416925d629) Merge pull request #155 from DylanLacey/keyevent
+- [3a9bebd](https://github.com/appium/ruby_lib/commit/3a9bebd48cc8ecc8a1d8e9c50d1db433e66bae1f) Add keyevent method
+- [758afbf](https://github.com/appium/ruby_lib/commit/758afbfee3beaf435ecc8c0f47584deb91b3ae2f) Merge pull request #154 from DylanLacey/master
+- [294ba49](https://github.com/appium/ruby_lib/commit/294ba49f4f98cce498f2b8217e639ab0c33c5036) Extend Appium::Device methods before promoting Appium methods.
+- [d432e36](https://github.com/appium/ruby_lib/commit/d432e365219914091f7a1bf532a758cfd2647aed) Merge pull request #149 from DylanLacey/chainz
+- [965ec7b](https://github.com/appium/ruby_lib/commit/965ec7bab13e8a92a4f5065ff1c4142ba58043d2) Add multi-touch actions, touch actions.
+- [d8cbacd](https://github.com/appium/ruby_lib/commit/d8cbacd938e41ce0ccc817f354ab6580f4742636) textfield_named to use chained find_element
+- [e76e6dd](https://github.com/appium/ruby_lib/commit/e76e6dd5f2046a73a2458a3bc03aa546c810ed20) Merge pull request #151 from DylanLacey/docs
+- [ecbbb18](https://github.com/appium/ruby_lib/commit/ecbbb18fa09b861a733f7b0071d2164e712697c2) Merge pull request #150 from DylanLacey/files
+- [7ef61e1](https://github.com/appium/ruby_lib/commit/7ef61e1cd1733217479646060c5131ef3235b852) Update doc
+- [6c97d17](https://github.com/appium/ruby_lib/commit/6c97d17ac177656c96a00ee29d64293e63a84c22) Add file methods
+- [aea8c5d](https://github.com/appium/ruby_lib/commit/aea8c5dd688778ba3cf076390a89455f5bec36cf) Update doc
+- [854d2c6](https://github.com/appium/ruby_lib/commit/854d2c689f9ea43701b4ae18fa83b121bf227f85) Fix invalid warnings Fix #147
+- [0408cc0](https://github.com/appium/ruby_lib/commit/0408cc0c7a99d3347cf6b762f28b1c4fa9339e2b) Fix driver docs
+- [e72c170](https://github.com/appium/ruby_lib/commit/e72c17094ff249f822346be9a62c135156d7758d) Remove Selendroid specific code
+- [4e9f3d6](https://github.com/appium/ruby_lib/commit/4e9f3d6f95fbd97c4db118e22de2741a49993d21) Validate platformName Fix #146
+- [38fc42e](https://github.com/appium/ruby_lib/commit/38fc42e599b02dcc17d007812cf9defbd21a6573) Clarify wait_true doc Fix #127
+- [285a97b](https://github.com/appium/ruby_lib/commit/285a97b0e15eb42034a91a2b59d8ba9bd8b0abe9) Fix ignore, wait, wait_true
+- [1b160b4](https://github.com/appium/ruby_lib/commit/1b160b46ecab5fccd45191f5af5f18eaf86a3188) Fix typing on iOS
+- [44eb53b](https://github.com/appium/ruby_lib/commit/44eb53b61c994dd16fd8636dd4bf43b70c98226e) Add comments to end
+- [a4d2c55](https://github.com/appium/ruby_lib/commit/a4d2c553a46b0cd64ecbc67193023e9802db2c0d) Add OpenStruct support to Awesome Print
+- [12b35a6](https://github.com/appium/ruby_lib/commit/12b35a612fcf7bb05173ef3e3ece66a0ecab4a0f) All tests passing
+- [01f4ecf](https://github.com/appium/ruby_lib/commit/01f4ecfdf5b5446c6eced06ca86cc85ff42edecd) Fix 'undefined' is not a function
+- [af76d4d](https://github.com/appium/ruby_lib/commit/af76d4daba1cc785325e62f4a1392895da7c7731) Fix broken ends
+- [9a214aa](https://github.com/appium/ruby_lib/commit/9a214aa7fb59042606956be1686c6c5a459a192c) Don't use add_to_path
+- [67a997c](https://github.com/appium/ruby_lib/commit/67a997c8396b4c8681f63be5d37f8055d39d220e) Clean up module syntax
+- [8be5b7c](https://github.com/appium/ruby_lib/commit/8be5b7c5b3dbdc1682a48b9ca85f2389c2a19502) Merge pull request #142 from appium/wip
+- [fb61522](https://github.com/appium/ruby_lib/commit/fb615225eae819eef70153a76e954ffa2991845e) Rename test folders
+- [8f2049f](https://github.com/appium/ruby_lib/commit/8f2049ff18e3dc20b7cd7a30cd15b0fcb1676341) Update capabilities and appium.txt
+- [62dc430](https://github.com/appium/ruby_lib/commit/62dc43030d047c3baaec28f524430893ac427ff9) Merge pull request #139 from DylanLacey/complex_find
+- [bc20a71](https://github.com/appium/ruby_lib/commit/bc20a7181b5159bbb8cd304e182a49765fec5b9d) Add complex find
+- [38a9429](https://github.com/appium/ruby_lib/commit/38a942973adc8768d7e5e1b270bad8d68323e33b) Merge pull request #140 from DylanLacey/hide
+- [f6d5987](https://github.com/appium/ruby_lib/commit/f6d598704f096dccfc0feedf28850d7059cd79f8) Add keyboard hidin'
+- [c0076e9](https://github.com/appium/ruby_lib/commit/c0076e92cdbeb3ce90fab536480a746c6acf933b) Merge pull request #138 from DylanLacey/noarg_methods
+- [23f24c9](https://github.com/appium/ruby_lib/commit/23f24c9193318c2cfb3432d01459aaf3b8121ab6) add current_activity, background_app, app_installed
+- [eb12171](https://github.com/appium/ruby_lib/commit/eb121710af6c7a3d128754a359640c36b7e73501) Merge pull request #135 from DylanLacey/contexts
+- [b8f3a91](https://github.com/appium/ruby_lib/commit/b8f3a919d11fc347b84ce4c1a38aab2705461553) Add context switching
+- [c13b877](https://github.com/appium/ruby_lib/commit/c13b877c75bd67390755720cc15842411a2d7218) Merge pull request #137 from DylanLacey/accessibility_id
+- [5c9d18f](https://github.com/appium/ruby_lib/commit/5c9d18f286c31f8ddbc6ad5cdd0b34a1041e775f) Add accessiblity_id finder
+- [5d1722f](https://github.com/appium/ruby_lib/commit/5d1722f965db7cac26eb7c14b3080f22ba5e1664) Merge pull request #136 from DylanLacey/uiauto_finders
+- [fdd14da](https://github.com/appium/ruby_lib/commit/fdd14daf4811aac740bdd7e1662f2d61aa43c359) Add uiautomat[ion|or] locators
+- [ef42569](https://github.com/appium/ruby_lib/commit/ef42569d2d0bc4bb741ed0132ba78371bb84b5f4) Merge pull request #133 from DylanLacey/master
+- [a6fbb15](https://github.com/appium/ruby_lib/commit/a6fbb15b1909df4d69c059a754fc7973123b17a3) Log warning when methods are added to Selenium
+- [6590e9f](https://github.com/appium/ruby_lib/commit/6590e9f5f30b7fa07c16390c965077a780116d44) All tests passing on master branch of appium
+- [cd5a25d](https://github.com/appium/ruby_lib/commit/cd5a25d395ec0d7f7361ce0a18a14aa4dc81f486) Update android tests
+- [7fc8c55](https://github.com/appium/ruby_lib/commit/7fc8c55b9c0866b14ce23f0c72fc5580d0935125) Update android tests
+- [6e32210](https://github.com/appium/ruby_lib/commit/6e3221015a028b184d0888d8d0281adc88c91d05) Add ruby_lib_ios and ruby_lib_android tests to ruby_lib
+- [b9b449a](https://github.com/appium/ruby_lib/commit/b9b449a1502db280728cf8b5d20ec36f7ae59a1d) Merge pull request #129 from DylanLacey/master
+- [f87a379](https://github.com/appium/ruby_lib/commit/f87a37906fe8cd66c549c351c8808d79586a1f79) Added calls to explicit endpoints for :install, :remove, :close, :launch, :lock, :shake.
+- [2ea9aa5](https://github.com/appium/ruby_lib/commit/2ea9aa598d38e2163a01a90ceee4473372999d67) Upgrade to SVG badges
+- [003bbe6](https://github.com/appium/ruby_lib/commit/003bbe6a92c2538c51dbea56f69fb525eec22db6) Status is in the official bindings
+- [d0b6198](https://github.com/appium/ruby_lib/commit/d0b619833457c974b500b00242ceb2fc7598f5d0) Document how to activate fast reset
+
+
 #### v0.24.1 2014-03-26
 
 - [a07da28](https://github.com/appium/ruby_lib/commit/a07da28de1e7133c77070859c2c35d7bd2635684) Release 0.24.1
