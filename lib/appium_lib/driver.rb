@@ -127,7 +127,8 @@ module Appium
         end
       end
 
-      data[:appium_lib][:require] = files.sort
+      # Must not sort files. File order is specified in appium.txt
+      data[:appium_lib][:require] = files
     end
 
     data
