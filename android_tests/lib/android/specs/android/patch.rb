@@ -1,13 +1,12 @@
 describe 'android/patch.rb' do
   t 'type' do
     # nav to textfield
-    find('app').click
-    find('search').click
-    find('invoke').click
+    wait { find('app').click }
+    wait { find('search').click }
+    wait { find('invoke').click }
 
-    ele = first_textfield
-    ele.type 'ok'
-    ele.text.must_equal 'ok'
+    wait { first_textfield.type 'ok' }
+    wait { first_textfield.text.must_equal 'ok' }
 
     # nav to start activity
     3.times { back }
