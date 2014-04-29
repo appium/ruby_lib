@@ -142,8 +142,6 @@ def patch_webdriver_bridge
   end # class
 end
 
-# def
-
 # Print Appium's origValue error messages.
 class Selenium::WebDriver::Remote::Response
   # @private

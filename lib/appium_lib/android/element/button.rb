@@ -32,9 +32,10 @@ module Appium
     
     public
 
-    # Find a button by text and optionally number.
-    # @param value [String, Integer] the value to exactly match. If int then the button at that index is returned.
-    # @return [Button] the button found with text and matching number
+    # Find the first button that contains value or by index.
+    # @param value [String, Integer] the value to exactly match.
+    # If int then the button at that index is returned.
+    # @return [Button]
     def button value
       # Don't use ele_index because that only works on one element type.
       # Android needs to combine button and image button to match iOS.
@@ -48,37 +49,40 @@ module Appium
       xpath _button_contains_string value
     end
 
+    # Find all buttons containing value
+    # @param value [String] the value to search for
+    # @return [Array<Button>]
     def buttons value
      xpaths _button_contains_string value
     end
 
-    # Get the first button element.
+    # Find the first button.
     # @return [Button]
     def first_button
       xpath _button_visible_string
     end
 
-    # Get the last button element.
+    # Find the last button.
     # @return [Button]
     def last_button
        xpath _button_visible_string index: 'last()'
     end
 
-    # Get the first button element that exactly matches text.
+    # Find the first button that exactly matches value.
     # @param value [String] the value to match exactly
     # @return [Button]
     def button_exact value
       xpath _button_exact_string value
     end
 
-    # Get all button elements that exactly match text.
+    # Find all buttons that exactly match value.
     # @param value [String] the value to match exactly
     # @return [Array<Button>]
     def buttons_exact value
       xpaths _button_exact_string value
     end
 
-    # Get an array of button elements.
+    # Find all buttons.
     # @return [Array<Button>]
     def e_buttons
       xpaths _button_visible_string

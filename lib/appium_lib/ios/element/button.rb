@@ -2,47 +2,52 @@
 module Appium
   module Ios
     UIAButton = 'UIAButton'
-    # Find a button by text and optionally number.
-    # @param value [String, Integer] the value to exactly match. If int then the button at that index is returned.
-    # @return [Button] the button found with text and matching number
+
+    # Find the first UIAButton that contains value or by index.
+    # @param value [String, Integer] the value to exactly match.
+    # If int then the UIAButton at that index is returned.
+    # @return [UIAButton]
     def button value
       # return button at index.
       return ele_index UIAButton, value if value.is_a? Numeric
       xpath_visible_contains UIAButton, value
     end
 
+    # Find all UIAButtons containing value
+    # @param value [String] the value to search for
+    # @return [Array<UIAButton>]
     def buttons value
       xpaths_visible_contains UIAButton, value
     end
 
-    # Get the first button element.
-    # @return [Button]
+    # Find the first UIAButton.
+    # @return [UIAButton]
     def first_button
       first_ele UIAButton
     end
 
-    # Get the last button element.
-    # @return [Button]
+    # Find the last UIAButton.
+    # @return [UIAButton]
     def last_button
       last_ele UIAButton
     end
 
-    # Get the first button element that exactly matches text.
+    # Find the first UIAButton that exactly matches value.
     # @param value [String] the value to match exactly
-    # @return [Button]
+    # @return [UIAButton]
     def button_exact value
       xpath_visible_exact UIAButton, value
     end
 
-    # Get all button elements that exactly match text.
+    # Find all UIAButtons that exactly match value.
     # @param value [String] the value to match exactly
-    # @return [Array<Button>]
+    # @return [Array<UIAButton>]
     def buttons_exact value
       xpaths_visible_exact UIAButton, value
     end
 
-    # Get an array of button elements.
-    # @return [Array<Button>]
+    # Find all UIAButtons.
+    # @return [Array<UIAButton>]
     def e_buttons
       tags UIAButton
     end

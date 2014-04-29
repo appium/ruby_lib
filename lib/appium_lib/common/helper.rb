@@ -119,6 +119,7 @@ module Appium
       @driver.page_source
     end
 
+    # @private
     # http://nokogiri.org/Nokogiri/XML/SAX.html
     class CountElements < Nokogiri::XML::SAX::Document
       attr_reader :result
@@ -168,7 +169,6 @@ module Appium
     # ```ruby
     # px_to_window_rel x: 50, y: 150
     # ```
-
     def px_to_window_rel opts={}
       w = $driver.window_size
       x = opts.fetch :x, 0
@@ -178,6 +178,7 @@ module Appium
                      y: "#{y.to_f} / #{w.height.to_f}")
     end
 
+    # @private
     def lazy_load_strings
       @strings_xml ||= app_strings
     end

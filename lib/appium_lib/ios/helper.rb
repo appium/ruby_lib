@@ -161,18 +161,30 @@
       find_element :xpath, %Q(//#{class_name}[@visible="true"][#{index}])
     end
 
+    # @private
     def string_attr_exact class_name, attr, value
       %Q(//#{class_name}[@visible="true" and @#{attr}='#{value}'])
     end
 
+    # Find the first element exactly matching class and attribute value.
+    # @param class_name [String] the class name to search for
+    # @param attr [String] the attribute to inspect
+    # @param value [String] the expected value of the attribute
+    # @return [Element]
     def find_ele_by_attr class_name, attr, value
       @driver.find_element :xpath, string_attr_exact(class_name, attr, value)
     end
 
+    # Find all elements exactly matching class and attribute value.
+    # @param class_name [String] the class name to match
+    # @param attr [String] the attribute to compare
+    # @param value [String] the value of the attribute that the element must have
+    # @return [Array<Element>]
     def find_eles_by_attr class_name, attr, value
       @driver.find_elements :xpath, string_attr_exact(class_name, attr, value)
     end
 
+    # @private
     def string_attr_include class_name, attr, value
       %Q(//#{class_name}[@visible="true" and contains(translate(@#{attr},'#{value.upcase}', '#{value}'), '#{value}')])
     end
@@ -226,8 +238,14 @@
       xpaths %Q(//#{class_name}[@visible="true"])
     end
 
-    # xpath fragment helper
-    # example: xpath_visible_contains 'UIATextField', text
+    # @private
+    # Returns a string xpath that matches the first element that contains value
+    #
+    # example: xpath_visible_contains 'UIATextField', 'sign in'
+    #
+    # @param element [String] the class name for the element
+    # @param value [String] the value to search for
+    # @return [String]
     def string_visible_contains element, value
       result     = []
       attributes = %w[name hint label value]
@@ -244,14 +262,27 @@
       "//#{element}[#{result}]"
     end
 
+    # Find the first element that contains value
+    # @param element [String] the class name for the element
+    # @param value [String] the value to search for
+    # @return [Element]
     def xpath_visible_contains element, value
       xpath string_visible_contains element, value
     end
 
+    # Find all elements containing value
+    # @param element [String] the class name for the element
+    # @param value [String] the value to search for
+    # @return [Array<Element>]
     def xpaths_visible_contains element, value
       xpaths string_visible_contains element, value
     end
 
+    # @private
+    # Create an xpath string to exactly match the first element with target value
+    # @param element [String] the class name for the element
+    # @param value [String] the value to search for
+    # @return [String]
     def string_visible_exact element, value
       result     = []
       attributes = %w[name hint label value]
@@ -266,10 +297,18 @@
       "//#{element}[#{result}]"
     end
 
+    # Find the first element exactly matching value
+    # @param element [String] the class name for the element
+    # @param value [String] the value to search for
+    # @return [Element]
     def xpath_visible_exact element, value
       xpath string_visible_exact element, value
     end
 
+    # Find all elements exactly matching value
+    # @param element [String] the class name for the element
+    # @param value [String] the value to search for
+    # @return [Element]
     def xpaths_visible_exact element, value
       xpaths string_visible_exact element, value
     end

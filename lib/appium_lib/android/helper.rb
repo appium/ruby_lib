@@ -1,5 +1,6 @@
 module Appium
   module Android
+    # @private
     # http://nokogiri.org/Nokogiri/XML/SAX.html
     class AndroidElements < Nokogiri::XML::SAX::Document
       # TODO: Support strings.xml ids
@@ -57,7 +58,9 @@ module Appium
 
     # Android only.
     # Returns a string containing interesting elements.
-    # If an element has no content desc or text, then it's not returned by this method.
+    # The text, content description, and id are returned.
+    # @param class_name [String] the class name to filter on.
+    # if false (default) then all classes will be inspected
     # @return [String]
     def get_android_inspect class_name=false
       parser = @android_elements_parser ||= Nokogiri::XML::SAX::Parser.new(AndroidElements.new)
@@ -71,6 +74,9 @@ module Appium
 
     # Intended for use with console.
     # Inspects and prints the current page.
+    # @param class_name [String] the class name to filter on.
+    # if false (default) then all classes will be inspected
+    # @return [void]
     def page class_name=false
       puts get_android_inspect class_name
       nil
@@ -103,7 +109,7 @@ module Appium
       xpath "#{exact} | #{contains}"
     end
 
-    # Get the element of type class_name at matching index.
+    # Find the element of type class_name at matching index.
     # @param class_name [String] the class name to find
     # @param index [Integer] the index
     # @return [Element] the found element of type class_name
@@ -115,24 +121,36 @@ module Appium
       find_element :xpath, %Q(//#{class_name}[#{index}])
     end
 
+    # @private
     def string_attr_exact class_name, attr, value
       %Q(//#{class_name}[@#{attr}='#{value}'])
     end
 
+    # Find the first element exactly matching class and attribute value.
+    # @param class_name [String] the class name to search for
+    # @param attr [String] the attribute to inspect
+    # @param value [String] the expected value of the attribute
+    # @return [Element]
     def find_ele_by_attr class_name, attr, value
       @driver.find_element :xpath, string_attr_exact(class_name, attr, value)
     end
 
+    # Find all elements exactly matching class and attribute value.
+    # @param class_name [String] the class name to match
+    # @param attr [String] the attribute to compare
+    # @param value [String] the value of the attribute that the element must have
+    # @return [Array<Element>]
     def find_eles_by_attr class_name, attr, value
       @driver.find_elements :xpath, string_attr_exact(class_name, attr, value)
     end
 
+    # @private
     def string_attr_include class_name, attr, value
       %Q(//#{class_name}[contains(translate(@#{attr},'#{value.upcase}', '#{value}'), '#{value}')])
     end
 
-    # Get the first tag by attribute that exactly matches value.
-    # @param class_name [String] the tag name to match
+    # Find the first element by attribute that exactly matches value.
+    # @param class_name [String] the class name to match
     # @param attr [String] the attribute to compare
     # @param value [String] the value of the attribute that the element must include
     # @return [Element] the element of type tag who's attribute includes value
@@ -140,7 +158,7 @@ module Appium
       @driver.find_element :xpath, string_attr_include(class_name, attr, value)
     end
 
-    # Get tags by attribute that include value.
+    # Find elements by attribute that include value.
     # @param class_name [String] the tag name to match
     # @param attr [String] the attribute to compare
     # @param value [String] the value of the attribute that the element must include
@@ -149,7 +167,7 @@ module Appium
       @driver.find_elements :xpath, string_attr_include(class_name, attr, value)
     end
 
-    # Get the first tag that matches class_name
+    # Find the first element that matches class_name
     # @param class_name [String] the tag to match
     # @return [Element]
     def first_ele class_name
@@ -157,14 +175,14 @@ module Appium
       ele_index class_name, 1
     end
 
-    # Get the last tag that matches class_name
+    # Find the last element that matches class_name
     # @param class_name [String] the tag to match
     # @return [Element]
     def last_ele class_name
       ele_index class_name, 'last()'
     end
 
-    # Returns the first element matching class_name
+    # Find the first element of type class_name
     #
     # @param class_name [String] the class_name to search for
     # @return [Element]
@@ -172,7 +190,7 @@ module Appium
       xpath %Q(//#{class_name})
     end
 
-    # Returns all elements matching class_name
+    # Find all elements of type class_name
     #
     # @param class_name [String] the class_name to search for
     # @return [Element]
@@ -180,8 +198,14 @@ module Appium
       xpaths %Q(//#{class_name})
     end
 
-    # xpath fragment helper
-    # example: xpath_visible_contains 'UIATextField', text
+    # @private
+    # Returns a string xpath that matches the first element that contains value
+    #
+    # example: xpath_visible_contains 'UIATextField', 'sign in'
+    #
+    # @param element [String] the class name for the element
+    # @param value [String] the value to search for
+    # @return [String]
     def string_visible_contains element, value
       result     = []
       attributes = %w[content-desc text]
@@ -201,14 +225,27 @@ module Appium
       "//#{element}[#{result}]"
     end
 
+    # Find the first element that contains value
+    # @param element [String] the class name for the element
+    # @param value [String] the value to search for
+    # @return [Element]
     def xpath_visible_contains element, value
       xpath string_visible_contains element, value
     end
 
+    # Find all elements containing value
+    # @param element [String] the class name for the element
+    # @param value [String] the value to search for
+    # @return [Array<Element>]
     def xpaths_visible_contains element, value
       xpaths string_visible_contains element, value
     end
 
+    # @private
+    # Create an xpath string to exactly match the first element with target value
+    # @param element [String] the class name for the element
+    # @param value [String] the value to search for
+    # @return [String]
     def string_visible_exact element, value
       result     = []
       attributes = %w[content-desc resource-id text]
@@ -222,10 +259,18 @@ module Appium
       "//#{element}[#{result}]"
     end
 
+    # Find the first element exactly matching value
+    # @param element [String] the class name for the element
+    # @param value [String] the value to search for
+    # @return [Element]
     def xpath_visible_exact element, value
       xpath string_visible_exact element, value
     end
 
+    # Find all elements exactly matching value
+    # @param element [String] the class name for the element
+    # @param value [String] the value to search for
+    # @return [Element]
     def xpaths_visible_exact element, value
       xpaths string_visible_exact element, value
     end

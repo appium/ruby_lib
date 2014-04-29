@@ -31,9 +31,10 @@ module Appium
 
     public
 
-    # Get the first textfield that matches text.
-    # @param value [String, Integer] the text to match exactly. If int then the textfield at that index is returned.
-    # @return [Textfield]
+    # Find the first TextField that contains value or by index.
+    # @param value [String, Integer] the text to match exactly.
+    # If int then the TextField at that index is returned.
+    # @return [TextField]
     def textfield value
       # Don't use ele_index because that only works on one element type.
       # iOS needs to combine textfield and secure to match Android.
@@ -47,35 +48,41 @@ module Appium
       xpath _textfield_contains_string value
     end
 
+    # Find all TextFields containing value.
+    # @param value [String] the value to search for
+    # @return [Array<TextField>]
     def textfields value
       xpaths _textfield_contains_string value
     end
 
-    # Get the first textfield element.
-    # @return [Textfield]
+    # Find the first TextField.
+    # @return [TextField]
     def first_textfield
       xpath _textfield_visible_string
     end
 
-    # Get the last textfield element.
-    # @return [Textfield]
+    # Find the last TextField.
+    # @return [TextField]
     def last_textfield
       xpath _textfield_visible_string index: 'last()'
     end
 
-    # Get the first textfield that exactly matches text.
-    # @param value [String] the value the textfield must exactly match
-    # @return [Textfield]
+    # Find the first TextField that exactly matches value.
+    # @param value [String] the value to match exactly
+    # @return [TextField]
     def textfield_exact value
       xpath _textfield_exact_string value
     end
 
+    # Find all TextFields that exactly match value.
+    # @param value [String] the value to match exactly
+    # @return [Array<TextField>]
     def textfields_exact value
       xpaths _textfield_exact_string value
     end
 
-    # Get an array of textfield elements.
-    # @return [Array<Textfield>]
+    # Find all TextFields.
+    # @return [Array<TextField>]
     def e_textfields
       xpaths _textfield_visible_string
     end

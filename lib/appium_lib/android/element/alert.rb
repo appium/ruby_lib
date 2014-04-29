@@ -1,6 +1,6 @@
 module Appium
   module Android
-    # Tap the alert button identified by value.
+    # Click the first alert button that contains value or by index.
     # @param value [Integer, String] either an integer index of the button or the button's name
     # @return [void]
     def alert_click value
