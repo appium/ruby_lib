@@ -8,17 +8,17 @@ require 'posix/spawn'
 def repo_name; 'appium_lib' end # ruby_lib published as appium_lib
 def gh_name; 'ruby_lib' end # the name as used on github.com
 def version_file; "lib/#{repo_name}/common/version.rb" end
-def version_rgx; /VERSION = '([^']+)'/m end
+def version_rgx; /\s*VERSION\s*=\s*'([^']+)'/m end
 
 def version
   @version = @version || File.read(version_file).match(version_rgx)[1]
 end
 
-def bump major=false
+def bump value
   data = File.read version_file
 
   v_line = data.match version_rgx
-  d_line = data.match /DATE = '([^']+)'/m
+  d_line = data.match /\s*DATE\s*=\s*'([^']+)'/m
 
   old_v = v_line[0]
   old_d = d_line[0]
@@ -27,7 +27,7 @@ def bump major=false
   new_num = old_num.split('.')
   new_num[-1] = new_num[-1].to_i + 1
 
-  if major
+  if value == :y
     new_num[-1] = 0 # x.y.Z -> x.y.0
     new_num[-2] = new_num[-2].to_i + 1 # x.Y -> x.Y+1
   end
@@ -48,15 +48,21 @@ def bump major=false
   File.write version_file, data
 end
 
-desc 'Bump the version number and update the date.'
+desc 'Bump the z version number and update the date.'
 task :bump do
-  bump
+  bump :z
 end
 
 desc 'Bump the y version number, set z to zero, update the date.'
 task :bumpy do
-  bump true
+  bump :y
 end
+
+desc 'Bump the x version number, set y & z to zero, update the date.'
+task :bumpx do
+  bump :x
+end
+
 
 desc 'Install gems required for release task'
 task :dev do
