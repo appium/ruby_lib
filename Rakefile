@@ -193,3 +193,21 @@ task :notes do
 
   File.open('release_notes.md', 'w') { |f| f.write notes.to_s.strip }
 end
+
+# Used to purge byte order marks that mess up YARD
+def remove_non_ascii
+  Dir.glob('./**/*.rb') do |path|
+    path = File.expand_path path
+    next if File.directory? path
+
+    data = File.read path
+    data = data.encode('US-ASCII', invalid: :replace, undef: :replace, replace: '')
+    data = data.encode('UTF-8')
+    File.open(path, 'w') { |f| f.write data }
+  end
+end
+
+desc 'Remove non-ascii bytes'
+task :byte do
+  remove_non_ascii
+end

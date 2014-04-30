@@ -9,8 +9,8 @@ describe 'ios/helper' do
   end
 
   t 'ios_password' do
-    ios_password.must_equal '•'
-    ios_password(2).must_equal '•' * 2
+    ios_password.must_equal 8226.chr('UTF-8')
+    ios_password(2).must_equal 8226.chr('UTF-8') * 2
   end
 
   # todo: t 'get_page' do

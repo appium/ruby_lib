@@ -1,4 +1,4 @@
-﻿module Appium
+module Appium
   module Ios
     # iOS only. On Android uiautomator always returns an empty string for EditText password.
     #
@@ -6,7 +6,7 @@
     # @param length [Integer] the length of the password to generate
     # @return [String] the returned string is of size length
     def ios_password length=1
-      '•' * length
+      8226.chr('UTF-8') * length
     end
 
     # Returns a string of interesting elements. iOS only.
