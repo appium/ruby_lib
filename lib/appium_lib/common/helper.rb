@@ -134,7 +134,9 @@ module Appium
 
       # http://nokogiri.org/Nokogiri/XML/SAX/Document.html
       def start_element name, attrs = []
-        @result[name] += 1
+        # Count only visible elements. Android is always visible
+        element_visible = $driver.device_is_android? ? true : attrs.to_h['visible'] == 'true'
+        @result[name] += 1 if element_visible
       end
 
       def formatted_result
@@ -147,7 +149,7 @@ module Appium
       end
     end # class CountElements
 
-    # Returns a string of class counts.
+    # Returns a string of class counts of visible elements.
     def get_page_class
       parser = @count_elements_parser ||= Nokogiri::XML::SAX::Parser.new(CountElements.new)
 

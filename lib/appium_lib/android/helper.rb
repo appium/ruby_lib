@@ -74,10 +74,11 @@ module Appium
 
     # Intended for use with console.
     # Inspects and prints the current page.
-    # @param class_name [String] the class name to filter on.
-    # if false (default) then all classes will be inspected
+    # @opt class [Symbol] the class name to filter on. case insensitive include match.
+    # if nil (default) then all classes will be inspected
     # @return [void]
-    def page class_name=false
+    def page opts={}
+      class_name = opts.fetch :class, nil
       puts get_android_inspect class_name
       nil
     end

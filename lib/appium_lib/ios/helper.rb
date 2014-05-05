@@ -14,10 +14,12 @@ module Appium
     # Defaults to inspecting the 1st windows source only.
     # use get_page(get_source) for all window sources
     #
-    # @param element [Object] the element to search. omit to search everything
+    # @opt element [Object] the element to search. omit to search everything
+    # @opt class_name [String,Symbol] the class name to filter on. case insensitive include match.
     # @return [String]
     def get_page element=source_window(0), class_name=nil
       lazy_load_strings # populate @strings_xml
+      class_name = class_name.to_s.downcase
 
       # @private
       def empty ele
@@ -50,7 +52,7 @@ module Appium
         type    = fix_space element['type']
 
         # if class_name is set, mark non-matches as invisible
-        visible = (type == class_name).to_s if class_name
+        visible = (type.downcase.include?(class_name)).to_s if class_name
 
         if name == label && name == value
           puts "#{type}" if name || label || value || hint
@@ -96,6 +98,18 @@ module Appium
     end
 
     # Prints a string of interesting elements to the console.
+    #
+    # Example
+    #
+    # ```ruby
+    # page class: :UIAButton # filter on buttons
+    # page window: 1 # show source for window 1
+    # page class: :UIAButton, window: 1
+    # ```
+    #
+    # @opt window [Integer] window index. -1 for default
+    # @opt class [Symbol] class name to filter on
+    #
     # @return [void]
     def page opts={}
       window_number = opts.fetch :window, -1
