@@ -39,6 +39,28 @@ module Appium
           end
         end
 
+        # scoped to: text resource-id content-desc
+        attributes_values = attributes.values
+        id_matches = $driver.lazy_load_strings.select do |key, value|
+          attributes_values.include? value
+        end
+
+        string_ids = nil
+
+        if id_matches && id_matches.length > 0
+          space_suffix = ' ' * '  strings.xml: '.length
+          string_ids = ''
+
+          # add first
+          string_ids += "#{id_matches.shift[0]}\n"
+
+          # use padding for remaining values
+          # [0] = key, [1] = value
+          id_matches.each do |match|
+            string_ids += "#{space_suffix}#{match[0]}\n"
+          end
+        end
+
         string = ''
         text   = attributes['text']
         desc   = attributes['content-desc']
@@ -51,6 +73,7 @@ module Appium
           string += "  desc: #{desc}\n" unless desc.nil?
         end
         string  += "  id: #{id}\n" unless id.nil?
+        string  += "  strings.xml: #{string_ids}" unless string_ids.nil?
 
         @result += "\n#{name}\n#{string}" unless attributes.empty?
       end
@@ -97,17 +120,29 @@ module Appium
                      am_start: pkg + '/' + act)
     end
 
-    # Find by id
+    # @private
+    def string_id_xpath id
+      value    = resolve_id id
+      # If the id doesn't resolve in strings.xml then use it as is
+      # It's probably a resource id which won't be in strings.xml
+      value    = id unless value
+      exact    = string_visible_exact '*', value
+      contains = string_visible_contains '*', value
+      "#{exact} | #{contains}"
+    end
+
+    # Find the first matching element by id
     # @param id [String] the id to search for
     # @return [Element]
     def id id
-      value = resolve_id id
-      # If the id doesn't resolve in strings.xml then use it as is
-      # It's probably a resource id which won't be in strings.xml
-      value = id unless value
-      exact    = string_visible_exact '*', value
-      contains = string_visible_contains '*', value
-      xpath "#{exact} | #{contains}"
+      xpath string_id_xpath id
+    end
+
+    # Find all matching elements by id
+    # @param id [String] the id to search for
+    # @return [Element]
+    def ids id
+      xpaths string_id_xpath id
     end
 
     # Find the element of type class_name at matching index.
