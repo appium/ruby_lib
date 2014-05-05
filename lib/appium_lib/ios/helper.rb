@@ -14,8 +14,8 @@ module Appium
     # Defaults to inspecting the 1st windows source only.
     # use get_page(get_source) for all window sources
     #
-    # @opt element [Object] the element to search. omit to search everything
-    # @opt class_name [String,Symbol] the class name to filter on. case insensitive include match.
+    # @option element [Object] the element to search. omit to search everything
+    # @option class_name [String,Symbol] the class name to filter on. case insensitive include match.
     # @return [String]
     def get_page element=source_window(0), class_name=nil
       lazy_load_strings # populate @strings_xml
@@ -107,8 +107,8 @@ module Appium
     # page class: :UIAButton, window: 1
     # ```
     #
-    # @opt window [Integer] window index. -1 for default
-    # @opt class [Symbol] class name to filter on
+    # @option window [Integer] window index. -1 for default
+    # @option class [Symbol] class name to filter on
     #
     # @return [void]
     def page opts={}

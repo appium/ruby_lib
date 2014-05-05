@@ -74,7 +74,7 @@ module Appium
 
     # Intended for use with console.
     # Inspects and prints the current page.
-    # @opt class [Symbol] the class name to filter on. case insensitive include match.
+    # @option class [Symbol] the class name to filter on. case insensitive include match.
     # if nil (default) then all classes will be inspected
     # @return [void]
     def page opts={}
