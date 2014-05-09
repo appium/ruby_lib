@@ -6,12 +6,10 @@ describe 'android/helper' do
 
   def page_class_data
     (<<-TXT).strip
-12x android.widget.TextView
-4x android.widget.FrameLayout
-2x android.widget.LinearLayout
-2x android.view.View
+14x android.widget.TextView
+1x android.view.View
 1x android.widget.ListView
-1x android.widget.ImageView
+1x android.widget.FrameLayout
 1x hierarchy
     TXT
   end
