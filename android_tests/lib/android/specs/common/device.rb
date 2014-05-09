@@ -90,16 +90,21 @@ describe 'common/device' do
     end
     wait { find_element(:name, 'Custom View') }
     back
+    wait { s_text_exact 'NFC' }
   end
 
   t 'swipe' do
     wait { Appium::TouchAction.new.swipe(start_x: 0.75, start_y: 0.25, end_x: 0.75, end_y: 0.5, duration: 1.5).perform }
+    wait { ! exists { s_text_exact 'NFC' } }
+    back
+    wait { s_text_exact 'NFC' }
   end
 
   t 'pinch & zoom' do
+    wait { s_text_exact 'NFC' }
+    wait { s_text_exact('Graphics').click }
+    wait { s_text('BitmapMesh').click }
     wait do
-      s_text('Graphics').click
-      s_text('BitmapMesh').click
       zoom 200
       pinch 75
     end
