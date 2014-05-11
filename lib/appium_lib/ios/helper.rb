@@ -18,6 +18,7 @@ module Appium
     # @option class_name [String,Symbol] the class name to filter on. case insensitive include match.
     # @return [String]
     def get_page element=source_window(0), class_name=nil
+      puts "Called get_page on #{element}"
       lazy_load_strings # populate @strings_xml
       class_name = class_name.to_s.downcase
 
@@ -130,16 +131,24 @@ module Appium
         window_number = -1
         class_name    = opts
       end
-
-      if window_number == -1
-        # if the 0th window has no children, find the next window that does.
-        target_window = source_window 0
-        target_window = source_window 1 if target_window['children'].empty?
-        get_page target_window, class_name
+      if current_context.start_with? 'WEBVIEW'
+        s = get_source
+        parser = @android_html_parser ||= Nokogiri::HTML::SAX::Parser.new(Common::HTMLElements.new)
+        parser.document.reset
+        parser.document.filter = class_name
+        parser.parse s
+        parser.document.result
       else
-        get_page source_window(window_number || 0), class_name
+        if window_number == -1
+          # if the 0th window has no children, find the next window that does.
+          target_window = source_window 0
+          target_window = source_window 1 if target_window['children'].empty?
+          get_page target_window, class_name
+        else
+          get_page source_window(window_number || 0), class_name
+        end
+        nil
       end
-      nil
     end
 
     # Gets the JSON source of window number
