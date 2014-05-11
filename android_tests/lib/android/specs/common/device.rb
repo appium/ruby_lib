@@ -40,10 +40,14 @@ describe 'common/device' do
     wait { current_context.must_equal 'NATIVE_APP' }
   end
 
-  t 'current_context=' do
+  t 'set_context' do
     wait do
-      current_context= 'WEBVIEW'
-      current_context.must_equal 'WEBVIEW'
+      scroll_to "Views"
+      last_s_text.click
+      scroll_to 'WebView'
+      last_s_text.click
+      set_context 'WEBVIEW'
+      current_context.must_equal 'WEBVIEW_1'
     end
   end
 
