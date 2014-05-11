@@ -40,10 +40,15 @@ describe 'common/device' do
     wait { current_context.must_equal 'NATIVE_APP' }
   end
 
-  t 'current_context=' do
+  t 'set_context' do
     wait do
-      current_context= 'WEBVIEW'
-      current_context.must_equal 'WEBVIEW'
+      Appium::TouchAction.swipe(start_x: 0.5, start_y: 0.0, end_x: 0.5, end_y: 1)
+      scroll_to "Views"
+      last_s_text.click
+      scroll_to 'WebView'
+      last_s_text.click
+      set_context 'WEBVIEW'
+      current_context.must_equal 'WEBVIEW_1'
     end
   end
 
