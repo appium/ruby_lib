@@ -53,42 +53,53 @@ module Appium
 
         # if class_name is set, mark non-matches as invisible
         visible = (type.downcase.include?(class_name)).to_s if class_name
-
-        if name == label && name == value
-          puts "#{type}" if name || label || value || hint
-          puts "   name, label, value: #{name}" if name
-          puts "   hint: #{hint}" if hint
-        elsif name == label
-          puts "#{type}" if name || label || value || hint
-          puts "   name, label: #{name}" if name
-          puts "   value: #{value}" if value
-          puts "   hint: #{hint}" if hint
-        elsif name == value
-          puts "#{type}" if name || label || value || hint
-          puts "   name, value: #{name}" if name
-          puts "  label: #{label}" if label
-          puts "   hint: #{hint}" if hint
-        else
-          puts "#{type}" if name || label || value || hint
-          puts "   name: #{name}" if name
-          puts "  label: #{label}" if label
-          puts "  value: #{value}" if value
-          puts "   hint: #{hint}" if hint
-        end if visible && visible == 'true'
-
-        # there may be many ids with the same value.
-        # output all exact matches.
-        id_matches = @strings_xml.select do |key, val|
-          val == name || val == label || val == value
-        end
-
-        if id_matches && id_matches.length > 0
-          match_str = ''
-          # [0] = key, [1] = value
-          id_matches.each do |match|
-            match_str += ' ' * 7 + "#{match[0]}\n"
+        if visible && visible == 'true'
+          if name == label && name == value
+            puts "#{type}" if name || label || value || hint
+            puts "   name, label, value: #{name}" if name
+            puts "   hint: #{hint}" if hint
+          elsif name == label
+            puts "#{type}" if name || label || value || hint
+            puts "   name, label: #{name}" if name
+            puts "   value: #{value}" if value
+            puts "   hint: #{hint}" if hint
+          elsif name == value
+            puts "#{type}" if name || label || value || hint
+            puts "   name, value: #{name}" if name
+            puts "  label: #{label}" if label
+            puts "   hint: #{hint}" if hint
+          else
+            puts "#{type}" if name || label || value || hint
+            puts "   name: #{name}" if name
+            puts "  label: #{label}" if label
+            puts "  value: #{value}" if value
+            puts "   hint: #{hint}" if hint
           end
-          puts "   id: #{match_str.strip}\n"
+
+          # there may be many ids with the same value.
+          # output all exact matches.
+          attributes = [name, label, value, hint].select { |attr| !attr.nil? }
+          partial    = {}
+          id_matches = @strings_xml.select do |key, val|
+            next if val.nil? || val.empty?
+            partial[key] = val if attributes.detect { |attr| attr.include?(val) }
+            attributes.detect { |attr| val == attr }
+          end
+
+          # If there are no exact matches, display partial matches.
+          id_matches = partial if id_matches.empty?
+
+          unless id_matches.empty?
+            match_str = ''
+            max_len   = id_matches.keys.max_by(&:length).length
+
+            # [0] = key, [1] = value
+            id_matches.each do |key, value|
+              arrow_space = ' ' * (max_len - key.length).to_i
+              match_str   += ' ' * 7 + "#{key} #{arrow_space}=> #{value}\n"
+            end
+            puts "   id: #{match_str.strip}\n"
+          end
         end
       end
 
