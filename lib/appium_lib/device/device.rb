@@ -10,12 +10,11 @@ module Appium
             launch:   'session/:session_id/appium/app/launch',
             close_app: 'session/:session_id/appium/app/close',
             reset:    'session/:session_id/appium/app/reset',
-            toggle_airplane_mode: 'session/:session_id/appium/device/toggle_airplane_mode' 
+            toggle_airplane_mode: 'session/:session_id/appium/device/toggle_airplane_mode' ,
         },
         get:  {
             current_activity:   'session/:session_id/appium/device/current_activity',
             current_context:    'session/:session_id/context',
-            app_strings:        'session/:session_id/appium/app/strings',
             available_contexts: 'session/:session_id/contexts',
         }
     }
@@ -96,6 +95,13 @@ module Appium
 
         NoArgMethods.each_pair do |verb, pair|
           pair.each_pair { |command, path| add_endpoint_method command, path, verb }
+        end
+
+        add_endpoint_method(:app_strings, 'session/:session_id/appium/app/strings') do
+          def app_strings language=nil
+            opts = language ? { language: language } : {}
+            execute :app_strings, {}, opts
+          end
         end
 
         add_endpoint_method(:lock, 'session/:session_id/appium/device/lock') do
