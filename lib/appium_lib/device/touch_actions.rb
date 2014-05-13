@@ -80,7 +80,8 @@ module Appium
     def tap(opts)
       opts[:count] = opts.delete(:fingers) if opts[:fingers]
       opts_with_defaults = {count: 1}.merge opts
-      chain_method(:tap, opts_with_defaults)
+      args = args_with_ele_ref opts
+      chain_method(:tap, args)
     end
 
     # Pause for a number of seconds before the next action
