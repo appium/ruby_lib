@@ -128,9 +128,9 @@ module Appium
           end
         end
 
-        add_endpoint_method(:current_context=, 'session/:session_id/context') do
-          def current_context=(context=null)
-            execute :current_context=, {}, :context => context
+        add_endpoint_method(:set_context, 'session/:session_id/context') do
+          def set_context(context=null)
+            execute :set_context, {}, :name => context
           end
         end
 
@@ -304,12 +304,12 @@ module Appium
       end
     end # class << self
         
-    # @!method current_context=
+    # @!method set_context
     #   Change the context to the given context.
     #   @param [String] The context to change to
     #
     #   ```ruby
-    #   current_context= "NATIVE_APP"
+    #   set_context "NATIVE_APP"
     #   ```
 
     # @!method current_context
@@ -327,13 +327,14 @@ module Appium
     # ```
     def within_context(context)
       existing_context = current_context
+      set_context context
       yield if block_given?
-      current_context = existing_context
+      set_context existing_context
     end
 
-    # Change to the default context.  This is equivalent to `current_context= nil`.
+    # Change to the default context.  This is equivalent to `set_context nil`.
     def switch_to_default_context
-      current_context = nil
+      set_context nil
     end
   end # module Device
 end # module Appium
