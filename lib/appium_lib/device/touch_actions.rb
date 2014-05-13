@@ -9,7 +9,7 @@ module Appium
   # action = TouchAction.new.press(x: 45, y: 100).wait(5).release
   # action.perform
   class TouchAction
-    ACTIONS = [:move_to, :press_for_duration, :press, :release, :tap, :wait, :perform]
+    ACTIONS = [:move_to, :long_press, :press, :release, :tap, :wait, :perform]
     COMPLEX_ACTIONS = [:swipe]
     
     class << self
@@ -40,13 +40,14 @@ module Appium
     end
 
     # Press down for a specific duration.
-    # @param element [WebDriver::Element] the element to press.
-    # @param x [integer] x co-ordinate to press on.
-    # @param y [integer] y co-ordinate to press on.
-    # @param duration [integer] Number of seconds to press.
-    def press_for_duration(element, x, y, duration)
-      @actions << {element: element.ref, x: x, y: y, duration: duration}
-      chain_method(:longPress, args)
+    # @option element [WebDriver::Element] the element to press.
+    # @option x [integer] x co-ordinate to press on.
+    # @option y [integer] y co-ordinate to press on.
+    # @option duration [integer] Number of milliseconds to press.
+    def long_press(opts)
+      args = opts.select {|k, v| [:element, :x, :y, :duration].include? k}
+      args = args_with_ele_ref(args)
+      chain_method(:longPress, args) # longPress is what the appium server expects
     end
 
     # Press a finger onto the screen.  Finger will stay down until you call
@@ -84,10 +85,10 @@ module Appium
       chain_method(:tap, args)
     end
 
-    # Pause for a number of seconds before the next action
-    # @param seconds [integer] Number of seconds to pause for
-    def wait(seconds)
-      args = {ms: seconds}
+    # Pause for a number of milliseconds before the next action
+    # @param milliseconds [integer] Number of milliseconds to pause for
+    def wait(milliseconds)
+      args = {ms: milliseconds}
       chain_method(:wait, args)
     end
 
@@ -96,7 +97,7 @@ module Appium
     # @option opts [int] :start_y Where to start swiping, on the y axis.  Default 0.
     # @option opts [int] :end_x Where to end swiping, on the x axis.  Default 0.
     # @option opts [int] :end_y Where to end swiping, on the y axis.  Default 0.
-    # @option opts [int] :duration How long the actual swipe takes to complete.
+    # @option opts [int] :duration How long the actual swipe takes to complete in milliseconds.
     def swipe(opts)
       start_x = opts.fetch :start_x, 0
       start_y = opts.fetch :start_y, 0

@@ -4,7 +4,7 @@ end
 # todo: write tests
 =begin
 move_to
-press_for_duration
+long_press
 press
 release
 tap

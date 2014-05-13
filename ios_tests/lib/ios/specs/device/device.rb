@@ -55,6 +55,7 @@ describe 'device/device' do
 
   t 'app_strings' do
     app_strings.must_include "SearchBarExplain"
+    app_strings('en').must_include "SearchBarExplain"
   end
 
   t 'action_chain' do
