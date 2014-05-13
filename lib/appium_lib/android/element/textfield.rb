@@ -12,9 +12,11 @@ module Appium
     end
 
     # Find all EditTexts containing value.
+    # If value is omitted, all EditTexts are returned.
     # @param value [String] the value to search for
     # @return [Array<EditText>]
-    def textfields value
+    def textfields value=false
+      tags EditText unless value
       xpaths_visible_contains EditText, value
     end
 
@@ -42,12 +44,6 @@ module Appium
     # @return [Array<EditText>]
     def textfields_exact value
       xpaths_visible_exact EditText, value
-    end
-
-    # Find all EditTexts.
-    # @return [Array<EditText>]
-    def e_textfields
-      tags EditText
     end
   end # module Android
 end # module Appium

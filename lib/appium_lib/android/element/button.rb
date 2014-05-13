@@ -29,7 +29,7 @@ module Appium
       image_button = string_visible_contains ImageButton, value
       "#{button} | #{image_button}"
     end
-    
+
     public
 
     # Find the first button that contains value or by index.
@@ -49,11 +49,13 @@ module Appium
       xpath _button_contains_string value
     end
 
-    # Find all buttons containing value
+    # Find all buttons containing value.
+    # If value is omitted, all buttons are returned.
     # @param value [String] the value to search for
     # @return [Array<Button>]
-    def buttons value
-     xpaths _button_contains_string value
+    def buttons value=false
+      return xpaths _button_visible_string unless value
+      xpaths _button_contains_string value
     end
 
     # Find the first button.
@@ -65,7 +67,7 @@ module Appium
     # Find the last button.
     # @return [Button]
     def last_button
-       xpath _button_visible_string index: 'last()'
+      xpath _button_visible_string index: 'last()'
     end
 
     # Find the first button that exactly matches value.
@@ -80,12 +82,6 @@ module Appium
     # @return [Array<Button>]
     def buttons_exact value
       xpaths _button_exact_string value
-    end
-
-    # Find all buttons.
-    # @return [Array<Button>]
-    def e_buttons
-      xpaths _button_visible_string
     end
   end # module Android
 end # module Appium

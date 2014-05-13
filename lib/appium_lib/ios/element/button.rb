@@ -13,10 +13,12 @@ module Appium
       xpath_visible_contains UIAButton, value
     end
 
-    # Find all UIAButtons containing value
+    # Find all UIAButtons containing value.
+    # If value is omitted, all UIAButtons are returned.
     # @param value [String] the value to search for
     # @return [Array<UIAButton>]
-    def buttons value
+    def buttons value=false
+      return tags UIAButton unless value
       xpaths_visible_contains UIAButton, value
     end
 
@@ -44,12 +46,6 @@ module Appium
     # @return [Array<UIAButton>]
     def buttons_exact value
       xpaths_visible_exact UIAButton, value
-    end
-
-    # Find all UIAButtons.
-    # @return [Array<UIAButton>]
-    def e_buttons
-      tags UIAButton
     end
   end # module Ios
 end # module Appium
