@@ -5,10 +5,23 @@ require 'date'
 require 'posix/spawn'
 
 # Defines gem name.
-def repo_name; 'appium_lib' end # ruby_lib published as appium_lib
-def gh_name; 'ruby_lib' end # the name as used on github.com
-def version_file; "lib/#{repo_name}/common/version.rb" end
-def version_rgx; /\s*VERSION\s*=\s*'([^']+)'/m end
+def repo_name;
+  'appium_lib'
+end
+
+# ruby_lib published as appium_lib
+def gh_name;
+  'ruby_lib'
+end
+
+# the name as used on github.com
+def version_file;
+  "lib/#{repo_name}/common/version.rb"
+end
+
+def version_rgx;
+  /\s*VERSION\s*=\s*'([^']+)'/m
+end
 
 def version
   @version = @version || File.read(version_file).match(version_rgx)[1]
@@ -23,8 +36,8 @@ def bump value
   old_v = v_line[0]
   old_d = d_line[0]
 
-  old_num = v_line[1]
-  new_num = old_num.split('.')
+  old_num     = v_line[1]
+  new_num     = old_num.split('.')
   new_num[-1] = new_num[-1].to_i + 1
 
   if value == :y
@@ -33,7 +46,7 @@ def bump value
   elsif value == :x
     new_num[-1] = 0 # x.y.Z -> x.y.0
     new_num[-2] = 0 # x.Y.z -> x.0.z
-    new_num[-3]= new_num[-3].to_i + 1
+    new_num[-3] = new_num[-3].to_i + 1
   end
 
   new_num = new_num.join '.'
@@ -43,7 +56,7 @@ def bump value
 
   old_date = d_line[1]
   new_date = Date.today.to_s
-  new_d = old_d.sub old_date, new_date
+  new_d    = old_d.sub old_date, new_date
   puts "#{old_date} -> #{new_date}" unless old_date == new_date
 
   data.sub! old_v, new_v
@@ -130,11 +143,14 @@ desc 'Uninstall gem'
 task :uninstall do
   cmd = "gem uninstall -aIx #{repo_name}"
   # rescue on gem not installed error.
-  begin; sh "#{cmd}"; rescue; end
+  begin
+    ; sh "#{cmd}";
+  rescue;
+  end
 end
 
 desc 'Install gem'
-task :install => [ :gem, :uninstall ] do
+task :install => [:gem, :uninstall] do
   sh "gem install --no-rdoc --no-ri --local #{repo_name}-#{version}.gem"
 end
 
@@ -145,7 +161,7 @@ end
 
 desc 'Update release notes'
 task :notes do
-  tag_sort = ->(tag1,tag2) do
+  tag_sort = ->(tag1, tag2) do
     tag1_numbers = tag1.match(/\.?v(\d+\.\d+\.\d+)$/)[1].split('.').map! { |n| n.to_i }
     tag2_numbers = tag2.match(/\.?v(\d+\.\d+\.\d+)$/)[1].split('.').map! { |n| n.to_i }
     tag1_numbers <=> tag2_numbers
@@ -176,16 +192,16 @@ task :notes do
   end
 
   pairs.each_index do |a|
-    data =`git log --pretty=oneline #{pairs[a]}`
+    data     =`git log --pretty=oneline #{pairs[a]}`
     new_data = ''
     data.split("\n").each do |line|
-      hex = line.match(/[a-zA-Z0-9]+/)[0]
+      hex     = line.match(/[a-zA-Z0-9]+/)[0]
       # use first 7 chars to match GitHub
       comment = line.gsub(hex, '').strip
       next if comment == 'Update release notes'
       new_data += "- [#{hex[0...7]}](https://github.com/appium/#{gh_name}/commit/#{hex}) #{comment}\n"
     end
-    data = new_data + "\n"
+    data  = new_data + "\n"
 
     # last pair is the released version.
     notes += "#### #{tag_date[a]}\n\n" + data + "\n"

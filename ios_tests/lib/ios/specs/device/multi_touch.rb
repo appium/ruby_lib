@@ -1,5 +1,5 @@
 describe 'device/multi_touch' do
-  t { } # place holder test
+  t {} # place holder test
 end
 
 # todo: write tests

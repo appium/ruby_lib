@@ -74,7 +74,7 @@ module Appium
         zoom.perform
       end
     end
-    
+
     # Create a new multi-action
     def initialize
       @actions = []

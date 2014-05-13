@@ -44,8 +44,8 @@ describe 'driver' do
                               debug:            true }
 
       if actual != expected
-        diff = HashDiff.diff expected, actual
-        diff = "diff (expected, actual):\n#{diff}"
+        diff    = HashDiff.diff expected, actual
+        diff    = "diff (expected, actual):\n#{diff}"
         # example:
         # change :ios in expected to match 'ios' in actual
         # [["~", "caps.platformName", :ios, "ios"]]
@@ -56,8 +56,8 @@ describe 'driver' do
 
     t 'verify attributes are immutable' do
       driver_attributes[:caps][:app] = 'fake'
-      actual = File.basename driver_attributes[:caps][:app]
-      expected = 'UICatalog.app'
+      actual                         = File.basename driver_attributes[:caps][:app]
+      expected                       = 'UICatalog.app'
       actual.must_equal expected
     end
 

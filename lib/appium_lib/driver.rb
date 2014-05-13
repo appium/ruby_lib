@@ -105,7 +105,7 @@ module Appium
       # ensure files are absolute
       r.map! do |file|
         file = File.exists?(file) ? file :
-            File.join(parent_dir, file)
+          File.join(parent_dir, file)
         file = File.expand_path file
 
         File.exists?(file) ? file : nil
@@ -162,7 +162,7 @@ module Appium
           end
           # override unless there's an existing method with matching arity
         end unless const.respond_to?(m) &&
-            const.method(m).arity == $driver.method(m).arity
+          const.method(m).arity == $driver.method(m).arity
       end
     end
   end
@@ -296,7 +296,7 @@ module Appium
         @@loaded = true
         # load device methods exactly once
         extend Appium::Device
-        
+
         # Promote only on Minitest::Spec (minitest 5) by default
         Appium.promote_appium_methods ::Minitest::Spec
       end

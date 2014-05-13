@@ -99,7 +99,7 @@ describe 'common/device' do
 
   t 'swipe' do
     wait { Appium::TouchAction.new.swipe(start_x: 0.75, start_y: 0.25, end_x: 0.75, end_y: 0.5, duration: 1.5).perform }
-    wait { ! exists { s_text_exact 'NFC' } }
+    wait { !exists { s_text_exact 'NFC' } }
     back
     wait { s_text_exact 'NFC' }
   end

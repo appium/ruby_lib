@@ -34,8 +34,8 @@ module Appium
     # @return [Element] the element scrolled to
     def scroll_to text
       args =
-          # textContains(text)
-          [[3, text]],
+        # textContains(text)
+        [[3, text]],
           # descriptionContains(text)
           [[7, text]]
 
@@ -46,9 +46,9 @@ module Appium
     # @param text [String] the text to search for in the text value and content description
     # @return [Element] the element scrolled to
     def scroll_to_exact text
-      args = 
-          # text(text)
-          [[1, text]],
+      args =
+        # text(text)
+        [[1, text]],
           # description(text)
           [[5, text]]
 
