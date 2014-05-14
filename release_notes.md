@@ -1,3 +1,29 @@
+#### v2.0.0 2014-05-14
+
+- [2d7ab8b](https://github.com/appium/ruby_lib/commit/2d7ab8b6cc442f39f6171f8a27bc4923e4d4e2a4) Release 2.0.0
+- [84af3e9](https://github.com/appium/ruby_lib/commit/84af3e91dbdfb3781dc64dcf40a55f70ec023734) Merge pull request #189 from appium/update_api
+- [208ce67](https://github.com/appium/ruby_lib/commit/208ce67ddb34651460ad6a83cfef4eb0c3c97081) Add migration doc
+- [52b2c3a](https://github.com/appium/ruby_lib/commit/52b2c3a44b9b2af3cfb22579b3a51ca3713f0bd5) Enable page 'static'
+- [19a2cf8](https://github.com/appium/ruby_lib/commit/19a2cf8025bee2c93ed32168a586accc1c01c25f) Update tests
+- [5e10809](https://github.com/appium/ruby_lib/commit/5e10809c6bb87da7251d5c32ac5eb547cd97edd1) Format all .rb files
+- [3f41705](https://github.com/appium/ruby_lib/commit/3f41705636c7be9f994972e5a999bf10430dcf18) Rename s_text to text. Remove e_* methods
+- [7909daa](https://github.com/appium/ruby_lib/commit/7909daa46c4e8cdbcde9d223b008069335402ed0) Rename press_for_duration to long_press
+- [d63a58f](https://github.com/appium/ruby_lib/commit/d63a58ffafe12a6bf7e7897480c1eb3c4275076b) Update app_strings to take optional language arg
+- [71ab5db](https://github.com/appium/ruby_lib/commit/71ab5db00b832a049f9ed5dc544bd2a49afc42c1) Pass element reference, not element, when calling tap
+- [30b646f](https://github.com/appium/ruby_lib/commit/30b646fefe54830aea4a4e41dbf21471566ab489) Merge pull request #184 from DylanLacey/master
+- [6afc071](https://github.com/appium/ruby_lib/commit/6afc071921d263db13ead17cf7747e321b4a9487) Change current_context= to set_context.
+- [8f280ec](https://github.com/appium/ruby_lib/commit/8f280ec52e3bcfe7e917d910271fdfeb8a48562c) Fix page on iOS
+- [7088169](https://github.com/appium/ruby_lib/commit/7088169dc643b06a785247cfbcbde9c00daf2298) Update android/helper.rb
+- [537a8c3](https://github.com/appium/ruby_lib/commit/537a8c342d4977ab5e66765e05f69863a48a0fd6) Update Android common/device
+- [72ff02a](https://github.com/appium/ruby_lib/commit/72ff02a41673b113ecabeaa503e2f1702005d108) Restore strings.xml support on Android
+- [0dc4965](https://github.com/appium/ruby_lib/commit/0dc4965867cf089d87864401279176d5196a0caa) Update readme.md
+- [a5c2a1f](https://github.com/appium/ruby_lib/commit/a5c2a1f34b3c42f499dd9a78e90f02b135dd79b7) Update docs
+- [ca767f4](https://github.com/appium/ruby_lib/commit/ca767f425d3bd0ab763af09eb9065b7e2853ff0b) Improve page/page_class
+- [034a309](https://github.com/appium/ruby_lib/commit/034a309357ed5450cd977af5082669af2905cb47) Purge byte order marks
+- [3988ee3](https://github.com/appium/ruby_lib/commit/3988ee341972d2a42b00005ae7d2c694a572088a) Update readme.md
+- [f1e91a4](https://github.com/appium/ruby_lib/commit/f1e91a4d6cce813080dece73c5f80d06415b645a) Update readme.md
+
+
 #### v1.0.0 2014-04-29
 
 - [5a3ecbb](https://github.com/appium/ruby_lib/commit/5a3ecbb4147693ce3c2c6b693e64074022d03511) Release 1.0.0
