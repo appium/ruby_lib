@@ -101,7 +101,7 @@ module Appium
     # if nil (default) then all classes will be inspected
     # @return [void]
     def page opts={}
-      class_name = opts.fetch :class, nil
+      class_name = opts.is_a?(Hash) ? opts.fetch(:class, nil) : opts
       puts get_android_inspect class_name
       nil
     end
