@@ -7,48 +7,44 @@ module Appium
     # @param value [String, Integer] the value to find.
     # If int then the TextView at that index is returned.
     # @return [TextView]
-    def s_text value
+    def text value
       return ele_index TextView, value if value.is_a? Numeric
       xpath_visible_contains TextView, value
     end
 
     # Find all TextViews containing value.
+    # If value is omitted, all texts are returned.
     # @param value [String] the value to search for
     # @return [Array<TextView>]
-    def s_texts value
+    def texts value=false
+      return tags TextView unless value
       xpaths_visible_contains TextView, value
     end
 
     # Find the first TextView.
     # @return [TextView]
-    def first_s_text
+    def first_text
       first_ele TextView
     end
 
     # Find the last TextView.
     # @return [TextView]
-    def last_s_text
+    def last_text
       last_ele TextView
     end
 
     # Find the first TextView that exactly matches value.
     # @param value [String] the value to match exactly
     # @return [TextView]
-    def s_text_exact value
+    def text_exact value
       xpath_visible_exact TextView, value
     end
 
     # Find all TextViews that exactly match value.
     # @param value [String] the value to match exactly
     # @return [Array<TextView>]
-    def s_texts_exact value
+    def texts_exact value
       xpaths_visible_exact TextView, value
-    end
-
-    # Find all TextViews.
-    # @return [Array<TextView>]
-    def e_s_texts
-      tags TextView
     end
   end # module Android
 end # module Appium

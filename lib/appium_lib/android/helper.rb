@@ -41,7 +41,7 @@ module Appium
 
         # scoped to: text resource-id content-desc
         attributes_values = attributes.values
-        id_matches = $driver.lazy_load_strings.select do |key, value|
+        id_matches        = $driver.lazy_load_strings.select do |key, value|
           attributes_values.include? value
         end
 
@@ -49,10 +49,10 @@ module Appium
 
         if id_matches && id_matches.length > 0
           space_suffix = ' ' * '  strings.xml: '.length
-          string_ids = ''
+          string_ids   = ''
 
           # add first
-          string_ids += "#{id_matches.shift[0]}\n"
+          string_ids   += "#{id_matches.shift[0]}\n"
 
           # use padding for remaining values
           # [0] = key, [1] = value
@@ -101,7 +101,7 @@ module Appium
     # if nil (default) then all classes will be inspected
     # @return [void]
     def page opts={}
-      class_name = opts.fetch :class, nil
+      class_name = opts.is_a?(Hash) ? opts.fetch(:class, nil) : opts
       puts get_android_inspect class_name
       nil
     end

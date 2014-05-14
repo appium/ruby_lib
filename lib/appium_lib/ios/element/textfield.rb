@@ -49,9 +49,11 @@ module Appium
     end
 
     # Find all TextFields containing value.
+    # If value is omitted, all TextFields are returned.
     # @param value [String] the value to search for
     # @return [Array<TextField>]
-    def textfields value
+    def textfields value=false
+      return xpaths _textfield_visible_string unless value
       xpaths _textfield_contains_string value
     end
 
@@ -79,12 +81,6 @@ module Appium
     # @return [Array<TextField>]
     def textfields_exact value
       xpaths _textfield_exact_string value
-    end
-
-    # Find all TextFields.
-    # @return [Array<TextField>]
-    def e_textfields
-      xpaths _textfield_visible_string
     end
   end # module Ios
 end # module Appium

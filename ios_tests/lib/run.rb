@@ -34,7 +34,7 @@ end
 
 def go_to_textfields
   screen.must_equal catalog
-  wait_true { s_text('textfield').click; screen == 'TextFields' } # wait for screen transition
+  wait_true { text('textfield').click; screen == 'TextFields' } # wait for screen transition
   screen.must_equal 'TextFields'
 end
 

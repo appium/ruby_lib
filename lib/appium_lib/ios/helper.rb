@@ -123,8 +123,13 @@ module Appium
     #
     # @return [void]
     def page opts={}
-      window_number = opts.fetch :window, -1
-      class_name    = opts.fetch :class, nil
+      if opts.is_a?(Hash)
+        window_number = opts.fetch :window, -1
+        class_name    = opts.fetch :class, nil
+      else
+        window_number = -1
+        class_name    = opts
+      end
 
       if window_number == -1
         # if the 0th window has no children, find the next window that does.

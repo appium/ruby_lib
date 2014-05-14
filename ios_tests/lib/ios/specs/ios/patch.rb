@@ -17,7 +17,7 @@ describe 'ios/patch' do
 
   t 'type' do
     # nav to textfield
-    s_text('textfields').click
+    text('textfields').click
 
     ele = first_textfield
     ele.type 'ok'

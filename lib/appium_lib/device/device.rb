@@ -5,18 +5,18 @@ module Appium
     extend Forwardable
 
     NoArgMethods = {
-        post: {
-            shake:    'session/:session_id/appium/device/shake',
-            launch:   'session/:session_id/appium/app/launch',
-            close_app: 'session/:session_id/appium/app/close',
-            reset:    'session/:session_id/appium/app/reset',
-            toggle_airplane_mode: 'session/:session_id/appium/device/toggle_airplane_mode' ,
-        },
-        get:  {
-            current_activity:   'session/:session_id/appium/device/current_activity',
-            current_context:    'session/:session_id/context',
-            available_contexts: 'session/:session_id/contexts',
-        }
+      post: {
+        shake:                'session/:session_id/appium/device/shake',
+        launch:               'session/:session_id/appium/app/launch',
+        close_app:            'session/:session_id/appium/app/close',
+        reset:                'session/:session_id/appium/app/reset',
+        toggle_airplane_mode: 'session/:session_id/appium/device/toggle_airplane_mode',
+      },
+      get:  {
+        current_activity:   'session/:session_id/appium/device/current_activity',
+        current_context:    'session/:session_id/context',
+        available_contexts: 'session/:session_id/contexts',
+      }
     }
 
     # @!method app_strings
@@ -148,7 +148,7 @@ module Appium
 
         add_endpoint_method(:key_event, 'session/:session_id/appium/device/keyevent') do
           def key_event(key, metastate=nil)
-            args = {keycode: key}
+            args             = { keycode: key }
             args[:metastate] = metastate if metastate
             execute :key_event, {}, args
           end
@@ -163,7 +163,7 @@ module Appium
 
         add_endpoint_method(:complex_find, 'session/:session_id/appium/app/complex_find') do
           def complex_find(opts)
-            mode = opts.fetch :mode, false
+            mode      = opts.fetch :mode, false
             selectors = opts.fetch :selectors, false
             raise 'Complex find must have selectors' unless selectors
             selectors.insert(0, mode) if mode
@@ -178,10 +178,10 @@ module Appium
           end
         end
 
-        add_endpoint_method(:push_file,'session/:session_id/appium/device/push_file') do
+        add_endpoint_method(:push_file, 'session/:session_id/appium/device/push_file') do
           def push_file(path, filedata)
             encoded_data = Base64.encode64 filedata
-            execute :push_file, {}, path: path, data: encoded_data 
+            execute :push_file, {}, path: path, data: encoded_data
           end
         end
 
@@ -217,7 +217,7 @@ module Appium
 
         delegate_driver_method method
         delegate_from_appium_driver method
-      end 
+      end
 
       # @private
       def extend_webdriver_with_forwardable
@@ -309,7 +309,7 @@ module Appium
         delegate_from_appium_driver(:zoom, Appium::MultiTouch)
       end
     end # class << self
-        
+
     # @!method set_context
     #   Change the context to the given context.
     #   @param [String] The context to change to

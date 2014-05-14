@@ -1,4 +1,4 @@
-describe 'android/element/alert.rb' do
+describe 'android/element/alert' do
   def open_alert
     # trigger the alert
     wait { button('OK Cancel dialog with a long message').click }

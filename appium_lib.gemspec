@@ -1,7 +1,7 @@
 def self.add_to_path path
- path = File.expand_path "../#{path}/", __FILE__
+  path = File.expand_path "../#{path}/", __FILE__
 
- $:.unshift path unless $:.include? path
+  $:.unshift path unless $:.include? path
 end
 
 add_to_path 'lib'
@@ -12,15 +12,15 @@ Gem::Specification.new do |s|
   # 1.8.x is not supported
   s.required_ruby_version = '>= 1.9.3'
 
-  s.name = 'appium_lib'
-  s.version = Appium::VERSION
-  s.date = Appium::DATE
-  s.license = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-  s.description = s.summary = 'Ruby library for Appium'
-  s.description += '.' # avoid identical warning
-  s.authors = s.email = [ 'code@bootstraponline.com' ]
-  s.homepage = 'https://github.com/appium/ruby_lib' # published as appium_lib
-  s.require_paths = [ 'lib' ]
+  s.name          = 'appium_lib'
+  s.version       = Appium::VERSION
+  s.date          = Appium::DATE
+  s.license       = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+  s.description   = s.summary = 'Ruby library for Appium'
+  s.description   += '.' # avoid identical warning
+  s.authors       = s.email = ['code@bootstraponline.com']
+  s.homepage      = 'https://github.com/appium/ruby_lib' # published as appium_lib
+  s.require_paths = ['lib']
 
   s.add_runtime_dependency 'selenium-webdriver', '~> 2.41', '>= 2.41.0'
   s.add_runtime_dependency 'awesome_print', '~> 1.2', '>= 1.2.0'

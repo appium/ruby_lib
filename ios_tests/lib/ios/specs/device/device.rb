@@ -67,11 +67,11 @@ describe 'device/device' do
   end
 
   t 'swipe' do
-    swipe start_x: 75, start_y: 500, end_x: 75, end_y: 0, duration: 0.8
+    swipe start_x: 75, start_y: 500, end_x: 75, end_y: 0, duration: 800
   end
 
   t 'pinch & zoom' do
-    s_text('Images, Use of UIImageView').click
+    text('Images, Use of UIImageView').click
     zoom 200
     pinch 75
   end
