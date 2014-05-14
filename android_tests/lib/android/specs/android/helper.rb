@@ -1,7 +1,7 @@
 # rake android[android/helper]
 describe 'android/helper' do
   t 'tags' do
-    wait { tags('android.widget.TextView').length.must_equal 14 }
+    wait { tags('android.widget.TextView').length.must_equal 12 }
   end
 
   def page_class_data

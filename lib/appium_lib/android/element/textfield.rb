@@ -16,7 +16,7 @@ module Appium
     # @param value [String] the value to search for
     # @return [Array<EditText>]
     def textfields value=false
-      tags EditText unless value
+      return tags EditText unless value
       xpaths_visible_contains EditText, value
     end
 

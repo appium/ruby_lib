@@ -3,7 +3,7 @@ describe 'ios/element/button' do
   def before_first
     screen.must_equal catalog
     # nav to buttons activity
-    wait { s_text('buttons').click }
+    wait { text('buttons').click }
   end
 
   def after_last
@@ -30,6 +30,7 @@ describe 'ios/element/button' do
   t 'buttons' do
     exp = ['Back', 'Gray', 'Right pointing arrow']
     buttons('a').map { |e| e.name }.must_equal exp
+    buttons.length.must_equal 4
   end
 
   t 'first_button' do
@@ -46,10 +47,6 @@ describe 'ios/element/button' do
 
   t 'buttons_exact' do
     buttons_exact(gray).first.name.must_equal gray
-  end
-
-  t 'e_buttons' do
-    e_buttons.length.must_equal 4
   end
 
   t 'after_last' do

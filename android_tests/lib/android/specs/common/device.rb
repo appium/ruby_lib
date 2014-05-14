@@ -20,7 +20,7 @@ describe 'common/device' do
 
   t 'reset' do
     reset
-    wait { s_text(1).text.must_equal 'API Demos' }
+    wait { text(1).text.must_equal 'API Demos' }
   end
 
   t 'close & launch' do
@@ -42,13 +42,14 @@ describe 'common/device' do
 
   t 'set_context' do
     wait do
-      scroll_to "Views"
-      last_s_text.click
-      scroll_to 'WebView'
-      last_s_text.click
+      scroll_to('Views').click
+      scroll_to('WebView').click
       set_context 'WEBVIEW'
       current_context.must_equal 'WEBVIEW_1'
     end
+
+    set_context 'NATIVE_APP'
+    2.times { back; sleep 1 }
   end
 
   t 'within_context' do
@@ -94,20 +95,20 @@ describe 'common/device' do
     end
     wait { find_element(:name, 'Custom View') }
     back
-    wait { s_text_exact 'NFC' }
+    wait { text_exact 'NFC' }
   end
 
   t 'swipe' do
     wait { Appium::TouchAction.new.swipe(start_x: 0.75, start_y: 0.25, end_x: 0.75, end_y: 0.5, duration: 1.5).perform }
-    wait { !exists { s_text_exact 'NFC' } }
+    wait { !exists { text_exact 'NFC' } }
     back
-    wait { s_text_exact 'NFC' }
+    wait { text_exact 'NFC' }
   end
 
   t 'pinch & zoom' do
-    wait { s_text_exact 'NFC' }
-    wait { s_text_exact('Graphics').click }
-    wait { s_text('BitmapMesh').click }
+    wait { text_exact 'NFC' }
+    wait { text_exact('Graphics').click }
+    wait { text('BitmapMesh').click }
     wait do
       zoom 200
       pinch 75

@@ -139,7 +139,7 @@ describe 'driver' do
 
     t 'restart' do
       restart
-      s_text 'buttons'
+      text 'buttons'
     end
 
     t 'driver' do

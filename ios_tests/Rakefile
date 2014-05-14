@@ -6,8 +6,8 @@ task :default => :ios
 # Run sh and ignore exception
 def run_sh cmd
   begin
-    ; sh cmd;
-  rescue;
+    sh cmd
+  rescue
   end
 end
 

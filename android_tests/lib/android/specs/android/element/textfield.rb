@@ -32,6 +32,7 @@ describe 'android/element/textfield' do
 
   t 'textfields' do
     wait { textfields('right').first.text.must_equal right }
+    wait { textfields.length.must_equal 2 }
   end
 
   t 'first_textfield' do
@@ -50,10 +51,6 @@ describe 'android/element/textfield' do
   t 'textfields_exact' do
     wait { textfields_exact('zz').must_equal [] }
     wait { textfields_exact(left).first.text.must_equal left }
-  end
-
-  t 'e_textfields' do
-    wait { e_textfields.length.must_equal 2 }
   end
 
   t { after_last }

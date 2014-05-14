@@ -13,14 +13,14 @@ describe 'common/patch' do
     # t 'value' do; end # Doesn't work on Android
 
     t 'name' do
-      wait { first_s_text.name.must_equal 'API Demos' }
+      wait { first_text.name.must_equal 'API Demos' }
     end
 
     # t 'tag_name' do; end # Doesn't work on Android
 
     t 'location_rel' do
       wait do
-        loc = first_s_text.location_rel
+        loc = first_text.location_rel
         loc.x.class.must_equal String
         loc.y.class.must_equal String
       end
@@ -55,7 +55,7 @@ describe 'common/patch' do
     t 'find many elements by resource id' do
       wait do
         value = find_elements(:id, 'android:id/text1').length
-        value.must_equal 13
+        value.must_equal 11
       end
     end
 

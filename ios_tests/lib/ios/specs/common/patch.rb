@@ -19,13 +19,13 @@ describe 'common/patch.rb' do
     # todo: t 'value' do; end
 
     t 'name' do
-      first_s_text.name.must_equal 'UICatalog'
+      first_text.name.must_equal 'UICatalog'
     end
 
     # t 'tag_name' do; end # Doesn't work on Android
 
     t 'location_rel' do
-      loc = first_s_text.location_rel
+      loc = first_text.location_rel
       loc.x.class.must_equal String
       loc.y.class.must_equal String
     end

@@ -5,35 +5,32 @@ describe 'android/element/text' do
     proc { block.call }.must_raise Selenium::WebDriver::Error::NoSuchElementError
   end
 
-  t 's_text' do
-    wait { s_text(1).text.must_equal 'API Demos' }
-    wait { s_text('mos').text.must_equal 'API Demos' }
+  t 'text' do
+    wait { text(1).text.must_equal 'API Demos' }
+    wait { text('mos').text.must_equal 'API Demos' }
   end
 
-  t 's_texts' do
-    wait { s_texts('i').length.must_equal 7 }
+  t 'texts' do
+    wait { texts('i').length.must_equal 6 }
+    wait { texts.length.must_equal 12 }
   end
 
-  t 'first_s_text' do
-    wait { first_s_text.text.must_equal 'API Demos' }
+  t 'first_text' do
+    wait { first_text.text.must_equal 'API Demos' }
   end
 
-  t 'last_s_text' do
-    wait { last_s_text.text.must_equal 'Views' }
+  t 'last_text' do
+    wait { last_text.text.must_equal 'Views' }
   end
 
-  t 's_text_exact' do
-    must_raise_no_element { s_text_exact 'mos' }
+  t 'text_exact' do
+    must_raise_no_element { text_exact 'mos' }
 
     # should pass
-    wait { s_text_exact('API Demos').text.must_equal 'API Demos' }
+    wait { text_exact('API Demos').text.must_equal 'API Demos' }
   end
 
-  t 's_texts_exact' do
-    wait { s_texts_exact('API Demos').length.must_equal 1 }
-  end
-
-  t 'e_s_texts' do
-    wait { e_s_texts.length.must_equal 14 }
+  t 'texts_exact' do
+    wait { texts_exact('API Demos').length.must_equal 1 }
   end
 end

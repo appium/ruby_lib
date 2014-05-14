@@ -45,11 +45,11 @@ describe 'common/helper' do
 
   t 'back' do
     # start page
-    wait { e_s_texts.length.must_equal 14 }
+    wait { texts.length.must_equal 12 }
     # nav to new page.
     # ele 0 is the title and can't be clicked.
-    wait { s_text(2).click }
-    wait { e_s_texts.length.must_equal 8 }
+    wait { text(2).click }
+    wait { texts.length.must_equal 5 }
     # go back
     back
     # start page
@@ -65,7 +65,7 @@ describe 'common/helper' do
   end
 
   t 'xpaths' do
-    wait { xpaths('//android.widget.TextView').length.must_equal 14 }
+    wait { xpaths('//android.widget.TextView').length.must_equal 12 }
   end
 
   t 'ele_index' do
@@ -73,7 +73,7 @@ describe 'common/helper' do
   end
 
   t 'tags' do
-    wait { tags('android.widget.TextView').length.must_equal 14 }
+    wait { tags('android.widget.TextView').length.must_equal 12 }
   end
 
   t 'find_ele_by_attr_include' do
@@ -86,7 +86,7 @@ describe 'common/helper' do
   t 'find_eles_by_attr_include' do
     wait do
       ele_count = find_eles_by_attr_include('android.widget.TextView', :text, 'e').length
-      ele_count.must_equal 9
+      ele_count.must_equal 7
     end
   end
 

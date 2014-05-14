@@ -30,6 +30,7 @@ describe 'ios/element/textfield' do
     values = textfields('enter').map { |e| e.value }
     values.include?('<enter text>').must_equal true
     values.include?('<enter password>').must_equal true
+    textfields.length.must_equal 4
   end
 
   t 'first_textfield' do
@@ -46,10 +47,6 @@ describe 'ios/element/textfield' do
 
   t 'textfields_exact' do
     textfields_exact(enter_password).first.text.must_equal enter_password
-  end
-
-  t 'e_textfields' do
-    e_textfields.length.must_equal 4
   end
 
   def keyboard_exists?
@@ -111,10 +108,6 @@ describe 'ios/element/textfield' do
 
   t 'no textfields_exact' do
     textfields_exact('does not exist').length.must_equal 0
-  end
-
-  t 'no e_textfields' do
-    e_textfields.length.must_equal 0
   end
 
   t 'after_last' do

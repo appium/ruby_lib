@@ -5,21 +5,21 @@ require 'date'
 require 'posix/spawn'
 
 # Defines gem name.
-def repo_name;
+def repo_name
   'appium_lib'
 end
 
 # ruby_lib published as appium_lib
-def gh_name;
+def gh_name
   'ruby_lib'
 end
 
 # the name as used on github.com
-def version_file;
+def version_file
   "lib/#{repo_name}/common/version.rb"
 end
 
-def version_rgx;
+def version_rgx
   /\s*VERSION\s*=\s*'([^']+)'/m
 end
 
@@ -144,8 +144,8 @@ task :uninstall do
   cmd = "gem uninstall -aIx #{repo_name}"
   # rescue on gem not installed error.
   begin
-    ; sh "#{cmd}";
-  rescue;
+    sh "#{cmd}"
+  rescue
   end
 end
 

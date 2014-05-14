@@ -158,7 +158,7 @@ describe 'driver' do
     # any elements
     t 'find_elements' do
       wait do
-        find_elements(:class_name, 'android.widget.TextView').length.must_equal 14
+        find_elements(:class_name, 'android.widget.TextView').length.must_equal 12
       end
     end
 

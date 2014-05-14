@@ -65,7 +65,7 @@ must_not_raise is a no-op.
     # start page
     tag('UIANavigationBar').name.must_equal 'UICatalog'
     # nav to new page.
-    wait_true { s_text('buttons').click; tag('UIANavigationBar').name == 'Buttons' }
+    wait_true { text('buttons').click; tag('UIANavigationBar').name == 'Buttons' }
     tag('UIANavigationBar').name.must_equal 'Buttons'
     # go back
     back_click

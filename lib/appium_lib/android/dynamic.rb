@@ -1,5 +1,6 @@
 module Appium
   class Driver
+    # http://developer.android.com/tools/help/uiautomator/UiSelector.html
     @@map = {
       1   => ['text(String text)', 'SELECTOR_TEXT', 1],
       2   => ['textStartsWith(String text)', 'SELECTOR_START_TEXT', 2],

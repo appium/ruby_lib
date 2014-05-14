@@ -2,7 +2,7 @@
 describe 'ios/element/alert' do
   def nav_once
     screen.must_equal catalog
-    wait_true { s_text('alerts').click; tag('UIANavigationBar').name == 'Alerts' } # wait for true
+    wait_true { text('alerts').click; tag('UIANavigationBar').name == 'Alerts' } # wait for true
     tag('UIANavigationBar').name.must_equal 'Alerts'
 
     # redefine method as no-op after it's invoked once
@@ -10,7 +10,7 @@ describe 'ios/element/alert' do
   end
 
   def after_last
-    alert_accept if exists { s_text('UIActionSheet <title>') }
+    alert_accept if exists { text('UIActionSheet <title>') }
     back_click
     screen.must_equal catalog
     sleep 1
@@ -23,9 +23,9 @@ describe 'ios/element/alert' do
 
   def open_alert
     wait_true do
-      return true if exists { s_text('UIActionSheet <title>') }
-      s_text('Show OK-Cancel').click
-      s_text('UIActionSheet <title>').displayed?
+      return true if exists { text('UIActionSheet <title>') }
+      text('Show OK-Cancel').click
+      text('UIActionSheet <title>').displayed?
     end
   end
 

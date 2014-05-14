@@ -29,6 +29,7 @@ describe 'android/element/button' do
   t 'buttons' do
     exp = ['Zoom in', 'Modern zoom in', 'Thumbnail zoom']
     wait { buttons('zoom').map { |e| e.text }.must_equal exp }
+    wait { buttons.length.must_equal 6 }
   end
 
   t 'first_button' do
@@ -45,10 +46,6 @@ describe 'android/element/button' do
 
   t 'buttons_exact' do
     wait { buttons_exact(fade_in).first.name.must_equal fade_in }
-  end
-
-  t 'e_buttons' do
-    wait { e_buttons.length.must_equal 6 }
   end
 
   t { after_last }
