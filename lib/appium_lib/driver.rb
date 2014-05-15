@@ -279,9 +279,10 @@ module Appium
       # enable debug patch
       # !!'constant' == true
       @debug = appium_lib_opts.fetch :debug, !!defined?(Pry)
-      puts "Debug is: #{@debug}"
+
       if @debug
         ap opts unless opts.empty?
+        puts "Debug is: #{@debug}"
         puts "Device is: #{@device}"
         patch_webdriver_bridge
       end
