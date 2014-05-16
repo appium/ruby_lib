@@ -25,5 +25,4 @@ Other changes:
                   :--|:--
 `press_for_duration` | `long_press`
 `current_context=`   | `set_context`
-
-`name` is gone, use `find` instead
+`name`               | `find`
