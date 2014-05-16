@@ -86,17 +86,21 @@ module Appium
     # if false (default) then all classes will be inspected
     # @return [String]
     def get_android_inspect class_name=false
-      parser = @android_elements_parser ||= Nokogiri::XML::SAX::Parser.new(AndroidElements.new)
-
+      source = get_source
+      if source.start_with? '<html>'
+        parser = @android_html_parser ||= Nokogiri::HTML::SAX::Parser.new(Common::HTMLElements.new)
+      else
+        parser = @android_webview_parser ||= Nokogiri::XML::SAX::Parser.new(AndroidElements.new)
+      end
       parser.document.reset
       parser.document.filter = class_name
-      parser.parse get_source
-
+      parser.parse source
       parser.document.result
     end
 
     # Intended for use with console.
     # Inspects and prints the current page.
+    # Will return XHTML for Web contexts because of a quirk with Nokogiri.
     # @option class [Symbol] the class name to filter on. case insensitive include match.
     # if nil (default) then all classes will be inspected
     # @return [void]

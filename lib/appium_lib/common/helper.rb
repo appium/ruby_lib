@@ -106,10 +106,18 @@ module Appium
     # Prints xml of the current page
     # @return [void]
     def source
-      doc = Nokogiri::XML(@driver.page_source) do |config|
-        config.options = Nokogiri::XML::ParseOptions::NOBLANKS | Nokogiri::XML::ParseOptions::NONET
+      source = @driver.page_source
+      if source.start_with? '<html'
+        doc = Nokogiri::HTML(source) do |config|
+          config.options = Nokogiri::XML::ParseOptions::NOBLANKS | Nokogiri::XML::ParseOptions::NONET
+        end
+        puts doc.to_xhtml indent: 2
+      else
+        doc = Nokogiri::XML(source) do |config|
+          config.options = Nokogiri::XML::ParseOptions::NOBLANKS | Nokogiri::XML::ParseOptions::NONET
+        end
+        puts doc.to_xml indent: 2
       end
-      puts doc.to_xml indent: 2
     end
 
     # Returns XML string for the current page
@@ -207,6 +215,67 @@ module Appium
     def resolve_id id
       lazy_load_strings
       @strings_xml[id]
+    end
+
+    class HTMLElements < Nokogiri::XML::SAX::Document
+      def filter
+        @filter
+      end
+
+      # convert to string to support symbols
+      def filter= value
+        # nil and false disable the filter
+        return @filter = false unless value
+        @filter = value.to_s.downcase
+      end
+
+      def initialize
+        reset
+        @filter = false
+      end
+
+      def reset
+        @element_stack = []
+        @elements_in_order = []
+        @skip_element = false
+      end
+
+      def result
+        @elements_in_order.reduce('') do |r, e|
+          name = e.delete :name
+          attr_string = e.reduce('') do |string, attr|
+            string += "  #{attr[0]}: #{attr[1]}\n"
+          end
+
+          unless attr_string.nil? || attr_string.empty?
+            r += "\n#{name}\n#{attr_string}"
+          end
+          r
+        end
+      end
+
+      def start_element name, attrs = []
+        @skip_element = filter && !filter.include?(name.downcase)
+        unless @skip_element
+          element = {name: name}
+          attrs.each {|a| element[a[0]] = a[1]}
+          @element_stack.push element
+          @elements_in_order.push element
+        end
+      end
+
+      def end_element name
+        return if filter && !filter.include?(name.downcase)
+        element_index = @element_stack.rindex {|e| e[:name] == name}
+        @element_stack.delete_at element_index
+      end
+
+      def characters(chars)
+        unless @skip_element
+          element = @element_stack.last
+          element[:text] = chars
+        end
+      end
     end
   end # module Common
 end # module Appium
