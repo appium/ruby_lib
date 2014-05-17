@@ -248,7 +248,9 @@ module Appium
       @default_wait     = appium_lib_opts.fetch :wait, 30
       @last_waits       = [@default_wait]
       @sauce_username   = appium_lib_opts.fetch :sauce_username, ENV['SAUCE_USERNAME']
+      @sauce_username   = nil if @sauce_username.nil? || @sauce_username.empty?
       @sauce_access_key = appium_lib_opts.fetch :sauce_access_key, ENV['SAUCE_ACCESS_KEY']
+      @sauce_access_key = nil if @sauce_access_key.nil? || @sauce_access_key.empty?
       @port             = appium_lib_opts.fetch :port, 4723
 
       # Path to the .apk, .app or .app.zip.
