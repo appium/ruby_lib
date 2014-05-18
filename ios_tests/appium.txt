@@ -1,3 +1,7 @@
 [caps]
 platformName = "ios"
 app = "./UICatalog.app"
+
+[appium_lib]
+sauce_username = ""
+sauce_access_key = ""

@@ -1,3 +1,7 @@
 [caps]
 platformName = "android"
 app = "./api.apk"
+
+[appium_lib]
+sauce_username = ""
+sauce_access_key = ""
