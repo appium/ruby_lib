@@ -32,7 +32,9 @@ describe 'driver' do
       actual              = driver_attributes
       actual[:caps][:app] = File.basename actual[:caps][:app]
       expected            = { caps:             { platformName: 'android',
-                                                  app:          'api.apk' },
+                                                  app:          'api.apk',
+                                                  appPackage:   '',
+                                                  appActivity:  '', },
                               custom_url:       false,
                               export_session:   false,
                               default_wait:     1,
@@ -41,7 +43,7 @@ describe 'driver' do
                               sauce_access_key: nil,
                               port:             4723,
                               device:           :android,
-                              debug:            true }
+                              debug:            true, }
 
       actual.must_equal expected
     end
