@@ -1,6 +1,8 @@
 [caps]
 platformName = "android"
 app = "./api.apk"
+appPackage = ""
+appActivity = ""
 
 [appium_lib]
 sauce_username = ""

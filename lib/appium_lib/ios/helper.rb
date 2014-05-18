@@ -18,7 +18,6 @@ module Appium
     # @option class_name [String,Symbol] the class name to filter on. case insensitive include match.
     # @return [String]
     def get_page element=source_window(0), class_name=nil
-      puts "Called get_page on #{element}"
       lazy_load_strings # populate @strings_xml
       class_name = class_name.to_s.downcase
 
@@ -131,7 +130,8 @@ module Appium
         window_number = -1
         class_name    = opts
       end
-      if current_context.start_with? 'WEBVIEW'
+      # current_context may be nil which breaks start_with
+      if current_context && current_context.start_with?('WEBVIEW')
         s = get_source
         parser = @android_html_parser ||= Nokogiri::HTML::SAX::Parser.new(Common::HTMLElements.new)
         parser.document.reset
