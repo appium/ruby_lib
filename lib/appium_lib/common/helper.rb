@@ -40,8 +40,8 @@ module Appium
         rescue Errno::ECONNREFUSED => e
           raise e
         rescue Exception
-        end)
           sleep interval
+        end)
         end
       end
       result
@@ -73,8 +73,9 @@ module Appium
         rescue Errno::ECONNREFUSED => e
           raise e
         rescue Exception
+        ensure
+          sleep interval unless result
         end)
-          sleep interval
         end
       end
       result
