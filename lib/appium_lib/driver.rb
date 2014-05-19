@@ -226,7 +226,7 @@ module Appium
     #
     # # Start Android driver
     # opts = { caps: { platformName: :android, app: '/path/to/my.apk' } }
-    # Appium::Driver.new(apk).start_driver
+    # Appium::Driver.new(opts).start_driver
     # ```
     #
     # @param opts [Object] A hash containing various options.
