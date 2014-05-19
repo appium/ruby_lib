@@ -37,6 +37,8 @@ module Appium
         until (
         begin
           result = block.call || true
+        rescue Errno::ECONNREFUSED => e
+          raise e
         rescue Exception
         end)
           sleep interval
@@ -68,6 +70,8 @@ module Appium
         until (
         begin
           result = block.call
+        rescue Errno::ECONNREFUSED => e
+          raise e
         rescue Exception
         end)
           sleep interval
