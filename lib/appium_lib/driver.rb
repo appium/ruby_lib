@@ -422,6 +422,7 @@ module Appium
       @client.timeout = 999999
 
       begin
+        driver_quit
         @driver = Selenium::WebDriver.for :remote, http_client: @client, desired_capabilities: @caps, url: server_url
         # Load touch methods.
         @driver.extend Selenium::WebDriver::DriverExtensions::HasTouchScreen
