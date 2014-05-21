@@ -26,9 +26,9 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'awesome_print', '~> 1.2', '>= 1.2.0'
   s.add_runtime_dependency 'json', '~> 1.8', '>= 1.8.1'
   s.add_runtime_dependency 'toml', '~> 0.0', '>= 0.0.4'
-  s.add_runtime_dependency 'posix-spawn', '~> 0.3', '>= 0.3.8'
   s.add_runtime_dependency 'nokogiri', '~> 1.6.1'
 
+  s.add_development_dependency 'posix-spawn', '~> 0.3', '>= 0.3.8'
   s.add_development_dependency 'hashdiff', '~> 0.2.0'
   s.add_development_dependency 'spec', '~> 5.3.4'
   s.add_development_dependency 'fakefs', '~> 0.5.0'
