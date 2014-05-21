@@ -1,8 +1,8 @@
 [caps]
 platformName = "android"
 app = "./api.apk"
-appPackage = ""
-appActivity = ""
+appPackage = "io.appium.android.apis"
+appActivity = ".ApiDemos"
 
 [appium_lib]
 sauce_username = ""

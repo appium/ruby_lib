@@ -15,6 +15,7 @@ describe 'common/helper' do
     # regular rescue will not handle exceptions outside of StandardError hierarchy
     # must rescue Exception explicitly to rescue everything
     proc { wait(*wait_time) { raise NoMemoryError } }.must_raise Timeout::Error
+    proc { wait(0.2, 0.0) { raise NoMemoryError } }.must_raise Timeout::Error
   end
 
   t 'ignore' do
@@ -40,7 +41,8 @@ describe 'common/helper' do
 
     # regular rescue will not handle exceptions outside of StandardError hierarchy
     # must rescue Exception explicitly to rescue everything
-    proc { wait(*wait_time) { raise NoMemoryError } }.must_raise Timeout::Error
+    proc { wait_true(*wait_time) { raise NoMemoryError } }.must_raise Timeout::Error
+    proc { wait_true(0.2, 0.0) { raise NoMemoryError } }.must_raise Timeout::Error
   end
 
   t 'back' do

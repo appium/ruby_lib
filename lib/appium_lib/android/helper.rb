@@ -113,9 +113,15 @@ module Appium
     # Lists package, activity, and adb shell am start -n value for current app.
     # Works on local host only (not remote).
     # noinspection RubyArgCount
+    # example line:
+    # "mFocusedApp=AppWindowToken{b1420058 token=Token{b128add0 ActivityRecord{b1264d10 u0 com.example.android.apis/.ApiDemos t23}}}"
     def current_app
       line = `adb shell dumpsys window windows`.each_line.grep(/mFocusedApp/).first.strip
-      pair = line.split(' ').last.gsub('}', '').split '/'
+
+      match = line.match(/ ([^\/ ]+\/[^ ]+) /)
+      return nil unless match && match[1]
+
+      pair = match[1].split '/'
       pkg  = pair.first
       act  = pair.last
       OpenStruct.new(line:     line,
