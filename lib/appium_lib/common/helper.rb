@@ -41,6 +41,9 @@ module Appium
           raise e
         rescue Exception
           sleep interval
+          # sleep returns truthy value which breaks out of until
+          # must return false value
+          false
         end)
         end
       end
