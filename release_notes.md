@@ -1,3 +1,32 @@
+#### v2.1.0 2014-05-21
+
+- [f0db091](https://github.com/appium/ruby_lib/commit/f0db0910ea077e04329d3e0cafb434f829760abb) Release 2.1.0
+- [189b99a](https://github.com/appium/ruby_lib/commit/189b99ab91625cc37414fe9aeb681949d4fd85be) Use io.appium.android.apis
+- [5b1e3d8](https://github.com/appium/ruby_lib/commit/5b1e3d8b014137cdd8f5a4f8af5d7019983aab9a) Fix current_app on Android
+- [aa6e93a](https://github.com/appium/ruby_lib/commit/aa6e93a0bb88ef31c596c5ac7352b159bc0ea53b) Fix wait
+- [c590996](https://github.com/appium/ruby_lib/commit/c5909961be059d715200ba58943e1b56e2dd8843) Move posix-spawn to dev dependency
+- [7a55892](https://github.com/appium/ruby_lib/commit/7a5589244db8f783f9a51b74809ff8fcb4354855) Fix typo
+- [2a1c009](https://github.com/appium/ruby_lib/commit/2a1c0096db8a4e53ae09a8c556b51b513eacfa74) Merge pull request #197 from xrd/patch-1
+- [9de20b7](https://github.com/appium/ruby_lib/commit/9de20b78f5dce29be874e727a027fd976703a0c1) Fix typo
+- [b306378](https://github.com/appium/ruby_lib/commit/b306378a9d54223e2b446a004a2c5a63574a9143) Merge pull request #196 from DylanLacey/master
+- [01dd97c](https://github.com/appium/ruby_lib/commit/01dd97ca63b6f8ff7ac65f170b8041241cad1271) Make wait and wait_true use the interval before it reexecutes
+- [9a138bb](https://github.com/appium/ruby_lib/commit/9a138bb6e2d1b0d836d3940f5e4b7e84d1fc0e3c) Merge pull request #195 from DylanLacey/master
+- [d85e292](https://github.com/appium/ruby_lib/commit/d85e292df723bcc9ff7227f8573581d44ef73c26) Don't continue to wait for crashed Appium server
+- [107a90c](https://github.com/appium/ruby_lib/commit/107a90c9137ef4ee7f8b7598c25adddedbdb34d4) Use __FILE__ instead of __dir__
+- [12d62bc](https://github.com/appium/ruby_lib/commit/12d62bcec3d8897089bd3045f564c0de271375bd) Merge pull request #194 from DylanLacey/master
+- [bcc7865](https://github.com/appium/ruby_lib/commit/bcc7865db8f65f5439cd60a983d1c45b80b97eb8) Quit driver before creating a new one.  Always.
+- [a52f215](https://github.com/appium/ruby_lib/commit/a52f215fb2246b35e17636ed9114fc977ad97511) Fix android test
+- [f43309c](https://github.com/appium/ruby_lib/commit/f43309ca716f5b140ef9370f4ebd4b45a500eb92) Fix #192
+- [4a97ba1](https://github.com/appium/ruby_lib/commit/4a97ba12684c7e49e8251305c47b8a3443a9ef98) Set sauce to empty so tests run local #191
+- [56d8a04](https://github.com/appium/ruby_lib/commit/56d8a04d8aa7e70f8e90a5e3cde79276bfb6158f) Fix #191
+- [ea0fe8e](https://github.com/appium/ruby_lib/commit/ea0fe8e2a9570e984a41fa424a908398694660de) Set empty sauce ENV to nil
+- [190f023](https://github.com/appium/ruby_lib/commit/190f0237fc94816e71e4327cbf8135913021688b) Update migration.md
+- [28aa754](https://github.com/appium/ruby_lib/commit/28aa7546b321950d704ba091a91c424a3cc4ac04) Update migration.md
+- [d9447a9](https://github.com/appium/ruby_lib/commit/d9447a97433b88afbc35c66264b1c67e175aef41) Merge pull request #190 from DylanLacey/xpath
+- [ac9f5eb](https://github.com/appium/ruby_lib/commit/ac9f5ebecf3a0e603cafc8ad4befda86050fc6d1) Parse HTML as HTML, not XML.
+- [a84163b](https://github.com/appium/ruby_lib/commit/a84163b113fb232068c9aa02bff61db8c11d374e) Output debug status only when enabled
+
+
 #### v2.0.0 2014-05-14
 
 - [2d7ab8b](https://github.com/appium/ruby_lib/commit/2d7ab8b6cc442f39f6171f8a27bc4923e4d4e2a4) Release 2.0.0
