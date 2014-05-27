@@ -30,6 +30,9 @@ module Appium
       26  => ['classNameMatches(String regex)', 'SELECTOR_CLASS_REGEX', 26],
       27  => ['descriptionMatches(String regex)', 'SELECTOR_DESCRIPTION_REGEX', 27],
       28  => ['packageNameMatches(String regex)', 'SELECTOR_PACKAGE_NAME_REGEX', 28],
+      29  => ['resourceId(String id)', 'SELECTOR_RESOURCE_ID', 29],
+      30  => ['checkable(boolean val)', 'SELECTOR_CHECKABLE', 30],
+      31  => ['resourceIdMatches(String regex)', 'SELECTOR_RESOURCE_ID_REGEX', 31],
       # // start internal methods at 100
       100 => ['getStringAttribute("name")', 'GET_NAME', 100]
     }

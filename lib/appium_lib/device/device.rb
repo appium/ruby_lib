@@ -163,6 +163,8 @@ module Appium
 
         add_endpoint_method(:complex_find, 'session/:session_id/appium/app/complex_find') do
           def complex_find(opts)
+            # allow: complex_find([[[3, 'app']]])
+            opts = { selectors: opts} if opts.is_a?(Array)
             mode      = opts.fetch :mode, false
             selectors = opts.fetch :selectors, false
             raise 'Complex find must have selectors' unless selectors
