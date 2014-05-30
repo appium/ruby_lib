@@ -78,20 +78,6 @@ describe 'common/helper' do
     wait { tags('android.widget.TextView').length.must_equal 12 }
   end
 
-  t 'find_ele_by_attr_include' do
-    wait do
-      el_text = find_ele_by_attr_include('android.widget.TextView', :text, 'acc').text
-      el_text.must_equal 'Accessibility'
-    end
-  end
-
-  t 'find_eles_by_attr_include' do
-    wait do
-      ele_count = find_eles_by_attr_include('android.widget.TextView', :text, 'e').length
-      ele_count.must_equal 7
-    end
-  end
-
   t 'first_ele' do
     wait do
       first_ele('android.widget.TextView').text.must_equal 'API Demos'

@@ -33,8 +33,8 @@ describe 'driver' do
       actual[:caps][:app] = File.basename actual[:caps][:app]
       expected            = { caps:             { platformName: 'android',
                                                   app:          'api.apk',
-                                                  appPackage:   '',
-                                                  appActivity:  '', },
+                                                  appPackage:   'io.appium.android.apis',
+                                                  appActivity:  '.ApiDemos', },
                               custom_url:       false,
                               export_session:   false,
                               default_wait:     1,
@@ -45,7 +45,15 @@ describe 'driver' do
                               device:           :android,
                               debug:            true, }
 
-      actual.must_equal expected
+      if actual != expected
+        diff    = HashDiff.diff expected, actual
+        diff    = "diff (expected, actual):\n#{diff}"
+        # example:
+        # change :ios in expected to match 'ios' in actual
+        # [["~", "caps.platformName", :ios, "ios"]]
+        message = "\n\nactual:\n\n: #{actual.ai}expected:\n\n#{expected.ai}\n\n#{diff}"
+        fail message
+      end
     end
   end
 

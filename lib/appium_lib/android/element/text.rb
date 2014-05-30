@@ -9,7 +9,7 @@ module Appium
     # @return [TextView]
     def text value
       return ele_index TextView, value if value.is_a? Numeric
-      xpath_visible_contains TextView, value
+      complex_find_contains TextView, value
     end
 
     # Find all TextViews containing value.
@@ -18,7 +18,7 @@ module Appium
     # @return [Array<TextView>]
     def texts value=false
       return tags TextView unless value
-      xpaths_visible_contains TextView, value
+      complex_finds_contains TextView, value
     end
 
     # Find the first TextView.
@@ -37,14 +37,14 @@ module Appium
     # @param value [String] the value to match exactly
     # @return [TextView]
     def text_exact value
-      xpath_visible_exact TextView, value
+      complex_find_exact TextView, value
     end
 
     # Find all TextViews that exactly match value.
     # @param value [String] the value to match exactly
     # @return [Array<TextView>]
     def texts_exact value
-      xpaths_visible_exact TextView, value
+      complex_finds_exact TextView, value
     end
   end # module Android
 end # module Appium

@@ -41,14 +41,14 @@ describe 'common/device' do
   end
 
   t 'set_context' do
-    wait do
-      scroll_to('Views').click
-      scroll_to('WebView').click
-      set_context 'WEBVIEW'
-      current_context.must_equal 'WEBVIEW_1'
-    end
+    wait { scroll_to('Views').click }
+    wait { scroll_to('WebView').click }
+    wait { set_context 'WEBVIEW' }
+    wait { current_context.must_equal 'WEBVIEW_1' }
 
-    set_context 'NATIVE_APP'
+    wait { set_context 'NATIVE_APP' }
+    wait { current_context.must_equal 'NATIVE_APP' }
+
     2.times { back; sleep 1 }
   end
 
@@ -66,10 +66,7 @@ describe 'common/device' do
   end
 
   t 'app_strings' do
-    wait do
-      strs = app_strings
-      strs.has_key?('activity_save_restore').must_equal true
-    end
+    wait_true { app_strings.has_key? 'activity_save_restore' }
   end
 
   def must_return_element element
@@ -116,9 +113,9 @@ describe 'common/device' do
   end
 
   t 'push and pull file' do
+    file = 'A Fine Day'
+    path = '/data/local/tmp/remote.txt'
     wait do
-      file = "A Fine Day"
-      path = "/data/local/tmp/remote.txt"
       push_file path, file
       read_file = pull_file path
       read_file.must_equal file
