@@ -94,7 +94,7 @@ def patch_webdriver_bridge
         # For complex_find, we pass a whole array
         if command_hash.kind_of? Array
           print_command[:args]   = [command_hash.clone]
-          print_command[:script] = 'mobile: find' if command == :complex_find
+          print_command[:script] = 'complex_find' if command == :complex_find
         else
           print_command = command_hash.clone
         end
