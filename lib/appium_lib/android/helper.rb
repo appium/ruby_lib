@@ -130,29 +130,20 @@ module Appium
                      am_start: pkg + '/' + act)
     end
 
-    # @private
-    def string_id_xpath id
-      value    = resolve_id id
-      # If the id doesn't resolve in strings.xml then use it as is
-      # It's probably a resource id which won't be in strings.xml
-      value    = id unless value
-      exact    = string_visible_exact '*', value
-      contains = string_visible_contains '*', value
-      "#{exact} | #{contains}"
-    end
-
     # Find the first matching element by id
     # @param id [String] the id to search for
     # @return [Element]
     def id id
-      xpath string_id_xpath id
+      # Android auto resolves strings.xml ids
+      find_element :id, id
     end
 
     # Find all matching elements by id
     # @param id [String] the id to search for
     # @return [Element]
     def ids id
-      xpaths string_id_xpath id
+      # Android auto resolves strings.xml ids
+      find_elements :id, value
     end
 
     # Find the element of type class_name at matching index.
@@ -160,65 +151,21 @@ module Appium
     # @param index [Integer] the index
     # @return [Element] the found element of type class_name
     def ele_index class_name, index
-      unless index == 'last()'
-        # XPath index starts at 1.
-        raise "#{index} is not a valid xpath index. Must be >= 1" if index <= 0
+      if index == 'last()'
+        index = tags(class_name).length
+        index -= 1 if index >= 0
+      else
+        raise 'Index must be >= 1' unless index >= 1
+        index -= 1 if index >= 1
       end
-      find_element :xpath, %Q(//#{class_name}[#{index}])
-    end
-
-    # @private
-    def string_attr_exact class_name, attr, value
-      %Q(//#{class_name}[@#{attr}='#{value}'])
-    end
-
-    # Find the first element exactly matching class and attribute value.
-    # @param class_name [String] the class name to search for
-    # @param attr [String] the attribute to inspect
-    # @param value [String] the expected value of the attribute
-    # @return [Element]
-    def find_ele_by_attr class_name, attr, value
-      @driver.find_element :xpath, string_attr_exact(class_name, attr, value)
-    end
-
-    # Find all elements exactly matching class and attribute value.
-    # @param class_name [String] the class name to match
-    # @param attr [String] the attribute to compare
-    # @param value [String] the value of the attribute that the element must have
-    # @return [Array<Element>]
-    def find_eles_by_attr class_name, attr, value
-      @driver.find_elements :xpath, string_attr_exact(class_name, attr, value)
-    end
-
-    # @private
-    def string_attr_include class_name, attr, value
-      %Q(//#{class_name}[contains(translate(@#{attr},'#{value.upcase}', '#{value}'), '#{value}')])
-    end
-
-    # Find the first element by attribute that exactly matches value.
-    # @param class_name [String] the class name to match
-    # @param attr [String] the attribute to compare
-    # @param value [String] the value of the attribute that the element must include
-    # @return [Element] the element of type tag who's attribute includes value
-    def find_ele_by_attr_include class_name, attr, value
-      @driver.find_element :xpath, string_attr_include(class_name, attr, value)
-    end
-
-    # Find elements by attribute that include value.
-    # @param class_name [String] the tag name to match
-    # @param attr [String] the attribute to compare
-    # @param value [String] the value of the attribute that the element must include
-    # @return [Array<Element>] the elements of type tag who's attribute includes value
-    def find_eles_by_attr_include class_name, attr, value
-      @driver.find_elements :xpath, string_attr_include(class_name, attr, value)
+      complex_find [[[4, class_name], [9, index]]]
     end
 
     # Find the first element that matches class_name
     # @param class_name [String] the tag to match
     # @return [Element]
     def first_ele class_name
-      # XPath index starts at 1
-      ele_index class_name, 1
+      tag(class_name)
     end
 
     # Find the last element that matches class_name
@@ -233,7 +180,7 @@ module Appium
     # @param class_name [String] the class_name to search for
     # @return [Element]
     def tag class_name
-      xpath %Q(//#{class_name})
+      find_element :class, class_name
     end
 
     # Find all elements of type class_name
@@ -241,84 +188,108 @@ module Appium
     # @param class_name [String] the class_name to search for
     # @return [Element]
     def tags class_name
-      xpaths %Q(//#{class_name})
+      find_elements :class, class_name
     end
 
     # @private
-    # Returns a string xpath that matches the first element that contains value
+    # Returns a string that matches the first element that contains value
     #
-    # example: xpath_visible_contains 'UIATextField', 'sign in'
+    # example: complex_find_contains 'UIATextField', 'sign in'
     #
-    # @param element [String] the class name for the element
+    # @param class_name [String] the class name for the element
     # @param value [String] the value to search for
     # @return [String]
-    def string_visible_contains element, value
-      result     = []
-      attributes = %w[content-desc text]
+    def string_visible_contains class_name, value
+      #  4  = className(String className)
+      # 29  = resourceId(String id
+      #  7  = descriptionContains(String desc)
+      #  3  = textContains(String text)
+      # todo: textContains isn't case insensitive
+      # descriptionContains is case insensitive
 
-      value_up   = value.upcase
-      value_down = value.downcase
-
-      attributes.each do |attribute|
-        result << %Q(contains(translate(@#{attribute},"#{value_up}","#{value_down}"), "#{value_down}"))
+      if class_name == '*'
+        return [
+          # resourceId()
+          [[29, value]],
+          # descriptionContains()
+          [[7, value]],
+          # textContains()
+          [[3, value]]
+        ]
       end
 
-      # never partial match on a resource id
-      result << %Q(@resource-id="#{value}")
-
-      result = result.join(' or ')
-
-      "//#{element}[#{result}]"
+      [
+        # className().resourceId()
+        [[4, class_name], [29, value]],
+        # className().descriptionContains()
+        [[4, class_name], [7, value]],
+        # className().textContains()
+        [[4, class_name], [3, value]]
+      ]
     end
 
     # Find the first element that contains value
     # @param element [String] the class name for the element
     # @param value [String] the value to search for
     # @return [Element]
-    def xpath_visible_contains element, value
-      xpath string_visible_contains element, value
+    def complex_find_contains element, value
+      complex_find string_visible_contains element, value
     end
 
     # Find all elements containing value
     # @param element [String] the class name for the element
     # @param value [String] the value to search for
     # @return [Array<Element>]
-    def xpaths_visible_contains element, value
-      xpaths string_visible_contains element, value
+    def complex_finds_contains element, value
+      complex_find mode: 'all', selectors: string_visible_contains(element, value)
     end
 
     # @private
-    # Create an xpath string to exactly match the first element with target value
-    # @param element [String] the class name for the element
+    # Create an string to exactly match the first element with target value
+    # @param class_name [String] the class name for the element
     # @param value [String] the value to search for
     # @return [String]
-    def string_visible_exact element, value
-      result     = []
-      attributes = %w[content-desc resource-id text]
+    def string_visible_exact class_name, value
+      #  4  = className(String className)
+      # 29  = resourceId(String id
+      #  5  = description(String desc)
+      #  1  = text(String text)
 
-      attributes.each do |attribute|
-        result << %Q(@#{attribute}="#{value}")
+      if class_name == '*'
+        return [
+          # resourceId()
+          [[29, value]],
+          # description()
+          [[5, value]],
+          # text()
+          [[1, value]]
+        ]
       end
 
-      result = result.join(' or ')
-
-      "//#{element}[#{result}]"
+      [
+        # className().resourceId()
+        [[4, class_name], [29, value]],
+        # className().description()
+        [[4, class_name], [5, value]],
+        # className().text()
+        [[4, class_name], [1, value]]
+      ]
     end
 
     # Find the first element exactly matching value
-    # @param element [String] the class name for the element
+    # @param class_name [String] the class name for the element
     # @param value [String] the value to search for
     # @return [Element]
-    def xpath_visible_exact element, value
-      xpath string_visible_exact element, value
+    def complex_find_exact class_name, value
+      complex_find string_visible_exact class_name, value
     end
 
     # Find all elements exactly matching value
-    # @param element [String] the class name for the element
+    # @param class_name [String] the class name for the element
     # @param value [String] the value to search for
     # @return [Element]
-    def xpaths_visible_exact element, value
-      xpaths string_visible_exact element, value
+    def complex_finds_exact class_name, value
+      complex_find mode: 'all', selectors: string_visible_exact(class_name, value)
     end
   end # module Android
 end # module Appium

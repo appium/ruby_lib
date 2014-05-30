@@ -8,7 +8,7 @@ module Appium
     # @return [EditText]
     def textfield value
       return ele_index EditText, value if value.is_a? Numeric
-      xpath_visible_contains EditText, value
+      complex_find_contains EditText, value
     end
 
     # Find all EditTexts containing value.
@@ -17,7 +17,7 @@ module Appium
     # @return [Array<EditText>]
     def textfields value=false
       return tags EditText unless value
-      xpaths_visible_contains EditText, value
+      complex_finds_contains EditText, value
     end
 
     # Find the first EditText.
@@ -36,14 +36,14 @@ module Appium
     # @param value [String] the value to match exactly
     # @return [EditText]
     def textfield_exact value
-      xpath_visible_exact EditText, value
+      complex_find_exact EditText, value
     end
 
     # Find all EditTexts that exactly match value.
     # @param value [String] the value to match exactly
     # @return [Array<EditText>]
     def textfields_exact value
-      xpaths_visible_exact EditText, value
+      complex_finds_exact EditText, value
     end
   end # module Android
 end # module Appium

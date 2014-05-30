@@ -20,7 +20,7 @@ describe 'android/element/button' do
 
   t 'button' do
     # by index
-    wait { button(1).name.must_equal fade_in }
+    2.times { wait { button(1).name.must_equal fade_in } }
 
     # by name contains
     wait { button('ade').name.must_equal fade_in }
@@ -45,7 +45,7 @@ describe 'android/element/button' do
   end
 
   t 'buttons_exact' do
-    wait { buttons_exact(fade_in).first.name.must_equal fade_in }
+    2.times { wait { buttons_exact(fade_in).first.name.must_equal fade_in } }
   end
 
   t { after_last }

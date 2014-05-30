@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'spec'
 require 'fakefs/safe'
+require 'hashdiff'
 require_relative '../../lib/appium_lib'
 
 =begin

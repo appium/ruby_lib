@@ -68,11 +68,10 @@ describe 'android/helper' do
   end
 
   t 'find by id' do
-    wait do
-      find('accessibility').click
-      find('accessibility node provider').click
-      id 'accessibility_node_provider' # Accessibility/Accessibility Node Provider
-      2.times { back }
-    end
+    wait { find('accessibility').click }
+    wait { find('accessibility node provider').click }
+    wait { id 'accessibility_node_provider' } # Accessibility/Accessibility Node Provider
+    2.times { back }
   end
+
 end

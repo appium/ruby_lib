@@ -7,12 +7,28 @@ module Appium
     private
 
     # @private
-    def _button_visible_string opts={}
-      index = opts.fetch :index, false
-      if index
-        %Q(//#{Button}[#{index}] | //#{ImageButton}[#{index}])
+    def _button_visible_selectors opts={}
+      button_index       = opts.fetch :button_index, false
+      image_button_index = opts.fetch :image_button_index, false
+
+      # complex_find(...)
+      # 4 = className(String className)
+      # 9 = instance(final int instance)
+
+      if button_index && image_button_index
+        [
+          # className().instance()
+          [[4, Button], [9, button_index]],
+          # className().instance()
+          [[4, ImageButton], [9, image_button_index]]
+        ]
       else
-        %Q(//#{Button} | //#{ImageButton})
+        [
+          # className()
+          [[4, Button]],
+          # className()
+          [[4, ImageButton]]
+        ]
       end
     end
 
@@ -20,14 +36,14 @@ module Appium
     def _button_exact_string value
       button       = string_visible_exact Button, value
       image_button = string_visible_exact ImageButton, value
-      "#{button} | #{image_button}"
+      button + image_button
     end
 
     # @private
     def _button_contains_string value
       button       = string_visible_contains Button, value
       image_button = string_visible_contains ImageButton, value
-      "#{button} | #{image_button}"
+      button + image_button
     end
 
     public
@@ -41,12 +57,12 @@ module Appium
       # Android needs to combine button and image button to match iOS.
       if value.is_a? Numeric
         index = value
-        raise "#{index} is not a valid xpath index. Must be >= 1" if index <= 0
+        raise "#{index} is not a valid index. Must be >= 1" if index <= 0
 
-        return xpath _button_visible_string index: index
+        return complex_find _button_visible_selectors index: index
       end
 
-      xpath _button_contains_string value
+      complex_find _button_contains_string value
     end
 
     # Find all buttons containing value.
@@ -54,34 +70,41 @@ module Appium
     # @param value [String] the value to search for
     # @return [Array<Button>]
     def buttons value=false
-      return xpaths _button_visible_string unless value
-      xpaths _button_contains_string value
+      return complex_find mode: 'all', selectors: _button_visible_selectors unless value
+      complex_find mode: 'all', selectors: _button_contains_string(value)
     end
 
     # Find the first button.
     # @return [Button]
     def first_button
-      xpath _button_visible_string
+      complex_find _button_visible_selectors button_index: 0, image_button_index: 0
     end
 
     # Find the last button.
     # @return [Button]
     def last_button
-      xpath _button_visible_string index: 'last()'
+      # uiautomator index doesn't support last
+      # and it's 0 indexed
+      button_index       = tags(Button).length
+      button_index       -= 1 if button_index >= 0
+      image_button_index = tags(ImageButton).length
+      image_button_index -= 1 if image_button_index >= 0
+
+      complex_find _button_visible_selectors button_index: button_index, image_button_index: image_button_index
     end
 
     # Find the first button that exactly matches value.
     # @param value [String] the value to match exactly
     # @return [Button]
     def button_exact value
-      xpath _button_exact_string value
+      complex_find _button_exact_string value
     end
 
     # Find all buttons that exactly match value.
     # @param value [String] the value to match exactly
     # @return [Array<Button>]
     def buttons_exact value
-      xpaths _button_exact_string value
+      complex_find mode: 'all', selectors: _button_exact_string(value)
     end
   end # module Android
 end # module Appium
