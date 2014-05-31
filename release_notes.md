@@ -1,3 +1,12 @@
+#### v3.0.0 2014-05-30
+
+- [77d64af](https://github.com/appium/ruby_lib/commit/77d64af57b0e6a828c5d61008c444518e6597e4b) Release 3.0.0
+- [86f1655](https://github.com/appium/ruby_lib/commit/86f1655d51ee74ec32e720ff285c30175283d4fd) Rename mobile find to complex_find
+- [109139b](https://github.com/appium/ruby_lib/commit/109139bd6ff664e020609a5828ab755c9f6dbf2e) Merge pull request #207 from appium/no_xpath
+- [682797d](https://github.com/appium/ruby_lib/commit/682797d252a040ffcc225a43491842c3e0d6e2ad) Use uiselector instead of xpath
+- [0c51bca](https://github.com/appium/ruby_lib/commit/0c51bcab548826d125b9f90418079fc8af72071a) Update complex find constants
+
+
 #### v2.1.0 2014-05-21
 
 - [f0db091](https://github.com/appium/ruby_lib/commit/f0db0910ea077e04329d3e0cafb434f829760abb) Release 2.1.0
