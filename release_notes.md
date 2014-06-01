@@ -1,3 +1,10 @@
+#### v3.0.1 2014-06-01
+
+- [370b79c](https://github.com/appium/ruby_lib/commit/370b79c4b9f18fa615c145685256f543ee18debd) Release 3.0.1
+- [48cb878](https://github.com/appium/ruby_lib/commit/48cb87835076d6faa51f525c86ef0ed478eb0542) Default to UTF_8 encoding
+- [5b30ed5](https://github.com/appium/ruby_lib/commit/5b30ed563b98a9084e6cb89921efec1944e999af) Fix current_app
+
+
 #### v3.0.0 2014-05-30
 
 - [77d64af](https://github.com/appium/ruby_lib/commit/77d64af57b0e6a828c5d61008c444518e6597e4b) Release 3.0.0
