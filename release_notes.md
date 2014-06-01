@@ -1,3 +1,10 @@
+#### v3.0.2 2014-06-01
+
+- [08fe528](https://github.com/appium/ruby_lib/commit/08fe528887c33d64a3b06a5160859888cb92a9dd) Release 3.0.2
+- [a051b35](https://github.com/appium/ruby_lib/commit/a051b355b488db6d303e800451668a1d8cb7d3d0) Fix find by ids on Android
+- [84e3983](https://github.com/appium/ruby_lib/commit/84e39831d7d0c825c5c7ed44a512fb891e6efef3) Allow setting sauce_username/sauce_access_key to false
+
+
 #### v3.0.1 2014-06-01
 
 - [370b79c](https://github.com/appium/ruby_lib/commit/370b79c4b9f18fa615c145685256f543ee18debd) Release 3.0.1
