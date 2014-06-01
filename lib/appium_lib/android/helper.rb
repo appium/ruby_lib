@@ -149,7 +149,7 @@ module Appium
     # @return [Element]
     def ids id
       # Android auto resolves strings.xml ids
-      find_elements :id, value
+      find_elements :id, id
     end
 
     # Find the element of type class_name at matching index.

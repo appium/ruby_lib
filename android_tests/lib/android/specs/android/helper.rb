@@ -74,6 +74,10 @@ describe 'android/helper' do
     2.times { back }
   end
 
+  t 'ids' do
+    wait { ids('android:id/text1').length.must_equal 11 }
+  end
+
   t '_parse_current_app_line' do
     # test values from appium's test/unit/adb-specs.js
     expected = [
