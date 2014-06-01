@@ -12,6 +12,11 @@ describe 'driver' do
     ENV['UPLOAD_FILE'] && ENV['SAUCE_USERNAME']
   end
 
+  t 'unicode defaults' do
+    data = File.read File.expand_path '../../../../data/unicode.txt', __FILE__
+    data.strip.must_equal 174.chr('UTF-8')
+  end
+
   t 'load_appium_txt' do
     # skip this test if we're using Sauce
     # the storage API doesn't have an on disk file

@@ -90,9 +90,10 @@ describe 'android/helper' do
        'io.appium.android.apis',
        '.ApiDemos'
       # api 16 selendroid
-      ], ['mFocusedApp=AppWindowToken{4157a2c8 token=Token{41582628 ActivityRecord{415821f0 com.android.launcher/com.android.launcher2.Launcher}}}',
-          'com.android.launcher',
-          'com.android.launcher2.Launcher'
+      ],
+      ['mFocusedApp=AppWindowToken{4157a2c8 token=Token{41582628 ActivityRecord{415821f0 com.android.launcher/com.android.launcher2.Launcher}}}',
+       'com.android.launcher',
+       'com.android.launcher2.Launcher'
       ]
     ]
 
