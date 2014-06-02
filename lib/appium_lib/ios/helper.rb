@@ -40,7 +40,7 @@ module Appium
         # convert string to binary and remove 160.
         # \xC2\xA0
         s = s.force_encoding('binary').gsub("\xC2\xA0".force_encoding('binary'), ' ') if s
-        s.empty? ? nil : s
+        s.empty? ? nil : s.force_encoding('UTF-8')
       end
 
       unless empty(element) || element['visible'] == false
