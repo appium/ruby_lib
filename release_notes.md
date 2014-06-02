@@ -1,3 +1,9 @@
+#### v3.0.3 2014-06-02
+
+- [3ed875c](https://github.com/appium/ruby_lib/commit/3ed875cc01ba7f670e9b1b8ccfd7b7adb0af82c1) Release 3.0.3
+- [fab8ebe](https://github.com/appium/ruby_lib/commit/fab8ebe7245e28ad7628c91ba7766418a97521d0) Encode string to UTF-8 on iOS #208
+
+
 #### v3.0.2 2014-06-01
 
 - [08fe528](https://github.com/appium/ruby_lib/commit/08fe528887c33d64a3b06a5160859888cb92a9dd) Release 3.0.2
