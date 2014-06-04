@@ -226,37 +226,23 @@ Reset after each test and when done report the result to Sauce after quiting the
 ```ruby
 require 'rest_client' # https://github.com/archiloque/rest-client
 require 'json' # for .to_json
-
-$passed = true
+require 'sauce_whisk'
 
 After do |scenario|
   # Reset scenario unless the feature was tagged @keep
-  $driver.execute_script 'mobile: reset' unless scenario.feature.source_tag_names.include? '@keep'
+  $driver.reset unless scenario.feature.source_tag_names.include? '@keep'
 
-  if $passed
-    $passed = false if scenario.failed?
-  end
+  $passed = ! scenario.failed?
 end
 
 at_exit do
-  # selenium-webdriver (2.32.1) or better can use
-  # $driver.driver.session_id
-  ID = $driver.driver.send(:bridge).session_id
+  # end the test session, ignoring any exceptions.
+  ignore { $driver.driver_quit }
   
-  # end the test session. move on after 10 seconds.
-  ignore { wait(10) { $driver.x } }
-
-  if !SAUCE_USERNAME.nil? && !SAUCE_ACCESS_KEY.nil?
-    URL = "https://#{SAUCE_USERNAME}:#{SAUCE_ACCESS_KEY}@saucelabs.com/rest/v1/#{SAUCE_USERNAME}/jobs/#{ID}"
-
-    # Keep trying until passed is set correctly. Give up after 30 seconds.
-    wait_true do
-      response = RestClient.put URL, { 'passed' => $passed }.to_json, :content_type => :json, :accept => :json
-      response = JSON.parse(response)
-
-      # Check that the server responded with the right value.
-      response['passed'] == $passed
-    end
+  user   = ENV['SAUCE_USERNAME']
+  key    = ENV['SAUCE_ACCESS_KEY']
+  if user && !user.empty? && key && !key.empty?
+    SauceWhisk::Jobs.change_status $driver.driver.session_id, $passed
   end
 end
 ```
