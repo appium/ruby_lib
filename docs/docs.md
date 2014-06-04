@@ -229,15 +229,14 @@ require 'json' # for .to_json
 require 'sauce_whisk'
 
 After do |scenario|
-  $passed = ! scenario.failed?
-
   # end the test session, ignoring any exceptions.
   ignore { $driver.driver_quit }
   
   user   = ENV['SAUCE_USERNAME']
   key    = ENV['SAUCE_ACCESS_KEY']
   if user && !user.empty? && key && !key.empty?
-    SauceWhisk::Jobs.change_status $driver.driver.session_id, $passed
+    passed = ! scenario.failed?
+    SauceWhisk::Jobs.change_status $driver.driver.session_id, passed
   end
 end
 ```
