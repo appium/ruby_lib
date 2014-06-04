@@ -229,13 +229,8 @@ require 'json' # for .to_json
 require 'sauce_whisk'
 
 After do |scenario|
-  # Reset scenario unless the feature was tagged @keep
-  $driver.reset unless scenario.feature.source_tag_names.include? '@keep'
-
   $passed = ! scenario.failed?
-end
 
-at_exit do
   # end the test session, ignoring any exceptions.
   ignore { $driver.driver_quit }
   
