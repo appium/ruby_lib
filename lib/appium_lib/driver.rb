@@ -210,7 +210,17 @@ module Appium
     # made available via the driver_attributes method
 
     # The amount to sleep in seconds before every webdriver http call.
-    attr_accessor :global_webdriver_http_sleep
+    attr_accessor :global_webdriver_http_sleep,
+                  :caps,
+                  :custom_url,
+                  :export_session,
+                  :default_wait,
+                  :last_waits,
+                  :sauce_username,
+                  :sauce_access_key,
+                  :appium_port,
+                  :appium_device,
+                  :appium_debug
 
     # Creates a new driver
     #
@@ -251,7 +261,7 @@ module Appium
       @sauce_username   = nil if !@sauce_username || (@sauce_username.is_a?(String) && @sauce_username.empty?)
       @sauce_access_key = appium_lib_opts.fetch :sauce_access_key, ENV['SAUCE_ACCESS_KEY']
       @sauce_access_key = nil if !@sauce_access_key || (@sauce_access_key.is_a?(String) && @sauce_access_key.empty?)
-      @port             = appium_lib_opts.fetch :port, 4723
+      @appium_port      = appium_lib_opts.fetch :port, 4723
 
       # Path to the .apk, .app or .app.zip.
       # The path can be local or remote for Sauce.
@@ -260,10 +270,10 @@ module Appium
       end
 
       # https://code.google.com/p/selenium/source/browse/spec-draft.md?repo=mobile
-      @device = @caps[:platformName]
-      @device = @device.is_a?(Symbol) ? @device : @device.downcase.strip.intern if @device
-      raise "platformName must be set. Not found in options: #{opts}" unless @device
-      raise 'platformName must be Android or iOS' unless [:android, :ios].include?(@device)
+      @appium_device = @caps[:platformName]
+      @appium_device = @appium_device.is_a?(Symbol) ? @appium_device : @appium_device.downcase.strip.intern if @appium_device
+      raise "platformName must be set. Not found in options: #{opts}" unless @appium_device
+      raise 'platformName must be Android or iOS' unless [:android, :ios].include?(@appium_device)
 
       # load common methods
       extend Appium::Common
@@ -280,12 +290,12 @@ module Appium
 
       # enable debug patch
       # !!'constant' == true
-      @debug = appium_lib_opts.fetch :debug, !!defined?(Pry)
+      @appium_debug = appium_lib_opts.fetch :debug, !!defined?(Pry)
 
-      if @debug
+      if @appium_debug
         ap opts unless opts.empty?
-        puts "Debug is: #{@debug}"
-        puts "Device is: #{@device}"
+        puts "Debug is: #{@appium_debug}"
+        puts "Device is: #{@appium_device}"
         patch_webdriver_bridge
       end
 
@@ -316,9 +326,9 @@ module Appium
                      last_waits:       @last_waits,
                      sauce_username:   @sauce_username,
                      sauce_access_key: @sauce_access_key,
-                     port:             @port,
-                     device:           @device,
-                     debug:            @debug,
+                     port:             @appium_port,
+                     device:           @appium_device,
+                     debug:            @appium_debug,
       }
 
       # Return duplicates so attributes are immutable
@@ -329,7 +339,7 @@ module Appium
     end
 
     def device_is_android?
-      @device == :android
+      @appium_device == :android
     end
 
     # Returns the server's version info
@@ -379,7 +389,7 @@ module Appium
       if !@sauce_username.nil? && !@sauce_access_key.nil?
         "http://#{@sauce_username}:#{@sauce_access_key}@ondemand.saucelabs.com:80/wd/hub"
       else
-        "http://127.0.0.1:#{@port}/wd/hub"
+        "http://127.0.0.1:#{@appium_port}/wd/hub"
       end
     end
 

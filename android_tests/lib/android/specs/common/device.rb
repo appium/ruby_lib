@@ -32,8 +32,10 @@ describe 'common/device' do
     wait { current_activity.must_equal '.ApiDemos' }
   end
 
+  # appium's context support is broken on android
+
   t 'available_contexts' do
-    wait { available_contexts.must_equal ['NATIVE_APP'] }
+    wait_true { available_contexts.include? 'NATIVE_APP' }
   end
 
   t 'current_context' do
@@ -43,8 +45,11 @@ describe 'common/device' do
   t 'set_context' do
     wait { scroll_to('Views').click }
     wait { scroll_to('WebView').click }
-    wait { set_context 'WEBVIEW' }
-    wait { current_context.must_equal 'WEBVIEW_1' }
+
+    webview_context = available_contexts.detect { |e| e.start_with?('WEBVIEW') }
+
+    wait { set_context webview_context }
+    wait { current_context.must_equal webview_context }
 
     wait { set_context 'NATIVE_APP' }
     wait { current_context.must_equal 'NATIVE_APP' }
@@ -63,6 +68,9 @@ describe 'common/device' do
       switch_to_default_context
       current_context.must_equal 'NATIVE_APP'
     end
+
+    wait { set_context 'NATIVE_APP' }
+    wait { current_context.must_equal 'NATIVE_APP' }
   end
 
   t 'app_strings' do
