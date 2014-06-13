@@ -5,8 +5,8 @@ describe 'driver' do
   end
 
   t 'load_appium_txt' do
-    # __FILE__ is '(eval)' so use env var set by the Rakefile
-    parsed   = Appium.load_appium_txt file: ENV['APPIUM_TXT'], verbose: true
+    appium_txt = File.expand_path(File.join(Dir.pwd, 'lib'))
+    parsed   = Appium.load_appium_txt file: appium_txt, verbose: true
     apk_name = File.basename parsed[:caps][:app]
     assert_equal apk_name, 'api.apk'
   end

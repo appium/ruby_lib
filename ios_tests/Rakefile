@@ -36,9 +36,6 @@ task :ios, :args, :test_file do |args, test_file|
   # args = android
   # test_file = {:args=>"ok"}
   test_file         = test_file[:args]
-  path              = File.expand_path('appium.txt', Rake.application.original_dir)
-  ENV['APPIUM_TXT'] = path
-  puts "Rake appium.txt path is: #{path}"
   cmd = 'bundle exec ruby ./lib/run.rb ios'
   cmd += %Q( "#{test_file}") if test_file
   bash cmd

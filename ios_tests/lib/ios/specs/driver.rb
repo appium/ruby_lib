@@ -21,9 +21,8 @@ describe 'driver' do
     # skip this test if we're using Sauce
     # the storage API doesn't have an on disk file
     skip if is_sauce
-    # __FILE__ is '(eval)' so use env var set by the Rakefile
-    path = ENV['APPIUM_TXT']
-    opts = Appium.load_appium_txt file: path, verbose: true
+    appium_txt = File.expand_path(File.join(Dir.pwd, 'lib'))
+    opts       = Appium.load_appium_txt file: appium_txt, verbose: true
 
     actual   = ''
     actual   = File.basename opts[:caps][:app] if opts && opts[:caps]
