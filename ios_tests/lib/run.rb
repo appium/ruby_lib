@@ -1,8 +1,8 @@
 require 'rubygems'
 require 'spec'
 require 'hashdiff'
-
 require_relative '../../lib/appium_lib'
+require_relative 'common'
 
 =begin
 Run all Android tests:
@@ -16,41 +16,6 @@ Run only the view album test:
 a = OpenStruct.new x: 'ok'
 raise 'x issue' unless a.x == 'ok'
 
-# common methods
-def back_click(opts={})
-  opts        ||= {}
-  search_wait = opts.fetch(:wait, 60 * 1.7)
-  # iOS may have multiple 'back' buttons
-  # select the first displayed? back button.
-  wait(search_wait) do
-    button_exact('Back').click
-  end
-end
-
-def leave_textfields
-  back_click
-  screen.must_equal catalog
-end
-
-def go_to_textfields
-  screen.must_equal catalog
-  wait_true { text('textfield').click; screen == 'TextFields' } # wait for screen transition
-  screen.must_equal 'TextFields'
-end
-
-def screen
-  $driver.find_element(:class, 'UIANavigationBar').name
-end
-
-def catalog
-  'UICatalog'
-end
-
-##
-
-caps = Appium.load_appium_txt file: File.expand_path('..', __FILE__), verbose: true
-caps = caps.merge({ appium_lib: { debug: true, wait: 30 } })
-
 dir     = File.expand_path '..', __FILE__
 device  = ARGV[0].downcase.strip
 devices = %w[ android selendroid ios ]
@@ -59,6 +24,8 @@ raise 'Expected android, selendroid or ios as first argument' unless devices.inc
 one_test   = ARGV[1]
 test_dir   = "/#{device}/"
 
+caps = Appium.load_appium_txt file: File.expand_path('..', __FILE__), verbose: true
+caps = caps.merge({ appium_lib: { debug: true, wait: 30 } })
 caps[:app] = ENV['SAUCE_PATH'] if ENV['SAUCE_USERNAME'] && ENV['SAUCE_ACCESS_KEY']
 
 trace_files = []
