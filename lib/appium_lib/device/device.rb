@@ -6,6 +6,7 @@ module Appium
 
     NoArgMethods = {
       post: {
+        open_notifications:   'session/:session_id/appium/device/open_notifications',
         shake:                'session/:session_id/appium/device/shake',
         launch:               'session/:session_id/appium/app/launch',
         close_app:            'session/:session_id/appium/app/close',

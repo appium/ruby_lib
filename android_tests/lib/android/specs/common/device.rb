@@ -99,6 +99,35 @@ describe 'common/device' do
     long_press_keycode 176
   end
 
+  t 'open_notifications' do
+    # test & comments from https://github.com/appium/appium/blob/master/test/functional/android/apidemos/notifications-specs.js#L19
+    # get to the notification page
+    wait { scroll_to('App').click }
+    wait { scroll_to('Notification').click }
+    wait { scroll_to('Status Bar').click }
+    # create a notification
+    wait { button(':-|').click }
+    open_notifications
+    # shouldn't see the elements behind shade
+    wait_true { !exists { find(':-|') } }
+    # should see the notification
+    wait_true { text_exact 'Mood ring' }
+    # return to app
+    back
+    # should be able to see elements from app
+    wait_true { button(':-|') }
+
+    # go back, waiting for each page to load.
+    # if we go back using 3.times { back }
+    # then android will flake out and discard some back events
+    back
+    wait { text('Status Bar') }
+    back
+    wait { text('Notification') }
+    back
+    wait { text('App') }
+  end
+
   t 'action_chain' do
     wait do
       e = find_element(:name, 'Accessibility')
