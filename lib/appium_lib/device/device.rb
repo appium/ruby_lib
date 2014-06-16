@@ -65,10 +65,17 @@ module Appium
     #  hide_keyboard('Finished') # Close a keyboard with the 'Finished' button
     #  ```
 
-    # @!method key_event
-    # Send a key event to the device.
-    # @param key (integer) The key to send.
-    # @param metastate (String) The state the metakeys should be in when sending the key.
+    # @!method press_keycode
+    # Press keycode on the device.
+    # http://developer.android.com/reference/android/view/KeyEvent.html
+    # @param key (integer) The key to press.
+    # @param metastate (String) The state the metakeys should be in when pressing the key.
+
+    # @!method long_press_keycode
+    # Long press keycode on the device.
+    # http://developer.android.com/reference/android/view/KeyEvent.html
+    # @param key (integer) The key to long press.
+    # @param metastate (String) The state the metakeys should be in when long pressing the key.
 
     # @!method push_file
     #   Place a file in a specific location on the device.
@@ -146,11 +153,19 @@ module Appium
           end
         end
 
-        add_endpoint_method(:key_event, 'session/:session_id/appium/device/keyevent') do
-          def key_event(key, metastate=nil)
+        add_endpoint_method(:press_keycode, 'session/:session_id/appium/device/press_keycode') do
+          def press_keycode(key, metastate=nil)
             args             = { keycode: key }
             args[:metastate] = metastate if metastate
-            execute :key_event, {}, args
+            execute :press_keycode, {}, args
+          end
+        end
+
+        add_endpoint_method(:long_press_keycode, 'session/:session_id/appium/device/long_press_keycode') do
+          def long_press_keycode(key, metastate=nil)
+            args             = { keycode: key }
+            args[:metastate] = metastate if metastate
+            execute :long_press_keycode, {}, args
           end
         end
 

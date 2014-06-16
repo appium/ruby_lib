@@ -1,5 +1,6 @@
 [caps]
 platformName = "android"
+deviceName = "Nexus 7"
 app = "./api.apk"
 appPackage = "io.appium.android.apis"
 appActivity = ".ApiDemos"

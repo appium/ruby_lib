@@ -89,8 +89,14 @@ describe 'common/device' do
     back
   end
 
-  t 'key_event' do
-    key_event 176
+  t 'press_keycode' do
+    # http://developer.android.com/reference/android/view/KeyEvent.html
+    press_keycode 176
+  end
+
+  t 'long_press_keycode' do
+    # http://developer.android.com/reference/android/view/KeyEvent.html
+    long_press_keycode 176
   end
 
   t 'action_chain' do
