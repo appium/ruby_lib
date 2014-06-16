@@ -1,3 +1,9 @@
+### Breaking Changes in 4.0
+
+           Old | New
+            :--|:--
+`key_event`    | `press_keycode`
+
 ### Breaking Changes in 2.0
 
 In 2.0, the e_* methods have been renamed.
