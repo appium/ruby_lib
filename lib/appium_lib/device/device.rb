@@ -93,6 +93,14 @@ module Appium
     #   pull_file 'Shenanigans.app/some/file' #=> Get 'some/file' from the install location of Shenanigans.app
     #   ```
 
+    # @!method pull_folder
+    #   Retrieve a folder from the device.
+    #   @param path (String) absolute path to the folder
+    #
+    #   ```ruby
+    #   pull_folder '/data/local/tmp' #=> Get the folder at that path
+    #   ```
+
     # @!method end_coverage
     #   Android only;  Ends the test coverage and writes the results to the given path on device.
     #   @param path (String) Path on the device to write too.
@@ -211,6 +219,14 @@ module Appium
         add_endpoint_method(:pull_file, 'session/:session_id/appium/device/pull_file') do
           def pull_file(path)
             data = execute :pull_file, {}, path: path
+            Base64.decode64 data
+          end
+        end
+
+        # TODO TEST ME
+        add_endpoint_method(:pull_folder, 'session/:session_id/appium/device/pull_folder') do
+          def pull_folder(path)
+            data = execute :pull_folder, {}, path: path
             Base64.decode64 data
           end
         end

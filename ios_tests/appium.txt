@@ -1,5 +1,6 @@
 [caps]
 platformName = "ios"
+deviceName ="iPhone Simulator"
 app = "./UICatalog.app"
 
 [appium_lib]
