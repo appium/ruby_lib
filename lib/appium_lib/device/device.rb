@@ -16,7 +16,6 @@ module Appium
       get:  {
         current_activity:   'session/:session_id/appium/device/current_activity',
         current_context:    'session/:session_id/context',
-        available_contexts: 'session/:session_id/contexts',
       }
     }
 
@@ -111,6 +110,13 @@ module Appium
 
         NoArgMethods.each_pair do |verb, pair|
           pair.each_pair { |command, path| add_endpoint_method command, path, verb }
+        end
+
+        add_endpoint_method(:available_contexts, 'session/:session_id/contexts', :get) do
+          def available_contexts
+            # return empty array instead of nil on failure
+            execute(:available_contexts, {}) || []
+          end
         end
 
         add_endpoint_method(:app_strings, 'session/:session_id/appium/app/strings') do
