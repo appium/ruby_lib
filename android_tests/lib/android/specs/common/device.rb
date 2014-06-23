@@ -164,4 +164,9 @@ describe 'common/device' do
       read_file.must_equal file
     end
   end
+
+  t 'pull_folder' do
+    data = pull_folder '/data/local/tmp'
+    data.length.must_be :>, 100
+  end
 end

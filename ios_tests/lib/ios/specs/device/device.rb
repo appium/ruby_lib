@@ -76,8 +76,13 @@ describe 'device/device' do
     pinch 75
   end
 
-  t 'file movement' do
+  t 'pull_file' do
     read_file = pull_file 'Library/AddressBook/AddressBook.sqlitedb'
     read_file.start_with?('SQLite format').must_equal true
+  end
+
+  t 'pull_folder' do
+    data = pull_folder 'Library/AddressBook'
+    data.length.must_be :>, 1
   end
 end
