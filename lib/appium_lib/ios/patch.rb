@@ -34,29 +34,7 @@ because swiping to dismiss works only if such key doesn't exist.
 =end
           # type
           $driver.execute_script %(au.getElement('#{self.ref}').setValue('#{text}');)
-
-          $driver.ignore {
-            # wait 5 seconds for a wild keyboard to appear. if the textfield is disabled
-            # then setValue will work, however the keyboard will never display
-            # because users are normally not allowed to type into it.
-            $driver.wait_true(5) do
-              $driver.execute_script %(au.mainApp().keyboard().type() !== 'UIAElementNil')
-            end
-
-            # dismiss keyboard
-            js = <<-JS
-            if (au.mainApp().keyboard().type() !== "UIAElementNil") {
-              au.hideKeyboard('Done');
-            }
-            JS
-
-            $driver.execute_script js
-
-            # wait 5 seconds for keyboard to go away
-            $driver.wait_true(5) do
-              $driver.execute_script %(au.mainApp().keyboard().type() === 'UIAElementNil')
-            end
-          }
+          $driver.hide_ios_keyboard
         end # def type
       end # Selenium::WebDriver::Element.class_eval
     end # def patch_webdriver_element

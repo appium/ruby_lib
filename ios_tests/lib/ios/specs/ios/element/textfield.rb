@@ -110,6 +110,11 @@ describe 'ios/element/textfield' do
     textfields_exact('does not exist').length.must_equal 0
   end
 
+  t 'hide_keyboard' do
+    first_textfield.click
+    hide_keyboard
+  end
+
   t 'after_last' do
     after_last
   end

@@ -53,5 +53,10 @@ describe 'android/element/textfield' do
     wait { textfields_exact(left).first.text.must_equal left }
   end
 
+  t 'hide_keyboard' do
+    first_textfield.click
+    hide_keyboard
+  end
+
   t { after_last }
 end

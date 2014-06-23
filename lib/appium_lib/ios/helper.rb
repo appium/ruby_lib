@@ -132,7 +132,7 @@ module Appium
       end
       # current_context may be nil which breaks start_with
       if current_context && current_context.start_with?('WEBVIEW')
-        s = get_source
+        s      = get_source
         parser = @android_html_parser ||= Nokogiri::HTML::SAX::Parser.new(Common::HTMLElements.new)
         parser.document.reset
         parser.document.filter = class_name
@@ -353,6 +353,56 @@ module Appium
     # @return [Element]
     def xpaths_visible_exact element, value
       xpaths string_visible_exact element, value
+    end
+
+    # @private
+    # If there's no keyboard, then do nothing.
+    # If there's no close key, fallback to window tap.
+    # If close key is present then tap it.
+    # @param close_key [String] close key to tap. Default value is 'Done'
+    # @return [void]
+    def hide_ios_keyboard close_key
+      close_key ||= 'Done'
+=begin
+Find the top left corner of the keyboard and move up 10 pixels (origin.y - 10)
+now swipe down until the end of the window - 10 pixels.
+-10 to ensure we're not going outside the window bounds.
+
+Swiping inside the keyboard will not dismiss it.
+
+Don't use window.tap. See https://github.com/appium/appium-uiauto/issues/28
+=end
+      dismiss_keyboard = (<<-JS).strip
+      if (!au.mainApp().keyboard().isNil()) {
+        var key = au.mainApp().keyboard().buttons()['#{close_key}']
+        if (key.isNil()) {
+          var startY = au.mainApp().keyboard().rect().origin.y - 10;
+          var endY = au.mainWindow().rect().size.height - 10;
+          au.flickApp(0, startY, 0, endY);
+        } else {
+          key.tap();
+        }
+        au.delay(1000);
+      }
+      JS
+
+      ignore do
+        # wait 5 seconds for a wild keyboard to appear. if the textfield is disabled
+        # then setValue will work, however the keyboard will never display
+        # because users are normally not allowed to type into it.
+        wait_true(5) do
+          execute_script '!au.mainApp().keyboard().isNil()'
+        end
+
+        # dismiss keyboard
+        execute_script dismiss_keyboard
+      end
+
+      # wait 5 seconds for keyboard to go away.
+      # if the keyboard isn't dismissed then wait_true will error.
+      wait_true(5) do
+        execute_script 'au.mainApp().keyboard().isNil()'
+      end
     end
   end # module Ios
 end # module Appium
