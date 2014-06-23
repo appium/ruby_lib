@@ -163,8 +163,29 @@ module Appium
         end
 
         add_endpoint_method(:hide_keyboard, 'session/:session_id/appium/device/hide_keyboard') do
-          def hide_keyboard(close_key='Done')
-            execute :hide_keyboard, {}, keyName: close_key
+          def hide_keyboard(close_key=nil)
+            # default is to tapOutside.
+            # key name could be various. 'Done', 'Go', 'Next', etc.
+            opts = {}
+            if !close_key.nil? && !close_key.empty?
+              opts[:strategy] = :pressKey
+              opts[:key]      = close_key
+
+              hide_keyboard = (<<-JS).strip
+                var key = au.mainApp().keyboard().buttons()['#{close_key}']
+                if (key.isNil()) {
+                  au.mainWindow().tap();
+                } else {
+                  key.tap();
+                }
+                au.delay(1000);
+JS
+              # if the key doesn't exist, fallback to window tap.
+              $driver.execute_script hide_keyboard
+            else # there's no key to press so request an outside tap
+              opts[:strategy] = :tapOutside
+              execute :hide_keyboard, {}, opts
+            end
           end
         end
 
