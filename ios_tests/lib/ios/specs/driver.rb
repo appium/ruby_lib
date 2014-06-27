@@ -36,6 +36,7 @@ describe 'driver' do
       actual              = driver_attributes
       actual[:caps][:app] = File.basename actual[:caps][:app]
       expected            = { caps:             { platformName: 'ios',
+                                                  deviceName:   'iPhone Simulator',
                                                   app:          'UICatalog.app' },
                               custom_url:       false,
                               export_session:   false,

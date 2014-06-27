@@ -44,18 +44,6 @@ module Appium
     # @!method toggle_flight_mode
     #   toggle flight mode on or off
 
-    #@!method complex_find
-    #  Find an element by a complex array of criteria.  Available criteria
-    #  are listed in [link here].  Criteria are formed by creating an array
-    #  of arrays, each containing a selector and that selector's value.
-    #
-    #  ```ruby
-    #  complex_find [[[2, 'Sau'], [14, true]]] # => Find a clickable element
-    #                                          #    whose names starts with 'Sau'
-    #  ```
-    #  @param mod (Symbol) If present, will be the 0th element in the selector array.
-    #  @param selectors (Array<Object>) The selectors to find elements with.
-
     # @!method hide_keyboard
     #   Hide the onscreen keyboard
     #   @param close_key (String) the name of the key which closes the keyboard.
@@ -194,30 +182,6 @@ module Appium
         add_endpoint_method(:set_immediate_value, 'session/:session_id/appium/element/:id/value') do
           def set_immediate_value(element, value)
             execute :set_immediate_value, { :id => element.ref }, value
-          end
-        end
-
-        add_endpoint_method(:complex_find, 'session/:session_id/appium/app/complex_find') do
-          def complex_find(opts)
-            # allow: complex_find([[[3, 'app']]])
-            opts      = { selectors: opts } if opts.is_a?(Array)
-            mode      = opts.fetch :mode, false # mode can be 'all' or 'scroll'
-            selectors = opts.fetch :selectors, false
-            raise 'Complex find must have selectors' unless selectors
-            selectors = selectors.dup.insert(0, mode) if mode # must dupe before insert
-
-            ids = execute :complex_find, {}, selectors
-            ids = [ids] unless ids.is_a? Array # wrap single result in an array
-
-            # mode can be set directly in the selectors
-            find_all = mode == 'all' || selectors.first == 'all'
-
-            result = ids.map do |id|
-              resolved_id = element_id_from(id)
-              Selenium::WebDriver::Element.new self, resolved_id
-            end
-            # when not finding all, don't return an array
-            return find_all ? result : result.first
           end
         end
 
