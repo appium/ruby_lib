@@ -157,14 +157,18 @@ module Appium
     # @param index [Integer] the index
     # @return [Element] the found element of type class_name
     def ele_index class_name, index
+      results = tags(class_name)
       if index == 'last()'
-        index = tags(class_name).length
+        index = results.length
         index -= 1 if index >= 0
       else
         raise 'Index must be >= 1' unless index >= 1
         index -= 1 if index >= 1
       end
-      complex_find [[[4, class_name], [9, index]]]
+
+      # uiautomator has issues with index/instance so calculate the index
+      # client side.
+      results[index]
     end
 
     # Find the first element that matches class_name
@@ -206,32 +210,19 @@ module Appium
     # @param value [String] the value to search for
     # @return [String]
     def string_visible_contains class_name, value
-      #  4  = className(String className)
-      # 29  = resourceId(String id
-      #  7  = descriptionContains(String desc)
-      #  3  = textContains(String text)
-      # todo: textContains isn't case insensitive
-      # descriptionContains is case insensitive
+      value = %Q("#{value}")
 
       if class_name == '*'
-        return [
-          # resourceId()
-          [[29, value]],
-          # descriptionContains()
-          [[7, value]],
-          # textContains()
-          [[3, value]]
-        ]
+        return "new UiSelector().resourceId(#{value});" +
+          "new UiSelector().descriptionContains(#{value});" +
+          "new UiSelector().textContains(#{value});"
       end
 
-      [
-        # className().resourceId()
-        [[4, class_name], [29, value]],
-        # className().descriptionContains()
-        [[4, class_name], [7, value]],
-        # className().textContains()
-        [[4, class_name], [3, value]]
-      ]
+      class_name = %Q("#{class_name}")
+
+      "new UiSelector().className(#{class_name}).resourceId(#{value});" +
+        "new UiSelector().className(#{class_name}).descriptionContains(#{value});" +
+        "new UiSelector().className(#{class_name}).textContains(#{value});"
     end
 
     # Find the first element that contains value
@@ -239,7 +230,7 @@ module Appium
     # @param value [String] the value to search for
     # @return [Element]
     def complex_find_contains element, value
-      complex_find string_visible_contains element, value
+      find_element :uiautomator, string_visible_contains(element, value)
     end
 
     # Find all elements containing value
@@ -247,7 +238,7 @@ module Appium
     # @param value [String] the value to search for
     # @return [Array<Element>]
     def complex_finds_contains element, value
-      complex_find mode: 'all', selectors: string_visible_contains(element, value)
+      find_elements :uiautomator, string_visible_contains(element, value)
     end
 
     # @private
@@ -256,30 +247,19 @@ module Appium
     # @param value [String] the value to search for
     # @return [String]
     def string_visible_exact class_name, value
-      #  4  = className(String className)
-      # 29  = resourceId(String id
-      #  5  = description(String desc)
-      #  1  = text(String text)
+      value = %Q("#{value}")
 
       if class_name == '*'
-        return [
-          # resourceId()
-          [[29, value]],
-          # description()
-          [[5, value]],
-          # text()
-          [[1, value]]
-        ]
+        return "new UiSelector().resourceId(#{value});" +
+          "new UiSelector().description(#{value});" +
+          "new UiSelector().text(#{value});"
       end
 
-      [
-        # className().resourceId()
-        [[4, class_name], [29, value]],
-        # className().description()
-        [[4, class_name], [5, value]],
-        # className().text()
-        [[4, class_name], [1, value]]
-      ]
+      class_name = %Q("#{class_name}")
+
+      "new UiSelector().className(#{class_name}).resourceId(#{value});" +
+        "new UiSelector().className(#{class_name}).description(#{value});" +
+        "new UiSelector().className(#{class_name}).text(#{value});"
     end
 
     # Find the first element exactly matching value
@@ -287,7 +267,7 @@ module Appium
     # @param value [String] the value to search for
     # @return [Element]
     def complex_find_exact class_name, value
-      complex_find string_visible_exact class_name, value
+      find_element :uiautomator, string_visible_exact(class_name, value)
     end
 
     # Find all elements exactly matching value
@@ -295,7 +275,7 @@ module Appium
     # @param value [String] the value to search for
     # @return [Element]
     def complex_finds_exact class_name, value
-      complex_find mode: 'all', selectors: string_visible_exact(class_name, value)
+      find_elements :uiautomator, string_visible_exact(class_name, value)
     end
   end # module Android
 end # module Appium

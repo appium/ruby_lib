@@ -89,47 +89,18 @@ def patch_webdriver_bridge
       path_str   = path.sub(path_match[0], '') unless path_match.nil?
 
       puts "#{verb} #{path_str}"
-      unless command_hash.nil? || command_hash.length == 0
-        print_command = {}
-        # For complex_find, we pass a whole array
-        if command_hash.kind_of? Array
-          print_command[:args]   = [command_hash.clone]
-          print_command[:script] = 'complex_find' if command == :complex_find
-        else
-          print_command = command_hash.clone
-        end
+      # must check to see if command_hash is a hash. sometimes it's not.
+      if command_hash.is_a?(Hash) && !command_hash.empty?
+        print_command = command_hash.clone
+
         print_command.delete :args if print_command[:args] == []
 
-        mobile_find = 'mobile: find'
-        if print_command[:script] == mobile_find
-          args = print_command[:args]
-          puts "#{mobile_find}" #" #{args}"
+        if print_command[:using] === '-android uiautomator'
+          value                 = print_command[:value].split(';').map { |v| "#{v};" }
+          print_command[:value] = value.length == 1 ? value[0] : value
 
-          # [[[[3, "sign"]]]] => [[[3, "sign"]]]
-          #
-          # [[[[4, "android.widget.EditText"], [7, "z"]], [[4, "android.widget.EditText"], [3, "z"]]]]
-          # => [[[4, "android.widget.EditText"], [7, "z"]], [[4, "android.widget.EditText"], [3, "z"]]]
-          args       = args[0]
-          option     = args[0].to_s.downcase
-          has_option = !option.match(/all|scroll/).nil?
-          puts option if has_option
-
-          start = has_option ? 1 : 0
-
-          start.upto(args.length-1) do |selector_index|
-            selectors      = args[selector_index]
-            selectors_size = selectors.length
-            selectors.each_index do |pair_index|
-              pair = selectors[pair_index]
-              res  = $driver.dynamic_code_to_string pair[0], pair[1]
-
-              if selectors_size == 1 || pair_index >= selectors_size - 1
-                puts res
-              elsif selectors_size > 1 && pair_index < selectors_size
-                print res + '.'
-              end
-            end
-          end # start.upto
+          # avoid backslash escape quotes in strings. "\"a\"" => "a"
+          puts print_command.ai.gsub('\"', '"')
         else
           ap print_command
         end

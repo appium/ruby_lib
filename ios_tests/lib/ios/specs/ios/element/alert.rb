@@ -29,11 +29,6 @@ describe 'ios/element/alert' do
     end
   end
 
-  # iOS 7 is not using the alert methods. alert is nil.
-  def ios7_alert_detected
-    execute_script 'UIATarget.localTarget().frontMostApp().alert().isNil()'
-  end
-
   t 'alert_accept' do
     alert_accept
   end

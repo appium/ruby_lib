@@ -361,8 +361,7 @@ module Appium
     # If close key is present then tap it.
     # @param close_key [String] close key to tap. Default value is 'Done'
     # @return [void]
-    def hide_ios_keyboard close_key
-      close_key ||= 'Done'
+    def hide_ios_keyboard close_key='Done'
 =begin
 Find the top left corner of the keyboard and move up 10 pixels (origin.y - 10)
 now swipe down until the end of the window - 10 pixels.

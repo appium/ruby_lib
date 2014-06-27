@@ -81,14 +81,6 @@ describe 'common/device' do
     element.class.must_equal Selenium::WebDriver::Element
   end
 
-  t 'complex_find' do
-    wait { find('Views').click }
-    wait { must_return_element complex_find(mode: 'scroll', selectors: [[[3, 'tabs']]]) }
-    wait { must_return_element complex_find(mode: 'all', selectors: [[[3, 'i']]]).first }
-    wait { must_return_element complex_find(selectors: [[[3, 'tabs']]]) }
-    back
-  end
-
   t 'press_keycode' do
     # http://developer.android.com/reference/android/view/KeyEvent.html
     press_keycode 176
