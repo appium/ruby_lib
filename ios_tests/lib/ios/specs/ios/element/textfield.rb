@@ -33,6 +33,11 @@ describe 'ios/element/textfield' do
     textfields.length.must_equal 4
   end
 
+  t 'predicate textfields' do
+    textfield_count = execute_script(%Q(au.mainApp().getAllWithPredicate("type contains[c] 'textfield'", true))).length
+    textfield_count.must_equal 4
+  end
+
   t 'first_textfield' do
     first_textfield.text.must_equal enter_text
   end
