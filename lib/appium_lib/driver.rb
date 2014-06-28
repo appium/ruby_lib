@@ -276,6 +276,7 @@ module Appium
 
       # load common methods
       extend Appium::Common
+      extend Appium::Device
       if device_is_android?
         # load Android specific methods
         extend Appium::Android
@@ -306,9 +307,6 @@ module Appium
       # Subsequent drivers do not trigger promotion.
       unless @@loaded
         @@loaded = true
-        # load device methods exactly once
-        extend Appium::Device
-
         # Promote only on Minitest::Spec (minitest 5) by default
         Appium.promote_appium_methods ::Minitest::Spec
       end
