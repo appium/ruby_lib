@@ -41,7 +41,7 @@ describe 'common/patch' do
         set_wait 30
       end
       value = value.split("\n").first.strip
-      exp   = "Could not find an element using supplied strategy. ID `ok` doesn't exist as text or content desc."
+      exp   = 'No element found'
       value.must_equal exp
     end
 
