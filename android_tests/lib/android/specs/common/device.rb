@@ -1,3 +1,4 @@
+# rake android[common/device]
 describe 'common/device' do
   # Not yet implemented
   t 'shake' do
@@ -46,7 +47,20 @@ describe 'common/device' do
     wait { scroll_to('Views').click }
     wait { scroll_to('WebView').click }
 
-    webview_context = available_contexts.detect { |e| e.start_with?('WEBVIEW') }
+    def undo_setcontext_nav
+      back
+      wait { find('WebView') }
+      back
+      wait { find'Views' }
+    end
+
+    contexts = available_contexts
+    webview_context = contexts.detect { |e| e.start_with?('WEBVIEW') }
+
+    if webview_context.nil?
+      undo_setcontext_nav
+      raise "No webview context found. contexts are: #{contexts}"
+    end
 
     wait { set_context webview_context }
     wait { current_context.must_equal webview_context }
@@ -54,7 +68,7 @@ describe 'common/device' do
     wait { set_context 'NATIVE_APP' }
     wait { current_context.must_equal 'NATIVE_APP' }
 
-    2.times { back; sleep 1 }
+    undo_setcontext_nav
   end
 
   t 'within_context' do
