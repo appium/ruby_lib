@@ -4,25 +4,16 @@ describe 'android/helper' do
     wait { tags('android.widget.TextView').length.must_equal 12 }
   end
 
-  def page_class_data
-    (<<-TXT).strip
-14x android.widget.TextView
-1x android.view.View
-1x android.widget.ListView
-1x android.widget.FrameLayout
-1x hierarchy
-    TXT
-  end
-
   # t 'get_selendroid_inspect' # only works on selendroid
   t 'get_page_class' do
     # digit values change based on screen size
     # larger screens have more elements
-    wait do
-      exp = page_class_data.gsub(/\d+/, '')
-      act = get_page_class.gsub(/\d+/, '')
-      act.must_equal exp
-    end
+
+    act = get_page_class
+    act.must_include 'android.widget.TextView'
+    act.must_include 'android.widget.ListView'
+    act.must_include 'android.widget.FrameLayout'
+    act.must_include 'hierarchy'
   end
 
   # t 'page_class' do # tested by get_page_class
