@@ -3,8 +3,7 @@ module Appium
     # @private
     # http://nokogiri.org/Nokogiri/XML/SAX.html
     class AndroidElements < Nokogiri::XML::SAX::Document
-      # TODO: Support strings.xml ids
-      attr_reader :result, :keys
+      attr_reader :result, :keys, :instance
 
       def filter
         @filter
@@ -20,16 +19,21 @@ module Appium
       def initialize
         reset
         @filter = false
+        @instance = Hash.new -1
       end
 
       def reset
         @result = ''
         @keys   = %w[text resource-id content-desc]
+        @instance = Hash.new -1
       end
 
       # http://nokogiri.org/Nokogiri/XML/SAX/Document.html
       def start_element name, attrs = []
         return if filter && !name.downcase.include?(filter)
+
+        # instance numbers start at 0.
+        number = instance[name] += 1
 
         attributes = {}
 
@@ -75,7 +79,7 @@ module Appium
         string  += "  id: #{id}\n" unless id.nil?
         string  += "  strings.xml: #{string_ids}" unless string_ids.nil?
 
-        @result += "\n#{name}\n#{string}" unless attributes.empty?
+        @result += "\n#{name} (#{number})\n#{string}" unless attributes.empty?
       end
     end # class AndroidElements
 
