@@ -359,6 +359,9 @@ module Appium
     # @return [String] APP_PATH as an absolute path
     def self.absolute_app_path app_path
       raise 'APP_PATH not set!' if app_path.nil? || app_path.empty?
+      # may be absolute path to file on remote server.
+      # if the file is on the remote server then we can't check if it exists
+      return app_path if @custom_url
       # Sauce storage API. http://saucelabs.com/docs/rest#storage
       return app_path if app_path.start_with? 'sauce-storage:'
       return app_path if app_path.match(/^http/) # public URL for Sauce
