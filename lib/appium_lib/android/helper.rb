@@ -96,10 +96,12 @@ module Appium
       else
         parser = @android_webview_parser ||= Nokogiri::XML::SAX::Parser.new(AndroidElements.new)
       end
-      parser.document.reset
+      parser.document.reset # ensure document is reset before parsing
       parser.document.filter = class_name
       parser.parse source
-      parser.document.result
+      result = parser.document.result
+      parser.document.reset # clean up any created objects after parsing
+      result
     end
 
     # Intended for use with console.
