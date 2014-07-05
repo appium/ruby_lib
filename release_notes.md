@@ -1,3 +1,41 @@
+#### v4.0.0 2014-07-05
+
+- [8cc004a](https://github.com/appium/ruby_lib/commit/8cc004ad04ec087a8a11c06ca0749a5e2c6586a7) Release 4.0.0
+- [e8c52c6](https://github.com/appium/ruby_lib/commit/e8c52c67226c94689c715a87ec7cee49c20c0821) Add note to android install test
+- [e5b3939](https://github.com/appium/ruby_lib/commit/e5b3939068f3fcd65ecd04f3f6fdd8652a159c43) Update install test on Android
+- [e02498c](https://github.com/appium/ruby_lib/commit/e02498c59272a173aed2eca662ef0c38539b6b24) Fix #152
+- [b9db60f](https://github.com/appium/ruby_lib/commit/b9db60fc686c190561d352689dbdd410f1a42123) Reset parser before/after parsing
+- [9c4672b](https://github.com/appium/ruby_lib/commit/9c4672ba9e5912d7a7aee0b80c78144295c0d5a0) Add instance numbers to page output on Android
+- [de5732d](https://github.com/appium/ruby_lib/commit/de5732d598ce9639dd18f4764971000f536833ab) Fix #224
+- [a206270](https://github.com/appium/ruby_lib/commit/a2062703fbcc2ebe0a80731034aee5d8bfb86108) Fix android device test
+- [9838d6a](https://github.com/appium/ruby_lib/commit/9838d6a5d910632a96df906c8d15a6084be97ea2) Move context tests to web_context.rb
+- [d6faefa](https://github.com/appium/ruby_lib/commit/d6faefaa2f18162076a0966b44b2b491f36a7504) Fix common/patch test
+- [414c4de](https://github.com/appium/ruby_lib/commit/414c4dea9de1404badf301c52142c75ba1125022) Update common/device test for Android L
+- [ccfb38d](https://github.com/appium/ruby_lib/commit/ccfb38d812d09cfbefcb77a404e9b3bbcbb6a237) Update android/helper for Android L
+- [24b75d7](https://github.com/appium/ruby_lib/commit/24b75d70f52cf5e2fe090086ed2ee5280cb572bd) Update alert tests for Android L
+- [8e9c7da](https://github.com/appium/ruby_lib/commit/8e9c7da4bf9ce44ab990da3ea9af9770aeac5c81) Fix #227
+- [596f6e0](https://github.com/appium/ruby_lib/commit/596f6e0e0cd6fe6e2b7f878517db46aedb45b716) Fix #223
+- [bcd9934](https://github.com/appium/ruby_lib/commit/bcd99340038fa30a3180e673757282b8e40b828f) Add predicate textfield test for iOS
+- [27732f4](https://github.com/appium/ruby_lib/commit/27732f4c6ebfbb0400419d90ca91528e0861bd68) Merge pull request #225 from appium/remove_complex_find
+- [3424d64](https://github.com/appium/ruby_lib/commit/3424d64bed8f641a67316c8a52e35f0b9ae7b75d) Remove complex_find. Update tests
+- [e2c82cc](https://github.com/appium/ruby_lib/commit/e2c82cc95d1443a31f73871fce96ae8aa4e99b6f) Add hide_keyboard for Android. Use custom for iOS
+- [27a25ba](https://github.com/appium/ruby_lib/commit/27a25baf936271203d13123386a2544b040d9a38) Update hide_keyboard for iOS
+- [e952bb0](https://github.com/appium/ruby_lib/commit/e952bb0d1287ebdd42254258e749136ed662b5f9) Test pull_folder on iOS & Android
+- [515e288](https://github.com/appium/ruby_lib/commit/515e28853607c729e6c58252dbe5e90e23b49e1d) available_contexts returns [] instead of nil on error
+- [86b378e](https://github.com/appium/ruby_lib/commit/86b378e7cf6cea86e2f88a342ab7b19f0cb455a8) Add pull_folder support
+- [0b3e0cf](https://github.com/appium/ruby_lib/commit/0b3e0cf2e4c5c8d674385e8a573a70d7c1ce3068) Add open_notifications. Fix #210
+- [05125b4](https://github.com/appium/ruby_lib/commit/05125b41dd4957c841fcb51566e07905b04bbd0c) Update migration.md
+- [235e1c0](https://github.com/appium/ruby_lib/commit/235e1c0dc9a93efb6defff27cfebf527784a3ba7) Replace keyevent with press_keycode. Add long_press_keycode
+- [64d9db1](https://github.com/appium/ruby_lib/commit/64d9db11152e46845b2a055bba97cc6d45edf413) Use one run.rb for all platforms
+- [335100e](https://github.com/appium/ruby_lib/commit/335100e8027a01bd46842111752d83f6fe3fe9de) Move iOS helpers to common.rb
+- [ab915cf](https://github.com/appium/ruby_lib/commit/ab915cfa92981afd628569cf7e85517c6e4aec97) Update driver opts
+- [b495c5e](https://github.com/appium/ruby_lib/commit/b495c5e0bf591c98c733d4636e3c31848857f8c2) Merge pull request #211 from kieferrm/patch-1
+- [543f8f3](https://github.com/appium/ruby_lib/commit/543f8f38763bec0d468dcadb3c4a6facf734e569) change require to lower case
+- [c54eaa1](https://github.com/appium/ruby_lib/commit/c54eaa1d78ed70bdf89405fac30d4129d9734a92) Remove global
+- [ee5a076](https://github.com/appium/ruby_lib/commit/ee5a07624314095148c6203bfe56454efc268891) Update docs.md
+- [a581424](https://github.com/appium/ruby_lib/commit/a5814249c8123c0309599847c0d0a9145c9ef819) Clean up cucumber doc
+
+
 #### v3.0.3 2014-06-02
 
 - [3ed875c](https://github.com/appium/ruby_lib/commit/3ed875cc01ba7f670e9b1b8ccfd7b7adb0af82c1) Release 3.0.3
