@@ -13,6 +13,8 @@ describe 'install' do
   end
 
   t 'install/uninstall/launch' do
+    skip # no way to launch apk after it's uninstalled/installed
+    # blocked on: https://github.com/appium/appium/issues/2969
     installed
     remove 'io.appium.android.apis'
     not_installed
