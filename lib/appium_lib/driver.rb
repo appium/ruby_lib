@@ -26,6 +26,7 @@ require_relative 'ios/mobile_methods'
 # android
 require_relative 'android/helper'
 require_relative 'android/patch'
+require_relative 'android/client_xpath'
 require_relative 'android/element/alert'
 require_relative 'android/element/button'
 require_relative 'android/element/generic'
