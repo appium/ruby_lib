@@ -93,6 +93,9 @@ module Appium
     end
 
     # Convenience method to peform a swipe.
+    #
+    # Note that iOS 7 simulators have broken swipe.
+    #
     # @option opts [int] :start_x Where to start swiping, on the x axis.  Default 0.
     # @option opts [int] :start_y Where to start swiping, on the y axis.  Default 0.
     # @option opts [int] :end_x Where to end swiping, on the x axis.  Default 0.
