@@ -94,8 +94,8 @@ module Appium
     data = Appium::symbolize_keys data
     ap data unless data.empty? if verbose
 
-    if data && data[:caps] && data[:caps][:app]
-      data[:caps][:app] = Appium::Driver.absolute_app_path data[:caps][:app]
+    if data && data[:caps] && data[:caps][:app] && !data[:caps][:app].empty?
+      data[:caps][:app] = Appium::Driver.absolute_app_path data
     end
 
     # return list of require files as an array
@@ -266,8 +266,8 @@ module Appium
 
       # Path to the .apk, .app or .app.zip.
       # The path can be local or remote for Sauce.
-      unless !@caps || @caps[:app].nil? || @caps[:app].empty?
-        @caps[:app] = self.class.absolute_app_path @caps[:app]
+      if @caps && @caps[:app] && ! @caps[:app].empty?
+        @caps[:app] = self.class.absolute_app_path opts
       end
 
       # https://code.google.com/p/selenium/source/browse/spec-draft.md?repo=mobile
@@ -358,12 +358,24 @@ module Appium
     end
 
     # Converts app_path to an absolute path.
+    #
+    # opts is the full options hash (caps and appium_lib). If server_url is set
+    # then the app path is used as is.
+    #
+    # if app isn't set then an error is raised.
+    #
     # @return [String] APP_PATH as an absolute path
-    def self.absolute_app_path app_path
-      raise 'APP_PATH not set!' if app_path.nil? || app_path.empty?
+    def self.absolute_app_path opts
+      raise 'opts must be a hash' unless opts.is_a? Hash
+      caps            = opts[:caps] || {}
+      appium_lib_opts = opts[:appium_lib] || {}
+      server_url      = appium_lib_opts.fetch :server_url, false
+
+      app_path        = caps[:app]
+      raise 'absolute_app_path invoked and app is not set!' if app_path.nil? || app_path.empty?
       # may be absolute path to file on remote server.
       # if the file is on the remote server then we can't check if it exists
-      return app_path if @custom_url
+      return app_path if server_url
       # Sauce storage API. http://saucelabs.com/docs/rest#storage
       return app_path if app_path.start_with? 'sauce-storage:'
       return app_path if app_path.match(/^http/) # public URL for Sauce
