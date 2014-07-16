@@ -8,7 +8,7 @@ describe 'common/helper.rb' do
     before_first
   end
 
-  wait_time = [0.2, 0.2] # max_wait, interval
+  wait_opts = { timeout: 0.2, interval: 0.2 } # max_wait, interval
 
 =begin
 There's no `must_not_raise` as the opposite of must_raise
@@ -21,17 +21,20 @@ must_not_raise is a no-op.
   # max_wait=0 is infinity to use 0.1
   t 'wait' do
     # successful wait should not raise error
-    wait(*wait_time) { true }
-    wait(*wait_time) { false }
-    wait(*wait_time) { nil }
+    wait(wait_opts) { true }
+    wait(wait_opts) { false }
+    wait(wait_opts) { nil }
 
     # failed wait should error
-    proc { wait(*wait_time) { raise } }.must_raise Timeout::Error
+    proc { wait(wait_opts) { raise } }.must_raise Selenium::WebDriver::Error::TimeOutError
 
     # regular rescue will not handle exceptions outside of StandardError hierarchy
     # must rescue Exception explicitly to rescue everything
-    proc { wait(*wait_time) { raise NoMemoryError } }.must_raise Timeout::Error
-    proc { wait(0.2, 0.0) { raise NoMemoryError } }.must_raise Timeout::Error
+    proc { wait(wait_opts) { raise NoMemoryError } }.must_raise Selenium::WebDriver::Error::TimeOutError
+    proc { wait(timeout: 0.2, interval: 0.0) { raise NoMemoryError } }.must_raise Selenium::WebDriver::Error::TimeOutError
+
+    # invalid keys are rejected
+    proc { wait(invalidkey: 2) { true } }.must_raise RuntimeError
   end
 
   t 'ignore' do
@@ -46,19 +49,22 @@ must_not_raise is a no-op.
   # wait_true is a success unless the value is not true
   t 'wait_true' do
     # successful wait should not error
-    wait_true(*wait_time) { true }
+    wait_true(wait_opts) { true }
 
     # failed wait should error
-    proc { wait_true(*wait_time) { false } }.must_raise Timeout::Error
-    proc { wait_true(*wait_time) { nil } }.must_raise Timeout::Error
+    proc { wait_true(wait_opts) { false } }.must_raise Selenium::WebDriver::Error::TimeOutError
+    proc { wait_true(wait_opts) { nil } }.must_raise Selenium::WebDriver::Error::TimeOutError
 
     # raise should error
-    proc { wait_true(*wait_time) { raise } }.must_raise Timeout::Error
+    proc { wait_true(wait_opts) { raise } }.must_raise Selenium::WebDriver::Error::TimeOutError
 
     # regular rescue will not handle exceptions outside of StandardError hierarchy
     # must rescue Exception explicitly to rescue everything
-    proc { wait_true(*wait_time) { raise NoMemoryError } }.must_raise Timeout::Error
-    proc { wait_true(0.2, 0.0) { raise NoMemoryError } }.must_raise Timeout::Error
+    proc { wait_true(wait_opts) { raise NoMemoryError } }.must_raise Selenium::WebDriver::Error::TimeOutError
+    proc { wait_true(timeout: 0.2, interval: 0.0) { raise NoMemoryError } }.must_raise Selenium::WebDriver::Error::TimeOutError
+
+    # invalid keys are rejected
+    proc { wait_true(invalidkey: 2) { true } }.must_raise RuntimeError
   end
 
   # t 'id' # id is for Selendroid

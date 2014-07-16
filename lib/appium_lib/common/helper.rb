@@ -18,70 +18,12 @@ module Appium
     #
     # find_element :text doesn't work so use XPath to find by text.
 
-    # Check every 0.5 seconds to see if block.call doesn't raise an exception.
-    # if .call raises an exception then it will be tried again.
-    # if .call doesn't raise an exception then it will stop waiting.
-    #
-    # Example: wait { name('back').click }
-    #
-    # Give up after 30 seconds.
-    # @param max_wait [Integer] the maximum time in seconds to wait for.
-    #         Note that max wait 0 means infinity.
-    # @param interval [Float] the time in seconds to wait after calling the block
-    # @param block [Block] the block to call
-    # @return [Object] the result of block.call
-    def wait max_wait=30, interval=0.5, &block
-      max_wait = 1 if max_wait <= 0
-      result   = nil
-      timeout max_wait do
-        until (
-        begin
-          result = block.call || true
-        rescue Errno::ECONNREFUSED => e
-          raise e
-        rescue Exception
-          sleep interval
-          # sleep returns truthy value which breaks out of until
-          # must return false value
-          false
-        end)
-        end
-      end
-      result
-    end
-
     # Return block.call and ignore any exceptions.
     def ignore &block
       begin
         block.call
       rescue Exception
       end
-    end
-
-    # Check every 0.5 seconds to see if block.call returns a truthy value.
-    # Note this isn't a strict boolean true, any truthy value is accepted.
-    # false and nil are considered failures.
-    # Give up after 30 seconds.
-    # @param max_wait [Integer] the maximum time in seconds to wait for
-    # @param interval [Float] the time in seconds to wait after calling the block
-    # @param block [Block] the block to call
-    # @return [Object] the result of block.call
-    def wait_true max_wait=30, interval=0.5, &block
-      max_wait = 1 if max_wait <= 0
-      result   = nil
-      timeout max_wait do
-        until (
-        begin
-          result = block.call
-        rescue Errno::ECONNREFUSED => e
-          raise e
-        rescue Exception
-        ensure
-          sleep interval unless result
-        end)
-        end
-      end
-      result
     end
 
     # Navigate back.

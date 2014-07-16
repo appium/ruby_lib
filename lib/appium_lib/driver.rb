@@ -8,6 +8,7 @@ require_relative 'awesome_print/ostruct'
 
 # common
 require_relative 'common/helper'
+require_relative 'common/wait'
 require_relative 'common/patch'
 require_relative 'common/version'
 require_relative 'common/element/window'
