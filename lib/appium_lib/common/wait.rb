@@ -69,8 +69,8 @@ module Appium
     # If only a number is provided then it's treated as the timeout value.
     #
     # @param [Hash] opts Options
-    # @option opts [Numeric] :timeout (5) Seconds to wait before timing out.
-    # @option opts [Numeric] :interval (0.2) Seconds to sleep between polls.
+    # @option opts [Numeric] :timeout (30) Seconds to wait before timing out.
+    # @option opts [Numeric] :interval (0.5) Seconds to sleep between polls.
     # @option opts [String] :message Exception message if timed out.
     # @option opts [Array, Exception] :ignore Exceptions to ignore while polling (default: Exception)
     def wait_true opts={}, &block
@@ -87,8 +87,8 @@ module Appium
     # If only a number is provided then it's treated as the timeout value.
     #
     # @param [Hash] opts Options
-    # @option opts [Numeric] :timeout (5) Seconds to wait before timing out.
-    # @option opts [Numeric] :interval (0.2) Seconds to sleep between polls.
+    # @option opts [Numeric] :timeout (30) Seconds to wait before timing out.
+    # @option opts [Numeric] :interval (0.5) Seconds to sleep between polls.
     # @option opts [String] :message Exception message if timed out.
     # @option opts [Array, Exception] :ignore Exceptions to ignore while polling (default: Exception)
     def wait opts={}, &block
