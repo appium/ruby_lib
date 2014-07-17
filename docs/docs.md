@@ -41,16 +41,6 @@ driver.rotate :landscape
 driver.rotate :portrait
 ```
 
---
-
-Tag Name  | UIA
-       --:|:--
-button    | UIAButton
-textfield | UIATextField
-secure    | UIASecureTextField
-text      | UIAStaticText
-
---
 
 - `status["value"]["build"]["revision"]` Discover the Appium rev running on the server.
 - `driver.keyboard.send_keys "msg"` Sends keys to currently active element
@@ -141,11 +131,11 @@ alert.dismiss
 # Secure textfield example.
 #
 # Find using default value
-s = secure 'Password'
+s = textfield 'Password'
 # Enter password
 s.send_keys 'hello'
 # Check value
-s.value == password('hello'.length)
+s.value == ios_password('hello'.length)
 ```
 
 [routing.js](https://github.com/appium/appium/blob/master/app/routing.js#L69) lists not yet implemented end points.
