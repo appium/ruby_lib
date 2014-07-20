@@ -149,12 +149,26 @@ module Appium
     result
   end
 
-  def self.promote_singleton_appium_methods main_module
+  # if modules is a module instead of an array, then the constants of
+  # that module are promoted on.
+  # otherwise, the array of modules will be used as the promotion target.
+  def self.promote_singleton_appium_methods modules
     raise 'Driver is nil' if $driver.nil?
-    main_module.constants.each do |sub_module|
+
+    target_modules = []
+
+    if modules.is_a? Module
+      modules.constants.each do |sub_module|
+        target_modules << modules.const_get(sub_module)
+      end
+    else
+      raise 'modules must be a module or an array' unless modules.is_a? Array
+      target_modules = modules
+    end
+
+    target_modules.each do |const|
       #noinspection RubyResolve
       $driver.public_methods(false).each do |m|
-        const = main_module.const_get(sub_module)
         const.send(:define_singleton_method, m) do |*args, &block|
           begin
             super(*args, &block) # promote.rb
