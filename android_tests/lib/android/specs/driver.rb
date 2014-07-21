@@ -69,12 +69,12 @@ describe 'driver' do
     end
 
     t 'absolute_app_path' do
-      def absolute_app_path path;
-        $driver.class.absolute_app_path path;
+      def absolute_app_path path
+        $driver.class.absolute_app_path({caps: { app: path } })
       end
 
-      def validate_path path;
-        absolute_app_path(path).must_equal path;
+      def validate_path path
+        absolute_app_path(path).must_equal path
       end
 
       validate_path 'sauce-storage:some_storage_suffix'
