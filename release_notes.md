@@ -1,3 +1,16 @@
+#### v4.1.0 2014-07-21
+
+- [a13158f](https://github.com/appium/ruby_lib/commit/a13158fb926212d84f26120c3bc5355c8cd34baf) Release 4.1.0
+- [be1c710](https://github.com/appium/ruby_lib/commit/be1c710134ee9a001b8e71c0ce5cbb5786bebf1e) Update android specs
+- [4edd949](https://github.com/appium/ruby_lib/commit/4edd94989519ec14acf9c694d9ed3ae6a5939b10) Update self.promote_singleton_appium_methods
+- [82a236a](https://github.com/appium/ruby_lib/commit/82a236a84742f1eb6d55acab00d8f222d721bd9a) Update docs.md
+- [a724d5d](https://github.com/appium/ruby_lib/commit/a724d5d3711cdfa3ea420663949c06017189bf02) Fix #224
+- [d05bfe8](https://github.com/appium/ruby_lib/commit/d05bfe85d6c356a8ea6a0f151aaf21dfef979736) Fix docs
+- [c04d6f0](https://github.com/appium/ruby_lib/commit/c04d6f048ee4e24c66bef662e31a0d957360e7a7) Fix wait / wait_true by using selenium wait method
+- [da19c8c](https://github.com/appium/ruby_lib/commit/da19c8cca5753f06576b82bbbb6e77e7e36bcb9c) Add iOS 7 note to swipe
+- [4f4d800](https://github.com/appium/ruby_lib/commit/4f4d80094eac5a4fbc2c11b8050155b2f767839c) Add client side xpath support
+
+
 #### v4.0.0 2014-07-05
 
 - [8cc004a](https://github.com/appium/ruby_lib/commit/8cc004ad04ec087a8a11c06ca0749a5e2c6586a7) Release 4.0.0
