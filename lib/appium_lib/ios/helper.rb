@@ -403,5 +403,21 @@ Don't use window.tap. See https://github.com/appium/appium-uiauto/issues/28
         execute_script 'au.mainApp().keyboard().isNil()'
       end
     end
+
+    def _all_visible_pred predicate
+      %Q($.mainApp().getAllWithPredicate("#{predicate}", true);)
+    end
+
+    # returns visible element matching predicate contained in the main app
+    def ele_with_pred predicate
+      # true = return only visible
+      find_element(:uiautomation, _all_visible_pred(predicate))
+    end
+
+    # returns visible elements matching predicate contained in the main app
+    def eles_with_pred predicate
+      find_elements(:uiautomation, _all_visible_pred(predicate))
+    end
+
   end # module Ios
 end # module Appium
