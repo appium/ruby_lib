@@ -320,7 +320,8 @@ module Appium
     end
 
     # Returns XML string for the current page
-    # Same as driver.page_source
+    # Fixes uiautomator's $ in node names.
+    # `android.app.ActionBar$Tab` becomes `android.app.ActionBar.Tab`
     # @return [String]
     def get_source
       src = @driver.page_source
