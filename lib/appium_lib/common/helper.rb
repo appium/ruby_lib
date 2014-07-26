@@ -53,21 +53,14 @@ module Appium
       find_elements :xpath, xpath_str
     end
 
-    # Prints xml of the current page
-    # @return [void]
-    def source
-      source = @driver.page_source
+    def _print_source source
+      opts = Nokogiri::XML::ParseOptions::NOBLANKS | Nokogiri::XML::ParseOptions::NONET
       if source.start_with? '<html'
-        doc = Nokogiri::HTML(source) do |config|
-          config.options = Nokogiri::XML::ParseOptions::NOBLANKS | Nokogiri::XML::ParseOptions::NONET
-        end
-        puts doc.to_xhtml indent: 2
+        doc = Nokogiri::HTML(source) { |cfg| cfg.options = opts }
       else
-        doc = Nokogiri::XML(source) do |config|
-          config.options = Nokogiri::XML::ParseOptions::NOBLANKS | Nokogiri::XML::ParseOptions::NONET
-        end
-        puts doc.to_xml indent: 2
+        doc = Nokogiri::XML(source)  { |cfg| cfg.options = opts }
       end
+      puts doc.to_xml indent: 2
     end
 
     # Returns XML string for the current page
@@ -185,14 +178,14 @@ module Appium
       end
 
       def reset
-        @element_stack = []
+        @element_stack     = []
         @elements_in_order = []
-        @skip_element = false
+        @skip_element      = false
       end
 
       def result
         @elements_in_order.reduce('') do |r, e|
-          name = e.delete :name
+          name        = e.delete :name
           attr_string = e.reduce('') do |string, attr|
             string += "  #{attr[0]}: #{attr[1]}\n"
           end
@@ -207,8 +200,8 @@ module Appium
       def start_element name, attrs = []
         @skip_element = filter && !filter.include?(name.downcase)
         unless @skip_element
-          element = {name: name}
-          attrs.each {|a| element[a[0]] = a[1]}
+          element = { name: name }
+          attrs.each { |a| element[a[0]] = a[1] }
           @element_stack.push element
           @elements_in_order.push element
         end
@@ -216,13 +209,13 @@ module Appium
 
       def end_element name
         return if filter && !filter.include?(name.downcase)
-        element_index = @element_stack.rindex {|e| e[:name] == name}
+        element_index = @element_stack.rindex { |e| e[:name] == name }
         @element_stack.delete_at element_index
       end
 
       def characters(chars)
         unless @skip_element
-          element = @element_stack.last
+          element        = @element_stack.last
           element[:text] = chars
         end
       end

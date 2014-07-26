@@ -419,5 +419,11 @@ Don't use window.tap. See https://github.com/appium/appium-uiauto/issues/28
       find_elements(:uiautomation, _all_visible_pred(predicate))
     end
 
+    # Prints xml of the current page
+    # @return [void]
+    def source
+      _print_source get_source
+    end
+
   end # module Ios
 end # module Appium

@@ -18,13 +18,13 @@ module Appium
 
       def initialize
         reset
-        @filter = false
+        @filter   = false
         @instance = Hash.new -1
       end
 
       def reset
-        @result = ''
-        @keys   = %w[text resource-id content-desc]
+        @result   = ''
+        @keys     = %w[text resource-id content-desc]
         @instance = Hash.new -1
       end
 
@@ -83,6 +83,41 @@ module Appium
       end
     end # class AndroidElements
 
+    # Fix uiautomator's xml dump.
+    # https://github.com/appium/appium/issues/2822
+    # https://code.google.com/p/android/issues/detail?id=74143
+    def _fix_android_native_source source
+      # <android.app.ActionBar$Tab
+      # <android.app.ActionBar  $  Tab
+
+      # find each closing tag that contains a dollar sign.
+      source.scan(/<\/([^>]*\$[^>]*)>/).flatten.uniq.each do |problem_tag|
+        # "android.app.ActionBar$Tab"
+        before, after = problem_tag.split('$')
+        before.strip!
+        after.strip!
+
+        fixed = "#{before}.#{after}"
+
+        # now escape . in before/after because they're used in regex
+        before.gsub!('.', '\.')
+        after.gsub!('.', '\.')
+
+        #  <android.app.ActionBar$Tab   => <android.app.ActionBar.Tab
+        # </android.app.ActionBar$Tab> => </android.app.ActionBar.Tab>
+        source = source.gsub(/<#{before}\s*\$\s*#{after}/, "<#{fixed}").
+                        gsub(/<\/#{before}\s*\$\s*#{after}>/, "</#{fixed}>")
+      end
+
+      source
+    end
+
+    # Prints xml of the current page
+    # @return [void]
+    def source
+      _print_source _fix_android_native_source get_source
+    end
+
     # Android only.
     # Returns a string containing interesting elements.
     # The text, content description, and id are returned.
@@ -91,10 +126,11 @@ module Appium
     # @return [String]
     def get_android_inspect class_name=false
       source = get_source
-      if source.start_with? '<html>'
+      if source.start_with? '<html>' # parse html from webview
         parser = @android_html_parser ||= Nokogiri::HTML::SAX::Parser.new(Common::HTMLElements.new)
       else
-        parser = @android_webview_parser ||= Nokogiri::XML::SAX::Parser.new(AndroidElements.new)
+        source = _fix_android_native_source source
+        parser = @android_native_parser ||= Nokogiri::XML::SAX::Parser.new(AndroidElements.new)
       end
       parser.document.reset # ensure document is reset before parsing
       parser.document.filter = class_name
