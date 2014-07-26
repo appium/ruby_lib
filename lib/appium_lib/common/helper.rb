@@ -63,13 +63,6 @@ module Appium
       puts doc.to_xml indent: 2
     end
 
-    # Returns XML string for the current page
-    # Same as driver.page_source
-    # @return [String]
-    def get_source
-      @driver.page_source
-    end
-
     # @private
     # http://nokogiri.org/Nokogiri/XML/SAX.html
     class CountElements < Nokogiri::XML::SAX::Document

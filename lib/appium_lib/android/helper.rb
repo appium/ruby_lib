@@ -106,7 +106,7 @@ module Appium
         #  <android.app.ActionBar$Tab   => <android.app.ActionBar.Tab
         # </android.app.ActionBar$Tab> => </android.app.ActionBar.Tab>
         source = source.gsub(/<#{before}\s*\$\s*#{after}/, "<#{fixed}").
-                        gsub(/<\/#{before}\s*\$\s*#{after}>/, "</#{fixed}>")
+          gsub(/<\/#{before}\s*\$\s*#{after}>/, "</#{fixed}>")
       end
 
       source
@@ -115,7 +115,7 @@ module Appium
     # Prints xml of the current page
     # @return [void]
     def source
-      _print_source _fix_android_native_source get_source
+      _print_source get_source
     end
 
     # Android only.
@@ -129,7 +129,6 @@ module Appium
       if source.start_with? '<html>' # parse html from webview
         parser = @android_html_parser ||= Nokogiri::HTML::SAX::Parser.new(Common::HTMLElements.new)
       else
-        source = _fix_android_native_source source
         parser = @android_native_parser ||= Nokogiri::XML::SAX::Parser.new(AndroidElements.new)
       end
       parser.document.reset # ensure document is reset before parsing
@@ -318,6 +317,15 @@ module Appium
     # @return [Element]
     def complex_finds_exact class_name, value
       find_elements :uiautomator, string_visible_exact(class_name, value)
+    end
+
+    # Returns XML string for the current page
+    # Same as driver.page_source
+    # @return [String]
+    def get_source
+      src = @driver.page_source
+      src = _fix_android_native_source src unless src && src.start_with?('<html>')
+      src
     end
   end # module Android
 end # module Appium
