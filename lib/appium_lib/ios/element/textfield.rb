@@ -52,7 +52,9 @@ https://github.com/appium/ruby_lib/issues/226#issuecomment-50036962
         index = value
         raise "#{index} is not a valid index. Must be >= 1" if index <= 0
         index -= 1 # predicates are 0 indexed.
-        return eles_with_pred(_textfield_visible_pred)[index]
+        result = eles_with_pred(_textfield_visible_pred)
+        return result[index] if result && result.length > 0 && index < result.length
+        _no_such_element # failure to find a single element = raise error.
       end
 
       ele_with_pred(_textfield_contains_pred(value))

@@ -1,3 +1,5 @@
+require 'selenium/webdriver/common/error'
+
 # Generic helper methods not specific
 # to a particular tag name
 module Appium
@@ -212,6 +214,10 @@ module Appium
           element[:text] = chars
         end
       end
+    end
+
+    def _no_such_element
+      raise Selenium::WebDriver::Error::NoSuchElementError, 'An element could not be located on the page using the given search parameters.'
     end
   end # module Common
 end # module Appium
