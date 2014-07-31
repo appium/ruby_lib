@@ -1,12 +1,4 @@
-def self.add_to_path path
-  path = File.expand_path "../#{path}/", __FILE__
-
-  $:.unshift path unless $:.include? path
-end
-
-add_to_path 'lib'
-
-require 'appium_lib/common/version'
+require_relative 'lib/appium_lib/common/version'
 
 Gem::Specification.new do |s|
   # 1.8.x is not supported
