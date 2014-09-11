@@ -132,3 +132,8 @@ class Selenium::WebDriver::Remote::Response
     msg
   end
 end
+
+class Selenium::WebDriver::Remote::Http::Common
+  remove_const :DEFAULT_HEADERS if defined? DEFAULT_HEADERS
+  DEFAULT_HEADERS = { 'Accept' => CONTENT_TYPE, 'User-Agent' => "appium/ruby_lib/#{::Appium::VERSION}" }
+end
