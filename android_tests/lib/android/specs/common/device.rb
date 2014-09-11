@@ -15,6 +15,14 @@ describe 'common/device' do
     wait { background_app 5 }
   end
 
+  t 'start_activity' do
+    wait { current_activity.must_equal '.ApiDemos' }
+    start_activity 'io.appium.android.apis', '.accessibility.AccessibilityNodeProviderActivity'
+    wait { current_activity.include?('Node').must_equal true }
+    start_activity 'com.android.contacts', '.ContactsListActivity'
+    wait { current_activity.include?('Contact').must_equal true }
+  end
+
   t 'is_installed' do
     wait { is_installed?('fake_app').must_equal false }
   end
