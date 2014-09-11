@@ -92,6 +92,13 @@ module Appium
     #   Android only;  Ends the test coverage and writes the results to the given path on device.
     #   @param path (String) Path on the device to write too.
     #   @param intent (String) Intent to broadcast when ending coverage.
+
+    # @!method get_settings
+    #   Get appium Settings for current test session
+
+    # @!method update_settings
+    #   Update appium Settings for current test session
+    #   @param settings (hash) Settings to update, keys are settings, values to value to set each setting to
     class << self
       def extended(mod)
         extend_webdriver_with_forwardable
@@ -211,6 +218,18 @@ module Appium
         add_endpoint_method(:end_coverage, 'session/:session_id/appium/app/end_test_coverage') do
           def end_coverage(path, intent)
             execute :end_coverage, {}, path: path, intent: intent
+          end
+        end
+
+        add_endpoint_method(:get_settings, 'session/:session_id/appium/settings', :get) do
+          def get_settings
+            execute :get_settings, {}
+          end
+        end
+
+        add_endpoint_method(:update_settings, 'session/:session_id/appium/settings') do
+          def update_settings(settings)
+            execute :update_settings, {}, settings: settings
           end
         end
 

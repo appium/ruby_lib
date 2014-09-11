@@ -180,6 +180,16 @@ describe 'driver' do
       end
     end
 
+    # settings
+    t 'get settings' do
+      get_settings.wont_be_nil
+    end
+
+    t 'update settings' do
+      update_settings cyberdelia: 'open'
+      get_settings['cyberdelia'].must_equal 'open'
+    end
+
     # Skip: x # x is only used in Pry
   end
 end
