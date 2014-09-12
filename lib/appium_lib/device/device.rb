@@ -151,6 +151,36 @@ module Appium
           end
         end
 
+        # @!method start_activity
+        #   Start a new activity within the current app or launch a new app and start the target activity.
+        #
+        #   Android only.
+        #   @param [String] The package owning the activity [required]
+        #   @param [String] The target activity [required]
+        #   @param [String] The package to start before the target package [optional]
+        #   @param [String] The activity to start before the target activity [optional]
+        #
+        #   ```ruby
+        #   start_activity app_package: 'io.appium.android.apis', app_activity: '.accessibility.AccessibilityNodeProviderActivity'
+        #   ```
+        add_endpoint_method(:start_activity, 'session/:session_id/appium/device/start_activity') do
+          def start_activity(opts)
+            raise 'opts must be a hash' unless opts.is_a? Hash
+            app_package = opts[:app_package]
+            raise 'app_package is required' unless app_package
+            app_activity = opts[:app_activity]
+            raise 'app_activity is required' unless opts[:app_activity]
+            app_wait_package  = opts.fetch(:app_wait_package, '')
+            app_wait_activity = opts.fetch(:app_wait_activity, '')
+
+            unknown_opts = opts.keys - [:app_package, :app_activity, :app_wait_package, :app_wait_activity]
+            raise "Unknown options #{unknown_opts}" unless unknown_opts.empty?
+
+            execute :start_activity, {}, { appPackage:     app_package,      appActivity: app_activity,
+                                           appWaitPackage: app_wait_package, appWaitActivity: app_wait_activity }
+          end
+        end
+
         add_endpoint_method(:set_context, 'session/:session_id/context') do
           def set_context(context=null)
             execute :set_context, {}, :name => context
