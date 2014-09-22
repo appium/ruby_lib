@@ -224,17 +224,27 @@ module Appium
     # attr readers are promoted to global scope. To avoid clobbering, they're
     # made available via the driver_attributes method
 
-    # The amount to sleep in seconds before every webdriver http call.
+    # @!parse attr_accessor The amount to sleep in seconds before every webdriver http call.
     attr_accessor :global_webdriver_http_sleep,
+                  # @!parse attr_accessor Selenium webdriver capabilities
                   :caps,
+                  # Custom URL for the selenium server
                   :custom_url,
+                  # Export session id to textfile in /tmp for 3rd party tools
                   :export_session,
+                  # Default wait time for elements to appear
                   :default_wait,
+                  # Array of previous wait time values
                   :last_waits,
+                  # Username for use on Sauce Labs
                   :sauce_username,
+                  # Access Key for use on Sauce Labs
                   :sauce_access_key,
+                  # Appium's server port
                   :appium_port,
+                  # Device type to request from the appium server
                   :appium_device,
+                  # Boolean debug mode for the Appium Ruby bindings
                   :appium_debug
 
     # Creates a new driver
