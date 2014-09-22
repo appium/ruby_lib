@@ -17,6 +17,18 @@
 - [Appium's mobile gesture docs](https://github.com/appium/appium/wiki/Automating-mobile-gestures)
 - [MiniTest Expectations](http://docs.seattlerb.org/minitest/Minitest/Expectations.html)
 
+
+--
+
+Driver types.
+
+```ruby
+# appium specific driver with helpers available
+@appium_driver = Appium::Driver.new @options
+# standard selenium driver without any appium methods
+@selenium_driver = @appium_driver.start_driver
+```
+
 --
 
 Example of automating the built in Android settings.
