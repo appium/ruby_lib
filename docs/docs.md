@@ -19,6 +19,22 @@
 
 --
 
+Example of automating the built in Android settings.
+
+```ruby
+# run Pry, and paste the following
+apk = { 
+        platformName: :android,
+        deviceName: :nexus,
+        appPackage: 'com.android.settings',
+        appActivity: '.Settings',
+        appWaitActivity: '.Settings'
+      }
+Appium::Driver.new(caps: apk).start_driver
+```
+
+--
+
 Example use of Appium's mobile gesture.
 
 > @driver.execute_script 'mobile: tap', :x => 0, :y => 500
