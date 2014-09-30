@@ -14,8 +14,9 @@ module Appium
         toggle_airplane_mode: 'session/:session_id/appium/device/toggle_airplane_mode',
       },
       get:  {
-        current_activity:   'session/:session_id/appium/device/current_activity',
-        current_context:    'session/:session_id/context',
+        current_activity:       'session/:session_id/appium/device/current_activity',
+        current_context:        'session/:session_id/context',
+        get_network_connection: 'session/:session_id/network_connection',
       }
     }
 
@@ -260,6 +261,27 @@ module Appium
         add_endpoint_method(:update_settings, 'session/:session_id/appium/settings') do
           def update_settings(settings)
             execute :update_settings, {}, settings: settings
+          end
+        end
+
+        # @!method get_network_connection
+        #   Get the device network connection current status
+        #   See set_network_connection method for return value
+
+        # @!method set_network_connection
+        #   Set the device network connection mode
+        #   @param path (String) Bit mask that represent the network mode
+        #   Value (Alias)      | Data | Wifi | Airplane Mode
+        #   -------------------------------------------------
+        #   1 (Airplane Mode)  | 0    | 0    | 1
+        #   6 (All network on) | 1    | 1    | 0
+        #   4 (Data only)      | 1    | 0    | 0
+        #   2 (Wifi only)      | 0    | 1    | 0
+        #   0 (None)           | 0    | 0    | 0
+        #
+        add_endpoint_method(:set_network_connection, 'session/:session_id/network_connection') do
+          def set_network_connection(mode)
+            execute :set_network_connection, {}, type: mode
           end
         end
 
