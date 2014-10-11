@@ -443,6 +443,100 @@ Don't use window.tap. See https://github.com/appium/appium-uiauto/issues/28
       _print_source get_source
     end
 
+    def _validate_object *objects
+      raise 'objects must be an array' unless objects.is_a? Array
+      objects.each do |obj|
+        next unless obj # obj may be nil. if so, ignore.
+        target = obj[:target]
+        raise 'target must be a string' unless target.is_a? String
+
+        substring = obj[:substring]
+        raise 'substring must be a boolean' unless [true, false].include? substring
+
+        insensitive = obj[:insensitive]
+        raise 'insensitive must be a boolean' unless [true, false].include? insensitive
+      end
+    end
+
+    # typeArray - array of string types to search for. Example: ["UIAStaticText"]
+    # onlyFirst - boolean. returns only the first result if true. Example: true
+    # onlyVisible - boolean. returns only visible elements if true. Example: true
+    # target - string. the target value to search for. Example: "Buttons, Various uses of UIButton"
+    # substring - boolean. matches on substrings if true otherwise an exact mathc is required. Example: true
+    # insensitive - boolean. ignores case sensitivity if true otherwise it's case sensitive. Example: true
+    #
+    # opts = {
+    #   typeArray: ["UIAStaticText"],
+    #   onlyFirst: true,
+    #   onlyVisible: true,
+    #   name: {
+    #     target: "Buttons, Various uses of UIButton",
+    #     substring: false,
+    #     insensitive: false,
+    #   },
+    #   label: {
+    #     target: "Buttons, Various uses of UIButton",
+    #     substring: false,
+    #     insensitive: false,
+    #   },
+    #   value: {
+    #     target: "Buttons, Various uses of UIButton",
+    #     substring: false,
+    #     insensitive: false,
+    #   }
+    # }
+    #
+    def _by_json opts
+      valid_keys = [:typeArray, :onlyFirst, :onlyVisible, :name, :label, :value]
+      unknown_keys = opts.keys - valid_keys
+      raise "Unknown keys: #{unknown_keys}" unless unknown_keys.empty?
+
+      typeArray = opts[:typeArray]
+      raise 'typeArray must be an array' unless typeArray.is_a? Array
+
+      onlyFirst = opts[:onlyFirst]
+      raise 'onlyFirst must be a boolean' unless [true, false].include? onlyFirst
+
+      onlyVisible = opts[:onlyVisible]
+      raise 'onlyVisible must be a boolean' unless [true, false].include? onlyVisible
+
+      raise 'at least one name, label, or value object must exist' unless opts[:name] || opts[:label] || opts[:value]
+      _validate_object opts[:name], opts[:label], opts[:value]
+
+      element_or_elements_by_type = <<-JS
+        (function() {
+        var opts = #{opts.to_json}
+
+        return $.mainWindow()._elementOrElementsByType(opts);
+        })();
+      JS
+
+      execute_script element_or_elements_by_type
+    end
+
+    # example usage:
+    #
+    # eles_by_json({
+    #   typeArray: ["UIAStaticText"],
+    #   onlyFirst: true,
+    #   onlyVisible: true,
+    #   name: {
+    #     target: "Buttons, Various uses of UIButton",
+    #     substring: false,
+    #     insensitive: false,
+    #   },
+    # })
+    def eles_by_json opts
+      return _by_json opts
+    end
+
+    # see eles_by_json
+    def ele_by_json opts
+      result = _by_json(opts).first
+      raise _no_such_element if result.nil?
+      result
+    end
+
     # Returns XML string for the current page
     # Same as driver.page_source
     # @return [String]
