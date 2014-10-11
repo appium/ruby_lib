@@ -223,29 +223,32 @@ module Appium
 
     # attr readers are promoted to global scope. To avoid clobbering, they're
     # made available via the driver_attributes method
+    #
+    # attr_accessor is repeated for each one so YARD documents them properly.
 
-    # @!parse attr_accessor The amount to sleep in seconds before every webdriver http call.
-    attr_accessor :global_webdriver_http_sleep,
-                  # @!parse attr_accessor Selenium webdriver capabilities
-                  :caps,
-                  # Custom URL for the selenium server
-                  :custom_url,
-                  # Export session id to textfile in /tmp for 3rd party tools
-                  :export_session,
-                  # Default wait time for elements to appear
-                  :default_wait,
-                  # Array of previous wait time values
-                  :last_waits,
-                  # Username for use on Sauce Labs
-                  :sauce_username,
-                  # Access Key for use on Sauce Labs
-                  :sauce_access_key,
-                  # Appium's server port
-                  :appium_port,
-                  # Device type to request from the appium server
-                  :appium_device,
-                  # Boolean debug mode for the Appium Ruby bindings
-                  :appium_debug
+
+    # The amount to sleep in seconds before every webdriver http call.
+    attr_accessor :global_webdriver_http_sleep
+    # Selenium webdriver capabilities
+    attr_accessor :caps
+    # Custom URL for the selenium server
+    attr_accessor :custom_url
+    # Export session id to textfile in /tmp for 3rd party tools
+    attr_accessor :export_session
+    # Default wait time for elements to appear
+    attr_accessor :default_wait
+    # Array of previous wait time values
+    attr_accessor :last_waits
+    # Username for use on Sauce Labs
+    attr_accessor :sauce_username
+    # Access Key for use on Sauce Labs
+    attr_accessor :sauce_access_key
+    # Appium's server port
+    attr_accessor :appium_port
+    # Device type to request from the appium server
+    attr_accessor :appium_device
+    # Boolean debug mode for the Appium Ruby bindings
+    attr_accessor :appium_debug
 
     # Creates a new driver
     #
