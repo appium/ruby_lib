@@ -447,6 +447,11 @@ Don't use window.tap. See https://github.com/appium/appium-uiauto/issues/28
       raise 'objects must be an array' unless objects.is_a? Array
       objects.each do |obj|
         next unless obj # obj may be nil. if so, ignore.
+
+        valid_keys = [:target, :substring, :insensitive]
+        unknown_keys = obj.keys - valid_keys
+        raise "Unknown keys: #{unknown_keys}" unless unknown_keys.empty?
+
         target = obj[:target]
         raise 'target must be a string' unless target.is_a? String
 
@@ -500,7 +505,8 @@ Don't use window.tap. See https://github.com/appium/appium-uiauto/issues/28
       onlyVisible = opts[:onlyVisible]
       raise 'onlyVisible must be a boolean' unless [true, false].include? onlyVisible
 
-      raise 'at least one name, label, or value object must exist' unless opts[:name] || opts[:label] || opts[:value]
+      # name/label/value are optional. when searching for class only, then none
+      # will be present.
       _validate_object opts[:name], opts[:label], opts[:value]
 
       element_or_elements_by_type = <<-JS
@@ -518,7 +524,6 @@ Don't use window.tap. See https://github.com/appium/appium-uiauto/issues/28
     #
     # eles_by_json({
     #   typeArray: ["UIAStaticText"],
-    #   onlyFirst: true,
     #   onlyVisible: true,
     #   name: {
     #     target: "Buttons, Various uses of UIButton",
@@ -527,11 +532,13 @@ Don't use window.tap. See https://github.com/appium/appium-uiauto/issues/28
     #   },
     # })
     def eles_by_json opts
+      opts[:onlyFirst] = false
       return _by_json opts
     end
 
     # see eles_by_json
     def ele_by_json opts
+      opts[:onlyFirst] = true
       result = _by_json(opts).first
       raise _no_such_element if result.nil?
       result

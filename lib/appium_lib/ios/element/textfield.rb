@@ -6,27 +6,41 @@ module Appium
     private
 
     # @private
-    def _textfield_visible_string opts={}
-      index = opts.fetch :index, false
-      if index
-        %Q((//#{UIATextField}[@visible="true"])[#{index}] | (//#{UIASecureTextField}[@visible="true"])[#{index}])
-      else
-        %Q(//#{UIATextField}[@visible="true"] | //#{UIASecureTextField}[@visible="true"])
-      end
+    def _textfield_visible
+      {
+        typeArray:   [UIATextField, UIASecureTextField],
+        onlyVisible: true,
+      }
     end
 
     # @private
     def _textfield_exact_string value
-      textfield = string_visible_exact UIATextField, value
-      secure    = string_visible_exact UIASecureTextField, value
-      "#{textfield} | #{secure}"
+      exact     = {
+        target:      value,
+        substring:   false,
+        insensitive: false,
+      }
+      exact_obj = {
+        name:  exact,
+        label: exact,
+        value: exact,
+      }
+      _textfield_visible.merge(exact_obj)
     end
 
     # @private
     def _textfield_contains_string value
-      textfield = string_visible_contains UIATextField, value
-      secure    = string_visible_contains UIASecureTextField, value
-      "#{textfield} | #{secure}"
+      contains     = {
+        target:      value,
+        substring:   true,
+        insensitive: true,
+      }
+      contains_obj = {
+        name:  contains,
+        label: contains,
+        value: contains,
+      }
+      _textfield_visible.merge(contains_obj)
     end
 
     public
@@ -40,12 +54,14 @@ module Appium
       # iOS needs to combine textfield and secure to match Android.
       if value.is_a? Numeric
         index = value
-        raise "#{index} is not a valid xpath index. Must be >= 1" if index <= 0
+        raise "#{index} is not a valid index. Must be >= 1" if index <= 0
 
-        return xpath _textfield_visible_string index: index
+        result = eles_by_json(_textfield_visible)[index]
+        raise _no_such_element if result.nil?
+        return result
       end
 
-      xpath _textfield_contains_string value
+      ele_by_json _textfield_contains_string value
     end
 
     # Find all TextFields containing value.
@@ -53,34 +69,36 @@ module Appium
     # @param value [String] the value to search for
     # @return [Array<TextField>]
     def textfields value=false
-      return xpaths _textfield_visible_string unless value
-      xpaths _textfield_contains_string value
+      return eles_by_json _textfield_visible unless value
+      eles_by_json _textfield_contains_string value
     end
 
     # Find the first TextField.
     # @return [TextField]
     def first_textfield
-      xpath _textfield_visible_string
+      ele_by_json _textfield_visible
     end
 
     # Find the last TextField.
     # @return [TextField]
     def last_textfield
-      xpath _textfield_visible_string index: 'last()'
+      result = eles_by_json(_textfield_visible).last
+      raise _no_such_element if result.nil?
+      result
     end
 
     # Find the first TextField that exactly matches value.
     # @param value [String] the value to match exactly
     # @return [TextField]
     def textfield_exact value
-      xpath _textfield_exact_string value
+      ele_by_json _textfield_exact_string value
     end
 
     # Find all TextFields that exactly match value.
     # @param value [String] the value to match exactly
     # @return [Array<TextField>]
     def textfields_exact value
-      xpaths _textfield_exact_string value
+      eles_by_json _textfield_exact_string value
     end
   end # module Ios
 end # module Appium
