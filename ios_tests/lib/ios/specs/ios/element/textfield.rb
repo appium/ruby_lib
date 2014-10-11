@@ -23,7 +23,7 @@ describe 'ios/element/textfield' do
   t 'textfield' do
     textfield(1).text.must_equal(enter_text)
     textfield(enter_text).text.must_equal(enter_text)
-    textfield('word').text.must_equal enter_password
+    textfield('word').value.must_equal enter_password
   end
 
   t 'textfields' do
@@ -43,15 +43,15 @@ describe 'ios/element/textfield' do
   end
 
   t 'last_textfield' do
-    last_textfield.text.must_equal enter_password
+    last_textfield.text.must_equal enter_text
   end
 
   t 'textfield_exact' do
-    textfield_exact(enter_password).text.must_equal enter_password
+    textfield_exact(enter_password).value.must_equal enter_password
   end
 
   t 'textfields_exact' do
-    textfields_exact(enter_password).first.text.must_equal enter_password
+    textfields_exact(enter_password).first.value.must_equal enter_password
   end
 
   def keyboard_exists?
@@ -81,6 +81,11 @@ describe 'ios/element/textfield' do
 
   def must_raise_no_element &block
     proc { block.call }.must_raise Selenium::WebDriver::Error::NoSuchElementError
+  end
+
+  t 'hide_keyboard' do
+    first_textfield.click
+    hide_keyboard
   end
 
   # test textfield methods with no textfields
@@ -113,11 +118,6 @@ describe 'ios/element/textfield' do
 
   t 'no textfields_exact' do
     textfields_exact('does not exist').length.must_equal 0
-  end
-
-  t 'hide_keyboard' do
-    first_textfield.click
-    hide_keyboard
   end
 
   t 'after_last' do

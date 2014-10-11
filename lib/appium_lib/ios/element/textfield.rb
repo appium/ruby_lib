@@ -55,6 +55,7 @@ module Appium
       if value.is_a? Numeric
         index = value
         raise "#{index} is not a valid index. Must be >= 1" if index <= 0
+        index -= 1 # eles_by_json is 0 indexed.
 
         result = eles_by_json(_textfield_visible)[index]
         raise _no_such_element if result.nil?
