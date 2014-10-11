@@ -157,7 +157,7 @@ module Appium
     def source_window window_number=0
       # appium 1.0 still returns JSON when getTree() is invoked so this
       # doesn't need to change to XML. If getTree() is removed then
-      # source_window will need to parse the results of getTreeForXML()\
+      # source_window will need to parse the elements of getTreeForXML()\
       # https://github.com/appium/appium-uiauto/blob/247eb71383fa1a087ff8f8fc96fac25025731f3f/uiauto/appium/element.js#L145
       execute_script "UIATarget.localTarget().frontMostApp().windows()[#{window_number}].getTree()"
     end
@@ -192,11 +192,19 @@ module Appium
     # @param index [Integer] the index
     # @return [Element]
     def ele_index class_name, index
-      unless index == 'last()'
-        # XPath index starts at 1.
-        raise "#{index} is not a valid xpath index. Must be >= 1" if index <= 0
+      raise 'Index must be >= 1' unless index == 'last()' || (index.is_a?(Integer) && index >= 1)
+      elements = tags(class_name)
+
+      if index == 'last()'
+        result = elements.last
+      else
+        # elements array is 0 indexed
+        index  -= 1
+        result = elements[index]
       end
-      find_element :xpath, %Q(//#{class_name}[@visible="true"][#{index}])
+
+      raise _no_such_element if result.nil?
+      result
     end
 
     # @private
@@ -205,6 +213,7 @@ module Appium
     end
 
     # Find the first element exactly matching class and attribute value.
+    # Note: Uses XPath
     # @param class_name [String] the class name to search for
     # @param attr [String] the attribute to inspect
     # @param value [String] the expected value of the attribute
@@ -214,6 +223,7 @@ module Appium
     end
 
     # Find all elements exactly matching class and attribute value.
+    # Note: Uses XPath
     # @param class_name [String] the class name to match
     # @param attr [String] the attribute to compare
     # @param value [String] the value of the attribute that the element must have
@@ -228,6 +238,7 @@ module Appium
     end
 
     # Get the first tag by attribute that exactly matches value.
+    # Note: Uses XPath
     # @param class_name [String] the tag name to match
     # @param attr [String] the attribute to compare
     # @param value [String] the value of the attribute that the element must include
@@ -237,6 +248,7 @@ module Appium
     end
 
     # Get tags by attribute that include value.
+    # Note: Uses XPath
     # @param class_name [String] the tag name to match
     # @param attr [String] the attribute to compare
     # @param value [String] the value of the attribute that the element must include
@@ -260,24 +272,30 @@ module Appium
       ele_index class_name, 'last()'
     end
 
-    # Returns the first element matching class_name
+    # Returns the first visible element matching class_name
     #
     # @param class_name [String] the class_name to search for
     # @return [Element]
     def tag class_name
-      xpath %Q(//#{class_name}[@visible="true"])
+      ele_by_json({
+                    typeArray:   [class_name],
+                    onlyVisible: true,
+                  })
     end
 
-    # Returns all elements matching class_name
+    # Returns all visible elements matching class_name
     #
     # @param class_name [String] the class_name to search for
     # @return [Element]
     def tags class_name
-      xpaths %Q(//#{class_name}[@visible="true"])
+      eles_by_json({
+                     typeArray:   [class_name],
+                     onlyVisible: true,
+                   })
     end
 
     # @private
-    # Returns a string xpath that matches the first element that contains value
+    # Returns an object that matches the first element that contains value
     #
     # example: ele_by_json_visible_contains 'UIATextField', 'sign in'
     #
@@ -317,7 +335,7 @@ module Appium
     end
 
     # @private
-    # Create an xpath string to exactly match the first element with target value
+    # Create an object to exactly match the first element with target value
     # @param element [String] the class name for the element
     # @param value [String] the value to search for
     # @return [String]
