@@ -404,19 +404,37 @@ Don't use window.tap. See https://github.com/appium/appium-uiauto/issues/28
       end
     end
 
-    def _all_visible_pred predicate
-      %Q($.mainApp().getAllWithPredicate("#{predicate}", true);)
+    #
+    # predicate - the predicate to evaluate on the main app
+    #
+    # visible - if true, only visible elements are returned. default true
+    #
+    def _all_pred opts
+      predicate = opts[:predicate]
+      raise 'predicate must be provided' unless predicate
+      visible = opts.fetch :visible, true
+      %Q($.mainApp().getAllWithPredicate("#{predicate}", #{visible});)
     end
 
-    # returns visible element matching predicate contained in the main app
-    def ele_with_pred predicate
+    # returns element matching predicate contained in the main app
+    #
+    # predicate - the predicate to evaluate on the main app
+    #
+    # visible - if true, only visible elements are returned. default true
+    # @return [Element]
+    def ele_with_pred opts
       # true = return only visible
-      find_element(:uiautomation, _all_visible_pred(predicate))
+      find_element(:uiautomation, _all_pred(opts))
     end
 
-    # returns visible elements matching predicate contained in the main app
-    def eles_with_pred predicate
-      find_elements(:uiautomation, _all_visible_pred(predicate))
+    # returns elements matching predicate contained in the main app
+    #
+    # predicate - the predicate to evaluate on the main app
+    #
+    # visible - if true, only visible elements are returned. default true
+    # @return [Array<Element>]
+    def eles_with_pred opts
+      find_elements(:uiautomation, _all_pred(opts))
     end
 
     # Prints xml of the current page
