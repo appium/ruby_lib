@@ -1,42 +1,32 @@
 module Appium
   module Ios
-    UITextField       = 'UITextField'
-    UISecureTextField = 'UISecureTextField'
+    UIATextField       = 'UIATextField'
+    UIASecureTextField = 'UIASecureTextField'
 
     private
-=begin
-contains only works with strings. will fail if used on non-string
-value may randomly be a number so value contains is going to randomly fail
-must use [cd] for case and diacritic insensitivity.
-
-@interface CustomTextField : UITextField
-
-The predicate type will always be CustomTextField even though element.type() in uiautomation
-returns UIATextField and UIASecureTextField. There's no way to identify the underlying predicate
- type without reading the source or brute force.
-https://github.com/appium/ruby_lib/issues/226#issuecomment-50036962
-=end
 
     # @private
-    def _textfield_visible_pred
-      # type refers to the underlying app specific class for the textfield which
-      # could be anything. we're assuming that textfields contain the string
-      # textfield in the type.
-      "type contains[cd] 'textfield'"
+    def _textfield_visible_string opts={}
+      index = opts.fetch :index, false
+      if index
+        %Q((//#{UIATextField}[@visible="true"])[#{index}] | (//#{UIASecureTextField}[@visible="true"])[#{index}])
+      else
+        %Q(//#{UIATextField}[@visible="true"] | //#{UIASecureTextField}[@visible="true"])
+      end
     end
 
     # @private
-    def _textfield_exact_pred value
-      value.gsub!("'", "\\\\'") # escape '
-      "#{_textfield_visible_pred} && value == '#{value}'"
+    def _textfield_exact_string value
+      textfield = string_visible_exact UIATextField, value
+      secure    = string_visible_exact UIASecureTextField, value
+      "#{textfield} | #{secure}"
     end
 
     # @private
-    def _textfield_contains_pred value
-      value.gsub!("'", "\\\\'") # escape '
-      # c - case insensitive
-      # d - diacritic insensitive
-      "#{_textfield_visible_pred}  && value contains[cd] '#{value}'"
+    def _textfield_contains_string value
+      textfield = string_visible_contains UIATextField, value
+      secure    = string_visible_contains UIASecureTextField, value
+      "#{textfield} | #{secure}"
     end
 
     public
@@ -50,14 +40,12 @@ https://github.com/appium/ruby_lib/issues/226#issuecomment-50036962
       # iOS needs to combine textfield and secure to match Android.
       if value.is_a? Numeric
         index = value
-        raise "#{index} is not a valid index. Must be >= 1" if index <= 0
-        index -= 1 # predicates are 0 indexed.
-        result = eles_with_pred(_textfield_visible_pred)
-        return result[index] if result && result.length > 0 && index < result.length
-        _no_such_element # failure to find a single element = raise error.
+        raise "#{index} is not a valid xpath index. Must be >= 1" if index <= 0
+
+        return xpath _textfield_visible_string index: index
       end
 
-      ele_with_pred(_textfield_contains_pred(value))
+      xpath _textfield_contains_string value
     end
 
     # Find all TextFields containing value.
@@ -65,34 +53,34 @@ https://github.com/appium/ruby_lib/issues/226#issuecomment-50036962
     # @param value [String] the value to search for
     # @return [Array<TextField>]
     def textfields value=false
-      return eles_with_pred(_textfield_visible_pred) unless value
-      eles_with_pred(_textfield_contains_pred(value))
+      return xpaths _textfield_visible_string unless value
+      xpaths _textfield_contains_string value
     end
 
     # Find the first TextField.
     # @return [TextField]
     def first_textfield
-      ele_with_pred(_textfield_visible_pred)
+      xpath _textfield_visible_string
     end
 
     # Find the last TextField.
     # @return [TextField]
     def last_textfield
-      eles_with_pred(_textfield_visible_pred).last
+      xpath _textfield_visible_string index: 'last()'
     end
 
     # Find the first TextField that exactly matches value.
     # @param value [String] the value to match exactly
     # @return [TextField]
     def textfield_exact value
-      ele_with_pred(_textfield_exact_pred(value))
+      xpath _textfield_exact_string value
     end
 
     # Find all TextFields that exactly match value.
     # @param value [String] the value to match exactly
     # @return [Array<TextField>]
     def textfields_exact value
-      eles_with_pred(_textfield_exact_pred(value))
+      xpaths _textfield_exact_string value
     end
   end # module Ios
 end # module Appium
