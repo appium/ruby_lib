@@ -126,7 +126,7 @@ must_not_raise is a no-op.
 
   t 'find_ele_by_attr_include' do
     el_text = find_ele_by_attr_include('UIAStaticText', :name, 'button').text
-    el_text.must_equal ''
+    el_text.must_equal uibutton_text
 
     el_name = find_ele_by_attr_include('UIAStaticText', :name, 'button').name
     el_name.must_equal uibutton_text
@@ -143,7 +143,7 @@ must_not_raise is a no-op.
 
   t 'last_ele' do
     el = last_ele('UIAStaticText')
-    el.text.must_equal ''
+    el.text.must_equal 'Transitions, Shows UIViewAnimationTransitions'
     el.name.must_equal 'Transitions, Shows UIViewAnimationTransitions'
   end
 
