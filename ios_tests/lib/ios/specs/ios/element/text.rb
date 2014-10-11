@@ -4,6 +4,10 @@ describe 'ios/element/text' do
     'UICatalog'
   end
 
+  def uiview_transitions
+    'Transitions, Shows UIViewAnimationTransitions'
+  end
+
   def before_first
     screen.must_equal catalog
   end
@@ -17,14 +21,14 @@ describe 'ios/element/text' do
   end
 
   t 'last_text' do
-    last_text.text.must_equal ''
-    last_text.name.must_equal 'Transitions, Shows UIViewAnimationTransitions'
+    last_text.text.must_equal uiview_transitions
+    last_text.name.must_equal uiview_transitions
   end
 
   t 'text' do
-    text('mat').text.must_equal ''
+    text('mat').text.must_equal uiview_transitions
     text(1).text.must_equal ui_catalog
-    text('mat').name.must_equal 'Transitions, Shows UIViewAnimationTransitions'
+    text('mat').name.must_equal uiview_transitions
   end
 
   t 'texts' do
