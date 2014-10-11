@@ -9,7 +9,7 @@ module Appium
     # @return [UIAStaticText]
     def text value
       return ele_index UIAStaticText, value if value.is_a? Numeric
-      xpath_visible_contains UIAStaticText, value
+      ele_by_json_visible_contains UIAStaticText, value
     end
 
     # Find all UIAStaticText containing value.
@@ -18,7 +18,7 @@ module Appium
     # @return [Array<UIAStaticText>]
     def texts value=false
       return tags UIAStaticText unless value
-      xpaths_visible_contains UIAStaticText, value
+      eles_by_json_visible_contains UIAStaticText, value
     end
 
     # Find the first UIAStaticText.
@@ -37,14 +37,14 @@ module Appium
     # @param value [String] the value to match exactly
     # @return [UIAStaticText]
     def text_exact value
-      xpath_visible_exact UIAStaticText, value
+      ele_by_json_visible_exact UIAStaticText, value
     end
 
     # Find all UIAStaticTexts that exactly match value.
     # @param value [String] the value to match exactly
     # @return [Array<UIAStaticText>]
     def texts_exact value
-      xpaths_visible_exact UIAStaticText, value
+      eles_by_json_visible_exact UIAStaticText, value
     end
   end # module Ios
 end # module Appium

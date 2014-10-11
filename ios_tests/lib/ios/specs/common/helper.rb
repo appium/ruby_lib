@@ -1,5 +1,6 @@
 # rake ios[common/helper]
 describe 'common/helper.rb' do
+
   def before_first
     screen.must_equal catalog
   end
@@ -158,20 +159,10 @@ must_not_raise is a no-op.
   end
 
   t 'invalid id should error' do
-    begin
-      id 'does not exist'
-    rescue Exception => e
-      message = e.message
-    end
-    message.must_equal 'Invalid id `does not exist`'
+    proc { id 'does not exist' }.must_raise Selenium::WebDriver::Error::NoSuchElementError
 
     # resource id should error on ios
-    begin
-      id 'android:id/text1'
-    rescue Exception => e
-      message = e.message
-    end
-    message.must_equal 'Invalid id `android:id/text1`'
+    proc { id 'android:id/text1' }.must_raise Selenium::WebDriver::Error::NoSuchElementError
   end
 
   t 'tag' do

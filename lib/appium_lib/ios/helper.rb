@@ -177,11 +177,7 @@ module Appium
     # @param id [String] the id to search for
     # @return [Element]
     def id id
-      value = resolve_id id
-      raise "Invalid id `#{id}`" unless value
-      exact    = string_visible_exact '*', value
-      contains = string_visible_contains '*', value
-      xpath "#{exact} | #{contains}"
+      find_element :id, id
     end
 
     # Return the iOS version as an array of integers
@@ -283,41 +279,41 @@ module Appium
     # @private
     # Returns a string xpath that matches the first element that contains value
     #
-    # example: xpath_visible_contains 'UIATextField', 'sign in'
+    # example: ele_by_json_visible_contains 'UIATextField', 'sign in'
     #
     # @param element [String] the class name for the element
     # @param value [String] the value to search for
     # @return [String]
     def string_visible_contains element, value
-      result     = []
-      attributes = %w[name hint label value]
+      contains = {
+        target:      value,
+        substring:   true,
+        insensitive: true,
+      }
 
-      value_up   = value.upcase
-      value_down = value.downcase
-
-      attributes.each do |attribute|
-        result << %Q(contains(translate(@#{attribute},"#{value_up}","#{value_down}"), "#{value_down}"))
-      end
-
-      result = result.join(' or ')
-      result = %Q(@visible="true" and (#{result}))
-      "//#{element}[#{result}]"
+      {
+        typeArray:   [element],
+        onlyVisible: true,
+        name:        contains,
+        label:       contains,
+        value:       contains,
+      }
     end
 
     # Find the first element that contains value
     # @param element [String] the class name for the element
     # @param value [String] the value to search for
     # @return [Element]
-    def xpath_visible_contains element, value
-      xpath string_visible_contains element, value
+    def ele_by_json_visible_contains element, value
+      ele_by_json string_visible_contains element, value
     end
 
     # Find all elements containing value
     # @param element [String] the class name for the element
     # @param value [String] the value to search for
     # @return [Array<Element>]
-    def xpaths_visible_contains element, value
-      xpaths string_visible_contains element, value
+    def eles_by_json_visible_contains element, value
+      eles_by_json string_visible_contains element, value
     end
 
     # @private
@@ -326,33 +322,35 @@ module Appium
     # @param value [String] the value to search for
     # @return [String]
     def string_visible_exact element, value
-      result     = []
-      attributes = %w[name hint label value]
+      exact = {
+        target:      value,
+        substring:   false,
+        insensitive: false,
+      }
 
-      attributes.each do |attribute|
-        result << %Q(@#{attribute}="#{value}")
-      end
-
-      result = result.join(' or ')
-      result = %Q(@visible="true" and (#{result}))
-
-      "//#{element}[#{result}]"
+      {
+        typeArray:   [element],
+        onlyVisible: true,
+        name:        exact,
+        label:       exact,
+        value:       exact,
+      }
     end
 
     # Find the first element exactly matching value
     # @param element [String] the class name for the element
     # @param value [String] the value to search for
     # @return [Element]
-    def xpath_visible_exact element, value
-      xpath string_visible_exact element, value
+    def ele_by_json_visible_exact element, value
+      ele_by_json string_visible_exact element, value
     end
 
     # Find all elements exactly matching value
     # @param element [String] the class name for the element
     # @param value [String] the value to search for
     # @return [Element]
-    def xpaths_visible_exact element, value
-      xpaths string_visible_exact element, value
+    def eles_by_json_visible_exact element, value
+      eles_by_json string_visible_exact element, value
     end
 
     # @private
@@ -448,7 +446,7 @@ Don't use window.tap. See https://github.com/appium/appium-uiauto/issues/28
       objects.each do |obj|
         next unless obj # obj may be nil. if so, ignore.
 
-        valid_keys = [:target, :substring, :insensitive]
+        valid_keys   = [:target, :substring, :insensitive]
         unknown_keys = obj.keys - valid_keys
         raise "Unknown keys: #{unknown_keys}" unless unknown_keys.empty?
 
@@ -492,7 +490,7 @@ Don't use window.tap. See https://github.com/appium/appium-uiauto/issues/28
     # }
     #
     def _by_json opts
-      valid_keys = [:typeArray, :onlyFirst, :onlyVisible, :name, :label, :value]
+      valid_keys   = [:typeArray, :onlyFirst, :onlyVisible, :name, :label, :value]
       unknown_keys = opts.keys - valid_keys
       raise "Unknown keys: #{unknown_keys}" unless unknown_keys.empty?
 
@@ -539,7 +537,7 @@ Don't use window.tap. See https://github.com/appium/appium-uiauto/issues/28
     # see eles_by_json
     def ele_by_json opts
       opts[:onlyFirst] = true
-      result = _by_json(opts).first
+      result           = _by_json(opts).first
       raise _no_such_element if result.nil?
       result
     end

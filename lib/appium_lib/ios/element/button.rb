@@ -10,7 +10,7 @@ module Appium
     def button value
       # return button at index.
       return ele_index UIAButton, value if value.is_a? Numeric
-      xpath_visible_contains UIAButton, value
+      ele_by_json_visible_contains UIAButton, value
     end
 
     # Find all UIAButtons containing value.
@@ -19,7 +19,7 @@ module Appium
     # @return [Array<UIAButton>]
     def buttons value=false
       return tags UIAButton unless value
-      xpaths_visible_contains UIAButton, value
+      eles_by_json_visible_contains UIAButton, value
     end
 
     # Find the first UIAButton.
@@ -38,14 +38,14 @@ module Appium
     # @param value [String] the value to match exactly
     # @return [UIAButton]
     def button_exact value
-      xpath_visible_exact UIAButton, value
+      ele_by_json_visible_exact UIAButton, value
     end
 
     # Find all UIAButtons that exactly match value.
     # @param value [String] the value to match exactly
     # @return [Array<UIAButton>]
     def buttons_exact value
-      xpaths_visible_exact UIAButton, value
+      eles_by_json_visible_exact UIAButton, value
     end
   end # module Ios
 end # module Appium
