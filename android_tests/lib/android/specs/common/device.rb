@@ -17,10 +17,11 @@ describe 'common/device' do
 
   t 'start_activity' do
     wait { current_activity.must_equal '.ApiDemos' }
-    start_activity 'io.appium.android.apis', '.accessibility.AccessibilityNodeProviderActivity'
+    start_activity app_package: 'io.appium.android.apis', app_activity: '.accessibility.AccessibilityNodeProviderActivity'
     wait { current_activity.include?('Node').must_equal true }
-    start_activity 'com.android.contacts', '.ContactsListActivity'
-    wait { current_activity.include?('Contact').must_equal true }
+    start_activity app_package:      'com.android.settings', app_activity:      '.Settings',
+                   app_wait_package: 'com.android.settings', app_wait_activity: '.Settings'
+    wait { current_activity.include?('Settings').must_equal true }
   end
 
   t 'is_installed' do
