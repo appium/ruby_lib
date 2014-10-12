@@ -60,7 +60,7 @@ must_not_raise is a no-op.
 
   t 'back' do
     # start page
-    wait { texts.length.must_equal 12 }
+    wait { texts.length.must_equal 13 }
     # nav to new page.
     # ele 0 is the title and can't be clicked.
     wait { text(2).click }
@@ -80,15 +80,15 @@ must_not_raise is a no-op.
   end
 
   t 'xpaths' do
-    wait { xpaths('//android.widget.TextView').length.must_equal 12 }
+    wait { xpaths('//android.widget.TextView').length.must_equal 13 }
   end
 
   t 'ele_index' do
-    wait { ele_index('android.widget.TextView', 2).name.must_equal 'Accessibility' }
+    wait { ele_index('android.widget.TextView', 3).name.must_equal 'Accessibility' }
   end
 
   t 'tags' do
-    wait { tags('android.widget.TextView').length.must_equal 12 }
+    wait { tags('android.widget.TextView').length.must_equal 13 }
   end
 
   t 'first_ele' do

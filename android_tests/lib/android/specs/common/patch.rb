@@ -55,14 +55,14 @@ describe 'common/patch' do
     t 'find many elements by resource id' do
       wait do
         value = find_elements(:id, 'android:id/text1').length
-        value.must_equal 11
+        value.must_equal 12
       end
     end
 
     t 'find single element by resource id' do
       wait do
         value = id('android:id/text1').text
-        value.must_equal 'Accessibility'
+        value.must_equal "Access'ibility"
       end
     end
   end

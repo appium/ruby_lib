@@ -11,8 +11,8 @@ describe 'android/element/text' do
   end
 
   t 'texts' do
-    wait { texts('i').length.must_equal 6 }
-    wait { texts.length.must_equal 12 }
+    wait { texts('i').length.must_equal 7 }
+    wait { texts.length.must_equal 13 }
   end
 
   t 'first_text' do

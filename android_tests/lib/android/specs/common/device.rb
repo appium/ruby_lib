@@ -35,7 +35,7 @@ describe 'common/device' do
 
   t 'close & launch' do
     close_app
-    launch
+    launch_app
   end
 
   t 'current_activity' do

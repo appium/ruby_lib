@@ -1,7 +1,7 @@
 # rake android[android/helper]
 describe 'android/helper' do
   t 'tags' do
-    wait { tags('android.widget.TextView').length.must_equal 12 }
+    wait { tags('android.widget.TextView').length.must_equal 13 }
   end
 
   # t 'get_selendroid_inspect' # only works on selendroid
@@ -66,7 +66,7 @@ describe 'android/helper' do
   end
 
   t 'ids' do
-    wait { ids('android:id/text1').length.must_equal 11 }
+    wait { ids('android:id/text1').length.must_equal 12 }
   end
 
   t '_parse_current_app_line' do
