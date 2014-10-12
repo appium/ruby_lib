@@ -12,14 +12,15 @@ describe 'install' do
     is_installed?(pkg).must_equal false
   end
 
-  t 'install/uninstall/launch' do
-    skip # no way to launch apk after it's uninstalled/installed
-    # blocked on: https://github.com/appium/appium/issues/2969
+  t 'install/uninstall' do
     installed
     remove_app 'io.appium.android.apis'
     not_installed
     install_app caps[:app]
     installed
-    launch_app
   end
+
+  # no way to launch apk after it's uninstalled/installed
+  # blocked on: https://github.com/appium/appium/issues/2969
+  # launch_app
 end
