@@ -8,7 +8,7 @@ module Appium
       post: {
         open_notifications:   'session/:session_id/appium/device/open_notifications',
         shake:                'session/:session_id/appium/device/shake',
-        launch:               'session/:session_id/appium/app/launch',
+        launch_app:           'session/:session_id/appium/app/launch',
         close_app:            'session/:session_id/appium/app/close',
         reset:                'session/:session_id/appium/app/reset',
         toggle_airplane_mode: 'session/:session_id/appium/device/toggle_airplane_mode',
@@ -33,7 +33,7 @@ module Appium
 
     # @!method current_activity
 
-    # @!method launch
+    # @!method launch_app
     #   Start the simulator and applicaton configured with desired capabilities  
 
     # @!method reset
@@ -128,15 +128,15 @@ module Appium
           end
         end
 
-        add_endpoint_method(:install, 'session/:session_id/appium/device/install_app') do
-          def install(path)
-            execute :install, {}, :appPath => path
+        add_endpoint_method(:install_app, 'session/:session_id/appium/device/install_app') do
+          def install_app(path)
+            execute :install_app, {}, :appPath => path
           end
         end
 
-        add_endpoint_method(:remove, 'session/:session_id/appium/device/remove_app') do
-          def remove(id)
-            execute :remove, {}, :appId => id
+        add_endpoint_method(:remove_app, 'session/:session_id/appium/device/remove_app') do
+          def remove_app(id)
+            execute :remove_app, {}, :appId => id
           end
         end
 
