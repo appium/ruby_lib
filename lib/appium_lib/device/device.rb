@@ -351,7 +351,7 @@ module Appium
       def add_touch_actions
         add_endpoint_method(:touch_actions, 'session/:session_id/touch/perform') do
           def touch_actions(actions)
-            actions = [actions].flatten
+            actions = { actions: [actions].flatten }
             execute :touch_actions, {}, actions
           end
         end
