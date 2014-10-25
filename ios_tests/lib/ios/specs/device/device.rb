@@ -3,6 +3,12 @@ describe 'device/device' do
     screen.must_equal catalog
   end
 
+  # go back to the main page
+  def go_back
+    back
+    wait { ! exists { id 'ArrowButton'  } } # successfully transitioned back
+  end
+
   t 'before_first' do
     before_first
   end
@@ -13,7 +19,7 @@ describe 'device/device' do
 
     # It appears that lockForDuration doesn't.
     close_app
-    launch
+    launch_app
   end
 
   t 'background_app' do
@@ -32,7 +38,7 @@ describe 'device/device' do
 
   t 'close and launch' do
     close_app
-    launch
+    launch_app
     tag('UIANavigationBar').name.must_equal 'UICatalog'
   end
 
@@ -45,12 +51,12 @@ describe 'device/device' do
   end
 
   t 'current_context' do
-    current_context.must_equal nil
+    current_context.must_equal 'NATIVE_APP'
   end
 
   t 'switch_to_default_context' do
     switch_to_default_context
-    current_context.must_equal nil
+    current_context.must_equal 'NATIVE_APP'
   end
 
   t 'app_strings' do
@@ -59,11 +65,9 @@ describe 'device/device' do
   end
 
   t 'action_chain' do
-    ac = Appium::TouchAction.new
-    e  = find_element(:name, 'Buttons, Various uses of UIButton')
-    ac.press element: e, x: 10, y: 10
-    ac.perform
-    back
+    Appium::TouchAction.new.press(element: id('ButtonsExplain')).perform
+    wait { id 'ArrowButton' } # successfully transitioned to buttons page
+    go_back
   end
 
   t 'swipe' do
@@ -71,9 +75,11 @@ describe 'device/device' do
   end
 
   t 'pinch & zoom' do
-    text('Images, Use of UIImageView').click
+    wait { id('ImagesExplain').click }
+    # both of these appear to do nothing on iOS 8
     zoom 200
     pinch 75
+    go_back
   end
 
   t 'pull_file' do
