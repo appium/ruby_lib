@@ -21,16 +21,16 @@ describe 'ios/element/button' do
 
   t 'button' do
     # by index
-    button(2).name.must_equal gray
+    button(3).name.must_equal gray
 
     # by name contains
     button('ray').name.must_equal gray
   end
 
   t 'buttons' do
-    exp = ['Back', 'Gray', 'Right pointing arrow']
+    exp = ['Back', 'Back', 'Gray', 'Right pointing arrow']
     buttons('a').map { |e| e.name }.must_equal exp
-    buttons.length.must_equal 4
+    buttons.length.must_equal 5
   end
 
   t 'first_button' do
