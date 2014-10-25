@@ -195,7 +195,7 @@ describe 'driver' do
 
     # any elements
     t 'find_elements' do
-      find_elements(:class, 'UIAStaticText').length.must_equal 13
+      find_elements(:class, 'UIATableCell').length.must_equal 12
     end
 
     # any element
