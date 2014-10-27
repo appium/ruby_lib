@@ -3,6 +3,7 @@
 - [appium_lib on RubyGems](https://rubygems.org/gems/appium_lib)
 - [Documentation for appium_lib](https://github.com/appium/ruby_lib/tree/master/docs)
 - [Appium Ruby Console](https://github.com/appium/ruby_console)
+- [Bootcamp quick start guide](http://sauceio.com/index.php/tag/appium-bootcamp/) & [Bootcamp example source](https://github.com/tourdedave/appium-getting-started-code-exampes)
 
 Helper methods for writing cross platform (iOS, Android) tests in Ruby using Appium. Note that user waits should not exceed 120 seconds if they're going to run on Sauce Labs.
 
