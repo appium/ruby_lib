@@ -92,11 +92,11 @@ must_not_raise is a no-op.
   end
 
   t 'xpaths' do
-    xpaths('//UIAStaticText').length.must_equal 13
+    xpaths('//UIAStaticText').length.must_equal 25
   end
 
   def uibutton_text
-    'Buttons, Various uses of UIButton'
+    'Buttons'
   end
 
   t 'ele_index' do
@@ -135,7 +135,7 @@ must_not_raise is a no-op.
 
   t 'find_eles_by_attr_include' do
     ele_count = find_eles_by_attr_include('UIAStaticText', :name, 'e').length
-    ele_count.must_equal 12
+    ele_count.must_equal 19
   end
 
   t 'first_ele' do
@@ -144,8 +144,8 @@ must_not_raise is a no-op.
 
   t 'last_ele' do
     el = last_ele('UIAStaticText')
-    el.text.must_equal 'Transitions, Shows UIViewAnimationTransitions'
-    el.name.must_equal 'Transitions, Shows UIViewAnimationTransitions'
+    el.text.must_equal 'Transitions'
+    el.name.must_equal 'Transitions'
   end
 
   # t 'source' do # tested by get_source
@@ -166,7 +166,7 @@ must_not_raise is a no-op.
   end
 
   t 'tag' do
-    tag('UIATableCell').name.must_equal 'Buttons, Various uses of UIButton'
+    tag('UIATableCell').name.must_equal uibutton_text
   end
 
   t 'tags' do
@@ -174,7 +174,7 @@ must_not_raise is a no-op.
   end
 
   t 'find_eles_by_attr_include' do
-    find_eles_by_attr_include('UIATableCell', 'name', 'Use').length.must_equal 7
+    find_eles_by_attr_include('UIAStaticText', 'name', 'Use').length.must_equal 7
   end
 
   t 'get_page_class' do

@@ -5,7 +5,7 @@ describe 'ios/element/generic' do
   end
 
   def uibutton_text
-    'Buttons, Various uses of UIButton'
+    'Buttons'
   end
 
   def verify element

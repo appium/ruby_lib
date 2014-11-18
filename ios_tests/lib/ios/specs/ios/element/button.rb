@@ -30,7 +30,7 @@ describe 'ios/element/button' do
   t 'buttons' do
     exp = ['Back', 'Back', 'Gray', 'Right pointing arrow']
     buttons('a').map { |e| e.name }.must_equal exp
-    buttons.length.must_equal exp.length
+    buttons('a').length.must_equal exp.length
   end
 
   t 'first_button' do

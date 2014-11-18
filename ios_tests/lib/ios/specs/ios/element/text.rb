@@ -5,7 +5,7 @@ describe 'ios/element/text' do
   end
 
   def uiview_transitions
-    'Transitions, Shows UIViewAnimationTransitions'
+    'Transitions'
   end
 
   def before_first
@@ -26,14 +26,14 @@ describe 'ios/element/text' do
   end
 
   t 'text' do
-    text('mat').text.must_equal uiview_transitions
+    text('siti').text.must_equal uiview_transitions
     text(1).text.must_equal ui_catalog
-    text('mat').name.must_equal uiview_transitions
+    text('siti').name.must_equal uiview_transitions
   end
 
   t 'texts' do
-    exp = ['Controls, Various uses of UIControl', 'Segments, Various uses of UISegmentedControl']
-    texts.length.must_equal 13
+    exp = ['Controls', 'Various uses of UIControl', 'Various uses of UISegmentedControl']
+    texts.length.must_equal 24
     texts('trol').map { |e| e.name }.must_equal exp
     texts('uses').length.must_equal 7
   end
