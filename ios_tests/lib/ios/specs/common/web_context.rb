@@ -8,4 +8,9 @@ describe 'the web context' do
     sleep 1  #Give a chance to load
     page.start_with?("\nhtml\n").must_equal true
   end
+
+  t 'after_last' do
+    set_context 'NATIVE_APP'
+    back_click
+  end
 end
