@@ -488,8 +488,7 @@ module Appium
         raise 'ERROR: Unable to connect to Appium. Is the server running?'
       end
 
-      # Set implicit wait by default unless we're using Pry.
-      @driver.manage.timeouts.implicit_wait = @default_wait unless defined? Pry
+      @driver.manage.timeouts.implicit_wait = @default_wait
 
       @driver
     end
