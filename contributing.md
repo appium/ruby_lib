@@ -10,14 +10,14 @@ For features or bug fixes, please submit a pull request. Ideally there would be 
 
 ### Run iOS tests
 
-iOS tests are run on the iOS 8.1 iPhone simulator.
+iOS tests are run on the iPhone 6 / iOS 8.1 simulator.
 
 - `cd ios_tests`
 - `flake 3 ios` - Run all the iOS tests up to 3 times
 
 ### Run Android tests
 
-Android tests require running on physical hardware. The emulator is unreliable.
+Android tests require running on physical hardware with Android 5.0 (API 21). The emulator is unreliable.
 
 - `cd android_tests`
 - `flake 3 android` - Run all the Android tests up to 3 times
