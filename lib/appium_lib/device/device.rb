@@ -219,7 +219,7 @@ module Appium
         # TODO TEST ME
         add_endpoint_method(:set_immediate_value, 'session/:session_id/appium/element/:id/value') do
           def set_immediate_value(element, value)
-            execute :set_immediate_value, { :id => element.ref }, value
+            execute :set_immediate_value, { :id => element.ref }, value: value
           end
         end
 

@@ -91,6 +91,7 @@ def patch_webdriver_bridge
       path_str   = path.sub(path_match[0], '') unless path_match.nil?
 
       puts "#{verb} #{path_str}"
+
       # must check to see if command_hash is a hash. sometimes it's not.
       if command_hash.is_a?(Hash) && !command_hash.empty?
         print_command = command_hash.clone
@@ -106,6 +107,10 @@ def patch_webdriver_bridge
         else
           ap print_command
         end
+      else # non-standard command hash
+        # It's important to output this for debugging problems.
+        # for example invalid JSON will not be a Hash
+        ap command_hash if command_hash
       end
       delay = $driver.global_webdriver_http_sleep
       sleep delay if !delay.nil? && delay > 0
