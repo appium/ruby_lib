@@ -126,7 +126,12 @@ module Appium
     # @return [String]
     def get_android_inspect class_name=false
       source = get_source
-      if source.start_with? '<html>' # parse html from webview
+
+      doctype_string = '<!doctyp'
+      source_header  = source[0..doctype_string.length].downcase
+      source_is_html = source_header.start_with?(doctype_string, '<html')
+
+      if source_is_html # parse html from webview
         parser = @android_html_parser ||= Nokogiri::HTML::SAX::Parser.new(Common::HTMLElements.new)
       else
         parser = @android_native_parser ||= Nokogiri::XML::SAX::Parser.new(AndroidElements.new)

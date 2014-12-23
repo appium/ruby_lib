@@ -182,7 +182,9 @@ module Appium
         @elements_in_order.reduce('') do |r, e|
           name        = e.delete :name
           attr_string = e.reduce('') do |string, attr|
-            string += "  #{attr[0]}: #{attr[1]}\n"
+            attr_1 = attr[1]
+            attr_1 = attr_1 ? attr_1.strip : attr_1
+            string += "  #{attr[0]}: #{attr_1}\n"
           end
 
           unless attr_string.nil? || attr_string.empty?
