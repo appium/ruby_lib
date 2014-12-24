@@ -1,3 +1,18 @@
+### Breaking Changes in 5.0
+
+           Old | New
+            :--|:--
+`launch`       | `launch_app`
+`install`      | `install_app`
+`remove`       | `remove_app`
+
+method_missing has been removed from the Ruby bindings. If you want to invoke methods on the top level object,
+you can use the following:
+
+`Appium.promote_appium_methods Object`
+
+Also make sure to update to Appium Ruby Console v1.0.2 or better. Old consoles will not work with the 5.0 release due to the removal of method_missing.
+
 ### Breaking Changes in 4.0
 
            Old | New
