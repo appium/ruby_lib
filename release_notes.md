@@ -1,3 +1,67 @@
+#### v5.0.0 2014-12-23
+
+- [7c3bc19](https://github.com/appium/ruby_lib/commit/7c3bc19905d0f008192a59dc7f5a938e3701ec8f) Release 5.0.0
+- [0585d78](https://github.com/appium/ruby_lib/commit/0585d78042ec6e32e00dc349c70fb56179db6b1d) Fix page command on Android
+- [1f2d10a](https://github.com/appium/ruby_lib/commit/1f2d10afa37b9ca863f94eac9558467b3c2539f4) Test touchactions in new file
+- [6a638c4](https://github.com/appium/ruby_lib/commit/6a638c4a752f135830cb57f58ec5e373b8461944) Fix webview page inspection
+- [ddd94b4](https://github.com/appium/ruby_lib/commit/ddd94b498601bfd961dc449f00e584ed6bf753d8) Remove method_missing
+- [ad10640](https://github.com/appium/ruby_lib/commit/ad10640c58ba1435b32a4d3a8268f66ae4c4b74e) Fix set_immediate_value & update debugging
+- [7c9e8d0](https://github.com/appium/ruby_lib/commit/7c9e8d0ee33a2d067d4e8c5cb19abf456306851a) Don't try and hide the keyboard after .type
+- [544e34a](https://github.com/appium/ruby_lib/commit/544e34a7cb8c749947e0f1ac4f2cf02a561a32c3) Fix #291 always set implicit wait to default wait
+- [d6dacd0](https://github.com/appium/ruby_lib/commit/d6dacd03624d8fce68cfbe7419bc0046072955b8) Clean up button test on iOS
+- [2967a52](https://github.com/appium/ruby_lib/commit/2967a5212cdabbf972d7000ddc275eab7f0293ef) Update contributing.md
+- [ad35078](https://github.com/appium/ruby_lib/commit/ad35078239f62483345505da2289aa2820a19333) Update contributing.md
+- [3943039](https://github.com/appium/ruby_lib/commit/394303988c41631b1715dd4731eedbc92de2a568) Create contributing.md
+- [20c0c4d](https://github.com/appium/ruby_lib/commit/20c0c4d66ef6f2bab9e7ddaae64e778d510c20bb) Merge pull request #289 from sofaking/master
+- [0e223ac](https://github.com/appium/ruby_lib/commit/0e223ac4097e8e6f43c2a33177355ddf852562c5) iOS text elements tests are green
+- [16b33af](https://github.com/appium/ruby_lib/commit/16b33af71bd9aec70f01635f775b9cc82c52ae4d) iOS button elements tests are green
+- [524d412](https://github.com/appium/ruby_lib/commit/524d412ca2576f2b5d0f284fcb9414960b62b97b) Get back to catalog after web view test
+- [06c3a75](https://github.com/appium/ruby_lib/commit/06c3a75d9350f603b2c06c73341b55020f5217fb) iOS driver tests are green
+- [c2e80f0](https://github.com/appium/ruby_lib/commit/c2e80f0351ffb2f71a7702d1d9e6d75b734f53ef) iOS web context test is green
+- [718e6f5](https://github.com/appium/ruby_lib/commit/718e6f541e594c820ab98b13ecc30ac0ae101774) Generic element tests for iOS are green now
+- [0651054](https://github.com/appium/ruby_lib/commit/065105471867a87ea364064191defb43107f79d3) ios helper tests are green now
+- [1356454](https://github.com/appium/ruby_lib/commit/1356454390a001c85e885ae00510167362ca89db) Compatibility with Rubies older than 2.1.0
+- [99c0b12](https://github.com/appium/ruby_lib/commit/99c0b128da5c6c4e7df2fb1313b7e84f1d6075c9) Add bootcamp guide & example links
+- [8d2daeb](https://github.com/appium/ruby_lib/commit/8d2daeb9544f6743856552c6828e71bbdecf130f) Fix iOS 8.1 driver test
+- [c52b099](https://github.com/appium/ruby_lib/commit/c52b09959ffa60784c1b91bf8d7eb9c1a4456725) Update button test
+- [a069f28](https://github.com/appium/ruby_lib/commit/a069f28854b722e56a34b4796d43c9aed3e833e6) Fix iOS 8.1 test device/device
+- [4643510](https://github.com/appium/ruby_lib/commit/4643510b8f0ac474340f65ab017b318fd06563a3) Update iOS 8.1 test ios/element/button  ✓
+- [44c930a](https://github.com/appium/ruby_lib/commit/44c930acce8ee9ef55f9de418922aefc0de39933) Merge pull request #285 from sbonebrake/touch_action_sauce_fix
+- [bbb4cc2](https://github.com/appium/ruby_lib/commit/bbb4cc2c65174d340a38d08f8e48ef55fef8d2ae) Fix for issue #283 'Ruby bindings TouchAction broken on Sauce Labs'
+- [3cfe864](https://github.com/appium/ruby_lib/commit/3cfe8648827ed6f78fb4d3bb9610f15aebbb38ed) Update tests for new api.apk
+- [f1e353a](https://github.com/appium/ruby_lib/commit/f1e353a5720a8dd202be7edd1f6f11235c8aad4a) Skip launch_app test
+- [8000cfa](https://github.com/appium/ruby_lib/commit/8000cfaa5268d70288d0e3f4ae7e2c8386b5076b) Add _app suffix to install/remove/launch
+- [bc81782](https://github.com/appium/ruby_lib/commit/bc8178235ed2dd97491d1ab528c68c01cd17a0bc) Fix android common/device test
+- [252df47](https://github.com/appium/ruby_lib/commit/252df470e9f6fb13f855f0ff2c7320b71499dbfd) Reimplement ele_index / tag to avoid xpath
+- [c5cf51d](https://github.com/appium/ruby_lib/commit/c5cf51d489e2e1d75e5b649f1c7767ec475d268a) Rewrite iOS helpers
+- [eb22269](https://github.com/appium/ruby_lib/commit/eb22269712354e5ad9e8af1db30954136930c425) Fix iOS textfield tests
+- [cfad029](https://github.com/appium/ruby_lib/commit/cfad029ea595f12e0328e7600c7d8c5e2abcd431) Rewrite iOS textfield helpers
+- [98a561b](https://github.com/appium/ruby_lib/commit/98a561beae09017eaa8be4b1d7cdaf5e3d6e1575) Add _elementOrElementsByType for iOS
+- [0b9aa53](https://github.com/appium/ruby_lib/commit/0b9aa5399ea7e4bd981ec7b65513f15423c07a6a) Regenerate docs
+- [b7def85](https://github.com/appium/ruby_lib/commit/b7def85c2bd734049121f7f3ca184d0b26e477fe) Fix accessor docs
+- [b38c783](https://github.com/appium/ruby_lib/commit/b38c7830250067c25834796e4a513fda7e6f3588) Update predicate methods. Fix version ref
+- [8d3bbc5](https://github.com/appium/ruby_lib/commit/8d3bbc53fb75e7f5fe60ffe7219f8fcb18095262) Restore xpath based textfield helper for iOS
+- [de61d18](https://github.com/appium/ruby_lib/commit/de61d18c1a0952cf72a34143672f5f46f962b3d2) Fix ios/element/text test
+- [d90446d](https://github.com/appium/ruby_lib/commit/d90446db37ffdc8db31bdacecc0a4083d91dd6ae) Fix common/helper iOS test
+- [5042465](https://github.com/appium/ruby_lib/commit/50424651ce90bd9d311cac2c6648dd3908a95a85) Update device attr docs
+- [e1f041f](https://github.com/appium/ruby_lib/commit/e1f041f96bc9acee6b218db646be078d68a21495) Device Modes
+- [dfdacdf](https://github.com/appium/ruby_lib/commit/dfdacdfbd3a1a932dcf98ac46a4f0ff8d38356b3) Update docs.md
+- [a0a74a9](https://github.com/appium/ruby_lib/commit/a0a74a95c2dd842202380946befe496b324a50b8) Add example of automating preinstalled Android app
+- [4569b0e](https://github.com/appium/ruby_lib/commit/4569b0e80ebafac295f39e42d93204d440320eff) Merge pull request #267 from 0x1mason/2969
+- [cfe9f29](https://github.com/appium/ruby_lib/commit/cfe9f2982d1dff85591ff7375dd92bf54bbd1e75) Added start_activity function and tests
+- [af6d44c](https://github.com/appium/ruby_lib/commit/af6d44c6ccd3f32a9553be3c290000421edae92d) Add User-Agent
+- [29dfcbe](https://github.com/appium/ruby_lib/commit/29dfcbe45f9f70602fa29213a032114d3a751150) Merge pull request #266 from Jonahss/master
+- [ca42554](https://github.com/appium/ruby_lib/commit/ca425545770af7530c6820be59f211a0d0f50009) added get_settings and update_settings methods
+- [7cd7431](https://github.com/appium/ruby_lib/commit/7cd74310638df62683f804f6e961cb34832ca728) Merge pull request #252 from jskswamy/master
+- [3ab6f01](https://github.com/appium/ruby_lib/commit/3ab6f01676e03d263be4bdb9193eef125204cc0d) Update nokogiri
+- [afcbd6b](https://github.com/appium/ruby_lib/commit/afcbd6b6ed868c189b383235a5a81762b0258a08) Update gemspec
+- [5f0c1c5](https://github.com/appium/ruby_lib/commit/5f0c1c569b2eb6014982cd9c1c246215dc3375ab) Fix textfield index
+- [d4517b8](https://github.com/appium/ruby_lib/commit/d4517b878763523068f99b89b38a1ea3b0a98c4b) Update comment
+- [b71c9d4](https://github.com/appium/ruby_lib/commit/b71c9d4dfe5d00e368b7fe56a88a6accfeb7485e) Fix get_source
+- [c352e68](https://github.com/appium/ruby_lib/commit/c352e6855e9d503199d86640d232dce7bda1734b) Fix uiautomator's invalid xml #243
+- [c2b5dcb](https://github.com/appium/ruby_lib/commit/c2b5dcbf733575ffa846432b21fa97575415aab3) Use predicates for ios/element/textfield
+
+
 #### v4.1.0 2014-07-21
 
 - [a13158f](https://github.com/appium/ruby_lib/commit/a13158fb926212d84f26120c3bc5355c8cd34baf) Release 4.1.0
