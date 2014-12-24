@@ -128,7 +128,9 @@ module Appium
 
     # @private
     def lazy_load_strings
-      @strings_xml ||= app_strings
+      # app strings only works on local apps.
+      # on disk apps (ex: com.android.settings) will error
+      @strings_xml ||= ignore { app_strings } || {}
     end
 
     # Search strings.xml's values for target.
