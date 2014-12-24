@@ -11,7 +11,7 @@ you can use the following:
 
 `Appium.promote_appium_methods Object`
 
-Also make sure to update to Appium Ruby Console v1.0.2 or better. Old consoles will not work with the 5.0 release due to the removal of method_missing.
+Also make sure to update to Appium Ruby Console v1.0.3 or better. Old consoles will not work with the 5.0 release due to the removal of method_missing.
 
 ### Breaking Changes in 4.0
 
