@@ -3,9 +3,6 @@ require 'ap'
 require 'selenium-webdriver'
 require 'nokogiri'
 
-# patch ap
-require_relative 'awesome_print/ostruct'
-
 # common
 require_relative 'common/helper'
 require_relative 'common/wait'
