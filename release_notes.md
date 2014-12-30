@@ -1,3 +1,12 @@
+#### v5.0.1 2014-12-30
+
+- [9b15701](https://github.com/appium/ruby_lib/commit/9b157011965442e6f021dcfeef588450277f1c6a) Release 5.0.1
+- [d2e12d8](https://github.com/appium/ruby_lib/commit/d2e12d8275f01f1652430d7908dd118bbfeec706) Merge pull request #298 from sbonebrake/upgrade_awesome_print
+- [4478662](https://github.com/appium/ruby_lib/commit/44786624397303e9785ce9322b7c6e625e70694e) Upgrade awesome_print and remove the ostruct patch. This fixes issue #297.
+- [fbf9a6e](https://github.com/appium/ruby_lib/commit/fbf9a6ed170f65d91f53617f0509c5b222bf3859) Update migration.md
+- [d5172bd](https://github.com/appium/ruby_lib/commit/d5172bd773f8d36e66e9b573c74e99d762d1c28d) Update migration.md
+
+
 #### v5.0.0 2014-12-23
 
 - [7c3bc19](https://github.com/appium/ruby_lib/commit/7c3bc19905d0f008192a59dc7f5a938e3701ec8f) Release 5.0.0
