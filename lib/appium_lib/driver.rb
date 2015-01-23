@@ -76,20 +76,20 @@ module Appium
 
     parent_dir = File.dirname file
     toml       = File.expand_path File.join parent_dir, 'appium.txt'
-    puts "appium.txt path: #{toml}" if verbose
+    Appium::Logger.info "appium.txt path: #{toml}" if verbose
 
     toml_exists = File.exists? toml
-    puts "Exists? #{toml_exists}" if verbose
+    Appium::Logger.info "Exists? #{toml_exists}" if verbose
 
     raise "toml doesn't exist #{toml}" unless toml_exists
     require 'toml'
-    puts "Loading #{toml}" if verbose
+    Appium::Logger.info "Loading #{toml}" if verbose
 
     data = File.read toml
     data = TOML::Parser.new(data).parsed
     # TOML creates string keys. must symbolize
     data = Appium::symbolize_keys data
-    ap data unless data.empty? if verbose
+    Appium::Logger.ap_info data unless data.empty? if verbose
 
     if data && data[:caps] && data[:caps][:app] && !data[:caps][:app].empty?
       data[:caps][:app] = Appium::Driver.absolute_app_path data
@@ -319,9 +319,9 @@ module Appium
       @appium_debug = appium_lib_opts.fetch :debug, !!defined?(Pry)
 
       if @appium_debug
-        ap opts unless opts.empty?
-        puts "Debug is: #{@appium_debug}"
-        puts "Device is: #{@appium_device}"
+        Appium::Logger.ap_debug opts unless opts.empty?
+        Appium::Logger.debug "Debug is: #{@appium_debug}"
+        Appium::Logger.debug "Device is: #{@appium_device}"
         patch_webdriver_bridge
       end
 
@@ -512,14 +512,14 @@ module Appium
     # @return [void]
     def set_wait timeout=nil
       if timeout.nil?
-        # puts "timeout = @default_wait = @last_wait"
-        # puts "timeout = @default_wait = #{@last_waits}"
+        # Appium::Logger.info "timeout = @default_wait = @last_wait"
+        # Appium::Logger.info "timeout = @default_wait = #{@last_waits}"
         timeout = @default_wait = @last_waits.first
       else
         @default_wait = timeout
-        # puts "last waits before: #{@last_waits}"
+        # Appium::Logger.info "last waits before: #{@last_waits}"
         @last_waits   = [@last_waits.last, @default_wait]
-        # puts "last waits after: #{@last_waits}"
+        # Appium::Logger.info "last waits after: #{@last_waits}"
       end
 
       @driver.manage.timeouts.implicit_wait = timeout
