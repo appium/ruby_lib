@@ -46,3 +46,11 @@ gem install --no-rdoc --no-ri appium_lib
 - [Ruby Android methods](https://github.com/appium/ruby_lib/blob/master/docs/android_docs.md)
 - [Ruby iOS methods](https://github.com/appium/ruby_lib/blob/master/docs/ios_docs.md)
 - [Appium Server docs](https://github.com/appium/appium/tree/master/docs)
+
+#### Logging
+
+[Log level](https://github.com/appium/ruby_lib/blob/1673a694121d2ae24ffd1530eb71b7015d44dc52/lib/appium_lib/logger.rb) can be adjusted. The default level is `Logger::WARN`
+
+```ruby
+Appium::Logger.level = Logger::INFO
+```
