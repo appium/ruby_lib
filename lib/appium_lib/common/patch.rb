@@ -90,7 +90,7 @@ def patch_webdriver_bridge
       path_match = path.match /.*\h{8}-?\h{4}-?\h{4}-?\h{4}-?\h{12}/
       path_str   = path.sub(path_match[0], '') unless path_match.nil?
 
-      puts "#{verb} #{path_str}"
+      Appium::Logger.info  "#{verb} #{path_str}"
 
       # must check to see if command_hash is a hash. sometimes it's not.
       if command_hash.is_a?(Hash) && !command_hash.empty?
@@ -103,18 +103,18 @@ def patch_webdriver_bridge
           print_command[:value] = value.length == 1 ? value[0] : value
 
           # avoid backslash escape quotes in strings. "\"a\"" => "a"
-          puts print_command.ai.gsub('\"', '"')
+          Appium::Logger.info print_command.ai.gsub('\"', '"')
         else
-          ap print_command
+          Appium::Logger.ap_info print_command
         end
       else # non-standard command hash
         # It's important to output this for debugging problems.
         # for example invalid JSON will not be a Hash
-        ap command_hash if command_hash
+        Appium::Logger.ap_info command_hash if command_hash
       end
       delay = $driver.global_webdriver_http_sleep
       sleep delay if !delay.nil? && delay > 0
-      # puts "verb: #{verb}, path #{path}, command_hash #{command_hash.to_json}"
+      # Appium::Logger.info "verb: #{verb}, path #{path}, command_hash #{command_hash.to_json}"
       http.call verb, path, command_hash
     end # def
   end # class
