@@ -1,3 +1,12 @@
+#### v6.0.0 2015-01-26
+
+- [ea11190](https://github.com/appium/ruby_lib/commit/ea11190b9ab36e34226d988f85fe612af6f769de) Release 6.0.0
+- [d15371d](https://github.com/appium/ruby_lib/commit/d15371deb2bbb0e6a441c7b38cabdc83b3e36256) Update readme.md
+- [4f99dd3](https://github.com/appium/ruby_lib/commit/4f99dd31ad0a1976214858195b5911e79a42c3a1) Merge pull request #302 from whoward/use-logger
+- [1673a69](https://github.com/appium/ruby_lib/commit/1673a694121d2ae24ffd1530eb71b7015d44dc52) Use the logger object for outputting debug information
+- [4573473](https://github.com/appium/ruby_lib/commit/457347379f26804af143269e896f45869e2860e1) Create index_paths.md
+
+
 #### v5.0.1 2014-12-30
 
 - [9b15701](https://github.com/appium/ruby_lib/commit/9b157011965442e6f021dcfeef588450277f1c6a) Release 5.0.1
