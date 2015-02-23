@@ -10,6 +10,8 @@ module Appium
         define_method("ap_#{level}") { |obj| logger.ap(obj, level) }
       end
 
+      attr_writer :logger
+
       private
 
       def logger
