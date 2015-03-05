@@ -531,11 +531,13 @@ Don't use window.tap. See https://github.com/appium/appium-uiauto/issues/28
       # will be present.
       _validate_object opts[:name], opts[:label], opts[:value]
 
+      # note that mainWindow is sometimes nil so it's passed as a param
+      # $._elementOrElementsByType will validate that the window isn't nil
       element_or_elements_by_type = <<-JS
         (function() {
-        var opts = #{opts.to_json}
+        var opts = #{opts.to_json};
 
-        return $.mainWindow()._elementOrElementsByType(opts);
+        return $._elementOrElementsByType($.mainWindow(), opts);
         })();
       JS
 
