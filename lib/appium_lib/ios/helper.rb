@@ -536,12 +536,19 @@ Don't use window.tap. See https://github.com/appium/appium-uiauto/issues/28
       element_or_elements_by_type = <<-JS
         (function() {
         var opts = #{opts.to_json};
+        var result = false;
 
-        return $._elementOrElementsByType($.mainWindow(), opts);
+        try {
+          result = $._elementOrElementsByType($.mainWindow(), opts);
+        } catch (e) {
+        }
+
+        return result;
         })();
       JS
 
-      execute_script element_or_elements_by_type
+      res = execute_script element_or_elements_by_type
+      res ? res : raise(Selenium::Client::CommandError, 'mainWindow is nil')
     end
 
     # example usage:

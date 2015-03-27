@@ -1,6 +1,6 @@
 [caps]
 platformName = "ios"
-platformVersion = "8.1"
+platformVersion = "8.2"
 deviceName ="iPhone Simulator"
 app = "./UICatalog.app"
 
