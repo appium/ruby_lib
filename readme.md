@@ -1,3 +1,6 @@
+[![Downloads](https://img.shields.io/gem/dt/appium_lib.svg)](https://rubygems.org/gems/appium_lib)
+[![Pull Requests](http://issuestats.com/github/appium/ruby_lib/badge/pr)](http://issuestats.com/github/appium/ruby_lib)
+[![Issues](http://issuestats.com/github/appium/ruby_lib/badge/issue)](http://issuestats.com/github/appium/ruby_lib)
 #### appium_lib [![Gem Version](https://badge.fury.io/rb/appium_lib.svg)](http://badge.fury.io/rb/appium_lib)[![Dependency Status](https://gemnasium.com/appium/ruby_lib.svg)](https://gemnasium.com/appium/ruby_lib)
 
 - [appium_lib on RubyGems](https://rubygems.org/gems/appium_lib)
