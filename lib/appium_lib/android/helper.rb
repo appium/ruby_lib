@@ -248,6 +248,36 @@ module Appium
     end
 
     # @private
+    # Detects if the string represents a resourceId
+    # resourceId is only supported on API >= 18 devices
+    #
+    # @param string [String] the string check for a resourceId
+    #                        value will be auto unquoted
+    # @param on_match [String] the string to return on resourceId match
+    #
+    # @return [String] empty string on failure, on_match on successful match
+    def _resourceId string, on_match
+      return '' unless string
+
+      # unquote the string
+      # "com.example.Test:id/enter" -> com.example.Test:id/enter
+      unquote = string.match(/"(.+)"/)
+      string = unquote[1] if unquote
+
+      # java_package : type / name
+      #
+      # com.example.Test:id/enter
+      #
+      # ^[a-zA-Z_]      - Java package must start with letter or underscore
+      # [a-zA-Z0-9\._]* - Java package may contain letters, numbers, periods and underscores
+      # :               - : ends the package and starts the type
+      # [^\/]+          - type is made up of at least one non-/ characters
+      # \\/             - / ends the type and starts the name
+      # [\S]+$          - the name contains at least one non-space character and then the line is ended
+      resource_id = /^[a-zA-Z_][a-zA-Z0-9\._]*:[^\/]+\/[\S]+$/
+      string.match(resource_id) ? on_match : ''
+    end
+
     # Returns a string that matches the first element that contains value
     #
     # example: complex_find_contains 'UIATextField', 'sign in'
@@ -259,14 +289,14 @@ module Appium
       value = %Q("#{value}")
 
       if class_name == '*'
-        return "new UiSelector().resourceId(#{value});" +
+        return _resourceId(value, "new UiSelector().resourceId(#{value});") +
           "new UiSelector().descriptionContains(#{value});" +
           "new UiSelector().textContains(#{value});"
       end
 
       class_name = %Q("#{class_name}")
 
-      "new UiSelector().className(#{class_name}).resourceId(#{value});" +
+      _resourceId(value, "new UiSelector().className(#{class_name}).resourceId(#{value});") +
         "new UiSelector().className(#{class_name}).descriptionContains(#{value});" +
         "new UiSelector().className(#{class_name}).textContains(#{value});"
     end
@@ -296,14 +326,14 @@ module Appium
       value = %Q("#{value}")
 
       if class_name == '*'
-        return "new UiSelector().resourceId(#{value});" +
+        return _resourceId(value, "new UiSelector().resourceId(#{value});") +
           "new UiSelector().description(#{value});" +
           "new UiSelector().text(#{value});"
       end
 
       class_name = %Q("#{class_name}")
 
-      "new UiSelector().className(#{class_name}).resourceId(#{value});" +
+      _resourceId(value, "new UiSelector().className(#{class_name}).resourceId(#{value});") +
         "new UiSelector().className(#{class_name}).description(#{value});" +
         "new UiSelector().className(#{class_name}).text(#{value});"
     end
