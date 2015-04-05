@@ -281,7 +281,7 @@ module Appium
       # appium_lib specific values
       @custom_url       = appium_lib_opts.fetch :server_url, false
       @export_session   = appium_lib_opts.fetch :export_session, false
-      @default_wait     = appium_lib_opts.fetch :wait, 30
+      @default_wait     = appium_lib_opts.fetch :wait, 0
       @last_waits       = [@default_wait]
       @sauce_username   = appium_lib_opts.fetch :sauce_username, ENV['SAUCE_USERNAME']
       @sauce_username   = nil if !@sauce_username || (@sauce_username.is_a?(String) && @sauce_username.empty?)
