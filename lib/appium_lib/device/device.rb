@@ -329,7 +329,7 @@ module Appium
         Selenium::WebDriver::Remote::Bridge.class_eval do
           command method, verb, path
           if block_given?
-            class_eval &Proc.new
+            class_eval(&Proc.new)
           else
             define_method(method) { execute method }
           end

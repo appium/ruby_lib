@@ -578,7 +578,7 @@ module Appium
     # @param args [*args] the args to use
     # @return [Array<Element>] Array is empty when no elements are found.
     def find_elements(*args)
-      @driver.find_elements *args
+      @driver.find_elements(*args)
     end
 
     # Calls @driver.find_elements
@@ -586,7 +586,7 @@ module Appium
     # @param args [*args] the args to use
     # @return [Element]
     def find_element(*args)
-      @driver.find_element *args
+      @driver.find_element(*args)
     end
 
     # Quit the driver and Pry.

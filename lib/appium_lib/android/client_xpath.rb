@@ -20,7 +20,7 @@ module Appium
     def _client_xpath(opts = {})
       root_node = Nokogiri::XML(get_source).children.first
 
-      instance = Hash.new -1
+      instance = Hash.new(-1)
 
       root_node.traverse do |node|
         number = instance[node.name] += 1

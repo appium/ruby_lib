@@ -19,13 +19,13 @@ module Appium
       def initialize
         reset
         @filter   = false
-        @instance = Hash.new -1
+        @instance = Hash.new(-1)
       end
 
       def reset
         @result   = ''
         @keys     = %w[text resource-id content-desc]
-        @instance = Hash.new -1
+        @instance = Hash.new(-1)
       end
 
       # http://nokogiri.org/Nokogiri/XML/SAX/Document.html
