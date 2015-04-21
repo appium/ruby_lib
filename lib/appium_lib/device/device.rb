@@ -307,7 +307,7 @@ module Appium
 
       # @private
       def extend_webdriver_with_forwardable
-        return if Selenium::WebDriver::Driver.kind_of? Forwardable
+        return if Selenium::WebDriver::Driver.is_a? Forwardable
         Selenium::WebDriver::Driver.class_eval do
           extend Forwardable
         end

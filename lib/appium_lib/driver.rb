@@ -68,7 +68,7 @@ module Appium
   # @param opts [Hash] file: '/path/to/appium.txt', verbose: true
   # @return [hash] the symbolized hash with updated :app and :require keys
   def self.load_appium_txt(opts = {})
-    raise 'opts must be a hash' unless opts.kind_of? Hash
+    raise 'opts must be a hash' unless opts.is_a? Hash
     raise 'opts must not be empty' if opts.empty?
 
     file = opts[:file]
@@ -100,7 +100,7 @@ module Appium
     # nil if require doesn't exist
     if data && data[:appium_lib] && data[:appium_lib][:require]
       r = data[:appium_lib][:require]
-      r = r.kind_of?(Array) ? r : [r]
+      r = r.is_a?(Array) ? r : [r]
       # ensure files are absolute
       r.map! do |file|
         file = File.exists?(file) ? file :
@@ -269,7 +269,7 @@ module Appium
     def initialize(opts = {})
       # quit last driver
       $driver.driver_quit if $driver
-      raise 'opts must be a hash' unless opts.kind_of? Hash
+      raise 'opts must be a hash' unless opts.is_a? Hash
 
       opts              = Appium::symbolize_keys opts
 
