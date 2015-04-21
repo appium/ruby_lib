@@ -3,6 +3,7 @@ require 'rubygems'
 require 'rake'
 require 'date'
 require 'posix/spawn'
+require 'rubocop/rake_task'
 
 # Defines gem name.
 def repo_name
@@ -226,4 +227,11 @@ end
 desc 'Remove non-ascii bytes'
 task :byte do
   remove_non_ascii
+end
+
+desc 'Execute RuboCop static code analysis'
+RuboCop::RakeTask.new(:rubocop) do |t|
+  t.patterns = %w(lib)
+  t.options = %w(-D)
+  t.fail_on_error = false
 end
