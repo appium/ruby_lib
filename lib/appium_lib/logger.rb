@@ -10,7 +10,7 @@ module Appium
         define_method("ap_#{level}") { |obj| logger.ap(obj, level) }
       end
 
-    private
+      private
 
       def logger
         @logger ||= begin
