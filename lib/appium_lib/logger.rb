@@ -11,7 +11,7 @@ module Appium
       end
 
     private
-    
+
       def logger
         @logger ||= begin
           logger = ::Logger.new($stdout)

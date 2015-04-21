@@ -34,7 +34,7 @@ module Appium
     # @!method current_activity
 
     # @!method launch_app
-    #   Start the simulator and applicaton configured with desired capabilities  
+    #   Start the simulator and applicaton configured with desired capabilities
 
     # @!method reset
     #   Reset the device, relaunching the application.
