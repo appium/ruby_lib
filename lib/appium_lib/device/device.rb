@@ -194,7 +194,7 @@ module Appium
           def hide_keyboard(close_key = nil)
             # Android can only tapOutside.
             if $driver.device_is_android?
-             return execute :hide_keyboard, {}, strategy: :tapOutside
+              return execute :hide_keyboard, {}, strategy: :tapOutside
             end
 
             close_key ||= 'Done' # default to Done key.
