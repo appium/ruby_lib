@@ -11,12 +11,12 @@ module Appium
         launch_app:           'session/:session_id/appium/app/launch',
         close_app:            'session/:session_id/appium/app/close',
         reset:                'session/:session_id/appium/app/reset',
-        toggle_airplane_mode: 'session/:session_id/appium/device/toggle_airplane_mode',
+        toggle_airplane_mode: 'session/:session_id/appium/device/toggle_airplane_mode'
       },
       get:  {
         current_activity:       'session/:session_id/appium/device/current_activity',
         current_context:        'session/:session_id/context',
-        get_network_connection: 'session/:session_id/network_connection',
+        get_network_connection: 'session/:session_id/network_connection'
       }
     }
 

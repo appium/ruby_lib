@@ -9,7 +9,7 @@ module Appium
     def _textfield_visible
       {
         typeArray:   [UIATextField, UIASecureTextField],
-        onlyVisible: true,
+        onlyVisible: true
       }
     end
 
@@ -18,12 +18,12 @@ module Appium
       exact     = {
         target:      value,
         substring:   false,
-        insensitive: false,
+        insensitive: false
       }
       exact_obj = {
         name:  exact,
         label: exact,
-        value: exact,
+        value: exact
       }
       _textfield_visible.merge(exact_obj)
     end
@@ -33,12 +33,12 @@ module Appium
       contains     = {
         target:      value,
         substring:   true,
-        insensitive: true,
+        insensitive: true
       }
       contains_obj = {
         name:  contains,
         label: contains,
-        value: contains,
+        value: contains
       }
       _textfield_visible.merge(contains_obj)
     end

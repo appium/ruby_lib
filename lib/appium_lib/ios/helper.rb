@@ -279,7 +279,7 @@ module Appium
     def tag class_name
       ele_by_json({
                     typeArray:   [class_name],
-                    onlyVisible: true,
+                    onlyVisible: true
                   })
     end
 
@@ -290,7 +290,7 @@ module Appium
     def tags class_name
       eles_by_json({
                      typeArray:   [class_name],
-                     onlyVisible: true,
+                     onlyVisible: true
                    })
     end
 
@@ -306,7 +306,7 @@ module Appium
       contains = {
         target:      value,
         substring:   true,
-        insensitive: true,
+        insensitive: true
       }
 
       {
@@ -314,7 +314,7 @@ module Appium
         onlyVisible: true,
         name:        contains,
         label:       contains,
-        value:       contains,
+        value:       contains
       }
     end
 
@@ -343,7 +343,7 @@ module Appium
       exact = {
         target:      value,
         substring:   false,
-        insensitive: false,
+        insensitive: false
       }
 
       {
@@ -351,7 +351,7 @@ module Appium
         onlyVisible: true,
         name:        exact,
         label:       exact,
-        value:       exact,
+        value:       exact
       }
     end
 

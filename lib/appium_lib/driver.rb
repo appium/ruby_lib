@@ -352,7 +352,7 @@ module Appium
                      sauce_access_key: @sauce_access_key,
                      port:             @appium_port,
                      device:           @appium_device,
-                     debug:            @appium_debug,
+                     debug:            @appium_debug
       }
 
       # Return duplicates so attributes are immutable
