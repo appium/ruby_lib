@@ -91,7 +91,7 @@ module Appium
       # <android.app.ActionBar  $  Tab
 
       # find each closing tag that contains a dollar sign.
-      source.scan(%r(/<\/([^>]*\$[^>]*)>/)).flatten.uniq.each do |problem_tag|
+      source.scan(/<\/([^>]*\$[^>]*)>/).flatten.uniq.each do |problem_tag|
         # "android.app.ActionBar$Tab"
         before, after = problem_tag.split('$')
         before.strip!
@@ -106,7 +106,7 @@ module Appium
         #  <android.app.ActionBar$Tab   => <android.app.ActionBar.Tab
         # </android.app.ActionBar$Tab> => </android.app.ActionBar.Tab>
         source = source.gsub(/<#{before}\s*\$\s*#{after}/, "<#{fixed}").
-          gsub(%r(/<\/#{before}\s*\$\s*#{after}>/), "</#{fixed}>")
+          gsub(/<\/#{before}\s*\$\s*#{after}>/, "</#{fixed}>")
       end
 
       source
@@ -170,7 +170,7 @@ module Appium
     # @private
     # noinspection RubyArgCount
     def _parse_current_app_line(line)
-      match = line.match(%r(/ ([^\/ ]+\/[^ }]+)[ }]/))
+      match = line.match(/ ([^\/ ]+\/[^ }]+)[ }]/)
       return nil unless match && match[1]
 
       pair = match[1].split '/'
@@ -274,7 +274,7 @@ module Appium
       # [^\/]+          - type is made up of at least one non-/ characters
       # \\/             - / ends the type and starts the name
       # [\S]+$          - the name contains at least one non-space character and then the line is ended
-      resource_id = %r(/^[a-zA-Z_][a-zA-Z0-9\._]*:[^\/]+\/[\S]+$/)
+      resource_id = /^[a-zA-Z_][a-zA-Z0-9\._]*:[^\/]+\/[\S]+$/
       string.match(resource_id) ? on_match : ''
     end
 
