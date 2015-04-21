@@ -82,7 +82,7 @@ module Appium
       def start_element name, attrs = []
         # Count only visible elements. Android is always visible
         element_visible = $driver.device_is_android? ? true : Hash[attrs]['visible'] == 'true'
-        @result[name]   += 1 if element_visible
+        @result[name] += 1 if element_visible
       end
 
       def formatted_result

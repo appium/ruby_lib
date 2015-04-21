@@ -56,7 +56,7 @@ module Appium
           string_ids   = ''
 
           # add first
-          string_ids   += "#{id_matches.shift[0]}\n"
+          string_ids += "#{id_matches.shift[0]}\n"
 
           # use padding for remaining values
           # [0] = key, [1] = value
@@ -76,8 +76,8 @@ module Appium
           string += "  text: #{text}\n" unless text.nil?
           string += "  desc: #{desc}\n" unless desc.nil?
         end
-        string  += "  id: #{id}\n" unless id.nil?
-        string  += "  strings.xml: #{string_ids}" unless string_ids.nil?
+        string += "  id: #{id}\n" unless id.nil?
+        string += "  strings.xml: #{string_ids}" unless string_ids.nil?
 
         @result += "\n#{name} (#{number})\n#{string}" unless attributes.empty?
       end

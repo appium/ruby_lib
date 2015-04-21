@@ -96,7 +96,7 @@ module Appium
             # [0] = key, [1] = value
             id_matches.each do |key, value|
               arrow_space = ' ' * (max_len - key.length).to_i
-              match_str   += ' ' * 7 + "#{key} #{arrow_space}=> #{value}\n"
+              match_str += ' ' * 7 + "#{key} #{arrow_space}=> #{value}\n"
             end
             puts "   id: #{match_str.strip}\n"
           end
@@ -199,7 +199,7 @@ module Appium
         result = elements.last
       else
         # elements array is 0 indexed
-        index  -= 1
+        index -= 1
         result = elements[index]
       end
 
