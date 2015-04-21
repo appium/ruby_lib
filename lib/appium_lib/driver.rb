@@ -79,7 +79,7 @@ module Appium
     toml       = File.expand_path File.join parent_dir, 'appium.txt'
     Appium::Logger.info "appium.txt path: #{toml}" if verbose
 
-    toml_exists = File.exists? toml
+    toml_exists = File.exist? toml
     Appium::Logger.info "Exists? #{toml_exists}" if verbose
 
     raise "toml doesn't exist #{toml}" unless toml_exists
@@ -103,11 +103,11 @@ module Appium
       r = r.is_a?(Array) ? r : [r]
       # ensure files are absolute
       r.map! do |file|
-        file = File.exists?(file) ? file :
+        file = File.exist?(file) ? file :
           File.join(parent_dir, file)
         file = File.expand_path file
 
-        File.exists?(file) ? file : nil
+        File.exist?(file) ? file : nil
       end
       r.compact! # remove nils
 
