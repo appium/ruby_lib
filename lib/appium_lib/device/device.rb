@@ -162,7 +162,8 @@ module Appium
         #   @param [String] The activity to start before the target activity [optional]
         #
         #   ```ruby
-        #   start_activity app_package: 'io.appium.android.apis', app_activity: '.accessibility.AccessibilityNodeProviderActivity'
+        #   start_activity app_package: 'io.appium.android.apis',
+        #     app_activity: '.accessibility.AccessibilityNodeProviderActivity'
         #   ```
         add_endpoint_method(:start_activity, 'session/:session_id/appium/device/start_activity') do
           def start_activity(opts)
