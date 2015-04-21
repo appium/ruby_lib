@@ -277,10 +277,10 @@ module Appium
     # @param class_name [String] the class_name to search for
     # @return [Element]
     def tag(class_name)
-      ele_by_json({
-                    typeArray:   [class_name],
-                    onlyVisible: true
-                  })
+      ele_by_json(
+          typeArray:   [class_name],
+          onlyVisible: true
+      )
     end
 
     # Returns all visible elements matching class_name
@@ -288,10 +288,10 @@ module Appium
     # @param class_name [String] the class_name to search for
     # @return [Element]
     def tags(class_name)
-      eles_by_json({
-                     typeArray:   [class_name],
-                     onlyVisible: true
-                   })
+      eles_by_json(
+          typeArray:   [class_name],
+          onlyVisible: true
+      )
     end
 
     # @private

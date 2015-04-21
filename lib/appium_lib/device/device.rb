@@ -177,8 +177,10 @@ module Appium
             unknown_opts = opts.keys - [:app_package, :app_activity, :app_wait_package, :app_wait_activity]
             raise "Unknown options #{unknown_opts}" unless unknown_opts.empty?
 
-            execute :start_activity, {}, { appPackage:     app_package,      appActivity: app_activity,
-                                           appWaitPackage: app_wait_package, appWaitActivity: app_wait_activity }
+            execute :start_activity, {}, appPackage: app_package,
+                                         appActivity: app_activity,
+                                         appWaitPackage: app_wait_package,
+                                         appWaitActivity: app_wait_activity
           end
         end
 
@@ -192,7 +194,7 @@ module Appium
           def hide_keyboard(close_key = nil)
             # Android can only tapOutside.
             if $driver.device_is_android?
-             return execute :hide_keyboard, {}, { strategy: :tapOutside }
+             return execute :hide_keyboard, {}, strategy: :tapOutside
             end
 
             close_key ||= 'Done' # default to Done key.
