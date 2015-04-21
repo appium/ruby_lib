@@ -1,5 +1,4 @@
 module Appium
-
   # MultiTouch actions allow for multiple touches to happen at the same time,
   # for instance, to simulate multiple finger swipes.
   #

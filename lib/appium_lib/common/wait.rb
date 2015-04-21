@@ -1,6 +1,5 @@
 module Appium
   module Common
-
     # http://mudge.name/2011/01/26/passing-blocks-in-ruby-without-block.html
     # Note that the Ruby timeout module is avoided. timeout has problems.
     # https://coderwall.com/p/1novga

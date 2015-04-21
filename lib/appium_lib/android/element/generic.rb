@@ -1,6 +1,5 @@
 module Appium
   module Android
-
     # Find the first element containing value
     # @param value [String] the value to search for
     # @return [Element]

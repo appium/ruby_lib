@@ -1,5 +1,4 @@
 module Appium
-
   # Perform a series of gestures, one after another.  Gestures are chained
   # together and only performed when `perform()` is called.
   #
