@@ -13,7 +13,7 @@ module Appium
         end
 
         # Cross platform way of entering text into a textfield
-        def type text
+        def type(text)
           # type
           $driver.execute_script %(au.getElement('#{self.ref}').setValue('#{text}');)
         end # def type

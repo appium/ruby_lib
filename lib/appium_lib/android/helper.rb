@@ -10,7 +10,7 @@ module Appium
       end
 
       # convert to string to support symbols
-      def filter= value
+      def filter=(value)
         # nil and false disable the filter
         return @filter = false unless value
         @filter = value.to_s.downcase
@@ -29,7 +29,7 @@ module Appium
       end
 
       # http://nokogiri.org/Nokogiri/XML/SAX/Document.html
-      def start_element name, attrs = []
+      def start_element(name, attrs = [])
         return if filter && !name.downcase.include?(filter)
 
         # instance numbers start at 0.
@@ -86,7 +86,7 @@ module Appium
     # Fix uiautomator's xml dump.
     # https://github.com/appium/appium/issues/2822
     # https://code.google.com/p/android/issues/detail?id=74143
-    def _fix_android_native_source source
+    def _fix_android_native_source(source)
       # <android.app.ActionBar$Tab
       # <android.app.ActionBar  $  Tab
 
@@ -124,7 +124,7 @@ module Appium
     # @param class_name [String] the class name to filter on.
     # if false (default) then all classes will be inspected
     # @return [String]
-    def get_android_inspect class_name = false
+    def get_android_inspect(class_name = false)
       source = get_source
 
       doctype_string = '<!doctyp'
@@ -150,7 +150,7 @@ module Appium
     # @option class [Symbol] the class name to filter on. case insensitive include match.
     # if nil (default) then all classes will be inspected
     # @return [void]
-    def page opts = {}
+    def page(opts = {})
       class_name = opts.is_a?(Hash) ? opts.fetch(:class, nil) : opts
       puts get_android_inspect class_name
       nil
@@ -169,7 +169,7 @@ module Appium
 
     # @private
     # noinspection RubyArgCount
-    def _parse_current_app_line line
+    def _parse_current_app_line(line)
       match = line.match(/ ([^\/ ]+\/[^ }]+)[ }]/)
       return nil unless match && match[1]
 
@@ -185,7 +185,7 @@ module Appium
     # Find the first matching element by id
     # @param id [String] the id to search for
     # @return [Element]
-    def id id
+    def id(id)
       # Android auto resolves strings.xml ids
       find_element :id, id
     end
@@ -193,7 +193,7 @@ module Appium
     # Find all matching elements by id
     # @param id [String] the id to search for
     # @return [Element]
-    def ids id
+    def ids(id)
       # Android auto resolves strings.xml ids
       find_elements :id, id
     end
@@ -202,7 +202,7 @@ module Appium
     # @param class_name [String] the class name to find
     # @param index [Integer] the index
     # @return [Element] the found element of type class_name
-    def ele_index class_name, index
+    def ele_index(class_name, index)
       results = tags(class_name)
       if index == 'last()'
         index = results.length
@@ -220,14 +220,14 @@ module Appium
     # Find the first element that matches class_name
     # @param class_name [String] the tag to match
     # @return [Element]
-    def first_ele class_name
+    def first_ele(class_name)
       tag(class_name)
     end
 
     # Find the last element that matches class_name
     # @param class_name [String] the tag to match
     # @return [Element]
-    def last_ele class_name
+    def last_ele(class_name)
       ele_index class_name, 'last()'
     end
 
@@ -235,7 +235,7 @@ module Appium
     #
     # @param class_name [String] the class_name to search for
     # @return [Element]
-    def tag class_name
+    def tag(class_name)
       find_element :class, class_name
     end
 
@@ -243,7 +243,7 @@ module Appium
     #
     # @param class_name [String] the class_name to search for
     # @return [Element]
-    def tags class_name
+    def tags(class_name)
       find_elements :class, class_name
     end
 
@@ -256,7 +256,7 @@ module Appium
     # @param on_match [String] the string to return on resourceId match
     #
     # @return [String] empty string on failure, on_match on successful match
-    def _resourceId string, on_match
+    def _resourceId(string, on_match)
       return '' unless string
 
       # unquote the string
@@ -285,7 +285,7 @@ module Appium
     # @param class_name [String] the class name for the element
     # @param value [String] the value to search for
     # @return [String]
-    def string_visible_contains class_name, value
+    def string_visible_contains(class_name, value)
       value = %Q("#{value}")
 
       if class_name == '*'
@@ -305,7 +305,7 @@ module Appium
     # @param element [String] the class name for the element
     # @param value [String] the value to search for
     # @return [Element]
-    def complex_find_contains element, value
+    def complex_find_contains(element, value)
       find_element :uiautomator, string_visible_contains(element, value)
     end
 
@@ -313,7 +313,7 @@ module Appium
     # @param element [String] the class name for the element
     # @param value [String] the value to search for
     # @return [Array<Element>]
-    def complex_finds_contains element, value
+    def complex_finds_contains(element, value)
       find_elements :uiautomator, string_visible_contains(element, value)
     end
 
@@ -322,7 +322,7 @@ module Appium
     # @param class_name [String] the class name for the element
     # @param value [String] the value to search for
     # @return [String]
-    def string_visible_exact class_name, value
+    def string_visible_exact(class_name, value)
       value = %Q("#{value}")
 
       if class_name == '*'
@@ -342,7 +342,7 @@ module Appium
     # @param class_name [String] the class name for the element
     # @param value [String] the value to search for
     # @return [Element]
-    def complex_find_exact class_name, value
+    def complex_find_exact(class_name, value)
       find_element :uiautomator, string_visible_exact(class_name, value)
     end
 
@@ -350,7 +350,7 @@ module Appium
     # @param class_name [String] the class name for the element
     # @param value [String] the value to search for
     # @return [Element]
-    def complex_finds_exact class_name, value
+    def complex_finds_exact(class_name, value)
       find_elements :uiautomator, string_visible_exact(class_name, value)
     end
 

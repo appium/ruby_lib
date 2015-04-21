@@ -67,7 +67,7 @@ module Appium
   #
   # @param opts [Hash] file: '/path/to/appium.txt', verbose: true
   # @return [hash] the symbolized hash with updated :app and :require keys
-  def self.load_appium_txt opts = {}
+  def self.load_appium_txt(opts = {})
     raise 'opts must be a hash' unless opts.kind_of? Hash
     raise 'opts must not be empty' if opts.empty?
 
@@ -137,7 +137,7 @@ module Appium
   #
   # based on deep_symbolize_keys & deep_transform_keys from rails
   # https://github.com/rails/docrails/blob/a3b1105ada3da64acfa3843b164b14b734456a50/activesupport/lib/active_support/core_ext/hash/keys.rb#L84
-  def self.symbolize_keys hash
+  def self.symbolize_keys(hash)
     raise 'symbolize_keys requires a hash' unless hash.is_a? Hash
     result = {}
     hash.each do |key, value|
@@ -150,7 +150,7 @@ module Appium
   # if modules is a module instead of an array, then the constants of
   # that module are promoted on.
   # otherwise, the array of modules will be used as the promotion target.
-  def self.promote_singleton_appium_methods modules
+  def self.promote_singleton_appium_methods(modules)
     raise 'Driver is nil' if $driver.nil?
 
     target_modules = []
@@ -190,7 +190,7 @@ module Appium
   # ```ruby
   # Appium.promote_appium_methods Object
   # ```
-  def self.promote_appium_methods class_array
+  def self.promote_appium_methods(class_array)
     raise 'Driver is nil' if $driver.nil?
     # Wrap single class into an array
     class_array = [class_array] unless class_array.class == Array
@@ -267,7 +267,7 @@ module Appium
     #
     # @param opts [Object] A hash containing various options.
     # @return [Driver]
-    def initialize opts = {}
+    def initialize(opts = {})
       # quit last driver
       $driver.driver_quit if $driver
       raise 'opts must be a hash' unless opts.kind_of? Hash
@@ -390,7 +390,7 @@ module Appium
     # if app isn't set then an error is raised.
     #
     # @return [String] APP_PATH as an absolute path
-    def self.absolute_app_path opts
+    def self.absolute_app_path(opts)
       raise 'opts must be a hash' unless opts.is_a? Hash
       caps            = opts[:caps] || {}
       appium_lib_opts = opts[:appium_lib] || {}
@@ -451,7 +451,7 @@ module Appium
     #
     # @param png_save_path [String] the full path to save the png
     # @return [nil]
-    def screenshot png_save_path
+    def screenshot(png_save_path)
       @driver.save_screenshot png_save_path
       nil
     end
@@ -511,7 +511,7 @@ module Appium
     #
     # @param timeout [Integer] the timeout in seconds
     # @return [void]
-    def set_wait timeout = nil
+    def set_wait(timeout = nil)
       if timeout.nil?
         # Appium::Logger.info "timeout = @default_wait = @last_wait"
         # Appium::Logger.info "timeout = @default_wait = #{@last_waits}"
@@ -545,7 +545,7 @@ module Appium
     #                             wait to after checking existance
     # @param search_block [Block] the block to call
     # @return [Boolean]
-    def exists pre_check = 0, post_check = @default_wait, &search_block
+    def exists(pre_check = 0, post_check = @default_wait, &search_block)
       # do not uset set_wait here.
       # it will cause problems with other methods reading the default_wait of 0
       # which then gets converted to a 1 second wait.
@@ -569,7 +569,7 @@ module Appium
     # @param script [String] the script to execute
     # @param args [*args] the args to pass to the script
     # @return [Object]
-    def execute_script script, *args
+    def execute_script(script, *args)
       @driver.execute_script script, *args
     end
 
@@ -577,7 +577,7 @@ module Appium
     #
     # @param args [*args] the args to use
     # @return [Array<Element>] Array is empty when no elements are found.
-    def find_elements *args
+    def find_elements(*args)
       @driver.find_elements *args
     end
 
@@ -585,7 +585,7 @@ module Appium
     #
     # @param args [*args] the args to use
     # @return [Element]
-    def find_element *args
+    def find_element(*args)
       @driver.find_element *args
     end
 

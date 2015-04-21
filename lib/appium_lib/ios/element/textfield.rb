@@ -14,7 +14,7 @@ module Appium
     end
 
     # @private
-    def _textfield_exact_string value
+    def _textfield_exact_string(value)
       exact     = {
         target:      value,
         substring:   false,
@@ -29,7 +29,7 @@ module Appium
     end
 
     # @private
-    def _textfield_contains_string value
+    def _textfield_contains_string(value)
       contains     = {
         target:      value,
         substring:   true,
@@ -49,7 +49,7 @@ module Appium
     # @param value [String, Integer] the text to match exactly.
     # If int then the TextField at that index is returned.
     # @return [TextField]
-    def textfield value
+    def textfield(value)
       # Don't use ele_index because that only works on one element type.
       # iOS needs to combine textfield and secure to match Android.
       if value.is_a? Numeric
@@ -69,7 +69,7 @@ module Appium
     # If value is omitted, all TextFields are returned.
     # @param value [String] the value to search for
     # @return [Array<TextField>]
-    def textfields value = false
+    def textfields(value = false)
       return eles_by_json _textfield_visible unless value
       eles_by_json _textfield_contains_string value
     end
@@ -91,14 +91,14 @@ module Appium
     # Find the first TextField that exactly matches value.
     # @param value [String] the value to match exactly
     # @return [TextField]
-    def textfield_exact value
+    def textfield_exact(value)
       ele_by_json _textfield_exact_string value
     end
 
     # Find all TextFields that exactly match value.
     # @param value [String] the value to match exactly
     # @return [Array<TextField>]
-    def textfields_exact value
+    def textfields_exact(value)
       eles_by_json _textfield_exact_string value
     end
   end # module Ios

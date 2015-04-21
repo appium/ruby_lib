@@ -116,7 +116,7 @@ module Appium
         end
 
         add_endpoint_method(:app_strings, 'session/:session_id/appium/app/strings') do
-          def app_strings language = nil
+          def app_strings(language = nil)
             opts = language ? { language: language } : {}
             execute :app_strings, {}, opts
           end

@@ -2,7 +2,7 @@ require 'nokogiri'
 
 module Appium
   module Android
-    def _nodeset_to_uiselector opts = {}
+    def _nodeset_to_uiselector(opts = {})
       results = ''
 
       nodes = opts[:nodes]
@@ -17,7 +17,7 @@ module Appium
       results.strip
     end
 
-    def _client_xpath opts = {}
+    def _client_xpath(opts = {})
       root_node = Nokogiri::XML(get_source).children.first
 
       instance = Hash.new -1
@@ -33,11 +33,11 @@ module Appium
       _nodeset_to_uiselector nodes: nodes, first: first
     end
 
-    def client_xpath xpath
+    def client_xpath(xpath)
       find_element :uiautomator, _client_xpath(xpath: xpath, first: true)
     end
 
-    def client_xpaths xpath
+    def client_xpaths(xpath)
       find_elements :uiautomator, _client_xpath(xpath: xpath, first: false)
     end
   end

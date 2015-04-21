@@ -5,7 +5,7 @@ module Appium
     # Password character returned from value of UIASecureTextField
     # @param length [Integer] the length of the password to generate
     # @return [String] the returned string is of size length
-    def ios_password length = 1
+    def ios_password(length = 1)
       8226.chr('UTF-8') * length
     end
 
@@ -17,17 +17,17 @@ module Appium
     # @option element [Object] the element to search. omit to search everything
     # @option class_name [String,Symbol] the class name to filter on. case insensitive include match.
     # @return [String]
-    def get_page element = source_window(0), class_name = nil
+    def get_page(element = source_window(0), class_name = nil)
       lazy_load_strings # populate @strings_xml
       class_name = class_name.to_s.downcase
 
       # @private
-      def empty ele
+      def empty(ele)
         (ele['name'] || ele['label'] || ele['value']) == nil
       end
 
       # @private
-      def fix_space s
+      def fix_space(s)
         # if s is an int, we can't call .empty
         return nil if s.nil? || (s.respond_to?(:empty) && s.empty?)
         # ints don't respond to force encoding
@@ -122,7 +122,7 @@ module Appium
     # @option class [Symbol] class name to filter on
     #
     # @return [void]
-    def page opts = {}
+    def page(opts = {})
       if opts.is_a?(Hash)
         window_number = opts.fetch :window, -1
         class_name    = opts.fetch :class, nil
@@ -154,7 +154,7 @@ module Appium
     # Gets the JSON source of window number
     # @param window_number [Integer] the int index of the target window
     # @return [JSON]
-    def source_window window_number = 0
+    def source_window(window_number = 0)
       # appium 1.0 still returns JSON when getTree() is invoked so this
       # doesn't need to change to XML. If getTree() is removed then
       # source_window will need to parse the elements of getTreeForXML()\
@@ -168,7 +168,7 @@ module Appium
     #
     # @param window_number [Integer] the int index of the target window
     # @return [void]
-    def page_window window_number = 0
+    def page_window(window_number = 0)
       get_page source_window window_number
       nil
     end
@@ -176,7 +176,7 @@ module Appium
     # Find by id
     # @param id [String] the id to search for
     # @return [Element]
-    def id id
+    def id(id)
       find_element :id, id
     end
 
@@ -191,7 +191,7 @@ module Appium
     # @param class_name [String] the class name to find
     # @param index [Integer] the index
     # @return [Element]
-    def ele_index class_name, index
+    def ele_index(class_name, index)
       raise 'Index must be >= 1' unless index == 'last()' || (index.is_a?(Integer) && index >= 1)
       elements = tags(class_name)
 
@@ -208,7 +208,7 @@ module Appium
     end
 
     # @private
-    def string_attr_exact class_name, attr, value
+    def string_attr_exact(class_name, attr, value)
       %Q(//#{class_name}[@visible="true" and @#{attr}='#{value}'])
     end
 
@@ -218,7 +218,7 @@ module Appium
     # @param attr [String] the attribute to inspect
     # @param value [String] the expected value of the attribute
     # @return [Element]
-    def find_ele_by_attr class_name, attr, value
+    def find_ele_by_attr(class_name, attr, value)
       @driver.find_element :xpath, string_attr_exact(class_name, attr, value)
     end
 
@@ -228,12 +228,12 @@ module Appium
     # @param attr [String] the attribute to compare
     # @param value [String] the value of the attribute that the element must have
     # @return [Array<Element>]
-    def find_eles_by_attr class_name, attr, value
+    def find_eles_by_attr(class_name, attr, value)
       @driver.find_elements :xpath, string_attr_exact(class_name, attr, value)
     end
 
     # @private
-    def string_attr_include class_name, attr, value
+    def string_attr_include(class_name, attr, value)
       %Q(//#{class_name}[@visible="true" and contains(translate(@#{attr},'#{value.upcase}', '#{value}'), '#{value}')])
     end
 
@@ -243,7 +243,7 @@ module Appium
     # @param attr [String] the attribute to compare
     # @param value [String] the value of the attribute that the element must include
     # @return [Element] the element of type tag who's attribute includes value
-    def find_ele_by_attr_include class_name, attr, value
+    def find_ele_by_attr_include(class_name, attr, value)
       @driver.find_element :xpath, string_attr_include(class_name, attr, value)
     end
 
@@ -253,14 +253,14 @@ module Appium
     # @param attr [String] the attribute to compare
     # @param value [String] the value of the attribute that the element must include
     # @return [Array<Element>] the elements of type tag who's attribute includes value
-    def find_eles_by_attr_include class_name, attr, value
+    def find_eles_by_attr_include(class_name, attr, value)
       @driver.find_elements :xpath, string_attr_include(class_name, attr, value)
     end
 
     # Get the first tag that matches class_name
     # @param class_name [String] the tag to match
     # @return [Element]
-    def first_ele class_name
+    def first_ele(class_name)
       # XPath index starts at 1
       ele_index class_name, 1
     end
@@ -268,7 +268,7 @@ module Appium
     # Get the last tag that matches class_name
     # @param class_name [String] the tag to match
     # @return [Element]
-    def last_ele class_name
+    def last_ele(class_name)
       ele_index class_name, 'last()'
     end
 
@@ -276,7 +276,7 @@ module Appium
     #
     # @param class_name [String] the class_name to search for
     # @return [Element]
-    def tag class_name
+    def tag(class_name)
       ele_by_json({
                     typeArray:   [class_name],
                     onlyVisible: true
@@ -287,7 +287,7 @@ module Appium
     #
     # @param class_name [String] the class_name to search for
     # @return [Element]
-    def tags class_name
+    def tags(class_name)
       eles_by_json({
                      typeArray:   [class_name],
                      onlyVisible: true
@@ -302,7 +302,7 @@ module Appium
     # @param element [String] the class name for the element
     # @param value [String] the value to search for
     # @return [String]
-    def string_visible_contains element, value
+    def string_visible_contains(element, value)
       contains = {
         target:      value,
         substring:   true,
@@ -322,7 +322,7 @@ module Appium
     # @param element [String] the class name for the element
     # @param value [String] the value to search for
     # @return [Element]
-    def ele_by_json_visible_contains element, value
+    def ele_by_json_visible_contains(element, value)
       ele_by_json string_visible_contains element, value
     end
 
@@ -330,7 +330,7 @@ module Appium
     # @param element [String] the class name for the element
     # @param value [String] the value to search for
     # @return [Array<Element>]
-    def eles_by_json_visible_contains element, value
+    def eles_by_json_visible_contains(element, value)
       eles_by_json string_visible_contains element, value
     end
 
@@ -339,7 +339,7 @@ module Appium
     # @param element [String] the class name for the element
     # @param value [String] the value to search for
     # @return [String]
-    def string_visible_exact element, value
+    def string_visible_exact(element, value)
       exact = {
         target:      value,
         substring:   false,
@@ -359,7 +359,7 @@ module Appium
     # @param element [String] the class name for the element
     # @param value [String] the value to search for
     # @return [Element]
-    def ele_by_json_visible_exact element, value
+    def ele_by_json_visible_exact(element, value)
       ele_by_json string_visible_exact element, value
     end
 
@@ -367,7 +367,7 @@ module Appium
     # @param element [String] the class name for the element
     # @param value [String] the value to search for
     # @return [Element]
-    def eles_by_json_visible_exact element, value
+    def eles_by_json_visible_exact(element, value)
       eles_by_json string_visible_exact element, value
     end
 
@@ -377,7 +377,7 @@ module Appium
     # If close key is present then tap it.
     # @param close_key [String] close key to tap. Default value is 'Done'
     # @return [void]
-    def hide_ios_keyboard close_key = 'Done'
+    def hide_ios_keyboard(close_key = 'Done')
 =begin
 todo: there are many various ways to hide the keyboard that work in different
 app specific circumstances. webview keyboard will require a window.tap for example.
@@ -431,7 +431,7 @@ Don't use window.tap. See https://github.com/appium/appium-uiauto/issues/28
     #
     # visible - if true, only visible elements are returned. default true
     #
-    def _all_pred opts
+    def _all_pred(opts)
       predicate = opts[:predicate]
       raise 'predicate must be provided' unless predicate
       visible = opts.fetch :visible, true
@@ -444,7 +444,7 @@ Don't use window.tap. See https://github.com/appium/appium-uiauto/issues/28
     #
     # visible - if true, only visible elements are returned. default true
     # @return [Element]
-    def ele_with_pred opts
+    def ele_with_pred(opts)
       # true = return only visible
       find_element(:uiautomation, _all_pred(opts))
     end
@@ -455,7 +455,7 @@ Don't use window.tap. See https://github.com/appium/appium-uiauto/issues/28
     #
     # visible - if true, only visible elements are returned. default true
     # @return [Array<Element>]
-    def eles_with_pred opts
+    def eles_with_pred(opts)
       find_elements(:uiautomation, _all_pred(opts))
     end
 
@@ -465,7 +465,7 @@ Don't use window.tap. See https://github.com/appium/appium-uiauto/issues/28
       _print_source get_source
     end
 
-    def _validate_object *objects
+    def _validate_object(*objects)
       raise 'objects must be an array' unless objects.is_a? Array
       objects.each do |obj|
         next unless obj # obj may be nil. if so, ignore.
@@ -513,7 +513,7 @@ Don't use window.tap. See https://github.com/appium/appium-uiauto/issues/28
     #   }
     # }
     #
-    def _by_json opts
+    def _by_json(opts)
       valid_keys   = [:typeArray, :onlyFirst, :onlyVisible, :name, :label, :value]
       unknown_keys = opts.keys - valid_keys
       raise "Unknown keys: #{unknown_keys}" unless unknown_keys.empty?
@@ -562,13 +562,13 @@ Don't use window.tap. See https://github.com/appium/appium-uiauto/issues/28
     #     insensitive: false,
     #   },
     # })
-    def eles_by_json opts
+    def eles_by_json(opts)
       opts[:onlyFirst] = false
       _by_json opts
     end
 
     # see eles_by_json
-    def ele_by_json opts
+    def ele_by_json(opts)
       opts[:onlyFirst] = true
       result           = _by_json(opts).first
       raise _no_such_element if result.nil?
