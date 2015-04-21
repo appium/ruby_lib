@@ -203,9 +203,10 @@ module Appium
               # Prefer existing method.
               # super will invoke method missing on driver
               super(*args, &block)
-                # minitest also defines a name method,
-                # so rescue argument error
-                # and call the name method on $driver
+
+              # minitest also defines a name method,
+              # so rescue argument error
+              # and call the name method on $driver
             rescue NoMethodError, ArgumentError
               $driver.send m, *args, &block if $driver.respond_to?(m)
             end

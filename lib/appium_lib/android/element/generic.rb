@@ -29,9 +29,9 @@ module Appium
     end
 
     # @private
-     def scroll_uiselector(content)
-       "new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(#{content}.instance(0));"
-     end
+    def scroll_uiselector(content)
+      "new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(#{content}.instance(0));"
+    end
 
     # Scroll to the first element containing target text or description.
     # @param text [String] the text to search for in the text value and content description
