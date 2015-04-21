@@ -224,7 +224,6 @@ module Appium
     #
     # attr_accessor is repeated for each one so YARD documents them properly.
 
-
     # The amount to sleep in seconds before every webdriver http call.
     attr_accessor :global_webdriver_http_sleep
     # Selenium webdriver capabilities
@@ -325,7 +324,6 @@ module Appium
         Appium::Logger.debug "Device is: #{@appium_device}"
         patch_webdriver_bridge
       end
-
 
       # Save global reference to last created Appium driver for top level methods.
       $driver = self
