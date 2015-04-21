@@ -286,7 +286,7 @@ module Appium
     # @param value [String] the value to search for
     # @return [String]
     def string_visible_contains(class_name, value)
-      value = %Q("#{value}")
+      value = %("#{value}")
 
       if class_name == '*'
         return _resourceId(value, "new UiSelector().resourceId(#{value});") +
@@ -294,7 +294,7 @@ module Appium
           "new UiSelector().textContains(#{value});"
       end
 
-      class_name = %Q("#{class_name}")
+      class_name = %("#{class_name}")
 
       _resourceId(value, "new UiSelector().className(#{class_name}).resourceId(#{value});") +
         "new UiSelector().className(#{class_name}).descriptionContains(#{value});" +
@@ -323,7 +323,7 @@ module Appium
     # @param value [String] the value to search for
     # @return [String]
     def string_visible_exact(class_name, value)
-      value = %Q("#{value}")
+      value = %("#{value}")
 
       if class_name == '*'
         return _resourceId(value, "new UiSelector().resourceId(#{value});") +
@@ -331,7 +331,7 @@ module Appium
           "new UiSelector().text(#{value});"
       end
 
-      class_name = %Q("#{class_name}")
+      class_name = %("#{class_name}")
 
       _resourceId(value, "new UiSelector().className(#{class_name}).resourceId(#{value});") +
         "new UiSelector().className(#{class_name}).description(#{value});" +

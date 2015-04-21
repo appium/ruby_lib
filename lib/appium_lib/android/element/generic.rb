@@ -38,7 +38,7 @@ module Appium
     # @param text [String] the text to search for in the text value and content description
     # @return [Element] the element scrolled to
     def scroll_to(text)
-      text = %Q("#{text}")
+      text = %("#{text}")
 
       args = scroll_uiselector("new UiSelector().textContains(#{text})") +
              scroll_uiselector("new UiSelector().descriptionContains(#{text})")
@@ -50,7 +50,7 @@ module Appium
     # @param text [String] the text to search for in the text value and content description
     # @return [Element] the element scrolled to
     def scroll_to_exact(text)
-      text = %Q("#{text}")
+      text = %("#{text}")
 
       args = scroll_uiselector("new UiSelector().text(#{text})") +
              scroll_uiselector("new UiSelector().description(#{text})")

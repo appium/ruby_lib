@@ -11,7 +11,7 @@ module Appium
       nodes = [nodes[0]] if first
 
       nodes.each do |node|
-        results += %Q(new UiSelector().className("#{node.name}").instance(#{node.attr('instance')});)
+        results += %(new UiSelector().className("#{node.name}").instance(#{node.attr('instance')});)
       end
 
       results.strip

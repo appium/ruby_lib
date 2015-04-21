@@ -209,7 +209,7 @@ module Appium
 
     # @private
     def string_attr_exact(class_name, attr, value)
-      %Q(//#{class_name}[@visible="true" and @#{attr}='#{value}'])
+      %(//#{class_name}[@visible="true" and @#{attr}='#{value}'])
     end
 
     # Find the first element exactly matching class and attribute value.
@@ -234,7 +234,7 @@ module Appium
 
     # @private
     def string_attr_include(class_name, attr, value)
-      %Q(//#{class_name}[@visible="true" and contains(translate(@#{attr},'#{value.upcase}', '#{value}'), '#{value}')])
+      %(//#{class_name}[@visible="true" and contains(translate(@#{attr},'#{value.upcase}', '#{value}'), '#{value}')])
     end
 
     # Get the first tag by attribute that exactly matches value.
@@ -435,7 +435,7 @@ Don't use window.tap. See https://github.com/appium/appium-uiauto/issues/28
       predicate = opts[:predicate]
       raise 'predicate must be provided' unless predicate
       visible = opts.fetch :visible, true
-      %Q($.mainApp().getAllWithPredicate("#{predicate}", #{visible});)
+      %($.mainApp().getAllWithPredicate("#{predicate}", #{visible});)
     end
 
     # returns element matching predicate contained in the main app
