@@ -105,8 +105,7 @@ module Appium
 
         #  <android.app.ActionBar$Tab   => <android.app.ActionBar.Tab
         # </android.app.ActionBar$Tab> => </android.app.ActionBar.Tab>
-        source = source.gsub(/<#{before}\s*\$\s*#{after}/, "<#{fixed}").
-          gsub(/<\/#{before}\s*\$\s*#{after}>/, "</#{fixed}>")
+        source = source.gsub(/<#{before}\s*\$\s*#{after}/, "<#{fixed}").gsub(/<\/#{before}\s*\$\s*#{after}>/, "</#{fixed}>")
       end
 
       source

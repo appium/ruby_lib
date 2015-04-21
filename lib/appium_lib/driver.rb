@@ -174,8 +174,7 @@ module Appium
             $driver.send m, *args, &block if $driver.respond_to?(m)
           end
           # override unless there's an existing method with matching arity
-        end unless const.respond_to?(m) &&
-          const.method(m).arity == $driver.method(m).arity
+        end unless const.respond_to?(m) && const.method(m).arity == $driver.method(m).arity
       end
     end
   end
