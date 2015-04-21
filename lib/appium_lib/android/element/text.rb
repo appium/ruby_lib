@@ -16,7 +16,7 @@ module Appium
     # If value is omitted, all texts are returned.
     # @param value [String] the value to search for
     # @return [Array<TextView>]
-    def texts value=false
+    def texts value = false
       return tags TextView unless value
       complex_finds_contains TextView, value
     end

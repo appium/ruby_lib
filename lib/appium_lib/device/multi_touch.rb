@@ -27,7 +27,7 @@ module Appium
       # action = pinch 75 #=> Pinch the screen from the top right and bottom left corners
       # action.perform    #=> to 25% of its size.
       # ```
-      def pinch(percentage=25, auto_perform=true)
+      def pinch(percentage = 25, auto_perform = true)
         raise ArgumentError("Can't pinch to greater than screen size.") if percentage > 100
 
         p = Float(percentage) / 100
@@ -55,7 +55,7 @@ module Appium
       # action = zoom 200 #=> Zoom in the screen from the center until it doubles in size.
       # action.perform
       # ```
-      def zoom(percentage=200, auto_perform=true)
+      def zoom(percentage = 200, auto_perform = true)
         raise ArgumentError("Can't zoom to smaller then screen size.") if percentage < 100
 
         p = 100 / Float(percentage)

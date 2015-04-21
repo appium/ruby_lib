@@ -67,7 +67,7 @@ module Appium
     # @option opts [WebDriver::Element] :element (Optional) Element to release from.
     # @option opts [integer] :x x co-ordinate to release from
     # @option opts [integer] :y y co-ordinate to release from
-    def release(opts=nil)
+    def release(opts = nil)
       args = args_with_ele_ref(opts) if opts
       chain_method(:release, args)
     end
@@ -130,7 +130,7 @@ module Appium
 
     private
 
-    def chain_method(method, args=nil)
+    def chain_method(method, args = nil)
       if args
         @actions << { action: method, options: args }
       else

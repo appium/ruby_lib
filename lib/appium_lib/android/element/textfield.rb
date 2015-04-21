@@ -15,7 +15,7 @@ module Appium
     # If value is omitted, all EditTexts are returned.
     # @param value [String] the value to search for
     # @return [Array<EditText>]
-    def textfields value=false
+    def textfields value = false
       return tags EditText unless value
       complex_finds_contains EditText, value
     end

@@ -16,7 +16,7 @@ module Appium
     # If value is omitted, all UIAStaticTexts are returned
     # @param value [String] the value to search for
     # @return [Array<UIAStaticText>]
-    def texts value=false
+    def texts value = false
       return tags UIAStaticText unless value
       eles_by_json_visible_contains UIAStaticText, value
     end

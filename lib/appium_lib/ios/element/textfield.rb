@@ -69,7 +69,7 @@ module Appium
     # If value is omitted, all TextFields are returned.
     # @param value [String] the value to search for
     # @return [Array<TextField>]
-    def textfields value=false
+    def textfields value = false
       return eles_by_json _textfield_visible unless value
       eles_by_json _textfield_contains_string value
     end

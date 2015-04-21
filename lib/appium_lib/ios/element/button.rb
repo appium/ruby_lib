@@ -17,7 +17,7 @@ module Appium
     # If value is omitted, all UIAButtons are returned.
     # @param value [String] the value to search for
     # @return [Array<UIAButton>]
-    def buttons value=false
+    def buttons value = false
       return tags UIAButton unless value
       eles_by_json_visible_contains UIAButton, value
     end

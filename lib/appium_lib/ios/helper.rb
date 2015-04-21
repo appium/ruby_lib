@@ -5,7 +5,7 @@ module Appium
     # Password character returned from value of UIASecureTextField
     # @param length [Integer] the length of the password to generate
     # @return [String] the returned string is of size length
-    def ios_password length=1
+    def ios_password length = 1
       8226.chr('UTF-8') * length
     end
 
@@ -17,7 +17,7 @@ module Appium
     # @option element [Object] the element to search. omit to search everything
     # @option class_name [String,Symbol] the class name to filter on. case insensitive include match.
     # @return [String]
-    def get_page element=source_window(0), class_name=nil
+    def get_page element = source_window(0), class_name = nil
       lazy_load_strings # populate @strings_xml
       class_name = class_name.to_s.downcase
 
@@ -122,7 +122,7 @@ module Appium
     # @option class [Symbol] class name to filter on
     #
     # @return [void]
-    def page opts={}
+    def page opts = {}
       if opts.is_a?(Hash)
         window_number = opts.fetch :window, -1
         class_name    = opts.fetch :class, nil
@@ -154,7 +154,7 @@ module Appium
     # Gets the JSON source of window number
     # @param window_number [Integer] the int index of the target window
     # @return [JSON]
-    def source_window window_number=0
+    def source_window window_number = 0
       # appium 1.0 still returns JSON when getTree() is invoked so this
       # doesn't need to change to XML. If getTree() is removed then
       # source_window will need to parse the elements of getTreeForXML()\
@@ -168,7 +168,7 @@ module Appium
     #
     # @param window_number [Integer] the int index of the target window
     # @return [void]
-    def page_window window_number=0
+    def page_window window_number = 0
       get_page source_window window_number
       nil
     end
@@ -377,7 +377,7 @@ module Appium
     # If close key is present then tap it.
     # @param close_key [String] close key to tap. Default value is 'Done'
     # @return [void]
-    def hide_ios_keyboard close_key='Done'
+    def hide_ios_keyboard close_key = 'Done'
 =begin
 todo: there are many various ways to hide the keyboard that work in different
 app specific circumstances. webview keyboard will require a window.tap for example.

@@ -2,7 +2,7 @@ require 'nokogiri'
 
 module Appium
   module Android
-    def _nodeset_to_uiselector opts={}
+    def _nodeset_to_uiselector opts = {}
       results = ''
 
       nodes = opts[:nodes]
@@ -17,7 +17,7 @@ module Appium
       results.strip
     end
 
-    def _client_xpath opts={}
+    def _client_xpath opts = {}
       root_node = Nokogiri::XML(get_source).children.first
 
       instance = Hash.new -1

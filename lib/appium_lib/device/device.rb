@@ -116,7 +116,7 @@ module Appium
         end
 
         add_endpoint_method(:app_strings, 'session/:session_id/appium/app/strings') do
-          def app_strings language=nil
+          def app_strings language = nil
             opts = language ? { language: language } : {}
             execute :app_strings, {}, opts
           end
@@ -183,13 +183,13 @@ module Appium
         end
 
         add_endpoint_method(:set_context, 'session/:session_id/context') do
-          def set_context(context=null)
+          def set_context(context = null)
             execute :set_context, {}, :name => context
           end
         end
 
         add_endpoint_method(:hide_keyboard, 'session/:session_id/appium/device/hide_keyboard') do
-          def hide_keyboard(close_key=nil)
+          def hide_keyboard(close_key = nil)
             # Android can only tapOutside.
             if $driver.device_is_android?
              return execute :hide_keyboard, {}, { strategy: :tapOutside }
@@ -201,7 +201,7 @@ module Appium
         end
 
         add_endpoint_method(:press_keycode, 'session/:session_id/appium/device/press_keycode') do
-          def press_keycode(key, metastate=nil)
+          def press_keycode(key, metastate = nil)
             args             = { keycode: key }
             args[:metastate] = metastate if metastate
             execute :press_keycode, {}, args
@@ -209,7 +209,7 @@ module Appium
         end
 
         add_endpoint_method(:long_press_keycode, 'session/:session_id/appium/device/long_press_keycode') do
-          def long_press_keycode(key, metastate=nil)
+          def long_press_keycode(key, metastate = nil)
             args             = { keycode: key }
             args[:metastate] = metastate if metastate
             execute :long_press_keycode, {}, args
@@ -292,7 +292,7 @@ module Appium
       # def extended
 
       # @private
-      def add_endpoint_method(method, path, verb=:post)
+      def add_endpoint_method(method, path, verb = :post)
         if block_given?
           # &Proc.new with no args passes the passed_in block
           # Because creating Procs from blocks is slow
@@ -320,7 +320,7 @@ module Appium
       end
 
       # @private
-      def delegate_from_appium_driver(method, delegation_target=:driver)
+      def delegate_from_appium_driver(method, delegation_target = :driver)
         def_delegator delegation_target, method
       end
 

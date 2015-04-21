@@ -7,7 +7,7 @@ module Appium
     private
 
     # @private
-    def _button_visible_selectors opts={}
+    def _button_visible_selectors opts = {}
       button_index       = opts.fetch :button_index, false
       image_button_index = opts.fetch :image_button_index, false
 
@@ -57,7 +57,7 @@ module Appium
     # If value is omitted, all buttons are returned.
     # @param value [String] the value to search for
     # @return [Array<Button>]
-    def buttons value=false
+    def buttons value = false
       return find_elements :uiautomator, _button_visible_selectors unless value
       find_elements :uiautomator, _button_contains_string(value)
     end

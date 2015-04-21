@@ -7,7 +7,7 @@ module Appium
 
     # Wait code from the selenium Ruby gem
     # https://github.com/SeleniumHQ/selenium/blob/cf501dda3f0ed12233de51ce8170c0e8090f0c20/rb/lib/selenium/webdriver/common/wait.rb
-    def _generic_wait opts={}, &block
+    def _generic_wait opts = {}, &block
       valid_keys = [:timeout, :interval, :message, :ignore, :return_if_true]
       invalid_keys = []
       opts.keys.each { |key| invalid_keys << key unless valid_keys.include?(key) }
@@ -73,7 +73,7 @@ module Appium
     # @option opts [Numeric] :interval (0.5) Seconds to sleep between polls.
     # @option opts [String] :message Exception message if timed out.
     # @option opts [Array, Exception] :ignore Exceptions to ignore while polling (default: Exception)
-    def wait_true opts={}, &block
+    def wait_true opts = {}, &block
       opts = _process_wait_opts(opts).merge(return_if_true: true)
       _generic_wait opts, &block
     end
@@ -91,7 +91,7 @@ module Appium
     # @option opts [Numeric] :interval (0.5) Seconds to sleep between polls.
     # @option opts [String] :message Exception message if timed out.
     # @option opts [Array, Exception] :ignore Exceptions to ignore while polling (default: Exception)
-    def wait opts={}, &block
+    def wait opts = {}, &block
       opts = _process_wait_opts(opts).merge(return_if_true: false)
       _generic_wait opts, &block
     end

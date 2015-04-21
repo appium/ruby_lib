@@ -117,7 +117,7 @@ module Appium
     # ```ruby
     # px_to_window_rel x: 50, y: 150
     # ```
-    def px_to_window_rel opts={}
+    def px_to_window_rel opts = {}
       w = $driver.window_size
       x = opts.fetch :x, 0
       y = opts.fetch :y, 0

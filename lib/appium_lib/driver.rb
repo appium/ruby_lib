@@ -67,7 +67,7 @@ module Appium
   #
   # @param opts [Hash] file: '/path/to/appium.txt', verbose: true
   # @return [hash] the symbolized hash with updated :app and :require keys
-  def self.load_appium_txt opts={}
+  def self.load_appium_txt opts = {}
     raise 'opts must be a hash' unless opts.kind_of? Hash
     raise 'opts must not be empty' if opts.empty?
 
@@ -267,7 +267,7 @@ module Appium
     #
     # @param opts [Object] A hash containing various options.
     # @return [Driver]
-    def initialize opts={}
+    def initialize opts = {}
       # quit last driver
       $driver.driver_quit if $driver
       raise 'opts must be a hash' unless opts.kind_of? Hash
@@ -511,7 +511,7 @@ module Appium
     #
     # @param timeout [Integer] the timeout in seconds
     # @return [void]
-    def set_wait timeout=nil
+    def set_wait timeout = nil
       if timeout.nil?
         # Appium::Logger.info "timeout = @default_wait = @last_wait"
         # Appium::Logger.info "timeout = @default_wait = #{@last_waits}"
@@ -545,7 +545,7 @@ module Appium
     #                             wait to after checking existance
     # @param search_block [Block] the block to call
     # @return [Boolean]
-    def exists pre_check=0, post_check=@default_wait, &search_block
+    def exists pre_check = 0, post_check = @default_wait, &search_block
       # do not uset set_wait here.
       # it will cause problems with other methods reading the default_wait of 0
       # which then gets converted to a 1 second wait.

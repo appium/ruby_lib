@@ -124,7 +124,7 @@ module Appium
     # @param class_name [String] the class name to filter on.
     # if false (default) then all classes will be inspected
     # @return [String]
-    def get_android_inspect class_name=false
+    def get_android_inspect class_name = false
       source = get_source
 
       doctype_string = '<!doctyp'
@@ -150,7 +150,7 @@ module Appium
     # @option class [Symbol] the class name to filter on. case insensitive include match.
     # if nil (default) then all classes will be inspected
     # @return [void]
-    def page opts={}
+    def page opts = {}
       class_name = opts.is_a?(Hash) ? opts.fetch(:class, nil) : opts
       puts get_android_inspect class_name
       nil
