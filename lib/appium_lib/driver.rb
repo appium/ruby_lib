@@ -89,7 +89,7 @@ module Appium
     data = File.read toml
     data = TOML::Parser.new(data).parsed
     # TOML creates string keys. must symbolize
-    data = Appium::symbolize_keys data
+    data = Appium.symbolize_keys data
     Appium::Logger.ap_info data unless data.empty? if verbose
 
     if data && data[:caps] && data[:caps][:app] && !data[:caps][:app].empty?
@@ -271,7 +271,7 @@ module Appium
       $driver.driver_quit if $driver
       raise 'opts must be a hash' unless opts.is_a? Hash
 
-      opts              = Appium::symbolize_keys opts
+      opts              = Appium.symbolize_keys opts
 
       # default to {} to prevent nil.fetch and other nil errors
       @caps             = opts[:caps] || {}
