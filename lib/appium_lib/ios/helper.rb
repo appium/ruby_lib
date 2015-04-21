@@ -564,7 +564,7 @@ Don't use window.tap. See https://github.com/appium/appium-uiauto/issues/28
     # })
     def eles_by_json opts
       opts[:onlyFirst] = false
-      return _by_json opts
+      _by_json opts
     end
 
     # see eles_by_json
