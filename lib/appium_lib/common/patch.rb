@@ -79,7 +79,7 @@ def patch_webdriver_bridge
       end
 
       # convert /// into /
-      path.gsub! /\/+/, '/'
+      path.gsub! %r(/\/+/), '/'
 
       # change path from session/efac972c-941a-499c-803c-d7d008749/execute
       # to /execute

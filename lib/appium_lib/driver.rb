@@ -404,14 +404,14 @@ module Appium
       # Sauce storage API. http://saucelabs.com/docs/rest#storage
       return app_path if app_path.start_with? 'sauce-storage:'
       return app_path if app_path.match(/^http/) # public URL for Sauce
-      if app_path.match(/^(\/|[a-zA-Z]:)/) # absolute file path
+      if app_path.match(%r(/^(\/|[a-zA-Z]:)/)) # absolute file path
         app_path = File.expand_path app_path unless File.exist? app_path
         raise "App doesn't exist. #{app_path}" unless File.exist? app_path
         return app_path
       end
 
       # if it doesn't contain a slash then it's a bundle id
-      return app_path unless app_path.match(/[\/\\]/)
+      return app_path unless app_path.match(%r(/[\/\\]/))
 
       # relative path that must be expanded.
       # absolute_app_path is called from load_appium_txt
