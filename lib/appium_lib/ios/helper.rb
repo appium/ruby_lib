@@ -184,7 +184,7 @@ module Appium
     # @return [Array<Integer>]
     def ios_version
       ios_version = execute_script 'UIATarget.localTarget().systemVersion()'
-      ios_version.split('.').map { |e| e.to_i }
+      ios_version.split('.').map(&:to_i)
     end
 
     # Get the element of type class_name at matching index.
