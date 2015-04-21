@@ -1,0 +1,4 @@
+# Custom config for RuboCop static code analysis
+
+Metrics/LineLength:
+  Max: 125
