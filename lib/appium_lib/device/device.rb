@@ -124,31 +124,31 @@ module Appium
 
         add_endpoint_method(:lock, 'session/:session_id/appium/device/lock') do
           def lock(duration)
-            execute :lock, {}, :seconds => duration
+            execute :lock, {}, seconds: duration
           end
         end
 
         add_endpoint_method(:install_app, 'session/:session_id/appium/device/install_app') do
           def install_app(path)
-            execute :install_app, {}, :appPath => path
+            execute :install_app, {}, appPath: path
           end
         end
 
         add_endpoint_method(:remove_app, 'session/:session_id/appium/device/remove_app') do
           def remove_app(id)
-            execute :remove_app, {}, :appId => id
+            execute :remove_app, {}, appId: id
           end
         end
 
         add_endpoint_method(:is_installed?, 'session/:session_id/appium/device/app_installed') do
           def is_installed?(app_id)
-            execute :is_installed?, {}, :bundleId => app_id
+            execute :is_installed?, {}, bundleId: app_id
           end
         end
 
         add_endpoint_method(:background_app, 'session/:session_id/appium/app/background') do
           def background_app(duration)
-            execute :background_app, {}, :seconds => duration
+            execute :background_app, {}, seconds: duration
           end
         end
 
@@ -184,7 +184,7 @@ module Appium
 
         add_endpoint_method(:set_context, 'session/:session_id/context') do
           def set_context(context = null)
-            execute :set_context, {}, :name => context
+            execute :set_context, {}, name: context
           end
         end
 
@@ -219,7 +219,7 @@ module Appium
         # TODO: TEST ME
         add_endpoint_method(:set_immediate_value, 'session/:session_id/appium/element/:id/value') do
           def set_immediate_value(element, value)
-            execute :set_immediate_value, { :id => element.ref }, value: value
+            execute :set_immediate_value, { id: element.ref }, value: value
           end
         end
 
