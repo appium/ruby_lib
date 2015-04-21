@@ -15,7 +15,7 @@ module Appium
     class << self
       COMPLEX_ACTIONS.each do |action|
         define_method(action) do |opts|
-          auto_perform = opts.delete(:auto_perform) { |k| true }
+          auto_perform = opts.delete(:auto_perform) { |_k| true }
           ta           = TouchAction.new
           ta.send(action, opts)
           return ta unless auto_perform
@@ -45,7 +45,7 @@ module Appium
     # @option y [integer] y co-ordinate to press on.
     # @option duration [integer] Number of milliseconds to press.
     def long_press(opts)
-      args = opts.select { |k, v| [:element, :x, :y, :duration].include? k }
+      args = opts.select { |k, _v| [:element, :x, :y, :duration].include? k }
       args = args_with_ele_ref(args)
       chain_method(:longPress, args) # longPress is what the appium server expects
     end
@@ -57,7 +57,7 @@ module Appium
     # @option opts [integer] :x x co-ordinate to press on
     # @option opts [integer] :y y co-ordinate to press on
     def press(opts)
-      args = opts.select { |k, v| [:element, :x, :y].include? k }
+      args = opts.select { |k, _v| [:element, :x, :y].include? k }
       args = args_with_ele_ref(args)
       chain_method(:press, args)
     end

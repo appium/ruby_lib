@@ -45,7 +45,7 @@ module Appium
 
         # scoped to: text resource-id content-desc
         attributes_values = attributes.values
-        id_matches        = $driver.lazy_load_strings.select do |key, value|
+        id_matches        = $driver.lazy_load_strings.select do |_key, value|
           attributes_values.include? value
         end
 

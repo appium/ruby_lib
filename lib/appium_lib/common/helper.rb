@@ -87,7 +87,7 @@ module Appium
 
       def formatted_result
         message = ''
-        sorted  = @result.sort_by { |element, count| count }.reverse
+        sorted  = @result.sort_by { |_element, count| count }.reverse
         sorted.each do |element, count|
           message += "#{count}x #{element}\n"
         end
@@ -138,7 +138,7 @@ module Appium
     # @return [Array]
     def xml_keys(target)
       lazy_load_strings
-      @strings_xml.select { |key, value| key.downcase.include? target.downcase }
+      @strings_xml.select { |key, _value| key.downcase.include? target.downcase }
     end
 
     # Search strings.xml's keys for target.
@@ -146,7 +146,7 @@ module Appium
     # @return [Array]
     def xml_values(target)
       lazy_load_strings
-      @strings_xml.select { |key, value| value.downcase.include? target.downcase }
+      @strings_xml.select { |_key, value| value.downcase.include? target.downcase }
     end
 
     # Resolve id in strings.xml and return the value.

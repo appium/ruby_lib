@@ -16,7 +16,7 @@ module Appium
         @logger ||= begin
           logger = ::Logger.new($stdout)
           logger.level = ::Logger::WARN
-          logger.formatter = proc { |severity, datetime, progname, msg| "#{msg}\n" } # do no special formatting
+          logger.formatter = proc { |_severity, _datetime, _progname, msg| "#{msg}\n" } # do no special formatting
           logger
         end
       end
