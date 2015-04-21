@@ -216,7 +216,7 @@ module Appium
           end
         end
 
-        # TODO TEST ME
+        # TODO: TEST ME
         add_endpoint_method(:set_immediate_value, 'session/:session_id/appium/element/:id/value') do
           def set_immediate_value(element, value)
             execute :set_immediate_value, { :id => element.ref }, value: value
@@ -237,7 +237,7 @@ module Appium
           end
         end
 
-        # TODO TEST ME
+        # TODO: TEST ME
         add_endpoint_method(:pull_folder, 'session/:session_id/appium/device/pull_folder') do
           def pull_folder(path)
             data = execute :pull_folder, {}, path: path
@@ -245,7 +245,7 @@ module Appium
           end
         end
 
-        # TODO TEST ME
+        # TODO: TEST ME
         add_endpoint_method(:end_coverage, 'session/:session_id/appium/app/end_test_coverage') do
           def end_coverage(path, intent)
             execute :end_coverage, {}, path: path, intent: intent
