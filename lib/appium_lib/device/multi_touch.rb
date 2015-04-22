@@ -16,7 +16,6 @@ module Appium
   # multi_touch_action.perform
   class MultiTouch
     class << self
-
       # Convenience method for pinching the screen.
       # Places two fingers at the edges of the screen and brings them together.
       # @param percentage (int) The percent size by which to shrink the screen when pinched.
