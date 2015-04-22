@@ -93,10 +93,10 @@ module Appium
             match_str = ''
             max_len   = id_matches.keys.max_by(&:length).length
 
-            # [0] = key, [1] = value
-            id_matches.each do |key, value|
+            # [0] = key, [1] = val
+            id_matches.each do |key, val|
               arrow_space = ' ' * (max_len - key.length).to_i
-              match_str += ' ' * 7 + "#{key} #{arrow_space}=> #{value}\n"
+              match_str += ' ' * 7 + "#{key} #{arrow_space}=> #{val}\n"
             end
             puts "   id: #{match_str.strip}\n"
           end

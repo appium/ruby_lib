@@ -102,9 +102,8 @@ module Appium
       r = data[:appium_lib][:require]
       r = r.is_a?(Array) ? r : [r]
       # ensure files are absolute
-      r.map! do |file|
-        file = File.exist?(file) ? file :
-          File.join(parent_dir, file)
+      r.map! do |f|
+        file = File.exist?(f) ? f : File.join(parent_dir, f)
         file = File.expand_path file
 
         File.exist?(file) ? file : nil
@@ -120,9 +119,9 @@ module Appium
           files << item
           next # only look inside folders
         end
-        Dir.glob(File.expand_path(File.join(item, '**', '*.rb'))) do |file|
+        Dir.glob(File.expand_path(File.join(item, '**', '*.rb'))) do |f|
           # do not add folders to the file list
-          files << File.expand_path(file) unless File.directory? file
+          files << File.expand_path(f) unless File.directory? f
         end
       end
 
