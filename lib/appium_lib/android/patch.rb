@@ -8,7 +8,7 @@ module Appium
       Selenium::WebDriver::Element.class_eval do
         # Cross platform way of entering text into a textfield
         def type(text)
-          self.send_keys text
+          send_keys text
         end
       end
     end

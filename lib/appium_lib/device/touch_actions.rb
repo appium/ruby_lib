@@ -107,10 +107,10 @@ module Appium
       end_y    = opts.fetch :end_y, 0
       duration = opts[:duration]
 
-      self.press x: start_x, y: start_y
-      self.wait(duration) if duration
-      self.move_to x: end_x, y: end_y
-      self.release
+      press x: start_x, y: start_y
+      wait(duration) if duration
+      move_to x: end_x, y: end_y
+      release
       self
     end
 

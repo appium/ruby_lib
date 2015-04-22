@@ -10,14 +10,14 @@ module Appium
       #
       # Fixes NoMethodError: undefined method `value' for Selenium::WebDriver::Element
       def value
-        self.attribute :value
+        attribute :value
       end
 
       # Returns the name attribute
       #
       # Fixes NoMethodError: undefined method `name' for Selenium::WebDriver::Element
       def name
-        self.attribute :name
+        attribute :name
       end
 
       # For use with mobile tap.
