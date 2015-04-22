@@ -165,7 +165,7 @@ module Appium
     end
 
     target_modules.each do |const|
-      #noinspection RubyResolve
+      # noinspection RubyResolve
       $driver.public_methods(false).each do |m|
         const.send(:define_singleton_method, m) do |*args, &block|
           begin
