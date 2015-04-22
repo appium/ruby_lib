@@ -278,8 +278,8 @@ module Appium
     # @return [Element]
     def tag(class_name)
       ele_by_json(
-          typeArray:   [class_name],
-          onlyVisible: true
+        typeArray:   [class_name],
+        onlyVisible: true
       )
     end
 
@@ -289,8 +289,8 @@ module Appium
     # @return [Element]
     def tags(class_name)
       eles_by_json(
-          typeArray:   [class_name],
-          onlyVisible: true
+        typeArray:   [class_name],
+        onlyVisible: true
       )
     end
 
