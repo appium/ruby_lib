@@ -101,7 +101,7 @@ module Appium
     #   Update appium Settings for current test session
     #   @param settings (hash) Settings to update, keys are settings, values to value to set each setting to
     class << self
-      def extended(mod)
+      def extended(_mod)
         extend_webdriver_with_forwardable
 
         NoArgMethods.each_pair do |verb, pair|

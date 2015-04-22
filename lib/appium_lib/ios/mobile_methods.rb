@@ -7,7 +7,7 @@ module Appium
       #   ```ruby
       #    find_elements :uiautomation, 'elements()
       #   ```
-      def extended(mod)
+      def extended(_mod)
         Selenium::WebDriver::SearchContext.class_eval do
           Selenium::WebDriver::SearchContext::FINDERS[:uiautomation] = '-ios uiautomation'
         end

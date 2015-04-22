@@ -7,7 +7,7 @@ module Appium
       #   ```ruby
       #    find_elements :uiautomator, 'new UiSelector().clickable(true)'
       #   ```
-      def extended(mod)
+      def extended(_mod)
         Selenium::WebDriver::SearchContext.class_eval do
           Selenium::WebDriver::SearchContext::FINDERS[:uiautomator] = '-android uiautomator'
         end
