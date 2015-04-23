@@ -24,7 +24,7 @@ module Appium
 
       def reset
         @result   = ''
-        @keys     = %w[text resource-id content-desc]
+        @keys     = %w(text resource-id content-desc)
         @instance = Hash.new(-1)
       end
 
