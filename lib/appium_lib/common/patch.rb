@@ -90,7 +90,7 @@ def patch_webdriver_bridge
       path_match = path.match /.*\h{8}-?\h{4}-?\h{4}-?\h{4}-?\h{12}/
       path_str   = path.sub(path_match[0], '') unless path_match.nil?
 
-      Appium::Logger.info  "#{verb} #{path_str}"
+      Appium::Logger.info "#{verb} #{path_str}"
 
       # must check to see if command_hash is a hash. sometimes it's not.
       if command_hash.is_a?(Hash) && !command_hash.empty?
