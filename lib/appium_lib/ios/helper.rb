@@ -23,7 +23,7 @@ module Appium
 
       # @private
       def empty(ele)
-        (ele['name'] || ele['label'] || ele['value']) == nil
+        (ele['name'] || ele['label'] || ele['value']).nil?
       end
 
       # @private
