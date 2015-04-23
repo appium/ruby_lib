@@ -98,7 +98,7 @@ def patch_webdriver_bridge
 
         print_command.delete :args if print_command[:args] == []
 
-        if print_command[:using] === '-android uiautomator'
+        if print_command[:using] == '-android uiautomator'
           value                 = print_command[:value].split(';').map { |v| "#{v};" }
           print_command[:value] = value.length == 1 ? value[0] : value
 
