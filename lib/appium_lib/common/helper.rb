@@ -198,12 +198,11 @@ module Appium
 
       def start_element(name, attrs = [])
         @skip_element = filter && !filter.include?(name.downcase)
-        unless @skip_element
-          element = { name: name }
-          attrs.each { |a| element[a[0]] = a[1] }
-          @element_stack.push element
-          @elements_in_order.push element
-        end
+        return if @skip_element
+        element = { name: name }
+        attrs.each { |a| element[a[0]] = a[1] }
+        @element_stack.push element
+        @elements_in_order.push element
       end
 
       def end_element(name)
@@ -213,10 +212,9 @@ module Appium
       end
 
       def characters(chars)
-        unless @skip_element
-          element        = @element_stack.last
-          element[:text] = chars
-        end
+        return if @skip_element
+        element        = @element_stack.last
+        element[:text] = chars
       end
     end
 
