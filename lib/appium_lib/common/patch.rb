@@ -127,13 +127,13 @@ class Selenium::WebDriver::Remote::Response
     val = value
 
     case val
-      when Hash
-        msg = val['origValue'] || val['message'] or return 'unknown error'
-        msg << " (#{ val['class'] })" if val['class']
-      when String
-        msg = val
-      else
-        msg = "unknown error, status=#{status}: #{val.inspect}"
+    when Hash
+      msg = val['origValue'] || val['message'] or return 'unknown error'
+      msg << " (#{ val['class'] })" if val['class']
+    when String
+      msg = val
+    else
+      msg = "unknown error, status=#{status}: #{val.inspect}"
     end
 
     msg
