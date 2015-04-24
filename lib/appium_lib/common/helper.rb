@@ -186,7 +186,7 @@ module Appium
           attr_string = e.reduce('') do |string, attr|
             attr_1 = attr[1]
             attr_1 = attr_1 ? attr_1.strip : attr_1
-            string += "  #{attr[0]}: #{attr_1}\n"
+            string + "  #{attr[0]}: #{attr_1}\n"
           end
 
           unless attr_string.nil? || attr_string.empty?
