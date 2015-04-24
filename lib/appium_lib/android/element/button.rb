@@ -80,7 +80,7 @@ module Appium
 
       find_element :uiautomator,
                    _button_visible_selectors(button_index: button_index,
-                                            image_button_index: image_button_index)
+                                             image_button_index: image_button_index)
     end
 
     # Find the first button that exactly matches value.
