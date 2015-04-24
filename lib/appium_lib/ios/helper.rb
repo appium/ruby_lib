@@ -51,6 +51,9 @@ module Appium
         visible = fix_space element['visible']
         type    = fix_space element['type']
 
+        # TODO: Rubocop warning cleanup
+        # rubocop:disable Metrics/BlockNesting
+
         # if class_name is set, mark non-matches as invisible
         visible = (type.downcase.include?(class_name)).to_s if class_name
         if visible && visible == 'true'
@@ -75,6 +78,7 @@ module Appium
             puts "  value: #{value}" if value
             puts "   hint: #{hint}" if hint
           end
+          # rubocop:enable Metrics/BlockNesting
 
           # there may be many ids with the same value.
           # output all exact matches.
