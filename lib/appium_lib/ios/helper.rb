@@ -383,7 +383,7 @@ module Appium
     # @return [void]
     def hide_ios_keyboard(close_key = 'Done')
       #
-      # todo: there are many various ways to hide the keyboard that work in different
+      # TODO: there are many various ways to hide the keyboard that work in different
       # app specific circumstances. webview keyboard will require a window.tap for example.
       #
       # Find the top left corner of the keyboard and move up 10 pixels (origin.y - 10)
