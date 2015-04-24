@@ -208,7 +208,7 @@ module Appium
         index = results.length
         index -= 1 if index >= 0
       else
-        raise 'Index must be >= 1' unless index >= 1
+        fail 'Index must be >= 1' unless index >= 1
         index -= 1 if index >= 1
       end
 

@@ -11,7 +11,7 @@ module Appium
       invalid_keys = []
       opts.keys.each { |key| invalid_keys << key unless valid_keys.include?(key) }
       # [:one, :two] => :one, :two
-      raise "Invalid keys #{invalid_keys.to_s[1..-2]}. Valid keys are #{valid_keys.to_s[1..-2]}" unless invalid_keys.empty?
+      fail "Invalid keys #{invalid_keys.to_s[1..-2]}. Valid keys are #{valid_keys.to_s[1..-2]}" unless invalid_keys.empty?
 
       timeout        = opts.fetch(:timeout, 30)
       interval       = opts.fetch(:interval, 0.5)
@@ -47,13 +47,13 @@ module Appium
 
       msg << " (#{last_error.message})" if last_error
 
-      raise Selenium::WebDriver::Error::TimeOutError, msg
+      fail Selenium::WebDriver::Error::TimeOutError, msg
     end
 
     # process opts before calling _generic_wait
     def _process_wait_opts(opts)
       opts = { timeout: opts } if opts.is_a?(Numeric)
-      raise 'opts must be a hash' unless opts.is_a? Hash
+      fail 'opts must be a hash' unless opts.is_a? Hash
       opts
     end
 

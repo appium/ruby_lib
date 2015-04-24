@@ -68,11 +68,11 @@ module Appium
   # @param opts [Hash] file: '/path/to/appium.txt', verbose: true
   # @return [hash] the symbolized hash with updated :app and :require keys
   def self.load_appium_txt(opts = {})
-    raise 'opts must be a hash' unless opts.is_a? Hash
-    raise 'opts must not be empty' if opts.empty?
+    fail 'opts must be a hash' unless opts.is_a? Hash
+    fail 'opts must not be empty' if opts.empty?
 
     file = opts[:file]
-    raise 'Must pass file' unless file
+    fail 'Must pass file' unless file
     verbose = opts.fetch :verbose, false
 
     parent_dir = File.dirname file
@@ -82,7 +82,7 @@ module Appium
     toml_exists = File.exist? toml
     Appium::Logger.info "Exists? #{toml_exists}" if verbose
 
-    raise "toml doesn't exist #{toml}" unless toml_exists
+    fail "toml doesn't exist #{toml}" unless toml_exists
     require 'toml'
     Appium::Logger.info "Loading #{toml}" if verbose
 
@@ -137,7 +137,7 @@ module Appium
   # based on deep_symbolize_keys & deep_transform_keys from rails
   # https://github.com/rails/docrails/blob/a3b1105ada3da64acfa3843b164b14b734456a50/activesupport/lib/active_support/core_ext/hash/keys.rb#L84
   def self.symbolize_keys(hash)
-    raise 'symbolize_keys requires a hash' unless hash.is_a? Hash
+    fail 'symbolize_keys requires a hash' unless hash.is_a? Hash
     result = {}
     hash.each do |key, value|
       key = key.to_sym rescue key
@@ -150,7 +150,7 @@ module Appium
   # that module are promoted on.
   # otherwise, the array of modules will be used as the promotion target.
   def self.promote_singleton_appium_methods(modules)
-    raise 'Driver is nil' if $driver.nil?
+    fail 'Driver is nil' if $driver.nil?
 
     target_modules = []
 
@@ -159,7 +159,7 @@ module Appium
         target_modules << modules.const_get(sub_module)
       end
     else
-      raise 'modules must be a module or an array' unless modules.is_a? Array
+      fail 'modules must be a module or an array' unless modules.is_a? Array
       target_modules = modules
     end
 
@@ -189,7 +189,7 @@ module Appium
   # Appium.promote_appium_methods Object
   # ```
   def self.promote_appium_methods(class_array)
-    raise 'Driver is nil' if $driver.nil?
+    fail 'Driver is nil' if $driver.nil?
     # Wrap single class into an array
     class_array = [class_array] unless class_array.class == Array
     # Promote Appium driver methods to class instance methods.
@@ -268,7 +268,7 @@ module Appium
     def initialize(opts = {})
       # quit last driver
       $driver.driver_quit if $driver
-      raise 'opts must be a hash' unless opts.is_a? Hash
+      fail 'opts must be a hash' unless opts.is_a? Hash
 
       opts              = Appium.symbolize_keys opts
 
@@ -296,8 +296,8 @@ module Appium
       # https://code.google.com/p/selenium/source/browse/spec-draft.md?repo=mobile
       @appium_device = @caps[:platformName]
       @appium_device = @appium_device.is_a?(Symbol) ? @appium_device : @appium_device.downcase.strip.intern if @appium_device
-      raise "platformName must be set. Not found in options: #{opts}" unless @appium_device
-      raise 'platformName must be Android or iOS' unless [:android, :ios].include?(@appium_device)
+      fail "platformName must be set. Not found in options: #{opts}" unless @appium_device
+      fail 'platformName must be Android or iOS' unless [:android, :ios].include?(@appium_device)
 
       # load common methods
       extend Appium::Common
@@ -388,13 +388,13 @@ module Appium
     #
     # @return [String] APP_PATH as an absolute path
     def self.absolute_app_path(opts)
-      raise 'opts must be a hash' unless opts.is_a? Hash
+      fail 'opts must be a hash' unless opts.is_a? Hash
       caps            = opts[:caps] || {}
       appium_lib_opts = opts[:appium_lib] || {}
       server_url      = appium_lib_opts.fetch :server_url, false
 
       app_path        = caps[:app]
-      raise 'absolute_app_path invoked and app is not set!' if app_path.nil? || app_path.empty?
+      fail 'absolute_app_path invoked and app is not set!' if app_path.nil? || app_path.empty?
       # may be absolute path to file on remote server.
       # if the file is on the remote server then we can't check if it exists
       return app_path if server_url
@@ -403,7 +403,7 @@ module Appium
       return app_path if app_path.match(/^http/) # public URL for Sauce
       if app_path.match(/^(\/|[a-zA-Z]:)/) # absolute file path
         app_path = File.expand_path app_path unless File.exist? app_path
-        raise "App doesn't exist. #{app_path}" unless File.exist? app_path
+        fail "App doesn't exist. #{app_path}" unless File.exist? app_path
         return app_path
       end
 
@@ -414,7 +414,7 @@ module Appium
       # absolute_app_path is called from load_appium_txt
       # and the txt file path is the base of the app path in that case.
       app_path = File.expand_path app_path
-      raise "App doesn't exist #{app_path}" unless File.exist? app_path
+      fail "App doesn't exist #{app_path}" unless File.exist? app_path
       app_path
     end
 

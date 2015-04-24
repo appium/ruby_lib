@@ -167,16 +167,16 @@ module Appium
         #   ```
         add_endpoint_method(:start_activity, 'session/:session_id/appium/device/start_activity') do
           def start_activity(opts)
-            raise 'opts must be a hash' unless opts.is_a? Hash
+            fail 'opts must be a hash' unless opts.is_a? Hash
             app_package = opts[:app_package]
-            raise 'app_package is required' unless app_package
+            fail 'app_package is required' unless app_package
             app_activity = opts[:app_activity]
-            raise 'app_activity is required' unless opts[:app_activity]
+            fail 'app_activity is required' unless opts[:app_activity]
             app_wait_package  = opts.fetch(:app_wait_package, '')
             app_wait_activity = opts.fetch(:app_wait_activity, '')
 
             unknown_opts = opts.keys - [:app_package, :app_activity, :app_wait_package, :app_wait_activity]
-            raise "Unknown options #{unknown_opts}" unless unknown_opts.empty?
+            fail "Unknown options #{unknown_opts}" unless unknown_opts.empty?
 
             execute :start_activity, {}, appPackage: app_package,
                                          appActivity: app_activity,

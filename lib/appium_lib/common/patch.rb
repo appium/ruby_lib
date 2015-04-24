@@ -68,7 +68,7 @@ def patch_webdriver_bridge
     # Code from lib/selenium/webdriver/remote/bridge.rb
     def raw_execute(command, opts = {}, command_hash = nil)
       verb, path = Selenium::WebDriver::Remote::COMMANDS[command] ||
-          raise(ArgumentError, "unknown command: #{command.inspect}")
+          fail(ArgumentError, "unknown command: #{command.inspect}")
       path       = path.dup
 
       path[':session_id'] = @session_id if path.include?(':session_id')

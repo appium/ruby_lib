@@ -192,7 +192,7 @@ module Appium
     # @param index [Integer] the index
     # @return [Element]
     def ele_index(class_name, index)
-      raise 'Index must be >= 1' unless index == 'last()' || (index.is_a?(Integer) && index >= 1)
+      fail 'Index must be >= 1' unless index == 'last()' || (index.is_a?(Integer) && index >= 1)
       elements = tags(class_name)
 
       if index == 'last()'
@@ -203,7 +203,7 @@ module Appium
         result = elements[index]
       end
 
-      raise _no_such_element if result.nil?
+      fail _no_such_element if result.nil?
       result
     end
 
@@ -433,7 +433,7 @@ Don't use window.tap. See https://github.com/appium/appium-uiauto/issues/28
     #
     def _all_pred(opts)
       predicate = opts[:predicate]
-      raise 'predicate must be provided' unless predicate
+      fail 'predicate must be provided' unless predicate
       visible = opts.fetch :visible, true
       %($.mainApp().getAllWithPredicate("#{predicate}", #{visible});)
     end
@@ -466,22 +466,22 @@ Don't use window.tap. See https://github.com/appium/appium-uiauto/issues/28
     end
 
     def _validate_object(*objects)
-      raise 'objects must be an array' unless objects.is_a? Array
+      fail 'objects must be an array' unless objects.is_a? Array
       objects.each do |obj|
         next unless obj # obj may be nil. if so, ignore.
 
         valid_keys   = [:target, :substring, :insensitive]
         unknown_keys = obj.keys - valid_keys
-        raise "Unknown keys: #{unknown_keys}" unless unknown_keys.empty?
+        fail "Unknown keys: #{unknown_keys}" unless unknown_keys.empty?
 
         target = obj[:target]
-        raise 'target must be a string' unless target.is_a? String
+        fail 'target must be a string' unless target.is_a? String
 
         substring = obj[:substring]
-        raise 'substring must be a boolean' unless [true, false].include? substring
+        fail 'substring must be a boolean' unless [true, false].include? substring
 
         insensitive = obj[:insensitive]
-        raise 'insensitive must be a boolean' unless [true, false].include? insensitive
+        fail 'insensitive must be a boolean' unless [true, false].include? insensitive
       end
     end
 
@@ -516,16 +516,16 @@ Don't use window.tap. See https://github.com/appium/appium-uiauto/issues/28
     def _by_json(opts)
       valid_keys   = [:typeArray, :onlyFirst, :onlyVisible, :name, :label, :value]
       unknown_keys = opts.keys - valid_keys
-      raise "Unknown keys: #{unknown_keys}" unless unknown_keys.empty?
+      fail "Unknown keys: #{unknown_keys}" unless unknown_keys.empty?
 
       typeArray = opts[:typeArray]
-      raise 'typeArray must be an array' unless typeArray.is_a? Array
+      fail 'typeArray must be an array' unless typeArray.is_a? Array
 
       onlyFirst = opts[:onlyFirst]
-      raise 'onlyFirst must be a boolean' unless [true, false].include? onlyFirst
+      fail 'onlyFirst must be a boolean' unless [true, false].include? onlyFirst
 
       onlyVisible = opts[:onlyVisible]
-      raise 'onlyVisible must be a boolean' unless [true, false].include? onlyVisible
+      fail 'onlyVisible must be a boolean' unless [true, false].include? onlyVisible
 
       # name/label/value are optional. when searching for class only, then none
       # will be present.
@@ -548,7 +548,7 @@ Don't use window.tap. See https://github.com/appium/appium-uiauto/issues/28
       JS
 
       res = execute_script element_or_elements_by_type
-      res ? res : raise(Selenium::Client::CommandError, 'mainWindow is nil')
+      res ? res : fail(Selenium::Client::CommandError, 'mainWindow is nil')
     end
 
     # example usage:
@@ -571,7 +571,7 @@ Don't use window.tap. See https://github.com/appium/appium-uiauto/issues/28
     def ele_by_json(opts)
       opts[:onlyFirst] = true
       result           = _by_json(opts).first
-      raise _no_such_element if result.nil?
+      fail _no_such_element if result.nil?
       result
     end
 
