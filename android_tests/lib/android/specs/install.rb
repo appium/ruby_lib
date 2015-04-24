@@ -5,11 +5,11 @@ describe 'install' do
   end
 
   def installed
-    is_installed?(pkg).must_equal true
+    installed?(pkg).must_equal true
   end
 
   def not_installed
-    is_installed?(pkg).must_equal false
+    installed?(pkg).must_equal false
   end
 
   t 'install/uninstall' do

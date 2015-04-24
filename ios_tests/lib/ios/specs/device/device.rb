@@ -27,8 +27,8 @@ describe 'device/device' do
     screen.must_equal catalog
   end
 
-  t 'is_installed' do
-    installed = is_installed? "Derrp"
+  t 'installed' do
+    installed = installed? "Derrp"
     installed.must_equal false
   end
 
