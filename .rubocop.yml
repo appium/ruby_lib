@@ -5,3 +5,6 @@ Metrics/LineLength:
 
 Style/ConstantName:
   Enabled: false
+
+Metrics/MethodLength:
+  Max: 30
