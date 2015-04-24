@@ -38,9 +38,7 @@ module Appium
         attributes = {}
 
         attrs.each do |key, value|
-          if keys.include?(key) && !value.empty?
-            attributes[key] = value
-          end
+          attributes[key] = value if keys.include?(key) && !value.empty?
         end
 
         # scoped to: text resource-id content-desc
