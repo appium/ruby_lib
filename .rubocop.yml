@@ -2,3 +2,6 @@
 
 Metrics/LineLength:
   Max: 125
+
+Style/ConstantName:
+  Enabled: false
