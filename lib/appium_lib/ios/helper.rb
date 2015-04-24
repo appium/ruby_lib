@@ -518,14 +518,14 @@ Don't use window.tap. See https://github.com/appium/appium-uiauto/issues/28
       unknown_keys = opts.keys - valid_keys
       fail "Unknown keys: #{unknown_keys}" unless unknown_keys.empty?
 
-      typeArray = opts[:typeArray]
-      fail 'typeArray must be an array' unless typeArray.is_a? Array
+      type_array = opts[:typeArray]
+      fail 'typeArray must be an array' unless type_array.is_a? Array
 
-      onlyFirst = opts[:onlyFirst]
-      fail 'onlyFirst must be a boolean' unless [true, false].include? onlyFirst
+      only_first = opts[:onlyFirst]
+      fail 'onlyFirst must be a boolean' unless [true, false].include? only_first
 
-      onlyVisible = opts[:onlyVisible]
-      fail 'onlyVisible must be a boolean' unless [true, false].include? onlyVisible
+      only_visible = opts[:onlyVisible]
+      fail 'onlyVisible must be a boolean' unless [true, false].include? only_visible
 
       # name/label/value are optional. when searching for class only, then none
       # will be present.
