@@ -3,7 +3,7 @@ require_relative 'version'
 module Appium
   module Common
     # Implement useful features for element.
-    class Selenium::WebDriver::Element
+    class Selenium::WebDriver::Element # rubocop:disable Style/ClassAndModuleChildren
       # Note: For testing .text should be used over value, and name.
 
       # Returns the value attribute
@@ -121,7 +121,7 @@ def patch_webdriver_bridge
 end
 
 # Print Appium's origValue error messages.
-class Selenium::WebDriver::Remote::Response
+class Selenium::WebDriver::Remote::Response # rubocop:disable Style/ClassAndModuleChildren
   # @private
   def error_message
     val = value
@@ -140,7 +140,7 @@ class Selenium::WebDriver::Remote::Response
   end
 end
 
-class Selenium::WebDriver::Remote::Http::Common
+class Selenium::WebDriver::Remote::Http::Common # rubocop:disable Style/ClassAndModuleChildren
   remove_const :DEFAULT_HEADERS if defined? DEFAULT_HEADERS
   DEFAULT_HEADERS = { 'Accept' => CONTENT_TYPE, 'User-Agent' => "appium/ruby_lib/#{::Appium::VERSION}" }
 end
