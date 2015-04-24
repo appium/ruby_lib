@@ -382,21 +382,21 @@ module Appium
     # @param close_key [String] close key to tap. Default value is 'Done'
     # @return [void]
     def hide_ios_keyboard(close_key = 'Done')
-=begin
-todo: there are many various ways to hide the keyboard that work in different
-app specific circumstances. webview keyboard will require a window.tap for example.
-
-Find the top left corner of the keyboard and move up 10 pixels (origin.y - 10)
-now swipe down until the end of the window - 10 pixels.
--10 to ensure we're not going outside the window bounds.
-
-Swiping inside the keyboard will not dismiss it.
-
-If the 'Done' key exists then that should be pressed to dismiss the keyboard
-because swiping to dismiss works only if such key doesn't exist.
-
-Don't use window.tap. See https://github.com/appium/appium-uiauto/issues/28
-=end
+      #
+      # todo: there are many various ways to hide the keyboard that work in different
+      # app specific circumstances. webview keyboard will require a window.tap for example.
+      #
+      # Find the top left corner of the keyboard and move up 10 pixels (origin.y - 10)
+      # now swipe down until the end of the window - 10 pixels.
+      # -10 to ensure we're not going outside the window bounds.
+      #
+      # Swiping inside the keyboard will not dismiss it.
+      #
+      # If the 'Done' key exists then that should be pressed to dismiss the keyboard
+      # because swiping to dismiss works only if such key doesn't exist.
+      #
+      # Don't use window.tap. See https://github.com/appium/appium-uiauto/issues/28
+      #
       dismiss_keyboard = (<<-JS).strip
       if (!au.mainApp().keyboard().isNil()) {
         var key = au.mainApp().keyboard().buttons()['#{close_key}']
