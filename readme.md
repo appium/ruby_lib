@@ -7,6 +7,7 @@
 - [Documentation for appium_lib](https://github.com/appium/ruby_lib/tree/master/docs)
 - [Appium Ruby Console](https://github.com/appium/ruby_console)
 - [Bootcamp quick start guide](http://sauceio.com/index.php/tag/appium-bootcamp/) & [Bootcamp example source](https://github.com/tourdedave/appium-getting-started-code-exampes)
+- [Mobile automation walkthrough with Ruby and Sauce](http://stackshare.io/sauce-labs/mobile-automation-with-appium-and-sauce-labs) & [code examples](https://github.com/jlipps/appium-ruby-example)
 
 Helper methods for writing cross platform (iOS, Android) tests in Ruby using Appium. Note that user waits should not exceed 120 seconds if they're going to run on Sauce Labs.
 
