@@ -288,14 +288,14 @@ module Appium
 
       if class_name == '*'
         return _resourceId(value, "new UiSelector().resourceId(#{value});") +
-          "new UiSelector().descriptionContains(#{value});" +
+          "new UiSelector().descriptionContains(#{value});" \
           "new UiSelector().textContains(#{value});"
       end
 
       class_name = %("#{class_name}")
 
       _resourceId(value, "new UiSelector().className(#{class_name}).resourceId(#{value});") +
-        "new UiSelector().className(#{class_name}).descriptionContains(#{value});" +
+        "new UiSelector().className(#{class_name}).descriptionContains(#{value});" \
         "new UiSelector().className(#{class_name}).textContains(#{value});"
     end
 
@@ -325,14 +325,14 @@ module Appium
 
       if class_name == '*'
         return _resourceId(value, "new UiSelector().resourceId(#{value});") +
-          "new UiSelector().description(#{value});" +
+          "new UiSelector().description(#{value});" \
           "new UiSelector().text(#{value});"
       end
 
       class_name = %("#{class_name}")
 
       _resourceId(value, "new UiSelector().className(#{class_name}).resourceId(#{value});") +
-        "new UiSelector().className(#{class_name}).description(#{value});" +
+        "new UiSelector().className(#{class_name}).description(#{value});" \
         "new UiSelector().className(#{class_name}).text(#{value});"
     end
 
