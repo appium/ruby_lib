@@ -24,8 +24,8 @@ describe 'common/device' do
     wait { current_activity.include?('Settings').must_equal true }
   end
 
-  t 'is_installed' do
-    wait { is_installed?('fake_app').must_equal false }
+  t 'installed' do
+    wait { app_installed?('fake_app').must_equal false }
   end
 
   t 'reset' do

@@ -11,12 +11,12 @@ module Appium
         launch_app:           'session/:session_id/appium/app/launch',
         close_app:            'session/:session_id/appium/app/close',
         reset:                'session/:session_id/appium/app/reset',
-        toggle_airplane_mode: 'session/:session_id/appium/device/toggle_airplane_mode',
+        toggle_airplane_mode: 'session/:session_id/appium/device/toggle_airplane_mode'
       },
       get:  {
         current_activity:       'session/:session_id/appium/device/current_activity',
         current_context:        'session/:session_id/context',
-        get_network_connection: 'session/:session_id/network_connection',
+        get_network_connection: 'session/:session_id/network_connection'
       }
     }
 
@@ -34,7 +34,7 @@ module Appium
     # @!method current_activity
 
     # @!method launch_app
-    #   Start the simulator and applicaton configured with desired capabilities  
+    #   Start the simulator and applicaton configured with desired capabilities
 
     # @!method reset
     #   Reset the device, relaunching the application.
@@ -101,7 +101,7 @@ module Appium
     #   Update appium Settings for current test session
     #   @param settings (hash) Settings to update, keys are settings, values to value to set each setting to
     class << self
-      def extended(mod)
+      def extended(_mod)
         extend_webdriver_with_forwardable
 
         NoArgMethods.each_pair do |verb, pair|
@@ -116,7 +116,7 @@ module Appium
         end
 
         add_endpoint_method(:app_strings, 'session/:session_id/appium/app/strings') do
-          def app_strings language=nil
+          def app_strings(language = nil)
             opts = language ? { language: language } : {}
             execute :app_strings, {}, opts
           end
@@ -124,31 +124,31 @@ module Appium
 
         add_endpoint_method(:lock, 'session/:session_id/appium/device/lock') do
           def lock(duration)
-            execute :lock, {}, :seconds => duration
+            execute :lock, {}, seconds: duration
           end
         end
 
         add_endpoint_method(:install_app, 'session/:session_id/appium/device/install_app') do
           def install_app(path)
-            execute :install_app, {}, :appPath => path
+            execute :install_app, {}, appPath: path
           end
         end
 
         add_endpoint_method(:remove_app, 'session/:session_id/appium/device/remove_app') do
           def remove_app(id)
-            execute :remove_app, {}, :appId => id
+            execute :remove_app, {}, appId: id
           end
         end
 
-        add_endpoint_method(:is_installed?, 'session/:session_id/appium/device/app_installed') do
-          def is_installed?(app_id)
-            execute :is_installed?, {}, :bundleId => app_id
+        add_endpoint_method(:app_installed?, 'session/:session_id/appium/device/app_installed') do
+          def app_installed?(app_id)
+            execute :app_installed?, {}, bundleId: app_id
           end
         end
 
         add_endpoint_method(:background_app, 'session/:session_id/appium/app/background') do
           def background_app(duration)
-            execute :background_app, {}, :seconds => duration
+            execute :background_app, {}, seconds: duration
           end
         end
 
@@ -162,37 +162,40 @@ module Appium
         #   @param [String] The activity to start before the target activity [optional]
         #
         #   ```ruby
-        #   start_activity app_package: 'io.appium.android.apis', app_activity: '.accessibility.AccessibilityNodeProviderActivity'
+        #   start_activity app_package: 'io.appium.android.apis',
+        #     app_activity: '.accessibility.AccessibilityNodeProviderActivity'
         #   ```
         add_endpoint_method(:start_activity, 'session/:session_id/appium/device/start_activity') do
           def start_activity(opts)
-            raise 'opts must be a hash' unless opts.is_a? Hash
+            fail 'opts must be a hash' unless opts.is_a? Hash
             app_package = opts[:app_package]
-            raise 'app_package is required' unless app_package
+            fail 'app_package is required' unless app_package
             app_activity = opts[:app_activity]
-            raise 'app_activity is required' unless opts[:app_activity]
+            fail 'app_activity is required' unless opts[:app_activity]
             app_wait_package  = opts.fetch(:app_wait_package, '')
             app_wait_activity = opts.fetch(:app_wait_activity, '')
 
             unknown_opts = opts.keys - [:app_package, :app_activity, :app_wait_package, :app_wait_activity]
-            raise "Unknown options #{unknown_opts}" unless unknown_opts.empty?
+            fail "Unknown options #{unknown_opts}" unless unknown_opts.empty?
 
-            execute :start_activity, {}, { appPackage:     app_package,      appActivity: app_activity,
-                                           appWaitPackage: app_wait_package, appWaitActivity: app_wait_activity }
+            execute :start_activity, {}, appPackage: app_package,
+                                         appActivity: app_activity,
+                                         appWaitPackage: app_wait_package,
+                                         appWaitActivity: app_wait_activity
           end
         end
 
         add_endpoint_method(:set_context, 'session/:session_id/context') do
-          def set_context(context=null)
-            execute :set_context, {}, :name => context
+          def set_context(context = null)
+            execute :set_context, {}, name: context
           end
         end
 
         add_endpoint_method(:hide_keyboard, 'session/:session_id/appium/device/hide_keyboard') do
-          def hide_keyboard(close_key=nil)
+          def hide_keyboard(close_key = nil)
             # Android can only tapOutside.
             if $driver.device_is_android?
-             return execute :hide_keyboard, {}, { strategy: :tapOutside }
+              return execute :hide_keyboard, {}, strategy: :tapOutside
             end
 
             close_key ||= 'Done' # default to Done key.
@@ -201,7 +204,7 @@ module Appium
         end
 
         add_endpoint_method(:press_keycode, 'session/:session_id/appium/device/press_keycode') do
-          def press_keycode(key, metastate=nil)
+          def press_keycode(key, metastate = nil)
             args             = { keycode: key }
             args[:metastate] = metastate if metastate
             execute :press_keycode, {}, args
@@ -209,17 +212,17 @@ module Appium
         end
 
         add_endpoint_method(:long_press_keycode, 'session/:session_id/appium/device/long_press_keycode') do
-          def long_press_keycode(key, metastate=nil)
+          def long_press_keycode(key, metastate = nil)
             args             = { keycode: key }
             args[:metastate] = metastate if metastate
             execute :long_press_keycode, {}, args
           end
         end
 
-        # TODO TEST ME
+        # TODO: TEST ME
         add_endpoint_method(:set_immediate_value, 'session/:session_id/appium/element/:id/value') do
           def set_immediate_value(element, value)
-            execute :set_immediate_value, { :id => element.ref }, value: value
+            execute :set_immediate_value, { id: element.ref }, value: value
           end
         end
 
@@ -237,7 +240,7 @@ module Appium
           end
         end
 
-        # TODO TEST ME
+        # TODO: TEST ME
         add_endpoint_method(:pull_folder, 'session/:session_id/appium/device/pull_folder') do
           def pull_folder(path)
             data = execute :pull_folder, {}, path: path
@@ -245,7 +248,7 @@ module Appium
           end
         end
 
-        # TODO TEST ME
+        # TODO: TEST ME
         add_endpoint_method(:end_coverage, 'session/:session_id/appium/app/end_test_coverage') do
           def end_coverage(path, intent)
             execute :end_coverage, {}, path: path, intent: intent
@@ -292,7 +295,7 @@ module Appium
       # def extended
 
       # @private
-      def add_endpoint_method(method, path, verb=:post)
+      def add_endpoint_method(method, path, verb = :post)
         if block_given?
           # &Proc.new with no args passes the passed_in block
           # Because creating Procs from blocks is slow
@@ -307,7 +310,7 @@ module Appium
 
       # @private
       def extend_webdriver_with_forwardable
-        return if Selenium::WebDriver::Driver.kind_of? Forwardable
+        return if Selenium::WebDriver::Driver.is_a? Forwardable
         Selenium::WebDriver::Driver.class_eval do
           extend Forwardable
         end
@@ -320,7 +323,7 @@ module Appium
       end
 
       # @private
-      def delegate_from_appium_driver(method, delegation_target=:driver)
+      def delegate_from_appium_driver(method, delegation_target = :driver)
         def_delegator delegation_target, method
       end
 
@@ -329,7 +332,7 @@ module Appium
         Selenium::WebDriver::Remote::Bridge.class_eval do
           command method, verb, path
           if block_given?
-            class_eval &Proc.new
+            class_eval(&Proc.new)
           else
             define_method(method) { execute method }
           end

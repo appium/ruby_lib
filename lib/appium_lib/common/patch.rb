@@ -3,21 +3,21 @@ require_relative 'version'
 module Appium
   module Common
     # Implement useful features for element.
-    class Selenium::WebDriver::Element
+    class Selenium::WebDriver::Element # rubocop:disable Style/ClassAndModuleChildren
       # Note: For testing .text should be used over value, and name.
 
       # Returns the value attribute
       #
       # Fixes NoMethodError: undefined method `value' for Selenium::WebDriver::Element
       def value
-        self.attribute :value
+        attribute :value
       end
 
       # Returns the name attribute
       #
       # Fixes NoMethodError: undefined method `name' for Selenium::WebDriver::Element
       def name
-        self.attribute :name
+        attribute :name
       end
 
       # For use with mobile tap.
@@ -67,8 +67,9 @@ def patch_webdriver_bridge
   Selenium::WebDriver::Remote::Bridge.class_eval do
     # Code from lib/selenium/webdriver/remote/bridge.rb
     def raw_execute(command, opts = {}, command_hash = nil)
-      verb, path          = Selenium::WebDriver::Remote::COMMANDS[command] || raise(ArgumentError, "unknown command: #{command.inspect}")
-      path                = path.dup
+      verb, path = Selenium::WebDriver::Remote::COMMANDS[command] ||
+                   fail(ArgumentError, "unknown command: #{command.inspect}")
+      path       = path.dup
 
       path[':session_id'] = @session_id if path.include?(':session_id')
 
@@ -79,18 +80,17 @@ def patch_webdriver_bridge
       end
 
       # convert /// into /
-      path.gsub! /\/+/, '/'
+      path.gsub!(/\/+/, '/')
 
       # change path from session/efac972c-941a-499c-803c-d7d008749/execute
       # to /execute
       # path may be nil, session, or not have anything after the session_id.
       path_str   = path
-      path_str   = '/' + path_str unless path_str.nil? ||
-        path_str.length <= 0 || path_str[0] == '/'
-      path_match = path.match /.*\h{8}-?\h{4}-?\h{4}-?\h{4}-?\h{12}/
+      path_str   = '/' + path_str unless path_str.nil? || path_str.length <= 0 || path_str[0] == '/'
+      path_match = path.match(/.*\h{8}-?\h{4}-?\h{4}-?\h{4}-?\h{12}/)
       path_str   = path.sub(path_match[0], '') unless path_match.nil?
 
-      Appium::Logger.info  "#{verb} #{path_str}"
+      Appium::Logger.info "#{verb} #{path_str}"
 
       # must check to see if command_hash is a hash. sometimes it's not.
       if command_hash.is_a?(Hash) && !command_hash.empty?
@@ -98,7 +98,7 @@ def patch_webdriver_bridge
 
         print_command.delete :args if print_command[:args] == []
 
-        if print_command[:using] === '-android uiautomator'
+        if print_command[:using] == '-android uiautomator'
           value                 = print_command[:value].split(';').map { |v| "#{v};" }
           print_command[:value] = value.length == 1 ? value[0] : value
 
@@ -121,26 +121,26 @@ def patch_webdriver_bridge
 end
 
 # Print Appium's origValue error messages.
-class Selenium::WebDriver::Remote::Response
+class Selenium::WebDriver::Remote::Response # rubocop:disable Style/ClassAndModuleChildren
   # @private
   def error_message
     val = value
 
     case val
-      when Hash
-        msg = val['origValue'] || val['message'] or return 'unknown error'
-        msg << " (#{ val['class'] })" if val['class']
-      when String
-        msg = val
-      else
-        msg = "unknown error, status=#{status}: #{val.inspect}"
+    when Hash
+      msg = val['origValue'] || val['message'] or return 'unknown error'
+      msg << " (#{ val['class'] })" if val['class']
+    when String
+      msg = val
+    else
+      msg = "unknown error, status=#{status}: #{val.inspect}"
     end
 
     msg
   end
 end
 
-class Selenium::WebDriver::Remote::Http::Common
+class Selenium::WebDriver::Remote::Http::Common # rubocop:disable Style/ClassAndModuleChildren
   remove_const :DEFAULT_HEADERS if defined? DEFAULT_HEADERS
   DEFAULT_HEADERS = { 'Accept' => CONTENT_TYPE, 'User-Agent' => "appium/ruby_lib/#{::Appium::VERSION}" }
 end

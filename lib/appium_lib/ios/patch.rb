@@ -9,13 +9,13 @@ module Appium
         # Enable access to iOS accessibility label
         # accessibility identifier is supported as 'name'
         def label
-          self.attribute('label')
+          attribute('label')
         end
 
         # Cross platform way of entering text into a textfield
-        def type text
+        def type(text)
           # type
-          $driver.execute_script %(au.getElement('#{self.ref}').setValue('#{text}');)
+          $driver.execute_script %(au.getElement('#{ref}').setValue('#{text}');)
         end # def type
       end # Selenium::WebDriver::Element.class_eval
     end # def patch_webdriver_element

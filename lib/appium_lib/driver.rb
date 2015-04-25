@@ -67,29 +67,29 @@ module Appium
   #
   # @param opts [Hash] file: '/path/to/appium.txt', verbose: true
   # @return [hash] the symbolized hash with updated :app and :require keys
-  def self.load_appium_txt opts={}
-    raise 'opts must be a hash' unless opts.kind_of? Hash
-    raise 'opts must not be empty' if opts.empty?
+  def self.load_appium_txt(opts = {})
+    fail 'opts must be a hash' unless opts.is_a? Hash
+    fail 'opts must not be empty' if opts.empty?
 
     file = opts[:file]
-    raise 'Must pass file' unless file
+    fail 'Must pass file' unless file
     verbose = opts.fetch :verbose, false
 
     parent_dir = File.dirname file
     toml       = File.expand_path File.join parent_dir, 'appium.txt'
     Appium::Logger.info "appium.txt path: #{toml}" if verbose
 
-    toml_exists = File.exists? toml
+    toml_exists = File.exist? toml
     Appium::Logger.info "Exists? #{toml_exists}" if verbose
 
-    raise "toml doesn't exist #{toml}" unless toml_exists
+    fail "toml doesn't exist #{toml}" unless toml_exists
     require 'toml'
     Appium::Logger.info "Loading #{toml}" if verbose
 
     data = File.read toml
     data = TOML::Parser.new(data).parsed
     # TOML creates string keys. must symbolize
-    data = Appium::symbolize_keys data
+    data = Appium.symbolize_keys data
     Appium::Logger.ap_info data unless data.empty? if verbose
 
     if data && data[:caps] && data[:caps][:app] && !data[:caps][:app].empty?
@@ -100,14 +100,13 @@ module Appium
     # nil if require doesn't exist
     if data && data[:appium_lib] && data[:appium_lib][:require]
       r = data[:appium_lib][:require]
-      r = r.kind_of?(Array) ? r : [r]
+      r = r.is_a?(Array) ? r : [r]
       # ensure files are absolute
-      r.map! do |file|
-        file = File.exists?(file) ? file :
-          File.join(parent_dir, file)
+      r.map! do |f|
+        file = File.exist?(f) ? f : File.join(parent_dir, f)
         file = File.expand_path file
 
-        File.exists?(file) ? file : nil
+        File.exist?(file) ? file : nil
       end
       r.compact! # remove nils
 
@@ -120,9 +119,9 @@ module Appium
           files << item
           next # only look inside folders
         end
-        Dir.glob(File.expand_path(File.join(item, '**', '*.rb'))) do |file|
+        Dir.glob(File.expand_path(File.join(item, '**', '*.rb'))) do |f|
           # do not add folders to the file list
-          files << File.expand_path(file) unless File.directory? file
+          files << File.expand_path(f) unless File.directory? f
         end
       end
 
@@ -137,8 +136,8 @@ module Appium
   #
   # based on deep_symbolize_keys & deep_transform_keys from rails
   # https://github.com/rails/docrails/blob/a3b1105ada3da64acfa3843b164b14b734456a50/activesupport/lib/active_support/core_ext/hash/keys.rb#L84
-  def self.symbolize_keys hash
-    raise 'symbolize_keys requires a hash' unless hash.is_a? Hash
+  def self.symbolize_keys(hash)
+    fail 'symbolize_keys requires a hash' unless hash.is_a? Hash
     result = {}
     hash.each do |key, value|
       key = key.to_sym rescue key
@@ -150,8 +149,8 @@ module Appium
   # if modules is a module instead of an array, then the constants of
   # that module are promoted on.
   # otherwise, the array of modules will be used as the promotion target.
-  def self.promote_singleton_appium_methods modules
-    raise 'Driver is nil' if $driver.nil?
+  def self.promote_singleton_appium_methods(modules)
+    fail 'Driver is nil' if $driver.nil?
 
     target_modules = []
 
@@ -160,12 +159,12 @@ module Appium
         target_modules << modules.const_get(sub_module)
       end
     else
-      raise 'modules must be a module or an array' unless modules.is_a? Array
+      fail 'modules must be a module or an array' unless modules.is_a? Array
       target_modules = modules
     end
 
     target_modules.each do |const|
-      #noinspection RubyResolve
+      # noinspection RubyResolve
       $driver.public_methods(false).each do |m|
         const.send(:define_singleton_method, m) do |*args, &block|
           begin
@@ -174,8 +173,7 @@ module Appium
             $driver.send m, *args, &block if $driver.respond_to?(m)
           end
           # override unless there's an existing method with matching arity
-        end unless const.respond_to?(m) &&
-          const.method(m).arity == $driver.method(m).arity
+        end unless const.respond_to?(m) && const.method(m).arity == $driver.method(m).arity
       end
     end
   end
@@ -190,8 +188,8 @@ module Appium
   # ```ruby
   # Appium.promote_appium_methods Object
   # ```
-  def self.promote_appium_methods class_array
-    raise 'Driver is nil' if $driver.nil?
+  def self.promote_appium_methods(class_array)
+    fail 'Driver is nil' if $driver.nil?
     # Wrap single class into an array
     class_array = [class_array] unless class_array.class == Array
     # Promote Appium driver methods to class instance methods.
@@ -203,9 +201,10 @@ module Appium
               # Prefer existing method.
               # super will invoke method missing on driver
               super(*args, &block)
-                # minitest also defines a name method,
-                # so rescue argument error
-                # and call the name method on $driver
+
+              # minitest also defines a name method,
+              # so rescue argument error
+              # and call the name method on $driver
             rescue NoMethodError, ArgumentError
               $driver.send m, *args, &block if $driver.respond_to?(m)
             end
@@ -223,7 +222,6 @@ module Appium
     # made available via the driver_attributes method
     #
     # attr_accessor is repeated for each one so YARD documents them properly.
-
 
     # The amount to sleep in seconds before every webdriver http call.
     attr_accessor :global_webdriver_http_sleep
@@ -267,12 +265,12 @@ module Appium
     #
     # @param opts [Object] A hash containing various options.
     # @return [Driver]
-    def initialize opts={}
+    def initialize(opts = {})
       # quit last driver
       $driver.driver_quit if $driver
-      raise 'opts must be a hash' unless opts.kind_of? Hash
+      fail 'opts must be a hash' unless opts.is_a? Hash
 
-      opts              = Appium::symbolize_keys opts
+      opts              = Appium.symbolize_keys opts
 
       # default to {} to prevent nil.fetch and other nil errors
       @caps             = opts[:caps] || {}
@@ -298,8 +296,8 @@ module Appium
       # https://code.google.com/p/selenium/source/browse/spec-draft.md?repo=mobile
       @appium_device = @caps[:platformName]
       @appium_device = @appium_device.is_a?(Symbol) ? @appium_device : @appium_device.downcase.strip.intern if @appium_device
-      raise "platformName must be set. Not found in options: #{opts}" unless @appium_device
-      raise 'platformName must be Android or iOS' unless [:android, :ios].include?(@appium_device)
+      fail "platformName must be set. Not found in options: #{opts}" unless @appium_device
+      fail 'platformName must be Android or iOS' unless [:android, :ios].include?(@appium_device)
 
       # load common methods
       extend Appium::Common
@@ -326,7 +324,6 @@ module Appium
         patch_webdriver_bridge
       end
 
-
       # Save global reference to last created Appium driver for top level methods.
       $driver = self
 
@@ -352,7 +349,7 @@ module Appium
                      sauce_access_key: @sauce_access_key,
                      port:             @appium_port,
                      device:           @appium_device,
-                     debug:            @appium_debug,
+                     debug:            @appium_debug
       }
 
       # Return duplicates so attributes are immutable
@@ -390,14 +387,14 @@ module Appium
     # if app isn't set then an error is raised.
     #
     # @return [String] APP_PATH as an absolute path
-    def self.absolute_app_path opts
-      raise 'opts must be a hash' unless opts.is_a? Hash
+    def self.absolute_app_path(opts)
+      fail 'opts must be a hash' unless opts.is_a? Hash
       caps            = opts[:caps] || {}
       appium_lib_opts = opts[:appium_lib] || {}
       server_url      = appium_lib_opts.fetch :server_url, false
 
       app_path        = caps[:app]
-      raise 'absolute_app_path invoked and app is not set!' if app_path.nil? || app_path.empty?
+      fail 'absolute_app_path invoked and app is not set!' if app_path.nil? || app_path.empty?
       # may be absolute path to file on remote server.
       # if the file is on the remote server then we can't check if it exists
       return app_path if server_url
@@ -406,7 +403,7 @@ module Appium
       return app_path if app_path.match(/^http/) # public URL for Sauce
       if app_path.match(/^(\/|[a-zA-Z]:)/) # absolute file path
         app_path = File.expand_path app_path unless File.exist? app_path
-        raise "App doesn't exist. #{app_path}" unless File.exist? app_path
+        fail "App doesn't exist. #{app_path}" unless File.exist? app_path
         return app_path
       end
 
@@ -417,7 +414,7 @@ module Appium
       # absolute_app_path is called from load_appium_txt
       # and the txt file path is the base of the app path in that case.
       app_path = File.expand_path app_path
-      raise "App doesn't exist #{app_path}" unless File.exist? app_path
+      fail "App doesn't exist #{app_path}" unless File.exist? app_path
       app_path
     end
 
@@ -451,7 +448,7 @@ module Appium
     #
     # @param png_save_path [String] the full path to save the png
     # @return [nil]
-    def screenshot png_save_path
+    def screenshot(png_save_path)
       @driver.save_screenshot png_save_path
       nil
     end
@@ -467,7 +464,7 @@ module Appium
     #
     # @return [Selenium::WebDriver] the new global driver
     def start_driver
-      @client         = @client || Selenium::WebDriver::Remote::Http::Default.new
+      @client ||= Selenium::WebDriver::Remote::Http::Default.new
       @client.timeout = 999999
 
       begin
@@ -511,7 +508,7 @@ module Appium
     #
     # @param timeout [Integer] the timeout in seconds
     # @return [void]
-    def set_wait timeout=nil
+    def set_wait(timeout = nil)
       if timeout.nil?
         # Appium::Logger.info "timeout = @default_wait = @last_wait"
         # Appium::Logger.info "timeout = @default_wait = #{@last_waits}"
@@ -545,7 +542,7 @@ module Appium
     #                             wait to after checking existance
     # @param search_block [Block] the block to call
     # @return [Boolean]
-    def exists pre_check=0, post_check=@default_wait, &search_block
+    def exists(pre_check = 0, post_check = @default_wait, &search_block)
       # do not uset set_wait here.
       # it will cause problems with other methods reading the default_wait of 0
       # which then gets converted to a 1 second wait.
@@ -569,7 +566,7 @@ module Appium
     # @param script [String] the script to execute
     # @param args [*args] the args to pass to the script
     # @return [Object]
-    def execute_script script, *args
+    def execute_script(script, *args)
       @driver.execute_script script, *args
     end
 
@@ -577,16 +574,16 @@ module Appium
     #
     # @param args [*args] the args to use
     # @return [Array<Element>] Array is empty when no elements are found.
-    def find_elements *args
-      @driver.find_elements *args
+    def find_elements(*args)
+      @driver.find_elements(*args)
     end
 
     # Calls @driver.find_elements
     #
     # @param args [*args] the args to use
     # @return [Element]
-    def find_element *args
-      @driver.find_element *args
+    def find_element(*args)
+      @driver.find_element(*args)
     end
 
     # Quit the driver and Pry.

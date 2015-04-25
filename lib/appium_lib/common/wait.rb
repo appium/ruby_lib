@@ -1,18 +1,17 @@
 module Appium
   module Common
-
     # http://mudge.name/2011/01/26/passing-blocks-in-ruby-without-block.html
     # Note that the Ruby timeout module is avoided. timeout has problems.
     # https://coderwall.com/p/1novga
 
     # Wait code from the selenium Ruby gem
     # https://github.com/SeleniumHQ/selenium/blob/cf501dda3f0ed12233de51ce8170c0e8090f0c20/rb/lib/selenium/webdriver/common/wait.rb
-    def _generic_wait opts={}, &block
+    def _generic_wait(opts = {}, &block)
       valid_keys = [:timeout, :interval, :message, :ignore, :return_if_true]
       invalid_keys = []
       opts.keys.each { |key| invalid_keys << key unless valid_keys.include?(key) }
       # [:one, :two] => :one, :two
-      raise "Invalid keys #{invalid_keys.to_s[1..-2]}. Valid keys are #{valid_keys.to_s[1..-2]}" unless invalid_keys.empty?
+      fail "Invalid keys #{invalid_keys.to_s[1..-2]}. Valid keys are #{valid_keys.to_s[1..-2]}" unless invalid_keys.empty?
 
       timeout        = opts.fetch(:timeout, 30)
       interval       = opts.fetch(:interval, 0.5)
@@ -48,13 +47,13 @@ module Appium
 
       msg << " (#{last_error.message})" if last_error
 
-      raise Selenium::WebDriver::Error::TimeOutError, msg
+      fail Selenium::WebDriver::Error::TimeOutError, msg
     end
 
     # process opts before calling _generic_wait
-    def _process_wait_opts opts
+    def _process_wait_opts(opts)
       opts = { timeout: opts } if opts.is_a?(Numeric)
-      raise 'opts must be a hash' unless opts.is_a? Hash
+      fail 'opts must be a hash' unless opts.is_a? Hash
       opts
     end
 
@@ -73,7 +72,7 @@ module Appium
     # @option opts [Numeric] :interval (0.5) Seconds to sleep between polls.
     # @option opts [String] :message Exception message if timed out.
     # @option opts [Array, Exception] :ignore Exceptions to ignore while polling (default: Exception)
-    def wait_true opts={}, &block
+    def wait_true(opts = {}, &block)
       opts = _process_wait_opts(opts).merge(return_if_true: true)
       _generic_wait opts, &block
     end
@@ -91,7 +90,7 @@ module Appium
     # @option opts [Numeric] :interval (0.5) Seconds to sleep between polls.
     # @option opts [String] :message Exception message if timed out.
     # @option opts [Array, Exception] :ignore Exceptions to ignore while polling (default: Exception)
-    def wait opts={}, &block
+    def wait(opts = {}, &block)
       opts = _process_wait_opts(opts).merge(return_if_true: false)
       _generic_wait opts, &block
     end

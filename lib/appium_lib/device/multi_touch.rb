@@ -1,5 +1,4 @@
 module Appium
-
   # MultiTouch actions allow for multiple touches to happen at the same time,
   # for instance, to simulate multiple finger swipes.
   #
@@ -17,7 +16,6 @@ module Appium
   # multi_touch_action.perform
   class MultiTouch
     class << self
-
       # Convenience method for pinching the screen.
       # Places two fingers at the edges of the screen and brings them together.
       # @param percentage (int) The percent size by which to shrink the screen when pinched.
@@ -27,8 +25,8 @@ module Appium
       # action = pinch 75 #=> Pinch the screen from the top right and bottom left corners
       # action.perform    #=> to 25% of its size.
       # ```
-      def pinch(percentage=25, auto_perform=true)
-        raise ArgumentError("Can't pinch to greater than screen size.") if percentage > 100
+      def pinch(percentage = 25, auto_perform = true)
+        fail ArgumentError("Can't pinch to greater than screen size.") if percentage > 100
 
         p = Float(percentage) / 100
         i = 1 - p
@@ -55,8 +53,8 @@ module Appium
       # action = zoom 200 #=> Zoom in the screen from the center until it doubles in size.
       # action.perform
       # ```
-      def zoom(percentage=200, auto_perform=true)
-        raise ArgumentError("Can't zoom to smaller then screen size.") if percentage < 100
+      def zoom(percentage = 200, auto_perform = true)
+        fail ArgumentError("Can't zoom to smaller then screen size.") if percentage < 100
 
         p = 100 / Float(percentage)
         i = 1 - p

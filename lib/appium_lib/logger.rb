@@ -7,16 +7,16 @@ module Appium
       def_delegators :logger, :ap, :fatal, :error, :warn, :info, :debug, :level, :level=, :formatter, :formatter=
 
       [:fatal, :error, :warn, :info, :debug].each do |level|
-        define_method("ap_#{level}") {|obj| logger.ap(obj, level) }
+        define_method("ap_#{level}") { |obj| logger.ap(obj, level) }
       end
 
-    private
-    
+      private
+
       def logger
         @logger ||= begin
           logger = ::Logger.new($stdout)
           logger.level = ::Logger::WARN
-          logger.formatter = proc { |severity, datetime, progname, msg| "#{msg}\n" } # do no special formatting
+          logger.formatter = proc { |_severity, _datetime, _progname, msg| "#{msg}\n" } # do no special formatting
           logger
         end
       end

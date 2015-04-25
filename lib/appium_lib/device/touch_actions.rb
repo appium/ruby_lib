@@ -1,5 +1,4 @@
 module Appium
-
   # Perform a series of gestures, one after another.  Gestures are chained
   # together and only performed when `perform()` is called.
   #
@@ -15,7 +14,7 @@ module Appium
     class << self
       COMPLEX_ACTIONS.each do |action|
         define_method(action) do |opts|
-          auto_perform = opts.delete(:auto_perform) { |k| true }
+          auto_perform = opts.delete(:auto_perform) { |_k| true }
           ta           = TouchAction.new
           ta.send(action, opts)
           return ta unless auto_perform
@@ -45,7 +44,7 @@ module Appium
     # @option y [integer] y co-ordinate to press on.
     # @option duration [integer] Number of milliseconds to press.
     def long_press(opts)
-      args = opts.select { |k, v| [:element, :x, :y, :duration].include? k }
+      args = opts.select { |k, _v| [:element, :x, :y, :duration].include? k }
       args = args_with_ele_ref(args)
       chain_method(:longPress, args) # longPress is what the appium server expects
     end
@@ -57,7 +56,7 @@ module Appium
     # @option opts [integer] :x x co-ordinate to press on
     # @option opts [integer] :y y co-ordinate to press on
     def press(opts)
-      args = opts.select { |k, v| [:element, :x, :y].include? k }
+      args = opts.select { |k, _v| [:element, :x, :y].include? k }
       args = args_with_ele_ref(args)
       chain_method(:press, args)
     end
@@ -67,7 +66,7 @@ module Appium
     # @option opts [WebDriver::Element] :element (Optional) Element to release from.
     # @option opts [integer] :x x co-ordinate to release from
     # @option opts [integer] :y y co-ordinate to release from
-    def release(opts=nil)
+    def release(opts = nil)
       args = args_with_ele_ref(opts) if opts
       chain_method(:release, args)
     end
@@ -108,10 +107,10 @@ module Appium
       end_y    = opts.fetch :end_y, 0
       duration = opts[:duration]
 
-      self.press x: start_x, y: start_y
-      self.wait(duration) if duration
-      self.move_to x: end_x, y: end_y
-      self.release
+      press x: start_x, y: start_y
+      wait(duration) if duration
+      move_to x: end_x, y: end_y
+      release
       self
     end
 
@@ -130,7 +129,7 @@ module Appium
 
     private
 
-    def chain_method(method, args=nil)
+    def chain_method(method, args = nil)
       if args
         @actions << { action: method, options: args }
       else
@@ -140,7 +139,7 @@ module Appium
     end
 
     def args_with_ele_ref(args)
-      args[:element] = args[:element].ref if args.has_key? :element
+      args[:element] = args[:element].ref if args.key? :element
       args
     end
   end # class TouchAction

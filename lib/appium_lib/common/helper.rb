@@ -21,7 +21,7 @@ module Appium
     # find_element :text doesn't work so use XPath to find by text.
 
     # Return block.call and ignore any exceptions.
-    def ignore &block
+    def ignore(&block)
       begin
         block.call
       rescue Exception
@@ -43,7 +43,7 @@ module Appium
     #
     # @param xpath_str [String] the XPath string
     # @return [Element]
-    def xpath xpath_str
+    def xpath(xpath_str)
       find_element :xpath, xpath_str
     end
 
@@ -51,11 +51,11 @@ module Appium
     #
     # @param xpath_str [String] the XPath string
     # @return [Array<Element>]
-    def xpaths xpath_str
+    def xpaths(xpath_str)
       find_elements :xpath, xpath_str
     end
 
-    def _print_source source
+    def _print_source(source)
       opts = Nokogiri::XML::ParseOptions::NOBLANKS | Nokogiri::XML::ParseOptions::NONET
       if source.start_with? '<html'
         doc = Nokogiri::HTML(source) { |cfg| cfg.options = opts }
@@ -79,15 +79,15 @@ module Appium
       end
 
       # http://nokogiri.org/Nokogiri/XML/SAX/Document.html
-      def start_element name, attrs = []
+      def start_element(name, attrs = [])
         # Count only visible elements. Android is always visible
         element_visible = $driver.device_is_android? ? true : Hash[attrs]['visible'] == 'true'
-        @result[name]   += 1 if element_visible
+        @result[name] += 1 if element_visible
       end
 
       def formatted_result
         message = ''
-        sorted  = @result.sort_by { |element, count| count }.reverse
+        sorted  = @result.sort_by { |_element, count| count }.reverse
         sorted.each do |element, count|
           message += "#{count}x #{element}\n"
         end
@@ -117,7 +117,7 @@ module Appium
     # ```ruby
     # px_to_window_rel x: 50, y: 150
     # ```
-    def px_to_window_rel opts={}
+    def px_to_window_rel(opts = {})
       w = $driver.window_size
       x = opts.fetch :x, 0
       y = opts.fetch :y, 0
@@ -136,23 +136,23 @@ module Appium
     # Search strings.xml's values for target.
     # @param target [String] the target to search for in strings.xml values
     # @return [Array]
-    def xml_keys target
+    def xml_keys(target)
       lazy_load_strings
-      @strings_xml.select { |key, value| key.downcase.include? target.downcase }
+      @strings_xml.select { |key, _value| key.downcase.include? target.downcase }
     end
 
     # Search strings.xml's keys for target.
     # @param target [String] the target to search for in strings.xml keys
     # @return [Array]
-    def xml_values target
+    def xml_values(target)
       lazy_load_strings
-      @strings_xml.select { |key, value| value.downcase.include? target.downcase }
+      @strings_xml.select { |_key, value| value.downcase.include? target.downcase }
     end
 
     # Resolve id in strings.xml and return the value.
     # @param id [String] the id to resolve
     # @return [String]
-    def resolve_id id
+    def resolve_id(id)
       lazy_load_strings
       @strings_xml[id]
     end
@@ -163,7 +163,7 @@ module Appium
       end
 
       # convert to string to support symbols
-      def filter= value
+      def filter=(value)
         # nil and false disable the filter
         return @filter = false unless value
         @filter = value.to_s.downcase
@@ -186,7 +186,7 @@ module Appium
           attr_string = e.reduce('') do |string, attr|
             attr_1 = attr[1]
             attr_1 = attr_1 ? attr_1.strip : attr_1
-            string += "  #{attr[0]}: #{attr_1}\n"
+            string + "  #{attr[0]}: #{attr_1}\n"
           end
 
           unless attr_string.nil? || attr_string.empty?
@@ -196,32 +196,31 @@ module Appium
         end
       end
 
-      def start_element name, attrs = []
+      def start_element(name, attrs = [])
         @skip_element = filter && !filter.include?(name.downcase)
-        unless @skip_element
-          element = { name: name }
-          attrs.each { |a| element[a[0]] = a[1] }
-          @element_stack.push element
-          @elements_in_order.push element
-        end
+        return if @skip_element
+        element = { name: name }
+        attrs.each { |a| element[a[0]] = a[1] }
+        @element_stack.push element
+        @elements_in_order.push element
       end
 
-      def end_element name
+      def end_element(name)
         return if filter && !filter.include?(name.downcase)
         element_index = @element_stack.rindex { |e| e[:name] == name }
         @element_stack.delete_at element_index
       end
 
       def characters(chars)
-        unless @skip_element
-          element        = @element_stack.last
-          element[:text] = chars
-        end
+        return if @skip_element
+        element        = @element_stack.last
+        element[:text] = chars
       end
     end
 
     def _no_such_element
-      raise Selenium::WebDriver::Error::NoSuchElementError, 'An element could not be located on the page using the given search parameters.'
+      fail Selenium::WebDriver::Error::NoSuchElementError,
+           'An element could not be located on the page using the given search parameters.'
     end
   end # module Common
 end # module Appium
