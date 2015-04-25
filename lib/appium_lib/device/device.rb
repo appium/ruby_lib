@@ -140,9 +140,9 @@ module Appium
           end
         end
 
-        add_endpoint_method(:installed?, 'session/:session_id/appium/device/app_installed') do
-          def installed?(app_id)
-            execute :installed?, {}, bundleId: app_id
+        add_endpoint_method(:app_installed?, 'session/:session_id/appium/device/app_installed') do
+          def app_installed?(app_id)
+            execute :app_installed?, {}, bundleId: app_id
           end
         end
 

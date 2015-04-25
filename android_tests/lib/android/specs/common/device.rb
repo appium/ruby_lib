@@ -25,7 +25,7 @@ describe 'common/device' do
   end
 
   t 'installed' do
-    wait { installed?('fake_app').must_equal false }
+    wait { app_installed?('fake_app').must_equal false }
   end
 
   t 'reset' do
