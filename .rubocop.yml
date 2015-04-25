@@ -1,10 +1,22 @@
 # Custom config for RuboCop static code analysis
-
 Metrics/LineLength:
   Max: 125
-
-Style/ConstantName:
-  Enabled: false
-
 Metrics/MethodLength:
   Max: 30
+Metrics/CyclomaticComplexity:
+  Enabled: false
+Metrics/PerceivedComplexity:
+  Enabled: false
+Metrics/MethodLength:
+  Enabled: false
+Metrics/AbcSize:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Style/RegexpLiteral:
+  Enabled: false
+Style/ConstantName:
+  Enabled: false
+# blocked on https://github.com/appium/ruby_lib/issues/312
+Style/GlobalVars:
+  Enabled: false
