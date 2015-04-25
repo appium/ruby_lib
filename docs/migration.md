@@ -1,3 +1,11 @@
+### Breaking Changes in 7.0
+
+Requires appium 1.4.0-beta or newer for iOS helper methods.
+
+           Old | New
+            :--|:--
+`installed?`   | `app_installed?`
+
 ### Breaking Changes in 5.0
 
            Old | New
