@@ -72,10 +72,10 @@ describe 'ios/element/textfield' do
     textfield(1).send_keys 'ok'
     keyboard_must_exist
 
-    # type will dismiss the keyboard
+    # type should not dismiss the keyboard
     message = 'type test type'
     textfield(1).type message
-    keyboard_must_not_exist
+    keyboard_must_exist
     textfield(1).text.must_equal message
   end
 
