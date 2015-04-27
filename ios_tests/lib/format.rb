@@ -15,11 +15,9 @@ list.split("\n").each do |method|
   puts
 end
 
-=begin
 # for Pry
-class Object
-  def must_equal b
-    raise 'not equal' unless self == b
-  end
-end
-=end
+# class Object
+#   def must_equal b
+#     raise 'not equal' unless self == b
+#   end
+# end
