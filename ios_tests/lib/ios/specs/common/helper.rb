@@ -71,7 +71,11 @@ describe 'common/helper.rb' do
     # start page
     tag('UIANavigationBar').name.must_equal 'UICatalog'
     # nav to new page.
-    wait_true { text('buttons').click; tag('UIANavigationBar').name == 'Buttons' }
+    wait_true do
+      text('buttons').click
+      tag('UIANavigationBar').name == 'Buttons'
+    end
+
     tag('UIANavigationBar').name.must_equal 'Buttons'
     # go back
     back_click

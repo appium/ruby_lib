@@ -17,7 +17,11 @@ end
 
 def go_to_textfields
   screen.must_equal catalog
-  wait_true { text('textfield').click; screen == 'TextFields' } # wait for screen transition
+  wait_true do
+    text('textfield').click
+    screen == 'TextFields' # wait for screen transition
+  end
+
   screen.must_equal 'TextFields'
 end
 

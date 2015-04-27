@@ -2,7 +2,11 @@
 describe 'ios/element/alert' do
   def nav_once
     screen.must_equal catalog
-    wait_true { text('alerts').click; tag('UIANavigationBar').name == 'Alerts' } # wait for true
+    wait_true do
+      text('alerts').click
+      tag('UIANavigationBar').name == 'Alerts' # wait for true
+    end
+
     tag('UIANavigationBar').name.must_equal 'Alerts'
 
     # redefine method as no-op after it's invoked once

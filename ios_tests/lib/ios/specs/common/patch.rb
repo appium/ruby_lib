@@ -40,7 +40,7 @@ describe 'common/patch.rb' do
       begin
         set_wait 0
         find_element(:css, 'ok')
-      rescue Exception => e;
+      rescue Exception => e
         value = e.message
       ensure
         set_wait
