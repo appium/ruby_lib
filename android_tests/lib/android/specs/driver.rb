@@ -70,7 +70,7 @@ describe 'driver' do
 
     t 'absolute_app_path' do
       def absolute_app_path(path)
-        $driver.class.absolute_app_path(caps: { app: path } )
+        $driver.class.absolute_app_path(caps: { app: path })
       end
 
       def validate_path(path)
