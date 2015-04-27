@@ -1,6 +1,6 @@
 
 # common methods
-def back_click(opts={})
+def back_click(opts = {})
   opts ||= {}
   search_wait = opts.fetch(:wait, 60 * 1.7)
   # iOS may have multiple 'back' buttons
