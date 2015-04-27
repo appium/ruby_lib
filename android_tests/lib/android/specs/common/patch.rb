@@ -1,3 +1,5 @@
+# rubocop:disable Lint/RescueException
+
 # Skip:
 #   status # status patches are already tested in driver.rb
 #   raw_execute # debug output for Pry

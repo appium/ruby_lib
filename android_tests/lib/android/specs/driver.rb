@@ -1,3 +1,5 @@
+# rubocop:disable Lint/RescueException
+
 # rake android[driver]
 describe 'driver' do
   def sauce?
