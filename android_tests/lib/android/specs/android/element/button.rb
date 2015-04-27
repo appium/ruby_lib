@@ -28,7 +28,7 @@ describe 'android/element/button' do
 
   t 'buttons' do
     exp = ['Zoom in', 'Modern zoom in', 'Thumbnail zoom']
-    wait { buttons('zoom').map { |e| e.text }.must_equal exp }
+    wait { buttons('zoom').map(&:text).must_equal exp }
     wait { buttons.length.must_equal 6 }
   end
 
