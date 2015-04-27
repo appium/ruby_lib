@@ -43,7 +43,7 @@ describe 'common/device' do
   end
 
   t 'app_strings' do
-    wait_true { app_strings.has_key? 'activity_save_restore' }
+    wait_true { app_strings.key? 'activity_save_restore' }
   end
 
   def must_return_element(element)
