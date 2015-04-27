@@ -8,7 +8,7 @@ describe 'ios/element/generic' do
     'Buttons'
   end
 
-  def verify element
+  def verify(element)
     element = element.first if element.is_a? Array
     element.name.must_equal uibutton_text
   end

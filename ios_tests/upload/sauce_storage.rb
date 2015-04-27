@@ -30,14 +30,14 @@ require 'json'
 class SauceStorage
   attr_reader :username, :key, :url, :debug
 
-  def initialize opts
+  def initialize(opts)
     @username = opts.fetch :username, ENV['SAUCE_USERNAME']
     @key      = opts.fetch :key, ENV['SAUCE_ACCESS_KEY']
     @url      = "https://#{@username}:#{@key}@saucelabs.com/rest/v1/storage/#{@username}"
     @debug    = opts.fetch :debug, false
   end
 
-  def upload file_path
+  def upload(file_path)
     file_name = File.basename file_path
     file      = File.new file_path
     local_md5 = Digest::MD5.hexdigest File.read file_path

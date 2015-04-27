@@ -79,7 +79,7 @@ describe 'ios/element/textfield' do
     textfield(1).text.must_equal message
   end
 
-  def must_raise_no_element &block
+  def must_raise_no_element(&block)
     proc { block.call }.must_raise Selenium::WebDriver::Error::NoSuchElementError
   end
 
