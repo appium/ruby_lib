@@ -42,7 +42,7 @@ class SauceStorage
     file      = File.new file_path
     local_md5 = Digest::MD5.hexdigest File.read file_path
 
-    self.files.each do |file|
+    files.each do |file|
       if file['md5'] == local_md5
         puts 'File already uploaded' if @debug
         return true
