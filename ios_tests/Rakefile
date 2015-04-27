@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'rake'
+require 'rubocop/rake_task'
 
 task :default => :ios
 
@@ -44,4 +45,11 @@ end
 desc 'Run bundle install'
 task :install do
   sh 'bundle install'
+end
+
+desc 'Execute RuboCop static code analysis'
+RuboCop::RakeTask.new(:rubocop) do |t|
+  t.patterns = %w(lib upload)
+  t.options = %w(-D)
+  t.fail_on_error = false
 end
