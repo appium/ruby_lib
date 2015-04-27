@@ -187,7 +187,7 @@ describe 'driver' do
     # returns true unless an error is raised
     t 'exists' do
       exists(0, 0) { true }.must_equal true
-      exists(0, 0) { raise 'error' }.must_equal false
+      exists(0, 0) { fail 'error' }.must_equal false
     end
 
     # any script
