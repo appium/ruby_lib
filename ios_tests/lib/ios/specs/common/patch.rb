@@ -13,8 +13,8 @@ describe 'common/patch.rb' do
     before_first
   end
 
-# Attributes are busted in Android.
-# Blocked on https://github.com/appium/appium/issues/628
+  # Attributes are busted in Android.
+  # Blocked on https://github.com/appium/appium/issues/628
   describe 'Selenium::WebDriver::Element methods' do
     # TODO: t 'value' do; end
 
