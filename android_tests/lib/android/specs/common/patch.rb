@@ -34,7 +34,7 @@ describe 'common/patch' do
       begin
         set_wait 0
         find_element(:id, 'ok')
-      rescue Exception => e;
+      rescue Exception => e
         value = e.message
       ensure
         set_wait 30
