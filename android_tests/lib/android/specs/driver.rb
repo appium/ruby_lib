@@ -35,7 +35,7 @@ describe 'driver' do
                                                   app:          'api.apk',
                                                   appPackage:   'io.appium.android.apis',
                                                   appActivity:  '.ApiDemos',
-                                                  deviceName:   'Nexus 7', },
+                                                  deviceName:   'Nexus 7' },
                               custom_url:       false,
                               export_session:   false,
                               default_wait:     1,
@@ -44,7 +44,7 @@ describe 'driver' do
                               sauce_access_key: nil,
                               port:             4723,
                               device:           :android,
-                              debug:            true, }
+                              debug:            true }
 
       if actual != expected
         diff    = HashDiff.diff expected, actual
