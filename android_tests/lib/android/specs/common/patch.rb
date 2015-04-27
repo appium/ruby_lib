@@ -1,4 +1,5 @@
 # rubocop:disable Lint/RescueException
+# rubocop:disable Metrics/LineLength
 
 # Skip:
 #   status # status patches are already tested in driver.rb
