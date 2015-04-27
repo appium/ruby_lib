@@ -2,14 +2,13 @@ require 'rubygems'
 require 'rake'
 require 'rubocop/rake_task'
 
-task :default => :android
+task default: :android
 
 # Run sh and ignore exception
+# rubocop:disable Lint/HandleExceptions
 def run_sh(cmd)
-  begin
-    sh cmd
-  rescue
-  end
+  sh cmd
+rescue
 end
 
 # Run cmd. On failure run install and try again.

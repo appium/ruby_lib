@@ -2,14 +2,13 @@ require 'rubygems'
 require 'rake'
 require 'rubocop/rake_task'
 
-task :default => :ios
+task default: :ios
 
 # Run sh and ignore exception
+# rubocop:disable Lint/HandleExceptions
 def run_sh(cmd)
-  begin
-    sh cmd
-  rescue
-  end
+  sh cmd
+rescue
 end
 
 # Run cmd. On failure run install and try again.
@@ -32,13 +31,13 @@ end
 # Run all tests with:
 # rake ios
 desc 'Run the iOS tests'
-task :ios, :args, :test_file do |args, test_file|
+task :ios, :args, :test_file do |_args, test_file|
   # rake android['ok']
   # args = android
   # test_file = {:args=>"ok"}
   test_file         = test_file[:args]
   cmd = 'bundle exec ruby ./lib/run.rb ios'
-  cmd += %Q( "#{test_file}") if test_file
+  cmd += %( "#{test_file}") if test_file
   bash cmd
 end
 
