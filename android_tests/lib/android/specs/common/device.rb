@@ -7,8 +7,8 @@ describe 'common/device' do
 
   t 'remove & install' do
     # TODO: write test
-    #remove 'com.example.android.apis'
-    #install ENV['APP_PATH']
+    # remove 'com.example.android.apis'
+    # install ENV['APP_PATH']
   end
 
   t 'background_app' do
