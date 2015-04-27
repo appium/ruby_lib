@@ -1,7 +1,6 @@
 # Tests specifically for areas where the web_context differs in behaviour
 # rake android[common/web_context]
 describe 'the web context' do
-
   # appium's context support is broken on android
 
   t 'available_contexts' do

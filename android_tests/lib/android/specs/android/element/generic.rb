@@ -1,6 +1,5 @@
 # rake android['android/element/generic']
 describe 'android/element/generic' do
-
   def content
     'Content'
   end
