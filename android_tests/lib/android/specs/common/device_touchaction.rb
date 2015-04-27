@@ -3,7 +3,7 @@ describe 'common/device_touchaction' do
   t 'action_chain' do
     wait do
       e = find_element(:name, 'Accessibility')
-      Appium::TouchAction.new.press(:element => e, x: 0.5, y: 0.5).release(:element => e).perform
+      Appium::TouchAction.new.press(element: e, x: 0.5, y: 0.5).release(element: e).perform
     end
     wait { find_element(:name, 'Custom View') }
     back

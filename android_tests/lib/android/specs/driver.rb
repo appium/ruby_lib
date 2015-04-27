@@ -1,6 +1,8 @@
+# rubocop:disable Lint/RescueException
+
 # rake android[driver]
 describe 'driver' do
-  def is_sauce
+  def sauce?
     ENV['UPLOAD_FILE'] && ENV['SAUCE_USERNAME']
   end
 
@@ -35,7 +37,7 @@ describe 'driver' do
                                                   app:          'api.apk',
                                                   appPackage:   'io.appium.android.apis',
                                                   appActivity:  '.ApiDemos',
-                                                  deviceName:   'Nexus 7', },
+                                                  deviceName:   'Nexus 7' },
                               custom_url:       false,
                               export_session:   false,
                               default_wait:     1,
@@ -44,7 +46,7 @@ describe 'driver' do
                               sauce_access_key: nil,
                               port:             4723,
                               device:           :android,
-                              debug:            true, }
+                              debug:            true }
 
       if actual != expected
         diff    = HashDiff.diff expected, actual
@@ -69,11 +71,11 @@ describe 'driver' do
     end
 
     t 'absolute_app_path' do
-      def absolute_app_path path
-        $driver.class.absolute_app_path({caps: { app: path } })
+      def absolute_app_path(path)
+        $driver.class.absolute_app_path(caps: { app: path })
       end
 
-      def validate_path path
+      def validate_path(path)
         absolute_app_path(path).must_equal path
       end
 
@@ -123,19 +125,18 @@ describe 'driver' do
 
     t 'server_version' do
       server_version = appium_server_version['build']['version']
-      if is_sauce
+      if sauce?
         server_version.must_match 'Sauce OnDemand'
       else
-        server_version.must_match /(\d+)\.(\d+).(\d+)/
+        server_version.must_match(/(\d+)\.(\d+).(\d+)/)
       end
     end
 
-=begin
-  Skip:
-    ios_capabilities # save for iOS tests
-    absolute_app_path # tested already by starting the driver for this test
-    server_url # sauce labs only
-=end
+    # Skip:
+    #   ios_capabilities # save for iOS tests
+    #   absolute_app_path # tested already by starting the driver for this test
+    #   server_url # sauce labs only
+
     t 'restart' do
       set_wait 1 # ensure wait is 1 before we restart.
       restart
@@ -146,15 +147,14 @@ describe 'driver' do
       driver.browser.must_equal :Android
     end
 
-=begin
-  Skip:
-    screenshot   # this is slow and already tested by Appium
-    driver_quit  # tested by restart
-    start_driver # tested by restart
-    no_wait  # posts value to server, it's not stored locally
-    set_wait # posts value to server, it's not stored locally
-    execute_script # 'mobile: ' is deprecated and plain executeScript unsupported
-=end
+    # Skip:
+    #   screenshot   # this is slow and already tested by Appium
+    #   driver_quit  # tested by restart
+    #   start_driver # tested by restart
+    #   no_wait  # posts value to server, it's not stored locally
+    #   set_wait # posts value to server, it's not stored locally
+    #   execute_script # 'mobile: ' is deprecated and plain executeScript unsupported
+
     t 'default_wait' do
       set_wait 1
       default_wait.must_equal 1
@@ -163,7 +163,7 @@ describe 'driver' do
     # returns true unless an error is raised
     t 'exists' do
       exists(0, 0) { true }.must_equal true
-      exists(0, 0) { raise 'error' }.must_equal false
+      exists(0, 0) { fail 'error' }.must_equal false
     end
 
     # any elements

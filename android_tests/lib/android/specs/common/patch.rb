@@ -1,11 +1,13 @@
-=begin
-  Skip:
-    status # status patches are already tested in driver.rb
-    raw_execute # debug output for Pry
-=end
+# rubocop:disable Lint/RescueException
+# rubocop:disable Metrics/LineLength
+
+# Skip:
+#   status # status patches are already tested in driver.rb
+#   raw_execute # debug output for Pry
+
 describe 'common/patch' do
-# Attributes are busted in Android.
-# Blocked on https://github.com/appium/appium/issues/628
+  # Attributes are busted in Android.
+  # Blocked on https://github.com/appium/appium/issues/628
   describe 'Selenium::WebDriver::Element methods' do
     # Android supports exactly two string Attributes
     # .name and .text
@@ -35,7 +37,7 @@ describe 'common/patch' do
       begin
         set_wait 0
         find_element(:id, 'ok')
-      rescue Exception => e;
+      rescue Exception => e
         value = e.message
       ensure
         set_wait 30

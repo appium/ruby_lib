@@ -2,13 +2,13 @@
 describe 'common/device' do
   # Not yet implemented
   t 'shake' do
-    # todo: write test
+    # TODO: write test
   end
 
   t 'remove & install' do
-    # todo: write test
-    #remove 'com.example.android.apis'
-    #install ENV['APP_PATH']
+    # TODO: write test
+    # remove 'com.example.android.apis'
+    # install ENV['APP_PATH']
   end
 
   t 'background_app' do
@@ -43,10 +43,10 @@ describe 'common/device' do
   end
 
   t 'app_strings' do
-    wait_true { app_strings.has_key? 'activity_save_restore' }
+    wait_true { app_strings.key? 'activity_save_restore' }
   end
 
-  def must_return_element element
+  def must_return_element(element)
     element.class.must_equal Selenium::WebDriver::Element
   end
 

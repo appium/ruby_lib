@@ -1,7 +1,6 @@
 # Tests specifically for areas where the web_context differs in behaviour
 # rake android[common/web_context]
 describe 'the web context' do
-
   # appium's context support is broken on android
 
   t 'available_contexts' do
@@ -28,7 +27,7 @@ describe 'the web context' do
 
     if webview_context.nil?
       undo_setcontext_nav
-      raise "No webview context found. contexts are: #{contexts}"
+      fail "No webview context found. contexts are: #{contexts}"
     end
 
     wait { set_context webview_context }
