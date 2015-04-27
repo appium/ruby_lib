@@ -94,7 +94,7 @@ describe 'android/helper' do
 
     expected.each do |line, package, activity|
       parsed = _parse_current_app_line(line)
-      raise "failed to parse #{line}" if parsed.nil?
+      fail "failed to parse #{line}" if parsed.nil?
       parsed.package.must_equal package
       parsed.activity.must_equal activity
       parsed.am_start.must_equal package + '/' + activity

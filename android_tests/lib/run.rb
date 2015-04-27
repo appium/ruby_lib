@@ -14,13 +14,13 @@ Run only the view album test:
 
 # Sanity check
 a = OpenStruct.new x: 'ok'
-raise 'x issue' unless a.x == 'ok'
+fail 'x issue' unless a.x == 'ok'
 
 appium_txt  = File.expand_path(File.join(Dir.pwd, 'lib'))
 dir     = appium_txt
 device  = ARGV[0].downcase.strip
 devices = %w(android selendroid ios)
-raise 'Expected android, selendroid or ios as first argument' unless devices.include? device
+fail 'Expected android, selendroid or ios as first argument' unless devices.include? device
 
 one_test = ARGV[1]
 test_dir = "/#{device}/"
@@ -40,7 +40,7 @@ if one_test
   else
     one_test = File.expand_path one_test
   end
-  raise "\nTest #{one_test} does not exist.\n" unless File.exist?(one_test)
+  fail "\nTest #{one_test} does not exist.\n" unless File.exist?(one_test)
   Appium::Driver.new(caps).start_driver
   # require support (common.rb)
   Dir.glob(File.join dir, test_dir + '/*.rb') do |test|

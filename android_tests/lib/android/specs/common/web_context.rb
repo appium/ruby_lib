@@ -27,7 +27,7 @@ describe 'the web context' do
 
     if webview_context.nil?
       undo_setcontext_nav
-      raise "No webview context found. contexts are: #{contexts}"
+      fail "No webview context found. contexts are: #{contexts}"
     end
 
     wait { set_context webview_context }

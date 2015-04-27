@@ -17,12 +17,12 @@ must_not_raise is a no-op.
     wait(wait_opts) { nil }
 
     # failed wait should error
-    proc { wait(wait_opts) { raise } }.must_raise Selenium::WebDriver::Error::TimeOutError
+    proc { wait(wait_opts) { fail } }.must_raise Selenium::WebDriver::Error::TimeOutError
 
     # regular rescue will not handle exceptions outside of StandardError hierarchy
     # must rescue Exception explicitly to rescue everything
-    proc { wait(wait_opts) { raise NoMemoryError } }.must_raise Selenium::WebDriver::Error::TimeOutError
-    proc { wait(timeout: 0.2, interval: 0.0) { raise NoMemoryError } }.must_raise Selenium::WebDriver::Error::TimeOutError
+    proc { wait(wait_opts) { fail NoMemoryError } }.must_raise Selenium::WebDriver::Error::TimeOutError
+    proc { wait(timeout: 0.2, interval: 0.0) { fail NoMemoryError } }.must_raise Selenium::WebDriver::Error::TimeOutError
 
     # invalid keys are rejected
     proc { wait(invalidkey: 2) { true } }.must_raise RuntimeError
@@ -33,8 +33,8 @@ must_not_raise is a no-op.
     ignore { true }
     ignore { false }
     ignore { nil }
-    ignore { raise }
-    ignore { raise NoMemoryError }
+    ignore { fail }
+    ignore { fail NoMemoryError }
   end
 
   # wait_true is a success unless the value is not true
@@ -47,12 +47,12 @@ must_not_raise is a no-op.
     proc { wait_true(wait_opts) { nil } }.must_raise Selenium::WebDriver::Error::TimeOutError
 
     # raise should error
-    proc { wait_true(wait_opts) { raise } }.must_raise Selenium::WebDriver::Error::TimeOutError
+    proc { wait_true(wait_opts) { fail } }.must_raise Selenium::WebDriver::Error::TimeOutError
 
     # regular rescue will not handle exceptions outside of StandardError hierarchy
     # must rescue Exception explicitly to rescue everything
-    proc { wait_true(wait_opts) { raise NoMemoryError } }.must_raise Selenium::WebDriver::Error::TimeOutError
-    proc { wait_true(timeout: 0.2, interval: 0.0) { raise NoMemoryError } }.must_raise Selenium::WebDriver::Error::TimeOutError
+    proc { wait_true(wait_opts) { fail NoMemoryError } }.must_raise Selenium::WebDriver::Error::TimeOutError
+    proc { wait_true(timeout: 0.2, interval: 0.0) { fail NoMemoryError } }.must_raise Selenium::WebDriver::Error::TimeOutError
 
     # invalid keys are rejected
     proc { wait_true(invalidkey: 2) { true } }.must_raise RuntimeError
