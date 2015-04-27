@@ -6,13 +6,13 @@ s = SauceStorage.new username: 'my_user_name', key: '00', debug: true
 # or if you have  SAUCE_USERNAME and SAUCE_ACCESS_KEY in env already
 
 s = SauceStorage.new debug: true
- 
+
 # list all files
 s.files
- 
+
 # upload a file
 s.upload '/tmp/sauce/test.zip'
- 
+
 > s.files
 => [{"size"=>8,
   "mtime"=>1367700857.1011374,
