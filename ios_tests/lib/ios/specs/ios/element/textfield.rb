@@ -27,7 +27,7 @@ describe 'ios/element/textfield' do
   end
 
   t 'textfields' do
-    values = textfields('enter').map { |e| e.value }
+    values = textfields('enter').map(&:value)
     values.include?('<enter text>').must_equal true
     values.include?('<enter password>').must_equal true
     textfields.length.must_equal 4
