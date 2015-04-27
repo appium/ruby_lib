@@ -26,7 +26,7 @@ one_test = ARGV[1]
 test_dir = "/#{device}/"
 
 caps       = Appium.load_appium_txt file: appium_txt, verbose: true
-caps       = caps.merge({ appium_lib: { debug: true, wait: 1 } })
+caps       = caps.merge(appium_lib: { debug: true, wait: 1 })
 caps[:app] = ENV['SAUCE_PATH'] if ENV['SAUCE_USERNAME'] && ENV['SAUCE_ACCESS_KEY']
 
 trace_files = []
@@ -71,4 +71,4 @@ end
 # Exit after tests.
 Minitest.after_run { $driver.x if $driver }
 # Run Minitest. Provide test file array for tracing.
-Minitest.run_specs({ trace: trace_files })
+Minitest.run_specs(trace: trace_files)
