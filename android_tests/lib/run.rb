@@ -19,7 +19,7 @@ raise 'x issue' unless a.x == 'ok'
 appium_txt  = File.expand_path(File.join(Dir.pwd, 'lib'))
 dir     = appium_txt
 device  = ARGV[0].downcase.strip
-devices = %w[ android selendroid ios ]
+devices = %w(android selendroid ios)
 raise 'Expected android, selendroid or ios as first argument' unless devices.include? device
 
 one_test = ARGV[1]
