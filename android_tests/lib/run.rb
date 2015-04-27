@@ -32,7 +32,7 @@ caps[:app] = ENV['SAUCE_PATH'] if ENV['SAUCE_USERNAME'] && ENV['SAUCE_ACCESS_KEY
 trace_files = []
 
 if one_test
-  unless File.exists? one_test
+  unless File.exist? one_test
     # ensure ext is .rb
     one_test = File.join(File.dirname(one_test),
                          File.basename(one_test, '.*') + '.rb')
@@ -40,7 +40,7 @@ if one_test
   else
     one_test = File.expand_path one_test
   end
-  raise "\nTest #{one_test} does not exist.\n" unless File.exists?(one_test)
+  raise "\nTest #{one_test} does not exist.\n" unless File.exist?(one_test)
   Appium::Driver.new(caps).start_driver
   # require support (common.rb)
   Dir.glob(File.join dir, test_dir + '/*.rb') do |test|
