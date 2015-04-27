@@ -465,7 +465,7 @@ module Appium
     # @return [Selenium::WebDriver] the new global driver
     def start_driver
       @client ||= Selenium::WebDriver::Remote::Http::Default.new
-      @client.timeout = 999999
+      @client.timeout = 999_999
 
       begin
         driver_quit

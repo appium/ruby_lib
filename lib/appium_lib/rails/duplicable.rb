@@ -1,5 +1,5 @@
 # rubocop:disable Style/BlockComments
-
+# rubocop:disable Lint/HandleExceptions
 # https://github.com/rails/rails/blob/e120d21211f9644e9b832e51ba7aa6c45448b782/activesupport/lib/active_support/core_ext/object/duplicable.rb
 =begin
 Copyright (c) 2005-2011 David Heinemeier Hansson

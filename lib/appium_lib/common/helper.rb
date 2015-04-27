@@ -158,9 +158,7 @@ module Appium
     end
 
     class HTMLElements < Nokogiri::XML::SAX::Document
-      def filter
-        @filter
-      end
+      attr_reader :filter
 
       # convert to string to support symbols
       def filter=(value)

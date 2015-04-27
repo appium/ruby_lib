@@ -3,11 +3,7 @@ module Appium
     # @private
     # http://nokogiri.org/Nokogiri/XML/SAX.html
     class AndroidElements < Nokogiri::XML::SAX::Document
-      attr_reader :result, :keys, :instance
-
-      def filter
-        @filter
-      end
+      attr_reader :result, :keys, :instance, :filter
 
       # convert to string to support symbols
       def filter=(value)
