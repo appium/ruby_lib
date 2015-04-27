@@ -1,7 +1,7 @@
 
 # common methods
 def back_click(opts={})
-  opts        ||= {}
+  opts ||= {}
   search_wait = opts.fetch(:wait, 60 * 1.7)
   # iOS may have multiple 'back' buttons
   # select the first displayed? back button.
