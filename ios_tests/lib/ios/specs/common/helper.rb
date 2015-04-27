@@ -84,7 +84,7 @@ must_not_raise is a no-op.
 
   t 'session_id' do
     # Sauce doesn't return '-' so make them optional.
-    session_id.must_match /\h{8}-?\h{4}-?\h{4}-?\h{4}-?\h{12}/
+    session_id.must_match(/\h{8}-?\h{4}-?\h{4}-?\h{4}-?\h{12}/)
   end
 
   t 'xpath' do
@@ -107,7 +107,7 @@ must_not_raise is a no-op.
 
   t 'find_ele_by_attr' do
     el_id = find_ele_by_attr('UIAStaticText', 'name', uibutton_text).instance_variable_get :@id
-    el_id.must_match /\d+/
+    el_id.must_match(/\d+/)
   end
 
   t 'find_eles_by_attr' do

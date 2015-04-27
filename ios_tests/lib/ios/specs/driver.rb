@@ -111,7 +111,7 @@ describe 'driver' do
     t 'sauce_access_key attr' do
       sauce_access_key = driver_attributes[:sauce_access_key]
       if is_sauce
-        sauce_access_key.must_match /\h{8}-\h{4}-\h{4}-\h{4}-\h{12}/
+        sauce_access_key.must_match(/\h{8}-\h{4}-\h{4}-\h{4}-\h{12}/)
       else
         sauce_access_key.must_be_nil
       end
@@ -139,7 +139,7 @@ describe 'driver' do
       if is_sauce
         server_version.must_match 'Sauce OnDemand'
       else
-        server_version.must_match /(\d+)\.(\d+).(\d+)/
+        server_version.must_match(/(\d+)\.(\d+).(\d+)/)
       end
     end
 
