@@ -154,7 +154,8 @@ module Appium
     # Works on local host only (not remote).
 
     # example line:
-    # "mFocusedApp=AppWindowToken{b1420058 token=Token{b128add0 ActivityRecord{b1264d10 u0 com.example.android.apis/.ApiDemos t23}}}"
+    # "mFocusedApp=AppWindowToken{b1420058 token=Token{b128add0
+    #  ActivityRecord{b1264d10 u0 com.example.android.apis/.ApiDemos t23}}}"
     def current_app
       line = `adb shell dumpsys window windows`.each_line.grep(/mFocusedApp/).first.strip
 
