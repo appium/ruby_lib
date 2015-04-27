@@ -13,7 +13,7 @@ describe 'ios/helper' do
     ios_password(2).must_equal 8226.chr('UTF-8') * 2
   end
 
-  # todo: t 'get_page' do
+  # TODO: t 'get_page' do
 
   # t 'page' do # writes to std out
 
@@ -21,7 +21,7 @@ describe 'ios/helper' do
     source_window.length.must_equal 11
   end
 
-  # todo: t 'page_window' do
-  # todo: t 'id' do
-  # todo: t 'ios_version' do
+  # TODO: t 'page_window' do
+  # TODO: t 'id' do
+  # TODO: t 'ios_version' do
 end

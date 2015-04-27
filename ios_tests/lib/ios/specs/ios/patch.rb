@@ -13,7 +13,7 @@ describe 'ios/patch' do
     before_first
   end
 
-  # todo: test 'label'
+  # TODO: test 'label'
 
   t 'type' do
     # nav to textfield

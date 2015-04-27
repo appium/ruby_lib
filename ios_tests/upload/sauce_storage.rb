@@ -6,13 +6,13 @@ s = SauceStorage.new username: 'my_user_name', key: '00', debug: true
 # or if you have  SAUCE_USERNAME and SAUCE_ACCESS_KEY in env already
 
 s = SauceStorage.new debug: true
- 
+
 # list all files
 s.files
- 
+
 # upload a file
 s.upload '/tmp/sauce/test.zip'
- 
+
 > s.files
 => [{"size"=>8,
   "mtime"=>1367700857.1011374,
@@ -30,20 +30,20 @@ require 'json'
 class SauceStorage
   attr_reader :username, :key, :url, :debug
 
-  def initialize opts
+  def initialize(opts)
     @username = opts.fetch :username, ENV['SAUCE_USERNAME']
     @key      = opts.fetch :key, ENV['SAUCE_ACCESS_KEY']
     @url      = "https://#{@username}:#{@key}@saucelabs.com/rest/v1/storage/#{@username}"
     @debug    = opts.fetch :debug, false
   end
 
-  def upload file_path
+  def upload(file_path)
     file_name = File.basename file_path
     file      = File.new file_path
     local_md5 = Digest::MD5.hexdigest File.read file_path
 
-    self.files.each do |file|
-      if file['md5'] == local_md5
+    files.each do |f|
+      if f['md5'] == local_md5
         puts 'File already uploaded' if @debug
         return true
       end

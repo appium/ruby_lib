@@ -1,3 +1,5 @@
+# rubocop:disable Lint/HandleExceptions
+
 # rake ios['ios/element/text']
 describe 'ios/element/text' do
   def ui_catalog
@@ -34,7 +36,7 @@ describe 'ios/element/text' do
   t 'texts' do
     exp = ['Controls', 'Various uses of UIControl', 'Various uses of UISegmentedControl']
     texts.length.must_equal 24
-    texts('trol').map { |e| e.name }.must_equal exp
+    texts('trol').map(&:name).must_equal exp
     texts('uses').length.must_equal 7
   end
 
@@ -44,6 +46,7 @@ describe 'ios/element/text' do
     act = begin
       text_exact 'mos'
     rescue
+      # nop
     end
     act.must_be_nil
     set_wait

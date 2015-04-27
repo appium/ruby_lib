@@ -1,7 +1,7 @@
 
 # common methods
-def back_click(opts={})
-  opts        ||= {}
+def back_click(opts = {})
+  opts ||= {}
   search_wait = opts.fetch(:wait, 60 * 1.7)
   # iOS may have multiple 'back' buttons
   # select the first displayed? back button.
@@ -17,7 +17,11 @@ end
 
 def go_to_textfields
   screen.must_equal catalog
-  wait_true { text('textfield').click; screen == 'TextFields' } # wait for screen transition
+  wait_true do
+    text('textfield').click
+    screen == 'TextFields' # wait for screen transition
+  end
+
   screen.must_equal 'TextFields'
 end
 

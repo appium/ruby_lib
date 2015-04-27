@@ -27,14 +27,14 @@ describe 'ios/element/textfield' do
   end
 
   t 'textfields' do
-    values = textfields('enter').map { |e| e.value }
+    values = textfields('enter').map(&:value)
     values.include?('<enter text>').must_equal true
     values.include?('<enter password>').must_equal true
     textfields.length.must_equal 4
   end
 
   t 'predicate textfields' do
-    textfield_count = execute_script(%Q(au.mainApp().getAllWithPredicate("type contains[c] 'textfield'", true))).length
+    textfield_count = execute_script(%(au.mainApp().getAllWithPredicate("type contains[c] 'textfield'", true))).length
     textfield_count.must_equal 4
   end
 
@@ -79,7 +79,7 @@ describe 'ios/element/textfield' do
     textfield(1).text.must_equal message
   end
 
-  def must_raise_no_element &block
+  def must_raise_no_element(&block)
     proc { block.call }.must_raise Selenium::WebDriver::Error::NoSuchElementError
   end
 

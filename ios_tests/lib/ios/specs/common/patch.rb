@@ -1,8 +1,12 @@
-=begin
-  Skip:
-    status # status patches are already tested in driver.rb
-    raw_execute # debug output for Pry
-=end
+# rubocop:disable Lint/RescueException
+# rubocop:disable Metrics/LineLength
+
+#
+#  Skip:
+#    status # status patches are already tested in driver.rb
+#    raw_execute # debug output for Pry
+#
+
 # rake ios[common/patch]
 describe 'common/patch.rb' do
   def before_first
@@ -13,10 +17,10 @@ describe 'common/patch.rb' do
     before_first
   end
 
-# Attributes are busted in Android.
-# Blocked on https://github.com/appium/appium/issues/628
+  # Attributes are busted in Android.
+  # Blocked on https://github.com/appium/appium/issues/628
   describe 'Selenium::WebDriver::Element methods' do
-    # todo: t 'value' do; end
+    # TODO: t 'value' do; end
 
     t 'name' do
       first_text.name.must_equal 'UICatalog'
@@ -39,12 +43,12 @@ describe 'common/patch.rb' do
       begin
         set_wait 0
         find_element(:css, 'ok')
-      rescue Exception => e;
+      rescue Exception => e
         value = e.message
       ensure
         set_wait
       end
-      value.must_equal "Invalid locator strategy: css selector"
+      value.must_equal 'Invalid locator strategy: css selector'
     end
   end
 end

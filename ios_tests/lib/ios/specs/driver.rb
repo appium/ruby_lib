@@ -8,7 +8,7 @@ describe 'driver' do
     before_first
   end
 
-  def is_sauce
+  def sauce?
     ENV['UPLOAD_FILE'] && ENV['SAUCE_USERNAME']
   end
 
@@ -20,7 +20,7 @@ describe 'driver' do
   t 'load_appium_txt' do
     # skip this test if we're using Sauce
     # the storage API doesn't have an on disk file
-    skip if is_sauce
+    skip if sauce?
     appium_txt = File.expand_path(File.join(Dir.pwd, 'lib'))
     opts       = Appium.load_appium_txt file: appium_txt, verbose: true
 
@@ -82,7 +82,7 @@ describe 'driver' do
     t 'app_path attr' do
       apk_name = File.basename driver_attributes[:caps][:app]
 
-      if is_sauce
+      if sauce?
         apk_name.must_equal 'sauce-storage:UICatalog6.1.app.zip'
       else
         apk_name.must_equal 'UICatalog.app'
@@ -92,7 +92,7 @@ describe 'driver' do
     # Only used for Sauce Labs
     t 'app_name attr' do
       name_attr = driver_attributes[:caps][:name]
-      if is_sauce
+      if sauce?
         name_attr.must_equal 'appium_lib_ios'
       else
         name_attr.must_be_nil
@@ -101,7 +101,7 @@ describe 'driver' do
 
     t 'sauce_username attr' do
       sauce_username = driver_attributes[:sauce_username]
-      if is_sauce
+      if sauce?
         sauce_username.must_equal 'appiumci'
       else
         sauce_username.must_be_nil
@@ -110,8 +110,8 @@ describe 'driver' do
 
     t 'sauce_access_key attr' do
       sauce_access_key = driver_attributes[:sauce_access_key]
-      if is_sauce
-        sauce_access_key.must_match /\h{8}-\h{4}-\h{4}-\h{4}-\h{12}/
+      if sauce?
+        sauce_access_key.must_match(/\h{8}-\h{4}-\h{4}-\h{4}-\h{12}/)
       else
         sauce_access_key.must_be_nil
       end
@@ -136,10 +136,10 @@ describe 'driver' do
 
     t 'server_version' do
       server_version = appium_server_version['build']['version']
-      if is_sauce
+      if sauce?
         server_version.must_match 'Sauce OnDemand'
       else
-        server_version.must_match /(\d+)\.(\d+).(\d+)/
+        server_version.must_match(/(\d+)\.(\d+).(\d+)/)
       end
     end
 
@@ -152,12 +152,13 @@ describe 'driver' do
       driver.browser.must_equal :iOS
     end
 
-=begin
-  Skip:
-    screenshot   # this is slow and already tested by Appium
-    driver_quit  # tested by restart
-    start_driver # tested by restart
-=end
+    #
+    # Skip:
+    #    screenshot   # this is slow and already tested by Appium
+    #    driver_quit  # tested by restart
+    #    start_driver # tested by restart
+    #
+
     t 'set_wait' do
       # fill the @last_waits array with: [30, 30]
       set_wait(30).must_equal(30)
@@ -186,7 +187,7 @@ describe 'driver' do
     # returns true unless an error is raised
     t 'exists' do
       exists(0, 0) { true }.must_equal true
-      exists(0, 0) { raise 'error' }.must_equal false
+      exists(0, 0) { fail 'error' }.must_equal false
     end
 
     # any script

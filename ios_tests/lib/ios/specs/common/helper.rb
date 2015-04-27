@@ -1,6 +1,5 @@
 # rake ios[common/helper]
 describe 'common/helper.rb' do
-
   def before_first
     screen.must_equal catalog
   end
@@ -11,12 +10,10 @@ describe 'common/helper.rb' do
 
   wait_opts = { timeout: 0.2, interval: 0.2 } # max_wait, interval
 
-=begin
-There's no `must_not_raise` as the opposite of must_raise
-
-By default code is expected to not raise exceptions.
-must_not_raise is a no-op.
-=end
+  # There's no `must_not_raise` as the opposite of must_raise
+  #
+  # By default code is expected to not raise exceptions.
+  # must_not_raise is a no-op.
 
   # wait is a success unless an error is raised
   # max_wait=0 is infinity to use 0.1
@@ -27,12 +24,12 @@ must_not_raise is a no-op.
     wait(wait_opts) { nil }
 
     # failed wait should error
-    proc { wait(wait_opts) { raise } }.must_raise Selenium::WebDriver::Error::TimeOutError
+    proc { wait(wait_opts) { fail } }.must_raise Selenium::WebDriver::Error::TimeOutError
 
     # regular rescue will not handle exceptions outside of StandardError hierarchy
     # must rescue Exception explicitly to rescue everything
-    proc { wait(wait_opts) { raise NoMemoryError } }.must_raise Selenium::WebDriver::Error::TimeOutError
-    proc { wait(timeout: 0.2, interval: 0.0) { raise NoMemoryError } }.must_raise Selenium::WebDriver::Error::TimeOutError
+    proc { wait(wait_opts) { fail NoMemoryError } }.must_raise Selenium::WebDriver::Error::TimeOutError
+    proc { wait(timeout: 0.2, interval: 0.0) { fail NoMemoryError } }.must_raise Selenium::WebDriver::Error::TimeOutError
 
     # invalid keys are rejected
     proc { wait(invalidkey: 2) { true } }.must_raise RuntimeError
@@ -43,8 +40,8 @@ must_not_raise is a no-op.
     ignore { true }
     ignore { false }
     ignore { nil }
-    ignore { raise }
-    ignore { raise NoMemoryError }
+    ignore { fail }
+    ignore { fail NoMemoryError }
   end
 
   # wait_true is a success unless the value is not true
@@ -57,12 +54,13 @@ must_not_raise is a no-op.
     proc { wait_true(wait_opts) { nil } }.must_raise Selenium::WebDriver::Error::TimeOutError
 
     # raise should error
-    proc { wait_true(wait_opts) { raise } }.must_raise Selenium::WebDriver::Error::TimeOutError
+    proc { wait_true(wait_opts) { fail } }.must_raise Selenium::WebDriver::Error::TimeOutError
 
     # regular rescue will not handle exceptions outside of StandardError hierarchy
     # must rescue Exception explicitly to rescue everything
-    proc { wait_true(wait_opts) { raise NoMemoryError } }.must_raise Selenium::WebDriver::Error::TimeOutError
-    proc { wait_true(timeout: 0.2, interval: 0.0) { raise NoMemoryError } }.must_raise Selenium::WebDriver::Error::TimeOutError
+    proc { wait_true(wait_opts) { fail NoMemoryError } }.must_raise Selenium::WebDriver::Error::TimeOutError
+    proc { wait_true(timeout: 0.2, interval: 0.0) { fail NoMemoryError } }
+      .must_raise Selenium::WebDriver::Error::TimeOutError
 
     # invalid keys are rejected
     proc { wait_true(invalidkey: 2) { true } }.must_raise RuntimeError
@@ -74,7 +72,11 @@ must_not_raise is a no-op.
     # start page
     tag('UIANavigationBar').name.must_equal 'UICatalog'
     # nav to new page.
-    wait_true { text('buttons').click; tag('UIANavigationBar').name == 'Buttons' }
+    wait_true do
+      text('buttons').click
+      tag('UIANavigationBar').name == 'Buttons'
+    end
+
     tag('UIANavigationBar').name.must_equal 'Buttons'
     # go back
     back_click
@@ -84,7 +86,7 @@ must_not_raise is a no-op.
 
   t 'session_id' do
     # Sauce doesn't return '-' so make them optional.
-    session_id.must_match /\h{8}-?\h{4}-?\h{4}-?\h{4}-?\h{12}/
+    session_id.must_match(/\h{8}-?\h{4}-?\h{4}-?\h{4}-?\h{12}/)
   end
 
   t 'xpath' do
@@ -103,11 +105,11 @@ must_not_raise is a no-op.
     ele_index('UIAStaticText', 2).name.must_equal uibutton_text
   end
 
-  # todo: 'string_attr_exact'
+  # TODO: 'string_attr_exact'
 
   t 'find_ele_by_attr' do
     el_id = find_ele_by_attr('UIAStaticText', 'name', uibutton_text).instance_variable_get :@id
-    el_id.must_match /\d+/
+    el_id.must_match(/\d+/)
   end
 
   t 'find_eles_by_attr' do
@@ -123,7 +125,7 @@ must_not_raise is a no-op.
     set_wait
   end
 
-  # todo: 'string_attr_include'
+  # TODO: 'string_attr_include'
 
   t 'find_ele_by_attr_include' do
     el_text = find_ele_by_attr_include('UIAStaticText', :name, 'button').text
@@ -181,23 +183,22 @@ must_not_raise is a no-op.
     # 8 local. 9 on sauce.
     get_page_class.split("\n").length.must_be :>=, 8
   end
-=begin
-todo:
-get_page_class
-page_class
-tag
-tags
-px_to_window_rel
-lazy_load_strings
-xml_keys
-xml_values
-resolve_id
-string_visible_contains
-xpath_visible_contains
-xpaths_visible_contains
-string_visible_exact
-xpath_visible_exact
-xpaths_visible_exact
-raise_no_element_error
-=end
+
+  # TODO: write tests
+  # get_page_class
+  # page_class
+  # tag
+  # tags
+  # px_to_window_rel
+  # lazy_load_strings
+  # xml_keys
+  # xml_values
+  # resolve_id
+  # string_visible_contains
+  # xpath_visible_contains
+  # xpaths_visible_contains
+  # string_visible_exact
+  # xpath_visible_exact
+  # xpaths_visible_exact
+  # raise_no_element_error
 end
