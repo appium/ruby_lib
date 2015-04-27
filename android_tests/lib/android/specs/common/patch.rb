@@ -4,8 +4,8 @@
     raw_execute # debug output for Pry
 =end
 describe 'common/patch' do
-# Attributes are busted in Android.
-# Blocked on https://github.com/appium/appium/issues/628
+  # Attributes are busted in Android.
+  # Blocked on https://github.com/appium/appium/issues/628
   describe 'Selenium::WebDriver::Element methods' do
     # Android supports exactly two string Attributes
     # .name and .text
