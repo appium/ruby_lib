@@ -59,7 +59,8 @@ describe 'common/helper.rb' do
     # regular rescue will not handle exceptions outside of StandardError hierarchy
     # must rescue Exception explicitly to rescue everything
     proc { wait_true(wait_opts) { fail NoMemoryError } }.must_raise Selenium::WebDriver::Error::TimeOutError
-    proc { wait_true(timeout: 0.2, interval: 0.0) { fail NoMemoryError } }.must_raise Selenium::WebDriver::Error::TimeOutError
+    proc { wait_true(timeout: 0.2, interval: 0.0) { fail NoMemoryError } }
+      .must_raise Selenium::WebDriver::Error::TimeOutError
 
     # invalid keys are rejected
     proc { wait_true(invalidkey: 2) { true } }.must_raise RuntimeError
