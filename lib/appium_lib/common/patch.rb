@@ -121,7 +121,9 @@ def patch_webdriver_bridge
 end
 
 # Print Appium's origValue error messages.
-class Selenium::WebDriver::Remote::Response # rubocop:disable Style/ClassAndModuleChildren
+# rubocop:disable Style/ClassAndModuleChildren
+# rubocop:disable Style/AndOr
+class Selenium::WebDriver::Remote::Response
   # @private
   def error_message
     val = value

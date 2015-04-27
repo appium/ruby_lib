@@ -3,6 +3,8 @@ Metrics/LineLength:
   Max: 125
 Metrics/MethodLength:
   Max: 30
+Metrics/ClassLength:
+  Enabled: false
 Metrics/CyclomaticComplexity:
   Enabled: false
 Metrics/PerceivedComplexity:
@@ -19,4 +21,8 @@ Style/ConstantName:
   Enabled: false
 # blocked on https://github.com/appium/ruby_lib/issues/312
 Style/GlobalVars:
+  Enabled: false
+Style/AccessorMethodName:
+  Enabled: false
+Style/DoubleNegation:
   Enabled: false
