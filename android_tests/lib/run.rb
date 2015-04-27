@@ -71,4 +71,4 @@ end
 # Exit after tests.
 Minitest.after_run { $driver.x if $driver }
 # Run Minitest. Provide test file array for tracing.
-Minitest.run_specs({ :trace => trace_files })
+Minitest.run_specs({ trace: trace_files })
