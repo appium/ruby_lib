@@ -1,3 +1,5 @@
+# rubocop:disable Lint/HandleExceptions
+
 # rake ios['ios/element/text']
 describe 'ios/element/text' do
   def ui_catalog
@@ -44,6 +46,7 @@ describe 'ios/element/text' do
     act = begin
       text_exact 'mos'
     rescue
+      # nop
     end
     act.must_be_nil
     set_wait
