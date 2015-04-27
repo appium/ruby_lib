@@ -1,8 +1,7 @@
-=begin
-  Skip:
-    status # status patches are already tested in driver.rb
-    raw_execute # debug output for Pry
-=end
+# Skip:
+#   status # status patches are already tested in driver.rb
+#   raw_execute # debug output for Pry
+
 describe 'common/patch' do
   # Attributes are busted in Android.
   # Blocked on https://github.com/appium/appium/issues/628

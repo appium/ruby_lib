@@ -130,12 +130,11 @@ describe 'driver' do
       end
     end
 
-=begin
-  Skip:
-    ios_capabilities # save for iOS tests
-    absolute_app_path # tested already by starting the driver for this test
-    server_url # sauce labs only
-=end
+    # Skip:
+    #   ios_capabilities # save for iOS tests
+    #   absolute_app_path # tested already by starting the driver for this test
+    #   server_url # sauce labs only
+
     t 'restart' do
       set_wait 1 # ensure wait is 1 before we restart.
       restart
@@ -146,15 +145,14 @@ describe 'driver' do
       driver.browser.must_equal :Android
     end
 
-=begin
-  Skip:
-    screenshot   # this is slow and already tested by Appium
-    driver_quit  # tested by restart
-    start_driver # tested by restart
-    no_wait  # posts value to server, it's not stored locally
-    set_wait # posts value to server, it's not stored locally
-    execute_script # 'mobile: ' is deprecated and plain executeScript unsupported
-=end
+    # Skip:
+    #   screenshot   # this is slow and already tested by Appium
+    #   driver_quit  # tested by restart
+    #   start_driver # tested by restart
+    #   no_wait  # posts value to server, it's not stored locally
+    #   set_wait # posts value to server, it's not stored locally
+    #   execute_script # 'mobile: ' is deprecated and plain executeScript unsupported
+
     t 'default_wait' do
       set_wait 1
       default_wait.must_equal 1

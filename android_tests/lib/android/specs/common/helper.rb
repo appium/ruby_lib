@@ -1,12 +1,10 @@
 describe 'common/helper' do
   wait_opts = { timeout: 0.2, interval: 0.2 } # max_wait, interval
 
-=begin
-There's no `must_not_raise` as the opposite of must_raise
+  # There's no `must_not_raise` as the opposite of must_raise
 
-By default code is expected to not raise exceptions.
-must_not_raise is a no-op.
-=end
+  # By default code is expected to not raise exceptions.
+  # must_not_raise is a no-op.
 
   # wait is a success unless an error is raised
   # max_wait=0 is infinity to use 0.1

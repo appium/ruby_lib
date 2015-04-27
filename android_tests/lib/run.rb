@@ -4,13 +4,11 @@ require 'fakefs/safe'
 require 'hashdiff'
 require_relative '../../lib/appium_lib'
 
-=begin
-Run all Android tests:
-  ruby run.rb android
+# Run all Android tests:
+#   ruby run.rb android
 
-Run only the view album test:
-  ruby run.rb ios view_album
-=end
+# Run only the view album test:
+#   ruby run.rb ios view_album
 
 # Sanity check
 a = OpenStruct.new x: 'ok'

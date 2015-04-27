@@ -39,11 +39,9 @@ list.split("\n").each do |method|
   puts line2
 end
 
-=begin
 # for Pry
-class Object
-  def must_equal b
-    raise 'not equal' unless self == b
-  end
-end
-=end
+# class Object
+#   def must_equal b
+#     raise 'not equal' unless self == b
+#   end
+# end
