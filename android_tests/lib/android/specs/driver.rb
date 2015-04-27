@@ -1,6 +1,6 @@
 # rake android[driver]
 describe 'driver' do
-  def is_sauce
+  def sauce?
     ENV['UPLOAD_FILE'] && ENV['SAUCE_USERNAME']
   end
 
@@ -123,7 +123,7 @@ describe 'driver' do
 
     t 'server_version' do
       server_version = appium_server_version['build']['version']
-      if is_sauce
+      if sauce?
         server_version.must_match 'Sauce OnDemand'
       else
         server_version.must_match(/(\d+)\.(\d+).(\d+)/)
