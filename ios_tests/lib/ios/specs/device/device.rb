@@ -28,7 +28,7 @@ describe 'device/device' do
   end
 
   t 'app_installed' do
-    installed = app_installed? "Derrp"
+    installed = app_installed? 'Derrp'
     installed.must_equal false
   end
 
@@ -47,7 +47,7 @@ describe 'device/device' do
   end
 
   t 'available_contexts' do
-    available_contexts.must_equal ["NATIVE_APP"]
+    available_contexts.must_equal ['NATIVE_APP']
   end
 
   t 'current_context' do
@@ -60,8 +60,8 @@ describe 'device/device' do
   end
 
   t 'app_strings' do
-    app_strings.must_include "SearchBarExplain"
-    app_strings('en').must_include "SearchBarExplain"
+    app_strings.must_include 'SearchBarExplain'
+    app_strings('en').must_include 'SearchBarExplain'
   end
 
   t 'action_chain' do
