@@ -46,7 +46,7 @@ describe 'common/device' do
     wait_true { app_strings.has_key? 'activity_save_restore' }
   end
 
-  def must_return_element element
+  def must_return_element(element)
     element.class.must_equal Selenium::WebDriver::Element
   end
 
