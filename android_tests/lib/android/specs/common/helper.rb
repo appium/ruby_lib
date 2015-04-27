@@ -72,7 +72,7 @@ must_not_raise is a no-op.
   end
 
   t 'session_id' do
-    wait { session_id.must_match /\h{8}-\h{4}-\h{4}-\h{4}-\h{12}/ }
+    wait { session_id.must_match(/\h{8}-\h{4}-\h{4}-\h{4}-\h{12}/) }
   end
 
   t 'xpath' do

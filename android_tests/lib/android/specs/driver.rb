@@ -126,7 +126,7 @@ describe 'driver' do
       if is_sauce
         server_version.must_match 'Sauce OnDemand'
       else
-        server_version.must_match /(\d+)\.(\d+).(\d+)/
+        server_version.must_match(/(\d+)\.(\d+).(\d+)/)
       end
     end
 

@@ -26,7 +26,7 @@ list = <<TXT
 TXT
 
 list.split("\n").each do |method|
-  pair  = method.match /"([^"]+)"[^"]+"([^"]+)"/
+  pair  = method.match(/"([^"]+)"[^"]+"([^"]+)"/)
   tag   = pair[1]
   klass = pair[2]
 
