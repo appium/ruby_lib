@@ -3,10 +3,8 @@ describe 'device/multi_touch' do
 end
 
 # TODO: write tests
-=begin
-pinch
-zoom
-initialize
-add
-perform
-=end
+# pinch
+# zoom
+# initialize
+# add
+# perform

@@ -10,12 +10,10 @@ describe 'common/helper.rb' do
 
   wait_opts = { timeout: 0.2, interval: 0.2 } # max_wait, interval
 
-=begin
-There's no `must_not_raise` as the opposite of must_raise
-
-By default code is expected to not raise exceptions.
-must_not_raise is a no-op.
-=end
+  # There's no `must_not_raise` as the opposite of must_raise
+  #
+  # By default code is expected to not raise exceptions.
+  # must_not_raise is a no-op.
 
   # wait is a success unless an error is raised
   # max_wait=0 is infinity to use 0.1
@@ -180,23 +178,22 @@ must_not_raise is a no-op.
     # 8 local. 9 on sauce.
     get_page_class.split("\n").length.must_be :>=, 8
   end
-=begin
-todo:
-get_page_class
-page_class
-tag
-tags
-px_to_window_rel
-lazy_load_strings
-xml_keys
-xml_values
-resolve_id
-string_visible_contains
-xpath_visible_contains
-xpaths_visible_contains
-string_visible_exact
-xpath_visible_exact
-xpaths_visible_exact
-raise_no_element_error
-=end
+
+  # TODO: write tests
+  # get_page_class
+  # page_class
+  # tag
+  # tags
+  # px_to_window_rel
+  # lazy_load_strings
+  # xml_keys
+  # xml_values
+  # resolve_id
+  # string_visible_contains
+  # xpath_visible_contains
+  # xpaths_visible_contains
+  # string_visible_exact
+  # xpath_visible_exact
+  # xpaths_visible_exact
+  # raise_no_element_error
 end

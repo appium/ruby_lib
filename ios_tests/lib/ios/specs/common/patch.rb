@@ -1,8 +1,9 @@
-=begin
-  Skip:
-    status # status patches are already tested in driver.rb
-    raw_execute # debug output for Pry
-=end
+#
+#  Skip:
+#    status # status patches are already tested in driver.rb
+#    raw_execute # debug output for Pry
+#
+
 # rake ios[common/patch]
 describe 'common/patch.rb' do
   def before_first

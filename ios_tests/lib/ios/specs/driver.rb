@@ -152,12 +152,13 @@ describe 'driver' do
       driver.browser.must_equal :iOS
     end
 
-=begin
-  Skip:
-    screenshot   # this is slow and already tested by Appium
-    driver_quit  # tested by restart
-    start_driver # tested by restart
-=end
+    #
+    # Skip:
+    #    screenshot   # this is slow and already tested by Appium
+    #    driver_quit  # tested by restart
+    #    start_driver # tested by restart
+    #
+
     t 'set_wait' do
       # fill the @last_waits array with: [30, 30]
       set_wait(30).must_equal(30)
