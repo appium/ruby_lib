@@ -16,7 +16,7 @@ describe 'common/patch.rb' do
 # Attributes are busted in Android.
 # Blocked on https://github.com/appium/appium/issues/628
   describe 'Selenium::WebDriver::Element methods' do
-    # todo: t 'value' do; end
+    # TODO: t 'value' do; end
 
     t 'name' do
       first_text.name.must_equal 'UICatalog'

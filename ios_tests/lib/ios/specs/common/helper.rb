@@ -103,7 +103,7 @@ must_not_raise is a no-op.
     ele_index('UIAStaticText', 2).name.must_equal uibutton_text
   end
 
-  # todo: 'string_attr_exact'
+  # TODO: 'string_attr_exact'
 
   t 'find_ele_by_attr' do
     el_id = find_ele_by_attr('UIAStaticText', 'name', uibutton_text).instance_variable_get :@id
@@ -123,7 +123,7 @@ must_not_raise is a no-op.
     set_wait
   end
 
-  # todo: 'string_attr_include'
+  # TODO: 'string_attr_include'
 
   t 'find_ele_by_attr_include' do
     el_text = find_ele_by_attr_include('UIAStaticText', :name, 'button').text

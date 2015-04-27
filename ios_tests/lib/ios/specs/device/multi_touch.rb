@@ -2,7 +2,7 @@ describe 'device/multi_touch' do
   t {} # place holder test
 end
 
-# todo: write tests
+# TODO: write tests
 =begin
 pinch
 zoom
