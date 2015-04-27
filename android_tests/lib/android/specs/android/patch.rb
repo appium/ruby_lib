@@ -9,7 +9,7 @@ describe 'android/patch.rb' do
     wait { first_textfield.type 'ok' }
     wait { first_textfield.text.must_equal 'ok' }
 
-    # todo: how to invoke random am start commands?
+    # TODO: how to invoke random am start commands?
     # nav to start activity
     # io.appium.android.apis/.ApiDemos
 

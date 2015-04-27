@@ -2,11 +2,11 @@
 describe 'common/device' do
   # Not yet implemented
   t 'shake' do
-    # todo: write test
+    # TODO: write test
   end
 
   t 'remove & install' do
-    # todo: write test
+    # TODO: write test
     #remove 'com.example.android.apis'
     #install ENV['APP_PATH']
   end
