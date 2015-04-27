@@ -4,7 +4,7 @@ describe 'the web context' do
     text('Web').click
     set_context 'WEBVIEW'
     current_context.must_equal 'WEBVIEW_1'
-    sleep 1  #Give a chance to load
+    sleep 1  # Give a chance to load
     page.start_with?("\nhtml\n").must_equal true
   end
 
