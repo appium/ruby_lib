@@ -20,8 +20,10 @@ api.apk is from [appium/android-apidemos](https://github.com/appium/android-apid
 
 --
 
-```java
-Finished in 2 mins 8 secs
+These results are run against Intel HAXM emulator (Nexus 7, Android 5.0.1, API 21)
 
-94 runs, 120 assertions, 0 failures, 0 errors, 0 skips
+```java
+Finished in 2 mins 57 secs
+
+106 runs, 144 assertions, 0 failures, 0 errors, 0 skips
 ```
