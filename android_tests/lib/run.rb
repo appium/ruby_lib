@@ -40,7 +40,11 @@ if one_test
   end
 
   fail "\nTest #{one_test} does not exist.\n" unless File.exist?(one_test)
-  Appium::Driver.new(caps).start_driver
+  driver = Appium::Driver.new(caps)
+  # Tests expect methods defined on the minispec object
+  Appium.promote_appium_methods ::Minitest::Spec
+  driver.start_driver
+
   # require support (common.rb)
   Dir.glob(File.join dir, test_dir + '/*.rb') do |test|
     require test

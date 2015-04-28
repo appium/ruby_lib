@@ -61,11 +61,6 @@ describe 'driver' do
   end
 
   describe 'Appium::Driver' do
-    t '@@loaded' do
-      loaded = $driver.class.class_variable_get :@@loaded
-      loaded.must_equal true
-    end
-
     t '$driver.class' do
       $driver.class.must_equal Appium::Driver
     end

@@ -1,6 +1,6 @@
 ### Breaking Changes in 7.0
 
-Requires appium 1.4.0-beta or newer for iOS helper methods.
+Requires appium 1.4.0-beta or newer for iOS helper methods. appium_lib no longer automatically promotes methods on minispec. To restore the old behavior use: `Appium.promote_appium_methods ::Minitest::Spec`
 
            Old | New
             :--|:--

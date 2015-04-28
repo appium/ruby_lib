@@ -140,7 +140,7 @@ module Appium
     fail 'symbolize_keys requires a hash' unless hash.is_a? Hash
     result = {}
     hash.each do |key, value|
-      key = key.to_sym rescue key
+      key = key.to_sym rescue key # rubocop:disable Style/RescueModifier
       result[key] = value.is_a?(Hash) ? symbolize_keys(value) : value
     end
     result
@@ -216,8 +216,6 @@ module Appium
   end
 
   class Driver
-    @@loaded = false
-
     # attr readers are promoted to global scope. To avoid clobbering, they're
     # made available via the driver_attributes method
     #
@@ -232,6 +230,9 @@ module Appium
     # Export session id to textfile in /tmp for 3rd party tools
     attr_accessor :export_session
     # Default wait time for elements to appear
+    # Returns the default client side wait.
+    # This value is independent of what the server is using
+    # @return [Integer]
     attr_accessor :default_wait
     # Array of previous wait time values
     attr_accessor :last_waits
@@ -245,6 +246,10 @@ module Appium
     attr_accessor :appium_device
     # Boolean debug mode for the Appium Ruby bindings
     attr_accessor :appium_debug
+
+    # Returns the driver
+    # @return [Driver] the driver
+    attr_reader :driver
 
     # Creates a new driver
     #
@@ -326,14 +331,6 @@ module Appium
 
       # Save global reference to last created Appium driver for top level methods.
       $driver = self
-
-      # Promote exactly once the first time the driver is created.
-      # Subsequent drivers do not trigger promotion.
-      unless @@loaded
-        @@loaded = true
-        # Promote only on Minitest::Spec (minitest 5) by default
-        Appium.promote_appium_methods ::Minitest::Spec
-      end
 
       self # return newly created driver
     end
@@ -436,12 +433,6 @@ module Appium
       start_driver
     end
 
-    # Returns the driver
-    # @return [Driver] the driver
-    def driver
-      @driver
-    end
-
     # Takes a png screenshot and saves to the target path.
     #
     # Example: screenshot '/tmp/hi.png'
@@ -457,6 +448,7 @@ module Appium
     # @return [void]
     def driver_quit
       # rescue NoSuchDriverError or nil driver
+      # rubocop:disable Style/RescueModifier
       @driver.quit rescue nil
     end
 
@@ -475,6 +467,7 @@ module Appium
 
         # export session
         if @export_session
+          # rubocop:disable Style/RescueModifier
           File.open('/tmp/appium_lib_session', 'w') do |f|
             f.puts @driver.session_id
           end rescue nil
@@ -521,13 +514,6 @@ module Appium
       end
 
       @driver.manage.timeouts.implicit_wait = timeout
-    end
-
-    # Returns the default client side wait.
-    # This value is independent of what the server is using
-    # @return [Integer]
-    def default_wait
-      @default_wait
     end
 
     # Returns existence of element.
