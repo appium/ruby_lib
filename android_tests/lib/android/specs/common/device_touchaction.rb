@@ -13,6 +13,7 @@ describe 'common/device_touchaction' do
   t 'swipe' do
     wait { Appium::TouchAction.new.swipe(start_x: 0.75, start_y: 0.25, end_x: 0.75, end_y: 0.5, duration: 1.5).perform }
     wait { !exists { text_exact 'NFC' } }
+    wait { text_exact 'Bouncing Balls' }
     back
     wait { text_exact 'NFC' }
   end
@@ -25,5 +26,7 @@ describe 'common/device_touchaction' do
       zoom 200
       pinch 75
     end
+    2.times { back }
+    wait { text_exact 'NFC' }
   end
 end
