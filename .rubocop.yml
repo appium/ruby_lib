@@ -2,14 +2,12 @@
 Metrics/LineLength:
   Max: 125
 Metrics/MethodLength:
-  Max: 30
+  Enabled: false
 Metrics/ClassLength:
   Enabled: false
 Metrics/CyclomaticComplexity:
   Enabled: false
 Metrics/PerceivedComplexity:
-  Enabled: false
-Metrics/MethodLength:
   Enabled: false
 Metrics/AbcSize:
   Enabled: false
