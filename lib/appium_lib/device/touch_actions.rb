@@ -78,9 +78,9 @@ module Appium
     # @option opts [integer] :y y co-ordinate to tap
     # @option opts [integer] :fingers how many fingers to tap with (Default 1)
     def tap(opts)
-      opts[:count]       = opts.delete(:fingers) if opts[:fingers]
-      opts[:count]     ||= 1
-      args               = args_with_ele_ref opts
+      opts[:count] = opts.delete(:fingers) if opts[:fingers]
+      opts[:count] ||= 1
+      args = args_with_ele_ref opts
       chain_method(:tap, args)
     end
 

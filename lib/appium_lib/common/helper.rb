@@ -22,10 +22,8 @@ module Appium
 
     # Return block.call and ignore any exceptions.
     def ignore(&block)
-      begin
-        block.call
-      rescue Exception
-      end
+      block.call
+    rescue Exception # rubocop:disable Lint/HandleExceptions, Lint/RescueException
     end
 
     # Navigate back.

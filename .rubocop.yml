@@ -26,3 +26,5 @@ Style/AccessorMethodName:
   Enabled: false
 Style/DoubleNegation:
   Enabled: false
+Style/EachWithObject:
+  Enabled: false

@@ -32,7 +32,7 @@ module Appium
           end
         rescue ::Errno::ECONNREFUSED => e
           raise e
-        rescue *ignored => last_error
+        rescue *ignored => last_error # rubocop:disable Lint/HandleExceptions
           # swallowed
         end
 
