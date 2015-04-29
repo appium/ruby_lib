@@ -146,6 +146,14 @@ module Appium
     result
   end
 
+  # This method is intended to work with page objects that share
+  # a common module. For example, Page::HomePage, Page::SignIn
+  # those could be promoted on with Appium.promote_singleton_appium_methods Page
+  #
+  # If you are promoting on an individual class then you should use
+  # Appium.promote_appium_methods instead. The singleton method is intended
+  # only for the shared module use case.
+  #
   # if modules is a module instead of an array, then the constants of
   # that module are promoted on.
   # otherwise, the array of modules will be used as the promotion target.
@@ -187,6 +195,18 @@ module Appium
   #
   # ```ruby
   # Appium.promote_appium_methods Object
+  # ```
+  #
+  # It's better to promote on specific classes instead of Object
+  #
+  # ```ruby
+  # # promote on rspec
+  # Appium.promote_appium_methods RSpec::Core::ExampleGroup
+  # ```
+  #
+  # ```ruby
+  # # promote on minispec
+  # Appium.promote_appium_methods Minitest::Spec
   # ```
   def self.promote_appium_methods(class_array)
     fail 'Driver is nil' if $driver.nil?
