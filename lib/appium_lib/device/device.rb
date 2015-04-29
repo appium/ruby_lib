@@ -11,7 +11,8 @@ module Appium
         launch_app:           'session/:session_id/appium/app/launch',
         close_app:            'session/:session_id/appium/app/close',
         reset:                'session/:session_id/appium/app/reset',
-        toggle_airplane_mode: 'session/:session_id/appium/device/toggle_airplane_mode'
+        toggle_airplane_mode: 'session/:session_id/appium/device/toggle_airplane_mode',
+        device_locked?:       'session/:session_id/appium/device/is_locked'
       },
       get:  {
         current_activity:       'session/:session_id/appium/device/current_activity',
@@ -34,7 +35,7 @@ module Appium
     # @!method current_activity
 
     # @!method launch_app
-    #   Start the simulator and applicaton configured with desired capabilities
+    #   Start the simulator and application configured with desired capabilities
 
     # @!method reset
     #   Reset the device, relaunching the application.
@@ -43,7 +44,9 @@ module Appium
     #   Cause the device to shake
 
     # @!method toggle_flight_mode
-    #   toggle flight mode on or off
+    #   Toggle flight mode on or off
+
+    # @!method device_locked?
 
     # @!method hide_keyboard
     #   Hide the onscreen keyboard

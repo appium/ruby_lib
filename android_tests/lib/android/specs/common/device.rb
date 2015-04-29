@@ -33,6 +33,13 @@ describe 'common/device' do
     wait { text(1).text.must_equal 'API Demos' }
   end
 
+  t 'device_locked?' do
+    lock 5
+    wait { device_locked?.must_equal true }
+    press_keycode 82
+    wait { device_locked?.must_equal false }
+  end
+
   t 'close & launch' do
     close_app
     launch_app
