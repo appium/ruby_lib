@@ -484,6 +484,7 @@ module Appium
         @driver = Selenium::WebDriver.for :remote, http_client: @client, desired_capabilities: @caps, url: server_url
         # Load touch methods.
         @driver.extend Selenium::WebDriver::DriverExtensions::HasTouchScreen
+        @driver.extend Selenium::WebDriver::DriverExtensions::HasLocation
 
         # export session
         if @export_session
@@ -590,6 +591,22 @@ module Appium
     # @return [Element]
     def find_element(*args)
       @driver.find_element(*args)
+    end
+
+    # Calls @driver.set_location
+    #
+    # @note This method does not work on real devices.
+    #
+    # @param [Hash] opts consisting of:
+    # @option opts [Float] :latitude the latitude in degrees (required)
+    # @option opts [Float] :longitude the longitude in degees (required)
+    # @option opts [Float] :altitude the altitude, defaulting to 75
+    # @return [Selenium::WebDriver::Location] the location constructed by the selenium webdriver
+    def set_location(opts = {})
+      latitude = opts.fetch(:latitude)
+      longitude = opts.fetch(:longitude)
+      altitude = opts.fetch(:altitude, 75)
+      @driver.set_location(latitude, longitude, altitude)
     end
 
     # Quit the driver and Pry.
