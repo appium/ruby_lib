@@ -10,6 +10,13 @@ require_relative '../../lib/appium_lib'
 # Run only the view album test:
 #   ruby run.rb ios view_album
 
+def start_driver(caps)
+  driver = Appium::Driver.new(caps)
+  # Tests expect methods defined on the minispec object
+  Appium.promote_appium_methods ::Minitest::Spec
+  driver.start_driver
+end
+
 # Sanity check
 a = OpenStruct.new x: 'ok'
 fail 'x issue' unless a.x == 'ok'
@@ -40,10 +47,7 @@ if one_test
   end
 
   fail "\nTest #{one_test} does not exist.\n" unless File.exist?(one_test)
-  driver = Appium::Driver.new(caps)
-  # Tests expect methods defined on the minispec object
-  Appium.promote_appium_methods ::Minitest::Spec
-  driver.start_driver
+  start_driver(caps)
 
   # require support (common.rb)
   Dir.glob(File.join dir, test_dir + '/*.rb') do |test|
@@ -61,7 +65,8 @@ else
     puts "  #{File.basename(test, '.*')}"
     require test
   end
-  Appium::Driver.new(caps).start_driver
+
+  start_driver(caps)
 end
 
 trace_files.map! do |f|
