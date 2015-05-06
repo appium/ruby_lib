@@ -185,6 +185,11 @@ describe 'driver' do
       exists(0, 0) { fail 'error' }.must_equal false
     end
 
+    # simple integration sanity test to check for unexpected exceptions
+    t 'set_location' do
+      set_location latitude: 55, longitude: -72, altitude: 33
+    end
+
     # any script
     t 'execute_script' do
       execute_script %q(au.mainApp().getFirstWithPredicate("name contains[c] 'button'");)
