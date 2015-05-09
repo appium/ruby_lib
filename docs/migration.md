@@ -2,6 +2,8 @@
 
 Requires appium 1.4.0-beta or newer for iOS helper methods. appium_lib no longer automatically promotes methods on minispec. To restore the old behavior use: `Appium.promote_appium_methods ::Minitest::Spec`
 
+The implicit wait now defaults to zero. To restore the old behavior, use `set_wait 30`.
+
            Old | New
             :--|:--
 `installed?`   | `app_installed?`
