@@ -30,13 +30,15 @@ def mobj_to_md obj
   out         += "> #{obj.signature}\n\n"
   out         += "#{obj.docstring}\n\n"
 
+  # puts "Processing: #{obj.name} #{method_path}"
 
   indent = space 5
   params = obj.tags.select { |tag| tag.tag_name == 'param' }
   if !params.empty?
     out += "__Parameters:__\n\n"
     params.each do |param|
-      out += indent + "[#{param.types.join ', '}] "
+      param_types = param.types ? "[#{param.types.join ', '}] " : ''
+      out += indent + param_types
       out += "#{param.name} - #{param.text}\n\n"
     end
   end
