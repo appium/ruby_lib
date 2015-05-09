@@ -1,3 +1,155 @@
+#### v7.0.0 2015-05-08
+
+- [af83896](https://github.com/appium/ruby_lib/commit/af838966d0724793d3dbfa35798ca6dd9f8a3143) Release 7.0.0
+- [7bb780d](https://github.com/appium/ruby_lib/commit/7bb780d2f3d4bbbc2dcade6cd0aa9fdf5cd7b3d9) Fix make_docs script
+- [b8cc4dd](https://github.com/appium/ruby_lib/commit/b8cc4dd425c6b1605d0a67ded8b51dac0ac0373d) Add note about implicit wait change
+- [2599a46](https://github.com/appium/ruby_lib/commit/2599a465896add2cf11634d26bf81bba4a99f39c) Fix set_location Android test on emulator
+- [8162e27](https://github.com/appium/ruby_lib/commit/8162e274732172229df48834c188fbf7d3819430) Work around empty app strings
+- [1657f8c](https://github.com/appium/ruby_lib/commit/1657f8c58c8c8505c3e7f07657fddc6c0b8f154e) Merge pull request #333 from hipyard/geolocation_pr
+- [dbb32b2](https://github.com/appium/ruby_lib/commit/dbb32b25e11576411ae4f62735b4f38e71e074d4) add set_location method for setting geolocation
+- [e441d6d](https://github.com/appium/ruby_lib/commit/e441d6d7d2219194cda58f194c07553e81c4d4d8) Merge pull request #334 from hipyard/settable_logger
+- [ed56450](https://github.com/appium/ruby_lib/commit/ed56450de85926f9bf991f4c50dca81fadad3376) logger setter method
+- [8634cad](https://github.com/appium/ruby_lib/commit/8634cad862f98fcd74e2262261dc86c21f3b5595) Merge pull request #336 from JaniJegoroff/fix-tests
+- [4afcf6f](https://github.com/appium/ruby_lib/commit/4afcf6fac61a973f41e165cf2bb8e48aab5d9ac4) Fix for "undefined local variable or method" errors
+- [9ea0754](https://github.com/appium/ruby_lib/commit/9ea07543fd760b3da09ae2673618caff0a383ae2) Merge pull request #330 from JaniJegoroff/add-locked-method
+- [73a7dc0](https://github.com/appium/ruby_lib/commit/73a7dc0b45098e4b26e5fef62207a87e4d6e61a1) Add device_locked? method
+- [1348a8c](https://github.com/appium/ruby_lib/commit/1348a8c015b36d7346542443229b3dfe338a3e48) Update .rubocop.yml
+- [de37577](https://github.com/appium/ruby_lib/commit/de37577fec4eac123c8b07873acd6d0a81de1cc4) Update dependencies
+- [b19d0e0](https://github.com/appium/ruby_lib/commit/b19d0e03940d80314cb61c3c86f28c6f54e9da57) Improve promote method documentation
+- [1b88060](https://github.com/appium/ruby_lib/commit/1b88060dc0a439e02323f52d6d695b1587aeba17) Merge pull request #329 from appium/rubocop
+- [e9d1986](https://github.com/appium/ruby_lib/commit/e9d1986a1e46319bfb42fa30de8c4778f6dbc3fb) Fix remaining rubocop issues
+- [7feace9](https://github.com/appium/ruby_lib/commit/7feace96c7030455a45c7527d3b5c4f184c3abab) Merge pull request #327 from JaniJegoroff/stable-android-tests
+- [502c9d5](https://github.com/appium/ruby_lib/commit/502c9d56e1f1fcfcce1f6016b1484499ec5f2522) Fix for Android tests
+- [b73c782](https://github.com/appium/ruby_lib/commit/b73c78237c4b331b9e4602bd92da7a2de45afc15) Fix rubocop Rakefile issues
+- [93cb8a5](https://github.com/appium/ruby_lib/commit/93cb8a59aa7f4fb0b398aa67cd5b93b6e34534b2) Run rubocop on more files
+- [cd8638b](https://github.com/appium/ruby_lib/commit/cd8638b8dc5a3a313dbbad4c42ed9291789139a8) Merge pull request #325 from JaniJegoroff/rubocop-android-tests
+- [bd54f96](https://github.com/appium/ruby_lib/commit/bd54f9690e57695f85da8378a1f45fc7a314681b) Rubocop - Style/UnlessElse
+- [3c520a9](https://github.com/appium/ruby_lib/commit/3c520a90e8639bdb265f3849ff5d84ad751f5d78) Rubocop - Metrics/LineLength
+- [e80398f](https://github.com/appium/ruby_lib/commit/e80398f149d8f3767512831b91af598e98ec4d59) Rubocop - Lint/RescueException
+- [b41a3da](https://github.com/appium/ruby_lib/commit/b41a3dabbf662eaa3d6498245d2f305d7e0d96a9) Rubocop - Style/Semicolon
+- [af3ea2e](https://github.com/appium/ruby_lib/commit/af3ea2ee0f8aba75262966025965ef5cc6af0f86) Rubocop - Style/PredicateName
+- [7907af6](https://github.com/appium/ruby_lib/commit/7907af6f67add544ca122eb696ec5647b6a8652b) Rubocop - Style/BlockComments
+- [95d34b7](https://github.com/appium/ruby_lib/commit/95d34b71e268d67c7561e96d8a9206f6d9895b0b) Rubocop - Style/SignalException
+- [cd6728f](https://github.com/appium/ruby_lib/commit/cd6728f4836aea74bed25b1d4571d73319cd280d) Rubocop - Style/SymbolProc
+- [e383ac6](https://github.com/appium/ruby_lib/commit/e383ac618411c5055839bbd3a908e050e4039fdc) Rubocop - Style/PercentLiteralDelimiters
+- [211bd82](https://github.com/appium/ruby_lib/commit/211bd821deb40a20034c1c20bcc1572a8ba47aef) Rubocop - Style/LeadingCommentSpace
+- [d141499](https://github.com/appium/ruby_lib/commit/d14149962c3ec7788beda980fa849dc5ca4683e8) Rubocop - Style/CommentIndentation
+- [45dbc04](https://github.com/appium/ruby_lib/commit/45dbc0414df6c59879760d92b14ac3aa999b3d6f) Rubocop - Style/CommentAnnotation
+- [db0961f](https://github.com/appium/ruby_lib/commit/db0961f03351bb04cdc6f43421bd1099b1e9bbfa) Rubocop - Style/DeprecatedHashMethods
+- [d710d6e](https://github.com/appium/ruby_lib/commit/d710d6e68c19abaf1f30ea7c645f83c3efc80af0) Rubocop - Style/EmptyLinesAroundBlockBody
+- [e8875c1](https://github.com/appium/ruby_lib/commit/e8875c176710d49b1aa65db074cf4cc5f602df09) Rubocop - Style/SpaceInsideParens
+- [b489f48](https://github.com/appium/ruby_lib/commit/b489f48adc96c4241ec53dfe73b94161d1d8dbd1) Rubocop - Lint/AmbiguousRegexpLiteral
+- [807f258](https://github.com/appium/ruby_lib/commit/807f258766be2a892f7e1ddb8fb9eb89dd36c680) Rubocop - Style/TrailingComma
+- [432144f](https://github.com/appium/ruby_lib/commit/432144fbc54ff91985b54c9100b2b45f238a0b90) Rubocop - Style/MethodDefParentheses
+- [510a2a6](https://github.com/appium/ruby_lib/commit/510a2a6ebc8ad3bfd6e8ad3c2720b8ac2ea76885) Rubocop - Lint/DeprecatedClassMethods
+- [47f1790](https://github.com/appium/ruby_lib/commit/47f179040dfaab80e043eaf11e5d2582b91c06c6) Rubocop - Style/BracesAroundHashParameters
+- [1b946fb](https://github.com/appium/ruby_lib/commit/1b946fbc2de48d73623c0f20340d74e2b2ecec9b) Rubocop - Style/HashSyntax
+- [86163f7](https://github.com/appium/ruby_lib/commit/86163f7ec0a247dd73885de14011821b6ebb2100) Rubocop - Style/TrailingBlankLines
+- [a7aef30](https://github.com/appium/ruby_lib/commit/a7aef30492334e57aa9e1e421062840765b852b3) Rubocop rake task
+- [1be017b](https://github.com/appium/ruby_lib/commit/1be017b14e1fedef9511a0341839b45d1d754c36) Merge pull request #324 from appium/rubocop
+- [fb534a0](https://github.com/appium/ruby_lib/commit/fb534a0078a0ce2097990591455f35d3d843da9b) Fix more rubocop issues
+- [893165d](https://github.com/appium/ruby_lib/commit/893165dc1a869a2d240c054e13d26438728efb98) Merge pull request #323 from JaniJegoroff/rubocop-ios-tests
+- [b1d9d5f](https://github.com/appium/ruby_lib/commit/b1d9d5fbdc54cb19a4b334d8820dfa7122118a9d) Rubocop - Metrics/LineLength
+- [39d8b4e](https://github.com/appium/ruby_lib/commit/39d8b4e8354cf8afbd96d8721582cdcab4b49b48) Rubocop - Lint/RescueException
+- [1460120](https://github.com/appium/ruby_lib/commit/1460120819e09c5879882661de49e7042d0892a4) Rubocop - Lint/HandleExceptions
+- [7f04d50](https://github.com/appium/ruby_lib/commit/7f04d50f7bea7a042115653d3f45d84d181b302c) Rubocop - Style/Semicolon
+- [1615e6d](https://github.com/appium/ruby_lib/commit/1615e6df1bd0dd5e721a5226cffb781d5a7c08bf) Rubocop -Lint/ShadowingOuterLocalVariable
+- [15e7c62](https://github.com/appium/ruby_lib/commit/15e7c62e068fdff2b935c53ad731351655027ce0) Rubocop - Style/SignalException
+- [0ecda98](https://github.com/appium/ruby_lib/commit/0ecda987aa73799dd45c423b5a1b7d28f595ca17) Rubocop - Style/BlockComments
+- [6dc9ee1](https://github.com/appium/ruby_lib/commit/6dc9ee16ab4d71f69da30f2e277dec787ebea8fd) Rubocop - Style/BlockComments
+- [a9d9573](https://github.com/appium/ruby_lib/commit/a9d9573a0b79490d357cd44ae8ac51f77bbfb83e) Rubocop - Style/SpaceAroundEqualsInParameterDefault
+- [66f4e14](https://github.com/appium/ruby_lib/commit/66f4e146a945db5a992c14805542ce3a4eb39ba0) Rubocop - Style/LeadingCommentSpace
+- [6c8efda](https://github.com/appium/ruby_lib/commit/6c8efdaca119c2b16728aac34ec97ed5516a689a) Rubocop - Style/PredicateName
+- [aef6dc9](https://github.com/appium/ruby_lib/commit/aef6dc9bfff3a7f17180ef5f3cd71013b8e3b256) Rubocop - Style/EmptyLinesAroundBlockBody
+- [c964236](https://github.com/appium/ruby_lib/commit/c9642368577156ac339755df0677432c8b21e11e) Rubocop - Style/CommentIndentation
+- [d9478af](https://github.com/appium/ruby_lib/commit/d9478afd066cd9add9993306ab6936cd450478b5) Rubocop - Style/SpaceAroundOperators
+- [22a329e](https://github.com/appium/ruby_lib/commit/22a329e4412be870fae9ddfef23974382038f05b) Rubocop - Style/BarePercentLiterals
+- [9b855c9](https://github.com/appium/ruby_lib/commit/9b855c904d578f7dcc317bee3d5db2f0d5108843) Rubocop - Style/SymbolProc
+- [4720e82](https://github.com/appium/ruby_lib/commit/4720e829b878ca048fa363073ba1f1fbe6afe1ec) Rubocop - Lint/AmbiguousRegexpLiteral
+- [7477497](https://github.com/appium/ruby_lib/commit/747749775a814bfc231037c1f41860e0df8a3b52) Rubocop - Style/StringLiterals
+- [40c060b](https://github.com/appium/ruby_lib/commit/40c060b64b64115a6780832955c84781db0381d4) Rubocop - Style/SpaceAfterNot
+- [2793129](https://github.com/appium/ruby_lib/commit/2793129df74057592069593db1eee80a4c5d673d) Rubocop - Style/CommentAnnotation
+- [e7750e9](https://github.com/appium/ruby_lib/commit/e7750e9897febdbd27192548af7b156925b9273d) Rubocop - Style/RedundantSelf
+- [403badd](https://github.com/appium/ruby_lib/commit/403badd2aaba11bd833210083a809fdd46da7e4e) Rubocop - Style/MethodDefParentheses
+- [a62ed2a](https://github.com/appium/ruby_lib/commit/a62ed2abf937da9875f7f16e8ffa0f390a5a33d7) Fix Rubocop rake task pattern
+- [1aaa1db](https://github.com/appium/ruby_lib/commit/1aaa1db2020a9dc37e3caa858c9290a814daf9e4) Rubocop rake task
+- [d2e1857](https://github.com/appium/ruby_lib/commit/d2e185708e41807e11bc1e607b9baada8e711823) Rubocop - Style/TrailingWhitespace
+- [602cb2a](https://github.com/appium/ruby_lib/commit/602cb2a18dfca30f4d0b6aeed84a5786175c1929) Rubocop - Style/TrailingBlankLines
+- [19507f5](https://github.com/appium/ruby_lib/commit/19507f584515484eba7b98acfada55bcf9d81e0e) Merge pull request #322 from JaniJegoroff/fix-ios-tests
+- [f0f4f84](https://github.com/appium/ruby_lib/commit/f0f4f847a244ed06b5bf53b5c9b02a3562b1cce2) Fixed iOS tests and updated documentation
+- [305ce9c](https://github.com/appium/ruby_lib/commit/305ce9c956be4879b3bb70f56a4df71fb4380c62) Add .rubocop.yml
+- [4b0383c](https://github.com/appium/ruby_lib/commit/4b0383c86c0fcfa98ab759b3f9d1b386ac33bb6b) Add travis. Update migration doc
+- [3dc3d0c](https://github.com/appium/ruby_lib/commit/3dc3d0cec10cd256dc4adb89e6c53b85107678ef) Merge pull request #320 from JaniJegoroff/rubocop-warning-fixes
+- [e539d7c](https://github.com/appium/ruby_lib/commit/e539d7c7596af1c56587a5056fef74d936ddc0ce) Renamed method installed? to app_installed?
+- [4ba5ed9](https://github.com/appium/ruby_lib/commit/4ba5ed90f19c5d9cf71b461142bc1a5890d20574) Link to new Ruby docs
+- [47276b5](https://github.com/appium/ruby_lib/commit/47276b5c11f47e0940d4407031f8bd7918c43094) Rubocop - Lint/UselessAssignment
+- [7ec6396](https://github.com/appium/ruby_lib/commit/7ec6396a166793c467fc7b1539d34f7ac6b55105) Rubocop - Style/ClassAndModuleChildren
+- [25cd420](https://github.com/appium/ruby_lib/commit/25cd420a602744ed30ff0fb99aef9c2821d46d8b) Rubocop - Style/PredicateName
+- [52d4910](https://github.com/appium/ruby_lib/commit/52d4910133c828de8d807de30e88104d772ab28c) Rubocop - Style/MethodName
+- [9df1000](https://github.com/appium/ruby_lib/commit/9df1000719f99aff44f1ac9623190531bf76b6c7) Rubocop - Style/CommentAnnotation
+- [156d595](https://github.com/appium/ruby_lib/commit/156d59563c663d937a3405098bb6204854d91592) Rubocop - Style/BlockComments
+- [dbda46d](https://github.com/appium/ruby_lib/commit/dbda46dcf7072fa5e8ad6304920f246245377f13) Rubocop - Style/LineEndConcatenation
+- [8c34235](https://github.com/appium/ruby_lib/commit/8c342350ad939875893e8efda347de7e0b4fd03b) Rubocop - Metrics/BlockNesting
+- [97e54a6](https://github.com/appium/ruby_lib/commit/97e54a6b73669ffe52d23665b8492d49b54e03fa) Rubocop - Style/VariableName
+- [5222346](https://github.com/appium/ruby_lib/commit/52223461b25e61de5fb3f3e73fbf8a3aef356188) Rubocop - Style/AlignParameters
+- [22f849e](https://github.com/appium/ruby_lib/commit/22f849e6318c9843ea9f03c3cb68b9e60b29c323) Rubocop - Metrics/MethodLength (custom method length)
+- [58aae60](https://github.com/appium/ruby_lib/commit/58aae603561270163a792354da9113fb59242f67) Rubocop - Style/ConstantName (cop disabled)
+- [2bc8006](https://github.com/appium/ruby_lib/commit/2bc8006d2e21ba9088f3e6ed14be9c57af905565) Rubocop - Style/IfUnlessModifier
+- [3434ec7](https://github.com/appium/ruby_lib/commit/3434ec76648eb354e6ea77c382f800ea7c64d098) Rubocop - Style/AlignHash
+- [548f632](https://github.com/appium/ruby_lib/commit/548f632ce73b7ded082982301369248004af4a55) Rubocop - Style/MultilineOperationIndentation
+- [610c172](https://github.com/appium/ruby_lib/commit/610c172530d141a98c28880f9cc0973be6123183) Rubocop - Lint/AmbiguousRegexpLiteral
+- [c68702d](https://github.com/appium/ruby_lib/commit/c68702d78459b94a656db7644eb03aae5616d26c) Rubocop - Style/SignalException
+- [318372e](https://github.com/appium/ruby_lib/commit/318372e7a90d34f2ce00816b9f824d41adebb36c) Rubocop - Style/NilComparison
+- [7994d0f](https://github.com/appium/ruby_lib/commit/7994d0fe82d1353d4f91bddea3cbbb583d0ef5d6) Rubocop - Style/PercentLiteralDelimiters
+- [4a6902d](https://github.com/appium/ruby_lib/commit/4a6902dbbfe74eb83d290643138aab803c4abf5f) Rubocop - Style/GuardClause
+- [07ebfbf](https://github.com/appium/ruby_lib/commit/07ebfbfac19aba459b5711ace9fe87cfe877c2db) Rubocop - Style/SingleSpaceBeforeFirstArg
+- [ded2c9a](https://github.com/appium/ruby_lib/commit/ded2c9a400549942178146addcc3eb86251f768b) Rubocop - Style/CaseEquality
+- [cd7c67e](https://github.com/appium/ruby_lib/commit/cd7c67e56293297c49becaff1eb213e782ab5819) Rubocop - Style/MultilineTernaryOperator
+- [afddea3](https://github.com/appium/ruby_lib/commit/afddea3188c4ce877e6babdf32833e0485b5864b) Rubocop - Style/CaseIndentation
+- [a843671](https://github.com/appium/ruby_lib/commit/a8436714e000887cbf2b22a77369686df32e937a) Rubocop - Style/EmptyLinesAroundClassBody
+- [829b17d](https://github.com/appium/ruby_lib/commit/829b17dd7625c3ece5b79ae8c8c053fa6c70d337) Rubocop - Lint/ShadowingOuterLocalVariable
+- [f5fd8cf](https://github.com/appium/ruby_lib/commit/f5fd8cf487194a53c9c72d738c1c69e669b97cfb) Rubocop - Style/RedundantSelf
+- [4444168](https://github.com/appium/ruby_lib/commit/444416801d5bf7176c83e4bddd60969b375a4ec5) Rubocop - Style/LeadingCommentSpace
+- [b18ae54](https://github.com/appium/ruby_lib/commit/b18ae540e02f3de50851fbf5128d53a31328fbb5) Rubocop - Lint/UnusedMethodArgument
+- [4e24752](https://github.com/appium/ruby_lib/commit/4e2475266401ae72f7506ed5e14cf340d19e4898) Rubocop - Style/FirstParameterIndentation
+- [5841e9d](https://github.com/appium/ruby_lib/commit/5841e9d6c6879f2aa3a0b13791e6a93086f8a96f) Rubocop - Style/DeprecatedHashMethods
+- [0264c37](https://github.com/appium/ruby_lib/commit/0264c376d9f81ce1037a106314594e23438ca723) Rubocop - Lint/DeprecatedClassMethods
+- [1923f64](https://github.com/appium/ruby_lib/commit/1923f6484b7920199604647b682ba935213bb813) Rubocop - Metrics/LineLength
+- [0ab729a](https://github.com/appium/ruby_lib/commit/0ab729a16b6678ac993dafd93d05d8cf6ceb0703) Custom config file for Rubocop
+- [6f18e6f](https://github.com/appium/ruby_lib/commit/6f18e6f24519bc77581da2fcd1a9d048b2850e15) Rubocop - Style/ColonMethodCall
+- [7ba83e5](https://github.com/appium/ruby_lib/commit/7ba83e575ae255f561e919a5a850cab96a14b3bc) Rubocop - Style/IndentationWidth
+- [20ebd0b](https://github.com/appium/ruby_lib/commit/20ebd0bc014e7f9e5ee3066b20562d602bf87751) Rubocop - Style/BracesAroundHashParameters
+- [9b08ab7](https://github.com/appium/ruby_lib/commit/9b08ab7f43ca6b0bbfea42afcec61146348bcd19) Rubocop - Style/HashSyntax
+- [7f28fb2](https://github.com/appium/ruby_lib/commit/7f28fb250abf7b6ea0279c9b19432f13ecfee90c) Rubocop - Style/MultilineOperationIndentation
+- [978b648](https://github.com/appium/ruby_lib/commit/978b6485b6b959f0cd2b481d67d2972914e84abf) Rubocop - Style/CommentAnnotation
+- [e939a7c](https://github.com/appium/ruby_lib/commit/e939a7cd8d720aaabc8c5a8f1e9bdfc82db1bdd2) Rubocop - Style/CommentIndentation
+- [40b6e10](https://github.com/appium/ruby_lib/commit/40b6e10b1aacad0747c1ff26795c27064f77538a) Rubocop - Style/EmptyLinesAroundModuleBody
+- [49ba5a9](https://github.com/appium/ruby_lib/commit/49ba5a9c9a7d5178f8f65b10a6f78670c4e9bada) Rubocop - Style/ClassCheck
+- [5b40de9](https://github.com/appium/ruby_lib/commit/5b40de93f3b533304802e1dbf90ea9448a5f5ffa) Rubocop - Style/SelfAssignment
+- [3e20158](https://github.com/appium/ruby_lib/commit/3e20158258d0ca85bb947cba81e4b1c70f6c44b9) Rubocop - Style/EmptyLines
+- [91de46e](https://github.com/appium/ruby_lib/commit/91de46e1fde964a64ff580a629e5d87481603cb7) Revert "Rubocop - Style/RegexpLiteral"
+- [d79ad18](https://github.com/appium/ruby_lib/commit/d79ad184c27a88766b38b27f5dd0ad0d361af592) Rubocop - Style/RegexpLiteral
+- [9a38dfb](https://github.com/appium/ruby_lib/commit/9a38dfb2255e47c732cc5ae72a76d366f96be198) Rubocop - Lint/AmbiguousOperator
+- [ab06fa4](https://github.com/appium/ruby_lib/commit/ab06fa4f47c8fde0108cafa3de15fb8eb5176170) Rubocop - Lint/UnusedBlockArgument
+- [4ce71f8](https://github.com/appium/ruby_lib/commit/4ce71f82b554c193bd741c100c9fdd15f193773c) Rubocop - Style/SymbolProc
+- [8389f70](https://github.com/appium/ruby_lib/commit/8389f70a91dc9ae540b94b89ed67f65dce9fefc5) Rubocop - Style/BarePercentLiterals
+- [b818def](https://github.com/appium/ruby_lib/commit/b818defb371a4fe69b30254255556422ecc8e9c0) Rubocop - Style/MethodDefParentheses
+- [f2ed949](https://github.com/appium/ruby_lib/commit/f2ed949ae8fa94ca54241a37856c5805afc8e983) Rubocop - Style/SpaceAroundOperators
+- [4fe1f3c](https://github.com/appium/ruby_lib/commit/4fe1f3c6f852d17c4463bddff87005947cd3e5da) Rubocop - Style/AccessModifierIndentation
+- [76a8888](https://github.com/appium/ruby_lib/commit/76a8888350af9f2e94777d48dd56440fc74ef5d7) Rubocop - Style/RedundantReturn
+- [96c65d7](https://github.com/appium/ruby_lib/commit/96c65d7ecb12d426bb8b004abe27d487cf7144ba) Rubocop - Style/TrailingComma
+- [da9c079](https://github.com/appium/ruby_lib/commit/da9c079b81d9078d6f1d9381231f4b2ca27df4db) Rubocop - Style/SpaceInsideBlockBraces
+- [3fc783e](https://github.com/appium/ruby_lib/commit/3fc783e98800c1bad9bda20ce956e9e1729e6caf) Rubocop - Style/TrailingWhitespace
+- [55b3c90](https://github.com/appium/ruby_lib/commit/55b3c9022dcf21141b6efd4d0f6afc440910c288) Rubocop - Style/SpaceAroundEqualsInParameterDefault
+- [677d7e2](https://github.com/appium/ruby_lib/commit/677d7e21eff15d72c02386c97b4cc454442d0f51) Rubocop - Style/TrailingBlankLines
+- [0084c57](https://github.com/appium/ruby_lib/commit/0084c57cdbde899edd4d79dfbead2a6b107eaf86) Rubocop rake task
+- [0059d23](https://github.com/appium/ruby_lib/commit/0059d2337f8d8f2948028c73ecd8a1c681c6636c) Set default wait to 0
+- [b5bb400](https://github.com/appium/ruby_lib/commit/b5bb4003d78988ec33546cf02d274c86bfa83dbb) Validate resourceId before searching
+- [c41ee41](https://github.com/appium/ruby_lib/commit/c41ee416214571e304465d135ff18be8c5bcf86b) Add issuestats badges
+- [2bb8694](https://github.com/appium/ruby_lib/commit/2bb869486e31145124c64cfd555bac9f57e576b7) Raise command error on nil mainWindow for iOS
+- [f2122de](https://github.com/appium/ruby_lib/commit/f2122de35a9bed7756207d679f9a83c68dcc4642) Don't crash when mainWindow is UIAElementNil
+
+
 #### v6.0.0 2015-01-26
 
 - [ea11190](https://github.com/appium/ruby_lib/commit/ea11190b9ab36e34226d988f85fe612af6f769de) Release 6.0.0
