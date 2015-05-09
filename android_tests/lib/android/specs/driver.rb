@@ -182,7 +182,10 @@ describe 'driver' do
       rescue Selenium::WebDriver::Error::UnknownError => e
         # on android this method is expected to fail with this message when running
         # on a regular device, or on genymotion.
-        raise unless e.message.start_with?('ERROR running Appium command: port should be > 0 and < 65536')
+        # error could be many messages, including:
+        # ERROR running Appium command: port should be a number or string
+        # ERROR running Appium command: port should be > 0 and < 65536
+        raise unless e.message.include?('ERROR running Appium command: port should be')
       end
     end
 
