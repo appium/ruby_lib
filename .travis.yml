@@ -8,3 +8,7 @@ install:
   - bundle install --retry=3
 script:
   - bundle exec rake rubocop
+notifications:
+  email:
+    on_success: never
+    on_failure: never
