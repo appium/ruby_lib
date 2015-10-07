@@ -67,7 +67,7 @@ def patch_webdriver_bridge
   Selenium::WebDriver::Remote::Bridge.class_eval do
     # Code from lib/selenium/webdriver/remote/bridge.rb
     def raw_execute(command, opts = {}, command_hash = nil)
-      verb, path = Selenium::WebDriver::Remote::COMMANDS[command] ||
+      verb, path = Selenium::WebDriver::Remote::Bridge::COMMANDS[command] ||
                    fail(ArgumentError, "unknown command: #{command.inspect}")
       path       = path.dup
 
