@@ -1,3 +1,13 @@
+#### v8.0.0 2015-10-08
+
+- [e71fd1e](https://github.com/appium/ruby_lib/commit/e71fd1e1a220d9453a954ece00e07875a6b5f7ef) Release 8.0.0
+- [c89464f](https://github.com/appium/ruby_lib/commit/c89464f22314d7521292f2b3e9367e53f1c5f00e) Update selenium-webdriver dependency to 2.48
+- [d9fbf8b](https://github.com/appium/ruby_lib/commit/d9fbf8b71c895328c7c0f5ca1de9d4d76490a235) Merge pull request #354 from titusfortner/command_fix
+- [829c76b](https://github.com/appium/ruby_lib/commit/829c76b8f2e2b535dc230106a5e403663d301145) fix COMMANDS location
+- [ad8bf40](https://github.com/appium/ruby_lib/commit/ad8bf400711005f32440618b370ee2551f172a7d) Update badges
+- [252e838](https://github.com/appium/ruby_lib/commit/252e83806318df7df28e9060d3f8e1e56dc732ba) Disable Travis email spam
+
+
 #### v7.0.0 2015-05-08
 
 - [af83896](https://github.com/appium/ruby_lib/commit/af838966d0724793d3dbfa35798ca6dd9f8a3143) Release 7.0.0
