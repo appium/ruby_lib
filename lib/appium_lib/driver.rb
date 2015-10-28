@@ -71,12 +71,11 @@ module Appium
     fail 'opts must be a hash' unless opts.is_a? Hash
     fail 'opts must not be empty' if opts.empty?
 
-    file = opts[:file]
-    fail 'Must pass file' unless file
+    toml = opts[:file]
+    fail 'Must pass file' unless toml
     verbose = opts.fetch :verbose, false
 
-    parent_dir = File.dirname file
-    toml       = File.expand_path File.join parent_dir, 'appium.txt'
+    parent_dir = File.dirname toml
     Appium::Logger.info "appium.txt path: #{toml}" if verbose
 
     toml_exists = File.exist? toml
