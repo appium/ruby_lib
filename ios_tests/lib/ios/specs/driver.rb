@@ -17,12 +17,12 @@ describe 'driver' do
     data.strip.must_equal 174.chr('UTF-8')
   end
 
-  t 'load_appium_txt' do
+  t 'load_settings' do
     # skip this test if we're using Sauce
     # the storage API doesn't have an on disk file
     skip if sauce?
-    appium_txt = File.expand_path(File.join(Dir.pwd, 'lib'))
-    opts       = Appium.load_appium_txt file: appium_txt, verbose: true
+    appium_txt = File.join(Dir.pwd, 'appium.txt')
+    opts       = Appium.load_settings file: appium_txt, verbose: true
 
     actual   = ''
     actual   = File.basename opts[:caps][:app] if opts && opts[:caps]

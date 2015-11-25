@@ -21,8 +21,8 @@ end
 a = OpenStruct.new x: 'ok'
 fail 'x issue' unless a.x == 'ok'
 
-appium_txt  = File.expand_path(File.join(Dir.pwd, 'lib'))
-dir     = appium_txt
+dir  = File.expand_path(File.join(Dir.pwd, 'lib'))
+appium_txt = File.join(Dir.pwd, 'appium.txt')
 device  = ARGV[0].downcase.strip
 devices = %w(android selendroid ios)
 fail 'Expected android, selendroid or ios as first argument' unless devices.include? device
@@ -30,7 +30,7 @@ fail 'Expected android, selendroid or ios as first argument' unless devices.incl
 one_test = ARGV[1]
 test_dir = "/#{device}/"
 
-caps       = Appium.load_appium_txt file: appium_txt, verbose: true
+caps       = Appium.load_settings file: appium_txt, verbose: true
 caps       = caps.merge(appium_lib: { debug: true, wait: 1 })
 caps[:app] = ENV['SAUCE_PATH'] if ENV['SAUCE_USERNAME'] && ENV['SAUCE_ACCESS_KEY']
 
