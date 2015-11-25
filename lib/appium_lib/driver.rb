@@ -321,8 +321,6 @@ module Appium
       # https://code.google.com/p/selenium/source/browse/spec-draft.md?repo=mobile
       @appium_device = @caps[:platformName]
       @appium_device = @appium_device.is_a?(Symbol) ? @appium_device : @appium_device.downcase.strip.intern if @appium_device
-      fail "platformName must be set. Not found in options: #{opts}" unless @appium_device
-      fail 'platformName must be Android or iOS' unless [:android, :ios].include?(@appium_device)
 
       # load common methods
       extend Appium::Common
