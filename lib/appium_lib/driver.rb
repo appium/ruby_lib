@@ -95,7 +95,7 @@ module Appium
 
     if data && data[:appium_lib] && data[:appium_lib][:require]
       parent_dir = File.dirname toml
-      data[:appium_lib][:require] = self.expand_required_files(parent_dir, data[:appium_lib][:require])
+      data[:appium_lib][:require] = expand_required_files(parent_dir, data[:appium_lib][:require])
     end
 
     data
