@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'selenium-webdriver', '~> 2.48'
   s.add_runtime_dependency 'awesome_print', '~> 1.6'
   s.add_runtime_dependency 'json', '~> 1.8'
-  s.add_runtime_dependency 'toml', '~> 0.0'
+  s.add_runtime_dependency 'tomlrb', '~> 1.1'
   s.add_runtime_dependency 'nokogiri', '~> 1.6.6'
 
   s.add_development_dependency 'posix-spawn', '~> 0.3'

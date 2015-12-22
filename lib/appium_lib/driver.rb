@@ -83,13 +83,10 @@ module Appium
     Appium::Logger.info "Exists? #{toml_exists}" if verbose
 
     fail "toml doesn't exist #{toml}" unless toml_exists
-    require 'toml'
+    require 'tomlrb'
     Appium::Logger.info "Loading #{toml}" if verbose
 
-    data = File.read toml
-    data = TOML::Parser.new(data).parsed
-    # TOML creates string keys. must symbolize
-    data = Appium.symbolize_keys data
+    data = Tomlrb.load_file(toml, symbolize_keys: true)
     Appium::Logger.ap_info data unless data.empty? if verbose
 
     if data && data[:caps] && data[:caps][:app] && !data[:caps][:app].empty?
