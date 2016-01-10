@@ -1,3 +1,13 @@
+#### v8.0.1 2016-01-10
+
+- [ed91786](https://github.com/appium/ruby_lib/commit/ed917866929f0f7b0ff7ef0aedb5a9b35fdcc95b) Release 8.0.1
+- [373f110](https://github.com/appium/ruby_lib/commit/373f11073ba9e8505be18e1826a02cc7d4b62478) Update contributing.md
+- [be4dca6](https://github.com/appium/ruby_lib/commit/be4dca6e8918e368864c383d34a0974c4a0f2a59) Merge pull request #358 from bayandin/change-toml-parser
+- [9a386c4](https://github.com/appium/ruby_lib/commit/9a386c4cb305a9e7440f8c699317087c36f1db33) Replace toml with tomlrb
+- [2ce8376](https://github.com/appium/ruby_lib/commit/2ce83763f7f81caf972b394fa5da7b8cf3065ca7) Merge pull request #357 from bayandin/selenium-compatibility
+- [28f6efb](https://github.com/appium/ruby_lib/commit/28f6efbacfa4954ab487bafd801cb0a68dee8d5d) Do not check platformName in passed caps
+
+
 #### v8.0.0 2015-10-08
 
 - [e71fd1e](https://github.com/appium/ruby_lib/commit/e71fd1e1a220d9453a954ece00e07875a6b5f7ef) Release 8.0.0
