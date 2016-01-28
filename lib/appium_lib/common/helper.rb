@@ -146,6 +146,14 @@ module Appium
       lazy_load_strings
       @strings_xml.select { |_key, value| value.downcase.include? target.downcase }
     end
+    
+    # Returns string key from element.
+    # @param args [*args] the args to use
+    # @return [String]
+    def element_string_key(*args)
+      string = find_element(*args).name
+      app_strings.key(string)
+    end
 
     # Resolve id in strings.xml and return the value.
     # @param id [String] the id to resolve
