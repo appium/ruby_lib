@@ -15,6 +15,7 @@ module Appium
         device_locked?:       'session/:session_id/appium/device/is_locked'
       },
       get:  {
+        device_time:            'session/:session_id/appium/device/system_time',
         current_activity:       'session/:session_id/appium/device/current_activity',
         current_context:        'session/:session_id/context',
         get_network_connection: 'session/:session_id/network_connection'
