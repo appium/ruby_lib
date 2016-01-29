@@ -13,6 +13,10 @@ describe 'device/device' do
     before_first
   end
 
+  t 'device_time' do
+    Date.parse(device_time)
+  end
+
   t 'lock' do
     lock 5
     tag('UIAButton').name.must_equal 'SlideToUnlock'
