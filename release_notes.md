@@ -1,3 +1,12 @@
+#### v8.0.2 2016-01-29
+
+- [d67cbba](https://github.com/appium/ruby_lib/commit/d67cbbac43f511515f6e6f53197cfae2bb7671e0) Release 8.0.2
+- [ec6815d](https://github.com/appium/ruby_lib/commit/ec6815dcc56ec0e1b56e2ae9eab5786e93d20eec) Update iOS platform version
+- [92be077](https://github.com/appium/ruby_lib/commit/92be077e9eee04f411ac6d93c66004c51fddcbf1) Merge pull request #361 from SrinivasanTarget/master
+- [02a3f5f](https://github.com/appium/ruby_lib/commit/02a3f5f049059401a594db5c4d01202f7112f258) Add device_time
+- [aeb8f9a](https://github.com/appium/ruby_lib/commit/aeb8f9aff7f7288b9f932182a19f8a99c4ffe2fd) Update selenium-webdriver dependency to 2.49
+
+
 #### v8.0.1 2016-01-10
 
 - [ed91786](https://github.com/appium/ruby_lib/commit/ed917866929f0f7b0ff7ef0aedb5a9b35fdcc95b) Release 8.0.1
