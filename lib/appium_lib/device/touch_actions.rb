@@ -99,13 +99,13 @@ module Appium
     # @option opts [int] :start_y Where to start swiping, on the y axis.  Default 0.
     # @option opts [int] :end_x Where to end swiping, on the x axis.  Default 0.
     # @option opts [int] :end_y Where to end swiping, on the y axis.  Default 0.
-    # @option opts [int] :duration How long the actual swipe takes to complete in milliseconds.
+    # @option opts [int] :duration How long the actual swipe takes to complete in milliseconds. Default 200.
     def swipe(opts)
       start_x  = opts.fetch :start_x, 0
       start_y  = opts.fetch :start_y, 0
       end_x    = opts.fetch :end_x, 0
       end_y    = opts.fetch :end_y, 0
-      duration = opts[:duration]
+      duration = opts.fetch :duration, 200
 
       press x: start_x, y: start_y
       wait(duration) if duration
