@@ -336,7 +336,9 @@ module Appium
         end
       end
 
-      # @!method find_element/s
+      # @!method find_element
+      # @!method find_elements
+      #
       #   find_element/s with their accessibility_id
       #
       #   ```ruby
