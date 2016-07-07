@@ -489,7 +489,7 @@ module Appium
           end rescue nil
         end
       rescue Errno::ECONNREFUSED
-        raise 'ERROR: Unable to connect to Appium. Is the server running?'
+        raise "ERROR: Unable to connect to Appium. Is the server running on #{server_url}?"
       end
 
       @driver.manage.timeouts.implicit_wait = @default_wait
