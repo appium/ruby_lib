@@ -84,6 +84,29 @@ module Appium
       chain_method(:tap, args)
     end
 
+    # Double tap an element on the screen
+    #
+    # @option opts [WebDriver::Element] :element (Optional) Element to restrict scope too.
+    # @option opts [integer] :x x co-ordinate to tap
+    # @option opts [integer] :y y co-ordinate to tap
+
+    def double_tap(opts)
+      args = opts.select { |k, _v| [:element, :x, :y].include? k }
+      args = args_with_ele_ref(args)
+      chain_method(:doubleTap, args) # doubleTap is what the appium server expects
+    end
+
+    # Two finger tap an element on the screen
+    #
+    # @option opts [WebDriver::Element] :element (Optional) Element to restrict scope too.
+    # @option opts [integer] :x x co-ordinate to tap
+    # @option opts [integer] :y y co-ordinate to tap
+    def two_finger_tap(opts)
+      args = opts.select { |k, _v| [:element, :x, :y].include? k }
+      args = args_with_ele_ref(args)
+      chain_method(:twoFingerTap, args) # twoFingerTap is what the appium server expects
+    end
+
     # Pause for a number of milliseconds before the next action
     # @param milliseconds [integer] Number of milliseconds to pause for
     def wait(milliseconds)
