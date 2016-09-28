@@ -435,7 +435,7 @@ module Appium
     def server_url
       return @custom_url if @custom_url
       if !@sauce_username.nil? && !@sauce_access_key.nil?
-        "http://#{@sauce_username}:#{@sauce_access_key}@ondemand.saucelabs.com:80/wd/hub"
+        "https://#{@sauce_username}:#{@sauce_access_key}@ondemand.saucelabs.com:443/wd/hub"
       else
         "http://127.0.0.1:#{@appium_port}/wd/hub"
       end
