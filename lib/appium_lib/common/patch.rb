@@ -52,10 +52,13 @@ end # module Appium
 #
 # Requires from lib/selenium/webdriver/remote.rb
 require 'selenium/webdriver/remote/capabilities'
+require 'selenium/webdriver/remote/w3c_capabilities'
 require 'selenium/webdriver/remote/bridge'
+require 'selenium/webdriver/remote/w3c_bridge'
 require 'selenium/webdriver/remote/server_error'
 require 'selenium/webdriver/remote/response'
 require 'selenium/webdriver/remote/commands'
+require 'selenium/webdriver/remote/w3c_commands'
 require 'selenium/webdriver/remote/http/common'
 require 'selenium/webdriver/remote/http/default'
 
@@ -68,13 +71,15 @@ def patch_webdriver_bridge
     # Code from lib/selenium/webdriver/remote/bridge.rb
     def raw_execute(command, opts = {}, command_hash = nil)
       verb, path = Selenium::WebDriver::Remote::Bridge::COMMANDS[command] ||
-                   fail(ArgumentError, "unknown command: #{command.inspect}")
-      path       = path.dup
+          raise(ArgumentError, "unknown command: #{command.inspect}")
+      path = path.dup
 
       path[':session_id'] = @session_id if path.include?(':session_id')
 
       begin
-        opts.each { |key, value| path[key.inspect] = escaper.escape(value.to_s) }
+        opts.each do |key, value|
+          path[key.inspect] = escaper.escape(value.to_s)
+        end
       rescue IndexError
         raise ArgumentError, "#{opts.inspect} invalid for #{command.inspect}"
       end
@@ -145,4 +150,42 @@ end
 class Selenium::WebDriver::Remote::Http::Common # rubocop:disable Style/ClassAndModuleChildren
   remove_const :DEFAULT_HEADERS if defined? DEFAULT_HEADERS
   DEFAULT_HEADERS = { 'Accept' => CONTENT_TYPE, 'User-Agent' => "appium/ruby_lib/#{::Appium::VERSION}" }
+end
+
+# We should use lib/selenium/webdriver/remote/bridge.rb instead of lib/selenium/webdriver/remote/w3c_bridge.rb
+# # Code from https://github.com/SeleniumHQ/selenium/blob/selenium-3.0.0/rb/lib/selenium/webdriver/common/driver.rb#L43
+def patch_webdriver_driver
+  Selenium::WebDriver::Driver.class_eval do
+    def for(browser, opts = {})
+      listener = opts.delete(:listener)
+
+      bridge = case browser
+                 when :firefox, :ff
+                   if Remote::W3CCapabilities.w3c?(opts)
+                     Firefox::W3CBridge.new(opts)
+                   else
+                     Firefox::Bridge.new(opts)
+                   end
+                 when :remote
+                   # remove Remote::W3CBridge.new(opts) to ignore W3C WebDriver
+                   Remote::Bridge.new(opts)
+                 when :ie, :internet_explorer
+                   IE::Bridge.new(opts)
+                 when :chrome
+                   Chrome::Bridge.new(opts)
+                 when :edge
+                   Edge::Bridge.new(opts)
+                 when :phantomjs
+                   PhantomJS::Bridge.new(opts)
+                 when :safari
+                   Safari::Bridge.new(opts)
+                 else
+                   raise ArgumentError, "unknown driver: #{browser.inspect}"
+               end
+
+      bridge = Support::EventFiringBridge.new(bridge, listener) if listener
+
+      new(bridge)
+    end
+  end
 end

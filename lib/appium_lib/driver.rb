@@ -1,7 +1,6 @@
 require 'rubygems'
 require 'ap'
 require 'selenium-webdriver'
-require 'selenium/client/errors' # used in helper.rb for CommandError
 require 'nokogiri'
 
 # common
@@ -15,6 +14,7 @@ require_relative 'common/element/window'
 # ios
 require_relative 'ios/helper'
 require_relative 'ios/patch'
+require_relative 'ios/errors'
 
 require_relative 'ios/element/alert'
 require_relative 'ios/element/button'
@@ -351,6 +351,10 @@ module Appium
       # apply os specific patches
       patch_webdriver_element
 
+      # to use legacy remote driver
+      # TODO: We should remove this patch if Appium support W3C WebDriver completely
+      patch_webdriver_driver
+
       # enable debug patch
       # !!'constant' == true
       @appium_debug = appium_lib_opts.fetch :debug, !!defined?(Pry)
@@ -621,7 +625,13 @@ module Appium
     # @param args [*args] the args to use
     # @return [Array<Element>] Array is empty when no elements are found.
     def find_elements(*args)
-      @driver.find_elements(*args)
+      how, _what = args
+
+      if Appium::Device::FINDERS.keys.include? how.keys.first
+        @driver.find_elements_with_appium(*args)
+      else
+        @driver.find_elements(*args)
+      end
     end
 
     # Calls @driver.find_elements
@@ -629,8 +639,13 @@ module Appium
     # @param args [*args] the args to use
     # @return [Element]
     def find_element(*args)
-      @driver.find_element(*args)
-    end
+      how, _what = args
+
+      if Appium::Device::FINDERS.keys.include? how.keys.first
+        @driver.find_element_with_appium(*args)
+      else
+        @driver.find_element(*args)
+      end    end
 
     # Calls @driver.set_location
     #

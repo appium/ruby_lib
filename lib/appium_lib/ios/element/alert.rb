@@ -5,7 +5,7 @@ module Appium
     def alert_accept
       # @driver.switch_to.alert.accept
       # ".switch_to.alert" calls getAlertText so use bridge directly
-      driver.send(:bridge).acceptAlert
+      driver.send(:bridge).accept_alert
     end
 
     # Dismiss the alert.
@@ -13,7 +13,7 @@ module Appium
     def alert_dismiss
       # @driver.switch_to.alert.dismiss
       # ".switch_to.alert" calls getAlertText so use bridge directly
-      driver.send(:bridge).dismissAlert
+      driver.send(:bridge).dismiss_alert
     end
   end # module Ios
 end # module Appium
