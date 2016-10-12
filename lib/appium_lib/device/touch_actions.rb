@@ -120,19 +120,33 @@ module Appium
     #
     # @option opts [int] :start_x Where to start swiping, on the x axis.  Default 0.
     # @option opts [int] :start_y Where to start swiping, on the y axis.  Default 0.
-    # @option opts [int] :end_x Where to end swiping, on the x axis.  Default 0.
-    # @option opts [int] :end_y Where to end swiping, on the y axis.  Default 0.
+    # @option opts [int] :delta_x The distance from start to move, on the x axis.  Default 0.
+    # @option opts [int] :delta_y The distance from start to move, on the y axis.  Default 0.
     # @option opts [int] :duration How long the actual swipe takes to complete in milliseconds. Default 200.
+    # @deprecated Please do not use end_x, end_y anymore
     def swipe(opts)
       start_x  = opts.fetch :start_x, 0
       start_y  = opts.fetch :start_y, 0
-      end_x    = opts.fetch :end_x, 0
-      end_y    = opts.fetch :end_y, 0
+      delta_x  = opts.fetch :delta_x, nil
+      delta_y  = opts.fetch :delta_y, nil
+      end_x    = opts.fetch :end_x, nil
+      end_y    = opts.fetch :end_y, nil
+
+      if (end_x || end_y)
+        warn "[DEPRECATION] `end_x` and `end_y` are deprecated. Please use `delta_x` and `delta_y` instead."
+      end
+
+      delta_x ||= end_x
+      delta_y ||= end_y
+
+      delta_x ||= 0
+      delta_y ||= 0
+
       duration = opts.fetch :duration, 200
 
       press x: start_x, y: start_y
       wait(duration) if duration
-      move_to x: end_x, y: end_y
+      move_to x: delta_x, y: delta_y
       release
       self
     end
