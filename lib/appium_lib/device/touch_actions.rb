@@ -132,8 +132,8 @@ module Appium
       end_x    = opts.fetch :end_x, nil
       end_y    = opts.fetch :end_y, nil
 
-      if (end_x || end_y)
-        warn "[DEPRECATION] `end_x` and `end_y` are deprecated. Please use `delta_x` and `delta_y` instead."
+      if end_x || end_y
+        warn '[DEPRECATION] `end_x` and `end_y` are deprecated. Please use `delta_x` and `delta_y` instead.'
       end
 
       delta_x ||= end_x
