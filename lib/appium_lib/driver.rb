@@ -263,6 +263,8 @@ module Appium
     attr_accessor :appium_device
     # Boolean debug mode for the Appium Ruby bindings
     attr_accessor :appium_debug
+    # instance of AbstractEventListener for logging support
+    attr_accessor :listener
 
     # Returns the driver
     # @return [Driver] the driver
@@ -336,6 +338,9 @@ module Appium
       # enable debug patch
       # !!'constant' == true
       @appium_debug = appium_lib_opts.fetch :debug, !!defined?(Pry)
+
+      # to pass it in Selenium.new
+      @listener = opts[:listener]
 
       if @appium_debug
         Appium::Logger.ap_debug opts unless opts.empty?
@@ -476,7 +481,8 @@ module Appium
 
       begin
         driver_quit
-        @driver = Selenium::WebDriver.for :remote, http_client: @client, desired_capabilities: @caps, url: server_url
+        @driver = Selenium::WebDriver.for :remote, http_client: @client,
+                                                   desired_capabilities: @caps, url: server_url, listener: @listener
         # Load touch methods.
         @driver.extend Selenium::WebDriver::DriverExtensions::HasTouchScreen
         @driver.extend Selenium::WebDriver::DriverExtensions::HasLocation
