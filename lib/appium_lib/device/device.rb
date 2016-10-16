@@ -93,6 +93,15 @@ module Appium
     #   pull_folder '/data/local/tmp' #=> Get the folder at that path
     #   ```
 
+    # @!method touch_id
+    #   iOS only;  Simulate Touch ID with either valid (match == true) or invalid (match == false) fingerprint.
+    #   @param match (Boolean) fingerprint validity
+    #     Defaults to true.
+    #   ```ruby
+    #   touch_id true #=> Simulate valid fingerprint
+    #   touch_id false #=> Simulate invalid fingerprint
+    #   ```
+
     # @!method end_coverage
     #   Android only;  Ends the test coverage and writes the results to the given path on device.
     #   @param path (String) Path on the device to write too.
@@ -249,6 +258,13 @@ module Appium
           def pull_folder(path)
             data = execute :pull_folder, {}, path: path
             Base64.decode64 data
+          end
+        end
+
+        # TODO: TEST ME
+        add_endpoint_method(:touch_id, 'session/:session_id/appium/simulator/touch_id') do
+          def touch_id(match = true)
+            execute :touch_id, {}, match: match
           end
         end
 
