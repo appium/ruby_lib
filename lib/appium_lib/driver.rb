@@ -645,7 +645,8 @@ module Appium
         @driver.find_element_with_appium(*args)
       else
         @driver.find_element(*args)
-      end    end
+      end
+    end
 
     # Calls @driver.set_location
     #
