@@ -153,39 +153,11 @@ class Selenium::WebDriver::Remote::Http::Common # rubocop:disable Style/ClassAnd
 end
 
 # We should use lib/selenium/webdriver/remote/bridge.rb instead of lib/selenium/webdriver/remote/w3c_bridge.rb
-# Code from https://github.com/SeleniumHQ/selenium/blob/selenium-3.0.0/rb/lib/selenium/webdriver/common/driver.rb#L43
+# So, the following patch allow user to use w3c_bridge only capability is  W3CCapabilities.
 def patch_webdriver_driver
-  Selenium::WebDriver::Driver.class_eval do
-    def for(browser, opts = {})
-      listener = opts.delete(:listener)
-
-      bridge = case browser
-               when :firefox, :ff
-                 if Remote::W3CCapabilities.w3c?(opts)
-                   Firefox::W3CBridge.new(opts)
-                 else
-                   Firefox::Bridge.new(opts)
-                 end
-               when :remote
-                 # remove Remote::W3CBridge.new(opts) to ignore W3C WebDriver
-                 Remote::Bridge.new(opts)
-               when :ie, :internet_explorer
-                 IE::Bridge.new(opts)
-               when :chrome
-                 Chrome::Bridge.new(opts)
-               when :edge
-                 Edge::Bridge.new(opts)
-               when :phantomjs
-                 PhantomJS::Bridge.new(opts)
-               when :safari
-                 Safari::Bridge.new(opts)
-               else
-                 fail ArgumentError, "unknown driver: #{browser.inspect}"
-               end
-
-      bridge = Support::EventFiringBridge.new(bridge, listener) if listener
-
-      new(bridge)
+  Selenium::WebDriver::Remote::W3CCapabilities.class_eval do
+    def self.w3c?(opts = {})
+      opts[:desired_capabilities].is_a?(W3CCapabilities)
     end
   end
 end
