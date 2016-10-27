@@ -1,51 +1,51 @@
-# UIAButton methods
+# XCUIElementTypeButton methods
 module Appium
   module Ios
-    UIAButton = 'UIAButton'
+    BUTTON = 'XCUIElementTypeButton'
 
-    # Find the first UIAButton that contains value or by index.
+    # Find the first XCUIElementTypeButton that contains value or by index.
     # @param value [String, Integer] the value to exactly match.
-    # If int then the UIAButton at that index is returned.
-    # @return [UIAButton]
+    # If int then the XCUIElementTypeButton at that index is returned.
+    # @return [XCUIElementTypeButton]
     def button(value)
       # return button at index.
-      return ele_index UIAButton, value if value.is_a? Numeric
-      ele_by_json_visible_contains UIAButton, value
+      return ele_index BUTTON, value if value.is_a? Numeric
+      find_ele_by_attr_include BUTTON, '*', value
     end
 
-    # Find all UIAButtons containing value.
-    # If value is omitted, all UIAButtons are returned.
+    # Find all XCUIElementTypeButtons containing value.
+    # If value is omitted, all XCUIElementTypeButtons are returned.
     # @param value [String] the value to search for
-    # @return [Array<UIAButton>]
+    # @return [Array<XCUIElementTypeButton>]
     def buttons(value = false)
-      return tags UIAButton unless value
-      eles_by_json_visible_contains UIAButton, value
+      return tags BUTTON unless value
+      find_ele_by_attr_include BUTTON, '*', value
     end
 
-    # Find the first UIAButton.
-    # @return [UIAButton]
+    # Find the first XCUIElementTypeButton.
+    # @return [XCUIElementTypeButton]
     def first_button
-      first_ele UIAButton
+      first_ele BUTTON
     end
 
-    # Find the last UIAButton.
-    # @return [UIAButton]
+    # Find the last XCUIElementTypeButton.
+    # @return [XCUIElementTypeButton]
     def last_button
-      last_ele UIAButton
+      last_ele BUTTON
     end
 
-    # Find the first UIAButton that exactly matches value.
+    # Find the first XCUIElementTypeButton that exactly matches value.
     # @param value [String] the value to match exactly
-    # @return [UIAButton]
+    # @return [XCUIElementTypeButton]
     def button_exact(value)
-      ele_by_json_visible_exact UIAButton, value
+      find_ele_by_attr BUTTON, '*', value
     end
 
-    # Find all UIAButtons that exactly match value.
+    # Find all XCUIElementTypeButtons that exactly match value.
     # @param value [String] the value to match exactly
-    # @return [Array<UIAButton>]
+    # @return [Array<XCUIElementTypeButton>]
     def buttons_exact(value)
-      eles_by_json_visible_exact UIAButton, value
+      find_ele_by_attr BUTTON, '*', value
     end
   end # module Ios
 end # module Appium

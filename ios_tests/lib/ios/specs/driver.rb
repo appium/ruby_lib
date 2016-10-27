@@ -36,7 +36,8 @@ describe 'driver' do
       actual              = driver_attributes
       actual[:caps][:app] = File.basename actual[:caps][:app]
       expected            = { caps:             { platformName: 'ios',
-                                                  platformVersion: '8.3',
+                                                  platformVersion: '10.0',
+                                                  automationName: 'UCUITest',
                                                   deviceName:   'iPhone Simulator',
                                                   app:          'UICatalog.app' },
                               custom_url:       false,
@@ -190,19 +191,14 @@ describe 'driver' do
       set_location latitude: 55, longitude: -72, altitude: 33
     end
 
-    # any script
-    t 'execute_script' do
-      execute_script %q(au.mainApp().getFirstWithPredicate("name contains[c] 'button'");)
-    end
-
     # any elements
     t 'find_elements' do
-      find_elements(:class, 'UIATableCell').length.must_equal 12
+      find_elements(:class, 'XCUIElementTypeTableCell').length.must_equal 12
     end
 
     # any element
     t 'find_element' do
-      find_element(:class, 'UIAStaticText').class.must_equal Selenium::WebDriver::Element
+      find_element(:class, 'XCUIElementTypeStaticText').class.must_equal Selenium::WebDriver::Element
     end
 
     # settings
