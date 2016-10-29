@@ -149,7 +149,7 @@ describe 'driver' do
     #   start_driver # tested by restart
     #   no_wait  # posts value to server, it's not stored locally
     #   set_wait # posts value to server, it's not stored locally
-    #   execute_script # 'mobile: ' is deprecated and plain executeScript unsupported
+    #   execute_script # 'mobile: ' is deprecated and plain execute_script unsupported
 
     t 'default_wait' do
       set_wait 1
