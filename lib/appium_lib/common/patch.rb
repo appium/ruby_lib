@@ -157,7 +157,7 @@ end
 def patch_webdriver_driver
   Selenium::WebDriver::Remote::W3CCapabilities.class_eval do
     def self.w3c?(opts = {})
-      opts[:desired_capabilities].is_a?(W3CCapabilities)
+      opts[:desired_capabilities].is_a?(Selenium::WebDriver::Remote::W3CCapabilities)
     end
   end
 end

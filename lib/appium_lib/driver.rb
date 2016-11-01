@@ -627,7 +627,9 @@ module Appium
     def find_elements(*args)
       how, _what = args
 
-      if how.is_a?(Hash) && Appium::Device::FINDERS.keys.include?(how.keys.first)
+      if how.is_a?(Hash) && Appium::Device::FINDERS.keys.include?(how.keys.first) # for :accessibility id
+        @driver.find_elements_with_appium(*args)
+      elsif Appium::Device::FINDERS.keys.include?(how) # for :uiautomator, :uiautomation
         @driver.find_elements_with_appium(*args)
       else
         @driver.find_elements(*args)
@@ -641,7 +643,9 @@ module Appium
     def find_element(*args)
       how, _what = args
 
-      if how.is_a?(Hash) && Appium::Device::FINDERS.keys.include?(how.keys.first)
+      if how.is_a?(Hash) && Appium::Device::FINDERS.keys.include?(how.keys.first) # for :accessibility id
+        @driver.find_element_with_appium(*args)
+      elsif Appium::Device::FINDERS.keys.include?(how) # for :uiautomator, :uiautomation
         @driver.find_element_with_appium(*args)
       else
         @driver.find_element(*args)
