@@ -1,5 +1,46 @@
 module Appium
   module Ios
+
+    class XCUITestElements < Nokogiri::XML::SAX::Document
+      attr_accessor :filter
+
+      def start_element(type, attrs = [])
+        if self.filter && !self.filter.eql?(type)
+	  return
+        end
+	page = attrs.inject({}) do |hash, attr|
+          if ['name', 'label', 'value', 'hint'].include?(attr[0])
+            hash[attr[0]] = attr[1]
+          end
+          hash
+	end
+	_print_attr(type, page['name'], page['label'], page['value'], page['hint'])
+      end
+
+      def _print_attr(type, name, label, value, hint)
+        if name == label && name == value
+          puts "#{type}" if name || label || value || hint
+          puts "   name, label, value: #{name}" if name
+          puts "   hint: #{hint}" if hint
+        elsif name == label
+          puts "#{type}" if name || label || value || hint
+          puts "   name, label: #{name}" if name
+          puts "   value: #{value}" if value
+          puts "   hint: #{hint}" if hint
+        elsif name == value
+          puts "#{type}" if name || label || value || hint
+          puts "   name, value: #{name}" if name
+          puts "  label: #{label}" if label
+          puts "   hint: #{hint}" if hint
+        else
+          puts "#{type}" if name || label || value || hint
+          puts "   name: #{name}" if name
+          puts "  label: #{label}" if label
+          puts "  value: #{value}" if value
+          puts "   hint: #{hint}" if hint
+        end
+      end
+    end
     # iOS only. On Android uiautomator always returns an empty string for EditText password.
     #
     # Password character returned from value of UIASecureTextField
@@ -145,11 +186,11 @@ module Appium
       else
 
         s = source_window(window_number || 0)
-        parser = Nokogiri::HTML::SAX::Parser.new(Common::HTMLElements.new)
-        parser.document.reset
-        parser.document.filter = class_name
+        parser = Nokogiri::XML::SAX::Parser.new(XCUITestElements.new)
+        if class_name
+          parser.document.filter = class_name.is_a?(Symbol) ? class_name.to_s : class_name
+        end
         parser.parse s
-        parser.document.result
 #        if window_number == -1
 #          # if the 0th window has no children, find the next window that does.
 #          target_window = source_window 0
@@ -158,7 +199,7 @@ module Appium
 #        else
 #          get_page source_window(window_number || 0), class_name
 #        end
-#        nil
+        nil
       end
     end
 
