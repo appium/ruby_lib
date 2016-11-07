@@ -625,15 +625,7 @@ module Appium
     # @param args [*args] the args to use
     # @return [Array<Element>] Array is empty when no elements are found.
     def find_elements(*args)
-      how, _what = args
-
-      if how.is_a?(Hash) && Appium::Device::FINDERS.keys.include?(how.keys.first) # for :accessibility id
-        @driver.find_elements_with_appium(*args)
-      elsif Appium::Device::FINDERS.keys.include?(how) # for :uiautomator, :uiautomation
-        @driver.find_elements_with_appium(*args)
-      else
-        @driver.find_elements(*args)
-      end
+      @driver.find_elements_with_appium(*args)
     end
 
     # Calls @driver.find_elements
@@ -641,15 +633,7 @@ module Appium
     # @param args [*args] the args to use
     # @return [Element]
     def find_element(*args)
-      how, _what = args
-
-      if how.is_a?(Hash) && Appium::Device::FINDERS.keys.include?(how.keys.first) # for :accessibility id
-        @driver.find_element_with_appium(*args)
-      elsif Appium::Device::FINDERS.keys.include?(how) # for :uiautomator, :uiautomation
-        @driver.find_element_with_appium(*args)
-      else
-        @driver.find_element(*args)
-      end
+      @driver.find_element_with_appium(*args)
     end
 
     # Calls @driver.set_location
