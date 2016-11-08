@@ -156,10 +156,6 @@ describe 'common/helper.rb' do
     get_source.class.must_equal String
   end
 
-  #t 'id' do
-  #  id 'ButtonsExplain' # 'Various uses of UIButton'
-  #end
-
   t 'invalid id should error' do
     proc { id 'does not exist' }.must_raise Selenium::WebDriver::Error::NoSuchElementError
 

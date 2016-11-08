@@ -7,7 +7,7 @@ module Appium
 
     # @private
     def _textfields
-       %(#{TEXT_FIELD} | //#{SECURE_TEXT_FIELD})
+      %(#{TEXT_FIELD} | //#{SECURE_TEXT_FIELD})
     end
 
     public

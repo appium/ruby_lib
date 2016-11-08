@@ -1,20 +1,15 @@
 module Appium
   module Ios
-
     class XCUITestElements < Nokogiri::XML::SAX::Document
       attr_accessor :filter
 
       def start_element(type, attrs = [])
-        if self.filter && !self.filter.eql?(type)
-	  return
-        end
-	page = attrs.inject({}) do |hash, attr|
-          if ['name', 'label', 'value', 'hint'].include?(attr[0])
-            hash[attr[0]] = attr[1]
-          end
+        return if filter && !filter.eql?(type)
+        page = attrs.inject({}) do |hash, attr|
+          hash[attr[0]] = attr[1] if %w(name label value hint).include?(attr[0])
           hash
-	end
-	_print_attr(type, page['name'], page['label'], page['value'], page['hint'])
+        end
+        _print_attr(type, page['name'], page['label'], page['value'], page['hint'])
       end
 
       def _print_attr(type, name, label, value, hint)
@@ -191,14 +186,6 @@ module Appium
           parser.document.filter = class_name.is_a?(Symbol) ? class_name.to_s : class_name
         end
         parser.parse s
-#        if window_number == -1
-#          # if the 0th window has no children, find the next window that does.
-#          target_window = source_window 0
-#          target_window = source_window 1 if target_window['children'].empty?
-#          get_page target_window, class_name
-#        else
-#          get_page source_window(window_number || 0), class_name
-#        end
         nil
       end
     end
@@ -206,7 +193,7 @@ module Appium
     # Gets the JSON source of window number
     # @param window_number [Integer] the int index of the target window
     # @return [JSON]
-    def source_window(window_number = 0)
+    def source_window(_window_number = 0)
       # appium 1.0 still returns JSON when getTree() is invoked so this
       # doesn't need to change to XML. If getTree() is removed then
       # source_window will need to parse the elements of getTreeForXML()\
@@ -336,7 +323,7 @@ module Appium
     # @param class_name [String] the class_name to search for
     # @return [Element]
     def tag(class_name)
-       first_ele(class_name)
+      first_ele(class_name)
     end
 
     # Returns all visible elements matching class_name
@@ -344,7 +331,7 @@ module Appium
     # @param class_name [String] the class_name to search for
     # @return [Element]
     def tags(class_name)
-       @driver.find_elements :xpath, "//#{class_name}"
+      @driver.find_elements :xpath, "//#{class_name}"
     end
 
     # @private
@@ -588,15 +575,15 @@ module Appium
       # $._elementOrElementsByType will validate that the window isn't nil
       element_or_elements_by_type = <<-JS
         (function() {
-	var selector = #{type_array.first};
-        var result = false;
+          var selector = #{type_array.first};
+          var result = false;
 
-        try {
-	  result = driver.findNativeElementOrElements('class name', selector, false);
-        } catch (e) {
-        }
+          try {
+            result = driver.findNativeElementOrElements('class name', selector, false);
+          } catch (e) {
+          }
 
-        return result;
+          return result;
         })();
       JS
 
