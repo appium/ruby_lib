@@ -47,7 +47,8 @@ describe 'driver' do
                               sauce_access_key: nil,
                               port:             4723,
                               device:           :ios,
-                              debug:            true }
+                              debug:            true,
+                              listener:         nil }
 
       if actual != expected
         diff    = HashDiff.diff expected, actual
