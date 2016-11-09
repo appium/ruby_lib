@@ -33,13 +33,12 @@ module Appium
     # If int then the TextField at that index is returned.
     # @return [TextField]
     def textfield(value)
-      find_ele_by_attr_include _textfields, '*', value
       if value.is_a? Numeric
         index = value
         fail "#{index} is not a valid index. Must be >= 1" if index <= 0
-        return ele_index index
+        return ele_index _textfields, index
       end
-      find_ele_by_attr _textfields, '*', value
+      find_ele_by_attr_include _textfields, '*', value
     end
 
     # Find all TextFields containing value.

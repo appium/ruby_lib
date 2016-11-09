@@ -249,9 +249,9 @@ module Appium
     # @private
     def string_attr_exact(class_name, attr, value)
       if attr == '*'
-        %(//#{class_name}[@*[.='#{value}']])
+        %((//#{class_name})[@*[.='#{value}']])
       else
-        %(//#{class_name}[@#{attr}='#{value}'])
+        %((//#{class_name})[@#{attr}='#{value}'])
       end
     end
 
@@ -278,9 +278,9 @@ module Appium
     # @private
     def string_attr_include(class_name, attr, value)
       if attr == '*'
-        %(//#{class_name}[@*[contains(translate(.,'#{value.upcase}', '#{value}'), '#{value}')]])
+        %((//#{class_name})[@*[contains(translate(.,'#{value.upcase}', '#{value}'), '#{value}')]])
       else
-        %(//#{class_name}[contains(translate(@#{attr},'#{value.upcase}', '#{value}'), '#{value}')])
+        %((//#{class_name})[contains(translate(@#{attr},'#{value.upcase}', '#{value}'), '#{value}')])
       end
     end
 
@@ -308,14 +308,16 @@ module Appium
     # @param class_name [String] the tag to match
     # @return [Element]
     def first_ele(class_name)
-      @driver.find_element :xpath, "//#{class_name}"
+      @driver.find_element :xpath, "(//#{class_name})"
     end
 
     # Get the last tag that matches class_name
     # @param class_name [String] the tag to match
     # @return [Element]
     def last_ele(class_name)
-      @driver.find_element :xpath, "(//#{class_name})[last()]"
+      result = @driver.find_elements :xpath, "(//#{class_name})"
+      fail _no_such_element if result.empty?
+      result.last
     end
 
     # Returns the first visible element matching class_name
@@ -331,7 +333,7 @@ module Appium
     # @param class_name [String] the class_name to search for
     # @return [Element]
     def tags(class_name)
-      @driver.find_elements :xpath, "//#{class_name}"
+      @driver.find_elements :xpath, "(//#{class_name})"
     end
 
     # @private
