@@ -1,6 +1,6 @@
 module Appium
   module Ios
-    class XCUITestElements < Nokogiri::XML::SAX::Document
+    class UITestElementsPrinter < Nokogiri::XML::SAX::Document
       attr_accessor :filter
 
       def start_element(type, attrs = [])
@@ -181,7 +181,7 @@ module Appium
       else
 
         s = source_window(window_number || 0)
-        parser = Nokogiri::XML::SAX::Parser.new(XCUITestElements.new)
+        parser = Nokogiri::XML::SAX::Parser.new(UITestElementsPrinter.new)
         if class_name
           parser.document.filter = class_name.is_a?(Symbol) ? class_name.to_s : class_name
         end

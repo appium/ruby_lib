@@ -261,12 +261,15 @@ module Appium
     attr_accessor :appium_port
     # Device type to request from the appium server
     attr_accessor :appium_device
+    # Automation name sent to appium server
+    attr_reader :automation_name
     # Boolean debug mode for the Appium Ruby bindings
     attr_accessor :appium_debug
 
     # Returns the driver
     # @return [Driver] the driver
     attr_reader :driver
+
 
     # Creates a new driver
     #
@@ -318,6 +321,8 @@ module Appium
       # https://code.google.com/p/selenium/source/browse/spec-draft.md?repo=mobile
       @appium_device = @caps[:platformName]
       @appium_device = @appium_device.is_a?(Symbol) ? @appium_device : @appium_device.downcase.strip.intern if @appium_device
+
+      @automation_name = @caps[:automationName]
 
       # load common methods
       extend Appium::Common

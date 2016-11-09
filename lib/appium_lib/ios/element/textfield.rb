@@ -1,13 +1,29 @@
 module Appium
   module Ios
-    TEXT_FIELD       = 'XCUIElementTypeTextField'
-    SECURE_TEXT_FIELD = 'XCUIElementTypeSecureTextField'
 
     private
 
     # @private
+    def _text_field_elem
+      if @automation_name && @automation_name == 'XCUITest'
+        'XCUIElementTypeTextField'
+      else
+        'UIATextField'
+      end
+    end
+
+    # @private
+    def _secure_text_field_elem
+      if @automation_name && @automation_name == 'XCUITest'
+        'XCUIElementTypeSecureTextField'
+      else
+        'UIASecureTextField'
+      end
+    end
+
+    # @private
     def _textfields
-      %(#{TEXT_FIELD} | //#{SECURE_TEXT_FIELD})
+      %(#{_text_field_elem} | //#{_secure_text_field_elem})
     end
 
     public
