@@ -10,7 +10,7 @@ For features or bug fixes, please submit a pull request. Ideally there would be 
 
 ### Run iOS tests
 
-iOS tests are run on the iPhone 6 / iOS 8.3 simulator.
+iOS tests are run on the iPhone 6 / iOS 9.3 simulator.
 
 - `cd ios_tests`
 - `flake 3 ios` - Run all the iOS tests up to 3 times
