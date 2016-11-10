@@ -263,6 +263,8 @@ module Appium
     attr_accessor :appium_device
     # Boolean debug mode for the Appium Ruby bindings
     attr_accessor :appium_debug
+    # instance of AbstractEventListener for logging support
+    attr_accessor :listener
 
     # Returns the driver
     # @return [Driver] the driver
@@ -308,6 +310,10 @@ module Appium
       @sauce_access_key = appium_lib_opts.fetch :sauce_access_key, ENV['SAUCE_ACCESS_KEY']
       @sauce_access_key = nil if !@sauce_access_key || (@sauce_access_key.is_a?(String) && @sauce_access_key.empty?)
       @appium_port      = appium_lib_opts.fetch :port, 4723
+
+      # to pass it in Selenium.new.
+      # `listener = opts.delete(:listener)` is called in Selenium::Driver.new
+      @listener = appium_lib_opts.fetch :listener, nil
 
       # Path to the .apk, .app or .app.zip.
       # The path can be local or remote for Sauce.
@@ -361,7 +367,8 @@ module Appium
                      sauce_access_key: @sauce_access_key,
                      port:             @appium_port,
                      device:           @appium_device,
-                     debug:            @appium_debug
+                     debug:            @appium_debug,
+                     listener:         @listener
       }
 
       # Return duplicates so attributes are immutable
@@ -476,7 +483,12 @@ module Appium
 
       begin
         driver_quit
-        @driver = Selenium::WebDriver.for :remote, http_client: @client, desired_capabilities: @caps, url: server_url
+        @driver =  Selenium::WebDriver.for(:remote,
+                                           http_client: @client,
+                                           desired_capabilities: @caps,
+                                           url: server_url,
+                                           listener: @listener)
+
         # Load touch methods.
         @driver.extend Selenium::WebDriver::DriverExtensions::HasTouchScreen
         @driver.extend Selenium::WebDriver::DriverExtensions::HasLocation
