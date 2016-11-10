@@ -193,12 +193,12 @@ describe 'driver' do
 
     # any elements
     t 'find_elements' do
-      find_elements(:class, 'XCUIElementTypeTableCell').length.must_equal 12
+      find_elements(:class, UI::Inventory.table_cell).length.must_equal 12
     end
 
     # any element
     t 'find_element' do
-      find_element(:class, 'XCUIElementTypeStaticText').class.must_equal Selenium::WebDriver::Element
+      find_element(:class, UI::Inventory.static_text).class.must_equal Selenium::WebDriver::Element
     end
 
     # settings

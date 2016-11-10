@@ -5,14 +5,14 @@ describe 'device/touch_actions' do
       screen == 'Pickers'
     end
 
-    ele_index('UIAStaticText', 2).text.must_equal 'John Appleseed - 0'
-    picker = ele_index('UIAPicker', 1)
+    ele_index(UI::Inventory.static_text, 2).text.must_equal 'John Appleseed - 0'
+    picker = ele_index(UI::Inventory.picker, 1)
     loc = picker.location.to_h
     size = picker.size.to_h
     start_x = loc[:x] + size[:width] / 2
     start_y = loc[:y] + size[:height] / 2
     swipe start_x: start_x, start_y: start_y, end_x: start_x, end_y: - 50
-    ele_index('UIAStaticText', 2).text.must_equal 'Chris Armstrong - 0'
+    ele_index(UI::Inventory.static_text, 2).text.must_equal 'Chris Armstrong - 0'
   end
 end
 
