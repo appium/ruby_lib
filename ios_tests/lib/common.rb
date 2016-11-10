@@ -119,7 +119,7 @@ module UI
       if xcuitest?
         'XCUIElementTypeOther'
       else
-        raise "unknown"
+        fail 'unknown UIA element: other'
       end
     end
 
