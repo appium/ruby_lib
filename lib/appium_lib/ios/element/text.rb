@@ -1,7 +1,6 @@
 # XCUIElementTypeStaticText methods
 module Appium
   module Ios
-
     private
 
     # @private

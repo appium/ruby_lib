@@ -1,7 +1,6 @@
 # XCUIElementTypeButton methods
 module Appium
   module Ios
-
     private
 
     # @private

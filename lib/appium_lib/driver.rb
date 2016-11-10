@@ -270,7 +270,6 @@ module Appium
     # @return [Driver] the driver
     attr_reader :driver
 
-
     # Creates a new driver
     #
     # ```ruby

@@ -1,6 +1,5 @@
 module Appium
   module Ios
-
     private
 
     # @private
