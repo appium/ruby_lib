@@ -14,8 +14,7 @@ ruby_lib's iOS tests. Requires `Ruby 1.9.3` or better.
 
 There are two backend drivers available for iOS (automationName). UIAutomation which is supported up-to iOS 9.3 and XCUITest which is supported from 10.0 on. UIAutomation is deprecated but will continue to be supported for the time being.
 
-The tests are now run against `iPhone 6 Simulator 10.1 (14A345)`
-
+By default, the tests are now run against `iPhone 6 Simulator 10.1 (14A345)`
 #### Documentation
 
 - [Installing Appium on OS X](https://github.com/appium/ruby_console/blob/master/osx.md)

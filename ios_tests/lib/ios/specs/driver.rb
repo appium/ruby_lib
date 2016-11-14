@@ -36,8 +36,8 @@ describe 'driver' do
       actual              = driver_attributes
       actual[:caps][:app] = File.basename actual[:caps][:app]
       expected            = { caps:             { platformName: 'ios',
-                                                  platformVersion: '10.0',
-                                                  automationName: 'UCUITest',
+                                                  platformVersion: '10.1',
+                                                  automationName: 'XCUITest',
                                                   deviceName:   'iPhone Simulator',
                                                   app:          'UICatalog.app' },
                               custom_url:       false,
@@ -48,7 +48,8 @@ describe 'driver' do
                               sauce_access_key: nil,
                               port:             4723,
                               device:           :ios,
-                              debug:            true }
+                              debug:            true,
+                              listener:         nil }
 
       if actual != expected
         diff    = HashDiff.diff expected, actual
