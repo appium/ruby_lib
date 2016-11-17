@@ -1,3 +1,22 @@
+#### v8.1.0 2016-11-18
+
+- [95d3a65](https://github.com/appium/ruby_lib/commit/95d3a6535472559590c4d043e887d15acc445a1a) Release 8.1.0
+- [4b5d817](https://github.com/appium/ruby_lib/commit/4b5d81752565f02645e301555e4be78b0235daf5) Release 8.1.0
+- [6c38ca5](https://github.com/appium/ruby_lib/commit/6c38ca5276342ade6168eb9080424a03608a1b3e) replace end_ to delta_ because end_ is deprecated in #380 (#392)
+- [09654ab](https://github.com/appium/ruby_lib/commit/09654ab9dbc69a31eff7e7bd426db985da09e3b8) Add EventListener to Driver (#389)
+- [2d8fc5f](https://github.com/appium/ruby_lib/commit/2d8fc5ff7acce9417847e66772b59fc691c1dbaa) Added touch id endpoint (#384)
+- [11b80e3](https://github.com/appium/ruby_lib/commit/11b80e398e98fbc71e580f659764ba54f87da4f3) Added double_tap and two_finger_tap to Appium::TouchAction (#377)
+- [2a9f79c](https://github.com/appium/ruby_lib/commit/2a9f79caae337e8770aa56c47d0bd9c17cf1569f) swipe proffers use of delta_x, delta_y instead of end_x, end_y which … (#380)
+- [6705226](https://github.com/appium/ruby_lib/commit/67052266b601270d2432c18b47739c9681af5563) Use secure sauce endpoint (https://ondemand.saucelabs.com:443) (#378)
+- [acdcff0](https://github.com/appium/ruby_lib/commit/acdcff06ae10f1ff4461ed94486346b4514a6e3a) Merge pull request #376 from sergey-plevako-badoo/add_double_tap_and_two_finger_tap
+- [eea3a6f](https://github.com/appium/ruby_lib/commit/eea3a6feaccd317b8a8ac4e2f83cc867613cdd02) Added double_tap and two_finger_tap to Appium::TouchAction
+- [ac03116](https://github.com/appium/ruby_lib/commit/ac03116756a72fbd624fa32ea886123b955d7089) Include url in raised connection error (#374)
+- [924c28b](https://github.com/appium/ruby_lib/commit/924c28bfa675b23b2519565dbcb0ee3531f05cd9) Fix docs of find elements (#372)
+- [8b71cdc](https://github.com/appium/ruby_lib/commit/8b71cdc81be8f50f5f97f0131aee5f3dc67c3eb7) Add default value for duration in swipe (#368)
+- [f58c8aa](https://github.com/appium/ruby_lib/commit/f58c8aa5a9eb349a7224c5c460c5a866444ff5dd) Merge pull request #363 from SrinivasanTarget/master
+- [f8cff26](https://github.com/appium/ruby_lib/commit/f8cff2659992962b6ab5bf49fa075b02d2d110ef) updated webdriver dependency
+
+
 #### v8.0.2 2016-01-29
 
 - [d67cbba](https://github.com/appium/ruby_lib/commit/d67cbbac43f511515f6e6f53197cfae2bb7671e0) Release 8.0.2
