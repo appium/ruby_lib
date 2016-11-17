@@ -1,7 +1,6 @@
 #### v8.1.0 2016-11-18
 
-- [95d3a65](https://github.com/appium/ruby_lib/commit/95d3a6535472559590c4d043e887d15acc445a1a) Release 8.1.0
-- [4b5d817](https://github.com/appium/ruby_lib/commit/4b5d81752565f02645e301555e4be78b0235daf5) Release 8.1.0
+- [0b476e7](https://github.com/appium/ruby_lib/commit/0b476e7c78f8cb829a909de55a402c6585ac5159) Release 8.1.0
 - [6c38ca5](https://github.com/appium/ruby_lib/commit/6c38ca5276342ade6168eb9080424a03608a1b3e) replace end_ to delta_ because end_ is deprecated in #380 (#392)
 - [09654ab](https://github.com/appium/ruby_lib/commit/09654ab9dbc69a31eff7e7bd426db985da09e3b8) Add EventListener to Driver (#389)
 - [2d8fc5f](https://github.com/appium/ruby_lib/commit/2d8fc5ff7acce9417847e66772b59fc691c1dbaa) Added touch id endpoint (#384)
