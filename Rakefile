@@ -119,7 +119,7 @@ task :release => :gem do
   sh 'git push origin master'
   sh "git push origin #{tag_name}"
   gem_build
-  sh "gem push #{repo_name}-#{version}.gem"
+  # sh "gem push #{repo_name}-#{version}.gem"
 end
 
 desc 'Build and release a new gem to rubygems.org (same as release)'
