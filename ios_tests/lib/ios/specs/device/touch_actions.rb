@@ -11,7 +11,7 @@ describe 'device/touch_actions' do
     size = picker.size.to_h
     start_x = loc[:x] + size[:width] / 2
     start_y = loc[:y] + size[:height] / 2
-    swipe start_x: start_x, start_y: start_y, end_x: start_x, end_y: - 50
+    swipe start_x: start_x, start_y: start_y, delta_x: start_x, delta_y: - 50
     ele_index('UIAStaticText', 2).text.must_equal 'Chris Armstrong - 0'
   end
 end
