@@ -29,4 +29,6 @@ Android tests require running on physical hardware with Android 5.0 (API 21). Th
 ~/.gem/credentials; chmod 0600 ~/.gem/credentials
 
 1. Bump the version number `rake bump`
-2. Publish with `rake release`
+2. Generate release note and create a branch with `rake release`
+    - Push and merge the branch to the master
+3. Build and publish gem with `rake publish`
