@@ -11,6 +11,10 @@ describe 'common/device' do
     # install ENV['APP_PATH']
   end
 
+  t 'device_time' do
+    Date.parse(device_time)
+  end
+
   t 'background_app' do
     wait { background_app 5 }
   end

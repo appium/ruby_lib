@@ -12,7 +12,7 @@ ruby_lib's iOS tests. Requires `Ruby 1.9.3` or better.
 
 `UICatalog6.1` is from [appium/appium](https://github.com/appium/appium/blob/master/assets/UICatalog6.1.app.zip)
 
-The tests are now run against `iPhone 6 Simulator 8.3 (12F69)`
+The tests are now run against `iPhone 6 Simulator 9.3 (12F69)`
 
 #### Documentation
 

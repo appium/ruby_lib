@@ -15,6 +15,7 @@ module Appium
         device_locked?:       'session/:session_id/appium/device/is_locked'
       },
       get:  {
+        device_time:            'session/:session_id/appium/device/system_time',
         current_activity:       'session/:session_id/appium/device/current_activity',
         current_context:        'session/:session_id/context',
         get_network_connection: 'session/:session_id/network_connection'
@@ -90,6 +91,15 @@ module Appium
     #
     #   ```ruby
     #   pull_folder '/data/local/tmp' #=> Get the folder at that path
+    #   ```
+
+    # @!method touch_id
+    #   iOS only;  Simulate Touch ID with either valid (match == true) or invalid (match == false) fingerprint.
+    #   @param match (Boolean) fingerprint validity
+    #     Defaults to true.
+    #   ```ruby
+    #   touch_id true #=> Simulate valid fingerprint
+    #   touch_id false #=> Simulate invalid fingerprint
     #   ```
 
     # @!method end_coverage
@@ -252,6 +262,13 @@ module Appium
         end
 
         # TODO: TEST ME
+        add_endpoint_method(:touch_id, 'session/:session_id/appium/simulator/touch_id') do
+          def touch_id(match = true)
+            execute :touch_id, {}, match: match
+          end
+        end
+
+        # TODO: TEST ME
         add_endpoint_method(:end_coverage, 'session/:session_id/appium/app/end_test_coverage') do
           def end_coverage(path, intent)
             execute :end_coverage, {}, path: path, intent: intent
@@ -342,7 +359,9 @@ module Appium
         end
       end
 
-      # @!method accessiblity_id_find
+      # @!method find_element
+      # @!method find_elements
+      #
       #   find_element/s with their accessibility_id
       #
       #   ```ruby

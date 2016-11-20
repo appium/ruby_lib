@@ -80,13 +80,10 @@ module Appium
     Appium::Logger.info "Exists? #{toml_exists}" if verbose
 
     fail "toml doesn't exist #{toml}" unless toml_exists
-    require 'toml'
+    require 'tomlrb'
     Appium::Logger.info "Loading #{toml}" if verbose
 
-    data = File.read toml
-    data = TOML::Parser.new(data).parsed
-    # TOML creates string keys. must symbolize
-    data = Appium.symbolize_keys data
+    data = Tomlrb.load_file(toml, symbolize_keys: true)
     Appium::Logger.ap_info data unless data.empty? if verbose
 
     if data && data[:caps] && data[:caps][:app] && !data[:caps][:app].empty?
@@ -270,6 +267,8 @@ module Appium
     attr_accessor :appium_device
     # Boolean debug mode for the Appium Ruby bindings
     attr_accessor :appium_debug
+    # instance of AbstractEventListener for logging support
+    attr_accessor :listener
 
     # Returns the driver
     # @return [Driver] the driver
@@ -316,6 +315,10 @@ module Appium
       @sauce_access_key = nil if !@sauce_access_key || (@sauce_access_key.is_a?(String) && @sauce_access_key.empty?)
       @appium_port      = appium_lib_opts.fetch :port, 4723
 
+      # to pass it in Selenium.new.
+      # `listener = opts.delete(:listener)` is called in Selenium::Driver.new
+      @listener = appium_lib_opts.fetch :listener, nil
+
       # Path to the .apk, .app or .app.zip.
       # The path can be local or remote for Sauce.
       if @caps && @caps[:app] && ! @caps[:app].empty?
@@ -325,8 +328,6 @@ module Appium
       # https://code.google.com/p/selenium/source/browse/spec-draft.md?repo=mobile
       @appium_device = @caps[:platformName]
       @appium_device = @appium_device.is_a?(Symbol) ? @appium_device : @appium_device.downcase.strip.intern if @appium_device
-      fail "platformName must be set. Not found in options: #{opts}" unless @appium_device
-      fail 'platformName must be Android or iOS' unless [:android, :ios].include?(@appium_device)
 
       # load common methods
       extend Appium::Common
@@ -370,7 +371,8 @@ module Appium
                      sauce_access_key: @sauce_access_key,
                      port:             @appium_port,
                      device:           @appium_device,
-                     debug:            @appium_debug
+                     debug:            @appium_debug,
+                     listener:         @listener
       }
 
       # Return duplicates so attributes are immutable
@@ -444,7 +446,7 @@ module Appium
     def server_url
       return @custom_url if @custom_url
       if !@sauce_username.nil? && !@sauce_access_key.nil?
-        "http://#{@sauce_username}:#{@sauce_access_key}@ondemand.saucelabs.com:80/wd/hub"
+        "https://#{@sauce_username}:#{@sauce_access_key}@ondemand.saucelabs.com:443/wd/hub"
       else
         "http://127.0.0.1:#{@appium_port}/wd/hub"
       end
@@ -485,7 +487,12 @@ module Appium
 
       begin
         driver_quit
-        @driver = Selenium::WebDriver.for :remote, http_client: @client, desired_capabilities: @caps, url: server_url
+        @driver =  Selenium::WebDriver.for(:remote,
+                                           http_client: @client,
+                                           desired_capabilities: @caps,
+                                           url: server_url,
+                                           listener: @listener)
+
         # Load touch methods.
         @driver.extend Selenium::WebDriver::DriverExtensions::HasTouchScreen
         @driver.extend Selenium::WebDriver::DriverExtensions::HasLocation
@@ -498,7 +505,7 @@ module Appium
           end rescue nil
         end
       rescue Errno::ECONNREFUSED
-        raise 'ERROR: Unable to connect to Appium. Is the server running?'
+        raise "ERROR: Unable to connect to Appium. Is the server running on #{server_url}?"
       end
 
       @driver.manage.timeouts.implicit_wait = @default_wait

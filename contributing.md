@@ -10,7 +10,7 @@ For features or bug fixes, please submit a pull request. Ideally there would be 
 
 ### Run iOS tests
 
-iOS tests are run on the iPhone 6 / iOS 8.3 simulator.
+iOS tests are run on the iPhone 6 / iOS 9.3 simulator.
 
 - `cd ios_tests`
 - `flake 3 ios` - Run all the iOS tests up to 3 times
@@ -21,3 +21,14 @@ Android tests require running on physical hardware with Android 5.0 (API 21). Th
 
 - `cd android_tests`
 - `flake 3 android` - Run all the Android tests up to 3 times
+
+### Publishing
+
+0. Ensure you have `~/.gem/credentials` If not run [the following command](http://guides.rubygems.org/make-your-own-gem/) (replace username with your rubygems user)
+> $ curl -u username https://rubygems.org/api/v1/api_key.yaml >
+~/.gem/credentials; chmod 0600 ~/.gem/credentials
+
+1. Bump the version number `rake bump`
+2. Generate release note and create a branch with `rake release`
+    - Push and merge the branch to the master
+3. Build and publish gem with `rake publish`

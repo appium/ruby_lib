@@ -13,6 +13,10 @@ describe 'device/device' do
     before_first
   end
 
+  t 'device_time' do
+    Date.parse(device_time)
+  end
+
   t 'lock' do
     lock 5
     tag('UIAButton').name.must_equal 'SlideToUnlock'
@@ -71,7 +75,7 @@ describe 'device/device' do
   end
 
   t 'swipe' do
-    swipe start_x: 75, start_y: 500, end_x: 75, end_y: 0, duration: 800
+    swipe start_x: 75, start_y: 500, delta_x: 75, delta_y: 0, duration: 800
   end
 
   t 'pinch & zoom' do
