@@ -18,10 +18,7 @@ module Appium
         device_time:            'session/:session_id/appium/device/system_time',
         current_activity:       'session/:session_id/appium/device/current_activity',
         current_context:        'session/:session_id/context',
-        get_network_connection: 'session/:session_id/network_connection',
-        ime_available_engines:  'session/:session_id/ime/available_engines', # https://github.com/SeleniumHQ/selenium/blob/selenium-3.0.1/rb/lib/selenium/webdriver/remote/commands.rb#L184-L192
-        ime_active_engine:      'session/:session_id/ime/active_engine',     # https://github.com/SeleniumHQ/selenium/blob/selenium-3.0.1/rb/lib/selenium/webdriver/remote/commands.rb#L184-L192
-        ime_activated:          'session/:session_id/ime/activated'          # https://github.com/SeleniumHQ/selenium/blob/selenium-3.0.1/rb/lib/selenium/webdriver/remote/commands.rb#L184-L192
+        get_network_connection: 'session/:session_id/network_connection'
       }
     }
 
@@ -37,15 +34,6 @@ module Appium
     # @param seconds (int) How many seconds to background the app for.
 
     # @!method current_activity
-
-    # @!method ime_available_engines
-    #   Android only; List all available input engines on the machine.
-
-    # @!method ime_active_engine
-    #   Android only; Get the name of the active IME engine.
-
-    # @!method ime_activated
-    #   Android only; Indicates whether IME input is active at the moment (not if it is available).
 
     # @!method launch_app
     #   Start the simulator and application configured with desired capabilities
@@ -210,38 +198,6 @@ module Appium
           end
         end
 
-        # @!method ime_activate
-        #   Make an engine that is available active.
-        #
-        #   Android only.
-        #   @param [String] The IME owning the activity [required]
-        #
-        #   ```ruby
-        #   ime_activate engine: 'com.android.inputmethod.latin/.LatinIME'
-        #   ```
-        add_endpoint_method(:ime_activate, 'session/:session_id/ime/activate') do
-          # https://github.com/SeleniumHQ/selenium/blob/selenium-3.0.1/rb/lib/selenium/webdriver/remote/commands.rb#L184-L192
-          def ime_activate(ime_name)
-            execute :ime_activate, {}, engine: ime_name
-          end
-        end
-
-        # @!method ime_deactivate
-        #   De-activates the currently-active IME engine.
-        #
-        #   Android only.
-        #   @param [String] The IME owning the activity [required]
-        #
-        #   ```ruby
-        #   ime_activate engine: 'com.android.inputmethod.latin/.LatinIME'
-        #   ```
-        add_endpoint_method(:ime_deactivate, 'session/:session_id/ime/deactivate') do
-          # https://github.com/SeleniumHQ/selenium/blob/selenium-3.0.1/rb/lib/selenium/webdriver/remote/commands.rb#L184-L192
-          def ime_deactivate
-            execute :ime_deactivate, {}
-          end
-        end
-
         add_endpoint_method(:set_context, 'session/:session_id/context') do
           def set_context(context = null)
             execute :set_context, {}, name: context
@@ -353,6 +309,7 @@ module Appium
         end
 
         add_touch_actions
+        add_ime_actions
         extend_search_contexts
       end
 
@@ -403,6 +360,29 @@ module Appium
         end
       end
 
+      # @private
+      def add_bridge_method(method)
+        if block_given?
+          create_bridge method, &Proc.new
+        else
+          create_bridge method
+        end
+
+        delegate_driver_method method
+        delegate_from_appium_driver method
+      end
+
+      # @private
+      def create_bridge(method)
+        Selenium::WebDriver::Remote::Bridge.class_eval do
+          if block_given?
+            class_eval(&Proc.new)
+          else
+            define_method(method) { execute method }
+          end
+        end
+      end
+
       # @!method find_element
       # @!method find_elements
       #
@@ -438,6 +418,66 @@ module Appium
 
         delegate_from_appium_driver(:pinch, Appium::MultiTouch)
         delegate_from_appium_driver(:zoom, Appium::MultiTouch)
+      end
+
+      def add_ime_actions
+        # Commands for IME are defined in the following commands.rb, but the driver have no bridge.
+        # So, appium_lib define just bridge here.
+        # https://github.com/SeleniumHQ/selenium/blob/selenium-3.0.1/rb/lib/selenium/webdriver/remote/commands.rb#L184-L192
+
+        # @!method ime_activate
+        #   Make an engine that is available active.
+        #
+        #   Android only.
+        #   @param [String] The IME owning the activity [required]
+        #
+        #   ```ruby
+        #   ime_activate engine: 'com.android.inputmethod.latin/.LatinIME'
+        #   ```
+        add_bridge_method(:ime_activate) {
+          def ime_activate(ime_name)
+            execute :imeActivateEngine, {}, engine: ime_name
+          end
+        }
+
+        # @!method ime_available_engines
+        #   Android only; List all available input engines on the machine.
+        add_bridge_method(:ime_available_engines) {
+          def ime_available_engines
+            execute :imeGetAvailableEngines
+          end
+        }
+
+        # @!method ime_active_engine
+        #   Android only; Get the name of the active IME engine.
+        add_bridge_method(:ime_active_engine) {
+          def ime_active_engine
+            execute :imeGetActiveEngine
+          end
+        }
+
+        # @!method ime_activated
+        #   Android only; Indicates whether IME input is active at the moment (not if it is available).
+        add_bridge_method(:ime_activated) {
+          def ime_activated
+            execute :imeIsActivated
+          end
+        }
+
+        # @!method ime_deactivate
+        #   De-activates the currently-active IME engine.
+        #
+        #   Android only.
+        #   @param [String] The IME owning the activity [required]
+        #
+        #   ```ruby
+        #   ime_activate engine: 'com.android.inputmethod.latin/.LatinIME'
+        #   ```
+        add_bridge_method(:ime_deactivate) {
+          def ime_deactivate
+            execute :imeDeactivate, {}
+          end
+        }
       end
     end # class << self
 

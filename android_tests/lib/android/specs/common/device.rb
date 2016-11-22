@@ -122,14 +122,17 @@ describe 'common/device' do
     wait { find('Search').click }
     wait { find('Invoke Search').click }
 
-    imes = ime_get_available_engines
+    imes = ime_available_engines
     imes.include?(ime_latin).must_equal true
 
     wait { ime_activate(ime_latin) }
-    ime_get_active_engine.must_equal ime_latin
-    ime_is_activated.must_equal true
+    ime_active_engine.must_equal ime_latin
+    ime_activated.must_equal true
 
     wait { ime_deactivate }
-    ime_get_active_engine.wont_equal ime_latin
+    ime_active_engine.wont_equal ime_latin
+
+    wait { ime_activate(ime_latin) }
+    ime_active_engine.must_equal ime_latin
   end
 end
