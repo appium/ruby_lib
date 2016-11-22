@@ -18,7 +18,10 @@ module Appium
         device_time:            'session/:session_id/appium/device/system_time',
         current_activity:       'session/:session_id/appium/device/current_activity',
         current_context:        'session/:session_id/context',
-        get_network_connection: 'session/:session_id/network_connection'
+        get_network_connection: 'session/:session_id/network_connection',
+        ime_available_engines:  'session/:session_id/ime/available_engines', # https://github.com/SeleniumHQ/selenium/blob/selenium-3.0.1/rb/lib/selenium/webdriver/remote/commands.rb#L184-L192
+        ime_active_engine:      'session/:session_id/ime/active_engine',     # https://github.com/SeleniumHQ/selenium/blob/selenium-3.0.1/rb/lib/selenium/webdriver/remote/commands.rb#L184-L192
+        ime_activated:          'session/:session_id/ime/activated'          # https://github.com/SeleniumHQ/selenium/blob/selenium-3.0.1/rb/lib/selenium/webdriver/remote/commands.rb#L184-L192
       }
     }
 
@@ -34,6 +37,15 @@ module Appium
     # @param seconds (int) How many seconds to background the app for.
 
     # @!method current_activity
+
+    # @!method ime_available_engines
+    #   Android only; List all available input engines on the machine.
+
+    # @!method ime_active_engine
+    #   Android only; Get the name of the active IME engine.
+
+    # @!method ime_activated
+    #   Android only; Indicates whether IME input is active at the moment (not if it is available).
 
     # @!method launch_app
     #   Start the simulator and application configured with desired capabilities
@@ -195,6 +207,38 @@ module Appium
                                          appActivity: app_activity,
                                          appWaitPackage: app_wait_package,
                                          appWaitActivity: app_wait_activity
+          end
+        end
+
+        # @!method ime_activate
+        #   Make an engine that is available active.
+        #
+        #   Android only.
+        #   @param [String] The IME owning the activity [required]
+        #
+        #   ```ruby
+        #   ime_activate engine: 'com.android.inputmethod.latin/.LatinIME'
+        #   ```
+        add_endpoint_method(:ime_activate, 'session/:session_id/ime/activate') do
+          # https://github.com/SeleniumHQ/selenium/blob/selenium-3.0.1/rb/lib/selenium/webdriver/remote/commands.rb#L184-L192
+          def ime_activate(ime_name)
+            execute :ime_activate, {}, engine: ime_name
+          end
+        end
+
+        # @!method ime_deactivate
+        #   De-activates the currently-active IME engine.
+        #
+        #   Android only.
+        #   @param [String] The IME owning the activity [required]
+        #
+        #   ```ruby
+        #   ime_activate engine: 'com.android.inputmethod.latin/.LatinIME'
+        #   ```
+        add_endpoint_method(:ime_deactivate, 'session/:session_id/ime/deactivate') do
+          # https://github.com/SeleniumHQ/selenium/blob/selenium-3.0.1/rb/lib/selenium/webdriver/remote/commands.rb#L184-L192
+          def ime_deactivate
+            execute :ime_deactivate, {}
           end
         end
 
