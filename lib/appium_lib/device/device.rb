@@ -309,6 +309,7 @@ module Appium
         end
 
         add_touch_actions
+        add_ime_actions
         extend_search_contexts
       end
 
@@ -359,6 +360,29 @@ module Appium
         end
       end
 
+      # @private
+      def add_bridge_method(method)
+        if block_given?
+          create_bridge method, &Proc.new
+        else
+          create_bridge method
+        end
+
+        delegate_driver_method method
+        delegate_from_appium_driver method
+      end
+
+      # @private
+      def create_bridge(method)
+        Selenium::WebDriver::Remote::Bridge.class_eval do
+          if block_given?
+            class_eval(&Proc.new)
+          else
+            define_method(method) { execute method }
+          end
+        end
+      end
+
       # @!method find_element
       # @!method find_elements
       #
@@ -394,6 +418,80 @@ module Appium
 
         delegate_from_appium_driver(:pinch, Appium::MultiTouch)
         delegate_from_appium_driver(:zoom, Appium::MultiTouch)
+      end
+
+      def add_ime_actions
+        # Commands for IME are defined in the following commands.rb, but the driver have no bridge.
+        # So, appium_lib define just bridge here.
+        # https://github.com/SeleniumHQ/selenium/blob/selenium-3.0.1/rb/lib/selenium/webdriver/remote/commands.rb#L184-L192
+
+        # @!method ime_activate
+        #   Make an engine that is available active.
+        #
+        #   Android only.
+        #   @param [String] The IME owning the activity [required]
+        #
+        #   ```ruby
+        #   ime_activate engine: 'com.android.inputmethod.latin/.LatinIME'
+        #   ```
+        add_bridge_method(:ime_activate) do
+          def ime_activate(ime_name)
+            execute :imeActivateEngine, {}, engine: ime_name
+          end
+        end
+
+        # @!method ime_available_engines
+        #   List all available input engines on the machine.
+        #   Android only.
+        #
+        #   ```ruby
+        #   ime_available_engines #=> Get the list of IME installed in the target device
+        #   ```
+        add_bridge_method(:ime_available_engines) do
+          def ime_available_engines
+            execute :imeGetAvailableEngines
+          end
+        end
+
+        # @!method ime_active_engine
+        #   Get the name of the active IME engine.
+        #   Android only.
+        #
+        #   ```ruby
+        #   ime_active_engine #=> Get the current active IME such as 'com.android.inputmethod.latin/.LatinIME'
+        #   ```
+        add_bridge_method(:ime_active_engine) do
+          def ime_active_engine
+            execute :imeGetActiveEngine
+          end
+        end
+
+        # @!method ime_activated
+        #   Indicates whether IME input is active at the moment (not if it is available).
+        #   Android only.
+        #
+        #   ```ruby
+        #   ime_activated #=> True if IME is activated
+        #   ```
+        add_bridge_method(:ime_activated) do
+          def ime_activated
+            execute :imeIsActivated
+          end
+        end
+
+        # @!method ime_deactivate
+        #   De-activates the currently-active IME engine.
+        #
+        #   Android only.
+        #
+        #   ```ruby
+        #   ime_deactivate #=> Deactivate current IME engine
+        #   ```
+        add_bridge_method(:ime_deactivate) do
+          def ime_deactivate
+            execute :imeDeactivate, {}
+          end
+        end
       end
     end # class << self
 
