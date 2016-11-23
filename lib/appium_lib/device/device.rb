@@ -434,50 +434,64 @@ module Appium
         #   ```ruby
         #   ime_activate engine: 'com.android.inputmethod.latin/.LatinIME'
         #   ```
-        add_bridge_method(:ime_activate) {
+        add_bridge_method(:ime_activate) do
           def ime_activate(ime_name)
             execute :imeActivateEngine, {}, engine: ime_name
           end
-        }
+        end
 
         # @!method ime_available_engines
-        #   Android only; List all available input engines on the machine.
-        add_bridge_method(:ime_available_engines) {
+        #   List all available input engines on the machine.
+        #   Android only.
+        #
+        #   ```ruby
+        #   ime_available_engines #=> Get the list of IME installed in the target device
+        #   ```
+        add_bridge_method(:ime_available_engines) do
           def ime_available_engines
             execute :imeGetAvailableEngines
           end
-        }
+        end
 
         # @!method ime_active_engine
-        #   Android only; Get the name of the active IME engine.
-        add_bridge_method(:ime_active_engine) {
+        #   Get the name of the active IME engine.
+        #   Android only.
+        #
+        #   ```ruby
+        #   ime_active_engine #=> Get the current active IME such as 'com.android.inputmethod.latin/.LatinIME'
+        #   ```
+        add_bridge_method(:ime_active_engine) do
           def ime_active_engine
             execute :imeGetActiveEngine
           end
-        }
+        end
 
         # @!method ime_activated
-        #   Android only; Indicates whether IME input is active at the moment (not if it is available).
-        add_bridge_method(:ime_activated) {
+        #   Indicates whether IME input is active at the moment (not if it is available).
+        #   Android only.
+        #
+        #   ```ruby
+        #   ime_activated #=> True if IME is activated
+        #   ```
+        add_bridge_method(:ime_activated) do
           def ime_activated
             execute :imeIsActivated
           end
-        }
+        end
 
         # @!method ime_deactivate
         #   De-activates the currently-active IME engine.
         #
         #   Android only.
-        #   @param [String] The IME owning the activity [required]
         #
         #   ```ruby
-        #   ime_activate engine: 'com.android.inputmethod.latin/.LatinIME'
+        #   ime_deactivate #=> Deactivate current IME engine
         #   ```
-        add_bridge_method(:ime_deactivate) {
+        add_bridge_method(:ime_deactivate) do
           def ime_deactivate
             execute :imeDeactivate, {}
           end
-        }
+        end
       end
     end # class << self
 
