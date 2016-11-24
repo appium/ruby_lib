@@ -75,7 +75,7 @@ describe 'device/device' do
   end
 
   t 'swipe' do
-    swipe start_x: 75, start_y: 500, end_x: 75, end_y: 0, duration: 800
+    swipe start_x: 75, start_y: 500, delta_x: 75, delta_y: 0, duration: 800
   end
 
   t 'pinch & zoom' do

@@ -6,9 +6,9 @@ describe 'driver' do
     ENV['UPLOAD_FILE'] && ENV['SAUCE_USERNAME']
   end
 
-  t 'load_appium_txt' do
-    appium_txt = File.expand_path(File.join(Dir.pwd, 'lib'))
-    parsed   = Appium.load_appium_txt file: appium_txt, verbose: true
+  t 'load_settings' do
+    appium_txt = File.join(Dir.pwd, 'appium.txt')
+    parsed   = Appium.load_settings file: appium_txt, verbose: true
     apk_name = File.basename parsed[:caps][:app]
     assert_equal apk_name, 'api.apk'
   end

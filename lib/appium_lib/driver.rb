@@ -51,7 +51,6 @@ end
 
 module Appium
   # Load appium.txt (toml format)
-  # the basedir of this file + appium.txt is what's used
   #
   # ```
   # [caps]
@@ -67,17 +66,15 @@ module Appium
   #
   # @param opts [Hash] file: '/path/to/appium.txt', verbose: true
   # @return [hash] the symbolized hash with updated :app and :require keys
-  def self.load_appium_txt(opts = {})
+  def self.load_settings(opts = {})
     fail 'opts must be a hash' unless opts.is_a? Hash
     fail 'opts must not be empty' if opts.empty?
 
-    file = opts[:file]
-    fail 'Must pass file' unless file
+    toml = opts[:file]
+    fail 'Must pass file' unless toml
     verbose = opts.fetch :verbose, false
 
-    parent_dir = File.dirname file
-    toml       = File.expand_path File.join parent_dir, 'appium.txt'
-    Appium::Logger.info "appium.txt path: #{toml}" if verbose
+    Appium::Logger.info "appium settings path: #{toml}" if verbose
 
     toml_exists = File.exist? toml
     Appium::Logger.info "Exists? #{toml_exists}" if verbose
@@ -93,40 +90,47 @@ module Appium
       data[:caps][:app] = Appium::Driver.absolute_app_path data
     end
 
-    # return list of require files as an array
-    # nil if require doesn't exist
     if data && data[:appium_lib] && data[:appium_lib][:require]
-      r = data[:appium_lib][:require]
-      r = r.is_a?(Array) ? r : [r]
-      # ensure files are absolute
-      r.map! do |f|
-        file = File.exist?(f) ? f : File.join(parent_dir, f)
-        file = File.expand_path file
-
-        File.exist?(file) ? file : nil
-      end
-      r.compact! # remove nils
-
-      files = []
-
-      # now expand dirs
-      r.each do |item|
-        unless File.directory? item
-          # save file
-          files << item
-          next # only look inside folders
-        end
-        Dir.glob(File.expand_path(File.join(item, '**', '*.rb'))) do |f|
-          # do not add folders to the file list
-          files << File.expand_path(f) unless File.directory? f
-        end
-      end
-
-      # Must not sort files. File order is specified in appium.txt
-      data[:appium_lib][:require] = files
+      parent_dir = File.dirname toml
+      data[:appium_lib][:require] = expand_required_files(parent_dir, data[:appium_lib][:require])
     end
 
     data
+  end
+
+  class << self
+    alias_method :load_appium_txt, :load_settings
+  end
+
+  # @param base_dir [String] parent directory of loaded appium.txt (toml)
+  # @param file_paths
+  # @return list of require files as an array, nil if require doesn't exist
+  def self.expand_required_files(base_dir, file_paths)
+    # ensure files are absolute
+    Array(file_paths).map! do |f|
+      file = File.exist?(f) ? f : File.join(base_dir, f)
+      file = File.expand_path file
+
+      File.exist?(file) ? file : nil
+    end
+    r.compact! # remove nils
+
+    files = []
+
+    # now expand dirs
+    file_paths.each do |item|
+      unless File.directory? item
+        # save file
+        files << item
+        next # only look inside folders
+      end
+      Dir.glob(File.expand_path(File.join(item, '**', '*.rb'))) do |f|
+        # do not add folders to the file list
+        files << File.expand_path(f) unless File.directory? f
+      end
+    end
+
+    files
   end
 
   # convert all keys (including nested) to symbols
@@ -434,7 +438,7 @@ module Appium
       return app_path unless app_path.match(/[\/\\]/)
 
       # relative path that must be expanded.
-      # absolute_app_path is called from load_appium_txt
+      # absolute_app_path is called from load_settings
       # and the txt file path is the base of the app path in that case.
       app_path = File.expand_path app_path
       fail "App doesn't exist #{app_path}" unless File.exist? app_path
