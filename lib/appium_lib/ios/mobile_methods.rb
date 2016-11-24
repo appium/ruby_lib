@@ -9,6 +9,7 @@ module Appium
       #   ```
       def extended(_mod)
         Selenium::WebDriver::SearchContext.class_eval do
+          Selenium::WebDriver::SearchContext::FINDERS[:uiautomation] = '-ios uiautomation'
           Selenium::WebDriver::SearchContext::FINDERS[:predicate] = '-ios predicate string'
           Selenium::WebDriver::SearchContext::FINDERS[:class_name] = 'class name'
         end
