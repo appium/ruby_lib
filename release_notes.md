@@ -1,6 +1,13 @@
+#### v8.2.0 2016-11-26
+
+- [4535ec9](https://github.com/appium/ruby_lib/commit/4535ec91f435255ae31b4c4fea9d96e5405d79f5) Release 8.2.0
+- [8a08021](https://github.com/appium/ruby_lib/commit/8a080213dbe4843f50b6acfbe80628209bfd143d) add endpoint for handling IME in remote bridge (#400)
+- [222cd47](https://github.com/appium/ruby_lib/commit/222cd47f69ba24b82a122734b0a136e5d6aed330) Allow to name toml files differently than appium.txt, fixes #280 (#397)
+- [d3a9235](https://github.com/appium/ruby_lib/commit/d3a9235767d6ba770246afac0e62ac58da0eb4b0) update release note and documentation (#396)
+
 #### v8.1.0 2016-11-18
 
-- [0b476e7](https://github.com/appium/ruby_lib/commit/0b476e7c78f8cb829a909de55a402c6585ac5159) Release 8.1.0
+- [95d3a65](https://github.com/appium/ruby_lib/commit/95d3a6535472559590c4d043e887d15acc445a1a) Release 8.1.0
 - [6c38ca5](https://github.com/appium/ruby_lib/commit/6c38ca5276342ade6168eb9080424a03608a1b3e) replace end_ to delta_ because end_ is deprecated in #380 (#392)
 - [09654ab](https://github.com/appium/ruby_lib/commit/09654ab9dbc69a31eff7e7bd426db985da09e3b8) Add EventListener to Driver (#389)
 - [2d8fc5f](https://github.com/appium/ruby_lib/commit/2d8fc5ff7acce9417847e66772b59fc691c1dbaa) Added touch id endpoint (#384)
