@@ -101,9 +101,6 @@ task :release => :gem do
     exit!
   end
 
-  branch_name = "release_#{version.gsub('.', '_')}"
-  sh "git checkout -b #{branch_name}"
-
   # ensure gems are installed
   `bundle update`
 
@@ -114,6 +111,9 @@ task :release => :gem do
   sh "git commit --allow-empty -am 'Release #{version}'"
   sh 'git pull'
   sh "git tag #{tag_name}"
+
+  branch_name = "release_#{version.gsub('.', '_')}"
+  sh "git checkout -b #{branch_name}"
 
   # update notes now that there's a new tag
   Rake::Task['notes'].execute
