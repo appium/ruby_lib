@@ -1,3 +1,26 @@
+### Breaking Changes in 8.2.0
+change `Appium.load_appium_txt` to `Appium.load_settings`.
+
+           Old | New
+            :--|:--
+`Appium.load_appium_txt` | `Appium.load_settings`
+
+- after
+
+```
+dir        = File.expand_path(File.join(Dir.pwd, 'lib'))
+appium_txt = File.join(Dir.pwd, 'appium.txt')
+caps       = Appium.load_settings file: appium_txt, verbose: true
+```
+
+- before
+
+```
+appium_txt = File.expand_path(File.join(Dir.pwd, 'lib'))
+dir        = appium_txt
+caps       = Appium.load_appium_txt file: appium_txt, verbose: true
+```
+
 ### Breaking Changes in 7.0
 
 Requires appium 1.4.0-beta or newer for iOS helper methods. appium_lib no longer automatically promotes methods on minispec. To restore the old behavior use: `Appium.promote_appium_methods ::Minitest::Spec`
