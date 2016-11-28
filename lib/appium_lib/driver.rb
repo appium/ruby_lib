@@ -50,7 +50,7 @@ module Minitest
 end
 
 module Appium
-  # Load appium.txt (toml format)
+  # Load arbitrary text (toml format)
   #
   # ```
   # [caps]
@@ -102,9 +102,9 @@ module Appium
     alias_method :load_appium_txt, :load_settings
   end
 
-  # @param base_dir [String] parent directory of loaded appium.txt (toml)
-  # @param file_paths
-  # @return list of require files as an array, nil if require doesn't exist
+  # @param [String] base_dir parent directory of loaded appium.txt (toml)
+  # @param [String] file_paths
+  # @return [Array] list of require files as an array, nil if require doesn't exist
   def self.expand_required_files(base_dir, file_paths)
     # ensure files are absolute
     Array(file_paths).map! do |f|
