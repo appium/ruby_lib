@@ -18,11 +18,11 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'awesome_print', '~> 1.6'
   s.add_runtime_dependency 'json', '~> 1.8'
   s.add_runtime_dependency 'tomlrb', '~> 1.1'
-  s.add_runtime_dependency 'nokogiri', '~> 1.6.6'
+  s.add_runtime_dependency 'nokogiri', '~> 1.6', '>= 1.6.6'
 
   s.add_development_dependency 'posix-spawn', '~> 0.3'
   s.add_development_dependency 'hashdiff', '~> 0.2.2'
-  s.add_development_dependency 'spec', '~> 5.3.4'
+  s.add_development_dependency 'spec', '~> 5.3', '>= 5.3.4'
   s.add_development_dependency 'fakefs', '~> 0.6.7'
 
   s.add_development_dependency 'rake', '~> 10.4'

@@ -19,7 +19,7 @@ describe 'device/device' do
 
   t 'lock' do
     lock 5
-    tag('UIAButton').name.must_equal 'SlideToUnlock'
+    tag(UI::Inventory.button).name.must_equal 'SlideToUnlock'
 
     # It appears that lockForDuration doesn't.
     close_app
@@ -43,7 +43,7 @@ describe 'device/device' do
   t 'close and launch' do
     close_app
     launch_app
-    tag('UIANavigationBar').name.must_equal 'UICatalog'
+    tag(UI::Inventory.navbar).name.must_equal 'UICatalog'
   end
 
   t 'reset' do

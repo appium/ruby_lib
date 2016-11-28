@@ -1,7 +1,8 @@
 [caps]
 platformName = "ios"
-platformVersion = "9.3"
+platformVersion = "10.1"
 deviceName ="iPhone Simulator"
+automationName = 'xcuitest'
 app = "./UICatalog.app"
 
 [appium_lib]

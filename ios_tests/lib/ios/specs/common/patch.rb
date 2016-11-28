@@ -48,7 +48,7 @@ describe 'common/patch.rb' do
       ensure
         set_wait
       end
-      value.must_equal 'Invalid locator strategy: css selector'
+      value.must_equal "Locator Strategy 'css selector' is not supported for this session"
     end
   end
 end

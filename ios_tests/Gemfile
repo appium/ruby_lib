@@ -1,2 +1,4 @@
 source 'https://rubygems.org'
 gemspec path: File.expand_path('../../', __FILE__) # __dir__ fails on 1.9
+
+gem 'appium_console'

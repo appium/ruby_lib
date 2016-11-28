@@ -1,5 +1,41 @@
 module Appium
   module Ios
+    class UITestElementsPrinter < Nokogiri::XML::SAX::Document
+      attr_accessor :filter
+
+      def start_element(type, attrs = [])
+        return if filter && !filter.eql?(type)
+        page = attrs.inject({}) do |hash, attr|
+          hash[attr[0]] = attr[1] if %w(name label value hint).include?(attr[0])
+          hash
+        end
+        _print_attr(type, page['name'], page['label'], page['value'], page['hint'])
+      end
+
+      def _print_attr(type, name, label, value, hint)
+        if name == label && name == value
+          puts "#{type}" if name || label || value || hint
+          puts "   name, label, value: #{name}" if name
+          puts "   hint: #{hint}" if hint
+        elsif name == label
+          puts "#{type}" if name || label || value || hint
+          puts "   name, label: #{name}" if name
+          puts "   value: #{value}" if value
+          puts "   hint: #{hint}" if hint
+        elsif name == value
+          puts "#{type}" if name || label || value || hint
+          puts "   name, value: #{name}" if name
+          puts "  label: #{label}" if label
+          puts "   hint: #{hint}" if hint
+        else
+          puts "#{type}" if name || label || value || hint
+          puts "   name: #{name}" if name
+          puts "  label: #{label}" if label
+          puts "  value: #{value}" if value
+          puts "   hint: #{hint}" if hint
+        end
+      end
+    end
     # iOS only. On Android uiautomator always returns an empty string for EditText password.
     #
     # Password character returned from value of UIASecureTextField
@@ -143,14 +179,13 @@ module Appium
         parser.parse s
         parser.document.result
       else
-        if window_number == -1
-          # if the 0th window has no children, find the next window that does.
-          target_window = source_window 0
-          target_window = source_window 1 if target_window['children'].empty?
-          get_page target_window, class_name
-        else
-          get_page source_window(window_number || 0), class_name
+
+        s = source_window(window_number || 0)
+        parser = Nokogiri::XML::SAX::Parser.new(UITestElementsPrinter.new)
+        if class_name
+          parser.document.filter = class_name.is_a?(Symbol) ? class_name.to_s : class_name
         end
+        parser.parse s
         nil
       end
     end
@@ -158,12 +193,12 @@ module Appium
     # Gets the JSON source of window number
     # @param window_number [Integer] the int index of the target window
     # @return [JSON]
-    def source_window(window_number = 0)
+    def source_window(_window_number = 0)
       # appium 1.0 still returns JSON when getTree() is invoked so this
       # doesn't need to change to XML. If getTree() is removed then
       # source_window will need to parse the elements of getTreeForXML()\
       # https://github.com/appium/appium-uiauto/blob/247eb71383fa1a087ff8f8fc96fac25025731f3f/uiauto/appium/element.js#L145
-      execute_script "UIATarget.localTarget().frontMostApp().windows()[#{window_number}].getTree()"
+      get_source
     end
 
     # Prints parsed page source to console.
@@ -213,7 +248,11 @@ module Appium
 
     # @private
     def string_attr_exact(class_name, attr, value)
-      %(//#{class_name}[@visible="true" and @#{attr}='#{value}'])
+      if attr == '*'
+        %((//#{class_name})[@*[.='#{value}']])
+      else
+        %((//#{class_name})[@#{attr}='#{value}'])
+      end
     end
 
     # Find the first element exactly matching class and attribute value.
@@ -238,7 +277,11 @@ module Appium
 
     # @private
     def string_attr_include(class_name, attr, value)
-      %(//#{class_name}[@visible="true" and contains(translate(@#{attr},'#{value.upcase}', '#{value}'), '#{value}')])
+      if attr == '*'
+        %((//#{class_name})[@*[contains(translate(.,'#{value.upcase}', '#{value}'), '#{value}')]])
+      else
+        %((//#{class_name})[contains(translate(@#{attr},'#{value.upcase}', '#{value}'), '#{value}')])
+      end
     end
 
     # Get the first tag by attribute that exactly matches value.
@@ -265,15 +308,16 @@ module Appium
     # @param class_name [String] the tag to match
     # @return [Element]
     def first_ele(class_name)
-      # XPath index starts at 1
-      ele_index class_name, 1
+      @driver.find_element :xpath, "(//#{class_name})"
     end
 
     # Get the last tag that matches class_name
     # @param class_name [String] the tag to match
     # @return [Element]
     def last_ele(class_name)
-      ele_index class_name, 'last()'
+      result = @driver.find_elements :xpath, "(//#{class_name})"
+      fail _no_such_element if result.empty?
+      result.last
     end
 
     # Returns the first visible element matching class_name
@@ -281,10 +325,7 @@ module Appium
     # @param class_name [String] the class_name to search for
     # @return [Element]
     def tag(class_name)
-      ele_by_json(
-        typeArray:   [class_name],
-        onlyVisible: true
-      )
+      first_ele(class_name)
     end
 
     # Returns all visible elements matching class_name
@@ -292,10 +333,7 @@ module Appium
     # @param class_name [String] the class_name to search for
     # @return [Element]
     def tags(class_name)
-      eles_by_json(
-        typeArray:   [class_name],
-        onlyVisible: true
-      )
+      @driver.find_elements :xpath, "(//#{class_name})"
     end
 
     # @private
@@ -539,15 +577,15 @@ module Appium
       # $._elementOrElementsByType will validate that the window isn't nil
       element_or_elements_by_type = <<-JS
         (function() {
-        var opts = #{opts.to_json};
-        var result = false;
+          var selector = #{type_array.first};
+          var result = false;
 
-        try {
-          result = $._elementOrElementsByType($.mainWindow(), opts);
-        } catch (e) {
-        }
+          try {
+            result = driver.findNativeElementOrElements('class name', selector, false);
+          } catch (e) {
+          }
 
-        return result;
+          return result;
         })();
       JS
 
