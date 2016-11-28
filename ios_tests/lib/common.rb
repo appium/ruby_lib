@@ -38,7 +38,7 @@ module UI
     private
 
     def self.xcuitest?
-      $driver.automation_name && $driver.automation_name == 'XCUITest'
+      $driver.automation_name && $driver.automation_name == 'xcuitest'
     end
 
     public

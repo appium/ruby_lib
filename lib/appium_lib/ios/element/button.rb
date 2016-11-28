@@ -5,7 +5,7 @@ module Appium
 
     # @private
     def _button_elem
-      if @automation_name && @automation_name == 'XCUITest'
+      if @automation_name && @automation_name == 'xcuitest'
         'XCUIElementTypeButton'
       else
         'UIAButton'

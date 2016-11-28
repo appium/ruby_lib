@@ -5,7 +5,7 @@ module Appium
 
     # @private
     def _static_text_elem
-      if @automation_name && @automation_name == 'XCUITest'
+      if @automation_name && @automation_name == 'xcuitest'
         'XCUIElementTypeStaticText'
       else
         'UIAStaticText'

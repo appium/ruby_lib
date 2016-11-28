@@ -4,7 +4,7 @@ module Appium
 
     # @private
     def _text_field_elem
-      if @automation_name && @automation_name == 'XCUITest'
+      if @automation_name && @automation_name == 'xcuitest'
         'XCUIElementTypeTextField'
       else
         'UIATextField'
@@ -13,7 +13,7 @@ module Appium
 
     # @private
     def _secure_text_field_elem
-      if @automation_name && @automation_name == 'XCUITest'
+      if @automation_name && @automation_name == 'xcuitest'
         'XCUIElementTypeSecureTextField'
       else
         'UIASecureTextField'
