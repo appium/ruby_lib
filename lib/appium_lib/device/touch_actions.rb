@@ -146,7 +146,7 @@ module Appium
 
       press x: start_x, y: start_y
       wait(duration) if duration
-      move_to x: delta_x, y: delta_y
+      move_to x: start_x + delta_x, y: start_y + delta_y
       release
       self
     end
