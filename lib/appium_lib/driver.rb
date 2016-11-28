@@ -176,10 +176,11 @@ module Appium
       # noinspection RubyResolve
       $driver.public_methods(false).each do |m|
         const.send(:define_singleton_method, m) do |*args, &block|
-          begin
-            super(*args, &block) # promote.rb
-          rescue NoMethodError, ArgumentError
-            $driver.send m, *args, &block if $driver.respond_to?(m)
+          # -1 is args*
+          if self.respond_to?(m) && ([-1, args.length].include? self.method(m).arity)
+            self.method(:m).call(*args, &block)
+          elsif $driver.respond_to?(m)
+            $driver.send m, *args, &block
           end
           # override unless there's an existing method with matching arity
         end unless const.respond_to?(m) && const.method(m).arity == $driver.method(m).arity
@@ -218,16 +219,11 @@ module Appium
       $driver.public_methods(false).each do |m|
         klass.class_eval do
           define_method m do |*args, &block|
-            begin
-              # Prefer existing method.
-              # super will invoke method missing on driver
-              super(*args, &block)
-
-              # minitest also defines a name method,
-              # so rescue argument error
-              # and call the name method on $driver
-            rescue NoMethodError, ArgumentError
-              $driver.send m, *args, &block if $driver.respond_to?(m)
+            # -1 is args*
+            if self.respond_to?(m) && ([-1, args.length].include? self.method(m).arity)
+              self.method(:m).call(*args, &block)
+            elsif $driver.respond_to?(m)
+              $driver.send m, *args, &block
             end
           end
         end
