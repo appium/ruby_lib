@@ -318,7 +318,7 @@ module Appium
     # @return [Element]
     def first_ele(class_name)
       if automation_name_is_xcuitest?
-        @driver.find_element :xpath, "(//#{class_name})"
+        @driver.find_element :class, class_name
       else
         ele_index class_name, 1
       end
@@ -355,7 +355,7 @@ module Appium
     # @return [Element]
     def tags(class_name)
       if automation_name_is_xcuitest?
-        @driver.find_elements :xpath, "(//#{class_name})"
+        @driver.find_elements :class, class_name
       else
         ele_by_json(typeArray: [class_name], onlyVisible: true)
       end

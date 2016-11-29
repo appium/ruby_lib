@@ -26,6 +26,18 @@ module Appium
       %(#{_text_field_elem} | //#{_secure_text_field_elem})
     end
 
+    # @private
+    # for XCUITest
+    def _textfield_with_xpath
+      xpath "//#{_textfields}"
+    end
+
+    # @private
+    # for XCUITest
+    def _textfields_with_xpath
+      xpaths "//#{_textfields}"
+    end
+
     # Appium
     def _textfield_visible
       { typeArray: [UIATextField, UIASecureTextField], onlyVisible: true }
@@ -55,15 +67,14 @@ module Appium
       if value.is_a? Numeric
         index = value
         fail "#{index} is not a valid index. Must be >= 1" if index <= 0
-
-        if automation_name_is_xcuitest?
-          return ele_index _textfields, index
-        else
-          index -= 1 # eles_by_json is 0 indexed.
-          result = eles_by_json(_textfield_visible)[index]
-          fail _no_such_element if result.nil?
-          return result
-        end
+        index -= 1 # eles_by_json and _textfields_with_xpath is 0 indexed.
+        result = if automation_name_is_xcuitest?
+                   _textfields_with_xpath[index]
+                 else
+                   eles_by_json(_textfield_visible)[index]
+                 end
+        fail _no_such_element if result.nil?
+        return result
 
       end
 
@@ -80,7 +91,7 @@ module Appium
     # @return [Array<TextField>]
     def textfields(value = false)
       if automation_name_is_xcuitest?
-        return tags(_textfields) unless value
+        return _textfields_with_xpath unless value
         find_eles_by_attr_include _textfields, '*', value
       else
         return eles_by_json _textfield_visible unless value
@@ -92,7 +103,7 @@ module Appium
     # @return [TextField]
     def first_textfield
       if automation_name_is_xcuitest?
-        first_ele _textfields
+        _textfield_with_xpath
       else
         ele_by_json _textfield_visible
       end
@@ -101,13 +112,13 @@ module Appium
     # Find the last TextField.
     # @return [TextField]
     def last_textfield
-      if automation_name_is_xcuitest?
-        last_ele _textfields
-      else
-        result = eles_by_json(_textfield_visible).last
-        fail _no_such_element if result.nil?
-        result
-      end
+      result = if automation_name_is_xcuitest?
+                 _textfields_with_xpath.last
+               else
+                 eles_by_json(_textfield_visible).last
+               end
+      fail _no_such_element if result.nil?
+      result
     end
 
     # Find the first TextField that exactly matches value.

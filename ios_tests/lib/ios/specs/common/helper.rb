@@ -181,10 +181,7 @@ describe 'common/helper.rb' do
   end
 
   # TODO: write tests
-  # get_page_class
   # page_class
-  # tag
-  # tags
   # px_to_window_rel
   # lazy_load_strings
   # xml_keys

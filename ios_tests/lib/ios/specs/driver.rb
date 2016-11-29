@@ -149,6 +149,10 @@ describe 'driver' do
       driver.browser.must_be_empty
     end
 
+    t 'automation_name_is_xcuitest?' do
+      automation_name_is_xcuitest?.must_equal UI::Inventory.xcuitest?
+    end
+
     #
     # Skip:
     #    screenshot   # this is slow and already tested by Appium

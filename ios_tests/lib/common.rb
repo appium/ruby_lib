@@ -34,7 +34,7 @@ end
 module UI
   module Inventory
     def self.xcuitest?
-      $driver.automation_name && $driver.automation_name == 'xcuitest'
+      $driver.automation_name_is_xcuitest?
     end
 
     def self.navbar
