@@ -14,8 +14,14 @@ module Appium
 
         # Cross platform way of entering text into a textfield
         def type(text)
-          # type
-          $driver.execute_script %(au.getElement('#{ref}').setValue('#{text}');)
+          # XCUITest doesn't support JS command
+          if $driver.automation_name_is_xcuitest?
+            send_keys text
+            $driver.hide_keyboard # without hide keyboard, test in ios/patch fails
+          else
+            # type
+            $driver.execute_script %(au.getElement('#{ref}').setValue('#{text}');)
+          end
         end # def type
       end # Selenium::WebDriver::Element.class_eval
     end # def patch_webdriver_element

@@ -37,7 +37,7 @@ describe 'driver' do
       actual[:caps][:app] = File.basename actual[:caps][:app]
       expected            = { caps:             { platformName: 'ios',
                                                   platformVersion: '10.1',
-                                                  automationName: 'xcuitest',
+                                                  automationName: 'XCUITest',
                                                   deviceName:   'iPhone Simulator',
                                                   app:          'UICatalog.app' },
                               custom_url:       false,
@@ -146,7 +146,7 @@ describe 'driver' do
     end
 
     t 'driver' do
-      driver.browser.must_equal :iOS
+      driver.browser.must_be_empty
     end
 
     #
@@ -189,6 +189,7 @@ describe 'driver' do
 
     # simple integration sanity test to check for unexpected exceptions
     t 'set_location' do
+      return true if UI::Inventory.xcuitest? # doesn't support https://github.com/appium/appium-xcuitest-driver/blob/v2.2.0/docs/endpoints.md
       set_location latitude: 55, longitude: -72, altitude: 33
     end
 
@@ -204,10 +205,13 @@ describe 'driver' do
 
     # settings
     t 'get settings' do
+      return true if UI::Inventory.xcuitest? # doesn't support https://github.com/appium/appium-xcuitest-driver/blob/v2.2.0/docs/endpoints.md
       get_settings.wont_be_nil
     end
 
     t 'update settings' do
+      return true if UI::Inventory.xcuitest? # doesn't support https://github.com/appium/appium-xcuitest-driver/blob/v2.2.0/docs/endpoints.md
+
       update_settings cyberdelia: 'open'
       get_settings['cyberdelia'].must_equal 'open'
     end

@@ -331,7 +331,7 @@ module Appium
       @appium_device = @caps[:platformName]
       @appium_device = @appium_device.is_a?(Symbol) ? @appium_device : @appium_device.downcase.strip.intern if @appium_device
 
-      @automation_name = @caps[:automationName].downcase if @caps[:automationName]
+      @automation_name = @caps[:automationName] if @caps[:automationName]
 
       # load common methods
       extend Appium::Common
@@ -388,6 +388,10 @@ module Appium
 
     def device_is_android?
       @appium_device == :android
+    end
+
+    def automation_name_is_xcuitest?
+      @automation_name && @automation_name.downcase == 'xcuitest'
     end
 
     # Returns the server's version info

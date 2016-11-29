@@ -194,6 +194,7 @@ module Appium
     # @param window_number [Integer] the int index of the target window
     # @return [JSON]
     def source_window(_window_number = 0)
+      # TODO: update comments
       # appium 1.0 still returns JSON when getTree() is invoked so this
       # doesn't need to change to XML. If getTree() is removed then
       # source_window will need to parse the elements of getTreeForXML()\
@@ -248,10 +249,14 @@ module Appium
 
     # @private
     def string_attr_exact(class_name, attr, value)
-      if attr == '*'
-        %((//#{class_name})[@*[.='#{value}']])
+      if automation_name_is_xcuitest?
+        if attr == '*'
+          %((//#{class_name})[@*[.='#{value}']])
+        else
+          %((//#{class_name})[@#{attr}='#{value}'])
+        end
       else
-        %((//#{class_name})[@#{attr}='#{value}'])
+        %(//#{class_name}[@visible="true" and @#{attr}='#{value}'])
       end
     end
 
@@ -277,10 +282,14 @@ module Appium
 
     # @private
     def string_attr_include(class_name, attr, value)
-      if attr == '*'
-        %((//#{class_name})[@*[contains(translate(.,'#{value.upcase}', '#{value}'), '#{value}')]])
+      if automation_name_is_xcuitest?
+        if attr == '*'
+          %((//#{class_name})[@*[contains(translate(., '#{value.upcase}', '#{value}'), '#{value}')]])
+        else
+          %((//#{class_name})[contains(translate(@#{attr}, '#{value.upcase}', '#{value}'), '#{value}')])
+        end
       else
-        %((//#{class_name})[contains(translate(@#{attr},'#{value.upcase}', '#{value}'), '#{value}')])
+        %(//#{class_name}[@visible="true" and contains(translate(@#{attr},'#{value.upcase}', '#{value}'), '#{value}')])
       end
     end
 
@@ -308,16 +317,24 @@ module Appium
     # @param class_name [String] the tag to match
     # @return [Element]
     def first_ele(class_name)
-      @driver.find_element :xpath, "(//#{class_name})"
+      if automation_name_is_xcuitest?
+        @driver.find_element :xpath, "(//#{class_name})"
+      else
+        ele_index class_name, 1
+      end
     end
 
     # Get the last tag that matches class_name
     # @param class_name [String] the tag to match
     # @return [Element]
     def last_ele(class_name)
-      result = @driver.find_elements :xpath, "(//#{class_name})"
-      fail _no_such_element if result.empty?
-      result.last
+      if automation_name_is_xcuitest?
+        result = @driver.find_elements :xpath, "(//#{class_name})"
+        fail _no_such_element if result.empty?
+        result.last
+      else
+        ele_index class_name, 'last()'
+      end
     end
 
     # Returns the first visible element matching class_name
@@ -325,7 +342,11 @@ module Appium
     # @param class_name [String] the class_name to search for
     # @return [Element]
     def tag(class_name)
-      first_ele(class_name)
+      if automation_name_is_xcuitest?
+        first_ele(class_name)
+      else
+        ele_by_json(typeArray: [class_name], onlyVisible: true)
+      end
     end
 
     # Returns all visible elements matching class_name
@@ -333,7 +354,11 @@ module Appium
     # @param class_name [String] the class_name to search for
     # @return [Element]
     def tags(class_name)
-      @driver.find_elements :xpath, "(//#{class_name})"
+      if automation_name_is_xcuitest?
+        @driver.find_elements :xpath, "(//#{class_name})"
+      else
+        ele_by_json(typeArray: [class_name], onlyVisible: true)
+      end
     end
 
     # @private

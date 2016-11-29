@@ -18,7 +18,11 @@ describe 'ios/helper' do
   # t 'page' do # writes to std out
 
   t 'source_window' do
-    source_window.length.must_equal 11
+    if UI::Inventory.xcuitest?
+      source_window.length.must_equal 1_4632
+    else
+      source_window.length.must_equal 1_4515
+    end
   end
 
   # TODO: t 'page_window' do

@@ -3,18 +3,18 @@ describe 'ios/element/alert' do
   def nav_once
     screen.must_equal catalog
     wait_true do
-      text('alerts').click
+      UI::Inventory.xcuitest? ? find_element(:name, 'Alerts').click : text('alerts').click
       tag(UI::Inventory.navbar).name == 'Alerts' # wait for true
     end
-
-    tag(UI::Inventory.navbar).name.must_equal 'Alerts'
 
     # redefine method as no-op after it's invoked once
     self.class.send :define_method, :nav_once, proc {}
   end
 
   def after_last
-    alert_accept if exists { text('UIActionSheet <title>') }
+    alert_accept if exists do
+      UI::Inventory.xcuitest? ? find_elements(:name, 'UIActionSheet <title>') : text('UIActionSheet <title>')
+    end
     back_click
     screen.must_equal catalog
     sleep 1
@@ -27,9 +27,13 @@ describe 'ios/element/alert' do
 
   def open_alert
     wait_true do
-      return true if exists { text('UIActionSheet <title>') }
-      text('Show OK-Cancel').click
-      text('UIActionSheet <title>').displayed?
+      if  UI::Inventory.xcuitest?
+        find_element(:name, 'Show OK-Cancel').click
+        find_element(:name, 'UIActionSheet <title>').displayed?
+      else
+        text('Show OK-Cancel').click
+        text('UIActionSheet <title>').displayed?
+      end
     end
   end
 
