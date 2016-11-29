@@ -385,7 +385,8 @@ module Appium
       }
     end
 
-    # Find the first element that contains value
+    # Find the first element that contains value.
+    # For Appium(automation name), not XCUITest
     # @param element [String] the class name for the element
     # @param value [String] the value to search for
     # @return [Element]
@@ -394,6 +395,7 @@ module Appium
     end
 
     # Find all elements containing value
+    # For Appium(automation name), not XCUITest
     # @param element [String] the class name for the element
     # @param value [String] the value to search for
     # @return [Array<Element>]
@@ -423,6 +425,7 @@ module Appium
     end
 
     # Find the first element exactly matching value
+    # For Appium(automation name), not XCUITest
     # @param element [String] the class name for the element
     # @param value [String] the value to search for
     # @return [Element]
@@ -431,6 +434,7 @@ module Appium
     end
 
     # Find all elements exactly matching value
+    # For Appium(automation name), not XCUITest
     # @param element [String] the class name for the element
     # @param value [String] the value to search for
     # @return [Element]
@@ -602,11 +606,11 @@ module Appium
       # $._elementOrElementsByType will validate that the window isn't nil
       element_or_elements_by_type = <<-JS
         (function() {
-          var selector = #{type_array.first};
+          var opts = #{opts.to_json};
           var result = false;
 
           try {
-            result = driver.findNativeElementOrElements('class name', selector, false);
+            result = $._elementOrElementsByType($.mainWindow(), opts);
           } catch (e) {
           }
 
@@ -618,6 +622,7 @@ module Appium
       res ? res : fail(Selenium::Client::CommandError, 'mainWindow is nil')
     end
 
+    # For Appium(automation name), not XCUITest
     # example usage:
     #
     # eles_by_json({
