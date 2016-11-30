@@ -137,7 +137,8 @@ describe 'common/helper.rb' do
 
   t 'find_eles_by_attr_include' do
     ele_count = find_eles_by_attr_include(UI::Inventory.static_text, :name, 'e').length
-    ele_count.must_equal 20
+    expected = UI::Inventory.xcuitest? ? 20 : 19
+    ele_count.must_equal expected
   end
 
   t 'first_ele' do
@@ -145,9 +146,17 @@ describe 'common/helper.rb' do
   end
 
   t 'last_ele' do
+    expected = UI::Inventory.xcuitest? ? 'Shows UIViewAnimationTransitions' : 'Transitions'
+
     el = last_ele(UI::Inventory.static_text)
-    el.text.must_equal 'Shows UIViewAnimationTransitions'
-    el.name.must_equal 'Shows UIViewAnimationTransitions'
+    el.text.must_equal expected
+    el.name.must_equal expected
+  end
+
+  t 'id' do
+    return true if UI::Inventory.xcuitest?
+
+    id 'ButtonsExplain' # 'Various uses of UIButton'
   end
 
   # t 'source' do # tested by get_source

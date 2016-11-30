@@ -217,7 +217,7 @@ module Appium
     # @param id [String] the id to search for
     # @return [Element]
     def id(id)
-      find_element :id, id
+      automation_name_is_xcuitest? ? find_element(:accessibility_id, id) : find_element(:id, id)
     end
 
     # Return the iOS version as an array of integers
@@ -357,7 +357,7 @@ module Appium
       if automation_name_is_xcuitest?
         @driver.find_elements :class, class_name
       else
-        ele_by_json(typeArray: [class_name], onlyVisible: true)
+        eles_by_json(typeArray: [class_name], onlyVisible: true)
       end
     end
 

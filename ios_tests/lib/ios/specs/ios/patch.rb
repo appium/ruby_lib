@@ -15,9 +15,9 @@ describe 'ios/patch' do
 
   t 'label' do
     if UI::Inventory.xcuitest?
-      find_element(:name, '<enter text>').label.must_equal 'Normal'
+      find_element(:name, '<enter text>').label.must_equal 'Rounded'
     else
-      text('<enter text>').label.must_equal 'Normal'
+      textfield('<enter text>').label.must_equal 'Rounded'
     end
   end
 
