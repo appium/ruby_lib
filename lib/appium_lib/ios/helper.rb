@@ -217,7 +217,7 @@ module Appium
     # @param id [String] the id to search for
     # @return [Element]
     def id(id)
-      automation_name_is_xcuitest? ? find_element(:accessibility_id, id) : find_element(:id, id)
+      find_element(:id, id)
     end
 
     # Return the iOS version as an array of integers
