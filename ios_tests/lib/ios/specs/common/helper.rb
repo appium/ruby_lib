@@ -154,7 +154,7 @@ describe 'common/helper.rb' do
   end
 
   t 'id' do
-    return true if UI::Inventory.xcuitest?
+    fail NotImplementedError, "XCUITest doesn't support yet" if UI::Inventory.xcuitest?
 
     id 'ButtonsExplain' # 'Various uses of UIButton'
   end

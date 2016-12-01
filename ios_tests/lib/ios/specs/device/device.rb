@@ -18,7 +18,7 @@ describe 'device/device' do
   end
 
   t 'lock' do
-    return true if UI::Inventory.xcuitest? # Method has not yet been implemented
+    fail NotImplementedError, "XCUITest doesn't support yet" if UI::Inventory.xcuitest?
 
     lock 5
     tag(UI::Inventory.button).name.must_equal 'SlideToUnlock'
@@ -34,14 +34,14 @@ describe 'device/device' do
   end
 
   t 'app_installed' do
-    return true if UI::Inventory.xcuitest? # Method has not yet been implemented
+    fail NotImplementedError, "XCUITest doesn't support yet" if UI::Inventory.xcuitest?
 
     installed = app_installed? 'Derrp'
     installed.must_equal false
   end
 
   t 'shake' do
-    return true if UI::Inventory.xcuitest? # Method has not yet been implemented
+    fail NotImplementedError, "XCUITest doesn't support yet" if UI::Inventory.xcuitest?
 
     shake
   end
@@ -95,7 +95,7 @@ describe 'device/device' do
   t 'pull_file' do
     # Selenium::WebDriver::Error::UnknownError: An unknown server-side error occurred while processing the command.
     # Original error: Cannot read property 'getDir' of undefined
-    return true if UI::Inventory.xcuitest?
+    fail NotImplementedError, "XCUITest doesn't support yet" if UI::Inventory.xcuitest?
 
     read_file = pull_file 'Library/AddressBook/AddressBook.sqlitedb'
     read_file.start_with?('SQLite format').must_equal true
@@ -104,7 +104,7 @@ describe 'device/device' do
   t 'pull_folder' do
     # Selenium::WebDriver::Error::UnknownError: An unknown server-side error occurred while processing the command.
     # Original error: Cannot read property 'getDir' of undefined
-    return true if UI::Inventory.xcuitest?
+    fail NotImplementedError, "XCUITest doesn't support yet" if UI::Inventory.xcuitest?
 
     data = pull_folder 'Library/AddressBook'
     data.length.must_be :>, 1

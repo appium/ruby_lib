@@ -193,7 +193,7 @@ describe 'driver' do
 
     # simple integration sanity test to check for unexpected exceptions
     t 'set_location' do
-      return true if UI::Inventory.xcuitest? # doesn't support https://github.com/appium/appium-xcuitest-driver/blob/v2.2.0/docs/endpoints.md
+      fail NotImplementedError, "XCUITest doesn't support yet" if UI::Inventory.xcuitest?
       set_location latitude: 55, longitude: -72, altitude: 33
     end
 
@@ -209,12 +209,12 @@ describe 'driver' do
 
     # settings
     t 'get settings' do
-      return true if UI::Inventory.xcuitest? # doesn't support https://github.com/appium/appium-xcuitest-driver/blob/v2.2.0/docs/endpoints.md
+      fail NotImplementedError, "XCUITest doesn't support yet" if UI::Inventory.xcuitest?
       get_settings.wont_be_nil
     end
 
     t 'update settings' do
-      return true if UI::Inventory.xcuitest? # doesn't support https://github.com/appium/appium-xcuitest-driver/blob/v2.2.0/docs/endpoints.md
+      fail NotImplementedError, "XCUITest doesn't support yet" if UI::Inventory.xcuitest?
 
       update_settings cyberdelia: 'open'
       get_settings['cyberdelia'].must_equal 'open'

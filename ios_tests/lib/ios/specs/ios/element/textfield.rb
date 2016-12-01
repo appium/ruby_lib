@@ -34,8 +34,7 @@ describe 'ios/element/textfield' do
   end
 
   t 'predicate textfields' do
-    # skip when xcuitest because it doesn't support JS's script
-    return true if UI::Inventory.xcuitest?
+    fail NotImplementedError, "XCUITest doesn't support JS script" if UI::Inventory.xcuitest?
 
     textfield_count = execute_script(%(au.mainApp().getAllWithPredicate("type contains[c] 'textfield'", true))).length
     textfield_count.must_equal 4
