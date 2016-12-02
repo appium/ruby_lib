@@ -223,6 +223,10 @@ module Appium
     # Return the iOS version as an array of integers
     # @return [Array<Integer>]
     def ios_version
+      # TODO: I'd like to get /status from WDA
+      # https://github.com/facebook/WebDriverAgent/blob/abd60b03395a4074925e83f5a8c4510df0e73a42/WebDriverAgentLib/Commands/FBSessionCommands.m#L72
+      # https://github.com/appium/appium-xcuitest-driver/blob/0c36c7659373c1c82a1411e50fa2503920909624/lib/driver.js#L126
+      # if automation_name_is_xcuitest?
       ios_version = execute_script 'UIATarget.localTarget().systemVersion()'
       ios_version.split('.').map(&:to_i)
     end

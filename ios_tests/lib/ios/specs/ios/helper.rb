@@ -22,6 +22,10 @@ describe 'ios/helper' do
   end
 
   # TODO: t 'page_window' do
-  # TODO: t 'id' do
+
+  t 'id' do
+    id 'Buttons' # 'Various uses of UIButton'
+  end
+
   # TODO: t 'ios_version' do
 end

@@ -153,12 +153,6 @@ describe 'common/helper.rb' do
     el.name.must_equal expected
   end
 
-  t 'id' do
-    fail NotImplementedError, "XCUITest doesn't support yet" if UI::Inventory.xcuitest?
-
-    id 'ButtonsExplain' # 'Various uses of UIButton'
-  end
-
   # t 'source' do # tested by get_source
 
   t 'get_source' do
