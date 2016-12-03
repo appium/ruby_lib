@@ -267,6 +267,8 @@ module Appium
     attr_accessor :appium_device
     # Automation name sent to appium server
     attr_reader :automation_name
+    # Appium's server version
+    attr_reader :appium_server_version
     # Boolean debug mode for the Appium Ruby bindings
     attr_accessor :appium_debug
     # instance of AbstractEventListener for logging support
@@ -515,6 +517,13 @@ module Appium
       rescue Errno::ECONNREFUSED
         raise "ERROR: Unable to connect to Appium. Is the server running on #{server_url}?"
       end
+
+      @appium_server_version = appium_server_version
+
+      if automation_name_is_xcuitest?
+        raise ArgumentError, 'XCUITest requires over Appium 1.6.0' unless @appium_server_version['build']['version'] > '1.6'
+      end
+
 
       @driver.manage.timeouts.implicit_wait = @default_wait
 
