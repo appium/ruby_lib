@@ -84,14 +84,6 @@ describe 'device/device' do
     swipe start_x: 75, start_y: 500, delta_x: 0, delta_y: -500, duration: 800
   end
 
-  t 'pinch & zoom' do
-    wait { id('ImagesExplain').click }
-    # both of these appear to do nothing on iOS 8
-    zoom 200
-    pinch 75
-    go_back
-  end
-
   t 'pull_file' do
     # Selenium::WebDriver::Error::UnknownError: An unknown server-side error occurred while processing the command.
     # Original error: Cannot read property 'getDir' of undefined
