@@ -33,10 +33,10 @@ module Appium
         if $driver.automation_name_is_xcuitest?
           ele = $driver.find_element :class, 'XCUIElementTypeApplication'
           top = TouchAction.new
-          top.swipe({start_x: 1.0, start_y: 0.0, delta_x: -p, delta_y: p}, ele)
+          top.swipe({ start_x: 1.0, start_y: 0.0, delta_x: -p, delta_y: p }, ele)
 
           bottom = TouchAction.new
-          bottom.swipe({start_x: 0.0, start_y: 1.0, delta_x: p, delta_y: -p}, ele)
+          bottom.swipe({ start_x: 0.0, start_y: 1.0, delta_x: p, delta_y: -p }, ele)
         else
           top = TouchAction.new
           top.swipe start_x: 1.0, start_y: 0.0, delta_x: -p, delta_y: p, duration: 1
@@ -72,11 +72,11 @@ module Appium
 
           top = TouchAction.new
           # from 0.25, 0.75 => 1, 0
-          top.swipe({start_x: p, start_y: i, delta_x: i, delta_y: -i}, ele)
+          top.swipe({ start_x: p, start_y: i, delta_x: i, delta_y: -i }, ele)
 
           bottom = TouchAction.new
           # from 0.75, 0.25 => 0, 1
-          bottom.swipe({start_x: i, start_y: p, delta_x: -i, delta_y: i}, ele)
+          bottom.swipe({ start_x: i, start_y: p, delta_x: -i, delta_y: i }, ele)
         else
           top = TouchAction.new
           top.swipe start_x: p, start_y: i, delta_x: i, delta_y: -i, duration: 1
@@ -84,7 +84,6 @@ module Appium
           bottom = TouchAction.new
           bottom.swipe start_x: i, start_y: p, delta_x: -i, delta_y: i, duration: 1
         end
-
 
         zoom = MultiTouch.new
         zoom.add top

@@ -521,9 +521,8 @@ module Appium
       @appium_server_version = appium_server_version
 
       if automation_name_is_xcuitest?
-        raise ArgumentError, 'XCUITest requires over Appium 1.6.0' unless @appium_server_version['build']['version'] > '1.6'
+        fail ArgumentError, 'XCUITest requires over Appium 1.6.0' unless @appium_server_version['build']['version'] > '1.6'
       end
-
 
       @driver.manage.timeouts.implicit_wait = @default_wait
 
