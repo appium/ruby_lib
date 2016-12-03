@@ -29,7 +29,7 @@ describe 'ios/element/button' do
 
   t 'buttons' do
     exp = ['Back', 'Back', 'Gray', 'Right pointing arrow']
-    exp.push 'Add contact' if UI::Inventory.xcuitest?
+    exp.concat ['Custom Text', 'More info', 'More info', 'More info', 'Add contact'] if UI::Inventory.xcuitest?
 
     target_buttons = buttons('a')
     target_buttons.map(&:name).must_equal exp
