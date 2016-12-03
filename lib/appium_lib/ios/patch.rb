@@ -17,7 +17,6 @@ module Appium
           # XCUITest doesn't support JS command
           if $driver.automation_name_is_xcuitest?
             send_keys text
-            $driver.hide_keyboard # without hide keyboard, test in ios/patch fails
           else
             # type
             $driver.execute_script %(au.getElement('#{ref}').setValue('#{text}');)
