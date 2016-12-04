@@ -50,6 +50,8 @@ module Minitest
 end
 
 module Appium
+  REQUIRED_VERSION_XCUITEST = '1.6.0'
+
   # Load arbitrary text (toml format)
   #
   # ```
@@ -520,8 +522,8 @@ module Appium
 
       @appium_server_version = appium_server_version
 
-      if automation_name_is_xcuitest?
-        fail ArgumentError, 'XCUITest requires over Appium 1.6.0' unless @appium_server_version['build']['version'] > '1.6'
+      if automation_name_is_xcuitest? && (@appium_server_version['build']['version'] <= REQUIRED_VERSION_XCUITEST)
+        fail ArgumentError, "XCUITest requires over Appium #{REQUIRED_VERSION_XCUITEST}"
       end
 
       @driver.manage.timeouts.implicit_wait = @default_wait

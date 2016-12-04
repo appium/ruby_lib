@@ -71,11 +71,9 @@ module Appium
           ele = $driver.find_element :class, 'XCUIElementTypeApplication'
 
           top = TouchAction.new
-          # from 0.25, 0.75 => 1, 0
           top.swipe({ start_x: p, start_y: i, delta_x: i, delta_y: -i }, ele)
 
           bottom = TouchAction.new
-          # from 0.75, 0.25 => 0, 1
           bottom.swipe({ start_x: i, start_y: p, delta_x: -i, delta_y: i }, ele)
         else
           top = TouchAction.new
