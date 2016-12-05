@@ -1,8 +1,8 @@
 # XCUIElementTypeButton methods
 module Appium
   module Ios
-    UIAButton = 'UIAButton'
-    XCUIElementTypeButton = 'XCUIElementTypeButton'
+    UIAButton = 'UIAButton'.freeze
+    XCUIElementTypeButton = 'XCUIElementTypeButton'.freeze
 
     private
 

@@ -1,10 +1,10 @@
 module Appium
   module Ios
-    UIATextField = 'UIATextField'
-    UIASecureTextField = 'UIASecureTextField'
+    UIATextField = 'UIATextField'.freeze
+    UIASecureTextField = 'UIASecureTextField'.freeze
 
-    XCUIElementTypeTextField = 'XCUIElementTypeTextField'
-    XCUIElementTypeSecureTextField = 'XCUIElementTypeSecureTextField'
+    XCUIElementTypeTextField = 'XCUIElementTypeTextField'.freeze
+    XCUIElementTypeSecureTextField = 'XCUIElementTypeSecureTextField'.freeze
 
     private
 

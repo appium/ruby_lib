@@ -9,6 +9,7 @@ require_relative 'common/helper'
 require_relative 'common/wait'
 require_relative 'common/patch'
 require_relative 'common/version'
+require_relative 'common/error'
 require_relative 'common/element/window'
 
 # ios
@@ -50,7 +51,7 @@ module Minitest
 end
 
 module Appium
-  REQUIRED_VERSION_XCUITEST = '1.6.0'
+  REQUIRED_VERSION_XCUITEST = '1.6.0'.freeze
 
   # Load arbitrary text (toml format)
   #
@@ -394,8 +395,21 @@ module Appium
       @appium_device == :android
     end
 
+    # Return true if automationName is 'XCUITest'
+    # @return Boolean
     def automation_name_is_xcuitest?
-      @automation_name && @automation_name.downcase == 'xcuitest'
+      return true if @automation_name && @automation_name.downcase == 'xcuitest'
+      false
+    end
+
+    # Return true if the target Appium server is over REQUIRED_VERSION_XCUITEST.
+    # If the Appium server is under REQUIRED_VERSION_XCUITEST, then error is raised.
+    # @return Boolean
+    def check_server_version_xcuitest
+      if automation_name_is_xcuitest? && (@appium_server_version['build']['version'] <= REQUIRED_VERSION_XCUITEST)
+        fail Appium::Error::NotSupportedAppiumServer, "XCUITest requires over Appium #{REQUIRED_VERSION_XCUITEST}"
+      end
+      true
     end
 
     # Returns the server's version info
@@ -522,9 +536,7 @@ module Appium
 
       @appium_server_version = appium_server_version
 
-      if automation_name_is_xcuitest? && (@appium_server_version['build']['version'] <= REQUIRED_VERSION_XCUITEST)
-        fail ArgumentError, "XCUITest requires over Appium #{REQUIRED_VERSION_XCUITEST}"
-      end
+      check_server_version_xcuitest
 
       @driver.manage.timeouts.implicit_wait = @default_wait
 

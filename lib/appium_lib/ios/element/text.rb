@@ -1,8 +1,8 @@
 # UIAStaticText|XCUIElementTypeStaticText methods
 module Appium
   module Ios
-    IAStaticText = 'UIAStaticText'
-    XCUIElementTypeStaticText = 'XCUIElementTypeStaticText'
+    IAStaticText = 'UIAStaticText'.freeze
+    XCUIElementTypeStaticText = 'XCUIElementTypeStaticText'.freeze
 
     private
 
