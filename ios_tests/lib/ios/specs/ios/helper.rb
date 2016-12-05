@@ -27,5 +27,7 @@ describe 'ios/helper' do
     id 'Buttons' # 'Various uses of UIButton'
   end
 
-  # TODO: t 'ios_version' do
+  t 'ios_version' do
+    ios_version.wont_be_empty
+  end
 end
