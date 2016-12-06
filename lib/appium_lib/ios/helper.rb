@@ -447,6 +447,7 @@ module Appium
     end
 
     # @private
+    # For Appium(automation name), not XCUITest
     # If there's no keyboard, then do nothing.
     # If there's no close key, fallback to window tap.
     # If close key is present then tap it.
@@ -560,6 +561,7 @@ module Appium
       end
     end
 
+    # For Appium(automation name), not XCUITest
     # typeArray - array of string types to search for. Example: ["UIAStaticText"]
     # onlyFirst - boolean. returns only the first result if true. Example: true
     # onlyVisible - boolean. returns only visible elements if true. Example: true

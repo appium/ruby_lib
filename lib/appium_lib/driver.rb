@@ -397,8 +397,7 @@ module Appium
     # Return true if automationName is 'XCUITest'
     # @return Boolean
     def automation_name_is_xcuitest?
-      return true if @automation_name && @automation_name.downcase == 'xcuitest'
-      false
+      !@automation_name.nil? && @automation_name.downcase == 'xcuitest'
     end
 
     # Return true if the target Appium server is over REQUIRED_VERSION_XCUITEST.
