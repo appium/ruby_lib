@@ -1,6 +1,3 @@
-require 'net/https' # to get status against WDA
-require 'json'      # to get status against WDA
-
 module Appium
   module Ios
     class UITestElementsPrinter < Nokogiri::XML::SAX::Document
@@ -226,25 +223,12 @@ module Appium
     # Return the iOS version as an array of integers
     # @return [Array<Integer>]
     def ios_version
-      # https://github.com/facebook/WebDriverAgent/blob/abd60b03395a4074925e83f5a8c4510df0e73a42/WebDriverAgentLib/Commands/FBSessionCommands.m#L72
-      # https://github.com/appium/appium-xcuitest-driver/blob/0c36c7659373c1c82a1411e50fa2503920909624/lib/driver.js#L126
       if automation_name_is_xcuitest?
-        status = get_wda_status
-        status['value']['os']['version'] # 10.1
+        @driver.capabilities['platformVersion']
       else
         ios_version = execute_script 'UIATarget.localTarget().systemVersion()'
         ios_version.split('.').map(&:to_i)
       end
-    end
-
-    # Returns iOS status as WDA status
-    # @return [Hash] e.g. {"value"=>{"state"=>"success", "os"=>{"name"=>"iOS", "version"=>"10.1"},
-    #                      "ios"=>{"simulatorVersion"=>"10.1"}, "build"=>{"time"=>"Dec  6 2016 03:09:12"}},
-    #                      "sessionId"=>"923F30D0-683D-4A78-B015-B088AF6AEFF0", "status"=>0}
-    def get_wda_status
-      uri = URI "#{wda_url}/status"
-      res2 = Net::HTTP.get(uri)
-      JSON.parse(res2)
     end
 
     # Get the element of type class_name at matching index.

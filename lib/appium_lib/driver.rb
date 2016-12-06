@@ -276,10 +276,6 @@ module Appium
     attr_accessor :appium_debug
     # instance of AbstractEventListener for logging support
     attr_accessor :listener
-
-    # Only for XCUITest. Custom URL for WebDriverAgent.
-    attr_accessor :wda_custom_url
-
     # Returns the driver
     # @return [Driver] the driver
     attr_reader :driver
@@ -340,10 +336,6 @@ module Appium
       @appium_device = @appium_device.is_a?(Symbol) ? @appium_device : @appium_device.downcase.strip.intern if @appium_device
 
       @automation_name = @caps[:automationName] if @caps[:automationName]
-
-      # for XCUITest
-      @wda_local_port = automation_name_is_xcuitest? ? (@caps[:wdaLocalPort] || 8100) : nil
-      @wda_custom_url = nil
 
       # load common methods
       extend Appium::Common
@@ -483,11 +475,6 @@ module Appium
       else
         "http://127.0.0.1:#{@appium_port}/wd/hub"
       end
-    end
-
-    def wda_url
-      return @wda_custom_url if @wda_custom_url
-      "http://localhost:#{@wda_local_port}"
     end
 
     # Restarts the driver
