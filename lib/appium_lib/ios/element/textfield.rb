@@ -6,24 +6,22 @@ module Appium
     XCUIElementTypeTextField = 'XCUIElementTypeTextField'.freeze
     XCUIElementTypeSecureTextField = 'XCUIElementTypeSecureTextField'.freeze
 
+    # @return String Class name for text field
+    def text_field_class
+      automation_name_is_xcuitest? ? XCUIElementTypeTextField : UIATextField
+    end
+
+    # @return String Class name for secure text field
+    def secure_text_field_class
+      automation_name_is_xcuitest? ? XCUIElementTypeSecureTextField : UIASecureTextField
+    end
+
     private
 
     # @private
     # for XCUITest
-    def _text_field_elem
-      automation_name_is_xcuitest? ? XCUIElementTypeTextField : UIATextField
-    end
-
-    # @private
-    # for XCUITest
-    def _secure_text_field_elem
-      automation_name_is_xcuitest? ? XCUIElementTypeSecureTextField : UIASecureTextField
-    end
-
-    # @private
-    # for XCUITest
     def _textfields
-      %(#{_text_field_elem} | //#{_secure_text_field_elem})
+      %(#{text_field_class} | //#{secure_text_field_class})
     end
 
     # @private
@@ -60,6 +58,7 @@ module Appium
     public
 
     # Find the first TextField that contains value or by index.
+    # Note: Uses XPath
     # @param value [String, Integer] the text to match exactly.
     # If int then the TextField at that index is returned.
     # @return [TextField]

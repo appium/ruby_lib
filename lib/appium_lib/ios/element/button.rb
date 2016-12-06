@@ -4,14 +4,10 @@ module Appium
     UIAButton = 'UIAButton'.freeze
     XCUIElementTypeButton = 'XCUIElementTypeButton'.freeze
 
-    private
-
-    # @private
-    def _button_elem
+    # @return String Class name for button
+    def button_class
       automation_name_is_xcuitest? ? XCUIElementTypeButton : UIAButton
     end
-
-    public
 
     # Find the first UIAButton|XCUIElementTypeButton that contains value or by index.
     # @param value [String, Integer] the value to exactly match.
@@ -19,12 +15,12 @@ module Appium
     # @return [UIAButton|XCUIElementTypeButton]
     def button(value)
       # return button at index.
-      return ele_index _button_elem, value if value.is_a? Numeric
+      return ele_index button_class, value if value.is_a? Numeric
 
       if automation_name_is_xcuitest?
-        find_ele_by_attr_include _button_elem, '*', value
+        find_ele_by_attr_include button_class, '*', value
       else
-        ele_by_json_visible_contains _button_elem, value
+        ele_by_json_visible_contains button_class, value
       end
     end
 
@@ -33,19 +29,19 @@ module Appium
     # @param value [String] the value to search for
     # @return [Array<UIAButton|XCUIElementTypeButton>]
     def buttons(value = false)
-      return tags _button_elem unless value
+      return tags button_class unless value
 
       if automation_name_is_xcuitest?
-        find_eles_by_attr_include _button_elem, '*', value
+        find_eles_by_attr_include button_class, '*', value
       else
-        eles_by_json_visible_contains _button_elem, value
+        eles_by_json_visible_contains button_class, value
       end
     end
 
     # Find the first UIAButton|XCUIElementTypeButton.
     # @return [UIAButton|XCUIElementTypeButton]
     def first_button
-      first_ele _button_elem
+      first_ele button_class
     end
 
     # TODO: add documentation regarding previous element.
@@ -53,7 +49,7 @@ module Appium
     # Find the last UIAButton|XCUIElementTypeButton.
     # @return [UIAButton|XCUIElementTypeButton]
     def last_button
-      last_ele _button_elem
+      last_ele button_class
     end
 
     # Find the first UIAButton|XCUIElementTypeButton that exactly matches value.
@@ -61,9 +57,9 @@ module Appium
     # @return [UIAButton|XCUIElementTypeButton]
     def button_exact(value)
       if automation_name_is_xcuitest?
-        find_ele_by_attr _button_elem, '*', value
+        find_ele_by_attr button_class, '*', value
       else
-        ele_by_json_visible_exact _button_elem, value
+        ele_by_json_visible_exact button_class, value
       end
     end
 
@@ -72,9 +68,9 @@ module Appium
     # @return [Array<UIAButton|XCUIElementTypeButton>]
     def buttons_exact(value)
       if automation_name_is_xcuitest?
-        find_eles_by_attr _button_elem, '*', value
+        find_eles_by_attr button_class, '*', value
       else
-        eles_by_json_visible_exact _button_elem, value
+        eles_by_json_visible_exact button_class, value
       end
     end
   end # module Ios

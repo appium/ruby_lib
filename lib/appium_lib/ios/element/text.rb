@@ -4,27 +4,22 @@ module Appium
     IAStaticText = 'UIAStaticText'.freeze
     XCUIElementTypeStaticText = 'XCUIElementTypeStaticText'.freeze
 
-    private
-
-    # @private
-    # XCUITest
-    def _static_text_elem
+    # @return String Class name for text
+    def static_text_class
       automation_name_is_xcuitest? ? XCUIElementTypeStaticText : IAStaticText
     end
-
-    public
 
     # Find the first UIAStaticText|XCUIElementTypeStaticText that contains value or by index.
     # @param value [String, Integer] the value to find.
     # If int then the UIAStaticText|XCUIElementTypeStaticText at that index is returned.
     # @return [UIAStaticText|XCUIElementTypeStaticText]
     def text(value)
-      return ele_index _static_text_elem, value if value.is_a? Numeric
+      return ele_index static_text_class, value if value.is_a? Numeric
 
       if automation_name_is_xcuitest?
-        find_ele_by_attr_include _static_text_elem, '*', value
+        find_ele_by_attr_include static_text_class, '*', value
       else
-        ele_by_json_visible_contains _static_text_elem, value
+        ele_by_json_visible_contains static_text_class, value
       end
     end
 
@@ -33,25 +28,25 @@ module Appium
     # @param value [String] the value to search for
     # @return [Array<UIAStaticText|XCUIElementTypeStaticText>]
     def texts(value = false)
-      return tags _static_text_elem unless value
+      return tags static_text_class unless value
 
       if automation_name_is_xcuitest?
-        find_eles_by_attr_include _static_text_elem, '*', value
+        find_eles_by_attr_include static_text_class, '*', value
       else
-        eles_by_json_visible_contains _static_text_elem, value
+        eles_by_json_visible_contains static_text_class, value
       end
     end
 
     # Find the first UIAStaticText|XCUIElementTypeStaticText.
     # @return [UIAStaticText|XCUIElementTypeStaticText]
     def first_text
-      first_ele _static_text_elem
+      first_ele static_text_class
     end
 
     # Find the last UIAStaticText|XCUIElementTypeStaticText.
     # @return [UIAStaticText|XCUIElementTypeStaticText]
     def last_text
-      last_ele _static_text_elem
+      last_ele static_text_class
     end
 
     # Find the first UIAStaticText|XCUIElementTypeStaticText that exactly matches value.
@@ -59,9 +54,9 @@ module Appium
     # @return [UIAStaticText|XCUIElementTypeStaticText]
     def text_exact(value)
       if automation_name_is_xcuitest?
-        find_ele_by_attr _static_text_elem, '*', value
+        find_ele_by_attr static_text_class, '*', value
       else
-        ele_by_json_visible_exact _static_text_elem, value
+        ele_by_json_visible_exact static_text_class, value
       end
     end
 
@@ -70,9 +65,9 @@ module Appium
     # @return [Array<UIAStaticText|XCUIElementTypeStaticText>]
     def texts_exact(value)
       if automation_name_is_xcuitest?
-        find_eles_by_attr _static_text_elem, '*', value
+        find_eles_by_attr static_text_class, '*', value
       else
-        eles_by_json_visible_exact _static_text_elem, value
+        eles_by_json_visible_exact static_text_class, value
       end
     end
   end # module Ios
