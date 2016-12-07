@@ -18,15 +18,13 @@ end
 def go_to_textfields
   screen.must_equal catalog
   wait_true do
-    text('textfield').click
+    UI::Inventory.xcuitest? ? find_element(:name, 'TextFields').click : text('textfield').click
     screen == 'TextFields' # wait for screen transition
   end
-
-  screen.must_equal 'TextFields'
 end
 
 def screen
-  $driver.find_element(:class, 'UIANavigationBar').name
+  $driver.find_element(:class, UI::Inventory.navbar).name
 end
 
 def catalog
@@ -35,13 +33,9 @@ end
 
 module UI
   module Inventory
-    private
-
     def self.xcuitest?
-      $driver.automation_name && $driver.automation_name == 'xcuitest'
+      $driver.automation_name_is_xcuitest?
     end
-
-    public
 
     def self.navbar
       if xcuitest?

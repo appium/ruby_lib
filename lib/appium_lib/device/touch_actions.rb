@@ -124,7 +124,7 @@ module Appium
     # @option opts [int] :delta_y The distance from start to move, on the y axis.  Default 0.
     # @option opts [int] :duration How long the actual swipe takes to complete in milliseconds. Default 200.
     # @deprecated Please do not use end_x, end_y anymore
-    def swipe(opts)
+    def swipe(opts, ele = nil)
       start_x  = opts.fetch :start_x, 0
       start_y  = opts.fetch :start_y, 0
       delta_x  = opts.fetch :delta_x, nil
@@ -144,10 +144,17 @@ module Appium
 
       duration = opts.fetch :duration, 200
 
-      press x: start_x, y: start_y
-      wait(duration) if duration
-      move_to x: start_x + delta_x, y: start_y + delta_y
-      release
+      if ele # pinch/zoom for XCUITest
+        press x: start_x, y: start_y, element: ele
+        move_to x: start_x + delta_x, y: start_y + delta_y, element: ele
+        release
+      else
+        press x: start_x, y: start_y, element: ele
+        wait(duration) if duration
+        move_to x: start_x + delta_x, y: start_y + delta_y
+        release
+      end
+
       self
     end
 

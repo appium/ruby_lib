@@ -34,6 +34,8 @@ describe 'ios/element/textfield' do
   end
 
   t 'predicate textfields' do
+    fail NotImplementedError, "XCUITest(Appium1.6.2) doesn't support UIAutomation script" if UI::Inventory.xcuitest?
+
     textfield_count = execute_script(%(au.mainApp().getAllWithPredicate("type contains[c] 'textfield'", true))).length
     textfield_count.must_equal 4
   end
@@ -68,15 +70,17 @@ describe 'ios/element/textfield' do
 
   t 'textfield type' do
     # Regular send keys triggers the keyboard and doesn't dismiss
-    keyboard_must_not_exist
+    keyboard_must_not_exist unless UI::Inventory.xcuitest? # xcuitest doesn't support JS command
     textfield(1).send_keys 'ok'
-    keyboard_must_exist
+    keyboard_must_exist unless UI::Inventory.xcuitest? # xcuitest doesn't support JS command
 
-    # type should not dismiss the keyboard
-    message = 'type test type'
-    textfield(1).type message
-    keyboard_must_exist
-    textfield(1).text.must_equal message
+    unless UI::Inventory.xcuitest?
+      # type should not dismiss the keyboard
+      message = 'type test type'
+      textfield(1).type message
+      keyboard_must_exist
+      textfield(1).text.must_equal message
+    end
   end
 
   def must_raise_no_element(&block)

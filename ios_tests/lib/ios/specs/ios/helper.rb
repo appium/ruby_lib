@@ -18,10 +18,16 @@ describe 'ios/helper' do
   # t 'page' do # writes to std out
 
   t 'source_window' do
-    source_window.length.must_equal 11
+    source_window.length.must_be :>=, 14_000
   end
 
   # TODO: t 'page_window' do
-  # TODO: t 'id' do
-  # TODO: t 'ios_version' do
+
+  t 'id' do
+    id 'Buttons' # 'Various uses of UIButton'
+  end
+
+  t 'ios_version' do
+    ios_version.wont_be_empty
+  end
 end

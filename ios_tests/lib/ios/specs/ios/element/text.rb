@@ -23,8 +23,10 @@ describe 'ios/element/text' do
   end
 
   t 'last_text' do
-    last_text.text.must_equal 'Shows UIViewAnimationTransitions'
-    last_text.name.must_equal 'Shows UIViewAnimationTransitions'
+    expected = UI::Inventory.xcuitest? ? 'Shows UIViewAnimationTransitions' : 'Transitions'
+
+    last_text.text.must_equal expected
+    last_text.name.must_equal expected
   end
 
   t 'text' do
@@ -35,7 +37,7 @@ describe 'ios/element/text' do
 
   t 'texts' do
     exp = ['Controls', 'Various uses of UIControl', 'Various uses of UISegmentedControl']
-    texts.length.must_equal 25
+    texts.length.must_equal(UI::Inventory.xcuitest? ? 25 : 24)
     texts('trol').map(&:name).must_equal exp
     texts('uses').length.must_equal 7
   end

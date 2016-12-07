@@ -9,6 +9,7 @@ require_relative 'common/helper'
 require_relative 'common/wait'
 require_relative 'common/patch'
 require_relative 'common/version'
+require_relative 'common/error'
 require_relative 'common/element/window'
 
 # ios
@@ -50,6 +51,8 @@ module Minitest
 end
 
 module Appium
+  REQUIRED_VERSION_XCUITEST = '1.6.0'.freeze
+
   # Load arbitrary text (toml format)
   #
   # ```
@@ -267,11 +270,12 @@ module Appium
     attr_accessor :appium_device
     # Automation name sent to appium server
     attr_reader :automation_name
+    # Appium's server version
+    attr_reader :appium_server_version
     # Boolean debug mode for the Appium Ruby bindings
     attr_accessor :appium_debug
     # instance of AbstractEventListener for logging support
     attr_accessor :listener
-
     # Returns the driver
     # @return [Driver] the driver
     attr_reader :driver
@@ -331,7 +335,7 @@ module Appium
       @appium_device = @caps[:platformName]
       @appium_device = @appium_device.is_a?(Symbol) ? @appium_device : @appium_device.downcase.strip.intern if @appium_device
 
-      @automation_name = @caps[:automationName].downcase if @caps[:automationName]
+      @automation_name = @caps[:automationName] if @caps[:automationName]
 
       # load common methods
       extend Appium::Common
@@ -388,6 +392,22 @@ module Appium
 
     def device_is_android?
       @appium_device == :android
+    end
+
+    # Return true if automationName is 'XCUITest'
+    # @return Boolean
+    def automation_name_is_xcuitest?
+      !@automation_name.nil? && @automation_name.downcase == 'xcuitest'
+    end
+
+    # Return true if the target Appium server is over REQUIRED_VERSION_XCUITEST.
+    # If the Appium server is under REQUIRED_VERSION_XCUITEST, then error is raised.
+    # @return Boolean
+    def check_server_version_xcuitest
+      if automation_name_is_xcuitest? && (@appium_server_version['build']['version'] <= REQUIRED_VERSION_XCUITEST)
+        fail Appium::Error::NotSupportedAppiumServer, "XCUITest requires over Appium #{REQUIRED_VERSION_XCUITEST}"
+      end
+      true
     end
 
     # Returns the server's version info
@@ -511,6 +531,10 @@ module Appium
       rescue Errno::ECONNREFUSED
         raise "ERROR: Unable to connect to Appium. Is the server running on #{server_url}?"
       end
+
+      @appium_server_version = appium_server_version
+
+      check_server_version_xcuitest
 
       @driver.manage.timeouts.implicit_wait = @default_wait
 

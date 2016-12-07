@@ -2,10 +2,10 @@
 describe 'common/device_touchaction' do
   t 'action_chain' do
     wait do
-      e = find_element(:name, 'Accessibility')
+      e = text('Accessibility')
       Appium::TouchAction.new.press(element: e, x: 0.5, y: 0.5).release(element: e).perform
     end
-    wait { find_element(:name, 'Custom View') }
+    wait { text('Custom View') }
     back
     wait { text_exact 'NFC' }
   end

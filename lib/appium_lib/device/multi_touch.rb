@@ -29,13 +29,21 @@ module Appium
         fail ArgumentError("Can't pinch to greater than screen size.") if percentage > 100
 
         p = Float(percentage) / 100
-        i = 1 - p
 
-        top = TouchAction.new
-        top.swipe start_x: 1.0, start_y: 0.0, delta_x: i, delta_y: i, duration: 1
+        if $driver.automation_name_is_xcuitest?
+          ele = $driver.find_element :class, 'XCUIElementTypeApplication'
+          top = TouchAction.new
+          top.swipe({ start_x: 1.0, start_y: 0.0, delta_x: -p, delta_y: p }, ele)
 
-        bottom = TouchAction.new
-        bottom.swipe(start_x: 0.0, start_y: 1.0, delta_x: p, delta_y: p, duration: 1)
+          bottom = TouchAction.new
+          bottom.swipe({ start_x: 0.0, start_y: 1.0, delta_x: p, delta_y: -p }, ele)
+        else
+          top = TouchAction.new
+          top.swipe start_x: 1.0, start_y: 0.0, delta_x: -p, delta_y: p, duration: 1
+
+          bottom = TouchAction.new
+          bottom.swipe start_x: 0.0, start_y: 1.0, delta_x: p, delta_y: -p, duration: 1
+        end
 
         pinch = MultiTouch.new
         pinch.add top
@@ -59,11 +67,21 @@ module Appium
         p = 100 / Float(percentage)
         i = 1 - p
 
-        top = TouchAction.new
-        top.swipe start_x: i, start_y: i, delta_x: 1, delta_y: 1, duration: 1
+        if $driver.automation_name_is_xcuitest?
+          ele = $driver.find_element :class, 'XCUIElementTypeApplication'
 
-        bottom = TouchAction.new
-        bottom.swipe start_x: p, start_y: p, delta_x: 1, delta_y: 1, duration: 1
+          top = TouchAction.new
+          top.swipe({ start_x: p, start_y: i, delta_x: i, delta_y: -i }, ele)
+
+          bottom = TouchAction.new
+          bottom.swipe({ start_x: i, start_y: p, delta_x: -i, delta_y: i }, ele)
+        else
+          top = TouchAction.new
+          top.swipe start_x: p, start_y: i, delta_x: i, delta_y: -i, duration: 1
+
+          bottom = TouchAction.new
+          bottom.swipe start_x: i, start_y: p, delta_x: -i, delta_y: i, duration: 1
+        end
 
         zoom = MultiTouch.new
         zoom.add top

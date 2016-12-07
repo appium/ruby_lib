@@ -1,5 +1,26 @@
+# rake ios[device/multi_touch]
 describe 'device/multi_touch' do
-  t {} # place holder test
+  def before_first
+    screen.must_equal catalog
+  end
+
+  # go back to the main page
+  def go_back
+    back
+    wait { !exists { id 'ArrowButton'  } } # successfully transitioned back
+  end
+
+  t 'before_first' do
+    before_first
+  end
+
+  t 'pinch & zoom' do
+    wait { id('Images').click }
+    # both of these appear to do nothing on iOS 8
+    zoom 200
+    pinch 75
+    go_back
+  end
 end
 
 # TODO: write tests

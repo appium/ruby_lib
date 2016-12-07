@@ -194,6 +194,7 @@ module Appium
     # @param window_number [Integer] the int index of the target window
     # @return [JSON]
     def source_window(_window_number = 0)
+      # TODO: update comments
       # appium 1.0 still returns JSON when getTree() is invoked so this
       # doesn't need to change to XML. If getTree() is removed then
       # source_window will need to parse the elements of getTreeForXML()\
@@ -216,14 +217,18 @@ module Appium
     # @param id [String] the id to search for
     # @return [Element]
     def id(id)
-      find_element :id, id
+      find_element(:id, id)
     end
 
     # Return the iOS version as an array of integers
     # @return [Array<Integer>]
     def ios_version
-      ios_version = execute_script 'UIATarget.localTarget().systemVersion()'
-      ios_version.split('.').map(&:to_i)
+      if automation_name_is_xcuitest?
+        @driver.capabilities['platformVersion']
+      else
+        ios_version = execute_script 'UIATarget.localTarget().systemVersion()'
+        ios_version.split('.').map(&:to_i)
+      end
     end
 
     # Get the element of type class_name at matching index.
@@ -248,10 +253,14 @@ module Appium
 
     # @private
     def string_attr_exact(class_name, attr, value)
-      if attr == '*'
-        %((//#{class_name})[@*[.='#{value}']])
+      if automation_name_is_xcuitest?
+        if attr == '*'
+          %((//#{class_name})[@*[.='#{value}']])
+        else
+          %((//#{class_name})[@#{attr}='#{value}'])
+        end
       else
-        %((//#{class_name})[@#{attr}='#{value}'])
+        %(//#{class_name}[@visible="true" and @#{attr}='#{value}'])
       end
     end
 
@@ -277,10 +286,14 @@ module Appium
 
     # @private
     def string_attr_include(class_name, attr, value)
-      if attr == '*'
-        %((//#{class_name})[@*[contains(translate(.,'#{value.upcase}', '#{value}'), '#{value}')]])
+      if automation_name_is_xcuitest?
+        if attr == '*'
+          %((//#{class_name})[@*[contains(translate(., '#{value.upcase}', '#{value}'), '#{value}')]])
+        else
+          %((//#{class_name})[contains(translate(@#{attr}, '#{value.upcase}', '#{value}'), '#{value}')])
+        end
       else
-        %((//#{class_name})[contains(translate(@#{attr},'#{value.upcase}', '#{value}'), '#{value}')])
+        %(//#{class_name}[@visible="true" and contains(translate(@#{attr},'#{value.upcase}', '#{value}'), '#{value}')])
       end
     end
 
@@ -308,16 +321,24 @@ module Appium
     # @param class_name [String] the tag to match
     # @return [Element]
     def first_ele(class_name)
-      @driver.find_element :xpath, "(//#{class_name})"
+      if automation_name_is_xcuitest?
+        @driver.find_element :class, class_name
+      else
+        ele_index class_name, 1
+      end
     end
 
     # Get the last tag that matches class_name
     # @param class_name [String] the tag to match
     # @return [Element]
     def last_ele(class_name)
-      result = @driver.find_elements :xpath, "(//#{class_name})"
-      fail _no_such_element if result.empty?
-      result.last
+      if automation_name_is_xcuitest?
+        result = @driver.find_elements :xpath, "(//#{class_name})"
+        fail _no_such_element if result.empty?
+        result.last
+      else
+        ele_index class_name, 'last()'
+      end
     end
 
     # Returns the first visible element matching class_name
@@ -325,7 +346,11 @@ module Appium
     # @param class_name [String] the class_name to search for
     # @return [Element]
     def tag(class_name)
-      first_ele(class_name)
+      if automation_name_is_xcuitest?
+        first_ele(class_name)
+      else
+        ele_by_json(typeArray: [class_name], onlyVisible: true)
+      end
     end
 
     # Returns all visible elements matching class_name
@@ -333,7 +358,11 @@ module Appium
     # @param class_name [String] the class_name to search for
     # @return [Element]
     def tags(class_name)
-      @driver.find_elements :xpath, "(//#{class_name})"
+      if automation_name_is_xcuitest?
+        @driver.find_elements :class, class_name
+      else
+        eles_by_json(typeArray: [class_name], onlyVisible: true)
+      end
     end
 
     # @private
@@ -360,7 +389,8 @@ module Appium
       }
     end
 
-    # Find the first element that contains value
+    # Find the first element that contains value.
+    # For Appium(automation name), not XCUITest
     # @param element [String] the class name for the element
     # @param value [String] the value to search for
     # @return [Element]
@@ -369,6 +399,7 @@ module Appium
     end
 
     # Find all elements containing value
+    # For Appium(automation name), not XCUITest
     # @param element [String] the class name for the element
     # @param value [String] the value to search for
     # @return [Array<Element>]
@@ -398,6 +429,7 @@ module Appium
     end
 
     # Find the first element exactly matching value
+    # For Appium(automation name), not XCUITest
     # @param element [String] the class name for the element
     # @param value [String] the value to search for
     # @return [Element]
@@ -406,6 +438,7 @@ module Appium
     end
 
     # Find all elements exactly matching value
+    # For Appium(automation name), not XCUITest
     # @param element [String] the class name for the element
     # @param value [String] the value to search for
     # @return [Element]
@@ -414,6 +447,7 @@ module Appium
     end
 
     # @private
+    # For Appium(automation name), not XCUITest
     # If there's no keyboard, then do nothing.
     # If there's no close key, fallback to window tap.
     # If close key is present then tap it.
@@ -527,6 +561,7 @@ module Appium
       end
     end
 
+    # For Appium(automation name), not XCUITest
     # typeArray - array of string types to search for. Example: ["UIAStaticText"]
     # onlyFirst - boolean. returns only the first result if true. Example: true
     # onlyVisible - boolean. returns only visible elements if true. Example: true
@@ -577,11 +612,11 @@ module Appium
       # $._elementOrElementsByType will validate that the window isn't nil
       element_or_elements_by_type = <<-JS
         (function() {
-          var selector = #{type_array.first};
+          var opts = #{opts.to_json};
           var result = false;
 
           try {
-            result = driver.findNativeElementOrElements('class name', selector, false);
+            result = $._elementOrElementsByType($.mainWindow(), opts);
           } catch (e) {
           }
 
@@ -593,6 +628,7 @@ module Appium
       res ? res : fail(Selenium::Client::CommandError, 'mainWindow is nil')
     end
 
+    # For Appium(automation name), not XCUITest
     # example usage:
     #
     # eles_by_json({
