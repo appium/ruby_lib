@@ -6,12 +6,12 @@ module Appium
     XCUIElementTypeTextField = 'XCUIElementTypeTextField'.freeze
     XCUIElementTypeSecureTextField = 'XCUIElementTypeSecureTextField'.freeze
 
-    # @return String Class name for text field
+    # @return [String] Class name for text field
     def text_field_class
       automation_name_is_xcuitest? ? XCUIElementTypeTextField : UIATextField
     end
 
-    # @return String Class name for secure text field
+    # @return [String] Class name for secure text field
     def secure_text_field_class
       automation_name_is_xcuitest? ? XCUIElementTypeSecureTextField : UIASecureTextField
     end

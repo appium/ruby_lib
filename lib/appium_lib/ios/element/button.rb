@@ -4,7 +4,7 @@ module Appium
     UIAButton = 'UIAButton'.freeze
     XCUIElementTypeButton = 'XCUIElementTypeButton'.freeze
 
-    # @return String Class name for button
+    # @return [String] Class name for button
     def button_class
       automation_name_is_xcuitest? ? XCUIElementTypeButton : UIAButton
     end
