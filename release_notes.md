@@ -1,3 +1,13 @@
+#### v9.0.0 2016-12-09
+
+- [54ff9c4](https://github.com/appium/ruby_lib/commit/54ff9c45df80ce901b718347e79e761f93a4316b) Release 9.0.0
+- [930d4c7](https://github.com/appium/ruby_lib/commit/930d4c701865cfab603c5030bd92d6049bb8b5ad) add documentations (#410)
+- [e765d1f](https://github.com/appium/ruby_lib/commit/e765d1f437a842c942e3efde0a33e15327571ced) Fix tests for xcuitest strategy (#408)
+- [cfabca1](https://github.com/appium/ruby_lib/commit/cfabca11933247e7fba6946d3128cf58035bd820) Feature/xcuitest (#388)
+- [75dd133](https://github.com/appium/ruby_lib/commit/75dd133d3279233312926aff66ec026a7c2e8766) Release 8 2 1 (#407)
+- [ad91ee4](https://github.com/appium/ruby_lib/commit/ad91ee47a96bf7a19b6f784dc760ac70b8788e5a) Release 8.2.1
+
+
 #### v8.2.1 2016-11-29
 
 - [ad91ee4](https://github.com/appium/ruby_lib/commit/ad91ee47a96bf7a19b6f784dc760ac70b8788e5a) Release 8.2.1

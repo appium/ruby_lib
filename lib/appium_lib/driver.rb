@@ -395,14 +395,14 @@ module Appium
     end
 
     # Return true if automationName is 'XCUITest'
-    # @return Boolean
+    # @return [Boolean]
     def automation_name_is_xcuitest?
       !@automation_name.nil? && @automation_name.downcase == 'xcuitest'
     end
 
     # Return true if the target Appium server is over REQUIRED_VERSION_XCUITEST.
     # If the Appium server is under REQUIRED_VERSION_XCUITEST, then error is raised.
-    # @return Boolean
+    # @return [Boolean]
     def check_server_version_xcuitest
       if automation_name_is_xcuitest? && (@appium_server_version['build']['version'] <= REQUIRED_VERSION_XCUITEST)
         fail Appium::Error::NotSupportedAppiumServer, "XCUITest requires over Appium #{REQUIRED_VERSION_XCUITEST}"

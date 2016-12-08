@@ -4,7 +4,7 @@ module Appium
     IAStaticText = 'UIAStaticText'.freeze
     XCUIElementTypeStaticText = 'XCUIElementTypeStaticText'.freeze
 
-    # @return String Class name for text
+    # @return [String] Class name for text
     def static_text_class
       automation_name_is_xcuitest? ? XCUIElementTypeStaticText : IAStaticText
     end
