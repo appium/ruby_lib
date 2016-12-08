@@ -54,6 +54,7 @@ gem install --no-rdoc --no-ri appium_lib
 - [Overview](https://github.com/appium/ruby_lib/blob/master/docs/docs.md) 
 - [Ruby Android methods](https://github.com/appium/ruby_lib/blob/master/docs/android_docs.md)
 - [Ruby iOS methods](https://github.com/appium/ruby_lib/blob/master/docs/ios_docs.md)
+    - [Tips for XCUITest for iOS](https://github.com/appium/ruby_lib/blob/master/docs/ios_xcuitest.md)
 - [Appium Server docs](https://github.com/appium/appium/tree/master/docs)
 
 #### Logging
