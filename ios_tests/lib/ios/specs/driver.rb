@@ -33,8 +33,10 @@ describe 'driver' do
   describe 'Appium::Driver attributes' do
     t 'verify all attributes' do
       2.times { set_wait 30 } # must set twice to validate last_waits
-      actual              = driver_attributes
-      actual[:caps][:app] = File.basename actual[:caps][:app]
+      actual                = driver_attributes
+      caps_app_for_teardown = actual[:caps][:app]
+      actual[:caps][:app]   = File.basename actual[:caps][:app]
+
       expected_caps       = ::Appium::Driver::Capabilities.init_caps_for_appium(platformName:    'ios',
                                                                                 platformVersion: '10.1',
                                                                                 automationName:  'XCUITest',
@@ -55,6 +57,8 @@ describe 'driver' do
       if actual != expected
         diff    = HashDiff.diff expected, actual
         diff    = "diff (expected, actual):\n#{diff}"
+
+        actual[:caps][:app] = caps_app_for_teardown
         # example:
         # change :ios in expected to match 'ios' in actual
         # [["~", "caps.platformName", :ios, "ios"]]
@@ -64,25 +68,24 @@ describe 'driver' do
 
       actual_selenium_caps = actual[:caps][:automationName]
       actual_selenium_caps.must_equal 'XCUITest'
+      actual[:caps][:app] = caps_app_for_teardown
     end
 
     t 'verify attributes are immutable' do
-      # immutability depends on Selenium
       driver_attributes[:custom_url] = true
-      actual                         = driver_attributes[:custom_url]
       expected                       = false
-      actual.must_equal expected
+      driver_attributes[:custom_url].must_equal expected
     end
 
     t 'verify attribute of :caps are not immutable becuse it depends on Selenium' do
       # immutability depends on Selenium
+      for_clean_up                   = driver_attributes[:caps][:app].dup
       driver_attributes[:caps][:app] = 'fake'
-      actual                         = File.basename driver_attributes[:caps][:app]
       expected                       = 'fake'
-      actual.must_equal expected
+      driver_attributes[:caps][:app].must_equal expected
 
       # clean up
-      driver_attributes[:caps][:app] = 'UICatalog.app'
+      driver_attributes[:caps][:app] = for_clean_up
     end
 
     t 'no_wait' do
