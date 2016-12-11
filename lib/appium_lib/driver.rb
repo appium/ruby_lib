@@ -241,6 +241,22 @@ module Appium
   end
 
   class Driver
+    module Capabilities
+      # except for browser_name, default capability is equal to ::Selenium::WebDriver::Remote::Capabilities.firefox
+      # Because Selenium::WebDriver::Remote::Bridge uses Capabilities.firefox by default
+      # https://github.com/SeleniumHQ/selenium/blob/selenium-3.0.1/rb/lib/selenium/webdriver/remote/bridge.rb#L67
+      def self.init_caps_for_appium(opts_caps = {})
+        default_caps_opts_firefox = ({
+          javascript_enabled: true,
+          takes_screenshot: true,
+          css_selectors_enabled: true
+        }).merge(opts_caps)
+        ::Selenium::WebDriver::Remote::Capabilities.new(default_caps_opts_firefox)
+      end
+    end
+  end
+
+  class Driver
     # attr readers are promoted to global scope. To avoid clobbering, they're
     # made available via the driver_attributes method
     #
@@ -307,8 +323,8 @@ module Appium
 
       opts              = Appium.symbolize_keys opts
 
-      # default to {} to prevent nil.fetch and other nil errors
-      @caps             = opts[:caps] || {}
+      @caps             = Capabilities.init_caps_for_appium(opts[:caps] || {})
+
       appium_lib_opts   = opts[:appium_lib] || {}
 
       # appium_lib specific values
@@ -351,10 +367,6 @@ module Appium
 
       # apply os specific patches
       patch_webdriver_element
-
-      # to use legacy remote driver
-      # TODO: We should remove this patch if Appium support W3C WebDriver completely
-      patch_webdriver_driver
 
       # enable debug patch
       # !!'constant' == true

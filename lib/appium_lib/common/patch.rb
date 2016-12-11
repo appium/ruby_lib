@@ -151,14 +151,3 @@ class Selenium::WebDriver::Remote::Http::Common # rubocop:disable Style/ClassAnd
   remove_const :DEFAULT_HEADERS if defined? DEFAULT_HEADERS
   DEFAULT_HEADERS = { 'Accept' => CONTENT_TYPE, 'User-Agent' => "appium/ruby_lib/#{::Appium::VERSION}" }
 end
-
-# We should use lib/selenium/webdriver/remote/bridge.rb instead of lib/selenium/webdriver/remote/w3c_bridge.rb
-# So, the following patch allow user to use w3c_bridge only for W3CCapabilities.
-# TODO: Or use  Selenium::WebDriver::Remote::Capabilities class to define capabilities
-def patch_webdriver_driver
-  Selenium::WebDriver::Remote::W3CCapabilities.class_eval do
-    def self.w3c?(opts = {})
-      opts[:desired_capabilities].is_a?(Selenium::WebDriver::Remote::W3CCapabilities)
-    end
-  end
-end

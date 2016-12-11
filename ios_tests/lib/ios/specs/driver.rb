@@ -35,11 +35,12 @@ describe 'driver' do
       2.times { set_wait 30 } # must set twice to validate last_waits
       actual              = driver_attributes
       actual[:caps][:app] = File.basename actual[:caps][:app]
-      expected            = { caps:             { platformName: 'ios',
-                                                  platformVersion: '10.1',
-                                                  automationName: 'XCUITest',
-                                                  deviceName:   'iPhone Simulator',
-                                                  app:          'UICatalog.app' },
+      expected_caps       = ::Appium::Driver::Capabilities.init_caps_for_appium(platformName:    'ios',
+                                                                                platformVersion: '10.1',
+                                                                                automationName:  'XCUITest',
+                                                                                deviceName:      'iPhone Simulator',
+                                                                                app:             'UICatalog.app')
+      expected            = { caps:             expected_caps,
                               custom_url:       false,
                               export_session:   false,
                               default_wait:     30,
@@ -60,13 +61,28 @@ describe 'driver' do
         message = "\n\nactual:\n\n: #{actual.ai}expected:\n\n#{expected.ai}\n\n#{diff}"
         fail message
       end
+
+      actual_selenium_caps = actual[:caps][:automationName]
+      actual_selenium_caps.must_equal 'XCUITest'
     end
 
     t 'verify attributes are immutable' do
+      # immutability depends on Selenium
+      driver_attributes[:custom_url] = true
+      actual                         = driver_attributes[:custom_url]
+      expected                       = false
+      actual.must_equal expected
+    end
+
+    t 'verify attribute of :caps are not immutable becuse it depends on Selenium' do
+      # immutability depends on Selenium
       driver_attributes[:caps][:app] = 'fake'
       actual                         = File.basename driver_attributes[:caps][:app]
-      expected                       = 'UICatalog.app'
+      expected                       = 'fake'
       actual.must_equal expected
+
+      # clean up
+      driver_attributes[:caps][:app] = 'UICatalog.app'
     end
 
     t 'no_wait' do
