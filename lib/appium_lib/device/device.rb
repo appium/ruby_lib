@@ -117,49 +117,49 @@ module Appium
       def extended(_mod)
         extend_webdriver_with_forwardable
 
-        NoArgMethods.each_pair do |verb, pair|
-          pair.each_pair { |command, path| add_endpoint_method command, path, verb }
+        ::Appium::Driver::Commands::COMMAND_NO_ARG.each_key do |method|
+          add_endpoint_method method
         end
 
-        add_endpoint_method(:available_contexts, 'session/:session_id/contexts', :get) do
+        add_endpoint_method(:available_contexts) do
           def available_contexts
             # return empty array instead of nil on failure
             execute(:available_contexts, {}) || []
           end
         end
 
-        add_endpoint_method(:app_strings, 'session/:session_id/appium/app/strings') do
+        add_endpoint_method(:app_strings) do
           def app_strings(language = nil)
             opts = language ? { language: language } : {}
             execute :app_strings, {}, opts
           end
         end
 
-        add_endpoint_method(:lock, 'session/:session_id/appium/device/lock') do
+        add_endpoint_method(:lock) do
           def lock(duration)
             execute :lock, {}, seconds: duration
           end
         end
 
-        add_endpoint_method(:install_app, 'session/:session_id/appium/device/install_app') do
+        add_endpoint_method(:install_app) do
           def install_app(path)
             execute :install_app, {}, appPath: path
           end
         end
 
-        add_endpoint_method(:remove_app, 'session/:session_id/appium/device/remove_app') do
+        add_endpoint_method(:remove_app) do
           def remove_app(id)
             execute :remove_app, {}, appId: id
           end
         end
 
-        add_endpoint_method(:app_installed?, 'session/:session_id/appium/device/app_installed') do
+        add_endpoint_method(:app_installed?) do
           def app_installed?(app_id)
             execute :app_installed?, {}, bundleId: app_id
           end
         end
 
-        add_endpoint_method(:background_app, 'session/:session_id/appium/app/background') do
+        add_endpoint_method(:background_app) do
           def background_app(duration)
             execute :background_app, {}, seconds: duration
           end
@@ -178,7 +178,7 @@ module Appium
         #   start_activity app_package: 'io.appium.android.apis',
         #     app_activity: '.accessibility.AccessibilityNodeProviderActivity'
         #   ```
-        add_endpoint_method(:start_activity, 'session/:session_id/appium/device/start_activity') do
+        add_endpoint_method(:start_activity) do
           def start_activity(opts)
             fail 'opts must be a hash' unless opts.is_a? Hash
             app_package = opts[:app_package]
@@ -198,13 +198,13 @@ module Appium
           end
         end
 
-        add_endpoint_method(:set_context, 'session/:session_id/context') do
+        add_endpoint_method(:set_context) do
           def set_context(context = null)
             execute :set_context, {}, name: context
           end
         end
 
-        add_endpoint_method(:hide_keyboard, 'session/:session_id/appium/device/hide_keyboard') do
+        add_endpoint_method(:hide_keyboard) do
           def hide_keyboard(close_key = nil)
             # Android can only tapOutside.
             if $driver.device_is_android?
@@ -222,7 +222,7 @@ module Appium
           end
         end
 
-        add_endpoint_method(:press_keycode, 'session/:session_id/appium/device/press_keycode') do
+        add_endpoint_method(:press_keycode) do
           def press_keycode(key, metastate = nil)
             args             = { keycode: key }
             args[:metastate] = metastate if metastate
@@ -230,7 +230,7 @@ module Appium
           end
         end
 
-        add_endpoint_method(:long_press_keycode, 'session/:session_id/appium/device/long_press_keycode') do
+        add_endpoint_method(:long_press_keycode) do
           def long_press_keycode(key, metastate = nil)
             args             = { keycode: key }
             args[:metastate] = metastate if metastate
@@ -239,20 +239,20 @@ module Appium
         end
 
         # TODO: TEST ME
-        add_endpoint_method(:set_immediate_value, 'session/:session_id/appium/element/:id/value') do
+        add_endpoint_method(:set_immediate_value) do
           def set_immediate_value(element, value)
             execute :set_immediate_value, { id: element.ref }, value: value
           end
         end
 
-        add_endpoint_method(:push_file, 'session/:session_id/appium/device/push_file') do
+        add_endpoint_method(:push_file) do
           def push_file(path, filedata)
             encoded_data = Base64.encode64 filedata
             execute :push_file, {}, path: path, data: encoded_data
           end
         end
 
-        add_endpoint_method(:pull_file, 'session/:session_id/appium/device/pull_file') do
+        add_endpoint_method(:pull_file) do
           def pull_file(path)
             data = execute :pull_file, {}, path: path
             Base64.decode64 data
@@ -260,7 +260,7 @@ module Appium
         end
 
         # TODO: TEST ME
-        add_endpoint_method(:pull_folder, 'session/:session_id/appium/device/pull_folder') do
+        add_endpoint_method(:pull_folder) do
           def pull_folder(path)
             data = execute :pull_folder, {}, path: path
             Base64.decode64 data
@@ -268,26 +268,26 @@ module Appium
         end
 
         # TODO: TEST ME
-        add_endpoint_method(:touch_id, 'session/:session_id/appium/simulator/touch_id') do
+        add_endpoint_method(:touch_id) do
           def touch_id(match = true)
             execute :touch_id, {}, match: match
           end
         end
 
         # TODO: TEST ME
-        add_endpoint_method(:end_coverage, 'session/:session_id/appium/app/end_test_coverage') do
+        add_endpoint_method(:end_coverage) do
           def end_coverage(path, intent)
             execute :end_coverage, {}, path: path, intent: intent
           end
         end
 
-        add_endpoint_method(:get_settings, 'session/:session_id/appium/settings', :get) do
+        add_endpoint_method(:get_settings) do
           def get_settings
             execute :get_settings, {}
           end
         end
 
-        add_endpoint_method(:update_settings, 'session/:session_id/appium/settings') do
+        add_endpoint_method(:update_settings) do
           def update_settings(settings)
             execute :update_settings, {}, settings: settings
           end
@@ -308,7 +308,7 @@ module Appium
         #   2 (Wifi only)      | 0    | 1    | 0
         #   0 (None)           | 0    | 0    | 0
         #
-        add_endpoint_method(:set_network_connection, 'session/:session_id/network_connection') do
+        add_endpoint_method(:set_network_connection) do
           def set_network_connection(mode)
             execute :set_network_connection, {}, type: mode
           end
@@ -322,13 +322,13 @@ module Appium
       # def extended
 
       # @private
-      def add_endpoint_method(method, path, verb = :post)
+      def add_endpoint_method(method)
         if block_given?
           # &Proc.new with no args passes the passed_in block
           # Because creating Procs from blocks is slow
-          create_bridge_command method, verb, path, &Proc.new
+          create_bridge_command method, &Proc.new
         else
-          create_bridge_command method, verb, path
+          create_bridge_command method
         end
 
         delegate_driver_method method
@@ -355,9 +355,8 @@ module Appium
       end
 
       # @private
-      def create_bridge_command(method, verb, path)
+      def create_bridge_command(method)
         Selenium::WebDriver::Remote::Bridge.class_eval do
-          command method, verb, path
           if block_given?
             class_eval(&Proc.new)
           else
@@ -430,14 +429,14 @@ module Appium
       end
 
       def add_touch_actions
-        add_endpoint_method(:touch_actions, 'session/:session_id/touch/perform') do
+        add_endpoint_method(:touch_actions) do
           def touch_actions(actions)
             actions = { actions: [actions].flatten }
             execute :touch_actions, {}, actions
           end
         end
 
-        add_endpoint_method(:multi_touch, 'session/:session_id/touch/multi/perform') do
+        add_endpoint_method(:multi_touch) do
           def multi_touch(actions)
             execute :multi_touch, {}, actions: actions
           end
