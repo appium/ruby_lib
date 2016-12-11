@@ -9,6 +9,7 @@ require_relative 'common/wait'
 require_relative 'common/patch'
 require_relative 'common/version'
 require_relative 'common/error'
+require_relative 'common/search_context'
 require_relative 'common/element/window'
 
 # ios

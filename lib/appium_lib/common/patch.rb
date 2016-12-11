@@ -153,7 +153,8 @@ class Selenium::WebDriver::Remote::Http::Common # rubocop:disable Style/ClassAnd
 end
 
 # We should use lib/selenium/webdriver/remote/bridge.rb instead of lib/selenium/webdriver/remote/w3c_bridge.rb
-# So, the following patch allow user to use w3c_bridge only capability is  W3CCapabilities.
+# So, the following patch allow user to use w3c_bridge only for W3CCapabilities.
+# TODO: Or use  Selenium::WebDriver::Remote::Capabilities class to define capabilities
 def patch_webdriver_driver
   Selenium::WebDriver::Remote::W3CCapabilities.class_eval do
     def self.w3c?(opts = {})

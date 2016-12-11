@@ -22,10 +22,6 @@ module Appium
       }
     }
 
-    FINDERS = {
-      accessibility_id: 'accessibility id'
-    }
-
     # @!method app_strings
     #   Return the hash of all localization strings.
     #   ```ruby
@@ -406,7 +402,7 @@ module Appium
           def find_element_with_appium(*args)
             how, what = extract_args(args)
 
-            finders = ::Selenium::WebDriver::SearchContext::FINDERS.merge ::Appium::Device::FINDERS
+            finders = ::Selenium::WebDriver::SearchContext::FINDERS.merge ::Appium::Driver::SearchContext::FINDERS
             by = finders[how.to_sym]
             fail ArgumentError, "cannot find element by #{how.inspect}" unless by
 
@@ -420,7 +416,7 @@ module Appium
           def find_elements_with_appium(*args)
             how, what = extract_args(args)
 
-            finders = ::Selenium::WebDriver::SearchContext::FINDERS.merge ::Appium::Device::FINDERS
+            finders = ::Selenium::WebDriver::SearchContext::FINDERS.merge ::Appium::Driver::SearchContext::FINDERS
             by = finders[how.to_sym]
             fail ArgumentError, "cannot find element by #{how.inspect}" unless by
 

@@ -8,7 +8,7 @@ module Appium
       #    find_elements :uiautomator, 'new UiSelector().clickable(true)'
       #   ```
       def extended(_mod)
-        Appium::Device::FINDERS[:uiautomator] = '-android uiautomator'
+        ::Appium::Driver::SearchContext::FINDERS[:uiautomator] = '-android uiautomator'
       end
     end # class << self
   end # module Android

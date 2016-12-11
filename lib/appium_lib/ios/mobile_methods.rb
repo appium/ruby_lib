@@ -8,8 +8,8 @@ module Appium
       #    find_elements :uiautomation, 'elements()
       #   ```
       def extended(_mod)
-        Appium::Device::FINDERS[:uiautomation] = '-ios uiautomation'
-        Appium::Device::FINDERS[:uiautomation] = '-ios predicate string'
+        ::Appium::Driver::SearchContext::FINDERS[:uiautomation] = '-ios uiautomation'
+        ::Appium::Driver::SearchContext::FINDERS[:predicate] = '-ios predicate string'
       end
     end # class << self
   end # module Ios
