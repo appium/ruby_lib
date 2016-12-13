@@ -1,7 +1,6 @@
 require 'rubygems'
 require 'ap'
 require 'selenium-webdriver'
-require 'selenium/client/errors' # used in helper.rb for CommandError
 require 'nokogiri'
 
 # common
@@ -10,11 +9,13 @@ require_relative 'common/wait'
 require_relative 'common/patch'
 require_relative 'common/version'
 require_relative 'common/error'
+require_relative 'common/search_context'
 require_relative 'common/element/window'
 
 # ios
 require_relative 'ios/helper'
 require_relative 'ios/patch'
+require_relative 'ios/errors'
 
 require_relative 'ios/element/alert'
 require_relative 'ios/element/button'
@@ -240,6 +241,22 @@ module Appium
   end
 
   class Driver
+    module Capabilities
+      # except for browser_name, default capability is equal to ::Selenium::WebDriver::Remote::Capabilities.firefox
+      # Because Selenium::WebDriver::Remote::Bridge uses Capabilities.firefox by default
+      # https://github.com/SeleniumHQ/selenium/blob/selenium-3.0.1/rb/lib/selenium/webdriver/remote/bridge.rb#L67
+      def self.init_caps_for_appium(opts_caps = {})
+        default_caps_opts_firefox = ({
+          javascript_enabled: true,
+          takes_screenshot: true,
+          css_selectors_enabled: true
+        }).merge(opts_caps)
+        ::Selenium::WebDriver::Remote::Capabilities.new(default_caps_opts_firefox)
+      end
+    end
+  end
+
+  class Driver
     # attr readers are promoted to global scope. To avoid clobbering, they're
     # made available via the driver_attributes method
     #
@@ -306,8 +323,8 @@ module Appium
 
       opts              = Appium.symbolize_keys opts
 
-      # default to {} to prevent nil.fetch and other nil errors
-      @caps             = opts[:caps] || {}
+      @caps             = Capabilities.init_caps_for_appium(opts[:caps] || {})
+
       appium_lib_opts   = opts[:appium_lib] || {}
 
       # appium_lib specific values
@@ -621,7 +638,7 @@ module Appium
     # @param args [*args] the args to use
     # @return [Array<Element>] Array is empty when no elements are found.
     def find_elements(*args)
-      @driver.find_elements(*args)
+      @driver.find_elements_with_appium(*args)
     end
 
     # Calls @driver.find_elements
@@ -629,7 +646,7 @@ module Appium
     # @param args [*args] the args to use
     # @return [Element]
     def find_element(*args)
-      @driver.find_element(*args)
+      @driver.find_element_with_appium(*args)
     end
 
     # Calls @driver.set_location

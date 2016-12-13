@@ -52,10 +52,13 @@ end # module Appium
 #
 # Requires from lib/selenium/webdriver/remote.rb
 require 'selenium/webdriver/remote/capabilities'
+require 'selenium/webdriver/remote/w3c_capabilities'
 require 'selenium/webdriver/remote/bridge'
+require 'selenium/webdriver/remote/w3c_bridge'
 require 'selenium/webdriver/remote/server_error'
 require 'selenium/webdriver/remote/response'
 require 'selenium/webdriver/remote/commands'
+require 'selenium/webdriver/remote/w3c_commands'
 require 'selenium/webdriver/remote/http/common'
 require 'selenium/webdriver/remote/http/default'
 
@@ -69,12 +72,14 @@ def patch_webdriver_bridge
     def raw_execute(command, opts = {}, command_hash = nil)
       verb, path = Selenium::WebDriver::Remote::Bridge::COMMANDS[command] ||
                    fail(ArgumentError, "unknown command: #{command.inspect}")
-      path       = path.dup
+      path = path.dup
 
       path[':session_id'] = @session_id if path.include?(':session_id')
 
       begin
-        opts.each { |key, value| path[key.inspect] = escaper.escape(value.to_s) }
+        opts.each do |key, value|
+          path[key.inspect] = escaper.escape(value.to_s)
+        end
       rescue IndexError
         raise ArgumentError, "#{opts.inspect} invalid for #{command.inspect}"
       end

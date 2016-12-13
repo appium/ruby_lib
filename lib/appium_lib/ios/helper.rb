@@ -625,7 +625,7 @@ module Appium
       JS
 
       res = execute_script element_or_elements_by_type
-      res ? res : fail(Selenium::Client::CommandError, 'mainWindow is nil')
+      res ? res : fail(Appium::Ios::CommandError, 'mainWindow is nil')
     end
 
     # For Appium(automation name), not XCUITest

@@ -399,7 +399,33 @@ module Appium
       #   ```
       def extend_search_contexts
         Selenium::WebDriver::SearchContext.class_eval do
-          Selenium::WebDriver::SearchContext::FINDERS[:accessibility_id] = 'accessibility id'
+          def find_element_with_appium(*args)
+            how, what = extract_args(args)
+
+            finders = ::Selenium::WebDriver::SearchContext::FINDERS.merge ::Appium::Driver::SearchContext::FINDERS
+            by = finders[how.to_sym]
+            fail ArgumentError, "cannot find element by #{how.inspect}" unless by
+
+            begin
+              bridge.find_element_by by, what.to_s, ref
+            rescue Selenium::WebDriver::Error::TimeOutError
+              raise Selenium::WebDriver::Error::NoSuchElementError
+            end
+          end
+
+          def find_elements_with_appium(*args)
+            how, what = extract_args(args)
+
+            finders = ::Selenium::WebDriver::SearchContext::FINDERS.merge ::Appium::Driver::SearchContext::FINDERS
+            by = finders[how.to_sym]
+            fail ArgumentError, "cannot find element by #{how.inspect}" unless by
+
+            begin
+              bridge.find_elements_by by, what.to_s, ref
+            rescue Selenium::WebDriver::Error::TimeOutError
+              raise Selenium::WebDriver::Error::NoSuchElementError
+            end
+          end
         end
       end
 

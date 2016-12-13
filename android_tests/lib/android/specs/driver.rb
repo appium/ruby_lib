@@ -31,13 +31,15 @@ describe 'driver' do
     # Only used for Sauce Labs
     t 'verify all attributes' do
       2.times { set_wait 1 } # must set twice to validate last_waits
-      actual              = driver_attributes
-      actual[:caps][:app] = File.basename actual[:caps][:app]
-      expected            = { caps:             { platformName: 'android',
-                                                  app:          'api.apk',
-                                                  appPackage:   'io.appium.android.apis',
-                                                  appActivity:  '.ApiDemos',
-                                                  deviceName:   'Nexus 7' },
+      actual                = driver_attributes
+      caps_app_for_teardown = actual[:caps][:app]
+      actual[:caps][:app]   = File.basename actual[:caps][:app]
+      expected_caps = ::Appium::Driver::Capabilities.init_caps_for_appium(platformName: 'Android',
+                                                                          app:          'api.apk',
+                                                                          appPackage:   'io.appium.android.apis',
+                                                                          appActivity:  '.ApiDemos',
+                                                                          deviceName:   'Nexus 7')
+      expected            = { caps:             expected_caps,
                               custom_url:       false,
                               export_session:   false,
                               default_wait:     1,
@@ -52,12 +54,18 @@ describe 'driver' do
       if actual != expected
         diff    = HashDiff.diff expected, actual
         diff    = "diff (expected, actual):\n#{diff}"
+
+        actual[:caps][:app] = caps_app_for_teardown
         # example:
         # change :ios in expected to match 'ios' in actual
         # [["~", "caps.platformName", :ios, "ios"]]
         message = "\n\nactual:\n\n: #{actual.ai}expected:\n\n#{expected.ai}\n\n#{diff}"
         fail message
       end
+
+      actual_selenium_caps = actual[:caps][:platformName]
+      actual_selenium_caps.must_equal 'Android'
+      actual[:caps][:app] = caps_app_for_teardown
     end
   end
 
@@ -149,7 +157,7 @@ describe 'driver' do
     #   start_driver # tested by restart
     #   no_wait  # posts value to server, it's not stored locally
     #   set_wait # posts value to server, it's not stored locally
-    #   execute_script # 'mobile: ' is deprecated and plain executeScript unsupported
+    #   execute_script # 'mobile: ' is deprecated and plain execute_script unsupported
 
     t 'default_wait' do
       set_wait 1
