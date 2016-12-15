@@ -4,24 +4,6 @@ module Appium
   module Device
     extend Forwardable
 
-    NoArgMethods = {
-      post: {
-        open_notifications:   'session/:session_id/appium/device/open_notifications',
-        shake:                'session/:session_id/appium/device/shake',
-        launch_app:           'session/:session_id/appium/app/launch',
-        close_app:            'session/:session_id/appium/app/close',
-        reset:                'session/:session_id/appium/app/reset',
-        toggle_airplane_mode: 'session/:session_id/appium/device/toggle_airplane_mode',
-        device_locked?:       'session/:session_id/appium/device/is_locked'
-      },
-      get:  {
-        device_time:            'session/:session_id/appium/device/system_time',
-        current_activity:       'session/:session_id/appium/device/current_activity',
-        current_context:        'session/:session_id/context',
-        get_network_connection: 'session/:session_id/network_connection'
-      }
-    }
-
     # @!method app_strings
     #   Return the hash of all localization strings.
     #   ```ruby
@@ -324,8 +306,6 @@ module Appium
       # @private
       def add_endpoint_method(method)
         if block_given?
-          # &Proc.new with no args passes the passed_in block
-          # Because creating Procs from blocks is slow
           create_bridge_command method, &Proc.new
         else
           create_bridge_command method
@@ -356,29 +336,6 @@ module Appium
 
       # @private
       def create_bridge_command(method)
-        Selenium::WebDriver::Remote::Bridge.class_eval do
-          if block_given?
-            class_eval(&Proc.new)
-          else
-            define_method(method) { execute method }
-          end
-        end
-      end
-
-      # @private
-      def add_bridge_method(method)
-        if block_given?
-          create_bridge method, &Proc.new
-        else
-          create_bridge method
-        end
-
-        delegate_driver_method method
-        delegate_from_appium_driver method
-      end
-
-      # @private
-      def create_bridge(method)
         Selenium::WebDriver::Remote::Bridge.class_eval do
           if block_given?
             class_eval(&Proc.new)
@@ -465,7 +422,7 @@ module Appium
         #   ```ruby
         #   ime_activate engine: 'com.android.inputmethod.latin/.LatinIME'
         #   ```
-        add_bridge_method(:ime_activate) do
+        add_endpoint_method(:ime_activate) do
           def ime_activate(ime_name)
             execute :imeActivateEngine, {}, engine: ime_name
           end
@@ -478,7 +435,7 @@ module Appium
         #   ```ruby
         #   ime_available_engines #=> Get the list of IME installed in the target device
         #   ```
-        add_bridge_method(:ime_available_engines) do
+        add_endpoint_method(:ime_available_engines) do
           def ime_available_engines
             execute :imeGetAvailableEngines
           end
@@ -491,7 +448,7 @@ module Appium
         #   ```ruby
         #   ime_active_engine #=> Get the current active IME such as 'com.android.inputmethod.latin/.LatinIME'
         #   ```
-        add_bridge_method(:ime_active_engine) do
+        add_endpoint_method(:ime_active_engine) do
           def ime_active_engine
             execute :imeGetActiveEngine
           end
@@ -504,7 +461,7 @@ module Appium
         #   ```ruby
         #   ime_activated #=> True if IME is activated
         #   ```
-        add_bridge_method(:ime_activated) do
+        add_endpoint_method(:ime_activated) do
           def ime_activated
             execute :imeIsActivated
           end
@@ -518,7 +475,7 @@ module Appium
         #   ```ruby
         #   ime_deactivate #=> Deactivate current IME engine
         #   ```
-        add_bridge_method(:ime_deactivate) do
+        add_endpoint_method(:ime_deactivate) do
           def ime_deactivate
             execute :imeDeactivate, {}
           end
