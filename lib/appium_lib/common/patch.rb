@@ -70,8 +70,7 @@ def patch_webdriver_bridge
   Selenium::WebDriver::Remote::Bridge.class_eval do
     # Code from lib/selenium/webdriver/remote/bridge.rb
     def raw_execute(command, opts = {}, command_hash = nil)
-      verb, path = Selenium::WebDriver::Remote::Bridge::COMMANDS[command] ||
-                   fail(ArgumentError, "unknown command: #{command.inspect}")
+      verb, path = commands(command) || fail(ArgumentError, "unknown command: #{command.inspect}")
       path = path.dup
 
       path[':session_id'] = @session_id if path.include?(':session_id')
@@ -150,4 +149,12 @@ end
 class Selenium::WebDriver::Remote::Http::Common # rubocop:disable Style/ClassAndModuleChildren
   remove_const :DEFAULT_HEADERS if defined? DEFAULT_HEADERS
   DEFAULT_HEADERS = { 'Accept' => CONTENT_TYPE, 'User-Agent' => "appium/ruby_lib/#{::Appium::VERSION}" }
+end
+
+def patch_remote_driver_commands
+  Selenium::WebDriver::Remote::Bridge.class_eval do
+    def commands(command)
+      ::Appium::Driver::Commands::COMMAND[command]
+    end
+  end
 end

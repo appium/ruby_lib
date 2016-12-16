@@ -10,6 +10,7 @@ require_relative 'common/patch'
 require_relative 'common/version'
 require_relative 'common/error'
 require_relative 'common/search_context'
+require_relative 'common/command'
 require_relative 'common/element/window'
 
 # ios
@@ -367,6 +368,9 @@ module Appium
 
       # apply os specific patches
       patch_webdriver_element
+
+      # for command
+      patch_remote_driver_commands
 
       # enable debug patch
       # !!'constant' == true
