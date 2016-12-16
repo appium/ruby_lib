@@ -1,7 +1,7 @@
 ruby_lib_ios
 =====================
 
-ruby_lib's iOS tests. Requires `Ruby 1.9.3` or better.
+ruby_lib's iOS tests. Requires `Ruby 2.2+` or better.
 
 - `rake install` Install gems required to run the tests.
 - `rake ios` Run all tests.

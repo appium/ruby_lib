@@ -1,7 +1,7 @@
 ruby_lib_android
 =====================
 
-ruby_lib's Android tests. Requires `Ruby 1.9.3` or better.
+ruby_lib's Android tests. Requires `Ruby 2.2+` or better.
 
 - `rake install` Install gems required to run the tests.
 - `rake android` Run all tests.
