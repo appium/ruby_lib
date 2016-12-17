@@ -70,7 +70,7 @@ def patch_webdriver_bridge
   Selenium::WebDriver::Remote::Bridge.class_eval do
     # Code from lib/selenium/webdriver/remote/bridge.rb
     def raw_execute(command, opts = {}, command_hash = nil)
-      verb, path = commands(command) || fail(ArgumentError, "unknown command: #{command.inspect}")
+      verb, path = commands(command) || raise(ArgumentError, "unknown command: #{command.inspect}")
       path = path.dup
 
       path[':session_id'] = @session_id if path.include?(':session_id')
@@ -111,10 +111,11 @@ def patch_webdriver_bridge
         else
           Appium::Logger.ap_info print_command
         end
-      else # non-standard command hash
+      elsif command_hash
+        # non-standard command hash
         # It's important to output this for debugging problems.
         # for example invalid JSON will not be a Hash
-        Appium::Logger.ap_info command_hash if command_hash
+        Appium::Logger.ap_info command_hash
       end
       delay = $driver.global_webdriver_http_sleep
       sleep delay if !delay.nil? && delay > 0
@@ -135,7 +136,7 @@ class Selenium::WebDriver::Remote::Response
     case val
     when Hash
       msg = val['origValue'] || val['message'] or return 'unknown error'
-      msg << " (#{ val['class'] })" if val['class']
+      msg << " (#{val['class']})" if val['class']
     when String
       msg = val
     else
@@ -148,7 +149,7 @@ end
 
 class Selenium::WebDriver::Remote::Http::Common # rubocop:disable Style/ClassAndModuleChildren
   remove_const :DEFAULT_HEADERS if defined? DEFAULT_HEADERS
-  DEFAULT_HEADERS = { 'Accept' => CONTENT_TYPE, 'User-Agent' => "appium/ruby_lib/#{::Appium::VERSION}" }
+  DEFAULT_HEADERS = { 'Accept' => CONTENT_TYPE, 'User-Agent' => "appium/ruby_lib/#{::Appium::VERSION}" }.freeze
 end
 
 def patch_remote_driver_commands

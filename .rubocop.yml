@@ -3,6 +3,8 @@ Metrics/LineLength:
   Max: 125
 Metrics/MethodLength:
   Enabled: false
+Metrics/ModuleLength:
+  Enabled: false
 Metrics/ClassLength:
   Enabled: false
 Metrics/CyclomaticComplexity:
@@ -10,6 +12,8 @@ Metrics/CyclomaticComplexity:
 Metrics/PerceivedComplexity:
   Enabled: false
 Metrics/AbcSize:
+  Enabled: false
+Metrics/BlockLength:
   Enabled: false
 Style/Documentation:
   Enabled: false
@@ -25,4 +29,21 @@ Style/AccessorMethodName:
 Style/DoubleNegation:
   Enabled: false
 Style/EachWithObject:
+  Enabled: false
+Style/SpaceAroundOperators:
+  Enabled: false
+Style/ExtraSpacing:
+  Enabled: false
+Style/IndentHash:
+  Enabled: false
+Style/VariableNumber:
+  EnforcedStyle: 'snake_case'
+# The followings should checked again
+Style/IdenticalConditionalBranches:
+  Enabled: false
+Lint/NestedMethodDefinition:
+  Enabled: false
+Lint/UnifiedInteger:
+  Enabled: false
+Performance/RedundantBlockCall:
   Enabled: false

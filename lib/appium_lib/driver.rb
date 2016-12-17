@@ -72,11 +72,11 @@ module Appium
   # @param opts [Hash] file: '/path/to/appium.txt', verbose: true
   # @return [hash] the symbolized hash with updated :app and :require keys
   def self.load_settings(opts = {})
-    fail 'opts must be a hash' unless opts.is_a? Hash
-    fail 'opts must not be empty' if opts.empty?
+    raise 'opts must be a hash' unless opts.is_a? Hash
+    raise 'opts must not be empty' if opts.empty?
 
     toml = opts[:file]
-    fail 'Must pass file' unless toml
+    raise 'Must pass file' unless toml
     verbose = opts.fetch :verbose, false
 
     Appium::Logger.info "appium settings path: #{toml}" if verbose
@@ -84,12 +84,14 @@ module Appium
     toml_exists = File.exist? toml
     Appium::Logger.info "Exists? #{toml_exists}" if verbose
 
-    fail "toml doesn't exist #{toml}" unless toml_exists
+    raise "toml doesn't exist #{toml}" unless toml_exists
     require 'tomlrb'
     Appium::Logger.info "Loading #{toml}" if verbose
 
     data = Tomlrb.load_file(toml, symbolize_keys: true)
-    Appium::Logger.ap_info data unless data.empty? if verbose
+    if verbose
+      Appium::Logger.ap_info data unless data.empty?
+    end
 
     if data && data[:caps] && data[:caps][:app] && !data[:caps][:app].empty?
       data[:caps][:app] = Appium::Driver.absolute_app_path data
@@ -104,6 +106,7 @@ module Appium
   end
 
   class << self
+    # rubocop:disable Style/Alias
     alias_method :load_appium_txt, :load_settings
   end
 
@@ -143,7 +146,7 @@ module Appium
   # based on deep_symbolize_keys & deep_transform_keys from rails
   # https://github.com/rails/docrails/blob/a3b1105ada3da64acfa3843b164b14b734456a50/activesupport/lib/active_support/core_ext/hash/keys.rb#L84
   def self.symbolize_keys(hash)
-    fail 'symbolize_keys requires a hash' unless hash.is_a? Hash
+    raise 'symbolize_keys requires a hash' unless hash.is_a? Hash
     result = {}
     hash.each do |key, value|
       key = key.to_sym rescue key # rubocop:disable Style/RescueModifier
@@ -164,7 +167,7 @@ module Appium
   # that module are promoted on.
   # otherwise, the array of modules will be used as the promotion target.
   def self.promote_singleton_appium_methods(modules)
-    fail 'Driver is nil' if $driver.nil?
+    raise 'Driver is nil' if $driver.nil?
 
     target_modules = []
 
@@ -173,12 +176,13 @@ module Appium
         target_modules << modules.const_get(sub_module)
       end
     else
-      fail 'modules must be a module or an array' unless modules.is_a? Array
+      raise 'modules must be a module or an array' unless modules.is_a? Array
       target_modules = modules
     end
 
     target_modules.each do |const|
       # noinspection RubyResolve
+      # rubocop:disable Style/MultilineIfModifier
       $driver.public_methods(false).each do |m|
         const.send(:define_singleton_method, m) do |*args, &block|
           begin
@@ -189,6 +193,7 @@ module Appium
           # override unless there's an existing method with matching arity
         end unless const.respond_to?(m) && const.method(m).arity == $driver.method(m).arity
       end
+      # rubocop:enable Style/MultilineIfModifier
     end
   end
 
@@ -215,7 +220,7 @@ module Appium
   # Appium.promote_appium_methods Minitest::Spec
   # ```
   def self.promote_appium_methods(class_array)
-    fail 'Driver is nil' if $driver.nil?
+    raise 'Driver is nil' if $driver.nil?
     # Wrap single class into an array
     class_array = [class_array] unless class_array.class == Array
     # Promote Appium driver methods to class instance methods.
@@ -247,11 +252,11 @@ module Appium
       # Because Selenium::WebDriver::Remote::Bridge uses Capabilities.firefox by default
       # https://github.com/SeleniumHQ/selenium/blob/selenium-3.0.1/rb/lib/selenium/webdriver/remote/bridge.rb#L67
       def self.init_caps_for_appium(opts_caps = {})
-        default_caps_opts_firefox = ({
+        default_caps_opts_firefox = {
           javascript_enabled: true,
           takes_screenshot: true,
           css_selectors_enabled: true
-        }).merge(opts_caps)
+        }.merge(opts_caps)
         ::Selenium::WebDriver::Remote::Capabilities.new(default_caps_opts_firefox)
       end
     end
@@ -320,7 +325,7 @@ module Appium
     def initialize(opts = {})
       # quit last driver
       $driver.driver_quit if $driver
-      fail 'opts must be a hash' unless opts.is_a? Hash
+      raise 'opts must be a hash' unless opts.is_a? Hash
 
       opts              = Appium.symbolize_keys opts
 
@@ -345,7 +350,7 @@ module Appium
 
       # Path to the .apk, .app or .app.zip.
       # The path can be local or remote for Sauce.
-      if @caps && @caps[:app] && ! @caps[:app].empty?
+      if @caps && @caps[:app] && !@caps[:app].empty?
         @caps[:app] = self.class.absolute_app_path opts
       end
 
@@ -391,17 +396,18 @@ module Appium
 
     # Returns a hash of the driver attributes
     def driver_attributes
-      attributes = { caps:             @caps,
-                     custom_url:       @custom_url,
-                     export_session:   @export_session,
-                     default_wait:     @default_wait,
-                     last_waits:       @last_waits,
-                     sauce_username:   @sauce_username,
-                     sauce_access_key: @sauce_access_key,
-                     port:             @appium_port,
-                     device:           @appium_device,
-                     debug:            @appium_debug,
-                     listener:         @listener
+      attributes = {
+          caps:             @caps,
+          custom_url:       @custom_url,
+          export_session:   @export_session,
+          default_wait:     @default_wait,
+          last_waits:       @last_waits,
+          sauce_username:   @sauce_username,
+          sauce_access_key: @sauce_access_key,
+          port:             @appium_port,
+          device:           @appium_device,
+          debug:            @appium_debug,
+          listener:         @listener
       }
 
       # Return duplicates so attributes are immutable
@@ -418,7 +424,7 @@ module Appium
     # Return true if automationName is 'XCUITest'
     # @return [Boolean]
     def automation_name_is_xcuitest?
-      !@automation_name.nil? && @automation_name.downcase == 'xcuitest'
+      !@automation_name.nil? && 'xcuitest'.casecmp(@automation_name).zero?
     end
 
     # Return true if the target Appium server is over REQUIRED_VERSION_XCUITEST.
@@ -426,7 +432,7 @@ module Appium
     # @return [Boolean]
     def check_server_version_xcuitest
       if automation_name_is_xcuitest? && (@appium_server_version['build']['version'] <= REQUIRED_VERSION_XCUITEST)
-        fail Appium::Error::NotSupportedAppiumServer, "XCUITest requires over Appium #{REQUIRED_VERSION_XCUITEST}"
+        raise Appium::Error::NotSupportedAppiumServer, "XCUITest requires over Appium #{REQUIRED_VERSION_XCUITEST}"
       end
       true
     end
@@ -456,33 +462,33 @@ module Appium
     #
     # @return [String] APP_PATH as an absolute path
     def self.absolute_app_path(opts)
-      fail 'opts must be a hash' unless opts.is_a? Hash
+      raise 'opts must be a hash' unless opts.is_a? Hash
       caps            = opts[:caps] || {}
       appium_lib_opts = opts[:appium_lib] || {}
       server_url      = appium_lib_opts.fetch :server_url, false
 
       app_path        = caps[:app]
-      fail 'absolute_app_path invoked and app is not set!' if app_path.nil? || app_path.empty?
+      raise 'absolute_app_path invoked and app is not set!' if app_path.nil? || app_path.empty?
       # may be absolute path to file on remote server.
       # if the file is on the remote server then we can't check if it exists
       return app_path if server_url
       # Sauce storage API. http://saucelabs.com/docs/rest#storage
       return app_path if app_path.start_with? 'sauce-storage:'
-      return app_path if app_path.match(/^http/) # public URL for Sauce
-      if app_path.match(/^(\/|[a-zA-Z]:)/) # absolute file path
+      return app_path if app_path =~ /^http/ # public URL for Sauce
+      if app_path =~ /^(\/|[a-zA-Z]:)/ # absolute file path
         app_path = File.expand_path app_path unless File.exist? app_path
-        fail "App doesn't exist. #{app_path}" unless File.exist? app_path
+        raise "App doesn't exist. #{app_path}" unless File.exist? app_path
         return app_path
       end
 
       # if it doesn't contain a slash then it's a bundle id
-      return app_path unless app_path.match(/[\/\\]/)
+      return app_path unless app_path =~ /[\/\\]/
 
       # relative path that must be expanded.
       # absolute_app_path is called from load_settings
       # and the txt file path is the base of the app path in that case.
       app_path = File.expand_path app_path
-      fail "App doesn't exist #{app_path}" unless File.exist? app_path
+      raise "App doesn't exist #{app_path}" unless File.exist? app_path
       app_path
     end
 
@@ -519,8 +525,9 @@ module Appium
     # @return [void]
     def driver_quit
       # rescue NoSuchDriverError or nil driver
-      # rubocop:disable Style/RescueModifier
-      @driver.quit rescue nil
+      @driver.quit
+    rescue
+      nil
     end
 
     # Creates a new global driver and quits the old one if it exists.

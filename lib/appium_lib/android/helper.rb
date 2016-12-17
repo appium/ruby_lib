@@ -50,8 +50,8 @@ module Appium
 
         string_ids = nil
 
-        if id_matches && id_matches.length > 0
-          space_suffix = ' ' * '  strings.xml: '.length
+        if id_matches && !id_matches.empty?
+          space_suffix = ' ' * 15 # 15 is '  strings.xml: '.length
           string_ids   = ''
 
           # add first
@@ -130,11 +130,11 @@ module Appium
       source_header  = source[0..doctype_string.length].downcase
       source_is_html = source_header.start_with?(doctype_string, '<html')
 
-      if source_is_html # parse html from webview
-        parser = @android_html_parser ||= Nokogiri::HTML::SAX::Parser.new(Common::HTMLElements.new)
-      else
-        parser = @android_native_parser ||= Nokogiri::XML::SAX::Parser.new(AndroidElements.new)
-      end
+      parser = if source_is_html # parse html from webview
+                 @android_html_parser ||= Nokogiri::HTML::SAX::Parser.new(Common::HTMLElements.new)
+               else
+                 @android_native_parser ||= Nokogiri::XML::SAX::Parser.new(AndroidElements.new)
+               end
       parser.document.reset # ensure document is reset before parsing
       parser.document.filter = class_name
       parser.parse source
@@ -208,7 +208,7 @@ module Appium
         index = results.length
         index -= 1 if index >= 0
       else
-        fail 'Index must be >= 1' unless index >= 1
+        raise 'Index must be >= 1' unless index >= 1
         index -= 1 if index >= 1
       end
 
@@ -289,9 +289,9 @@ module Appium
       value = %("#{value}")
 
       if class_name == '*'
-        return _resource_id(value, "new UiSelector().resourceId(#{value});") +
+        return (_resource_id(value, "new UiSelector().resourceId(#{value});") +
           "new UiSelector().descriptionContains(#{value});" \
-          "new UiSelector().textContains(#{value});"
+          "new UiSelector().textContains(#{value});")
       end
 
       class_name = %("#{class_name}")
@@ -326,9 +326,9 @@ module Appium
       value = %("#{value}")
 
       if class_name == '*'
-        return _resource_id(value, "new UiSelector().resourceId(#{value});") +
+        return (_resource_id(value, "new UiSelector().resourceId(#{value});") +
           "new UiSelector().description(#{value});" \
-          "new UiSelector().text(#{value});"
+          "new UiSelector().text(#{value});")
       end
 
       class_name = %("#{class_name}")

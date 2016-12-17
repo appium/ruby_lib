@@ -63,7 +63,7 @@ describe 'driver' do
         # change :ios in expected to match 'ios' in actual
         # [["~", "caps.platformName", :ios, "ios"]]
         message = "\n\nactual:\n\n: #{actual.ai}expected:\n\n#{expected.ai}\n\n#{diff}"
-        fail message
+        raise message
       end
 
       actual_selenium_caps = actual[:caps][:automationName]
@@ -207,12 +207,12 @@ describe 'driver' do
     # returns true unless an error is raised
     t 'exists' do
       exists(0, 0) { true }.must_equal true
-      exists(0, 0) { fail 'error' }.must_equal false
+      exists(0, 0) { raise 'error' }.must_equal false
     end
 
     # simple integration sanity test to check for unexpected exceptions
     t 'set_location' do
-      fail NotImplementedError, "XCUITest(Appium1.6.2) doesn't support yet" if UI::Inventory.xcuitest?
+      raise NotImplementedError, "XCUITest(Appium1.6.2) doesn't support yet" if UI::Inventory.xcuitest?
       set_location latitude: 55, longitude: -72, altitude: 33
     end
 
@@ -228,12 +228,12 @@ describe 'driver' do
 
     # settings
     t 'get settings' do
-      fail NotImplementedError, "XCUITest(Appium1.6.2) doesn't support yet" if UI::Inventory.xcuitest?
+      raise NotImplementedError, "XCUITest(Appium1.6.2) doesn't support yet" if UI::Inventory.xcuitest?
       get_settings.wont_be_nil
     end
 
     t 'update settings' do
-      fail NotImplementedError, "XCUITest(Appium1.6.2) doesn't support yet" if UI::Inventory.xcuitest?
+      raise NotImplementedError, "XCUITest(Appium1.6.2) doesn't support yet" if UI::Inventory.xcuitest?
 
       update_settings cyberdelia: 'open'
       get_settings['cyberdelia'].must_equal 'open'

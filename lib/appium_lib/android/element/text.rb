@@ -1,7 +1,7 @@
 # TextView methods
 module Appium
   module Android
-    TextView = 'android.widget.TextView'
+    TextView = 'android.widget.TextView'.freeze
 
     # Find the first TextView that contains value or by index.
     # @param value [String, Integer] the value to find.

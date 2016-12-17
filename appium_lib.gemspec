@@ -24,10 +24,10 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'spec', '~> 5.3', '>= 5.3.4'
   s.add_development_dependency 'fakefs', '~> 0.6.7'
 
-  s.add_development_dependency 'rake', '~> 10.4'
+  s.add_development_dependency 'rake', '~> 12.0'
   s.add_development_dependency 'yard', '~> 0.8'
 
-  s.add_development_dependency 'rubocop', '~> 0.30.1'
+  s.add_development_dependency 'rubocop', '~> 0.46.0'
 
   s.files = `git ls-files`.split "\n"
 end

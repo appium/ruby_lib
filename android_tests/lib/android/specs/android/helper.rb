@@ -85,18 +85,16 @@ describe 'android/helper' do
       # api 19
       ['mFocusedApp=AppWindowToken{b40af858 token=Token{b3e2ce38 ActivityRecord{b3eb47d8 u0 io.appium.android.apis/.ApiDemos t6}}}',
        'io.appium.android.apis',
-       '.ApiDemos'
-      ],
+       '.ApiDemos'],
       # api 16 selendroid
       ['mFocusedApp=AppWindowToken{4157a2c8 token=Token{41582628 ActivityRecord{415821f0 com.android.launcher/com.android.launcher2.Launcher}}}',
        'com.android.launcher',
-       'com.android.launcher2.Launcher'
-      ]
+       'com.android.launcher2.Launcher']
     ]
 
     expected.each do |line, package, activity|
       parsed = _parse_current_app_line(line)
-      fail "failed to parse #{line}" if parsed.nil?
+      raise "failed to parse #{line}" if parsed.nil?
       parsed.package.must_equal package
       parsed.activity.must_equal activity
       parsed.am_start.must_equal package + '/' + activity

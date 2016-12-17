@@ -38,9 +38,9 @@ class SauceStorage
   end
 
   def upload(file_path)
-    file_name = File.basename file_path
-    file      = File.new file_path
-    local_md5 = Digest::MD5.hexdigest File.read file_path
+    file_name  = File.basename file_path
+    file       = File.new file_path
+    local_md_5 = Digest::MD5.hexdigest File.read file_path
 
     files.each do |f|
       if f['md5'] == local_md5
@@ -50,16 +50,18 @@ class SauceStorage
     end
 
     url        = "#{@url}/#{file_name}?overwrite=plz"
-    remote_md5 = JSON.parse(RestClient.post url, file, content_type: 'application/octet-stream')['md5']
+    json = RestClient.post(url, file, content_type: 'application/octet-stream')
+    remote_md_5 = JSON.parse(json)['md5']
     if @debug
       puts "Uploaded #{file_path}"
-      puts " local_md5: #{local_md5}"
-      puts "remote_md5: #{remote_md5}"
+      puts " local_md5: #{local_md_5}"
+      puts "remote_md5: #{remote_md_5}"
     end
-    local_md5 == remote_md5
+    local_md_5 == remote_md_5
   end
 
   def files
-    JSON.parse(RestClient.get @url)['files']
+    get = RestClient.get @url
+    JSON.parse(get)['files']
   end
 end

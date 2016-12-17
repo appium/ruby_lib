@@ -19,13 +19,13 @@ end
 
 # Sanity check
 a = OpenStruct.new x: 'ok'
-fail 'x issue' unless a.x == 'ok'
+raise 'x issue' unless a.x == 'ok'
 
 dir  = File.expand_path(File.join(Dir.pwd, 'lib'))
 appium_txt = File.join(Dir.pwd, 'appium.txt')
 device  = ARGV[0].downcase.strip
 devices = %w(android selendroid ios)
-fail 'Expected android, selendroid or ios as first argument' unless devices.include? device
+raise 'Expected android, selendroid or ios as first argument' unless devices.include? device
 
 one_test = ARGV[1]
 test_dir = "/#{device}/"
@@ -46,11 +46,12 @@ if one_test
     one_test = File.join(dir, test_dir + 'specs/', one_test)
   end
 
-  fail "\nTest #{one_test} does not exist.\n" unless File.exist?(one_test)
+  raise "\nTest #{one_test} does not exist.\n" unless File.exist?(one_test)
   start_driver(caps)
 
   # require support (common.rb)
-  Dir.glob(File.join dir, test_dir + '/*.rb') do |test|
+  file_name = File.join dir, test_dir + '/*.rb'
+  Dir.glob(file_name) do |test|
     require test
     trace_files << test
   end
@@ -59,7 +60,8 @@ if one_test
   trace_files << one_test
 else
   # require all
-  Dir.glob(File.join dir, test_dir + '**/*.rb') do |test|
+  file_names = File.join(dir, test_dir + '**/*.rb')
+  Dir.glob(file_names) do |test|
     # load all tests
     trace_files << test
     puts "  #{File.basename(test, '.*')}"
