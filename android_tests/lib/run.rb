@@ -50,7 +50,8 @@ if one_test
   start_driver(caps)
 
   # require support (common.rb)
-  Dir.glob(File.join dir, test_dir + '/*.rb') do |test|
+  file_name = File.join dir, test_dir + '/*.rb'
+  Dir.glob(file_name) do |test|
     require test
     trace_files << test
   end
@@ -59,7 +60,8 @@ if one_test
   trace_files << one_test
 else
   # require all
-  Dir.glob(File.join dir, test_dir + '**/*.rb') do |test|
+  file_names = File.join(dir, test_dir + '**/*.rb')
+  Dir.glob(file_names) do |test|
     # load all tests
     trace_files << test
     puts "  #{File.basename(test, '.*')}"

@@ -50,7 +50,7 @@ module Appium
 
         string_ids = nil
 
-        if id_matches && id_matches.length > 0
+        if id_matches && !id_matches.empty?
           space_suffix = ' ' * '  strings.xml: '.length
           string_ids   = ''
 

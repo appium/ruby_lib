@@ -1,8 +1,8 @@
 # UIAButton methods
 module Appium
   module Android
-    Button      = 'android.widget.Button'
-    ImageButton = 'android.widget.ImageButton'
+    Button      = 'android.widget.Button'.freeze
+    ImageButton = 'android.widget.ImageButton'.freeze
 
     private
 

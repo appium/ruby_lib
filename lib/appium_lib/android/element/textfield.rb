@@ -1,6 +1,6 @@
 module Appium
   module Android
-    EditText = 'android.widget.EditText'
+    EditText = 'android.widget.EditText'.freeze
 
     # Find the first EditText that contains value or by index.
     # @param value [String, Integer] the text to match exactly.
