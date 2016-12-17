@@ -35,7 +35,10 @@ Android tests require running on physical hardware with Android 5.0 (API 21). Th
 4. Add release information on GitHub: https://github.com/appium/ruby_lib/releases
     - Template
  ```
-1. Enhancements
-2. Bug fixes
-3. Deprecations
+### 1. Enhancements
+
+### 2. Bug fixes
+
+### 3. Deprecations
 ```
+
