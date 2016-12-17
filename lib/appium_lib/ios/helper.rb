@@ -14,21 +14,21 @@ module Appium
 
       def _print_attr(type, name, label, value, hint)
         if name == label && name == value
-          puts "#{type}" if name || label || value || hint
+          puts type.to_s if name || label || value || hint
           puts "   name, label, value: #{name}" if name
           puts "   hint: #{hint}" if hint
         elsif name == label
-          puts "#{type}" if name || label || value || hint
+          puts type.to_s if name || label || value || hint
           puts "   name, label: #{name}" if name
           puts "   value: #{value}" if value
           puts "   hint: #{hint}" if hint
         elsif name == value
-          puts "#{type}" if name || label || value || hint
+          puts type.to_s if name || label || value || hint
           puts "   name, value: #{name}" if name
           puts "  label: #{label}" if label
           puts "   hint: #{hint}" if hint
         else
-          puts "#{type}" if name || label || value || hint
+          puts type.to_s if name || label || value || hint
           puts "   name: #{name}" if name
           puts "  label: #{label}" if label
           puts "  value: #{value}" if value
@@ -91,24 +91,24 @@ module Appium
         # rubocop:disable Metrics/BlockNesting
 
         # if class_name is set, mark non-matches as invisible
-        visible = (type.downcase.include?(class_name)).to_s if class_name
+        visible = (type.downcase.include? class_namet).to_s if class_name
         if visible && visible == 'true'
           if name == label && name == value
-            puts "#{type}" if name || label || value || hint
+            puts type.to_s if name || label || value || hint
             puts "   name, label, value: #{name}" if name
             puts "   hint: #{hint}" if hint
           elsif name == label
-            puts "#{type}" if name || label || value || hint
+            puts type.to_s if name || label || value || hint
             puts "   name, label: #{name}" if name
             puts "   value: #{value}" if value
             puts "   hint: #{hint}" if hint
           elsif name == value
-            puts "#{type}" if name || label || value || hint
+            puts type.to_s if name || label || value || hint
             puts "   name, value: #{name}" if name
             puts "  label: #{label}" if label
             puts "   hint: #{hint}" if hint
           else
-            puts "#{type}" if name || label || value || hint
+            puts type.to_s if name || label || value || hint
             puts "   name: #{name}" if name
             puts "  label: #{label}" if label
             puts "  value: #{value}" if value
@@ -236,7 +236,7 @@ module Appium
     # @param index [Integer] the index
     # @return [Element]
     def ele_index(class_name, index)
-      fail 'Index must be >= 1' unless index == 'last()' || (index.is_a?(Integer) && index >= 1)
+      raise 'Index must be >= 1' unless index == 'last()' || (index.is_a?(Integer) && index >= 1)
       elements = tags(class_name)
 
       if index == 'last()'
@@ -247,7 +247,7 @@ module Appium
         result = elements[index]
       end
 
-      fail _no_such_element if result.nil?
+      raise _no_such_element if result.nil?
       result
     end
 
@@ -334,7 +334,7 @@ module Appium
     def last_ele(class_name)
       if automation_name_is_xcuitest?
         result = @driver.find_elements :xpath, "(//#{class_name})"
-        fail _no_such_element if result.empty?
+        raise _no_such_element if result.empty?
         result.last
       else
         ele_index class_name, 'last()'
@@ -469,7 +469,7 @@ module Appium
       #
       # Don't use window.tap. See https://github.com/appium/appium-uiauto/issues/28
       #
-      dismiss_keyboard = (<<-JS).strip
+      dismiss_keyboard = <<-JS.strip
       if (!au.mainApp().keyboard().isNil()) {
         var key = au.mainApp().keyboard().buttons()['#{close_key}']
         if (key.isNil()) {
@@ -509,7 +509,7 @@ module Appium
     #
     def _all_pred(opts)
       predicate = opts[:predicate]
-      fail 'predicate must be provided' unless predicate
+      raise 'predicate must be provided' unless predicate
       visible = opts.fetch :visible, true
       %($.mainApp().getAllWithPredicate("#{predicate}", #{visible});)
     end
@@ -542,22 +542,22 @@ module Appium
     end
 
     def _validate_object(*objects)
-      fail 'objects must be an array' unless objects.is_a? Array
+      raise 'objects must be an array' unless objects.is_a? Array
       objects.each do |obj|
         next unless obj # obj may be nil. if so, ignore.
 
         valid_keys   = [:target, :substring, :insensitive]
         unknown_keys = obj.keys - valid_keys
-        fail "Unknown keys: #{unknown_keys}" unless unknown_keys.empty?
+        raise "Unknown keys: #{unknown_keys}" unless unknown_keys.empty?
 
         target = obj[:target]
-        fail 'target must be a string' unless target.is_a? String
+        raise 'target must be a string' unless target.is_a? String
 
         substring = obj[:substring]
-        fail 'substring must be a boolean' unless [true, false].include? substring
+        raise 'substring must be a boolean' unless [true, false].include? substring
 
         insensitive = obj[:insensitive]
-        fail 'insensitive must be a boolean' unless [true, false].include? insensitive
+        raise 'insensitive must be a boolean' unless [true, false].include? insensitive
       end
     end
 
@@ -593,16 +593,16 @@ module Appium
     def _by_json(opts)
       valid_keys   = [:typeArray, :onlyFirst, :onlyVisible, :name, :label, :value]
       unknown_keys = opts.keys - valid_keys
-      fail "Unknown keys: #{unknown_keys}" unless unknown_keys.empty?
+      raise "Unknown keys: #{unknown_keys}" unless unknown_keys.empty?
 
       type_array = opts[:typeArray]
-      fail 'typeArray must be an array' unless type_array.is_a? Array
+      raise 'typeArray must be an array' unless type_array.is_a? Array
 
       only_first = opts[:onlyFirst]
-      fail 'onlyFirst must be a boolean' unless [true, false].include? only_first
+      raise 'onlyFirst must be a boolean' unless [true, false].include? only_first
 
       only_visible = opts[:onlyVisible]
-      fail 'onlyVisible must be a boolean' unless [true, false].include? only_visible
+      raise 'onlyVisible must be a boolean' unless [true, false].include? only_visible
 
       # name/label/value are optional. when searching for class only, then none
       # will be present.
@@ -625,7 +625,7 @@ module Appium
       JS
 
       res = execute_script element_or_elements_by_type
-      res ? res : fail(Appium::Ios::CommandError, 'mainWindow is nil')
+      res ? res : raise(Appium::Ios::CommandError, 'mainWindow is nil')
     end
 
     # For Appium(automation name), not XCUITest
@@ -649,7 +649,7 @@ module Appium
     def ele_by_json(opts)
       opts[:onlyFirst] = true
       result           = _by_json(opts).first
-      fail _no_such_element if result.nil?
+      raise _no_such_element if result.nil?
       result
     end
 

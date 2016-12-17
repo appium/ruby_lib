@@ -60,7 +60,7 @@ describe 'driver' do
         # change :ios in expected to match 'ios' in actual
         # [["~", "caps.platformName", :ios, "ios"]]
         message = "\n\nactual:\n\n: #{actual.ai}expected:\n\n#{expected.ai}\n\n#{diff}"
-        fail message
+        raise message
       end
 
       actual_selenium_caps = actual[:caps][:platformName]
@@ -167,7 +167,7 @@ describe 'driver' do
     # returns true unless an error is raised
     t 'exists' do
       exists(0, 0) { true }.must_equal true
-      exists(0, 0) { fail 'error' }.must_equal false
+      exists(0, 0) { raise 'error' }.must_equal false
     end
 
     # any elements
@@ -189,7 +189,7 @@ describe 'driver' do
       begin
         set_location latitude: 55, longitude: -72, altitude: 33
       rescue Selenium::WebDriver::Error::UnknownError => e
-        # on android this method is expected to fail with this message when running
+        # on android this method is expected to raise with this message when running
         # on a regular device, or on genymotion.
         # error could be many messages, including:
         # ERROR running Appium command: port should be a number or string

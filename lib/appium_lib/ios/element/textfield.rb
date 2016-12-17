@@ -65,14 +65,14 @@ module Appium
     def textfield(value)
       if value.is_a? Numeric
         index = value
-        fail "#{index} is not a valid index. Must be >= 1" if index <= 0
+        raise "#{index} is not a valid index. Must be >= 1" if index <= 0
         index -= 1 # eles_by_json and _textfields_with_xpath is 0 indexed.
         result = if automation_name_is_xcuitest?
                    _textfields_with_xpath[index]
                  else
                    eles_by_json(_textfield_visible)[index]
                  end
-        fail _no_such_element if result.nil?
+        raise _no_such_element if result.nil?
         return result
 
       end
@@ -116,7 +116,7 @@ module Appium
                else
                  eles_by_json(_textfield_visible).last
                end
-      fail _no_such_element if result.nil?
+      raise _no_such_element if result.nil?
       result
     end
 

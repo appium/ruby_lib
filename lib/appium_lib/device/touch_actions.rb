@@ -8,8 +8,8 @@ module Appium
   # action = TouchAction.new.press(x: 45, y: 100).wait(5).release
   # action.perform
   class TouchAction
-    ACTIONS         = [:move_to, :long_press, :double_tap, :two_finger_tap, :press, :release, :tap, :wait, :perform]
-    COMPLEX_ACTIONS = [:swipe]
+    ACTIONS         = [:move_to, :long_press, :double_tap, :two_finger_tap, :press, :release, :tap, :wait, :perform].freeze
+    COMPLEX_ACTIONS = [:swipe].freeze
 
     class << self
       COMPLEX_ACTIONS.each do |action|
@@ -174,11 +174,8 @@ module Appium
     private
 
     def chain_method(method, args = nil)
-      if args
-        @actions << { action: method, options: args }
-      else
-        @actions << { action: method }
-      end
+      action = args ? { action: method, options: args } : { action: method }
+      @actions << action
       self
     end
 

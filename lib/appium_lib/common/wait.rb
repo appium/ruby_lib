@@ -11,7 +11,7 @@ module Appium
       invalid_keys = []
       opts.keys.each { |key| invalid_keys << key unless valid_keys.include?(key) }
       # [:one, :two] => :one, :two
-      fail "Invalid keys #{invalid_keys.to_s[1..-2]}. Valid keys are #{valid_keys.to_s[1..-2]}" unless invalid_keys.empty?
+      raise "Invalid keys #{invalid_keys.to_s[1..-2]}. Valid keys are #{valid_keys.to_s[1..-2]}" unless invalid_keys.empty?
 
       timeout        = opts.fetch(:timeout, 30)
       interval       = opts.fetch(:interval, 0.5)
@@ -24,12 +24,10 @@ module Appium
 
       until Time.now > end_time
         begin
-          if return_if_true
-            result = block.call
-            return result if result
-          else
-            return block.call
-          end
+          return block.call unless return_if_true
+
+          result = block.call
+          return result if result
         rescue ::Errno::ECONNREFUSED => e
           raise e
         rescue *ignored => last_error # rubocop:disable Lint/HandleExceptions
@@ -39,21 +37,17 @@ module Appium
         sleep interval
       end
 
-      if message
-        msg = message.dup
-      else
-        msg = "timed out after #{timeout} seconds"
-      end
+      msg = message ? message.dup : "timed out after #{timeout} seconds"
 
       msg << " (#{last_error.message})" if last_error
 
-      fail Selenium::WebDriver::Error::TimeOutError, msg
+      raise Selenium::WebDriver::Error::TimeOutError, msg
     end
 
     # process opts before calling _generic_wait
     def _process_wait_opts(opts)
       opts = { timeout: opts } if opts.is_a?(Numeric)
-      fail 'opts must be a hash' unless opts.is_a? Hash
+      raise 'opts must be a hash' unless opts.is_a? Hash
       opts
     end
 

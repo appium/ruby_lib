@@ -38,91 +38,47 @@ module UI
     end
 
     def self.navbar
-      if xcuitest?
-        'XCUIElementTypeNavigationBar'
-      else
-        'UIANavigationBar'
-      end
+      xcuitest? ? 'XCUIElementTypeNavigationBar' : 'UIANavigationBar'
     end
 
     def self.button
-      if xcuitest?
-        'XCUIElementTypeButton'
-      else
-        'UIAButton'
-      end
+      xcuitest? ? 'XCUIElementTypeButton' : 'UIAButton'
     end
 
     def self.static_text
-      if xcuitest?
-        'XCUIElementTypeStaticText'
-      else
-        'UIAStaticText'
-      end
+      xcuitest? ? 'XCUIElementTypeStaticText' : 'UIAStaticText'
     end
 
     def self.text_field
-      if xcuitest?
-        'XCUIElementTypeTextField'
-      else
-        'UIATextField'
-      end
+      xcuitest? ? 'XCUIElementTypeTextField' : 'UIATextField'
     end
 
     def self.secure_text_field
-      if xcuitest?
-        'XCUIElementTypeSecureTextField'
-      else
-        'UIASecureTextField'
-      end
+      xcuitest? ? 'XCUIElementTypeSecureTextField' : 'UIASecureTextField'
     end
 
     def self.picker
-      if xcuitest?
-        'XCUIElementTypePicker'
-      else
-        'UIAPicker'
-      end
+      xcuitest? ? 'XCUIElementTypePicker' : 'UIAPicker'
     end
 
     def self.action_sheet
-      if xcuitest?
-        'XCUIElementTypeActionSheet'
-      else
-        'UIActionSheet'
-      end
+      xcuitest? ? 'XCUIElementTypeActionSheet' : 'UIActionSheet'
     end
 
     def self.table
-      if xcuitest?
-        'XCUIElementTypeTable'
-      else
-        'UIATable'
-      end
+      xcuitest? ? 'XCUIElementTypeTable' : 'UIATable'
     end
 
     def self.table_cell
-      if xcuitest?
-        'XCUIElementTypeCell'
-      else
-        'UIATableCell'
-      end
+      xcuitest? ? 'XCUIElementTypeCell' : 'UIATableCell'
     end
 
     def self.other
-      if xcuitest?
-        'XCUIElementTypeOther'
-      else
-        fail 'unknown UIA element: other'
-      end
+      xcuitest? ? 'XCUIElementTypeOther' : raise('unknown UIA element: other')
     end
 
     def self.status_bar
-      if xcuitest?
-        'XCUIElementTypeStatusBar'
-      else
-        'UIAStatusBar'
-      end
+      xcuitest? ? 'XCUIElementTypeStatusBar' : 'UIAStatusBar'
     end
   end
 end

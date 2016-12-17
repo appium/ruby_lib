@@ -55,11 +55,11 @@ module Appium
 
     def _print_source(source)
       opts = Nokogiri::XML::ParseOptions::NOBLANKS | Nokogiri::XML::ParseOptions::NONET
-      if source.start_with? '<html'
-        doc = Nokogiri::HTML(source) { |cfg| cfg.options = opts }
-      else
-        doc = Nokogiri::XML(source)  { |cfg| cfg.options = opts }
-      end
+      doc = if source.start_with? '<html'
+              Nokogiri::HTML(source) { |cfg| cfg.options = opts }
+            else
+              Nokogiri::XML(source)  { |cfg| cfg.options = opts }
+            end
       puts doc.to_xml indent: 2
     end
 
@@ -215,8 +215,8 @@ module Appium
     end
 
     def _no_such_element
-      fail Selenium::WebDriver::Error::NoSuchElementError,
-           'An element could not be located on the page using the given search parameters.'
+      error_message = 'An element could not be located on the page using the given search parameters.'
+      raise Selenium::WebDriver::Error::NoSuchElementError, error_message
     end
   end # module Common
 end # module Appium

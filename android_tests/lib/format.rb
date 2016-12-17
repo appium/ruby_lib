@@ -32,11 +32,11 @@ list.split("\n").each do |method|
 
   indent = 6
   puts ' ' * indent + "when '" + tag + "'"
-  line2 = ' ' * (indent + 2) + "prefix '" + klass + "'"
+  line_2 = ' ' * (indent + 2) + "prefix '" + klass + "'"
   # button must translate to both button and image button
   # for ruby_lib to find all buttons
-  line2 += ", 'ImageButton'" if klass == 'Button'
-  puts line2
+  line_2 += ", 'ImageButton'" if klass == 'Button'
+  puts line_2
 end
 
 # for Pry
