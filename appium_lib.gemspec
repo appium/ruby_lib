@@ -1,13 +1,12 @@
 require_relative 'lib/appium_lib/common/version'
 
 Gem::Specification.new do |s|
-  # 1.8.x is not supported
-  s.required_ruby_version = '>= 1.9.3'
+  s.required_ruby_version = '>= 2.2'
 
   s.name          = 'appium_lib'
   s.version       = Appium::VERSION
   s.date          = Appium::DATE
-  s.license       = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+  s.license       = 'Apache'
   s.description   = s.summary = 'Ruby library for Appium'
   s.description   += '.' # avoid identical warning
   s.authors       = s.email = ['code@bootstraponline.com']
