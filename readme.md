@@ -17,7 +17,8 @@
 Helper methods for writing cross platform (iOS, Android) tests in Ruby using Appium. Note that user waits should not exceed 120 seconds if they're going to run on Sauce Labs.
 
 Make sure you're using Appium 1.0.0 or newer and Ruby 2.2+ with upgraded rubygems and bundler.
-(XCUITest for iOS requires over Appium 1.6.0)
+
+XCUITest for iOS requires `Appium 1.6.0+`. `appium_lib9.1.0+` requires `selenium-webdriver3.0.2+`.(`appium_lib9.0.0` or less requires `selenium-webdriver2.x`)
 
 #### Start appium server
 
