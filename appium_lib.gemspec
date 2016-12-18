@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.homepage      = 'https://github.com/appium/ruby_lib' # published as appium_lib
   s.require_paths = ['lib']
 
-  s.add_runtime_dependency 'selenium-webdriver', '~> 3.0.2'
+  s.add_runtime_dependency 'selenium-webdriver', '~> 3.0', '>= 3.0.2'
   s.add_runtime_dependency 'awesome_print', '~> 1.6'
   s.add_runtime_dependency 'json', '>= 1.8'
   s.add_runtime_dependency 'tomlrb', '~> 1.1'
