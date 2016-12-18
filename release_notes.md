@@ -1,3 +1,16 @@
+#### v9.1.0 2016-12-18
+
+- [ba9ec64](https://github.com/appium/ruby_lib/commit/ba9ec64031f242b3065674b1e4f8b236b391f9fa) Release 9.1.0
+- [5e2ed6a](https://github.com/appium/ruby_lib/commit/5e2ed6a984837ff30efa39ebd36e2ee5fc607c89) update readme and template (#418)
+- [e4b4426](https://github.com/appium/ruby_lib/commit/e4b4426a1322a3a552bad93c4d8a54c9592bebc6) Fix rubocop (#417)
+- [da4ed34](https://github.com/appium/ruby_lib/commit/da4ed34296ebffff8ed6d6b970ca5ca5a47ca72f) Require ruby 22 (#416)
+- [858863a](https://github.com/appium/ruby_lib/commit/858863ad88e0d4e32acb109c6bd087a040817fd2) Support over selenium-webdriver3.0.2 (#413)
+- [fbcaa62](https://github.com/appium/ruby_lib/commit/fbcaa62219eca64ebe8892f02d91b0103ee53909) update selenium-webdriver 3.0 and add patches to work with Appium (#383)
+- [19fb322](https://github.com/appium/ruby_lib/commit/19fb322fe0d9fc184fc708d111764e8b38c3c188) update some tips for finding elements (#412)
+- [e485121](https://github.com/appium/ruby_lib/commit/e4851210a2d0202bea3a62aea7f7c33798476466) Release 9 0 0 (#411)
+- [54ff9c4](https://github.com/appium/ruby_lib/commit/54ff9c45df80ce901b718347e79e761f93a4316b) Release 9.0.0
+
+
 #### v9.0.0 2016-12-09
 
 - [54ff9c4](https://github.com/appium/ruby_lib/commit/54ff9c45df80ce901b718347e79e761f93a4316b) Release 9.0.0
