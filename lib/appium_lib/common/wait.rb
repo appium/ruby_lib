@@ -6,7 +6,7 @@ module Appium
 
     # Wait code from the selenium Ruby gem
     # https://github.com/SeleniumHQ/selenium/blob/cf501dda3f0ed12233de51ce8170c0e8090f0c20/rb/lib/selenium/webdriver/common/wait.rb
-    def _generic_wait(opts = {}, &block)
+    def _generic_wait(opts = {})
       valid_keys = [:timeout, :interval, :message, :ignore, :return_if_true]
       invalid_keys = []
       opts.keys.each { |key| invalid_keys << key unless valid_keys.include?(key) }
@@ -24,9 +24,9 @@ module Appium
 
       until Time.now > end_time
         begin
-          return block.call unless return_if_true
+          return yield unless return_if_true
 
-          result = block.call
+          result = yield
           return result if result
         rescue ::Errno::ECONNREFUSED => e
           raise e
@@ -51,7 +51,7 @@ module Appium
       opts
     end
 
-    # Check every interval seconds to see if block.call returns a truthy value.
+    # Check every interval seconds to see if yield returns a truthy value.
     # Note this isn't a strict boolean true, any truthy value is accepted.
     # false and nil are considered failures.
     # Give up after timeout seconds.
@@ -71,7 +71,7 @@ module Appium
       _generic_wait opts, &block
     end
 
-    # Check every interval seconds to see if block.call doesn't raise an exception.
+    # Check every interval seconds to see if yield doesn't raise an exception.
     # Give up after timeout seconds.
     #
     # Wait code from the selenium Ruby gem
