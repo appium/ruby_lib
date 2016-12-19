@@ -38,7 +38,7 @@ module Appium
     # @return [Array<Element>]
     def finds_exact(value)
       if automation_name_is_xcuitest?
-        find_ele_by_attr '*', '*', value
+        find_eles_by_attr '*', '*', value
       else
         eles_by_json_visible_exact '*', value
       end
