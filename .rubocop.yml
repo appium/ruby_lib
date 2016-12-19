@@ -45,5 +45,3 @@ Lint/NestedMethodDefinition:
   Enabled: false
 Lint/UnifiedInteger:
   Enabled: false
-Performance/RedundantBlockCall:
-  Enabled: false
