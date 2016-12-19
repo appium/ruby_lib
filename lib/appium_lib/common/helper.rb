@@ -20,9 +20,9 @@ module Appium
     #
     # find_element :text doesn't work so use XPath to find by text.
 
-    # Return block.call and ignore any exceptions.
-    def ignore(&block)
-      block.call
+    # Return yield and ignore any exceptions.
+    def ignore
+      yield
     rescue Exception # rubocop:disable Lint/HandleExceptions, Lint/RescueException
     end
 

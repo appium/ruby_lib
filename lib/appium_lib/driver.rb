@@ -629,7 +629,7 @@ module Appium
     #                             wait to after checking existance
     # @param search_block [Block] the block to call
     # @return [Boolean]
-    def exists(pre_check = 0, post_check = @default_wait, &search_block)
+    def exists(pre_check = 0, post_check = @default_wait)
       # do not uset set_wait here.
       # it will cause problems with other methods reading the default_wait of 0
       # which then gets converted to a 1 second wait.
@@ -638,7 +638,7 @@ module Appium
       exists                                = true
 
       begin
-        search_block.call # search for element
+        yield # search for element
       rescue
         exists = false # error means it's not there
       end

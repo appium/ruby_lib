@@ -1,7 +1,7 @@
 # rake android['android/element/text']
 describe 'android/element/text' do
-  def must_raise_no_element(&block)
-    proc { block.call }.must_raise Selenium::WebDriver::Error::NoSuchElementError
+  def must_raise_no_element
+    proc { yield }.must_raise Selenium::WebDriver::Error::NoSuchElementError
   end
 
   t 'text' do
