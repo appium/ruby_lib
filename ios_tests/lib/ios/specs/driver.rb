@@ -159,6 +159,12 @@ describe 'driver' do
       end
     end
 
+    t 'client_version' do
+      client_version = appium_client_version
+      expected = { version: ::Appium::VERSION }
+      client_version.must_equal expected
+    end
+
     t 'restart' do
       restart
       text 'buttons'

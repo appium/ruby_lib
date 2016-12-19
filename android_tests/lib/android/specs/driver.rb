@@ -136,6 +136,12 @@ describe 'driver' do
       end
     end
 
+    t 'client_version' do
+      client_version = appium_client_version
+      expected = { version: ::Appium::VERSION }
+      client_version.must_equal expected
+    end
+
     # Skip:
     #   ios_capabilities # save for iOS tests
     #   absolute_app_path # tested already by starting the driver for this test

@@ -453,6 +453,19 @@ module Appium
       driver.remote_status
     end
 
+    # Returns the client's version info
+    #
+    # ```ruby
+    # {
+    #     "version" => "9.1.1"
+    # }
+    # ```
+    #
+    # @return [Hash]
+    def appium_client_version
+      { version: ::Appium::VERSION }
+    end
+
     # Converts app_path to an absolute path.
     #
     # opts is the full options hash (caps and appium_lib). If server_url is set
