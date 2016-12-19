@@ -1,3 +1,11 @@
+#### v9.1.1 2016-12-19
+
+- [c016ba3](https://github.com/appium/ruby_lib/commit/c016ba3f9d265ca8b851ec8ed85670ee50b4215b) Release 9.1.1
+- [125f144](https://github.com/appium/ruby_lib/commit/125f144481f0b01ab7014ca83968924e7bf827ba) bugfix for finding an array of exact elements in ios (#424)
+- [586205a](https://github.com/appium/ruby_lib/commit/586205ab9d6ce0c286a6036616a7755b74f6a1ba) Release 9 1 0 (#419)
+- [ba9ec64](https://github.com/appium/ruby_lib/commit/ba9ec64031f242b3065674b1e4f8b236b391f9fa) Release 9.1.0
+
+
 #### v9.1.0 2016-12-18
 
 - [ba9ec64](https://github.com/appium/ruby_lib/commit/ba9ec64031f242b3065674b1e4f8b236b391f9fa) Release 9.1.0
