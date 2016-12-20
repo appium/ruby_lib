@@ -38,10 +38,8 @@ Style/IndentHash:
   Enabled: false
 Style/VariableNumber:
   EnforcedStyle: 'snake_case'
-# The followings should checked again
-Style/IdenticalConditionalBranches:
-  Enabled: false
 Lint/NestedMethodDefinition:
   Enabled: false
+# The followings should checked again
 Lint/UnifiedInteger:
   Enabled: false

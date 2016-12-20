@@ -16,24 +16,21 @@ module Appium
         if name == label && name == value
           puts type.to_s if name || label || value || hint
           puts "   name, label, value: #{name}" if name
-          puts "   hint: #{hint}" if hint
         elsif name == label
           puts type.to_s if name || label || value || hint
           puts "   name, label: #{name}" if name
           puts "   value: #{value}" if value
-          puts "   hint: #{hint}" if hint
         elsif name == value
           puts type.to_s if name || label || value || hint
           puts "   name, value: #{name}" if name
           puts "  label: #{label}" if label
-          puts "   hint: #{hint}" if hint
         else
           puts type.to_s if name || label || value || hint
           puts "   name: #{name}" if name
           puts "  label: #{label}" if label
           puts "  value: #{value}" if value
-          puts "   hint: #{hint}" if hint
         end
+        puts "   hint: #{hint}" if hint
       end
     end
     # iOS only. On Android uiautomator always returns an empty string for EditText password.
@@ -87,34 +84,11 @@ module Appium
         visible = fix_space element['visible']
         type    = fix_space element['type']
 
-        # TODO: Rubocop warning cleanup
-        # rubocop:disable Metrics/BlockNesting
-
         # if class_name is set, mark non-matches as invisible
         visible = (type.downcase.include? class_namet).to_s if class_name
         if visible && visible == 'true'
-          if name == label && name == value
-            puts type.to_s if name || label || value || hint
-            puts "   name, label, value: #{name}" if name
-            puts "   hint: #{hint}" if hint
-          elsif name == label
-            puts type.to_s if name || label || value || hint
-            puts "   name, label: #{name}" if name
-            puts "   value: #{value}" if value
-            puts "   hint: #{hint}" if hint
-          elsif name == value
-            puts type.to_s if name || label || value || hint
-            puts "   name, value: #{name}" if name
-            puts "  label: #{label}" if label
-            puts "   hint: #{hint}" if hint
-          else
-            puts type.to_s if name || label || value || hint
-            puts "   name: #{name}" if name
-            puts "  label: #{label}" if label
-            puts "  value: #{value}" if value
-            puts "   hint: #{hint}" if hint
-          end
-          # rubocop:enable Metrics/BlockNesting
+
+          _print_attr(type, name, label, value, hint)
 
           # there may be many ids with the same value.
           # output all exact matches.
