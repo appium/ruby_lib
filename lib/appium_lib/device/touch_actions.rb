@@ -147,13 +147,12 @@ module Appium
       if ele # pinch/zoom for XCUITest
         press x: start_x, y: start_y, element: ele
         move_to x: start_x + delta_x, y: start_y + delta_y, element: ele
-        release
       else
         press x: start_x, y: start_y
         wait(duration) if duration
         move_to x: start_x + delta_x, y: start_y + delta_y
-        release
       end
+      release
 
       self
     end
