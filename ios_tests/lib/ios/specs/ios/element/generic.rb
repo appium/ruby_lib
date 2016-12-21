@@ -30,6 +30,8 @@ describe 'ios/element/generic' do
   end
 
   t 'finds_exact' do
-    verify finds_exact uibutton_text
+    elements = finds_exact uibutton_text
+    elements.is_a?(Array).must_equal true
+    verify elements
   end
 end

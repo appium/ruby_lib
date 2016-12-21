@@ -1,3 +1,4 @@
+# rake android[common/element/window]
 describe 'common/element/window' do
   t 'window_size' do
     wait do
