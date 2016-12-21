@@ -8,6 +8,7 @@ describe 'common/element/window' do
     before_first
   end
 
+  # rubocop:disable Lint/UnifiedInteger
   t 'window_size' do
     size = window_size
     size.width.class.must_equal Fixnum
