@@ -220,10 +220,18 @@ module Appium
           end
         end
 
-        # TODO: TEST ME
+        # @!method set_immediate_value
+        #   Set the value to element directly
+        #   for iOS; setValue is called in XCUITest instead because XCUITest doesn't provide set value directly.
+        #   https://github.com/appium/appium-xcuitest-driver/blob/793cdc7d5e84bd553e375076e1c6dc7e242c9cde/lib/commands/element.js#L123
+        #
+        #   ```ruby
+        #   set_immediate_value element, 'hello'
+        #   ```
         add_endpoint_method(:set_immediate_value) do
-          def set_immediate_value(element, value)
-            execute :set_immediate_value, { id: element.ref }, value: value
+          def set_immediate_value(element, *value)
+            keys = ::Selenium::WebDriver::Keys.encode(value)
+            execute :set_immediate_value, { id: element.ref }, value: Array(keys)
           end
         end
 

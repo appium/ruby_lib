@@ -124,6 +124,22 @@ describe 'ios/element/textfield' do
     textfields_exact('does not exist').length.must_equal 0
   end
 
+  t 'set_immediate_value' do
+    go_to_textfields
+
+    message = 'hello'
+
+    element = textfield(1)
+    element.click
+    element.clear
+
+    set_immediate_value(element, message)
+    element.text.must_equal message
+
+    set_wait 10
+    leave_textfields
+  end
+
   t 'after_last' do
     after_last
   end
