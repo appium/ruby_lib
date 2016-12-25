@@ -1,3 +1,16 @@
+#### v9.1.2 2016-12-25
+
+- [22401b0](https://github.com/appium/ruby_lib/commit/22401b065f2317e82d37b5188ad9c18c701b0a41) Release 9.1.2
+- [ab3ba8e](https://github.com/appium/ruby_lib/commit/ab3ba8e0fd9e6867b63c5cd0a3f929aca8fc236b) Fix set immediate value (#432)
+- [75acc43](https://github.com/appium/ruby_lib/commit/75acc4313fffca87c3c9c54214175a9981c0d540) disable lint unified integer (#431)
+- [baf5f3c](https://github.com/appium/ruby_lib/commit/baf5f3c7bc3cf51b5f38878f40d88563546dfc10) update tests for finds_exact (#429)
+- [42df79b](https://github.com/appium/ruby_lib/commit/42df79b4cd0b5a36f52628f0acdeb688c5170c0c) fix identicalConditionalBranches (#428)
+- [2a91a6d](https://github.com/appium/ruby_lib/commit/2a91a6dcd50097101e212b1ed9fc64a470dd95da) add appium_client_version (#421)
+- [7c39087](https://github.com/appium/ruby_lib/commit/7c39087676071a4cf27d97fc309e13e968dfb21c) fix rubocop associated with block call (#422)
+- [1979cd8](https://github.com/appium/ruby_lib/commit/1979cd824947d1182fb99ff0f00dbfff165c0aab) Release 9 1 1 (#427)
+- [c016ba3](https://github.com/appium/ruby_lib/commit/c016ba3f9d265ca8b851ec8ed85670ee50b4215b) Release 9.1.1
+
+
 #### v9.1.1 2016-12-19
 
 - [c016ba3](https://github.com/appium/ruby_lib/commit/c016ba3f9d265ca8b851ec8ed85670ee50b4215b) Release 9.1.1
