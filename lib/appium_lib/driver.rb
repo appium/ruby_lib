@@ -302,6 +302,9 @@ module Appium
     # Returns the driver
     # @return [Driver] the driver
     attr_reader :driver
+    # Return http client called in start_driver()
+    # @return [Selenium::WebDriver::Remote::Http::Default] the http client
+    attr_reader :http_client
 
     # Creates a new driver
     #
@@ -547,13 +550,12 @@ module Appium
     #
     # @return [Selenium::WebDriver] the new global driver
     def start_driver
-      @client ||= Selenium::WebDriver::Remote::Http::Default.new
-      @client.timeout = 999_999
+      @http_client ||= Selenium::WebDriver::Remote::Http::Default.new(open_timeout: 999_999, read_timeout: 999_999)
 
       begin
         driver_quit
         @driver =  Selenium::WebDriver.for(:remote,
-                                           http_client: @client,
+                                           http_client: @http_client,
                                            desired_capabilities: @caps,
                                            url: server_url,
                                            listener: @listener)

@@ -67,6 +67,11 @@ describe 'driver' do
       actual_selenium_caps.must_equal 'Android'
       actual[:caps][:app] = caps_app_for_teardown
     end
+
+    t 'default timeout for http client' do
+      http_client.open_timeout.must_equal 999_999
+      http_client.read_timeout.must_equal 999_999
+    end
   end
 
   describe 'Appium::Driver' do
