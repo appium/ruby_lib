@@ -6,7 +6,7 @@
     - [Migrating your iOS tests from UIAutomation](https://github.com/appium/appium/blob/v1.6.2/docs/en/advanced-concepts/migrating-to-xcuitest.md)
 
 ## find elements
-- supported elements by find_element is:
+- supported elements by find_element are:
     - [appium-xcuitest-driver](https://github.com/appium/appium-xcuitest-driver/blob/master/lib/commands/find.js#L17)
     - [WebDriverAgent](https://github.com/facebook/WebDriverAgent/blob/8346199212bffceab24192e81bc0118d65132466/WebDriverAgentLib/Commands/FBFindElementCommands.m#L111)
 - Mapping
@@ -15,7 +15,7 @@
 ### with except for XPath
 #### examples
 - [button_class](https://github.com/appium/ruby_lib/blob/master/lib/appium_lib/ios/element/button.rb#L8), [static_text_class](https://github.com/appium/ruby_lib/blob/master/lib/appium_lib/ios/element/text.rb#L8), [text_field_class](https://github.com/appium/ruby_lib/blob/master/lib/appium_lib/ios/element/textfield.rb#L10) and [secure_text_field_class](https://github.com/appium/ruby_lib/blob/master/lib/appium_lib/ios/element/textfield.rb#L15) provide class name.
-    - If `automationName` is `Appium`, then they provide `UIAxxxx`
+    - If `automationName` is `Appium` or `nil`, then they provide `UIAxxxx`
     - If `automationName` is `XCUITest`, then they provide `XCUIElementTypexxx`
 
 ```ruby
@@ -33,7 +33,7 @@ find_element(:accessibility_id, element) # Return a element which has accessibil
 ### with XPath
 - It is better to avoid XPath strategy.
     - https://github.com/appium/appium/blob/v1.6.2/docs/en/advanced-concepts/migrating-to-xcuitest.md#xpath-locator-strategy
-        - > Try not to use XPath locators unless there is absolutely no other alternatives. In general, xpath locators might be times slower, than other types of locators like accessibility id, class name and predicate (up to 100 times slower in some special cases). They are so slow, because xpath location is not natively supported by Apple's XCTest framework.
+        - > Try not to use XPath locators unless there are absolutely no other alternatives. In general, XPath locators might be times slower, than other types of locators like accessibility id, class name and predicate (up to 100 times slower in some special cases). They are so slow because XPath location is not natively supported by Apple's XCTest framework.
     - Improved performance a bit
         - https://github.com/appium/appium/issues/6842
         - https://github.com/facebook/WebDriverAgent/issues/306
@@ -50,4 +50,4 @@ text(value) # Return a XCUIElementTypeStaticText element which has `value` text.
 ```
 
 ## Other actions
-Basically, other actions such as `type` is compatible with `automationName = Appium`. 
+Basically, other actions such as `type` are compatible with `automationName = Appium`.
