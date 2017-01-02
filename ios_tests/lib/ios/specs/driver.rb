@@ -170,6 +170,22 @@ describe 'driver' do
       client_version.must_equal expected
     end
 
+    t 'set_immediate_value' do
+      go_to_textfields
+
+      message = 'hello'
+
+      element = textfield(1)
+      element.click
+      element.clear
+
+      set_immediate_value(element, message)
+      element.text.must_equal message
+
+      set_wait 10
+      leave_textfields
+    end
+
     t 'restart' do
       restart
       text 'buttons'

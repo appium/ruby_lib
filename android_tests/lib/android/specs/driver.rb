@@ -152,6 +152,21 @@ describe 'driver' do
     #   absolute_app_path # tested already by starting the driver for this test
     #   server_url # sauce labs only
 
+    t 'set_immediate_value' do
+      wait { find('app').click }
+      wait { find('activity').click }
+      wait { find('custom title').click }
+
+      message = 'hello'
+
+      wait do
+        elem = textfield(1)
+        elem.clear
+        set_immediate_value(elem, message)
+        elem.text.must_equal message
+      end
+    end
+
     t 'restart' do
       set_wait 1 # ensure wait is 1 before we restart.
       restart

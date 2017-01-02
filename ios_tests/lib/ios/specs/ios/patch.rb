@@ -28,6 +28,7 @@ describe 'ios/patch' do
 
     ele = first_textfield
 
+    ele.clear
     ele.type 'ok'
     ele.text.must_equal 'ok'
   end
