@@ -30,6 +30,12 @@ find_element(:class, button_class) # Return a element of XCUIElementTypeButton f
 find_element(:accessibility_id, element) # Return a element which has accessibilityIdentifier, `element`.
 ```
 
+- `button/s(value)`, `button_exact/buttons_exact`, `text/s(value)`, `text_exact/texts_exact` 
+```ruby
+buttons(value) # Return button elements include `value` as its name attributes.
+```
+
+
 ### with XPath
 - It is better to avoid XPath strategy.
     - https://github.com/appium/appium/blob/v1.6.2/docs/en/advanced-concepts/migrating-to-xcuitest.md#xpath-locator-strategy
@@ -41,12 +47,11 @@ find_element(:accessibility_id, element) # Return a element which has accessibil
     - https://github.com/facebook/WebDriverAgent/blob/2158a8d0f305549532f1338fe1e4628cfbd53cd9/WebDriverAgentLib/Categories/XCElementSnapshot%2BFBHelpers.m#L57
 
 #### examples
-- `button/s(value)`, `textfield/s(value)`, `text/s(value)` uses XPath in their method. So, these methods are slower than other find_element directly.
+- `textfield/s(value)`, `find/s`, `find_exact/finds_exact` uses XPath in their method. So, these methods are slower than other find_element directly.
 
 ```ruby
-button(value) # Return a XCUIElementTypeButton element which has `value` text.
 textfield(value) # Return a XCUIElementTypeSecureTextField or XCUIElementTypeTextField element which has `value` text.
-text(value) # Return a XCUIElementTypeStaticText element which has `value` text.
+finds_exact(value) # Return any elements include `value` as its name attributes.
 ```
 
 ## Other actions
