@@ -39,6 +39,10 @@ module Appium
     end
 
     # Press down for a specific duration.
+    # Alternatively, you can use `press(...).wait(...).release()` instead of `long_press` if duration doesn't work well.
+    # https://github.com/appium/ruby_lib/issues/231#issuecomment-269895512
+    # e.g. Appium::TouchAction.new.press(x: 280, y: 530).wait(2000).release.perform
+    #
     # @option element [WebDriver::Element] the element to press.
     # @option x [integer] x co-ordinate to press on.
     # @option y [integer] y co-ordinate to press on.
