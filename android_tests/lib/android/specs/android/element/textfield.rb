@@ -58,15 +58,5 @@ describe 'android/element/textfield' do
     hide_keyboard
   end
 
-  t 'set_immediate_value' do
-    message = 'hello'
-
-    wait do
-      elem = textfield(1)
-      set_immediate_value(elem, message)
-      elem.text.must_equal message
-    end
-  end
-
   t { after_last }
 end
