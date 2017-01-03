@@ -17,7 +17,7 @@ module Appium
       return ele_index static_text_class, value if value.is_a? Numeric
 
       if automation_name_is_xcuitest?
-        find_ele_by_attr_include static_text_class, '*', value
+        _raise_error_if_no_element texts(value).first
       else
         ele_by_json_visible_contains static_text_class, value
       end
@@ -31,7 +31,8 @@ module Appium
       return tags static_text_class unless value
 
       if automation_name_is_xcuitest?
-        find_eles_by_attr_include static_text_class, '*', value
+        elements = tags static_text_class
+        _elements_include elements, value
       else
         eles_by_json_visible_contains static_text_class, value
       end
@@ -54,7 +55,7 @@ module Appium
     # @return [UIAStaticText|XCUIElementTypeStaticText]
     def text_exact(value)
       if automation_name_is_xcuitest?
-        find_ele_by_attr static_text_class, '*', value
+        _raise_error_if_no_element texts_exact(value).first
       else
         ele_by_json_visible_exact static_text_class, value
       end
@@ -65,7 +66,8 @@ module Appium
     # @return [Array<UIAStaticText|XCUIElementTypeStaticText>]
     def texts_exact(value)
       if automation_name_is_xcuitest?
-        find_eles_by_attr static_text_class, '*', value
+        elements = tags static_text_class
+        _elements_exact elements, value
       else
         eles_by_json_visible_exact static_text_class, value
       end

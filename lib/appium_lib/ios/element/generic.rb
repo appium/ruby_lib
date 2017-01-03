@@ -43,5 +43,28 @@ module Appium
         eles_by_json_visible_exact '*', value
       end
     end
+
+    private
+
+    def _raise_error_if_no_element(element)
+      raise ::Selenium::WebDriver::Error::NoSuchElementError if element.nil?
+      element
+    end
+
+    def _elements_include(elements, value)
+      return [] if elements.empty?
+      elements.select do |element|
+        name = element.name
+        name.nil? ? false : name.downcase.include?(value.downcase)
+      end
+    end
+
+    def _elements_exact(elements, value)
+      return [] if elements.empty?
+      elements.select do |element|
+        name = element.name
+        name.nil? ? false : name.casecmp(value).zero?
+      end
+    end
   end # module Ios
 end # module Appium
