@@ -40,3 +40,12 @@ Style/VariableNumber:
   EnforcedStyle: 'snake_case'
 Lint/NestedMethodDefinition:
   Enabled: false
+# Should enable and fix for Ruby3
+Style/FrozenStringLiteralComment:
+  Enabled: false
+# Can use over Ruby2.3
+Style/SafeNavigation:
+  Enabled: false
+# Can use over Ruby2.3
+Style/NumericPredicate:
+  Enabled: false

@@ -166,7 +166,7 @@ module Appium
             app_package = opts[:app_package]
             raise 'app_package is required' unless app_package
             app_activity = opts[:app_activity]
-            raise 'app_activity is required' unless opts[:app_activity]
+            raise 'app_activity is required' unless app_activity
             app_wait_package  = opts.fetch(:app_wait_package, '')
             app_wait_activity = opts.fetch(:app_wait_activity, '')
 
@@ -313,11 +313,7 @@ module Appium
 
       # @private
       def add_endpoint_method(method)
-        if block_given?
-          create_bridge_command method, &Proc.new
-        else
-          create_bridge_command method
-        end
+        block_given? ? create_bridge_command(method, &Proc.new) : create_bridge_command(method)
 
         delegate_driver_method method
         delegate_from_appium_driver method
@@ -345,11 +341,7 @@ module Appium
       # @private
       def create_bridge_command(method)
         Selenium::WebDriver::Remote::Bridge.class_eval do
-          if block_given?
-            class_eval(&Proc.new)
-          else
-            define_method(method) { execute method }
-          end
+          block_given? ? class_eval(&Proc.new) : define_method(method) { execute method }
         end
       end
 
@@ -365,11 +357,7 @@ module Appium
         Selenium::WebDriver::SearchContext.class_eval do
           def find_element_with_appium(*args)
             how, what = extract_args(args)
-
-            finders = ::Selenium::WebDriver::SearchContext::FINDERS.merge ::Appium::Driver::SearchContext::FINDERS
-            by = finders[how.to_sym]
-            raise ArgumentError, "cannot find element by #{how.inspect}" unless by
-
+            by = _set_by_from_finders(how)
             begin
               bridge.find_element_by by, what.to_s, ref
             rescue Selenium::WebDriver::Error::TimeOutError
@@ -379,16 +367,19 @@ module Appium
 
           def find_elements_with_appium(*args)
             how, what = extract_args(args)
-
-            finders = ::Selenium::WebDriver::SearchContext::FINDERS.merge ::Appium::Driver::SearchContext::FINDERS
-            by = finders[how.to_sym]
-            raise ArgumentError, "cannot find element by #{how.inspect}" unless by
-
+            by = _set_by_from_finders(how)
             begin
               bridge.find_elements_by by, what.to_s, ref
             rescue Selenium::WebDriver::Error::TimeOutError
               raise Selenium::WebDriver::Error::NoSuchElementError
             end
+          end
+
+          def _set_by_from_finders(how)
+            finders = ::Selenium::WebDriver::SearchContext::FINDERS.merge ::Appium::Driver::SearchContext::FINDERS
+            by = finders[how.to_sym]
+            raise ArgumentError, "cannot find element by #{how.inspect}" unless by
+            by
           end
         end
       end
