@@ -46,7 +46,6 @@ describe 'driver' do
                               custom_url:       false,
                               export_session:   false,
                               default_wait:     30,
-                              last_waits:       [30, 30],
                               sauce_username:   nil,
                               sauce_access_key: nil,
                               port:             4723,
@@ -212,18 +211,18 @@ describe 'driver' do
       set_wait(30).must_equal(30)
 
       # verify set_wait with no args works correctly
-      set_wait.must_equal(30)
+      set_wait.must_equal(0)
       set_wait(30).must_equal(30)
-      set_wait.must_equal(30)
+      set_wait.must_equal(0)
 
       set_wait(2).must_equal(2)
-      set_wait.must_equal(30)
+      set_wait.must_equal(0)
       set_wait(3).must_equal(3)
-      set_wait.must_equal(2)
+      set_wait.must_equal(0)
 
       set_wait(2).must_equal(2)
       set_wait(3).must_equal(3)
-      set_wait.must_equal(2)
+      set_wait.must_equal(0)
     end
 
     t 'default_wait' do

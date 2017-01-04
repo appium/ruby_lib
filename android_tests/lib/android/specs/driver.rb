@@ -20,7 +20,7 @@ describe 'driver' do
     t 'default_wait attr' do
       set_wait 1
       default_wait.must_equal 1
-      set_wait # restore default
+      set_wait 30 # restore default
     end
 
     t 'app_path attr' do
@@ -43,7 +43,6 @@ describe 'driver' do
                               custom_url:       false,
                               export_session:   false,
                               default_wait:     1,
-                              last_waits:       [1, 1],
                               sauce_username:   nil,
                               sauce_access_key: nil,
                               port:             4723,
