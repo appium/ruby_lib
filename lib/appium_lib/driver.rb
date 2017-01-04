@@ -291,7 +291,8 @@ module Appium
     attr_accessor :appium_port
     # Device type to request from the appium server
     attr_accessor :appium_device
-    # Automation name sent to appium server
+    # Automation name sent to appium server or received from server
+    # If automation_name is nil, it is not set both client side and server side.
     attr_reader :automation_name
     # Appium's server version
     attr_reader :appium_server_version
@@ -401,6 +402,7 @@ module Appium
     def driver_attributes
       attributes = {
           caps:             @caps,
+          automation_name:  @automation_name,
           custom_url:       @custom_url,
           export_session:   @export_session,
           default_wait:     @default_wait,
@@ -578,6 +580,7 @@ module Appium
       @appium_server_version = appium_server_version
 
       check_server_version_xcuitest
+      set_automation_name_if_nil
 
       @driver.manage.timeouts.implicit_wait = @default_wait
 
@@ -697,6 +700,15 @@ module Appium
     def x
       driver_quit
       exit # exit pry
+    end
+
+    private
+
+    # If "automationName" is set only server side, this method set "automationName" attribute into @automation_name.
+    # Since @automation_name is set only client side before start_driver is called.
+    def set_automation_name_if_nil
+      return unless @automation_name.nil?
+      @automation_name = @driver.capabilities['automationName']
     end
   end # class Driver
 end # module Appium
