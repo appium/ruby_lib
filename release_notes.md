@@ -1,3 +1,16 @@
+#### v9.1.3 2017-01-04
+
+- [ba2fbdc](https://github.com/appium/ruby_lib/commit/ba2fbdcb206609259134fc09eac7940c21cc2c13) Release 9.1.3
+- [f0c15c5](https://github.com/appium/ruby_lib/commit/f0c15c5b0211b40a8412583c5180a19dc4b56047) update documentations in xcuitest (#444)
+- [67114d1](https://github.com/appium/ruby_lib/commit/67114d1c16f4289c9aa4e7bb02fcc05a08cc3575) Improve performance for button/s and text/s (#442)
+- [2d1f30e](https://github.com/appium/ruby_lib/commit/2d1f30e9b4d89dc51bb546d535c0bd3f14687394) simplify a bit and move tests to suitable file (#441)
+- [1efed4c](https://github.com/appium/ruby_lib/commit/1efed4cbf45b889ca9e64f91346e786a89ba3c42) add documentation for alternative long_press method (#440)
+- [71e629f](https://github.com/appium/ruby_lib/commit/71e629f34065b6a6e39e9bc18bcf4eb0576be0cb) update small changes (#439)
+- [cec023c](https://github.com/appium/ruby_lib/commit/cec023cc9388afe5283c7637622f369a9b891b1e) Use open timeout and read timeout and require selenium-webdriver3.0.4+ (#437)
+- [ffa78a6](https://github.com/appium/ruby_lib/commit/ffa78a64b1dd68fa24c80779eff0a9c2ab685c19) Release 9 1 2 (#434)
+- [22401b0](https://github.com/appium/ruby_lib/commit/22401b065f2317e82d37b5188ad9c18c701b0a41) Release 9.1.2
+
+
 #### v9.1.2 2016-12-25
 
 - [22401b0](https://github.com/appium/ruby_lib/commit/22401b065f2317e82d37b5188ad9c18c701b0a41) Release 9.1.2
