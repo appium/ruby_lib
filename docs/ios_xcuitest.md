@@ -8,6 +8,7 @@
 ## find elements
 - supported elements by find_element are:
     - [appium-xcuitest-driver](https://github.com/appium/appium-xcuitest-driver/blob/master/lib/commands/find.js#L17)
+        - [locatorStrategies](https://github.com/appium/appium-xcuitest-driver/blob/95886f1118d71fe950768f8262179d3608b40fc7/lib/driver.js#L81)
     - [WebDriverAgent](https://github.com/facebook/WebDriverAgent/blob/8346199212bffceab24192e81bc0118d65132466/WebDriverAgentLib/Commands/FBFindElementCommands.m#L111)
 - Mapping
     - https://github.com/facebook/WebDriverAgent/blob/master/WebDriverAgentLib/Utilities/FBElementTypeTransformer.m#L19
