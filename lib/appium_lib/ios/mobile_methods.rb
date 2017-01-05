@@ -7,6 +7,13 @@ module Appium
       #   ```ruby
       #    find_elements :uiautomation, 'elements()
       #   ```
+      #
+      # @!method ios_predicate_string_find
+      #   find_element/s can be used with a [Predicates](https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/Predicates/AdditionalChapters/Introduction.html)
+      #
+      #   ```ruby
+      #    find_elements :predicate, "isWDVisible == 1"
+      #   ```
       def extended(_mod)
         ::Appium::Driver::SearchContext::FINDERS[:uiautomation] = '-ios uiautomation'
         ::Appium::Driver::SearchContext::FINDERS[:predicate] = '-ios predicate string'

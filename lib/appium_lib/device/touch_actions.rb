@@ -75,7 +75,8 @@ module Appium
       chain_method(:release, args)
     end
 
-    # Touch a point on the screen
+    # Touch a point on the screen.
+    # Alternatively, you can use `press(...).release.perform` instead of `tap(...).perform`.
     #
     # @option opts [WebDriver::Element] :element (Optional) Element to restrict scope too.
     # @option opts [integer] :x x co-ordinate to tap
