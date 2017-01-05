@@ -13,6 +13,8 @@ module Appium
       #
       #   ```ruby
       #    find_elements :predicate, "isWDVisible == 1"
+      #    find_elements :predicate, 'wdName == "Buttons"'
+      #    find_elements :predicate, 'wdValue == "SearchBar" AND isWDDivisible == 1'
       #   ```
       def extended(_mod)
         ::Appium::Driver::SearchContext::FINDERS[:uiautomation] = '-ios uiautomation'
