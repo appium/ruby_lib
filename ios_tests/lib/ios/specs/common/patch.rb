@@ -46,7 +46,7 @@ describe 'common/patch.rb' do
       rescue Exception => e
         value = e.message
       ensure
-        set_wait 30
+        set_wait
       end
       value.must_equal "Locator Strategy 'css selector' is not supported for this session"
     end

@@ -51,7 +51,7 @@ describe 'ios/element/text' do
       # nop
     end
     act.must_be_nil
-    set_wait 30
+    set_wait
 
     # should pass
     text_exact(ui_catalog).text.must_equal ui_catalog

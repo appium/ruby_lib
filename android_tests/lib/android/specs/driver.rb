@@ -14,13 +14,19 @@ describe 'driver' do
   end
 
   describe 'Appium::Driver attributes' do
+    t 'no_wait' do
+      no_wait
+      proc { button('zz') }.must_raise Selenium::WebDriver::Error::NoSuchElementError
+      set_wait
+    end
+
     # attr_reader :default_wait, :app_path, :app_name, :selendroid,
     #            :app_package, :app_activity, :app_wait_activity,
     #            :sauce_username, :sauce_access_key, :port, :os, :debug
     t 'default_wait attr' do
       set_wait 1
       default_wait.must_equal 1
-      set_wait 30 # restore default
+      set_wait # restore default
     end
 
     t 'app_path attr' do
@@ -30,12 +36,11 @@ describe 'driver' do
 
     # Only used for Sauce Labs
     t 'verify all attributes' do
-      2.times { set_wait 1 } # must set twice to validate last_waits
       actual                = driver_attributes
       caps_app_for_teardown = actual[:caps][:app]
-      actual[:caps][:app]   = File.basename actual[:caps][:app]
+      expected_app = File.absolute_path('api.apk')
       expected_caps = ::Appium::Driver::Capabilities.init_caps_for_appium(platformName: 'Android',
-                                                                          app:          'api.apk',
+                                                                          app:          expected_app,
                                                                           appPackage:   'io.appium.android.apis',
                                                                           appActivity:  '.ApiDemos',
                                                                           deviceName:   'Nexus 7')

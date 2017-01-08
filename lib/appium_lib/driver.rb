@@ -280,7 +280,7 @@ module Appium
     # Returns the default client side wait.
     # This value is independent of what the server is using
     # @return [Integer]
-    attr_accessor :default_wait
+    attr_reader :default_wait
     # Username for use on Sauce Labs
     attr_accessor :sauce_username
     # Access Key for use on Sauce Labs
@@ -581,26 +581,24 @@ module Appium
       @driver
     end
 
-    # Set implicit wait and default_wait to zero.
+    # Set implicit wait to zero.
     def no_wait
-      @default_wait                         = 0
       @driver.manage.timeouts.implicit_wait = 0
     end
 
-    # Set implicit wait and default_wait to timeout, defaults to 0.
+    # Set implicit wait. Default to @default_wait.
     #
     # ```ruby`
     # set_wait 2
-    # set_wait 3
-    # set_wait # 0
+    # set_wait # @default_wait
     #
     # ````
     #
     # @param timeout [Integer] the timeout in seconds
     # @return [void]
     def set_wait(timeout = nil)
-      timeout.nil? ? (@default_wait = 0) : (@default_wait = timeout)
-      @driver.manage.timeouts.implicit_wait = @default_wait
+      timeout = @default_wait if timeout.nil?
+      @driver.manage.timeouts.implicit_wait = timeout
     end
 
     # Returns existence of element.

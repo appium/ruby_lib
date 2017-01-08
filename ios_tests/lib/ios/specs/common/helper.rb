@@ -122,7 +122,7 @@ describe 'common/helper.rb' do
 
     found = !find_eles_by_attr(UI::Inventory.static_text, 'name', 'zz').empty?
     found.must_equal false
-    set_wait 30
+    set_wait
   end
 
   # TODO: 'string_attr_include'

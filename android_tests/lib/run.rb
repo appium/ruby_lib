@@ -31,7 +31,14 @@ one_test = ARGV[1]
 test_dir = "/#{device}/"
 
 caps       = Appium.load_settings file: appium_txt, verbose: true
-caps       = caps.merge(appium_lib: { debug: true, wait: 1 })
+caps = if caps[:appium_lib]
+         appium_lib = caps[:appium_lib]
+         appium_lib = appium_lib.merge(debug: true) unless appium_lib[:debug]
+         appium_lib = appium_lib.merge(wait: 1) unless appium_lib[:wait]
+         caps.merge(appium_lib: appium_lib)
+       else
+         caps.merge(appium_lib: { debug: true, wait: 1 })
+       end
 caps[:app] = ENV['SAUCE_PATH'] if ENV['SAUCE_USERNAME'] && ENV['SAUCE_ACCESS_KEY']
 
 trace_files = []
