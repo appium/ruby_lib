@@ -8,3 +8,4 @@ app = "./UICatalog.app"
 [appium_lib]
 sauce_username = ""
 sauce_access_key = ""
+wait = 30
