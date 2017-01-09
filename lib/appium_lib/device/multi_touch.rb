@@ -8,7 +8,7 @@ module Appium
   #
   # ```ruby
   # action_1 = TouchAction.new.press(x: 45, y: 100).wait(5).release
-  # action_2 = TouchAction.new.tap(element: el, x: 50, y:5, count: 3).release
+  # action_2 = TouchAction.new.tap(element: el, x: 50, y:5, count: 3)
   #
   # multi_touch_action = MultiTouch.new
   # multi_touch_action.add action_1

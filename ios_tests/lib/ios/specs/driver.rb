@@ -41,6 +41,7 @@ describe 'driver' do
                                                                                 deviceName:      'iPhone Simulator',
                                                                                 app:             expected_app)
       expected            = { caps:             expected_caps,
+                              automation_name:  'XCUITest',
                               custom_url:       false,
                               export_session:   false,
                               default_wait:     30,

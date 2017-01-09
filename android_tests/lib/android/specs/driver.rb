@@ -45,6 +45,7 @@ describe 'driver' do
                                                                           appActivity:  '.ApiDemos',
                                                                           deviceName:   'Nexus 7')
       expected            = { caps:             expected_caps,
+                              automationName:   nil,
                               custom_url:       false,
                               export_session:   false,
                               default_wait:     1,
@@ -178,7 +179,7 @@ describe 'driver' do
     end
 
     t 'driver' do
-      driver.browser.must_equal :Android
+      driver.browser.must_be_empty
     end
 
     # Skip:

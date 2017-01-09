@@ -108,12 +108,10 @@ task :release => :gem do
   tag_name = "v#{version}"
   raise 'Tag already exists!' if tag_exists tag_name
 
-  sh "git commit --allow-empty -am 'Release #{version}'"
-  sh 'git pull'
-  sh "git tag #{tag_name}"
-
   branch_name = "release_#{version.gsub('.', '_')}"
   sh "git checkout -b #{branch_name}"
+
+  sh "git commit --allow-empty -am 'Release #{version}'"
 
   # update notes now that there's a new tag
   Rake::Task['notes'].execute
@@ -125,7 +123,15 @@ end
 
 desc 'Build and release a new gem to rubygems.org'
 task :publish do
+  unless `git branch`.include? '* master'
+    puts 'Master branch required to release.'
+    exit!
+  end
+
+  sh 'git pull'
+
   tag_name = "v#{version}"
+  sh "git tag #{tag_name}"
   sh "git push origin #{tag_name}"
 
   gem_build
@@ -153,6 +159,7 @@ task :uninstall do
   begin
     sh "#{cmd}"
   rescue
+    # ignored
   end
 end
 
@@ -163,7 +170,7 @@ end
 
 desc 'Update android and iOS docs'
 task :docs do
-  sh "ruby docs_gen/make_docs.rb"
+  sh 'ruby docs_gen/make_docs.rb'
 end
 
 desc 'Update release notes'
