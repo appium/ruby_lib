@@ -8,6 +8,7 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 - update set_wait / no_wait logic #249
     - `no_wait` just set `implicit_wait = 0`
     - `set_wait` just set `@default_wait` or arbitrary time as `implicit_wait`
+    - remove `last_waits` attribute
 
 ### 2. Bug fixes
 - automationName always nil if set automationName in server side #450
