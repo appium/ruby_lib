@@ -3,6 +3,17 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## v9.2.0
+### 1. Enhancements
+- update set_wait / no_wait logic #249
+    - `no_wait` just set `implicit_wait = 0`
+    - `set_wait` just set `@default_wait` or arbitrary time as `implicit_wait`
+
+### 2. Bug fixes
+- automationName always nil if set automationName in server side #450
+
+### 3. Deprecations
+
 ## v9.1.3
 
 Support selenium-webdriver 3.0.4+
@@ -30,7 +41,7 @@ Support selenium-webdriver 3.0.4+
 ### 1. Enhancements
 
 ### 2. Bug fixes
-- fix Finds exact in ios does not return an array #423 
+- fix Finds exact in ios does not return an array #423
 
 ### 3. Deprecations
 
@@ -56,7 +67,7 @@ Thanks @slipy12
         - Users who use `find_element/s` should work fine.
         - tests for elements are [here](https://github.com/appium/ruby_lib/tree/master/ios_tests/lib/ios/specs/ios/element)
 
-Special thanks to @montdidier 
+Special thanks to @montdidier
 
 ### 2. Bug fixes
 
