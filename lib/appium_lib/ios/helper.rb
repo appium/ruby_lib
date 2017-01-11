@@ -295,11 +295,7 @@ module Appium
     # @param class_name [String] the tag to match
     # @return [Element]
     def first_ele(class_name)
-      if automation_name_is_xcuitest?
-        @driver.find_element :class, class_name
-      else
-        ele_index class_name, 1
-      end
+      ele_index class_name, 1
     end
 
     # Get the last tag that matches class_name
@@ -321,7 +317,7 @@ module Appium
     # @return [Element]
     def tag(class_name)
       if automation_name_is_xcuitest?
-        tags(class_name).first
+        raise_error_if_no_element tags(class_name).first
       else
         ele_by_json(typeArray: [class_name], onlyVisible: true)
       end
@@ -334,7 +330,7 @@ module Appium
     def tags(class_name)
       if automation_name_is_xcuitest?
         elements = @driver.find_elements :class, class_name
-        _select_visible_elements elements
+        select_visible_elements elements
       else
         eles_by_json(typeArray: [class_name], onlyVisible: true)
       end

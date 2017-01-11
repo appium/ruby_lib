@@ -5,7 +5,7 @@ module Appium
     # @return [Element]
     def find(value)
       if automation_name_is_xcuitest?
-        find_ele_by_attr_include '*', '*', value
+        raise_error_if_no_element finds(value).first
       else
         ele_by_json_visible_contains '*', value
       end
@@ -16,7 +16,8 @@ module Appium
     # @return [Array<Element>]
     def finds(value)
       if automation_name_is_xcuitest?
-        find_eles_by_attr_include '*', '*', value
+        elements = find_eles_by_attr_include '*', '*', value
+        select_visible_elements elements
       else
         eles_by_json_visible_contains '*', value
       end
@@ -27,7 +28,7 @@ module Appium
     # @return [Element]
     def find_exact(value)
       if automation_name_is_xcuitest?
-        find_ele_by_attr '*', '*', value
+        raise_error_if_no_element finds_exact(value).first
       else
         ele_by_json_visible_exact '*', value
       end
@@ -38,7 +39,8 @@ module Appium
     # @return [Array<Element>]
     def finds_exact(value)
       if automation_name_is_xcuitest?
-        find_eles_by_attr '*', '*', value
+        elements = find_eles_by_attr '*', '*', value
+        select_visible_elements elements
       else
         eles_by_json_visible_exact '*', value
       end
@@ -46,13 +48,14 @@ module Appium
 
     private
 
-    def _raise_error_if_no_element(element)
-      raise ::Selenium::WebDriver::Error::NoSuchElementError if element.nil?
+    def raise_error_if_no_element(element)
+      error_message = 'An element could not be located on the page using the given search parameters.'
+      raise(::Selenium::WebDriver::Error::NoSuchElementError, error_message) if element.nil?
       element
     end
 
     # Return all elements include not displayed elements.
-    def _elements_include(elements, value)
+    def elements_include(elements, value)
       return [] if elements.empty?
       elements.select do |element|
         # `text` is equal to `value` if value is not `nil`
@@ -66,7 +69,7 @@ module Appium
     end
 
     # Return all elements include not displayed elements.
-    def _elements_exact(elements, value)
+    def elements_exact(elements, value)
       return [] if elements.empty?
       elements.select do |element|
         # `text` is equal to `value` if value is not `nil`
@@ -80,7 +83,7 @@ module Appium
     end
 
     # Return visible elements.
-    def _select_visible_elements(elements)
+    def select_visible_elements(elements)
       elements.select(&:displayed?)
     end
   end # module Ios
