@@ -23,7 +23,7 @@ describe 'ios/element/text' do
   end
 
   t 'last_text' do
-    expected = UI::Inventory.xcuitest? ? 'Shows UIViewAnimationTransitions' : 'Transitions'
+    expected = 'Transitions'
 
     last_text.text.must_equal expected
     last_text.name.must_equal expected

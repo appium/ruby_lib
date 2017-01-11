@@ -240,6 +240,7 @@ module Appium
 
     # Find the first element exactly matching class and attribute value.
     # Note: Uses XPath
+    # Note: For XCUITest, this method return ALL elements include displayed or not displayed elements.
     # @param class_name [String] the class name to search for
     # @param attr [String] the attribute to inspect
     # @param value [String] the expected value of the attribute
@@ -250,6 +251,7 @@ module Appium
 
     # Find all elements exactly matching class and attribute value.
     # Note: Uses XPath
+    # Note: For XCUITest, this method return ALL elements include displayed or not displayed elements.
     # @param class_name [String] the class name to match
     # @param attr [String] the attribute to compare
     # @param value [String] the value of the attribute that the element must have
