@@ -32,8 +32,8 @@ module Appium
       return tags button_class unless value
 
       if automation_name_is_xcuitest?
-        elements = tags button_class
-        _elements_include elements, value
+        visible_elements = tags button_class
+        _elements_include visible_elements, value
       else
         eles_by_json_visible_contains button_class, value
       end
@@ -69,8 +69,8 @@ module Appium
     # @return [Array<UIAButton|XCUIElementTypeButton>]
     def buttons_exact(value)
       if automation_name_is_xcuitest?
-        elements = tags button_class
-        _elements_exact elements, value
+        visible_elements = tags button_class
+        _elements_exact visible_elements, value
       else
         eles_by_json_visible_exact button_class, value
       end

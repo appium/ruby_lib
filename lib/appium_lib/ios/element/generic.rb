@@ -51,20 +51,35 @@ module Appium
       element
     end
 
+    # Return all elements include not displayed elements.
     def _elements_include(elements, value)
       return [] if elements.empty?
       elements.select do |element|
-        name = element.name
-        name.nil? ? false : name.downcase.include?(value.downcase)
+        # `text` is equal to `value` if value is not `nil`
+        # `text` is equal to `name` if value is `nil`
+        name, text = element.name, element.value
+        name_result = name.nil? ? false : name.downcase.include?(value.downcase)
+        text_result = text.nil? ? false : text.downcase.include?(value.downcase)
+        name_result || text_result
       end
     end
 
+    # Return all elements include not displayed elements.
     def _elements_exact(elements, value)
       return [] if elements.empty?
       elements.select do |element|
-        name = element.name
-        name.nil? ? false : name.casecmp(value).zero?
+        # `text` is equal to `value` if value is not `nil`
+        # `text` is equal to `name` if value is `nil`
+        name, text = element.name, element.value
+        name_result = name.nil? ? false : name.casecmp(value).zero?
+        text_result = text.nil? ? false : text.casecmp(value).zero?
+        name_result || text_result
       end
+    end
+
+    # Return visible elements.
+    def _select_visible_elements(elements)
+      elements.select { |element| element.displayed? }
     end
   end # module Ios
 end # module Appium

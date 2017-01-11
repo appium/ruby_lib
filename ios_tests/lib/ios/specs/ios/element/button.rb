@@ -29,7 +29,6 @@ describe 'ios/element/button' do
 
   t 'buttons' do
     exp = ['Back', 'Back', 'Gray', 'Right pointing arrow']
-    exp.concat ['Add contact'] if UI::Inventory.xcuitest?
 
     target_buttons = buttons('a')
     target_buttons.map(&:name).must_equal exp
@@ -41,7 +40,7 @@ describe 'ios/element/button' do
   end
 
   t 'last_button' do
-    expected = UI::Inventory.xcuitest? ? 'Add contact' : 'Rounded'
+    expected = 'Rounded'
     last_button.name.must_equal expected
   end
 

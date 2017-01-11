@@ -307,21 +307,21 @@ module Appium
     # @return [Element]
     def last_ele(class_name)
       if automation_name_is_xcuitest?
-        result = @driver.find_elements :xpath, "(//#{class_name})"
-        raise _no_such_element if result.empty?
-        result.last
+        visible_elements = tags class_name
+        raise _no_such_element if visible_elements.empty?
+        visible_elements.last
       else
         ele_index class_name, 'last()'
       end
     end
 
-    # Returns the first visible element matching class_name
+    # Returns the first **visible** element matching class_name
     #
     # @param class_name [String] the class_name to search for
     # @return [Element]
     def tag(class_name)
       if automation_name_is_xcuitest?
-        first_ele(class_name)
+        tags(class_name).first
       else
         ele_by_json(typeArray: [class_name], onlyVisible: true)
       end
@@ -333,7 +333,8 @@ module Appium
     # @return [Element]
     def tags(class_name)
       if automation_name_is_xcuitest?
-        @driver.find_elements :class, class_name
+        elements = @driver.find_elements :class, class_name
+        _select_visible_elements elements
       else
         eles_by_json(typeArray: [class_name], onlyVisible: true)
       end

@@ -31,8 +31,8 @@ module Appium
       return tags static_text_class unless value
 
       if automation_name_is_xcuitest?
-        elements = tags static_text_class
-        _elements_include elements, value
+        visible_elements = tags static_text_class
+        _elements_include visible_elements, value
       else
         eles_by_json_visible_contains static_text_class, value
       end
@@ -66,8 +66,8 @@ module Appium
     # @return [Array<UIAStaticText|XCUIElementTypeStaticText>]
     def texts_exact(value)
       if automation_name_is_xcuitest?
-        elements = tags static_text_class
-        _elements_exact elements, value
+        visible_elements = tags static_text_class
+        _elements_exact visible_elements, value
       else
         eles_by_json_visible_exact static_text_class, value
       end
