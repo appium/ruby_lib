@@ -30,8 +30,18 @@ module Appium
     end
 
     # Move to the given co-ordinates.
+    # `move_to`'s `x` and `y` have two case. One is working as coordinate, the other is working as offset.
+    #
+    # Only element
+    # @option opts [WebDriver::Element] Element to move to.
+    #
+    # Without element.
     # @option opts [integer] :x x co-ordinate to move to.
     # @option opts [integer] :y y co-ordinate to move to.
+    #
+    # With element.
+    # @option opts [integer] :x x offset.
+    # @option opts [integer] :y y offset.
     # @option opts [WebDriver::Element] Element to scope this move within.
     def move_to(opts)
       opts = args_with_ele_ref(opts)
