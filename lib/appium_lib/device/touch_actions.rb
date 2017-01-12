@@ -128,7 +128,6 @@ module Appium
     # @option opts [int] :end_x Where to end swiping, on the x axis.  Default 0.
     # @option opts [int] :end_y Where to end swiping, on the y axis.  Default 0.
     # @option opts [int] :duration How long the actual swipe takes to complete in milliseconds. Default 200.
-    # @deprecated Please do not use end_x, end_y anymore
     def swipe(opts, ele = nil)
       start_x  = opts.fetch :start_x, 0
       start_y  = opts.fetch :start_y, 0
