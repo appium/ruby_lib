@@ -34,16 +34,16 @@ module Appium
         if $driver.automation_name_is_xcuitest?
           ele = $driver.find_element :class, 'XCUIElementTypeApplication'
           top = TouchAction.new
-          top.swipe({ start_x: 0.5, start_y: 0.0, end_x: i, end_y: 0.5 }, ele)
+          top.swipe({ start_x: 0.5, start_y: 0.0, offset_x: i, offset_y: 0.5 }, ele)
 
           bottom = TouchAction.new
-          bottom.swipe({ start_x: 0.5, start_y: 1.0, end_x: p, end_y: 0.5 }, ele)
+          bottom.swipe({ start_x: 0.5, start_y: 1.0, offset_x: p, offset_y: 0.5 }, ele)
         else
           top = TouchAction.new
-          top.swipe start_x: 0.5, start_y: 1.0, end_x: i, end_y: 0.5, duration: 1
+          top.swipe start_x: 0.5, start_y: 1.0, offset_x: i, offset_y: 0.5, duration: 1
 
           bottom = TouchAction.new
-          bottom.swipe start_x: 0.5, start_y: 0.0, end_x: p, end_y: 0.5, duration: 1
+          bottom.swipe start_x: 0.5, start_y: 0.0, offset_x: p, offset_y: 0.5, duration: 1
         end
 
         pinch = MultiTouch.new
@@ -72,16 +72,16 @@ module Appium
           ele = $driver.find_element :class, 'XCUIElementTypeApplication'
 
           top = TouchAction.new
-          top.swipe({ start_x: 0.5, start_y: i, end_x: 0.5, end_y: 0.0 }, ele)
+          top.swipe({ start_x: 0.5, start_y: i, offset_x: 0.5, offset_y: 0.0 }, ele)
 
           bottom = TouchAction.new
-          bottom.swipe({ start_x: 0.5, start_y: p, end_x: 0.5, end_y: 1.0 }, ele)
+          bottom.swipe({ start_x: 0.5, start_y: p, offset_x: 0.5, offset_y: 1.0 }, ele)
         else
           top = TouchAction.new
-          top.swipe start_x: 0.5, start_y: i, end_x: 0.5, end_y: 0.0, duration: 1
+          top.swipe start_x: 0.5, start_y: i, offset_x: 0.5, offset_y: 0.0, duration: 1
 
           bottom = TouchAction.new
-          bottom.swipe start_x: 0.5, start_y: p, end_x: 0.5, end_y: 1.0, duration: 1
+          bottom.swipe start_x: 0.5, start_y: p, offset_x: 0.5, offset_y: 1.0, duration: 1
         end
 
         zoom = MultiTouch.new

@@ -3,7 +3,7 @@ describe 'device/touch_actions' do
     start_x = window_size[:width] / 2
     start_y = window_size[:height] / 2
     wait(60) do
-      swipe start_x: start_x, start_y: start_y, end_x: start_x, end_y: start_y - 100
+      swipe start_x: start_x, start_y: start_y, offset_x: start_x, offset_y: start_y - 100
       text(seen_text).displayed?
     end
   end

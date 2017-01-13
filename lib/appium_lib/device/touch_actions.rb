@@ -135,24 +135,37 @@ module Appium
     #
     # @option opts [int] :start_x Where to start swiping, on the x axis.  Default 0.
     # @option opts [int] :start_y Where to start swiping, on the y axis.  Default 0.
-    # @option opts [int] :end_x Where to end swiping, on the x axis.  Default 0.
-    # @option opts [int] :end_y Where to end swiping, on the y axis.  Default 0.
+    # @option opts [int] :offset_x Where to end swiping, on the x axis.  Default 0.
+    # @option opts [int] :offset_y Where to end swiping, on the y axis.  Default 0.
     # @option opts [int] :duration How long the actual swipe takes to complete in milliseconds. Default 200.
+    # @deprecated Please do not use end_x, end_y anymore
     def swipe(opts, ele = nil)
       start_x  = opts.fetch :start_x, 0
       start_y  = opts.fetch :start_y, 0
-      end_x    = opts.fetch :end_x, 0
-      end_y    = opts.fetch :end_y, 0
+      offset_x = opts.fetch :offset_x, nil
+      offset_y = opts.fetch :offset_y, nil
+      end_x    = opts.fetch :end_x, nil
+      end_y    = opts.fetch :end_y, nil
+
+      if end_x || end_y
+        warn '[DEPRECATION] `end_x` and `end_y` are deprecated. Please use `offset_x` and `offset_y` instead.'
+      end
+
+      offset_x ||= end_x
+      offset_y ||= end_y
+
+      offset_x ||= 0
+      offset_y ||= 0
 
       duration = opts.fetch :duration, 200
 
       if ele # pinch/zoom for XCUITest
         press x: start_x, y: start_y, element: ele
-        move_to x: end_x, y: end_y, element: ele
+        move_to x: offset_x, y: offset_y, element: ele
       else
         press x: start_x, y: start_y
         wait(duration) if duration
-        move_to x: end_x, y: end_y
+        move_to x: offset_x, y: offset_y
       end
       release
 
