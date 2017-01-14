@@ -31,19 +31,20 @@ module Appium
         p = Float(percentage) / 100
         i = 1 - p
 
+        # TODO: Prepare for iOS, for Android
         if $driver.automation_name_is_xcuitest?
           ele = $driver.find_element :class, 'XCUIElementTypeApplication'
           top = TouchAction.new
-          top.swipe({ start_x: 0.5, start_y: 0.0, offset_x: i, offset_y: 0.5 }, ele)
+          top.swipe({ start_x: 0.5, start_y: 0.0, offset_x: 0.0, offset_y: i }, ele)
 
           bottom = TouchAction.new
-          bottom.swipe({ start_x: 0.5, start_y: 1.0, offset_x: p, offset_y: 0.5 }, ele)
+          bottom.swipe({ start_x: 0.5, start_y: 1.0, offset_x: 0.0, offset_y: p }, ele)
         else
           top = TouchAction.new
-          top.swipe start_x: 0.5, start_y: 1.0, offset_x: i, offset_y: 0.5, duration: 1
+          top.swipe start_x: 0.5, start_y: 1.0, offset_x: 0.5, offset_y: i, duration: 1
 
           bottom = TouchAction.new
-          bottom.swipe start_x: 0.5, start_y: 0.0, offset_x: p, offset_y: 0.5, duration: 1
+          bottom.swipe start_x: 0.5, start_y: 0.0, offset_x: 0.5, offset_y: p, duration: 1
         end
 
         pinch = MultiTouch.new
@@ -62,6 +63,7 @@ module Appium
       # action = zoom 200 #=> Zoom in the screen from the center until it doubles in size.
       # action.perform
       # ```
+      # TODO: Prepare for iOS, for Android
       def zoom(percentage = 200, auto_perform = true)
         raise ArgumentError("Can't zoom to smaller then screen size.") if percentage < 100
 
@@ -72,16 +74,16 @@ module Appium
           ele = $driver.find_element :class, 'XCUIElementTypeApplication'
 
           top = TouchAction.new
-          top.swipe({ start_x: 0.5, start_y: i, offset_x: 0.5, offset_y: 0.0 }, ele)
+          top.swipe({ start_x: 0.5, start_y: i, offset_x: 0.0, offset_y: -i }, ele)
 
           bottom = TouchAction.new
-          bottom.swipe({ start_x: 0.5, start_y: p, offset_x: 0.5, offset_y: 1.0 }, ele)
+          bottom.swipe({ start_x: 0.5, start_y: p, offset_x: 0.0, offset_y: i }, ele)
         else
           top = TouchAction.new
-          top.swipe start_x: 0.5, start_y: i, offset_x: 0.5, offset_y: 0.0, duration: 1
+          top.swipe start_x: 0.5, start_y: i, offset_x: 0.0, offset_y: -i, duration: 1
 
           bottom = TouchAction.new
-          bottom.swipe start_x: 0.5, start_y: p, offset_x: 0.5, offset_y: 1.0, duration: 1
+          bottom.swipe start_x: 0.5, start_y: p, offset_x: 0.0, offset_y: i, duration: 1
         end
 
         zoom = MultiTouch.new

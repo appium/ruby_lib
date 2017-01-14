@@ -30,18 +30,11 @@ module Appium
     end
 
     # Move to the given co-ordinates.
+    #
     # `move_to`'s `x` and `y` have two case. One is working as coordinate, the other is working as offset.
     #
-    # Only element
-    # @option opts [WebDriver::Element] Element to move to.
-    #
-    # Without element.
-    # @option opts [integer] :x x co-ordinate to move to.
-    # @option opts [integer] :y y co-ordinate to move to.
-    #
-    # With element.
-    # @option opts [integer] :x x offset.
-    # @option opts [integer] :y y offset.
+    # @option opts [integer] :x x co-ordinate to move to if element isn't set. Works as an offset if x is set with Element.
+    # @option opts [integer] :y y co-ordinate to move to if element isn't set. Works as an offset if y is set with Element.
     # @option opts [WebDriver::Element] Element to scope this move within.
     def move_to(opts)
       opts = args_with_ele_ref(opts)
@@ -133,12 +126,20 @@ module Appium
     #
     # Note that iOS 7 simulators have broken swipe.
     #
+    # For iOS: Use `offset_x` and `offset_y` to define the end point.
+    #
+    # For Android: Use `end_x` and `end_y` to define the end point.
+    #
+    # If you'd like more details, please read tests and its log samples in
+    # `ios_tests/lib/ios/specs/device/touch_actions.rb` and `ios_tests/lib/ios/specs/device/touch_actions.rb`
+    #
     # @option opts [int] :start_x Where to start swiping, on the x axis.  Default 0.
     # @option opts [int] :start_y Where to start swiping, on the y axis.  Default 0.
-    # @option opts [int] :offset_x Where to end swiping, on the x axis.  Default 0.
-    # @option opts [int] :offset_y Where to end swiping, on the y axis.  Default 0.
+    # @option opts [int] :offset_x For iOS. Offset, on the x axis.  Default 0.
+    # @option opts [int] :offset_y For iOS. Offset, on the y axis.  Default 0.
+    # @option opts [int] :end_x For Android. Where to end swiping, on the x axis.  Default 0.
+    # @option opts [int] :end_y For Android. Where to end swiping, on the y axis.  Default 0.
     # @option opts [int] :duration How long the actual swipe takes to complete in milliseconds. Default 200.
-    # @deprecated Please do not use end_x, end_y anymore
     def swipe(opts, ele = nil)
       start_x  = opts.fetch :start_x, 0
       start_y  = opts.fetch :start_y, 0
@@ -146,26 +147,17 @@ module Appium
       offset_y = opts.fetch :offset_y, nil
       end_x    = opts.fetch :end_x, nil
       end_y    = opts.fetch :end_y, nil
-
-      if end_x || end_y
-        warn '[DEPRECATION] `end_x` and `end_y` are deprecated. Please use `offset_x` and `offset_y` instead.'
-      end
-
-      offset_x ||= end_x
-      offset_y ||= end_y
-
-      offset_x ||= 0
-      offset_y ||= 0
-
       duration = opts.fetch :duration, 200
+
+      coordinates = swipe_coordinates(end_x: end_x, end_y: end_y, offset_x: offset_x, offset_y: offset_y)
 
       if ele # pinch/zoom for XCUITest
         press x: start_x, y: start_y, element: ele
-        move_to x: offset_x, y: offset_y, element: ele
+        move_to x: coordinates[:offset_x], y: coordinates[:offset_y], element: ele
       else
         press x: start_x, y: start_y
         wait(duration) if duration
-        move_to x: offset_x, y: offset_y
+        move_to x: coordinates[:offset_x], y: coordinates[:offset_y]
       end
       release
 
@@ -183,6 +175,22 @@ module Appium
       @actions << { action: cancel }
       $driver.touch_actions @actions
       self
+    end
+
+    def swipe_coordinates(end_x: nil, end_y: nil, offset_x: nil, offset_y: nil)
+      if $driver.device_is_android?
+        puts 'end_x and end_y are used for Android. Not offset_x and offset_y.' if end_x.nil? || end_y.nil?
+        end_x ||= 0
+        end_y ||= 0
+        return {offset_x: end_x, offset_y: end_y}
+      elsif offset_x.nil? || offset_y.nil?
+        puts 'offset_x and offset_y are used for iOS. Not end_x and end_y point.'
+      end
+
+      offset_x ||= 0
+      offset_y ||= 0
+
+      {offset_x: offset_x, offset_y: offset_y}
     end
 
     private
