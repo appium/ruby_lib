@@ -42,7 +42,7 @@ describe 'device/touch_actions' do
   end
 
   t 'swipe_coordinates_offset' do
-    s = Appium::TouchAction.new.swipe_coordinates()
+    s = Appium::TouchAction.new.swipe_coordinates
     s[:offset_x].must_equal 0
     s[:offset_y].must_equal 0
   end

@@ -182,7 +182,7 @@ module Appium
         puts 'end_x and end_y are used for Android. Not offset_x and offset_y.' if end_x.nil? || end_y.nil?
         end_x ||= 0
         end_y ||= 0
-        return {offset_x: end_x, offset_y: end_y}
+        return { offset_x: end_x, offset_y: end_y }
       elsif offset_x.nil? || offset_y.nil?
         puts 'offset_x and offset_y are used for iOS. Not end_x and end_y point.'
       end
@@ -190,7 +190,7 @@ module Appium
       offset_x ||= 0
       offset_y ||= 0
 
-      {offset_x: offset_x, offset_y: offset_y}
+      { offset_x: offset_x, offset_y: offset_y }
     end
 
     private
