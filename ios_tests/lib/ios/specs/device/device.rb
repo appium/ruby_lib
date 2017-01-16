@@ -81,7 +81,7 @@ describe 'device/device' do
   end
 
   t 'swipe' do
-    swipe start_x: 75, start_y: 500, delta_x: 0, delta_y: -500, duration: 800
+    swipe start_x: 75, start_y: 500, offset_x: 75, offset_y: 0, duration: 800
   end
 
   t 'pull_file' do
