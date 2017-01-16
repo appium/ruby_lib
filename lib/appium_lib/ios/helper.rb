@@ -229,12 +229,12 @@ module Appium
     def string_attr_exact(class_name, attr, value)
       if automation_name_is_xcuitest?
         if attr == '*'
-          %((//#{class_name})[@*[.='#{value}']])
+          %((//#{class_name})[@*[.="#{value}"]])
         else
-          %((//#{class_name})[@#{attr}='#{value}'])
+          %((//#{class_name})[@#{attr}="#{value}"])
         end
       else
-        %(//#{class_name}[@visible="true" and @#{attr}='#{value}'])
+        %(//#{class_name}[@visible="true" and @#{attr}="#{value}"])
       end
     end
 
@@ -264,12 +264,12 @@ module Appium
     def string_attr_include(class_name, attr, value)
       if automation_name_is_xcuitest?
         if attr == '*'
-          %((//#{class_name})[@*[contains(translate(., '#{value.upcase}', '#{value}'), '#{value}')]])
+          %((//#{class_name})[@*[contains(translate(., "#{value.upcase}", "#{value}"), "#{value}")]])
         else
-          %((//#{class_name})[contains(translate(@#{attr}, '#{value.upcase}', '#{value}'), '#{value}')])
+          %((//#{class_name})[contains(translate(@#{attr}, "#{value.upcase}", "#{value}"), "#{value}")])
         end
       else
-        %(//#{class_name}[@visible="true" and contains(translate(@#{attr},'#{value.upcase}', '#{value}'), '#{value}')])
+        %(//#{class_name}[@visible="true" and contains(translate(@#{attr},"#{value.upcase}", "#{value}"), "#{value}")])
       end
     end
 
