@@ -13,8 +13,8 @@ module Appium
       # [:one, :two] => :one, :two
       raise "Invalid keys #{invalid_keys.to_s[1..-2]}. Valid keys are #{valid_keys.to_s[1..-2]}" unless invalid_keys.empty?
 
-      timeout        = opts.fetch(:timeout, 30)
-      interval       = opts.fetch(:interval, 0.5)
+      timeout        = opts.fetch(:timeout, @appium_wait_timeout)
+      interval       = opts.fetch(:interval, @appium_wait_interval)
       message        = opts[:message]
       ignored        = Array(opts[:ignore] || ::Exception)
       return_if_true = opts[:return_if_true]

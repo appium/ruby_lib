@@ -54,7 +54,9 @@ describe 'driver' do
                               port:             4723,
                               device:           :android,
                               debug:            true,
-                              listener:         nil }
+                              listener:         nil,
+                              wait_timeout:     30,    # default
+                              wait_interval:    0.5 }  # default
 
       if actual != expected
         diff    = HashDiff.diff expected, actual
