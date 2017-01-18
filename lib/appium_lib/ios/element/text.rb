@@ -1,12 +1,12 @@
 # UIAStaticText|XCUIElementTypeStaticText methods
 module Appium
   module Ios
-    IAStaticText = 'UIAStaticText'.freeze
+    UIAStaticText = 'UIAStaticText'.freeze
     XCUIElementTypeStaticText = 'XCUIElementTypeStaticText'.freeze
 
     # @return [String] Class name for text
     def static_text_class
-      automation_name_is_xcuitest? ? XCUIElementTypeStaticText : IAStaticText
+      automation_name_is_xcuitest? ? XCUIElementTypeStaticText : UIAStaticText
     end
 
     # Find the first UIAStaticText|XCUIElementTypeStaticText that contains value or by index.
