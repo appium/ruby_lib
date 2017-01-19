@@ -644,11 +644,11 @@ module Appium
     #
     # exists { button('sign in') } ? puts('true') : puts('false')
     #
-    # @param pre_check [Integer]  the amount in seconds to set the
-    #                             wait to before checking existance
-    # @param post_check [Integer] the amount in seconds to set the
-    #                             wait to after checking existance
-    # @param search_block [Block] the block to call
+    # @param [Integer] pre_check The amount in seconds to set the
+    #                             wait to before checking existence
+    # @param [Integer] post_check The amount in seconds to set the
+    #                             wait to after checking existence
+    # @yield The block to call
     # @return [Boolean]
     def exists(pre_check = 0, post_check = @default_wait)
       # do not uset set_wait here.
@@ -671,8 +671,8 @@ module Appium
     end
 
     # The same as @driver.execute_script
-    # @param script [String] the script to execute
-    # @param args [*args] the args to pass to the script
+    # @param [String] script The script to execute
+    # @param [*args] args The args to pass to the script
     # @return [Object]
     def execute_script(script, *args)
       @driver.execute_script script, *args
@@ -680,7 +680,7 @@ module Appium
 
     # Calls @driver.find_elements
     #
-    # @param args [*args] the args to use
+    # @param [*args] args The args to use
     # @return [Array<Element>] Array is empty when no elements are found.
     def find_elements(*args)
       @driver.find_elements_with_appium(*args)
@@ -688,7 +688,7 @@ module Appium
 
     # Calls @driver.find_elements
     #
-    # @param args [*args] the args to use
+    # @param [*args] args The args to use
     # @return [Element]
     def find_element(*args)
       @driver.find_element_with_appium(*args)
@@ -698,7 +698,7 @@ module Appium
     #
     # @note This method does not work on real devices.
     #
-    # @param [Hash] opts consisting of:
+    # @param  [Hash] opts consisting of:
     # @option opts [Float] :latitude the latitude in degrees (required)
     # @option opts [Float] :longitude the longitude in degees (required)
     # @option opts [Float] :altitude the altitude, defaulting to 75

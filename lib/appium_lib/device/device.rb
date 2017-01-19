@@ -33,7 +33,7 @@ module Appium
 
     # @!method hide_keyboard
     #   Hide the onscreen keyboard
-    #   @param close_key (String) the name of the key which closes the keyboard.
+    #   @param [String] close_key The name of the key which closes the keyboard.
     #     Defaults to 'Done'.
     #  ```ruby
     #  hide_keyboard # Close a keyboard with the 'Done' button
@@ -43,24 +43,24 @@ module Appium
     # @!method press_keycode
     # Press keycode on the device.
     # http://developer.android.com/reference/android/view/KeyEvent.html
-    # @param key (integer) The key to press.
-    # @param metastate (String) The state the metakeys should be in when pressing the key.
+    # @param [integer] key The key to press.
+    # @param [String] metastate The state the metakeys should be in when pressing the key.
 
     # @!method long_press_keycode
     # Long press keycode on the device.
     # http://developer.android.com/reference/android/view/KeyEvent.html
-    # @param key (integer) The key to long press.
-    # @param metastate (String) The state the metakeys should be in when long pressing the key.
+    # @param [integer] key The key to long press.
+    # @param [String] metastate The state the metakeys should be in when long pressing the key.
 
     # @!method push_file
     #   Place a file in a specific location on the device.
-    #   @param path (String) The absolute path on the device to store data at.
-    #   @param data (String) Raw file data to be sent to the device.
+    #   @param [String] path The absolute path on the device to store data at.
+    #   @param [String] data Raw file data to be sent to the device.
 
     # @!method pull_file
     #   Retrieve a file from the device.  This can retrieve an absolute path or
     #   a path relative to the installed app (iOS only).
-    #   @param path (String) Either an absolute path OR, for iOS devices, a path relative to the app, as described.
+    #   @param [String] path Either an absolute path OR, for iOS devices, a path relative to the app, as described.
     #
     #   ```ruby
     #   pull_file '/local/data/some/path' #=> Get the file at that path
@@ -69,7 +69,7 @@ module Appium
 
     # @!method pull_folder
     #   Retrieve a folder from the device.
-    #   @param path (String) absolute path to the folder
+    #   @param [String] path absolute path to the folder
     #
     #   ```ruby
     #   pull_folder '/data/local/tmp' #=> Get the folder at that path
@@ -77,7 +77,7 @@ module Appium
 
     # @!method touch_id
     #   iOS only;  Simulate Touch ID with either valid (match == true) or invalid (match == false) fingerprint.
-    #   @param match (Boolean) fingerprint validity
+    #   @param [Boolean] match fingerprint validity
     #     Defaults to true.
     #   ```ruby
     #   touch_id true #=> Simulate valid fingerprint
@@ -86,15 +86,55 @@ module Appium
 
     # @!method end_coverage
     #   Android only;  Ends the test coverage and writes the results to the given path on device.
-    #   @param path (String) Path on the device to write too.
-    #   @param intent (String) Intent to broadcast when ending coverage.
+    #   @param [String] path Path on the device to write too.
+    #   @param [String] intent Intent to broadcast when ending coverage.
 
     # @!method get_settings
     #   Get appium Settings for current test session
 
     # @!method update_settings
     #   Update appium Settings for current test session
-    #   @param settings (hash) Settings to update, keys are settings, values to value to set each setting to
+    #   @param [Hash] settings Settings to update, keys are settings, values to value to set each setting to
+
+    # @!method start_activity
+    #   Start a new activity within the current app or launch a new app and start the target activity.
+    #
+    #   Android only.
+    #   @option [String] The package owning the activity [required]
+    #   @option [String] The target activity [required]
+    #   @option opts [String] The package to start before the target package [optional]
+    #   @option opts [String] The activity to start before the target activity [optional]
+    #
+    #   ```ruby
+    #   start_activity app_package: 'io.appium.android.apis',
+    #     app_activity: '.accessibility.AccessibilityNodeProviderActivity'
+    #   ```
+
+    # @!method get_network_connection
+    #   Get the device network connection current status
+    #   See set_network_connection method for return value
+
+    # @!method set_network_connection
+    #   Set the device network connection mode
+    #   @param [String] path Bit mask that represent the network mode
+    #
+    #   Value (Alias)      | Data | Wifi | Airplane Mode
+    #   -------------------------------------------------
+    #   1 (Airplane Mode)  | 0    | 0    | 1
+    #   6 (All network on) | 1    | 1    | 0
+    #   4 (Data only)      | 1    | 0    | 0
+    #   2 (Wifi only)      | 0    | 1    | 0
+    #   0 (None)           | 0    | 0    | 0
+    #
+
+    # @!method set_immediate_value
+    #   Set the value to element directly
+    #   for iOS; setValue is called in XCUITest instead because XCUITest doesn't provide set value directly.
+    #   https://github.com/appium/appium-xcuitest-driver/blob/793cdc7d5e84bd553e375076e1c6dc7e242c9cde/lib/commands/element.js#L123
+    #
+    #   ```ruby
+    #   set_immediate_value element, 'hello'
+    #   ```
     class << self
       def extended(_mod)
         extend_webdriver_with_forwardable
@@ -147,19 +187,6 @@ module Appium
           end
         end
 
-        # @!method start_activity
-        #   Start a new activity within the current app or launch a new app and start the target activity.
-        #
-        #   Android only.
-        #   @param [String] The package owning the activity [required]
-        #   @param [String] The target activity [required]
-        #   @param [String] The package to start before the target package [optional]
-        #   @param [String] The activity to start before the target activity [optional]
-        #
-        #   ```ruby
-        #   start_activity app_package: 'io.appium.android.apis',
-        #     app_activity: '.accessibility.AccessibilityNodeProviderActivity'
-        #   ```
         add_endpoint_method(:start_activity) do
           def start_activity(opts)
             raise 'opts must be a hash' unless opts.is_a? Hash
@@ -220,14 +247,6 @@ module Appium
           end
         end
 
-        # @!method set_immediate_value
-        #   Set the value to element directly
-        #   for iOS; setValue is called in XCUITest instead because XCUITest doesn't provide set value directly.
-        #   https://github.com/appium/appium-xcuitest-driver/blob/793cdc7d5e84bd553e375076e1c6dc7e242c9cde/lib/commands/element.js#L123
-        #
-        #   ```ruby
-        #   set_immediate_value element, 'hello'
-        #   ```
         add_endpoint_method(:set_immediate_value) do
           def set_immediate_value(element, *value)
             keys = ::Selenium::WebDriver::Keys.encode(value)
@@ -283,21 +302,6 @@ module Appium
           end
         end
 
-        # @!method get_network_connection
-        #   Get the device network connection current status
-        #   See set_network_connection method for return value
-
-        # @!method set_network_connection
-        #   Set the device network connection mode
-        #   @param path (String) Bit mask that represent the network mode
-        #   Value (Alias)      | Data | Wifi | Airplane Mode
-        #   -------------------------------------------------
-        #   1 (Airplane Mode)  | 0    | 0    | 1
-        #   6 (All network on) | 1    | 1    | 0
-        #   4 (Data only)      | 1    | 0    | 0
-        #   2 (Wifi only)      | 0    | 1    | 0
-        #   0 (None)           | 0    | 0    | 0
-        #
         add_endpoint_method(:set_network_connection) do
           def set_network_connection(mode)
             execute :set_network_connection, {}, type: mode
