@@ -1,6 +1,6 @@
 [caps]
 platformName = "ios"
-platformVersion = "10.1"
+platformVersion = "10.2"
 deviceName ="iPhone Simulator"
 automationName = 'XCUITest'
 app = "./UICatalog.app"
@@ -9,3 +9,5 @@ app = "./UICatalog.app"
 sauce_username = ""
 sauce_access_key = ""
 wait = 30
+wait_timeout = 20
+wait_interval = 1

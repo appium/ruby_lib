@@ -304,23 +304,52 @@ module Appium
     # Return http client called in start_driver()
     # @return [Selenium::WebDriver::Remote::Http::Default] the http client
     attr_reader :http_client
+    # Return a time wait timeout
+    # Wait time for ::Appium::Common.wait or ::Appium::Common.wait_true.
+    # Provide Appium::Drive like { appium_lib: { wait_timeout: 20 } }
+    # @return [Integer]
+    attr_reader :appium_wait_timeout
+    # Return a time wait timeout
+    # Wait interval time for ::Appium::Common.wait or ::Appium::Common.wait_true.
+    # Provide Appium::Drive like { appium_lib: { wait_interval: 20 } }
+    # @return [Integer]
+    attr_reader :appium_wait_interval
 
     # Creates a new driver
     #
-    # ```ruby
-    # require 'rubygems'
-    # require 'appium_lib'
+    # @example
     #
-    # # platformName takes a string or a symbol.
+    #     ```ruby
+    #     require 'rubygems'
+    #     require 'appium_lib'
     #
-    # # Start iOS driver
-    # opts = { caps: { platformName: :ios, app: '/path/to/MyiOS.app' } }
-    # Appium::Driver.new(opts).start_driver
+    #     # platformName takes a string or a symbol.
     #
-    # # Start Android driver
-    # opts = { caps: { platformName: :android, app: '/path/to/my.apk' } }
-    # Appium::Driver.new(opts).start_driver
-    # ```
+    #     # Start iOS driver
+    #     opts = {
+    #              caps: {
+    #                platformName: :ios,
+    #                app: '/path/to/MyiOS.app'
+    #              },
+    #              appium_lib: {
+    #                wait_timeout: 30
+    #              }
+    #            }
+    #     Appium::Driver.new(opts).start_driver
+    #
+    #     # Start Android driver
+    #     opts = {
+    #              caps: {
+    #                platformName: :android,
+    #                app: '/path/to/my.apk'
+    #              },
+    #              appium_lib: {
+    #                wait_timeout: 30,
+    #                wait_interval: 1
+    #              }
+    #            }
+    #     Appium::Driver.new(opts).start_driver
+    #     ```
     #
     # @param opts [Object] A hash containing various options.
     # @return [Driver]
@@ -344,6 +373,9 @@ module Appium
       @sauce_access_key = appium_lib_opts.fetch :sauce_access_key, ENV['SAUCE_ACCESS_KEY']
       @sauce_access_key = nil if !@sauce_access_key || (@sauce_access_key.is_a?(String) && @sauce_access_key.empty?)
       @appium_port      = appium_lib_opts.fetch :port, 4723
+      # timeout and interval used in ::Appium::Comm.wait/wait_true
+      @appium_wait_timeout  = appium_lib_opts.fetch :wait_timeout, 30
+      @appium_wait_interval = appium_lib_opts.fetch :wait_interval, 0.5
 
       # to pass it in Selenium.new.
       # `listener = opts.delete(:listener)` is called in Selenium::Driver.new
@@ -408,7 +440,9 @@ module Appium
           port:             @appium_port,
           device:           @appium_device,
           debug:            @appium_debug,
-          listener:         @listener
+          listener:         @listener,
+          wait_timeout:     @appium_wait_timeout,
+          wait_interval:    @appium_wait_interval
       }
 
       # Return duplicates so attributes are immutable

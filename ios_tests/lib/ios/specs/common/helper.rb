@@ -146,7 +146,7 @@ describe 'common/helper.rb' do
   end
 
   t 'last_ele' do
-    expected = UI::Inventory.xcuitest? ? 'Shows UIViewAnimationTransitions' : 'Transitions'
+    expected = 'Transitions'
 
     el = last_ele(UI::Inventory.static_text)
     el.text.must_equal expected

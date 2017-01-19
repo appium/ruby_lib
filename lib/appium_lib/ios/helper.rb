@@ -229,17 +229,18 @@ module Appium
     def string_attr_exact(class_name, attr, value)
       if automation_name_is_xcuitest?
         if attr == '*'
-          %((//#{class_name})[@*[.='#{value}']])
+          %((//#{class_name})[@*[.="#{value}"]])
         else
-          %((//#{class_name})[@#{attr}='#{value}'])
+          %((//#{class_name})[@#{attr}="#{value}"])
         end
       else
-        %(//#{class_name}[@visible="true" and @#{attr}='#{value}'])
+        %(//#{class_name}[@visible="true" and @#{attr}="#{value}"])
       end
     end
 
     # Find the first element exactly matching class and attribute value.
     # Note: Uses XPath
+    # Note: For XCUITest, this method return ALL elements include displayed or not displayed elements.
     # @param class_name [String] the class name to search for
     # @param attr [String] the attribute to inspect
     # @param value [String] the expected value of the attribute
@@ -250,6 +251,7 @@ module Appium
 
     # Find all elements exactly matching class and attribute value.
     # Note: Uses XPath
+    # Note: For XCUITest, this method return ALL elements include displayed or not displayed elements.
     # @param class_name [String] the class name to match
     # @param attr [String] the attribute to compare
     # @param value [String] the value of the attribute that the element must have
@@ -262,12 +264,12 @@ module Appium
     def string_attr_include(class_name, attr, value)
       if automation_name_is_xcuitest?
         if attr == '*'
-          %((//#{class_name})[@*[contains(translate(., '#{value.upcase}', '#{value}'), '#{value}')]])
+          %((//#{class_name})[@*[contains(translate(., "#{value.upcase}", "#{value}"), "#{value}")]])
         else
-          %((//#{class_name})[contains(translate(@#{attr}, '#{value.upcase}', '#{value}'), '#{value}')])
+          %((//#{class_name})[contains(translate(@#{attr}, "#{value.upcase}", "#{value}"), "#{value}")])
         end
       else
-        %(//#{class_name}[@visible="true" and contains(translate(@#{attr},'#{value.upcase}', '#{value}'), '#{value}')])
+        %(//#{class_name}[@visible="true" and contains(translate(@#{attr},"#{value.upcase}", "#{value}"), "#{value}")])
       end
     end
 
@@ -295,11 +297,7 @@ module Appium
     # @param class_name [String] the tag to match
     # @return [Element]
     def first_ele(class_name)
-      if automation_name_is_xcuitest?
-        @driver.find_element :class, class_name
-      else
-        ele_index class_name, 1
-      end
+      ele_index class_name, 1
     end
 
     # Get the last tag that matches class_name
@@ -307,21 +305,21 @@ module Appium
     # @return [Element]
     def last_ele(class_name)
       if automation_name_is_xcuitest?
-        result = @driver.find_elements :xpath, "(//#{class_name})"
-        raise _no_such_element if result.empty?
-        result.last
+        visible_elements = tags class_name
+        raise _no_such_element if visible_elements.empty?
+        visible_elements.last
       else
         ele_index class_name, 'last()'
       end
     end
 
-    # Returns the first visible element matching class_name
+    # Returns the first **visible** element matching class_name
     #
     # @param class_name [String] the class_name to search for
     # @return [Element]
     def tag(class_name)
       if automation_name_is_xcuitest?
-        first_ele(class_name)
+        raise_error_if_no_element tags(class_name).first
       else
         ele_by_json(typeArray: [class_name], onlyVisible: true)
       end
@@ -333,7 +331,8 @@ module Appium
     # @return [Element]
     def tags(class_name)
       if automation_name_is_xcuitest?
-        @driver.find_elements :class, class_name
+        elements = @driver.find_elements :class, class_name
+        select_visible_elements elements
       else
         eles_by_json(typeArray: [class_name], onlyVisible: true)
       end

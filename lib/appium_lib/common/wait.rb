@@ -13,8 +13,8 @@ module Appium
       # [:one, :two] => :one, :two
       raise "Invalid keys #{invalid_keys.to_s[1..-2]}. Valid keys are #{valid_keys.to_s[1..-2]}" unless invalid_keys.empty?
 
-      timeout        = opts.fetch(:timeout, 30)
-      interval       = opts.fetch(:interval, 0.5)
+      timeout        = opts.fetch(:timeout, @appium_wait_timeout)
+      interval       = opts.fetch(:interval, @appium_wait_interval)
       message        = opts[:message]
       ignored        = Array(opts[:ignore] || ::Exception)
       return_if_true = opts[:return_if_true]
@@ -62,8 +62,8 @@ module Appium
     # If only a number is provided then it's treated as the timeout value.
     #
     # @param [Hash] opts Options
-    # @option opts [Numeric] :timeout (30) Seconds to wait before timing out.
-    # @option opts [Numeric] :interval (0.5) Seconds to sleep between polls.
+    # @option opts [Numeric] :timeout Seconds to wait before timing out. Set default by `appium_wait_timeout` (30).
+    # @option opts [Numeric] :interval Seconds to sleep between polls. Set default by `appium_wait_interval` (0.5).
     # @option opts [String] :message Exception message if timed out.
     # @option opts [Array, Exception] :ignore Exceptions to ignore while polling (default: Exception)
     def wait_true(opts = {}, &block)
@@ -80,8 +80,8 @@ module Appium
     # If only a number is provided then it's treated as the timeout value.
     #
     # @param [Hash] opts Options
-    # @option opts [Numeric] :timeout (30) Seconds to wait before timing out.
-    # @option opts [Numeric] :interval (0.5) Seconds to sleep between polls.
+    # @option opts [Numeric] :timeout Seconds to wait before timing out. Set default by `appium_wait_timeout` (30).
+    # @option opts [Numeric] :interval Seconds to sleep between polls. Set default by `appium_wait_interval` (0.5).
     # @option opts [String] :message Exception message if timed out.
     # @option opts [Array, Exception] :ignore Exceptions to ignore while polling (default: Exception)
     def wait(opts = {}, &block)

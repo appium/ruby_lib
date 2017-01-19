@@ -50,7 +50,9 @@ describe 'driver' do
                               port:             4723,
                               device:           :ios,
                               debug:            true,
-                              listener:         nil }
+                              listener:         nil,
+                              wait_timeout:     20,  # defined in appium.txt
+                              wait_interval:    1 }  # defined in appium.txt
 
       if actual != expected
         diff    = HashDiff.diff expected, actual
