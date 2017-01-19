@@ -27,13 +27,14 @@ module Appium
     # @private
     # for XCUITest
     def _textfield_with_xpath
-      xpath "//#{_textfields}"
+      raise_error_if_no_element _textfields_with_xpath.first
     end
 
     # @private
     # for XCUITest
     def _textfields_with_xpath
-      xpaths "//#{_textfields}"
+      elements = xpaths "//#{_textfields}"
+      select_visible_elements elements
     end
 
     # Appium
@@ -78,7 +79,7 @@ module Appium
       end
 
       if automation_name_is_xcuitest?
-        find_ele_by_attr_include _textfields, '*', value
+        raise_error_if_no_element textfields(value).first
       else
         ele_by_json _textfield_contains_string value
       end
@@ -91,7 +92,8 @@ module Appium
     def textfields(value = false)
       if automation_name_is_xcuitest?
         return _textfields_with_xpath unless value
-        find_eles_by_attr_include _textfields, '*', value
+        elements = find_eles_by_attr_include _textfields, '*', value
+        select_visible_elements elements
       else
         return eles_by_json _textfield_visible unless value
         eles_by_json _textfield_contains_string value
@@ -125,7 +127,7 @@ module Appium
     # @return [TextField]
     def textfield_exact(value)
       if automation_name_is_xcuitest?
-        find_ele_by_attr _textfields, '*', value
+        raise_error_if_no_element textfields_exact(value).first
       else
         ele_by_json _textfield_exact_string value
       end
@@ -136,7 +138,8 @@ module Appium
     # @return [Array<TextField>]
     def textfields_exact(value)
       if automation_name_is_xcuitest?
-        find_eles_by_attr _textfields, '*', value
+        elements = find_eles_by_attr _textfields, '*', value
+        select_visible_elements elements
       else
         eles_by_json _textfield_exact_string value
       end

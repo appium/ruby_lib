@@ -14,12 +14,7 @@ describe 'ios/patch' do
   end
 
   t 'label' do
-    if UI::Inventory.xcuitest?
-      # Order of the elements are: Normal, Rounded, Secure, Check
-      find_element(:name, '<enter text>').label.must_equal 'Normal'
-    else
-      textfield('<enter text>').label.must_equal 'Rounded'
-    end
+    textfield('<enter text>').label.must_equal 'Rounded'
   end
 
   t 'type' do
