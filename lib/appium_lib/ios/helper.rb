@@ -165,7 +165,7 @@ module Appium
     end
 
     # Gets the JSON source of window number
-    # @param window_number [Integer] the int index of the target window
+    # @param [Integer] _window_number The int index of the target window
     # @return [JSON]
     def source_window(_window_number = 0)
       # TODO: update comments
