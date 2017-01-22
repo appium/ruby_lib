@@ -3,6 +3,32 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## v9.3.0
+### 1. Enhancements
+- wait / wait_true need global defaults [#250](https://github.com/appium/ruby_lib/issues/250)
+    - You can set default value in `appium_lib` 
+    - e.g.: [lib/appium_lib/driver.rb](https://github.com/appium/ruby_lib/blob/34803ef6b7b94df9ef4e147ba8fec5c1d2cfaada/lib/appium_lib/driver.rb#L341-L351)
+- Problem with delta_x/delta_y in swipe method [#461](https://github.com/appium/ruby_lib/issues/461)
+    - Revert _fix arguments for `move_to` in `swipe` method._ in Appium v8.2.1
+    - `delta_x/delta_y` replace to `offset_*` for iOS
+        - e.g.: `swipe start_x: start_x, start_y: start_y, end_offset_x: 0, offset_y: -100`
+    - `delta_x/delta_y` replace to `end_*` for Android
+        - e.g.: `swipe start_x: start_x, start_y: start_y, end_x: start_x, end_y: start_y - 100`
+    - The reason why there are two kind of arguments is the following issue.
+        - [Difference behaviour between iOS and Android regarding with `swipe` action #7702](https://github.com/appium/appium/issues/7702)
+- Clarify disabling Sauce Labs. #471
+  - update documentations
+
+### 2. Bug fixes
+- REQUIRED_VERSION_XCUITEST [#463](https://github.com/appium/ruby_lib/issues/463)
+- find elements except for name attributes in text/s, button/s [#462](https://github.com/appium/ruby_lib/issues/462)
+    - Return only **visible** elements
+        - Previously, these methods return **all** elements.
+
+### 3. Deprecations
+- Problem with delta_x/delta_y in swipe method [#461](https://github.com/appium/ruby_lib/issues/461)
+    - `delta_x/delta_y` are replaced to `offset_*` for iOS and `end_*` for Android.
+
 ## v9.2.0
 ### 1. Enhancements
 - update set_wait / no_wait logic #249
