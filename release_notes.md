@@ -1,3 +1,18 @@
+#### v9.2.0 2017-01-09
+
+- [958ae3e](https://github.com/appium/ruby_lib/commit/958ae3e2fc84b78191baf22e967c8a2fb7eded22) Release 9 2 0 (#460)
+- [292acdf](https://github.com/appium/ruby_lib/commit/292acdf323e7725ef6cc09f2c56d94a8f54ec801) update changelog for 9.2.0 (#458)
+- [1457728](https://github.com/appium/ruby_lib/commit/1457728872214746d9792d916a262a5f996e78ef) Remove last waits (#456)
+- [b10cf83](https://github.com/appium/ruby_lib/commit/b10cf837edafea96e2b2d13e7adf6a87dd448723) add examples for predicate (#455)
+- [d050100](https://github.com/appium/ruby_lib/commit/d050100c0f461c639c417f64ec12d569c412bfb6) Add some documents (#454)
+- [6ee434f](https://github.com/appium/ruby_lib/commit/6ee434f9dbabb7bdb775692382972731c39a71c9) set auomation name from server if client side is nil (#451)
+- [6abb146](https://github.com/appium/ruby_lib/commit/6abb14627fc454684ad4766d9dd95dfd4b52d564) add link to locatorStrategies (#449)
+- [74dc747](https://github.com/appium/ruby_lib/commit/74dc747f56fe78f2bd883c1070d2ea25af0fa382) add changelog (#448)
+- [4e8a449](https://github.com/appium/ruby_lib/commit/4e8a449bf2ff5a3e6f778389b336ecd1a712c25f) arrange a bit (#446)
+- [4efeefa](https://github.com/appium/ruby_lib/commit/4efeefa7e3cb751dcc11280e26169e4ba57b3065) Release 9 1 3 (#445)
+- [ba2fbdc](https://github.com/appium/ruby_lib/commit/ba2fbdcb206609259134fc09eac7940c21cc2c13) Release 9.1.3
+
+
 #### v9.1.3 2017-01-04
 
 - [ba2fbdc](https://github.com/appium/ruby_lib/commit/ba2fbdcb206609259134fc09eac7940c21cc2c13) Release 9.1.3
