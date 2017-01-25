@@ -101,33 +101,30 @@ iOS uses accessibility label with a fallback to text.
 
 #### button
 0. `(Button) button(index)` Find a button by index.
-0. `(Button) button(text, number = 0)` Find a button by text and optionally number.
-0. `(Button) button_include(text)` Get the first button that includes text.
+0. `(Button) button(text)` Get the first button that includes text.
 0. `(Array<String>, Array<Buttons>) buttons(text = nil)` Get an array of button texts or button elements if text is provided.
-0. `(Array<Button>) buttons_include(text)` Get all buttons that include text.
+0. `(Array<Button>) buttons(text)` Get all buttons that include text.
 0. `(Button) first_button` Get the first button element.
 0. `(Button) last_button` Get the last button element.
 
 #### textfield
 0. `(Textfield) textfield(index)` Find a textfield by index.
-0. `(Array<Textfield>) e_textfields` Get an array of textfield elements.
+0. `(Array<Textfield>) textfields` Get an array of textfield elements.
 0. `(Textfield) first_textfield` Get the first textfield element.
 0. `(Textfield) last_textfield` Get the last textfield element.
-0. `(Textfield) textfield(text)` Get the first textfield that matches text.
-0. `(Textfield) textfield_include(text)` Get the first textfield that includes text.
-0. `(Array<String>) textfields` Get an array of textfield texts.
+0. `(Textfield) textfield_exact(text)` Get the first textfield that matches text.
+0. `(Textfield) textfield(text)` Get the first textfield that includes text.
 
 #### text
 
 The Static Text methods have been prefixed with `s_` to avoid conflicting with the generic text methods.
 
-0. `(Text) s_text(index)` Find a text by index.
-0. `(Array<Text>) s_e_texts` Get an array of text elements.
-0. `(Text) first_s_text` Get the first text element.
-0. `(Text) last_s_text` Get the last text element.
-0. `(Text) s_text(text)` Get the first element that matches text.
-0. `(Text) s_text_include(text)` Get the first textfield that includes text.
-0. `(Array<String>) s_texts` Get an array of text texts.
+0. `(Text) text(index)` Find a text by index.
+0. `(Array<Text>) texts` Get an array of text elements.
+0. `(Text) first_text` Get the first text element.
+0. `(Text) last_text` Get the last text element.
+0. `(Text) text_exact(text)` Get the first element that matches text.
+0. `(Text) text(text)` Get the first textfield that includes text.
 
 #### window
 0. `(Object) window_size` Get the window's size.
@@ -168,8 +165,6 @@ s.send_keys 'hello'
 s.value == ios_password('hello'.length)
 ```
 
-[routing.js](https://github.com/appium/appium/blob/master/app/routing.js#L69) lists not yet implemented end points.
-
 --
 
 #### Driver
@@ -184,11 +179,9 @@ s.value == ios_password('hello'.length)
 
 `find_elements` calls `$driver.find_elements`
 
-`mobile :swipe, endX: 100, endY: 100, duration: 0.01` calls `$driver.execute_script 'mobile: swipe', endX: 100, endY: 100, duration: 0.01`
-
 `no_wait` will set implicit wait to 0. `$driver.manage.timeouts.implicit_wait = 0`
 
-`set_wait` will set implicit wait to default 30 seconds. `$driver.manage.timeouts.implicit_wait = 30`
+`set_wait` will set implicit wait to default seconds. `$driver.manage.timeouts.implicit_wait = default`
 
 `set_wait(timeout_seconds)` will set implicit wait to desired timeout. `$driver.manage.timeouts.implicit_wait = timeout`
 
