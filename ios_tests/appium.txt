@@ -4,6 +4,7 @@ platformVersion = "10.2"
 deviceName ="iPhone Simulator"
 automationName = 'XCUITest'
 app = "./UICatalog.app"
+some_capability = "some_capability"
 
 [appium_lib]
 sauce_username = ""
