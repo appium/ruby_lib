@@ -251,6 +251,9 @@ module Appium
       # except for browser_name, default capability is equal to ::Selenium::WebDriver::Remote::Capabilities.firefox
       # Because Selenium::WebDriver::Remote::Bridge uses Capabilities.firefox by default
       # https://github.com/SeleniumHQ/selenium/blob/selenium-3.0.1/rb/lib/selenium/webdriver/remote/bridge.rb#L67
+      # @param [Hash] opts_caps Capabilities for Appium server. All capability keys are converted to lowerCamelCase when
+      #                         this client sends capabilities to Appium server as JSON format.
+      # @return [Selenium::WebDriver::Remote::Capabilities] Return instance of Selenium::WebDriver::Remote::Capabilities
       def self.init_caps_for_appium(opts_caps = {})
         default_caps_opts_firefox = {
           javascript_enabled: true,
