@@ -284,9 +284,9 @@ module Appium
     # This value is independent of what the server is using
     # @return [Integer]
     attr_reader :default_wait
-    # Username for use on Sauce Labs
+    # Username for use on Sauce Labs. Set `false` to disable Sauce, even when SAUCE_USERNAME is in ENV.
     attr_accessor :sauce_username
-    # Access Key for use on Sauce Labs
+    # Access Key for use on Sauce Labs. Set `false` to disable Sauce, even when SAUCE_ACCESS_KEY is in ENV.
     attr_accessor :sauce_access_key
     # Appium's server port
     attr_accessor :appium_port

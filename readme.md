@@ -45,6 +45,8 @@ gem install --no-rdoc --no-ri appium_lib
 - `SAUCE_USERNAME` Sauce username
 - `SAUCE_ACCESS_KEY` Sauce API key
 
+(Note: If these variables are set, all tests will use Sauce Labs unless over-ridden in configuration.)
+
 #### Troubleshooting
 
 1. Does `adb kill-server; adb devices` list an active Android device?
