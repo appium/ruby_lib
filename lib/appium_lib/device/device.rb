@@ -135,6 +135,26 @@ module Appium
     #   ```ruby
     #   set_immediate_value element, 'hello'
     #   ```
+
+    # @!method get_support_performance_data_types
+    #   Get the information type of the system state which is supported to read such as
+    #   cpu, memory, network, battery via adb commands.
+    #   https://github.com/appium/appium-base-driver/blob/be29aec2318316d12b5c3295e924a5ba8f09b0fb/lib/mjsonwp/routes.js#L300
+    #
+    #   ```ruby
+    #   get_support_performance_data_types #=> ["cpuinfo", "batteryinfo", "networkinfo", "memoryinfo"]
+    #   ```
+
+    # @!method get_performance_data
+    #   Get the resource usage information of the application.
+    #   https://github.com/appium/appium-base-driver/blob/be29aec2318316d12b5c3295e924a5ba8f09b0fb/lib/mjsonwp/routes.js#L303
+    #   @param [String] package_name Package name
+    #   @param [String] data_type Data type get with `get_support_performance_data_types`
+    #   @param [String] data_read_timeout Command timeout. Default is 2.
+    #
+    #   ```ruby
+    #   get_performance_data package_name: package_name, data_type: data_type, data_read_timeout: 2
+    #   ```
     class << self
       def extended(_mod)
         extend_webdriver_with_forwardable
@@ -305,6 +325,16 @@ module Appium
         add_endpoint_method(:set_network_connection) do
           def set_network_connection(mode)
             execute :set_network_connection, {}, type: mode
+          end
+        end
+
+        # FIXME: Current command requires 'applicationPackageName', 'performanceDataType'.
+        #        https://github.com/appium/appium-base-driver/commit/0fd67e4efbed9c8a8352b18557b84b10649baabc
+        add_endpoint_method(:get_performance_data) do
+          def get_performance_data(package_name:, data_type:, data_read_timeout: 1000)
+            execute :get_performance_data, {}, packageName: package_name,
+                                               dataType: data_type,
+                                               dataReadTimeout: data_read_timeout
           end
         end
 

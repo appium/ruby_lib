@@ -14,6 +14,7 @@ module Appium
         toggle_airplane_mode:   [:post, 'session/:session_id/appium/device/toggle_airplane_mode'.freeze],
         current_activity:       [:get,  'session/:session_id/appium/device/current_activity'.freeze],
         get_network_connection: [:get,  'session/:session_id/network_connection'.freeze],
+        get_support_performance_data_types: [:post, 'session/:session_id/appium/performanceData/types'.freeze],
 
         # iOS
         device_time:            [:get,  'session/:session_id/appium/device/system_time'.freeze],
@@ -46,6 +47,7 @@ module Appium
         start_activity:         [:post, 'session/:session_id/appium/device/start_activity'.freeze],
         end_coverage:           [:post, 'session/:session_id/appium/app/end_test_coverage'.freeze],
         set_network_connection: [:post, 'session/:session_id/network_connection'.freeze],
+        get_performance_data:   [:post, 'session/:session_id/appium/getPerformanceData'.freeze],
 
         # iOS
         touch_id:               [:post, 'session/:session_id/appium/simulator/touch_id'.freeze]

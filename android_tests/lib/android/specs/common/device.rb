@@ -11,6 +11,17 @@ describe 'common/device' do
     # install ENV['APP_PATH']
   end
 
+  t 'get_support_performance_data_types' do
+    require 'pry'
+    binding.pry
+
+    expected = %w(cpuinfo batteryinfo networkinfo memoryinfo)
+    get_support_performance_data_types.must_equal expected
+
+    get_performance_data(package_name: 'io.appium.android.apis', data_type: 'cpuinfo')
+  end
+
+
   t 'device_time' do
     Date.parse(device_time)
   end
