@@ -55,7 +55,8 @@ end
 module Appium
   REQUIRED_VERSION_XCUITEST = '1.6.0'.freeze
 
-  # Load arbitrary text (toml format)
+  # Load arbitrary text ([toml format](https://github.com/toml-lang/toml))
+  # The toml is parsed by https://github.com/fbernier/tomlrb .
   #
   # ```
   # [caps]
@@ -76,7 +77,7 @@ module Appium
     raise 'opts must not be empty' if opts.empty?
 
     toml = opts[:file]
-    raise 'Must pass file' unless toml
+    raise 'Must pass a capability file which has [caps] and [appium_lib]' unless toml
     verbose = opts.fetch :verbose, false
 
     Appium::Logger.info "appium settings path: #{toml}" if verbose
