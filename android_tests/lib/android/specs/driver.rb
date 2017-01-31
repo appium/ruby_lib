@@ -34,18 +34,36 @@ describe 'driver' do
       apk_name.must_equal 'api.apk'
     end
 
-    # Only used for Sauce Labs
+    t 'verify Appium::Driver::Capabilities.init_caps_for_appium' do
+      expected_app = File.absolute_path('api.apk')
+      caps = ::Appium::Driver::Capabilities.init_caps_for_appium(platformName: 'Android',
+                                                                 app:          expected_app,
+                                                                 appPackage:   'io.appium.android.apis',
+                                                                 appActivity:  '.ApiDemos',
+                                                                 deviceName:   'Nexus 7',
+                                                                 some_capability: 'some_capability')
+      caps_with_json = JSON.parse(caps.to_json)
+      caps_with_json['platformName'].must_equal 'Android'
+      caps_with_json['app'].must_equal expected_app
+      caps_with_json['appPackage'].must_equal 'io.appium.android.apis'
+      caps_with_json['appActivity'].must_equal '.ApiDemos'
+      caps_with_json['deviceName'].must_equal 'Nexus 7'
+      caps_with_json['someCapability'].must_equal 'some_capability'
+
+      caps[:platformName].must_equal 'Android'
+      caps[:app].must_equal expected_app
+      caps[:appPackage].must_equal 'io.appium.android.apis'
+      caps[:appActivity].must_equal '.ApiDemos'
+      caps[:deviceName].must_equal 'Nexus 7'
+      caps[:some_capability].must_equal 'some_capability'
+    end
+
     t 'verify all attributes' do
       actual                = driver_attributes
       caps_app_for_teardown = actual[:caps][:app]
       expected_app = File.absolute_path('api.apk')
-      expected_caps = ::Appium::Driver::Capabilities.init_caps_for_appium(platformName: 'Android',
-                                                                          app:          expected_app,
-                                                                          appPackage:   'io.appium.android.apis',
-                                                                          appActivity:  '.ApiDemos',
-                                                                          deviceName:   'Nexus 7')
-      expected            = { caps:             expected_caps,
-                              automationName:   nil,
+
+      expected            = { automation_name:   nil,
                               custom_url:       false,
                               export_session:   false,
                               default_wait:     1,
@@ -58,7 +76,26 @@ describe 'driver' do
                               wait_timeout:     30,    # default
                               wait_interval:    0.5 }  # default
 
-      if actual != expected
+      # actual[:caps].to_json send to Appium server
+      caps_with_json = JSON.parse(actual[:caps].to_json)
+      caps_with_json['platformName'].must_equal 'android'
+      caps_with_json['app'].must_equal expected_app
+      caps_with_json['appPackage'].must_equal 'io.appium.android.apis'
+      caps_with_json['appActivity'].must_equal '.ApiDemos'
+      caps_with_json['deviceName'].must_equal 'Nexus 7'
+      caps_with_json['someCapability'].must_equal 'some_capability'
+
+      actual[:caps][:platformName].must_equal 'android'
+      actual[:caps][:app].must_equal expected_app
+      actual[:caps][:appPackage].must_equal 'io.appium.android.apis'
+      actual[:caps][:appActivity].must_equal '.ApiDemos'
+      actual[:caps][:deviceName].must_equal 'Nexus 7'
+      actual[:caps][:some_capability].must_equal 'some_capability'
+
+      dup_actual = actual.dup
+      dup_actual.delete(:caps)
+
+      if dup_actual != expected
         diff    = HashDiff.diff expected, actual
         diff    = "diff (expected, actual):\n#{diff}"
 
@@ -69,10 +106,6 @@ describe 'driver' do
         message = "\n\nactual:\n\n: #{actual.ai}expected:\n\n#{expected.ai}\n\n#{diff}"
         raise message
       end
-
-      actual_selenium_caps = actual[:caps][:platformName]
-      actual_selenium_caps.must_equal 'Android'
-      actual[:caps][:app] = caps_app_for_teardown
     end
 
     t 'default timeout for http client' do

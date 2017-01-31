@@ -30,18 +30,37 @@ describe 'driver' do
     assert_equal expected, actual
   end
 
+  t 'verify Appium::Driver::Capabilities.init_caps_for_appium' do
+    expected_app = File.absolute_path('UICatalog.app')
+    caps = ::Appium::Driver::Capabilities.init_caps_for_appium(platformName:    'ios',
+                                                               platformVersion: '10.2',
+                                                               automationName:  'XCUITest',
+                                                               deviceName:      'iPhone Simulator',
+                                                               app:             expected_app,
+                                                               some_capability: 'some_capability')
+    caps_with_json = JSON.parse(caps.to_json)
+    caps_with_json['platformName'].must_equal 'ios'
+    caps_with_json['platformVersion'].must_equal '10.2'
+    caps_with_json['app'].must_equal expected_app
+    caps_with_json['automationName'].must_equal 'XCUITest'
+    caps_with_json['deviceName'].must_equal 'iPhone Simulator'
+    caps_with_json['someCapability'].must_equal 'some_capability'
+
+    caps[:platformName].must_equal 'ios'
+    caps[:platformVersion].must_equal '10.2'
+    caps[:app].must_equal expected_app
+    caps[:automationName].must_equal 'XCUITest'
+    caps[:deviceName].must_equal 'iPhone Simulator'
+    caps[:some_capability].must_equal 'some_capability'
+  end
+
   describe 'Appium::Driver attributes' do
     t 'verify all attributes' do
       actual                = driver_attributes
       caps_app_for_teardown = actual[:caps][:app]
       expected_app = File.absolute_path('UICatalog.app')
-      expected_caps       = ::Appium::Driver::Capabilities.init_caps_for_appium(platformName:    'ios',
-                                                                                platformVersion: '10.1',
-                                                                                automationName:  'XCUITest',
-                                                                                deviceName:      'iPhone Simulator',
-                                                                                app:             expected_app)
-      expected            = { caps:             expected_caps,
-                              automation_name:  'XCUITest',
+
+      expected            = { automation_name:  'XCUITest',
                               custom_url:       false,
                               export_session:   false,
                               default_wait:     30,
@@ -54,7 +73,26 @@ describe 'driver' do
                               wait_timeout:     20,  # defined in appium.txt
                               wait_interval:    1 }  # defined in appium.txt
 
-      if actual != expected
+      # actual[:caps].to_json send to Appium server
+      caps_with_json = JSON.parse(actual[:caps].to_json)
+      caps_with_json['platformName'].must_equal 'ios'
+      caps_with_json['platformVersion'].must_equal '10.2'
+      caps_with_json['app'].must_equal expected_app
+      caps_with_json['automationName'].must_equal 'XCUITest'
+      caps_with_json['deviceName'].must_equal 'iPhone Simulator'
+      caps_with_json['someCapability'].must_equal 'some_capability'
+
+      actual[:caps][:platformName].must_equal 'ios'
+      actual[:caps][:platformVersion].must_equal '10.2'
+      actual[:caps][:app].must_equal expected_app
+      actual[:caps][:automationName].must_equal 'XCUITest'
+      actual[:caps][:deviceName].must_equal 'iPhone Simulator'
+      actual[:caps][:some_capability].must_equal 'some_capability'
+
+      dup_actual = actual.dup
+      dup_actual.delete(:caps)
+
+      if dup_actual != expected
         diff    = HashDiff.diff expected, actual
         diff    = "diff (expected, actual):\n#{diff}"
 
