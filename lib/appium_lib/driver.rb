@@ -122,7 +122,7 @@ module Appium
 
       File.exist?(file) ? file : nil
     end
-    r.compact! # remove nils
+    file_paths.compact! # remove nils
 
     files = []
 
