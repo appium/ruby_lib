@@ -15,9 +15,9 @@ describe 'common/device' do
     expected = %w(cpuinfo batteryinfo networkinfo memoryinfo)
     get_support_performance_data_types.must_equal expected
 
-    get_performance_data(package_name: 'io.appium.android.apis', data_type: 'cpuinfo').must_equal [['user', 'kernel'], ['0', '0']]
+    get_performance_data(package_name: 'io.appium.android.apis',
+                         data_type: 'cpuinfo').must_equal [%w(user kernel), %w(0 0)]
   end
-
 
   t 'device_time' do
     Date.parse(device_time)
@@ -29,7 +29,8 @@ describe 'common/device' do
 
   t 'start_activity' do
     wait { current_activity.must_equal '.ApiDemos' }
-    start_activity app_package: 'io.appium.android.apis', app_activity: '.accessibility.AccessibilityNodeProviderActivity'
+    start_activity app_package: 'io.appium.android.apis',
+                   app_activity: '.accessibility.AccessibilityNodeProviderActivity'
     wait { current_activity.include?('Node').must_equal true }
     start_activity app_package:      'com.android.settings', app_activity:      '.Settings',
                    app_wait_package: 'com.android.settings', app_wait_activity: '.Settings'
