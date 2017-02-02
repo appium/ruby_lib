@@ -4,6 +4,7 @@ deviceName = "Nexus 7"
 app = "./api.apk"
 appPackage = "io.appium.android.apis"
 appActivity = ".ApiDemos"
+some_capability = "some_capability"
 
 [appium_lib]
 sauce_username = ""
