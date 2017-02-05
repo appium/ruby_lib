@@ -11,9 +11,9 @@ describe 'common/device' do
     # install ENV['APP_PATH']
   end
 
-  t 'get_support_performance_data_types' do
+  t 'get_performance_data_types' do
     expected = %w(cpuinfo batteryinfo networkinfo memoryinfo)
-    get_support_performance_data_types.must_equal expected
+    get_performance_data_types.must_equal expected
 
     get_performance_data(package_name: 'io.appium.android.apis',
                          data_type: 'cpuinfo').must_equal [%w(user kernel), %w(0 0)]
