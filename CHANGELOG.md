@@ -3,6 +3,17 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## v9.3.1
+### 1. Enhancements
+- Clarify disabling Sauce Labs. [#471](https://github.com/appium/ruby_lib/pull/471)
+- add getting performance [#479](https://github.com/appium/ruby_lib/issues/479)
+    - **require appium-base-driver@2.1.7**
+
+### 2. Bug fixes
+- Fix missed var rename [#481](https://github.com/appium/ruby_lib/pull/481)
+
+### 3. Deprecations
+
 ## v9.3.0
 ### 1. Enhancements
 - wait / wait_true need global defaults [#250](https://github.com/appium/ruby_lib/issues/250)
