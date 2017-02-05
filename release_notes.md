@@ -1,3 +1,15 @@
+#### v9.3.0 2017-01-22
+
+- [a1c2872](https://github.com/appium/ruby_lib/commit/a1c287296c9eace08ef19449998fba7229b65697) Release 9 3 0 (#474)
+- [23d937a](https://github.com/appium/ruby_lib/commit/23d937a60da55c2d95ccbbda07ad23bda1b53a7b) update changelogs for v9.3.0 (#472)
+- [34803ef](https://github.com/appium/ruby_lib/commit/34803ef6b7b94df9ef4e147ba8fec5c1d2cfaada) arrange docs (#470)
+- [c1106aa](https://github.com/appium/ruby_lib/commit/c1106aaa6f48a4ed22dc1a7e55c9c4119cdef15c) fix returning only visible elements (#465)
+- [0104a87](https://github.com/appium/ruby_lib/commit/0104a87fad933598bb2b8ac1174319857494ba21) add capability to be able to set default timeout/interval for wait/wait_true (#468)
+- [1372e64](https://github.com/appium/ruby_lib/commit/1372e6453536eb64829825b5bf405ad0f11a9a46) fix typo (#467)
+- [a5ddd4a](https://github.com/appium/ruby_lib/commit/a5ddd4aa1d5f009b9024ee5aa5434805ba73895c) fix swipe, pinch, zoom (#466)
+- [a1c2e9e](https://github.com/appium/ruby_lib/commit/a1c2e9e815e9f85c929da857e26f419629d760df) fix appium server's version check (#464)
+
+
 #### v9.2.0 2017-01-09
 
 - [958ae3e](https://github.com/appium/ruby_lib/commit/958ae3e2fc84b78191baf22e967c8a2fb7eded22) Release 9 2 0 (#460)
