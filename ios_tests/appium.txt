@@ -9,6 +9,7 @@ some_capability = "some_capability"
 [appium_lib]
 sauce_username = ""
 sauce_access_key = ""
+sauce_endpoint = ""
 wait = 30
 wait_timeout = 20
 wait_interval = 1

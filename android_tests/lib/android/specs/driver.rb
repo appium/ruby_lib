@@ -69,6 +69,7 @@ describe 'driver' do
                               default_wait:     1,
                               sauce_username:   nil,
                               sauce_access_key: nil,
+                              sauce_endpoint:   'ondemand.saucelabs.com:443/wd/hub',
                               port:             4723,
                               device:           :android,
                               debug:            true,
