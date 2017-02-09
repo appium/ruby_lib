@@ -289,6 +289,8 @@ module Appium
     attr_accessor :sauce_username
     # Access Key for use on Sauce Labs. Set `false` to disable Sauce, even when SAUCE_ACCESS_KEY is in ENV.
     attr_accessor :sauce_access_key
+    # Override the Sauce Appium endpoint to allow e.g. TestObject tests
+    attr_accessor :sauce_endpoint
     # Appium's server port
     attr_accessor :appium_port
     # Device type to request from the appium server
@@ -376,6 +378,9 @@ module Appium
       @sauce_username   = nil if !@sauce_username || (@sauce_username.is_a?(String) && @sauce_username.empty?)
       @sauce_access_key = appium_lib_opts.fetch :sauce_access_key, ENV['SAUCE_ACCESS_KEY']
       @sauce_access_key = nil if !@sauce_access_key || (@sauce_access_key.is_a?(String) && @sauce_access_key.empty?)
+      @sauce_endpoint   = appium_lib_opts.fetch :sauce_endpoint, ENV['SAUCE_ENDPOINT']
+      @sauce_endpoint   = 'ondemand.saucelabs.com:443/wd/hub' if
+                          !@sauce_endpoint || (@sauce_endpoint.is_a?(String) && @sauce_endpoint.empty?)
       @appium_port      = appium_lib_opts.fetch :port, 4723
       # timeout and interval used in ::Appium::Comm.wait/wait_true
       @appium_wait_timeout  = appium_lib_opts.fetch :wait_timeout, 30
@@ -441,6 +446,7 @@ module Appium
           default_wait:     @default_wait,
           sauce_username:   @sauce_username,
           sauce_access_key: @sauce_access_key,
+          sauce_endpoint:   @sauce_endpoint,
           port:             @appium_port,
           device:           @appium_device,
           debug:            @appium_debug,
@@ -549,7 +555,7 @@ module Appium
     def server_url
       return @custom_url if @custom_url
       if !@sauce_username.nil? && !@sauce_access_key.nil?
-        "https://#{@sauce_username}:#{@sauce_access_key}@ondemand.saucelabs.com:443/wd/hub"
+        "https://#{@sauce_username}:#{@sauce_access_key}@#{@sauce_endpoint}"
       else
         "http://127.0.0.1:#{@appium_port}/wd/hub"
       end
