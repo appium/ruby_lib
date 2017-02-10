@@ -1,3 +1,15 @@
+#### v9.3.1 2017-02-05
+
+- [fa555d1](https://github.com/appium/ruby_lib/commit/fa555d10e7a5c48e4976fbbf2e9c061a5948d6bd) Release 9 3 1 (#484)
+- [c3bc3be](https://github.com/appium/ruby_lib/commit/c3bc3bed375c76e5a7c5fd76bb1225adad54656c) add changelog (#483)
+- [6849567](https://github.com/appium/ruby_lib/commit/68495675f35856bbf4179176f23a3c05f4cb1592) add getting performance command (#480)
+- [0b52c16](https://github.com/appium/ruby_lib/commit/0b52c16b6bf0591b500b1f6e1ebc04c0a7032cc6) Fix missed var rename (#481)
+- [54a8979](https://github.com/appium/ruby_lib/commit/54a897908c066905fd99b5eee7d539a757e987ac) add android tests for capabilities (#477)
+- [5ba85ec](https://github.com/appium/ruby_lib/commit/5ba85ec455378505dd953002ae5aca8bbd980a1f) add documents for toml (#478)
+- [bab7df7](https://github.com/appium/ruby_lib/commit/bab7df7f097fef9e848f33a60d70d0e7e018c25c) Clarify disabling Sauce Labs. (#471)
+- [cf0bda0](https://github.com/appium/ruby_lib/commit/cf0bda06c392274949843888272a762b9ed01a47) remove outdated methods (#475)
+
+
 #### v9.3.0 2017-01-22
 
 - [a1c2872](https://github.com/appium/ruby_lib/commit/a1c287296c9eace08ef19449998fba7229b65697) Release 9 3 0 (#474)
