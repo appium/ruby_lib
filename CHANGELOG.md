@@ -3,6 +3,15 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## v9.3.2
+### 1. Enhancements
+- allow SAUCE_ENDPOINT env var to override sauce server url/path [#485](https://github.com/appium/ruby_lib/pull/485)
+    - Read [readme](https://github.com/appium/ruby_lib/blob/89c7c89be058153d119d517eab22ccc318d33649/readme.md#sauce-labs-env-vars)'s `SAUCE_ENDPOINT` section.
+
+### 2. Bug fixes
+
+### 3. Deprecations
+
 ## v9.3.1
 ### 1. Enhancements
 - Clarify disabling Sauce Labs. [#471](https://github.com/appium/ruby_lib/pull/471)
