@@ -338,6 +338,40 @@ module Appium
       end
     end
 
+    # Returns all visible elements matching class_names and value
+    #
+    # @param class_names [Array[String]] the class_names to search for
+    # @param value [String] the value to search for
+    # @return [Array[Element]]
+    def tags_include(class_names:, value: nil)
+      return unless class_names.is_a? Array
+
+      class_names.flat_map do |class_name|
+        if automation_name_is_xcuitest?
+          value ? elements_include(tags(class_name), value) : tags(class_names)
+        else
+          value ? eles_by_json_visible_contains(class_name, value) : tags(class_names)
+        end
+      end
+    end
+
+    # Returns all visible elements matching class_names and value
+    #
+    # @param class_names [Array[String]] the class_names to search for
+    # @param value [String] the value to search for
+    # @return [Array[Element]]
+    def tags_exact(class_names:, value: nil)
+      return unless class_names.is_a? Array
+
+      class_names.flat_map do |class_name|
+        if automation_name_is_xcuitest?
+          value ? elements_exact(tags(class_name), value) : tags(class_names)
+        else
+          value ? eles_by_json_visible_exact(class_name, value) : tags(class_names)
+        end
+      end
+    end
+
     # @private
     # Returns an object that matches the first element that contains value
     #
