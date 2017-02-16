@@ -339,7 +339,7 @@ module Appium
     end
 
     # Returns all visible elements matching class_names and value
-    # This method call find_element/s and element.value/text size of class_names times.
+    # This method calls find_element/s and element.value/text many times.
     # So, if you set many class_names, this method's performance become worse.
     #
     # @param class_names [Array[String]] the class_names to search for
@@ -350,7 +350,8 @@ module Appium
 
       class_names.flat_map do |class_name|
         if automation_name_is_xcuitest?
-          value ? elements_include(tags(class_name), value) : tags(class_name)
+          visible_elements = tags(class_name)
+          value ? elements_include(visible_elements, value) : visible_elements
         else
           value ? eles_by_json_visible_contains(class_name, value) : tags(class_name)
         end
@@ -358,7 +359,7 @@ module Appium
     end
 
     # Returns all visible elements matching class_names and value.
-    # This method call find_element/s and element.value/text size of class_names times.
+    # This method calls find_element/s and element.value/text many times.
     # So, if you set many class_names, this method's performance become worse.
     #
     # @param class_names [Array[String]] the class_names to search for
@@ -369,7 +370,8 @@ module Appium
 
       class_names.flat_map do |class_name|
         if automation_name_is_xcuitest?
-          value ? elements_exact(tags(class_name), value) : tags(class_name)
+          visible_elements = tags(class_name)
+          value ? elements_exact(visible_elements, value) : visible_elements
         else
           value ? eles_by_json_visible_exact(class_name, value) : tags(class_name)
         end
