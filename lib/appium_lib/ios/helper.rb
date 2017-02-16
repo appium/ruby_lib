@@ -339,6 +339,8 @@ module Appium
     end
 
     # Returns all visible elements matching class_names and value
+    # This method call find_element/s and element.value/text size of class_names times.
+    # So, if you set many class_names, this method's performance become worse.
     #
     # @param class_names [Array[String]] the class_names to search for
     # @param value [String] the value to search for
@@ -355,7 +357,9 @@ module Appium
       end
     end
 
-    # Returns all visible elements matching class_names and value
+    # Returns all visible elements matching class_names and value.
+    # This method call find_element/s and element.value/text size of class_names times.
+    # So, if you set many class_names, this method's performance become worse.
     #
     # @param class_names [Array[String]] the class_names to search for
     # @param value [String] the value to search for
