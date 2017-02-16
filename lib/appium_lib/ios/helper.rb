@@ -348,9 +348,9 @@ module Appium
 
       class_names.flat_map do |class_name|
         if automation_name_is_xcuitest?
-          value ? elements_include(tags(class_name), value) : tags(class_names)
+          value ? elements_include(tags(class_name), value) : tags(class_name)
         else
-          value ? eles_by_json_visible_contains(class_name, value) : tags(class_names)
+          value ? eles_by_json_visible_contains(class_name, value) : tags(class_name)
         end
       end
     end
@@ -365,9 +365,9 @@ module Appium
 
       class_names.flat_map do |class_name|
         if automation_name_is_xcuitest?
-          value ? elements_exact(tags(class_name), value) : tags(class_names)
+          value ? elements_exact(tags(class_name), value) : tags(class_name)
         else
-          value ? eles_by_json_visible_exact(class_name, value) : tags(class_names)
+          value ? eles_by_json_visible_exact(class_name, value) : tags(class_name)
         end
       end
     end
