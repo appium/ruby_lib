@@ -3,6 +3,14 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## v9.3.3
+### 1. Enhancements
+- add tags_include/tags_exact to be able to find elements of arbitrary classes such as XCUIElementTypeTextView [#488](https://github.com/appium/ruby_lib/issues/488)
+
+### 2. Bug fixes
+
+### 3. Deprecations
+
 ## v9.3.2
 ### 1. Enhancements
 - allow SAUCE_ENDPOINT env var to override sauce server url/path [#485](https://github.com/appium/ruby_lib/pull/485)
