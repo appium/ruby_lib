@@ -1,3 +1,10 @@
+#### v9.3.2 2017-02-11
+
+- [39fd66f](https://github.com/appium/ruby_lib/commit/39fd66f354b6fdd6bba7ae6f5e28f86dc301cdf9) Release 9 3 2 (#487)
+- [7edcd09](https://github.com/appium/ruby_lib/commit/7edcd098be56c0ea72c4d33f91600009df1c1b88) Update changelog and add tests (#486)
+- [5731059](https://github.com/appium/ruby_lib/commit/5731059766542b5a7615fff20644db42177586e4) allow SAUCE_ENDPOINT env var to override sauce server url/path (#485)
+
+
 #### v9.3.1 2017-02-05
 
 - [fa555d1](https://github.com/appium/ruby_lib/commit/fa555d10e7a5c48e4976fbbf2e9c061a5948d6bd) Release 9 3 1 (#484)
