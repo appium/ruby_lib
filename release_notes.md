@@ -1,3 +1,34 @@
+#### v9.3.2 2017-02-11
+
+- [39fd66f](https://github.com/appium/ruby_lib/commit/39fd66f354b6fdd6bba7ae6f5e28f86dc301cdf9) Release 9 3 2 (#487)
+- [7edcd09](https://github.com/appium/ruby_lib/commit/7edcd098be56c0ea72c4d33f91600009df1c1b88) Update changelog and add tests (#486)
+- [5731059](https://github.com/appium/ruby_lib/commit/5731059766542b5a7615fff20644db42177586e4) allow SAUCE_ENDPOINT env var to override sauce server url/path (#485)
+
+
+#### v9.3.1 2017-02-05
+
+- [fa555d1](https://github.com/appium/ruby_lib/commit/fa555d10e7a5c48e4976fbbf2e9c061a5948d6bd) Release 9 3 1 (#484)
+- [c3bc3be](https://github.com/appium/ruby_lib/commit/c3bc3bed375c76e5a7c5fd76bb1225adad54656c) add changelog (#483)
+- [6849567](https://github.com/appium/ruby_lib/commit/68495675f35856bbf4179176f23a3c05f4cb1592) add getting performance command (#480)
+- [0b52c16](https://github.com/appium/ruby_lib/commit/0b52c16b6bf0591b500b1f6e1ebc04c0a7032cc6) Fix missed var rename (#481)
+- [54a8979](https://github.com/appium/ruby_lib/commit/54a897908c066905fd99b5eee7d539a757e987ac) add android tests for capabilities (#477)
+- [5ba85ec](https://github.com/appium/ruby_lib/commit/5ba85ec455378505dd953002ae5aca8bbd980a1f) add documents for toml (#478)
+- [bab7df7](https://github.com/appium/ruby_lib/commit/bab7df7f097fef9e848f33a60d70d0e7e018c25c) Clarify disabling Sauce Labs. (#471)
+- [cf0bda0](https://github.com/appium/ruby_lib/commit/cf0bda06c392274949843888272a762b9ed01a47) remove outdated methods (#475)
+
+
+#### v9.3.0 2017-01-22
+
+- [a1c2872](https://github.com/appium/ruby_lib/commit/a1c287296c9eace08ef19449998fba7229b65697) Release 9 3 0 (#474)
+- [23d937a](https://github.com/appium/ruby_lib/commit/23d937a60da55c2d95ccbbda07ad23bda1b53a7b) update changelogs for v9.3.0 (#472)
+- [34803ef](https://github.com/appium/ruby_lib/commit/34803ef6b7b94df9ef4e147ba8fec5c1d2cfaada) arrange docs (#470)
+- [c1106aa](https://github.com/appium/ruby_lib/commit/c1106aaa6f48a4ed22dc1a7e55c9c4119cdef15c) fix returning only visible elements (#465)
+- [0104a87](https://github.com/appium/ruby_lib/commit/0104a87fad933598bb2b8ac1174319857494ba21) add capability to be able to set default timeout/interval for wait/wait_true (#468)
+- [1372e64](https://github.com/appium/ruby_lib/commit/1372e6453536eb64829825b5bf405ad0f11a9a46) fix typo (#467)
+- [a5ddd4a](https://github.com/appium/ruby_lib/commit/a5ddd4aa1d5f009b9024ee5aa5434805ba73895c) fix swipe, pinch, zoom (#466)
+- [a1c2e9e](https://github.com/appium/ruby_lib/commit/a1c2e9e815e9f85c929da857e26f419629d760df) fix appium server's version check (#464)
+
+
 #### v9.2.0 2017-01-09
 
 - [958ae3e](https://github.com/appium/ruby_lib/commit/958ae3e2fc84b78191baf22e967c8a2fb7eded22) Release 9 2 0 (#460)

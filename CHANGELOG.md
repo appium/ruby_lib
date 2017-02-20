@@ -3,6 +3,34 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## v9.3.3
+### 1. Enhancements
+- add tags_include/tags_exact to be able to find elements of arbitrary classes such as XCUIElementTypeTextView [#488](https://github.com/appium/ruby_lib/issues/488)
+
+### 2. Bug fixes
+
+### 3. Deprecations
+
+## v9.3.2
+### 1. Enhancements
+- allow SAUCE_ENDPOINT env var to override sauce server url/path [#485](https://github.com/appium/ruby_lib/pull/485)
+    - Read [readme](https://github.com/appium/ruby_lib/blob/89c7c89be058153d119d517eab22ccc318d33649/readme.md#sauce-labs-env-vars)'s `SAUCE_ENDPOINT` section.
+
+### 2. Bug fixes
+
+### 3. Deprecations
+
+## v9.3.1
+### 1. Enhancements
+- Clarify disabling Sauce Labs. [#471](https://github.com/appium/ruby_lib/pull/471)
+- add getting performance [#479](https://github.com/appium/ruby_lib/issues/479)
+    - **require appium-base-driver@2.1.7**
+
+### 2. Bug fixes
+- Fix missed var rename [#481](https://github.com/appium/ruby_lib/pull/481)
+
+### 3. Deprecations
+
 ## v9.3.0
 ### 1. Enhancements
 - wait / wait_true need global defaults [#250](https://github.com/appium/ruby_lib/issues/250)

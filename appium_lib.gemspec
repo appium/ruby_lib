@@ -29,6 +29,7 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'rubocop', '~> 0.46.0'
   s.add_development_dependency 'rainbow', '>= 2.1.0', '< 2.2.0' # workaround for Gem::Ext::BuildError: ERROR: Failed to build gem native extension.
+  s.add_development_dependency 'pry'
 
   s.files = `git ls-files`.split "\n"
 end

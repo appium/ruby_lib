@@ -1,4 +1,4 @@
-#### appium_lib 
+#### appium_lib
 
 [![Gem Version](https://badge.fury.io/rb/appium_lib.svg)](http://badge.fury.io/rb/appium_lib)
 [![Dependency Status](https://gemnasium.com/appium/ruby_lib.svg)](https://gemnasium.com/appium/ruby_lib)
@@ -44,6 +44,7 @@ gem install --no-rdoc --no-ri appium_lib
 
 - `SAUCE_USERNAME` Sauce username
 - `SAUCE_ACCESS_KEY` Sauce API key
+- `SAUCE_ENDPOINT` Alternative Sauce Appium Server endpoint (only use if directed)
 
 (Note: If these variables are set, all tests will use Sauce Labs unless over-ridden in configuration.)
 
@@ -55,7 +56,7 @@ gem install --no-rdoc --no-ri appium_lib
 #### Documentation
 
 - [Installing Appium on OS X](https://github.com/appium/ruby_console/blob/master/osx.md)
-- [Overview](https://github.com/appium/ruby_lib/blob/master/docs/docs.md) 
+- [Overview](https://github.com/appium/ruby_lib/blob/master/docs/docs.md)
 - [Ruby Android methods](https://github.com/appium/ruby_lib/blob/master/docs/android_docs.md)
 - [Ruby iOS methods](https://github.com/appium/ruby_lib/blob/master/docs/ios_docs.md)
     - [Tips for XCUITest for iOS](https://github.com/appium/ruby_lib/blob/master/docs/ios_xcuitest.md)
