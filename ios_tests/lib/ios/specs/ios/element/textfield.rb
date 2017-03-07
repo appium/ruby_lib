@@ -34,10 +34,13 @@ describe 'ios/element/textfield' do
   end
 
   t 'predicate textfields' do
-    raise NotImplementedError, "XCUITest(Appium1.6.2) doesn't support UIAutomation script" if UI::Inventory.xcuitest?
+    textfields = if UI::Inventory.xcuitest?
+                   find_elements(:predicate, "type contains[c] 'textfield'")
+                 else
+                   execute_script(%(au.mainApp().getAllWithPredicate("type contains[c] 'textfield'", true)))
+                 end
 
-    textfield_count = execute_script(%(au.mainApp().getAllWithPredicate("type contains[c] 'textfield'", true))).length
-    textfield_count.must_equal 4
+    textfields.length.must_equal 4
   end
 
   t 'first_textfield' do
