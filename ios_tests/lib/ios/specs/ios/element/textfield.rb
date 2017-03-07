@@ -34,11 +34,13 @@ describe 'ios/element/textfield' do
   end
 
   t 'predicate textfields' do
-    textfield_count =
-        UI::Inventory.xcuitest? ? find_elements(:predicate, "type contains[c] 'textfield'") :
-            execute_script(%(au.mainApp().getAllWithPredicate("type contains[c] 'textfield'", true))).length
+    textfields = if UI::Inventory.xcuitest?
+                   find_elements(:predicate, "type contains[c] 'textfield'")
+                 else
+                   execute_script(%(au.mainApp().getAllWithPredicate("type contains[c] 'textfield'", true)))
+                 end
 
-    textfield_count.must_equal 4
+    textfields.length.must_equal 4
   end
 
   t 'first_textfield' do
