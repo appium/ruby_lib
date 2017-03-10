@@ -21,7 +21,6 @@ module Appium
     #   background_app(-1) #=> the app never come back. https://github.com/appium/appium/issues/7741
     #   ```
 
-
     # @!method current_activity
 
     # @!method launch_app
