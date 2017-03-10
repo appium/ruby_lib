@@ -13,7 +13,14 @@ module Appium
     # @!method background_app
     #  Backgrounds the app for a set number of seconds.
     #  This is a blocking application
-    # @param [Integer] seconds How many seconds to background the app for. if `-1`, the app never come back
+    # @param [Integer] seconds How many seconds to background the app for.
+    #
+    #   ```ruby
+    #   background_app
+    #   background_app(5)
+    #   background_app(-1) #=> the app never come back. https://github.com/appium/appium/issues/7741
+    #   ```
+
 
     # @!method current_activity
 
@@ -203,10 +210,10 @@ module Appium
 
         add_endpoint_method(:background_app) do
           def background_app(duration = 0)
-            # https://github.com/appium/ruby_lib/issues/500
+            # https://github.com/appium/ruby_lib/issues/500, https://github.com/appium/appium/issues/7741
             if $driver.automation_name_is_xcuitest? && $driver.appium_server_status['build']['version'] >= '1.6.4'
-              duration_sec = duration.nil? ? nil : duration * 1000
-              execute :background_app, {}, seconds: { timeout: duration_sec }
+              duration_milli_sec = duration.nil? ? nil : duration * 1000
+              execute :background_app, {}, seconds: { timeout: duration_milli_sec }
             else
               execute :background_app, {}, seconds: duration
             end
