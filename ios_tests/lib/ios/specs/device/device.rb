@@ -53,7 +53,7 @@ describe 'device/device' do
   end
 
   t 'background_app homescreen' do
-    background_app -1
+    background_app(-1)
     screen.must_raise ::Selenium::WebDriver::Error::NoSuchElementError
   end
 
