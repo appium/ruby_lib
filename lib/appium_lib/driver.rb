@@ -299,7 +299,7 @@ module Appium
     # If automation_name is nil, it is not set both client side and server side.
     attr_reader :automation_name
     # Appium's server version
-    attr_reader :appium_server_version
+    attr_reader :appium_server_status
     # Boolean debug mode for the Appium Ruby bindings
     attr_accessor :appium_debug
     # instance of AbstractEventListener for logging support
@@ -476,7 +476,7 @@ module Appium
     # If the Appium server is under REQUIRED_VERSION_XCUITEST, then error is raised.
     # @return [Boolean]
     def check_server_version_xcuitest
-      if automation_name_is_xcuitest? && (@appium_server_version['build']['version'] < REQUIRED_VERSION_XCUITEST)
+      if automation_name_is_xcuitest? && (@appium_server_status['build']['version'] < REQUIRED_VERSION_XCUITEST)
         raise Appium::Error::NotSupportedAppiumServer, "XCUITest requires Appium version >= #{REQUIRED_VERSION_XCUITEST}"
       end
       true
@@ -618,7 +618,7 @@ module Appium
         raise "ERROR: Unable to connect to Appium. Is the server running on #{server_url}?"
       end
 
-      @appium_server_version = appium_server_version
+      @appium_server_status = appium_server_version
 
       check_server_version_xcuitest
       set_automation_name_if_nil

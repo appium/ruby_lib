@@ -52,6 +52,11 @@ describe 'device/device' do
     tag(UI::Inventory.navbar).name.must_equal 'UICatalog'
   end
 
+  t 'background_app homescreen' do
+    background_app(-1) # background_app(nil) should work as same.
+    screen.must_raise ::Selenium::WebDriver::Error::NoSuchElementError
+  end
+
   t 'reset' do
     reset
   end
