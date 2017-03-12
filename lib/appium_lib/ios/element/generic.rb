@@ -16,7 +16,7 @@ module Appium
     # @return [Array<Element>]
     def finds(value)
       if automation_name_is_xcuitest?
-        elements = find_eles_by_attr_include '*', '*', value
+        elements = find_eles_by_predicate_include value: value
         select_visible_elements elements
       else
         eles_by_json_visible_contains '*', value
@@ -39,7 +39,7 @@ module Appium
     # @return [Array<Element>]
     def finds_exact(value)
       if automation_name_is_xcuitest?
-        elements = find_eles_by_attr '*', '*', value
+        elements = find_eles_by_predicate value: value
         select_visible_elements elements
       else
         eles_by_json_visible_exact '*', value

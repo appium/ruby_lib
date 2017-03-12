@@ -13,7 +13,7 @@
 - Mapping
     - https://github.com/facebook/WebDriverAgent/blob/master/WebDriverAgentLib/Utilities/FBElementTypeTransformer.m#L19
 
-### with except for XPath
+### with except for XPath and Predicate
 #### examples
 - [button_class](https://github.com/appium/ruby_lib/blob/master/lib/appium_lib/ios/element/button.rb#L8), [static_text_class](https://github.com/appium/ruby_lib/blob/master/lib/appium_lib/ios/element/text.rb#L8), [text_field_class](https://github.com/appium/ruby_lib/blob/master/lib/appium_lib/ios/element/textfield.rb#L10) and [secure_text_field_class](https://github.com/appium/ruby_lib/blob/master/lib/appium_lib/ios/element/textfield.rb#L15) provide class name.
     - If `automationName` is `Appium` or `nil`, then they provide `UIAxxxx`
@@ -36,6 +36,16 @@ find_element(:accessibility_id, element) # Return a element which has accessibil
 buttons(value) # Return button elements include `value` as its name attributes.
 ```
 
+### with Predicate
+- We recommend to use predicate strategy instead of XPath strategy.
+    - e.g. `find_ele_by_predicate/find_eles_by_predicate`,  `find_ele_by_predicate_include/find_eles_by_predicate_include`
+
+#### examples
+- `find/s`, `find_exact/finds_exact`, `find_ele_by_predicate/find_eles_by_predicate` and `find_ele_by_predicate_include/find_eles_by_predicate_include` use predicate strategy in their method.
+
+```ruby
+finds_exact(value) # Return any elements include `value` as its name attributes.
+```
 
 ### with XPath
 - It is better to avoid XPath strategy.
@@ -48,11 +58,10 @@ buttons(value) # Return button elements include `value` as its name attributes.
     - https://github.com/facebook/WebDriverAgent/blob/2158a8d0f305549532f1338fe1e4628cfbd53cd9/WebDriverAgentLib/Categories/XCElementSnapshot%2BFBHelpers.m#L57
 
 #### examples
-- `textfield/s(value)`, `find/s`, `find_exact/finds_exact` uses XPath in their method. So, these methods are slower than other find_element directly.
+- `textfield/s(value)` uses XPath in their method. So, these methods are slower than other find_element directly.
 
 ```ruby
 textfield(value) # Return a XCUIElementTypeSecureTextField or XCUIElementTypeTextField element which has `value` text.
-finds_exact(value) # Return any elements include `value` as its name attributes.
 ```
 
 ## Other actions
