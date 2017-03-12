@@ -314,7 +314,6 @@ module Appium
       @driver.find_elements :xpath, string_attr_include(class_name, attr, value)
     end
 
-
     # Get the first elements that exactly matches value.
     # Note: Uses Predicate
     # @param value [String] the value of the attribute that the element must include
