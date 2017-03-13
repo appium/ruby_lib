@@ -290,10 +290,10 @@ module Appium
     # @return [Array<Element>]
     def find_eles_by_predicate(class_name: '*', value:)
       predicate =  if class_name == '*'
-                     "name ==[c] '#{value}' || label ==[c] '#{value}' || value ==[c] '#{value}'"
+                     %(name ==[c] "#{value}" || label ==[c] "#{value}" || value ==[c] "#{value}")
                    else
-                     "type == '#{class_name}' && " +
-                         "(name ==[c] '#{value}' || label ==[c] '#{value}' || value ==[c] '#{value}')"
+                     %(type == "#{class_name}" && ) +
+                         %((name ==[c] "#{value}" || label ==[c] "#{value}" || value ==[c] "#{value}"))
                    end
       @driver.find_elements_with_appium :predicate, predicate
     end
@@ -335,10 +335,10 @@ module Appium
     # @return [Array<Element>] the elements of type tag who's attribute includes value
     def find_eles_by_predicate_include(class_name: '*', value:)
       predicate = if class_name == '*'
-                    "name contains[c] '#{value}' || label contains[c] '#{value}' || value contains[c] '#{value}'"
+                    %(name contains[c] "#{value}" || label contains[c] "#{value}" || value contains[c] "#{value}")
                   else
-                    "type == '#{class_name}' && " +
-                        "(name contains[c] '#{value}' || label contains[c] '#{value}' || value contains[c] '#{value}')"
+                    %(type == "#{class_name}" && ) +
+                        %((name contains[c] "#{value}" || label contains[c] "#{value}" || value contains[c] "#{value}"))
                   end
       @driver.find_elements_with_appium :predicate, predicate
     end
@@ -399,11 +399,11 @@ module Appium
       return unless class_names.is_a? Array
 
       if automation_name_is_xcuitest?
-        c_names = class_names.map { |class_name| "type == '#{class_name}'"}.join(' || ')
+        c_names = class_names.map { |class_name| %(type == "#{class_name}")}.join(' || ')
 
         if value
-          predicate = "(#{c_names}) && " +
-              "(name contains[c] '#{value}' || label contains[c] '#{value}' || value contains[c] '#{value}')"
+          predicate = %((#{c_names}) && ) +
+              %((name contains[c] "#{value}" || label contains[c] "#{value}" || value contains[c] "#{value}"))
           elements = @driver.find_elements_with_appium :predicate, predicate
           select_visible_elements elements
         else
@@ -428,11 +428,11 @@ module Appium
       return unless class_names.is_a? Array
 
       if automation_name_is_xcuitest?
-        c_names = class_names.map { |class_name| "type == '#{class_name}'"}.join(' || ')
+        c_names = class_names.map { |class_name| %(type == '#{class_name}')}.join(' || ')
 
         if value
-          predicate = "(#{c_names}) && " +
-              "(name ==[c] '#{value}' || label ==[c] '#{value}' || value ==[c] '#{value}')"
+          predicate = %((#{c_names}) && ) +
+              %((name ==[c] "#{value}" || label ==[c] "#{value}" || value ==[c] "#{value}"))
           elements = @driver.find_elements_with_appium :predicate, predicate
           select_visible_elements elements
         else
