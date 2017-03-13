@@ -32,19 +32,28 @@ describe 'ios/helper' do
   end
 
   t 'tags_include' do
+    elements = tags_include class_names: %w(XCUIElementTypeTextView)
+    elements.length.must_equal 0
+
     elements = tags_include class_names: %w(XCUIElementTypeTextView XCUIElementTypeStaticText)
-    elements.length.must_be 24
+    elements.length.must_equal 24
 
     elements = tags_include class_names: %w(XCUIElementTypeTextView XCUIElementTypeStaticText), value: 'u'
-    elements.length.must_be 13
+    elements.length.must_equal 13
   end
 
-  t 'tags_include' do
+  t 'tags_exact' do
+    elements = tags_exact class_names: %w()
+    elements.length.must_equal 0
+
+    elements = tags_exact class_names: %w(XCUIElementTypeStaticText)
+    elements.length.must_equal 24
+
     elements = tags_exact class_names: %w(XCUIElementTypeTextView XCUIElementTypeStaticText)
-    elements.length.must_be 24
+    elements.length.must_equal 24
 
     elements = tags_exact class_names: %w(XCUIElementTypeTextView XCUIElementTypeStaticText), value: 'Buttons'
-    elements.length.must_be 1
+    elements.length.must_equal 1
     elements.first.value.must_equal 'Buttons'
   end
 end

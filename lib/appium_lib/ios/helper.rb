@@ -381,7 +381,7 @@ module Appium
     # @return [Element]
     def tags(class_name)
       if automation_name_is_xcuitest?
-        elements = @driver.find_elements_with_appium :predicate, "type == '#{class_name}'"
+        elements = @driver.find_elements :class, class_name
         select_visible_elements elements
       else
         eles_by_json(typeArray: [class_name], onlyVisible: true)
@@ -398,15 +398,20 @@ module Appium
     def tags_include(class_names:, value: nil)
       return unless class_names.is_a? Array
 
-      class_names.flat_map do |class_name|
-        if automation_name_is_xcuitest?
-          if value
-            elements = find_eles_by_predicate_include(class_name: class_name, value: value)
-            select_visible_elements elements
-          else
-            tags(class_name)
-          end
+      if automation_name_is_xcuitest?
+        c_names = class_names.map { |class_name| "type == '#{class_name}'"}.join(' || ')
+
+        if value
+          predicate = "(#{c_names}) && " +
+              "(name contains[c] '#{value}' || label contains[c] '#{value}' || value contains[c] '#{value}')"
+          elements = @driver.find_elements_with_appium :predicate, predicate
+          select_visible_elements elements
         else
+          elements = @driver.find_elements_with_appium :predicate, c_names
+          select_visible_elements elements
+        end
+      else
+        class_names.flat_map do |class_name|
           value ? eles_by_json_visible_contains(class_name, value) : tags(class_name)
         end
       end
@@ -422,15 +427,20 @@ module Appium
     def tags_exact(class_names:, value: nil)
       return unless class_names.is_a? Array
 
-      class_names.flat_map do |class_name|
-        if automation_name_is_xcuitest?
-          if value
-            elements = find_eles_by_predicate(class_name: class_name, value: value)
-            select_visible_elements elements
-          else
-            tags(class_name)
-          end
+      if automation_name_is_xcuitest?
+        c_names = class_names.map { |class_name| "type == '#{class_name}'"}.join(' || ')
+
+        if value
+          predicate = "(#{c_names}) && " +
+              "(name ==[c] '#{value}' || label ==[c] '#{value}' || value ==[c] '#{value}')"
+          elements = @driver.find_elements_with_appium :predicate, predicate
+          select_visible_elements elements
         else
+          elements = @driver.find_elements_with_appium :predicate, c_names
+          select_visible_elements elements
+        end
+      else
+        class_names.flat_map do |class_name|
           value ? eles_by_json_visible_exact(class_name, value) : tags(class_name)
         end
       end
