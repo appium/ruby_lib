@@ -293,7 +293,7 @@ module Appium
                      %(name ==[c] "#{value}" || label ==[c] "#{value}" || value ==[c] "#{value}")
                    else
                      %(type == "#{class_name}" && ) +
-                         %((name ==[c] "#{value}" || label ==[c] "#{value}" || value ==[c] "#{value}"))
+                       %((name ==[c] "#{value}" || label ==[c] "#{value}" || value ==[c] "#{value}"))
                    end
       @driver.find_elements_with_appium :predicate, predicate
     end
@@ -338,7 +338,7 @@ module Appium
                     %(name contains[c] "#{value}" || label contains[c] "#{value}" || value contains[c] "#{value}")
                   else
                     %(type == "#{class_name}" && ) +
-                        %((name contains[c] "#{value}" || label contains[c] "#{value}" || value contains[c] "#{value}"))
+                      %((name contains[c] "#{value}" || label contains[c] "#{value}" || value contains[c] "#{value}"))
                   end
       @driver.find_elements_with_appium :predicate, predicate
     end
@@ -399,17 +399,16 @@ module Appium
       return unless class_names.is_a? Array
 
       if automation_name_is_xcuitest?
-        c_names = class_names.map { |class_name| %(type == "#{class_name}")}.join(' || ')
+        c_names = class_names.map { |class_name| %(type == "#{class_name}") }.join(' || ')
 
-        if value
-          predicate = %((#{c_names}) && ) +
-              %((name contains[c] "#{value}" || label contains[c] "#{value}" || value contains[c] "#{value}"))
-          elements = @driver.find_elements_with_appium :predicate, predicate
-          select_visible_elements elements
-        else
-          elements = @driver.find_elements_with_appium :predicate, c_names
-          select_visible_elements elements
-        end
+        elements = if value
+                     predicate = %((#{c_names}) && ) +
+                       %((name contains[c] "#{value}" || label contains[c] "#{value}" || value contains[c] "#{value}"))
+                     @driver.find_elements_with_appium :predicate, predicate
+                   else
+                     @driver.find_elements_with_appium :predicate, c_names
+                   end
+        select_visible_elements elements
       else
         class_names.flat_map do |class_name|
           value ? eles_by_json_visible_contains(class_name, value) : tags(class_name)
@@ -428,17 +427,17 @@ module Appium
       return unless class_names.is_a? Array
 
       if automation_name_is_xcuitest?
-        c_names = class_names.map { |class_name| %(type == '#{class_name}')}.join(' || ')
+        c_names = class_names.map { |class_name| %(type == "#{class_name}") }.join(' || ')
 
-        if value
-          predicate = %((#{c_names}) && ) +
-              %((name ==[c] "#{value}" || label ==[c] "#{value}" || value ==[c] "#{value}"))
-          elements = @driver.find_elements_with_appium :predicate, predicate
-          select_visible_elements elements
-        else
-          elements = @driver.find_elements_with_appium :predicate, c_names
-          select_visible_elements elements
-        end
+        elements = if value
+                     predicate = %((#{c_names}) && ) +
+                       %((name ==[c] "#{value}" || label ==[c] "#{value}" || value ==[c] "#{value}"))
+                     @driver.find_elements_with_appium :predicate, predicate
+                   else
+                     @driver.find_elements_with_appium :predicate, c_names
+                   end
+
+        select_visible_elements elements
       else
         class_names.flat_map do |class_name|
           value ? eles_by_json_visible_exact(class_name, value) : tags(class_name)
