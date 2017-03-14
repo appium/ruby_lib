@@ -64,7 +64,6 @@ finds_exact(value) # Return any elements include `value` as its name attributes.
     - https://github.com/facebook/WebDriverAgent/blob/2158a8d0f305549532f1338fe1e4628cfbd53cd9/WebDriverAgentLib/Categories/XCElementSnapshot%2BFBHelpers.m#L57
 
 #### examples
--  uses XPath in their method. So, these methods are slower than other find_element directly.
 
 ```ruby
 xpaths("//some xpaths")
