@@ -39,11 +39,17 @@ buttons(value) # Return button elements include `value` as its name attributes.
 ### with Predicate
 - We recommend to use predicate strategy instead of XPath strategy.
     - e.g. `find_ele_by_predicate/find_eles_by_predicate`,  `find_ele_by_predicate_include/find_eles_by_predicate_include`
+- A helpful cheatsheet for predicate
+    - https://realm.io/news/nspredicate-cheatsheet/
+- For XCUITest(WebDriverAgent), without 'wd' prefixes are supported.
+    - https://github.com/facebook/WebDriverAgent/wiki/Queries
+    - For example, `%(name ==[c] "#{value}" || label ==[c] "#{value}" || value ==[c] "#{value}")` is equal to `%(wdName ==[c] "#{value}" || wdLabel ==[c] "#{value}" || wdValue ==[c] "#{value}")` in WebDriverAgent.
 
 #### examples
-- `find/s`, `find_exact/finds_exact`, `find_ele_by_predicate/find_eles_by_predicate` and `find_ele_by_predicate_include/find_eles_by_predicate_include` use predicate strategy in their method.
+- `textfield/s(value)`, `find/s`, `find_exact/finds_exact`, `find_ele_by_predicate/find_eles_by_predicate` and `find_ele_by_predicate_include/find_eles_by_predicate_include` use predicate strategy in their method.
 
 ```ruby
+textfield(value) # Return a XCUIElementTypeSecureTextField or XCUIElementTypeTextField element which has `value` text.
 finds_exact(value) # Return any elements include `value` as its name attributes.
 ```
 
@@ -58,10 +64,10 @@ finds_exact(value) # Return any elements include `value` as its name attributes.
     - https://github.com/facebook/WebDriverAgent/blob/2158a8d0f305549532f1338fe1e4628cfbd53cd9/WebDriverAgentLib/Categories/XCElementSnapshot%2BFBHelpers.m#L57
 
 #### examples
-- `textfield/s(value)` uses XPath in their method. So, these methods are slower than other find_element directly.
+-  uses XPath in their method. So, these methods are slower than other find_element directly.
 
 ```ruby
-textfield(value) # Return a XCUIElementTypeSecureTextField or XCUIElementTypeTextField element which has `value` text.
+xpaths("//some xpaths")
 ```
 
 ## Other actions
