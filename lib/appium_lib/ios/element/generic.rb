@@ -16,7 +16,7 @@ module Appium
     # @return [Array<Element>]
     def finds(value)
       if automation_name_is_xcuitest?
-        elements = find_eles_by_attr_include '*', '*', value
+        elements = find_eles_by_predicate_include value: value
         select_visible_elements elements
       else
         eles_by_json_visible_contains '*', value
@@ -39,7 +39,7 @@ module Appium
     # @return [Array<Element>]
     def finds_exact(value)
       if automation_name_is_xcuitest?
-        elements = find_eles_by_attr '*', '*', value
+        elements = find_eles_by_predicate value: value
         select_visible_elements elements
       else
         eles_by_json_visible_exact '*', value
@@ -52,34 +52,6 @@ module Appium
       error_message = 'An element could not be located on the page using the given search parameters.'
       raise(::Selenium::WebDriver::Error::NoSuchElementError, error_message) if element.nil?
       element
-    end
-
-    # Return all elements include not displayed elements.
-    def elements_include(elements, value)
-      return [] if elements.empty?
-      elements.select do |element|
-        # `text` is equal to `value` if value is not `nil`
-        # `text` is equal to `name` if value is `nil`
-        name = element.name
-        text = element.value
-        name_result = name.nil? ? false : name.downcase.include?(value.downcase)
-        text_result = text.nil? ? false : text.downcase.include?(value.downcase)
-        name_result || text_result
-      end
-    end
-
-    # Return all elements include not displayed elements.
-    def elements_exact(elements, value)
-      return [] if elements.empty?
-      elements.select do |element|
-        # `text` is equal to `value` if value is not `nil`
-        # `text` is equal to `name` if value is `nil`
-        name = element.name
-        text = element.value
-        name_result = name.nil? ? false : name.casecmp(value).zero?
-        text_result = text.nil? ? false : text.casecmp(value).zero?
-        name_result || text_result
-      end
     end
 
     # Return visible elements.

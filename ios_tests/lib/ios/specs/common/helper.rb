@@ -125,6 +125,22 @@ describe 'common/helper.rb' do
     set_wait
   end
 
+  t 'find_ele_by_predicate' do
+    el_text = find_ele_by_predicate(value: uibutton_text).text
+    el_text.must_equal uibutton_text
+
+    el_name = find_ele_by_predicate(value: uibutton_text).name
+    el_name.must_equal uibutton_text
+  end
+
+  t 'find_eles_by_predicate' do
+    ele_count = find_eles_by_predicate(value: uibutton_text).length
+    ele_count.must_equal 1
+
+    ele_count = find_eles_by_predicate(value: 'zz').length
+    ele_count.must_equal 0
+  end
+
   # TODO: 'string_attr_include'
 
   t 'find_ele_by_attr_include' do
@@ -139,6 +155,18 @@ describe 'common/helper.rb' do
     ele_count = find_eles_by_attr_include(UI::Inventory.static_text, :name, 'e').length
     expected = UI::Inventory.xcuitest? ? 20 : 19
     ele_count.must_equal expected
+  end
+
+  t 'find_ele_by_predicate_include' do
+    el_text = find_ele_by_predicate_include(value: 'button').text
+    el_text.must_equal uibutton_text
+
+    el_name = find_ele_by_predicate_include(value: 'button').name
+    el_name.must_equal uibutton_text
+  end
+
+  t 'find_eles_by_predicate_include' do
+    find_eles_by_predicate_include(value: 'e').length.must_equal 21
   end
 
   t 'first_ele' do
@@ -174,7 +202,7 @@ describe 'common/helper.rb' do
     tags(UI::Inventory.table_cell).length.must_equal 12
   end
 
-  t 'find_eles_by_attr_include' do
+  t 'find_eles_by_attr_include_length' do
     find_eles_by_attr_include(UI::Inventory.static_text, 'name', 'Use').length.must_equal 7
   end
 
