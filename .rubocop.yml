@@ -38,6 +38,8 @@ Style/IndentHash:
   Enabled: false
 Style/VariableNumber:
   EnforcedStyle: 'snake_case'
+Style/MultilineOperationIndentation:
+  Enabled: false
 Lint/NestedMethodDefinition:
   Enabled: false
 # Should enable and fix for Ruby3
