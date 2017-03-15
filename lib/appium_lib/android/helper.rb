@@ -256,7 +256,7 @@ module Appium
     # @param on_match [String] the string to return on resourceId match
     #
     # @return [String] empty string on failure, on_match on successful match
-    def _resource_id(string, on_match)
+    def resource_id(string, on_match)
       return '' unless string
 
       # unquote the string
@@ -289,14 +289,14 @@ module Appium
       value = %("#{value}")
 
       if class_name == '*'
-        return (_resource_id(value, "new UiSelector().resourceId(#{value});") +
+        return (resource_id(value, "new UiSelector().resourceId(#{value});") +
           "new UiSelector().descriptionContains(#{value});" \
           "new UiSelector().textContains(#{value});")
       end
 
       class_name = %("#{class_name}")
 
-      _resource_id(value, "new UiSelector().className(#{class_name}).resourceId(#{value});") +
+      resource_id(value, "new UiSelector().className(#{class_name}).resourceId(#{value});") +
         "new UiSelector().className(#{class_name}).descriptionContains(#{value});" \
         "new UiSelector().className(#{class_name}).textContains(#{value});"
     end
@@ -326,14 +326,14 @@ module Appium
       value = %("#{value}")
 
       if class_name == '*'
-        return (_resource_id(value, "new UiSelector().resourceId(#{value});") +
+        return (resource_id(value, "new UiSelector().resourceId(#{value});") +
           "new UiSelector().description(#{value});" \
           "new UiSelector().text(#{value});")
       end
 
       class_name = %("#{class_name}")
 
-      _resource_id(value, "new UiSelector().className(#{class_name}).resourceId(#{value});") +
+      resource_id(value, "new UiSelector().className(#{class_name}).resourceId(#{value});") +
         "new UiSelector().className(#{class_name}).description(#{value});" \
         "new UiSelector().className(#{class_name}).text(#{value});"
     end
