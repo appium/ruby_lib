@@ -7,6 +7,15 @@ module Appium
   # ```ruby
   # action = TouchAction.new.press(x: 45, y: 100).wait(5).release
   # action.perform
+  # ```
+  #
+  # Or each methods can call without `TouchAction.new` as the following.
+  # In this case, `perform` is called automatically.
+  # ```ruby
+  # # called `swipe(...).perform` in this method.
+  # swipe(start_x: 75, start_y: 500, offset_x: 75, offset_y: 20, duration: 500)
+  # ```
+
   class TouchAction
     ACTIONS         = [:move_to, :long_press, :double_tap, :two_finger_tap, :press, :release, :tap, :wait, :perform].freeze
     COMPLEX_ACTIONS = [:swipe].freeze
@@ -167,6 +176,7 @@ module Appium
     # Ask the driver to perform all actions in this action chain.
     def perform
       $driver.touch_actions @actions
+      @actions = []
       self
     end
 
