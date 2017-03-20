@@ -3,6 +3,19 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## v9.3.4
+### 1. Enhancements
+- [remove workaround](https://github.com/appium/ruby_lib/pull/474/commits/57cc95264e83e14862f729683b93c1f020a30ce5) to pass CI
+- document uiautomator events logging command [#319](https://github.com/appium/ruby_lib/issues/319)
+- use predicate for XCUITest to improve performance [#493](https://github.com/appium/ruby_lib/issues/493)
+    - `text/s`, `button/s`, `textfield/s`, `tags_exact`, `tags_include`
+    - new: `find_ele/s_by_predicate`, `find_ele/s_by_predicate_include`
+
+### 2. Bug fixes
+
+### 3. Deprecations
+
+
 ## v9.3.3
 ### 1. Enhancements
 - add tags_include/tags_exact to be able to find elements of arbitrary classes such as XCUIElementTypeTextView [#488](https://github.com/appium/ruby_lib/issues/488)

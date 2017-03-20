@@ -163,6 +163,8 @@ module Appium
       end
     end # self
 
+    attr_reader :actions
+
     # Create a new multi-action
     def initialize
       @actions = []
@@ -177,6 +179,7 @@ module Appium
     # Ask Appium to perform the actions
     def perform
       $driver.multi_touch @actions
+      @actions.clear
     end
   end # class MultiTouch
 end # module Appium

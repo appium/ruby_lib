@@ -1,3 +1,9 @@
+#### v9.3.3 2017-02-18
+
+- [422a468](https://github.com/appium/ruby_lib/commit/422a4683f10fc99d3731985d532b71e1fe80b4e6) Release 9 3 3 (#494)
+- [c09cf1e](https://github.com/appium/ruby_lib/commit/c09cf1efb33b276d6faf179b1344435df5dc7d16) add tags_include and tags_exact to find value (#490)
+
+
 #### v9.3.2 2017-02-11
 
 - [39fd66f](https://github.com/appium/ruby_lib/commit/39fd66f354b6fdd6bba7ae6f5e28f86dc301cdf9) Release 9 3 2 (#487)
