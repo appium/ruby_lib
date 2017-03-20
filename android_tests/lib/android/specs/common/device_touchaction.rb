@@ -3,7 +3,9 @@ describe 'common/device_touchaction' do
   t 'action_chain' do
     wait do
       e = text('Accessibility')
-      Appium::TouchAction.new.press(element: e, x: 0.5, y: 0.5).release(element: e).perform
+      touch_action = Appium::TouchAction.new.press(element: e, x: 0.5, y: 0.5).release(element: e)
+      touch_action.perform
+      touch_action.actions.must_equal []
     end
     wait { text('Custom View') }
     back
