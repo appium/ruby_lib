@@ -56,7 +56,7 @@ describe 'device/device' do
     background_app(-1) # background_app(nil) should work as same.
 
     screen.must_equal 'UICatalog'
-    # TODO Should update this assert.
+    # TODO: Should update this assert.
     # screen.must_raise ::Selenium::WebDriver::Error::NoSuchElementError
   end
 
@@ -95,13 +95,13 @@ describe 'device/device' do
     touch_action = Appium::TouchAction.new.swipe(start_x: 75, start_y: 500, offset_x: 75, offset_y: 20, duration: 500)
 
     touch_action.actions[0][:action].must_equal :press
-    touch_action.actions[0][:options].must_equal( {x: 75, y: 500 } )
+    touch_action.actions[0][:options].must_equal(x: 75, y: 500)
 
     touch_action.actions[1][:action].must_equal :wait,
-                                                touch_action.actions[1][:options].must_equal( {ms: 500 } )
+                                                touch_action.actions[1][:options].must_equal(ms: 500)
 
     touch_action.actions[2][:action].must_equal :moveTo
-    touch_action.actions[2][:options].must_equal( {x: 75, y: 20 } )
+    touch_action.actions[2][:options].must_equal(x: 75, y: 20)
 
     touch_action.actions[3][:action].must_equal :release
 
