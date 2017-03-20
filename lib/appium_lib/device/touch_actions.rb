@@ -176,7 +176,7 @@ module Appium
     # Ask the driver to perform all actions in this action chain.
     def perform
       $driver.touch_actions @actions
-      @actions = []
+      @actions.clear
       self
     end
 
