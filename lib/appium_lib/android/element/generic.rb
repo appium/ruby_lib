@@ -42,7 +42,7 @@ module Appium
 
       args = scroll_uiselector("new UiSelector().textContains(#{text})", scrollable_index) +
              scroll_uiselector("new UiSelector().descriptionContains(#{text})", scrollable_index) +
-             scroll_uiselector(resource_id(text, "new UiSelector().resourceId(#{text});", scrollable_index))
+             scroll_uiselector(resource_id(text, "new UiSelector().resourceId(#{text});"), scrollable_index)
 
       find_element :uiautomator, args
     end
@@ -56,7 +56,7 @@ module Appium
 
       args = scroll_uiselector("new UiSelector().text(#{text})", scrollable_index) +
              scroll_uiselector("new UiSelector().description(#{text})", scrollable_index) +
-             scroll_uiselector(resource_id(text, "new UiSelector().resourceId(#{text});", scrollable_index))
+             scroll_uiselector(resource_id(text, "new UiSelector().resourceId(#{text});"), scrollable_index)
 
       find_element :uiautomator, args
     end
