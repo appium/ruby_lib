@@ -33,14 +33,25 @@ describe 'android/element/generic' do
   # scroll_to is broken
   t 'scroll_to' do
     wait { find('Views').click }
-    wait { scroll_to('rotating button').text.must_equal 'Rotating Button' }
+    wait { scroll_to('scrollbars').text.must_equal 'ScrollBars' }
+
+    wait { find('ScrollBars').click }
+    wait { text('style').click }
+    wait { scroll_to('Developers', 1).text.must_include 'What would it take to build a better mobile phone?' }
+    back
+    back
     # back to start activity
     back
   end
 
   t 'scroll_to_exact' do
     wait { find('Views').click }
-    wait { scroll_to_exact('Rotating Button').text.must_equal 'Rotating Button' }
+
+    wait { scroll_to_exact('ScrollBars').text.must_equal 'ScrollBars' }
+    wait { find('ScrollBars').click }
+    wait { text('style').click }
+    back
+    back
     # back to start activity
     back
   end
