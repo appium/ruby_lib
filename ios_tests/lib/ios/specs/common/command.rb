@@ -36,6 +36,7 @@ describe 'common/command.rb' do
     Selenium::WebDriver::Remote::Bridge.method_defined?(:pull_file).must_equal true
     Selenium::WebDriver::Remote::Bridge.method_defined?(:pull_folder).must_equal true
     Selenium::WebDriver::Remote::Bridge.method_defined?(:touch_id).must_equal true
+    Selenium::WebDriver::Remote::Bridge.method_defined?(:toggle_touch_id_enrollment).must_equal true
     Selenium::WebDriver::Remote::Bridge.method_defined?(:get_settings).must_equal true
     Selenium::WebDriver::Remote::Bridge.method_defined?(:update_settings).must_equal true
     Selenium::WebDriver::Remote::Bridge.method_defined?(:touch_actions).must_equal true

@@ -963,7 +963,7 @@ __Parameters:__
 
 > def touch_id
 
-iOS only;  Simulate Touch ID with either valid (match == true) or invalid (match == false) fingerprint.
+iOS Simulator only;  Simulate Touch ID with either valid (match == true) or invalid (match == false) fingerprint.
 ```ruby
 touch_id true #=> Simulate valid fingerprint
 touch_id false #=> Simulate invalid fingerprint
