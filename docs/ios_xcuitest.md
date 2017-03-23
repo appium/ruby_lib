@@ -53,6 +53,13 @@ textfield(value) # Return a XCUIElementTypeSecureTextField or XCUIElementTypeTex
 finds_exact(value) # Return any elements include `value` as its name attributes.
 ```
 
+### with Class Chain
+- require Appium 1.6.4+
+    - https://github.com/appium/appium-xcuitest-driver/pull/391
+    - https://github.com/appium/java-client/pull/599/files
+- WebDriverAgent
+    - https://github.com/facebook/WebDriverAgent/wiki/Queries
+
 ### with XPath
 - It is better to avoid XPath strategy.
     - https://github.com/appium/appium/blob/v1.6.2/docs/en/advanced-concepts/migrating-to-xcuitest.md#xpath-locator-strategy
