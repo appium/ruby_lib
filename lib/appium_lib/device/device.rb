@@ -23,6 +23,25 @@ module Appium
 
     # @!method current_activity
 
+    # @!method get_system_bars
+    #  Get system bar's information
+    # @param [String] seconds How many seconds to background the app for.
+    #   ```ruby
+    #   get_system_bars
+    #   ```
+
+    # @!method get_display_density
+    #  Get connected device's density.
+    #   ```ruby
+    #   get_display_density # 320
+    #   ```
+
+    # @!method is_keyboard_shown
+    #  Get whether keyboard is displayed or not.
+    #   ```ruby
+    #   is_keyboard_shown # false
+    #   ```
+
     # @!method launch_app
     #   Start the simulator and application configured with desired capabilities
 
