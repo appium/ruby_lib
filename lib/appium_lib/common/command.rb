@@ -19,7 +19,6 @@ module Appium
         get_network_connection:     [:get,  'session/:session_id/network_connection'.freeze],
         get_performance_data_types: [:post, 'session/:session_id/appium/performanceData/types'.freeze],
 
-
         # iOS
         device_time:                [:get,  'session/:session_id/appium/device/system_time'.freeze],
         current_context:            [:get,  'session/:session_id/context'.freeze]
