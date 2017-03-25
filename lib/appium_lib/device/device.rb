@@ -23,6 +23,30 @@ module Appium
 
     # @!method current_activity
 
+    # @!method get_system_bars
+    #   Get system bar's information
+    #   @return [String] System bar
+    #
+    #   ```ruby
+    #   get_system_bars
+    #   ```
+
+    # @!method get_display_density
+    #   Get connected device's density.
+    #   @return [Integer] The size of density
+    #
+    #   ```ruby
+    #   get_display_density # 320
+    #   ```
+
+    # @!method is_keyboard_shown
+    #   Get whether keyboard is displayed or not.
+    #   @return [Bool] Return true if keyboard is shown. Return false if keyboard is hidden.
+    #
+    #   ```ruby
+    #   is_keyboard_shown # false
+    #   ```
+
     # @!method launch_app
     #   Start the simulator and application configured with desired capabilities
 
@@ -538,7 +562,7 @@ module Appium
     #   @return [String] The context currently being used.
 
     # @!method available_contexts
-    # @return [Array<String>] All usable contexts, as an array of strings.
+    #   @return [Array<String>] All usable contexts, as an array of strings.
 
     # Perform a block within the given context, then switch back to the starting context.
     # @param context (String) The context to switch to for the duration of the block.

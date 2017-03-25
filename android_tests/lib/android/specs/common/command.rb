@@ -20,6 +20,9 @@ describe 'common/command.rb' do
     Selenium::WebDriver::Remote::Bridge.method_defined?(:get_network_connection).must_equal true
     Selenium::WebDriver::Remote::Bridge.method_defined?(:get_performance_data_types).must_equal true
     Selenium::WebDriver::Remote::Bridge.method_defined?(:get_performance_data).must_equal true
+    Selenium::WebDriver::Remote::Bridge.method_defined?(:get_system_bars).must_equal true
+    Selenium::WebDriver::Remote::Bridge.method_defined?(:get_display_density).must_equal true
+    Selenium::WebDriver::Remote::Bridge.method_defined?(:is_keyboard_shown).must_equal true
   end
 
   t 'check all command with arg' do

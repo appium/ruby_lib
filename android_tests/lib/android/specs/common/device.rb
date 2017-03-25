@@ -23,6 +23,18 @@ describe 'common/device' do
     Date.parse(device_time)
   end
 
+  t 'get_system_bars' do
+    get_system_bars
+  end
+
+  t 'get_display_density' do
+    (get_display_density > 0).must_equal true
+  end
+
+  t 'system_bars' do
+    is_keyboard_shown.must_equal false
+  end
+
   t 'background_app' do
     wait { background_app 5 }
   end
