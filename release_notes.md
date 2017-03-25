@@ -1,3 +1,14 @@
+#### v9.3.4 2017-03-16
+
+- [2b01065](https://github.com/appium/ruby_lib/commit/2b01065d0b2c2287ed9568cb23de5e459082ef62) Release 9 3 4 (#509)
+- [0abf62f](https://github.com/appium/ruby_lib/commit/0abf62f0fa99d1ce0841a98e86a6ca334a143f0e) add doc for uiautomator (#508)
+- [0199159](https://github.com/appium/ruby_lib/commit/0199159b6f0193884ebcffbfa460b3403859e537) Search with predicate (#504)
+- [dbd8762](https://github.com/appium/ruby_lib/commit/dbd87620b771e7448e9826181b0ae595701ccaa2) Update deactive app for xcuitest (#502)
+- [e06b25e](https://github.com/appium/ruby_lib/commit/e06b25ed1df5ed1a67fcf1a59767cc42ddcdb0d0) add a test for predicate (#499)
+- [447f13c](https://github.com/appium/ruby_lib/commit/447f13cd799652d203bed4fc557b3c251ef2aa2c) Use awesome print 1.7 (#498)
+- [a68cc5f](https://github.com/appium/ruby_lib/commit/a68cc5fc38b64d1d41945024a808df9af90828d7) remove workaround for rainbow (#497)
+
+
 #### v9.3.3 2017-02-18
 
 - [422a468](https://github.com/appium/ruby_lib/commit/422a4683f10fc99d3731985d532b71e1fe80b4e6) Release 9 3 3 (#494)
