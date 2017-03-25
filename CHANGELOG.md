@@ -3,6 +3,24 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## v9.3.5
+### 1. Enhancements
+- add some commands for Android and class chain for iOS [#513](https://github.com/appium/ruby_lib/issues/513)
+    - iOS
+        - `find_element :class_chain, 'XCUIElementTypeWindow/*/*/XCUIElementTypeStaticText'`
+    - Android
+        - `get_system_bars`
+        - `get_display_density`
+        - `is_keyboard_shown`
+- add scrollable index parameter into scroll methods [#506](https://github.com/appium/ruby_lib/issues/506)
+    - `scroll_to(text, scrollable_index = 0)`
+    - `scroll_to_exact(text, scrollable_index = 0)`
+- clear `@actions` in Appium::TouchAction if `perform` is called [#511](https://github.com/appium/ruby_lib/issues/511)
+
+### 2. Bug fixes
+
+### 3. Deprecations
+
 ## v9.3.4
 ### 1. Enhancements
 - [remove workaround](https://github.com/appium/ruby_lib/pull/474/commits/57cc95264e83e14862f729683b93c1f020a30ce5) to pass CI
