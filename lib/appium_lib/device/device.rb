@@ -344,7 +344,7 @@ module Appium
 
         # TODO: TEST ME
         add_endpoint_method(:toggle_touch_id_enrollment) do
-          def toggle_touch_id_enrollment()
+          def toggle_touch_id_enrollment
             execute :toggle_touch_id_enrollment, {}
           end
         end
