@@ -53,7 +53,8 @@ module Appium
         get_performance_data:       [:post, 'session/:session_id/appium/getPerformanceData'.freeze],
 
         # iOS
-        touch_id:                   [:post, 'session/:session_id/appium/simulator/touch_id'.freeze]
+        touch_id:                   [:post, 'session/:session_id/appium/simulator/touch_id'.freeze],
+        toggle_touch_id_enrollment: [:post, 'session/:session_id/appium/simulator/toggle_touch_id_enrollment'.freeze]
       }.merge(COMMAND_NO_ARG).merge(::Selenium::WebDriver::Remote::Bridge::COMMANDS).freeze
     end
   end

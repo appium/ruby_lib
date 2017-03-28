@@ -114,6 +114,9 @@ module Appium
     #   touch_id false #=> Simulate invalid fingerprint
     #   ```
 
+    # @!method toggle_touch_id_enrollment
+    #   iOS Simulator only:  Toggle touch id enrollment on an iOS Simulator.
+
     # @!method end_coverage
     #   Android only;  Ends the test coverage and writes the results to the given path on device.
     #   @param [String] path Path on the device to write too.
@@ -336,6 +339,13 @@ module Appium
         add_endpoint_method(:touch_id) do
           def touch_id(match = true)
             execute :touch_id, {}, match: match
+          end
+        end
+
+        # TODO: TEST ME
+        add_endpoint_method(:toggle_touch_id_enrollment) do
+          def toggle_touch_id_enrollment
+            execute :toggle_touch_id_enrollment, {}
           end
         end
 
