@@ -3,6 +3,14 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## v9.3.6
+### 1. Enhancements
+- Add toggle touch id enrollment [#521](https://github.com/appium/ruby_lib/pull/521)
+
+### 2. Bug fixes
+
+### 3. Deprecations
+
 ## v9.3.5
 ### 1. Enhancements
 - add some commands for Android and class chain for iOS [#513](https://github.com/appium/ruby_lib/issues/513)
@@ -65,7 +73,7 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 ## v9.3.0
 ### 1. Enhancements
 - wait / wait_true need global defaults [#250](https://github.com/appium/ruby_lib/issues/250)
-    - You can set default value in `appium_lib` 
+    - You can set default value in `appium_lib`
     - e.g.: [lib/appium_lib/driver.rb](https://github.com/appium/ruby_lib/blob/34803ef6b7b94df9ef4e147ba8fec5c1d2cfaada/lib/appium_lib/driver.rb#L341-L351)
 - Problem with delta_x/delta_y in swipe method [#461](https://github.com/appium/ruby_lib/issues/461)
     - Revert _fix arguments for `move_to` in `swipe` method._ in Appium v8.2.1
