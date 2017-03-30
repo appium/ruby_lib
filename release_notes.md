@@ -1,3 +1,12 @@
+#### v9.3.5 2017-03-26
+
+- [c652bb3](https://github.com/appium/ruby_lib/commit/c652bb3332016a3c8ba7502e31477a330ab1c1ab) Release 9 3 5 (#520)
+- [c8ae26d](https://github.com/appium/ruby_lib/commit/c8ae26d6c9c400c5f40c3d1b620a3a5ba09c5932) Add some android commands (#517)
+- [e0db50e](https://github.com/appium/ruby_lib/commit/e0db50e5635dc359620eec9f79609f55af6ba529) Add class chain (#515)
+- [43ea919](https://github.com/appium/ruby_lib/commit/43ea919e4830477751f98aa6cf2475a54bcecb8e) [WIP]add scrollable index param into scroll_uiselector (#507)
+- [80f8071](https://github.com/appium/ruby_lib/commit/80f80715dcee6de968700ece40894222af41579a) add clearing actions after calling perform (#512)
+
+
 #### v9.3.4 2017-03-16
 
 - [2b01065](https://github.com/appium/ruby_lib/commit/2b01065d0b2c2287ed9568cb23de5e459082ef62) Release 9 3 4 (#509)
