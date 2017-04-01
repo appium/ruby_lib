@@ -609,11 +609,11 @@ Set implicit wait to zero.
 
 Set implicit wait. Default to @default_wait.
 
-```ruby`
+```ruby
 set_wait 2
 set_wait # @default_wait
 
-````
+```
 
 __Parameters:__
 
