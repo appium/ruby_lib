@@ -635,11 +635,11 @@ module Appium
 
     # Set implicit wait. Default to @default_wait.
     #
-    # ```ruby`
+    # ```ruby
     # set_wait 2
     # set_wait # @default_wait
     #
-    # ````
+    # ```
     #
     # @param timeout [Integer] the timeout in seconds
     # @return [void]
