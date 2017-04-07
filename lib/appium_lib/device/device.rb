@@ -423,17 +423,17 @@ module Appium
         end
       end
 
-      # @!method find_element_with_appium
-      # @!method find_elements_with_appium
+      # @!method find_element
+      # @!method find_elements
       #
-      #   find_element/s_with_appium with their accessibility_id
+      #   find_element/s with their accessibility_id
       #
       #   ```ruby
       #    find_elements :accessibility_id, 'Animation'
       #   ```
       def extend_search_contexts
         Selenium::WebDriver::SearchContext.class_eval do
-          def find_element_with_appium(*args)
+          def find_element(*args)
             how, what = extract_args(args)
             by = _set_by_from_finders(how)
             begin
@@ -443,7 +443,7 @@ module Appium
             end
           end
 
-          def find_elements_with_appium(*args)
+          def find_elements(*args)
             how, what = extract_args(args)
             by = _set_by_from_finders(how)
             begin

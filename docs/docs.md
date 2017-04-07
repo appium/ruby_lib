@@ -51,7 +51,7 @@ Appium::Driver.new(caps: apk).start_driver
 
 Example use of Appium's mobile gesture.
 
-> @driver.find_element_with_appium()
+> @driver.find_element()
 
 `console.rb` uses some code from [simple_test.rb](
 https://github.com/appium/appium/blob/82995f47408530c80c3376f4e07a1f649d96ba22/sample-code/examples/ruby/simple_test.rb) and is released under the [same license](https://github.com/appium/appium/blob/c58eeb66f2d6fa3b9a89d188a2e657cca7cb300f/LICENSE) as Appium. The [Accessibility Inspector](https://developer.apple.com/library/ios/#documentation/UserExperience/Conceptual/iPhoneAccessibility/Testing_Accessibility/Testing_Accessibility.html) is helpful for discovering button names and textfield values.
