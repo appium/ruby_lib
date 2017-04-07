@@ -5,10 +5,6 @@ describe 'driver' do
   end
 
   t 'before_first' do
-
-    require 'pry'
-    binding.pry
-
     before_first
   end
 
