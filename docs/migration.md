@@ -1,5 +1,6 @@
 ### Breaking Changes in 9.1.0
-change `Appium.load_appium_txt` to `Appium.load_settings`.
+change `@selenium_driver.find_element/s` to `@selenium_driver.find_element/s_with_appium`.
+ref: https://github.com/appium/ruby_lib/pull/383
 
            Old | New
             :--|:--
