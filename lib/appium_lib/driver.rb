@@ -688,7 +688,14 @@ module Appium
       @driver.execute_script script, *args
     end
 
-    # Calls @driver.find_elements
+    # Calls @driver.find_elements_with_appium
+    #
+    # ```
+    # @driver = Appium::Driver.new()
+    # @driver.find_elements :predicate, yyy
+    # ```
+    #
+    # If you call `Appium.promote_appium_methods`, you can call `find_elements` directly.
     #
     # @param [*args] args The args to use
     # @return [Array<Element>] Array is empty when no elements are found.
@@ -696,7 +703,14 @@ module Appium
       @driver.find_elements_with_appium(*args)
     end
 
-    # Calls @driver.find_elements
+    # Calls @driver.find_element_with_appium
+    #
+    # ```
+    # @driver = Appium::Driver.new()
+    # @driver.find_element :accessibility_id, zzz
+    # ```
+    #
+    # If you call `Appium.promote_appium_methods`, you can call `find_element` directly.
     #
     # @param [*args] args The args to use
     # @return [Element]

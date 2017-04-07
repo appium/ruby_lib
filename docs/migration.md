@@ -1,3 +1,24 @@
+### Breaking Changes in 9.1.0
+change `Appium.load_appium_txt` to `Appium.load_settings`.
+
+           Old | New
+            :--|:--
+`@selenium_driver.find_element/s` | `@selenium_driver.find_element/s_with_appium`
+
+- after
+
+```
+@selenium_driver.find_element_with_appium :accessibility_id, "some ids"
+@selenium_driver.find_elements_with_appium :accessibility_id, "some ids"
+```
+
+- before
+
+```
+@selenium_driver.find_element :accessibility_id, "some ids"
+@selenium_driver.find_elements :accessibility_id, "some ids"
+```
+
 ### Breaking Changes in 8.2.0
 change `Appium.load_appium_txt` to `Appium.load_settings`.
 
