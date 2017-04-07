@@ -9,8 +9,8 @@ ref: https://github.com/appium/ruby_lib/pull/383
 - after
 
 ```
-@selenium_driver.find_element :accessibility_id, "some ids"
-@selenium_driver.find_elements :accessibility_id, "some ids"
+@selenium_driver.find_element_with_appium :accessibility_id, "some ids"
+@selenium_driver.find_elements_with_appium :accessibility_id, "some ids"
 ```
 
 - before
