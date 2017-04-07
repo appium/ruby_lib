@@ -1,3 +1,28 @@
+### Breaking Changes in 9.3.7
+change `@selenium_driver.find_element/s_with_appium` to `@selenium_driver.find_element/s`.
+ref: https://github.com/appium/ruby_lib/pull/532
+
+A breaking change in v9.1.0 is reverted in this version.
+
+           Old | New
+            :--|:--
+`@selenium_driver.find_element/s_with_appium` | `@selenium_driver.find_element/s`
+
+- after
+
+```
+@selenium_driver.find_element :accessibility_id, "some ids"
+@selenium_driver.find_elements :accessibility_id, "some ids"
+```
+
+- before
+
+```
+@selenium_driver.find_element_with_appium :accessibility_id, "some ids"
+@selenium_driver.find_elements_with_appium :accessibility_id, "some ids"
+```
+
+
 ### Breaking Changes in 9.1.0
 change `@selenium_driver.find_element/s` to `@selenium_driver.find_element/s_with_appium`.
 ref: https://github.com/appium/ruby_lib/pull/383
