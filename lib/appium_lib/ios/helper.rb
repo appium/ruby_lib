@@ -295,7 +295,7 @@ module Appium
                      %(type == "#{class_name}" && ) +
                        %((name ==[c] "#{value}" || label ==[c] "#{value}" || value ==[c] "#{value}"))
                    end
-      @driver.find_elements_with_appium :predicate, predicate
+      @driver.find_elements :predicate, predicate
     end
 
     # Get the first tag by attribute that exactly matches value.
@@ -340,7 +340,7 @@ module Appium
                     %(type == "#{class_name}" && ) +
                       %((name contains[c] "#{value}" || label contains[c] "#{value}" || value contains[c] "#{value}"))
                   end
-      @driver.find_elements_with_appium :predicate, predicate
+      @driver.find_elements :predicate, predicate
     end
 
     # Get the first tag that matches class_name
@@ -408,7 +408,7 @@ module Appium
                       c_names
                     end
 
-        elements = @driver.find_elements_with_appium :predicate, predicate
+        elements = @driver.find_elements :predicate, predicate
         select_visible_elements elements
       else
         class_names.flat_map do |class_name|
@@ -437,7 +437,7 @@ module Appium
                       c_names
                     end
 
-        elements = @driver.find_elements_with_appium :predicate, predicate
+        elements = @driver.find_elements :predicate, predicate
         select_visible_elements elements
       else
         class_names.flat_map do |class_name|
