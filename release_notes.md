@@ -1,3 +1,9 @@
+#### v9.3.6 2017-03-31
+
+- [0f1e3aa](https://github.com/appium/ruby_lib/commit/0f1e3aa48ce2d561af0a5897ab62017306009d8b) Release 9 3 6 (#523)
+- [4ae0815](https://github.com/appium/ruby_lib/commit/4ae081549cf1aad89c6d304fc8a8b9499db96160) Add toggle touch id enrollment (#521)
+
+
 #### v9.3.5 2017-03-26
 
 - [c652bb3](https://github.com/appium/ruby_lib/commit/c652bb3332016a3c8ba7502e31477a330ab1c1ab) Release 9 3 5 (#520)
