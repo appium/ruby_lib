@@ -3,7 +3,7 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
-## v9.3.6
+## v9.3.7
 ### 1. Enhancements
 - Remove appium suffix from find element [#532](https://github.com/appium/ruby_lib/pull/532)
     - rename `@driver.find_element/s_with_appium` to `@driver.find_element/s`
