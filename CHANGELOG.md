@@ -5,6 +5,18 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 
 ## v9.3.6
 ### 1. Enhancements
+- Remove appium suffix from find element [#532](https://github.com/appium/ruby_lib/pull/532)
+    - rename `@driver.find_element/s_with_appium` to `@driver.find_element/s`
+- fix documentations
+
+### 2. Bug fixes
+
+### 3. Deprecations
+- `@driver.find_element/s_with_appium`
+    - use `@driver.find_element/s` instead
+
+## v9.3.6
+### 1. Enhancements
 - Add toggle touch id enrollment [#521](https://github.com/appium/ruby_lib/pull/521)
 
 ### 2. Bug fixes
