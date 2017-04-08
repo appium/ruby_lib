@@ -33,21 +33,21 @@ describe 'driver' do
   t 'verify Appium::Driver::Capabilities.init_caps_for_appium' do
     expected_app = File.absolute_path('UICatalog.app')
     caps = ::Appium::Driver::Capabilities.init_caps_for_appium(platformName:    'ios',
-                                                               platformVersion: '10.2',
+                                                               platformVersion: '10.3',
                                                                automationName:  'XCUITest',
                                                                deviceName:      'iPhone Simulator',
                                                                app:             expected_app,
                                                                some_capability: 'some_capability')
     caps_with_json = JSON.parse(caps.to_json)
     caps_with_json['platformName'].must_equal 'ios'
-    caps_with_json['platformVersion'].must_equal '10.2'
+    caps_with_json['platformVersion'].must_equal '10.3'
     caps_with_json['app'].must_equal expected_app
     caps_with_json['automationName'].must_equal 'XCUITest'
     caps_with_json['deviceName'].must_equal 'iPhone Simulator'
     caps_with_json['someCapability'].must_equal 'some_capability'
 
     caps[:platformName].must_equal 'ios'
-    caps[:platformVersion].must_equal '10.2'
+    caps[:platformVersion].must_equal '10.3'
     caps[:app].must_equal expected_app
     caps[:automationName].must_equal 'XCUITest'
     caps[:deviceName].must_equal 'iPhone Simulator'
@@ -77,14 +77,14 @@ describe 'driver' do
       # actual[:caps].to_json send to Appium server
       caps_with_json = JSON.parse(actual[:caps].to_json)
       caps_with_json['platformName'].must_equal 'ios'
-      caps_with_json['platformVersion'].must_equal '10.2'
+      caps_with_json['platformVersion'].must_equal '10.3'
       caps_with_json['app'].must_equal expected_app
       caps_with_json['automationName'].must_equal 'XCUITest'
       caps_with_json['deviceName'].must_equal 'iPhone Simulator'
       caps_with_json['someCapability'].must_equal 'some_capability'
 
       actual[:caps][:platformName].must_equal 'ios'
-      actual[:caps][:platformVersion].must_equal '10.2'
+      actual[:caps][:platformVersion].must_equal '10.3'
       actual[:caps][:app].must_equal expected_app
       actual[:caps][:automationName].must_equal 'XCUITest'
       actual[:caps][:deviceName].must_equal 'iPhone Simulator'

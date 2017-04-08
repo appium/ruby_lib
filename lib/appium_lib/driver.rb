@@ -697,13 +697,20 @@ module Appium
     #
     # If you call `Appium.promote_appium_methods`, you can call `find_elements` directly.
     #
+    # ```
+    # @driver = Appium::Driver.new()
+    # @driver.find_elements :predicate, yyy
+    # ```
+    #
+    # If you call `Appium.promote_appium_methods`, you can call `find_elements` directly.
+    #
     # @param [*args] args The args to use
     # @return [Array<Element>] Array is empty when no elements are found.
     def find_elements(*args)
-      @driver.find_elements_with_appium(*args)
+      @driver.find_elements(*args)
     end
 
-    # Calls @driver.find_element_with_appium
+    # Calls @driver.find_element
     #
     # ```
     # @driver = Appium::Driver.new()
@@ -715,7 +722,7 @@ module Appium
     # @param [*args] args The args to use
     # @return [Element]
     def find_element(*args)
-      @driver.find_element_with_appium(*args)
+      @driver.find_element(*args)
     end
 
     # Calls @driver.set_location

@@ -433,7 +433,7 @@ module Appium
       #   ```
       def extend_search_contexts
         Selenium::WebDriver::SearchContext.class_eval do
-          def find_element_with_appium(*args)
+          def find_element(*args)
             how, what = extract_args(args)
             by = _set_by_from_finders(how)
             begin
@@ -443,7 +443,7 @@ module Appium
             end
           end
 
-          def find_elements_with_appium(*args)
+          def find_elements(*args)
             how, what = extract_args(args)
             by = _set_by_from_finders(how)
             begin
