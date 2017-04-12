@@ -1,3 +1,12 @@
+#### v9.3.7 2017-04-09
+
+- [8daf6f7](https://github.com/appium/ruby_lib/commit/8daf6f773c9b8acd7a89e2a9225fd834de5b4e2e) Release 9 3 7 (#535)
+- [893c714](https://github.com/appium/ruby_lib/commit/893c714f4b60985753950f74e9e4b3bfb5f066eb) Remove appium suffix from find element (#532)
+- [61ee15c](https://github.com/appium/ruby_lib/commit/61ee15c58ec536db1c32f8e278f8214148c96552) Update docs for find_element/s (#531)
+- [17d17e6](https://github.com/appium/ruby_lib/commit/17d17e65a52cc22d093f913084673cb3a33b450c) fix markup (#526)
+- [9de862c](https://github.com/appium/ruby_lib/commit/9de862ca6440e8a2e864b7b342725ac7699c096b) fix the android doc markup (#525)
+
+
 #### v9.3.6 2017-03-31
 
 - [0f1e3aa](https://github.com/appium/ruby_lib/commit/0f1e3aa48ce2d561af0a5897ab62017306009d8b) Release 9 3 6 (#523)
