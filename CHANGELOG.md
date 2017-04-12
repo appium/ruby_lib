@@ -3,6 +3,14 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## v9.3.8
+### 1. Enhancements
+- allow using TestObject server [#538](https://github.com/appium/ruby_lib/pull/538)
+
+### 2. Bug fixes
+
+### 3. Deprecations
+
 ## v9.3.7
 ### 1. Enhancements
 - Remove appium suffix from find element [#532](https://github.com/appium/ruby_lib/pull/532)
