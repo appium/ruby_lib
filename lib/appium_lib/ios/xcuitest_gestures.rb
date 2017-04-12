@@ -6,7 +6,9 @@ module Appium
       def swipe(direction:, element: nil)
         return unless %w(up down left right).include?(direction)
 
-        args = element ? { direction: direction, element: element } : { direction: direction }
+        args = { direction: direction }
+        args[:element] = element if element
+
         execute_script 'mobile: swipe', args
       end
 
@@ -20,7 +22,8 @@ module Appium
       def scroll(direction:, name: nil, element: nil, to_visible: nil, predicate_string: nil)
         return unless %w(up down left right).include?(direction)
 
-        args =  element ? { direction: direction, element: element } : { direction: direction }
+        args =  { direction: direction }
+        args[:element] = element if element
         args[:name] = name if name
         args[:toVisible] = to_visible if to_visible
         args[:predicateString] = predicate_string if predicate_string
@@ -34,7 +37,9 @@ module Appium
       def pinch(scale:, velocity: 1.0, element: nil)
         return unless automation_name_is_xcuitest?
 
-        args = element ? { scale: scale, velocity: velocity, element: element } : { scale: scale, velocity: velocity }
+        args = { scale: scale, velocity: velocity }
+        args[:element] = element if element
+
         execute_script 'mobile: pinch', args
       end
 
@@ -44,7 +49,9 @@ module Appium
       def double_tap(x:, y:, element: nil)
         return unless automation_name_is_xcuitest?
 
-        args = element ? { x: x, y: y, element: element } : { x: x, y: y }
+        args = { x: x, y: y }
+        args[:element] = element if element
+
         execute_script 'mobile: doubleTap', args
       end
 
@@ -53,6 +60,7 @@ module Appium
         return unless automation_name_is_xcuitest?
 
         args = { element: element }
+
         execute_script 'mobile: twoFingerTap', args
       end
 
@@ -62,7 +70,9 @@ module Appium
       def tap(x:, y:, element: nil)
         return unless automation_name_is_xcuitest?
 
-        args = element ? { x: x, y: y, element: element } : { x: x, y: y }
+        args = { x: x, y: y }
+        args[:element] = element if element
+
         execute_script 'mobile: tap', args
       end
 
