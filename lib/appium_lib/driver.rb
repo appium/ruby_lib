@@ -24,6 +24,7 @@ require_relative 'ios/element/generic'
 require_relative 'ios/element/textfield'
 require_relative 'ios/element/text'
 require_relative 'ios/mobile_methods'
+require_relative 'ios/xcuitest_gestures'
 
 # android
 require_relative 'android/helper'
@@ -411,6 +412,7 @@ module Appium
       else
         # load iOS specific methods
         extend Appium::Ios
+        extend Appium::Ios::XcuitestGesture if automation_name_is_xcuitest? # Override touch actions
       end
 
       # apply os specific patches
