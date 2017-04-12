@@ -13,15 +13,17 @@ module Appium
       # @param [string] direction Either 'up', 'down', 'left' or 'right'.
       # @option opts [String] :name the accessibility id of the child element, to which scrolling is performed.
       # @option opts [Element] :element Element id to long tap on.
-      # @option opts [bool] :to_visible Boolean parameter. If set to true then asks to scroll to the first visible element in the parent container. Has no effect if element is not set
-      # @option opts [String] :predicate_string the NSPredicate locator of the child element, to which the scrolling should be performed. Has no effect if element is not a container
+      # @option opts [bool] :to_visible Boolean parameter. If set to true then asks to scroll to the first visible
+      #   element in the parent container. Has no effect if element is not set
+      # @option opts [String] :predicate_string the NSPredicate locator of the child element,
+      #   to which the scrolling should be performed. Has no effect if element is not a container
       def scroll(direction:, name: nil, element: nil, to_visible: nil, predicate_string: nil)
         return unless %w(up down left right).include?(direction)
 
         args =  element ? { direction: direction, element: element } : { direction: direction }
-        args.merge!(name: name) if name
-        args.merge!(toVisible: to_visible)if to_visible
-        args.merge!(predicateString: predicate_string) if predicate_string
+        args[:name] = name if name
+        args[:toVisible] = to_visible if to_visible
+        args[:predicateString] = predicate_string if predicate_string
 
         execute_script 'mobile: scroll', args
       end
@@ -64,7 +66,9 @@ module Appium
         execute_script 'mobile: tap', args
       end
 
-      # @param duration [float] Float number of seconds in range [0.5, 60]. How long the tap gesture at starting drag point should be before to start dragging. Mandatory parameter
+      # rubocop:disable Metrics/ParameterLists
+      # @param duration [float] Float number of seconds in range [0.5, 60]. How long the tap gesture at starting
+      #   drag point should be before to start dragging. Mandatory parameter
       # @param from_x [float] The x coordinate of starting drag point (type float). Mandatory parameter
       # @param from_y [float] The y coordinate of starting drag point (type float). Mandatory parameter
       # @param to_x [float] The x coordinate of ending drag point (type float). Mandatory parameter
@@ -74,10 +78,11 @@ module Appium
         return unless automation_name_is_xcuitest?
 
         args = { from_x: from_x, from_y: from_y, to_x: to_x, to_y: to_y, duration: duration }
-        args.merge!(element: element) if element
+        args[:element] = element if element
 
         execute_script 'mobile: tap', args
       end
+      # rubocop:enable Metrics/ParameterLists
     end
   end # module Ios
 end # module Appium
