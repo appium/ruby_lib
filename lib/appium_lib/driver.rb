@@ -478,7 +478,9 @@ module Appium
     # If the Appium server is under REQUIRED_VERSION_XCUITEST, then error is raised.
     # @return [Boolean]
     def check_server_version_xcuitest
-      if automation_name_is_xcuitest? && (@appium_server_status['build']['version'] < REQUIRED_VERSION_XCUITEST)
+      if automation_name_is_xcuitest? &&
+          !@appium_server_status.empty? &&
+          (@appium_server_status['build']['version'] < REQUIRED_VERSION_XCUITEST)
         raise Appium::Error::NotSupportedAppiumServer, "XCUITest requires Appium version >= #{REQUIRED_VERSION_XCUITEST}"
       end
       true
@@ -498,6 +500,10 @@ module Appium
     # @return [Hash]
     def appium_server_version
       driver.remote_status
+    rescue Selenium::WebDriver::Error::WebDriverError => ex
+      raise unless ex.message.include?('content-type=""')
+      # server (TestObject for instance) does not respond to status call
+      {}
     end
 
     # Returns the client's version info
