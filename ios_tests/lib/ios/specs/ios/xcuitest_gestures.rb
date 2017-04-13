@@ -23,15 +23,15 @@ describe 'ios/xcuitest_gestures' do
   end
 
   t 'scroll' do
-    scroll direction: "down"
-    text("Style Default").displayed?.must_be true
+    scroll direction: 'down'
+    text('Style Default').displayed?.must_be true
   end
 
   t 'swipe' do
-    swipe direction: "down"
-    swipe direction: "down"
+    swipe direction: 'down'
+    swipe direction: 'down'
 
-    proc { text("Style Default") }.must_raise ::Selenium::WebDriver::Error::NoSuchElementError
+    proc { text('Style Default') }.must_raise ::Selenium::WebDriver::Error::NoSuchElementError
   end
 
   t 'pinch' do

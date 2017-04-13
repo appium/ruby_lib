@@ -7,7 +7,7 @@ module Appium
       #   ```ruby
       #   swipe direction: "down"
       #   ```
-    def swipe(direction:, element: nil)
+      def swipe(direction:, element: nil)
         return unless %w(up down left right).include?(direction)
 
         args = { direction: direction }
@@ -65,7 +65,7 @@ module Appium
       #   ```
       def double_tap(x: nil, y: nil, element: nil)
         return 'require XCUITest(WDA)' unless automation_name_is_xcuitest?
-        return 'Please set x, y or element' if (x.nil? or y.nil?) && element.nil?
+        return 'Please set x, y or element' if (x.nil? || y.nil?) && element.nil?
 
         args = element.nil? ? { x: x, y: y } : { element: element.ref }
         execute_script 'mobile: doubleTap', args
