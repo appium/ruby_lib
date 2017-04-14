@@ -4,6 +4,9 @@
     - [WebDriverAgent](https://github.com/facebook/WebDriverAgent)
 - How to migrate XCUITest from UIAutomation
     - [Migrating your iOS tests from UIAutomation](https://github.com/appium/appium/blob/v1.6.2/docs/en/advanced-concepts/migrating-to-xcuitest.md)
+- Mobile gestures for XCUITest
+    - [ios-xctest-mobile-gestures](https://github.com/appium/appium/blob/master/docs/en/writing-running-appium/ios-xctest-mobile-gestures.md)
+    - Required Appium1.6.4+
 
 ## find elements
 - supported elements by find_element are:
