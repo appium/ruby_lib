@@ -124,7 +124,6 @@ module Appium
       end
       # rubocop:enable Metrics/ParameterLists
 
-
       # https://github.com/facebook/WebDriverAgent/pull/523
       # https://github.com/appium/appium-xcuitest-driver/pull/420
       # @param order [String] The order to move picker to. "next" or "previous".
