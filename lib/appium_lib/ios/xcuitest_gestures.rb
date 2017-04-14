@@ -111,15 +111,34 @@ module Appium
       # @option opts [Element] :element  Element id to perform drag on. All the coordinates will be calculated
       #   relatively this this element position on the screen. Absolute screen coordinates are expected
       #   if this argument is not set
+      #
+      #   ```ruby
+      #   drag_from_to_for_duration from_x: 100, from_y: 100, to_x: 150, to_y: 150
+      #   ```
       def drag_from_to_for_duration(from_x:, from_y:, to_x:, to_y:, duration: 1.0, element: nil)
         return unless automation_name_is_xcuitest?
 
         args = { from_x: from_x, from_y: from_y, to_x: to_x, to_y: to_y, duration: duration }
         args[:element] = element if element
-
-        execute_script 'mobile: tap', args
+        execute_script 'mobile: dragFromToForDuration', args
       end
       # rubocop:enable Metrics/ParameterLists
-    end
+
+
+      # https://github.com/facebook/WebDriverAgent/pull/523
+      # https://github.com/appium/appium-xcuitest-driver/pull/420
+      # @param order [String] The order to move picker to. "next" or "previous".
+      # @param element [Element]  Element id to perform select picker wheel on.
+      #
+      #   ```ruby
+      #   select_picker_wheel order: "next", element: find_element(:accessibility_id, "some picker")
+      #   ```
+      def select_picker_wheel(element:, order:)
+        return unless %w(next previous).include?(order)
+
+        args = { element: element.ref, order: order }
+        execute_script 'mobile: selectPickerWheelValue', args
+      end
+    end # module XcuitestGesture
   end # module Ios
 end # module Appium
