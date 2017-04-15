@@ -3,6 +3,18 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## v9.4.0
+### 1. Enhancements
+- update mobile gesture APIs for XCUITest(WDA) [#514](https://github.com/appium/ruby_lib/pull/514)
+    - For XCUITest(WebDriverAgent)
+    - You can call some [`mobile:` methods](https://github.com/appium/appium/blob/master/docs/en/writing-running-appium/ios-xctest-mobile-gestures.md) without `execute_script('mobile: tap', ...)`.
+    - Example: https://github.com/appium/ruby_lib/pull/537
+
+
+### 2. Bug fixes
+
+### 3. Deprecations
+
 ## v9.3.8
 ### 1. Enhancements
 - allow using TestObject server [#538](https://github.com/appium/ruby_lib/pull/538)
