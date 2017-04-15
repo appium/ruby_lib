@@ -38,14 +38,24 @@ describe 'ios/xcuitest_gestures' do
     pinch(scale: 0.5, velocity: -1)
   end
 
+  t 'back to top' do
+    back_click
+  end
+
   t 'select_picker_wheel' do
-    # TODO: Implement after Appium server support this method
-    # element = text('pickers')
-    # tap(x: 0, y: 0, element: element)
+    element = text('pickers')
+    tap(x: 0, y: 0, element: element)
+
+    e = find_element :name, 'John Appleseed'
+    select_picker_wheel(element: e, order: 'next')
+
+    e.displayed?.must_be false
+    find_element(:name, 'Serena Auroux').displayed?.must_be true
+
+    back_click
   end
 
   t 'after_last' do
-    back_click
     after_last
   end
 end
