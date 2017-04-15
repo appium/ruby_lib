@@ -334,8 +334,8 @@ module Appium
       class_name = %("#{class_name}")
 
       resource_id(value, "new UiSelector().className(#{class_name}).resourceId(#{value});") +
-        "new UiSelector().className(#{class_name}).description(#{value});" \
-        "new UiSelector().className(#{class_name}).text(#{value});"
+          "new UiSelector().className(#{class_name}).text(#{value});"\
+          "new UiSelector().className(#{class_name}).description(#{value});"
     end
 
     # Find the first element exactly matching value
