@@ -79,5 +79,9 @@ finds_exact(value) # Return any elements include `value` as its name attributes.
 xpaths("//some xpaths")
 ```
 
+## Gesture
+- `mobile:` commands are provided by WDA.
+- https://github.com/appium/appium-xcuitest-driver/blob/master/test/functional/basic/gesture-e2e-specs.js
+
 ## Other actions
 Basically, other actions such as `type` are compatible with `automationName = Appium`.

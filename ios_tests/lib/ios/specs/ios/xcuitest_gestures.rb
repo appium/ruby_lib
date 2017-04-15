@@ -38,6 +38,12 @@ describe 'ios/xcuitest_gestures' do
     pinch(scale: 0.5, velocity: -1)
   end
 
+  t 'select_picker_wheel' do
+    # TODO: Implement after Appium server support this method
+    # element = text('pickers')
+    # tap(x: 0, y: 0, element: element)
+  end
+
   t 'after_last' do
     back_click
     after_last

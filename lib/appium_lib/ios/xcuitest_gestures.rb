@@ -28,7 +28,7 @@ module Appium
       #   scroll direction: "down"
       #   ```
       def scroll(direction:, name: nil, element: nil, to_visible: nil, predicate_string: nil)
-        return unless %w(up down left right).include?(direction)
+        return 'Set "up", "down", "left" or "right" for :direction' unless %w(up down left right).include?(direction)
 
         args =  { direction: direction }
         args[:element] = element.ref if element
@@ -65,7 +65,7 @@ module Appium
       #   ```
       def double_tap(x: nil, y: nil, element: nil)
         return 'require XCUITest(WDA)' unless automation_name_is_xcuitest?
-        return 'Please set x, y or element' if (x.nil? || y.nil?) && element.nil?
+        return 'Set x, y or element' if (x.nil? || y.nil?) && element.nil?
 
         args = element.nil? ? { x: x, y: y } : { element: element.ref }
         execute_script 'mobile: doubleTap', args
@@ -116,7 +116,7 @@ module Appium
       #   drag_from_to_for_duration from_x: 100, from_y: 100, to_x: 150, to_y: 150
       #   ```
       def drag_from_to_for_duration(from_x:, from_y:, to_x:, to_y:, duration: 1.0, element: nil)
-        return unless automation_name_is_xcuitest?
+        return 'require XCUITest(WDA)' unless automation_name_is_xcuitest?
 
         args = { from_x: from_x, from_y: from_y, to_x: to_x, to_y: to_y, duration: duration }
         args[:element] = element if element
@@ -133,7 +133,8 @@ module Appium
       #   select_picker_wheel order: "next", element: find_element(:accessibility_id, "some picker")
       #   ```
       def select_picker_wheel(element:, order:)
-        return unless %w(next previous).include?(order)
+        return 'require XCUITest(WDA)' unless automation_name_is_xcuitest?
+        return 'Set "next" or "previous" for :order' unless %w(next previous).include?(order)
 
         args = { element: element.ref, order: order }
         execute_script 'mobile: selectPickerWheelValue', args
