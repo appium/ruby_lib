@@ -36,7 +36,7 @@ module Appium
         index = value
         raise "#{index} is not a valid index. Must be >= 1" if index <= 0
 
-        result = find_elements(:xpath, _button_visible_selectors)[value + 1]
+        result = find_elements(:xpath, _button_visible_selectors)[value - 1]
         raise Selenium::WebDriver::Error::NoSuchElementError unless result
         return result
       end
