@@ -286,19 +286,15 @@ module Appium
     # @param value [String] the value to search for
     # @return [String]
     def string_visible_contains(class_name, value)
-      value = %("#{value}")
+      r_id = resource_id(value, " or @resource-id='#{value}'")
 
       if class_name == '*'
-        return (resource_id(value, "new UiSelector().resourceId(#{value});") +
-          "new UiSelector().descriptionContains(#{value});" \
-          "new UiSelector().textContains(#{value});")
+        return "//*[contains(translate(@text,'#{value.upcase}', '#{value}'), '#{value}')" \
+            " or contains(translate(@content-desc,'#{value.upcase}', '#{value}'), '#{value}')" + r_id + ']'
       end
 
-      class_name = %("#{class_name}")
-
-      resource_id(value, "new UiSelector().className(#{class_name}).resourceId(#{value});") +
-        "new UiSelector().className(#{class_name}).descriptionContains(#{value});" \
-        "new UiSelector().className(#{class_name}).textContains(#{value});"
+      "//#{class_name}[contains(translate(@text,'#{value.upcase}', '#{value}'), '#{value}')" \
+        " or contains(translate(@content-desc,'#{value.upcase}', '#{value}'), '#{value}')" + r_id + ']'
     end
 
     # Find the first element that contains value
@@ -306,7 +302,7 @@ module Appium
     # @param value [String] the value to search for
     # @return [Element]
     def complex_find_contains(element, value)
-      find_element :uiautomator, string_visible_contains(element, value)
+      find_element :xpath, string_visible_contains(element, value)
     end
 
     # Find all elements containing value
@@ -314,7 +310,7 @@ module Appium
     # @param value [String] the value to search for
     # @return [Array<Element>]
     def complex_finds_contains(element, value)
-      find_elements :uiautomator, string_visible_contains(element, value)
+      find_elements :xpath, string_visible_contains(element, value)
     end
 
     # @private
@@ -323,19 +319,13 @@ module Appium
     # @param value [String] the value to search for
     # @return [String]
     def string_visible_exact(class_name, value)
-      value = %("#{value}")
+      r_id = resource_id(value, " or @resource-id='#{value}'")
 
       if class_name == '*'
-        return (resource_id(value, "new UiSelector().resourceId(#{value});") +
-          "new UiSelector().description(#{value});" \
-          "new UiSelector().text(#{value});")
+        return "//*[@text='#{value}' or @content-desc='#{value}'" + r_id + ']'
       end
 
-      class_name = %("#{class_name}")
-
-      resource_id(value, "new UiSelector().className(#{class_name}).resourceId(#{value});") +
-        "new UiSelector().className(#{class_name}).description(#{value});" \
-        "new UiSelector().className(#{class_name}).text(#{value});"
+      "//#{class_name}[@text='#{value}' or @content-desc='#{value}'" + r_id + ']'
     end
 
     # Find the first element exactly matching value
@@ -343,7 +333,7 @@ module Appium
     # @param value [String] the value to search for
     # @return [Element]
     def complex_find_exact(class_name, value)
-      find_element :uiautomator, string_visible_exact(class_name, value)
+      find_element :xpath, string_visible_exact(class_name, value)
     end
 
     # Find all elements exactly matching value
@@ -351,7 +341,7 @@ module Appium
     # @param value [String] the value to search for
     # @return [Element]
     def complex_finds_exact(class_name, value)
-      find_elements :uiautomator, string_visible_exact(class_name, value)
+      find_elements :xpath, string_visible_exact(class_name, value)
     end
 
     # Returns XML string for the current page

@@ -12,8 +12,8 @@ describe 'common/device' do
   end
 
   t 'get_performance_data_types' do
-    expected = %w(cpuinfo batteryinfo networkinfo memoryinfo)
-    get_performance_data_types.must_equal expected
+    expected = %w(batteryinfo cpuinfo memoryinfo networkinfo)
+    get_performance_data_types.sort.must_equal expected
 
     get_performance_data(package_name: 'io.appium.android.apis',
                          data_type: 'cpuinfo').must_equal [%w(user kernel), %w(0 0)]

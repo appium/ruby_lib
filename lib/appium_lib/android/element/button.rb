@@ -7,31 +7,20 @@ module Appium
     private
 
     # @private
-    def _button_visible_selectors(opts = {})
-      button_index       = opts.fetch :button_index, false
-      image_button_index = opts.fetch :image_button_index, false
-
-      if button_index && image_button_index
-        "new UiSelector().className(#{Button}).instance(#{button_index});" \
-          "new UiSelector().className(#{ImageButton}).instance(#{image_button_index});"
-      else
-        "new UiSelector().className(#{Button});" \
-          "new UiSelector().className(#{ImageButton});"
-      end
+    def _button_visible_selectors
+      "//#{Button}|#{ImageButton}"
     end
 
     # @private
     def _button_exact_string(value)
-      button       = string_visible_exact Button, value
-      image_button = string_visible_exact ImageButton, value
-      button + image_button
+      string_visible_exact(Button, value) +
+          string_visible_exact(ImageButton, value).sub(/\A\/\//, '|')
     end
 
     # @private
     def _button_contains_string(value)
-      button       = string_visible_contains Button, value
-      image_button = string_visible_contains ImageButton, value
-      button + image_button
+      string_visible_contains(Button, value) +
+          string_visible_contains(ImageButton, value).sub(/\A\/\//, '|')
     end
 
     public
@@ -47,10 +36,12 @@ module Appium
         index = value
         raise "#{index} is not a valid index. Must be >= 1" if index <= 0
 
-        return find_element :uiautomator, _button_visible_selectors(index: index)
+        result = find_elements(:xpath, _button_visible_selectors)[value - 1]
+        raise Selenium::WebDriver::Error::NoSuchElementError unless result
+        return result
       end
 
-      find_element :uiautomator, _button_contains_string(value)
+      find_element :xpath, _button_contains_string(value)
     end
 
     # Find all buttons containing value.
@@ -58,43 +49,36 @@ module Appium
     # @param value [String] the value to search for
     # @return [Array<Button>]
     def buttons(value = false)
-      return find_elements :uiautomator, _button_visible_selectors unless value
-      find_elements :uiautomator, _button_contains_string(value)
+      return find_elements :xpath, _button_visible_selectors unless value
+      find_elements :xpath, _button_contains_string(value)
     end
 
     # Find the first button.
     # @return [Button]
     def first_button
-      find_element :uiautomator, _button_visible_selectors(button_index: 0, image_button_index: 0)
+      find_element :xpath, _button_visible_selectors
     end
 
     # Find the last button.
     # @return [Button]
     def last_button
-      # uiautomator index doesn't support last
-      # and it's 0 indexed
-      button_index = tags(Button).length
-      button_index -= 1 if button_index > 0
-      image_button_index = tags(ImageButton).length
-      image_button_index -= 1 if image_button_index > 0
-
-      find_element :uiautomator,
-                   _button_visible_selectors(button_index: button_index,
-                                             image_button_index: image_button_index)
+      result = find_elements(:xpath, _button_visible_selectors).last
+      raise Selenium::WebDriver::Error::NoSuchElementError unless result
+      result
     end
 
     # Find the first button that exactly matches value.
     # @param value [String] the value to match exactly
     # @return [Button]
     def button_exact(value)
-      find_element :uiautomator, _button_exact_string(value)
+      find_element :xpath, _button_exact_string(value)
     end
 
     # Find all buttons that exactly match value.
     # @param value [String] the value to match exactly
     # @return [Array<Button>]
     def buttons_exact(value)
-      find_elements :uiautomator, _button_exact_string(value)
+      find_elements :xpath, _button_exact_string(value)
     end
   end # module Android
 end # module Appium
