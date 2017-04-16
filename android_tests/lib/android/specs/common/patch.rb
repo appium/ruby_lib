@@ -43,7 +43,7 @@ describe 'common/patch' do
         set_wait 30
       end
       value = value.split("\n").first.strip
-      exp   = 'No element found'
+      exp   = 'An element could not be located on the page using the given search parameters.'
       value.must_equal exp
     end
 
