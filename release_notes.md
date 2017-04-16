@@ -1,3 +1,10 @@
+#### v9.3.8 2017-04-13
+
+- [7a7cf44](https://github.com/appium/ruby_lib/commit/7a7cf44c3cb11a90142285b8e8d731dc452b89eb) Release 9 3 8 (#540)
+- [5e67b88](https://github.com/appium/ruby_lib/commit/5e67b8813950148661bc4491811a696edeffc63c) allow using TestObject server (#538)
+- [9fdf89f](https://github.com/appium/ruby_lib/commit/9fdf89f9c3993730aabf1b8e25f03a773e565d98) add link to mobile gesture for XCUITets (#536)
+
+
 #### v9.3.7 2017-04-09
 
 - [8daf6f7](https://github.com/appium/ruby_lib/commit/8daf6f773c9b8acd7a89e2a9225fd834de5b4e2e) Release 9 3 7 (#535)

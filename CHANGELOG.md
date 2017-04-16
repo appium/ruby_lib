@@ -10,6 +10,8 @@ Release tags are https://github.com/appium/ruby_lib/releases .
     - Users can call some [`mobile:` methods](https://github.com/appium/appium/blob/master/docs/en/writing-running-appium/ios-xctest-mobile-gestures.md) without `execute_script('mobile: tap', args)`.
     - Users can write test code without `.ref` method for elements in `execute_script`.
     - Example: https://github.com/appium/ruby_lib/pull/537
+- Support UIAutomator2 strategy for Android[#505](https://github.com/appium/ruby_lib/issues/505)
+    - Fix some find elemenet methods[#544](https://github.com/appium/ruby_lib/pull/544)
 
 ### 2. Bug fixes
 
