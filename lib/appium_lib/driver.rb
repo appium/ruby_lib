@@ -474,6 +474,12 @@ module Appium
       !@automation_name.nil? && 'xcuitest'.casecmp(@automation_name).zero?
     end
 
+    # Return true if automationName is 'uiautomator2'
+    # @return [Boolean]
+    def automation_name_is_uiautomator2?
+      !@automation_name.nil? && 'uiautomator2'.casecmp(@automation_name).zero?
+    end
+
     # Return true if the target Appium server is over REQUIRED_VERSION_XCUITEST.
     # If the Appium server is under REQUIRED_VERSION_XCUITEST, then error is raised.
     # @return [Boolean]

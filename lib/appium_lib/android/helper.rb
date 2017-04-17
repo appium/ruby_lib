@@ -285,7 +285,7 @@ module Appium
     # @param class_name [String] the class name for the element
     # @param value [String] the value to search for
     # @return [String]
-    def string_visible_contains(class_name, value)
+    def string_visible_contains_xpath(class_name, value)
       r_id = resource_id(value, " or @resource-id='#{value}'")
 
       if class_name == '*'
@@ -297,12 +297,37 @@ module Appium
         " or contains(translate(@content-desc,'#{value.upcase}', '#{value}'), '#{value}')" + r_id + ']'
     end
 
+    # Returns a string that matches the first element that contains value
+    #
+    # example: complex_find_contains 'UIATextField', 'sign in'
+    #
+    # @param class_name [String] the class name for the element
+    # @param value [String] the value to search for
+    # @return [String]
+    def string_visible_contains(class_name, value)
+      value = %("#{value}")
+      if class_name == '*'
+        return (resource_id(value, "new UiSelector().resourceId(#{value});") +
+            "new UiSelector().descriptionContains(#{value});" \
+            "new UiSelector().textContains(#{value});")
+      end
+
+      class_name = %("#{class_name}")
+      resource_id(value, "new UiSelector().className(#{class_name}).resourceId(#{value});") +
+          "new UiSelector().className(#{class_name}).descriptionContains(#{value});" \
+          "new UiSelector().className(#{class_name}).textContains(#{value});"
+    end
+
     # Find the first element that contains value
     # @param element [String] the class name for the element
     # @param value [String] the value to search for
     # @return [Element]
     def complex_find_contains(element, value)
-      find_element :xpath, string_visible_contains(element, value)
+      if automation_name_is_uiautomator2?
+        find_element :xpath, string_visible_contains_xpath(element, value)
+      else
+        find_element :uiautomator, string_visible_contains(element, value)
+      end
     end
 
     # Find all elements containing value
@@ -310,7 +335,11 @@ module Appium
     # @param value [String] the value to search for
     # @return [Array<Element>]
     def complex_finds_contains(element, value)
-      find_elements :xpath, string_visible_contains(element, value)
+      if automation_name_is_uiautomator2?
+        find_elements :xpath, string_visible_contains_xpath(element, value)
+      else
+        find_elements :uiautomator, string_visible_contains(element, value)
+      end
     end
 
     # @private
@@ -318,7 +347,7 @@ module Appium
     # @param class_name [String] the class name for the element
     # @param value [String] the value to search for
     # @return [String]
-    def string_visible_exact(class_name, value)
+    def string_visible_exact_xpath(class_name, value)
       r_id = resource_id(value, " or @resource-id='#{value}'")
 
       if class_name == '*'
@@ -328,12 +357,36 @@ module Appium
       "//#{class_name}[@text='#{value}' or @content-desc='#{value}'" + r_id + ']'
     end
 
+    # @private
+    # Create an string to exactly match the first element with target value
+    # @param class_name [String] the class name for the element
+    # @param value [String] the value to search for
+    # @return [String]
+    def string_visible_exact(class_name, value)
+      value = %("#{value}")
+
+      if class_name == '*'
+        return (resource_id(value, "new UiSelector().resourceId(#{value});") +
+            "new UiSelector().description(#{value});" \
+            "new UiSelector().text(#{value});")
+      end
+
+      class_name = %("#{class_name}")
+      resource_id(value, "new UiSelector().className(#{class_name}).resourceId(#{value});") +
+          "new UiSelector().className(#{class_name}).description(#{value});" \
+          "new UiSelector().className(#{class_name}).text(#{value});"
+    end
+
     # Find the first element exactly matching value
     # @param class_name [String] the class name for the element
     # @param value [String] the value to search for
     # @return [Element]
     def complex_find_exact(class_name, value)
-      find_element :xpath, string_visible_exact(class_name, value)
+      if automation_name_is_uiautomator2?
+        find_element :xpath, string_visible_exact_xpath(class_name, value)
+      else
+        find_element :uiautomator, string_visible_exact(class_name, value)
+      end
     end
 
     # Find all elements exactly matching value
@@ -341,7 +394,11 @@ module Appium
     # @param value [String] the value to search for
     # @return [Element]
     def complex_finds_exact(class_name, value)
-      find_elements :xpath, string_visible_exact(class_name, value)
+      if automation_name_is_uiautomator2?
+        find_elements :xpath, string_visible_exact_xpath(class_name, value)
+      else
+        find_elements :uiautomator, string_visible_exact(class_name, value)
+      end
     end
 
     # Returns XML string for the current page

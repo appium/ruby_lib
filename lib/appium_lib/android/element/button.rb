@@ -13,14 +13,14 @@ module Appium
 
     # @private
     def _button_exact_string(value)
-      string_visible_exact(Button, value) +
-          string_visible_exact(ImageButton, value).sub(/\A\/\//, '|')
+      string_visible_exact_xpath(Button, value) +
+          string_visible_exact_xpath(ImageButton, value).sub(/\A\/\//, '|')
     end
 
     # @private
     def _button_contains_string(value)
-      string_visible_contains(Button, value) +
-          string_visible_contains(ImageButton, value).sub(/\A\/\//, '|')
+      string_visible_contains_xpath(Button, value) +
+          string_visible_contains_xpath(ImageButton, value).sub(/\A\/\//, '|')
     end
 
     public
