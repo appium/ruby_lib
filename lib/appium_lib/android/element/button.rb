@@ -71,7 +71,11 @@ module Appium
         return result
       end
 
-      find_element :xpath, _button_contains_string_xpath(value)
+      if automation_name_is_uiautomator2?
+        find_element :xpath, _button_contains_string_xpath(value)
+      else
+        find_element :uiautomator, _button_contains_string(value)
+      end
     end
 
     # Find all buttons containing value.
