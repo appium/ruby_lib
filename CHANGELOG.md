@@ -3,6 +3,16 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## v9.4.1
+### 1. Enhancements
+
+### 2. Bug fixes
+- fix 9.4.0 release sudden failures [#546](https://github.com/appium/ruby_lib/issues/546)
+    - XPath strategy for find_element/s sudden fail than uiautomator strategy.
+    - Use `:xpath` strategy only for uiautomator2
+
+### 3. Deprecations
+
 ## v9.4.0
 ### 1. Enhancements
 - update mobile gesture APIs for XCUITest(WDA) [#514](https://github.com/appium/ruby_lib/pull/514)

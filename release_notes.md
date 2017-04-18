@@ -1,3 +1,11 @@
+#### v9.4.0 2017-04-17
+
+- [9492690](https://github.com/appium/ruby_lib/commit/9492690f80efaab79ce165e16dd335fca9717c4a) Release 9 4 0 (#545)
+- [2ea94c3](https://github.com/appium/ruby_lib/commit/2ea94c3933f1ecd1362c33f306348236facefc37) add mobile gesture (#542)
+- [1c7dd0f](https://github.com/appium/ruby_lib/commit/1c7dd0ff844265e76b3f2e15a0e6b3651005518f) use xpath instead of uiselectors (#544)
+- [5841a39](https://github.com/appium/ruby_lib/commit/5841a39d60b0986f1a1dd786b910bfbd6223d124) add mobile gesture for XCUITest (#537)
+
+
 #### v9.3.8 2017-04-13
 
 - [7a7cf44](https://github.com/appium/ruby_lib/commit/7a7cf44c3cb11a90142285b8e8d731dc452b89eb) Release 9 3 8 (#540)
