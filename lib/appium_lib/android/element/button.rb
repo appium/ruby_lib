@@ -90,7 +90,6 @@ module Appium
         return find_elements :uiautomator, _button_visible_selectors unless value
         find_elements :uiautomator, _button_contains_string(value)
       end
-
     end
 
     # Find the first button.
@@ -101,7 +100,6 @@ module Appium
       else
         find_element :uiautomator, _button_visible_selectors(button_index: 0, image_button_index: 0)
       end
-
     end
 
     # Find the last button.
