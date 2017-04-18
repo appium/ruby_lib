@@ -25,6 +25,7 @@ module Appium
     end
 
     # @private
+    # For automationName is uiautomator2
     def _button_exact_string_xpath(value)
       string_visible_exact_xpath(Button, value) +
           string_visible_exact_xpath(ImageButton, value).sub(/\A\/\//, '|')
@@ -37,6 +38,7 @@ module Appium
     end
 
     # @private
+    # For automationName is uiautomator2
     def _button_contains_string_xpath(value)
       string_visible_contains_xpath(Button, value) +
           string_visible_contains_xpath(ImageButton, value).sub(/\A\/\//, '|')

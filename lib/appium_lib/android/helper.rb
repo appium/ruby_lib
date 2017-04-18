@@ -279,8 +279,8 @@ module Appium
     end
 
     # Returns a string that matches the first element that contains value
-    #
-    # example: complex_find_contains 'UIATextField', 'sign in'
+    # For automationName is uiautomator2
+    # example: string_visible_contains_xpath 'UIATextField', 'sign in'
     #
     # @param class_name [String] the class name for the element
     # @param value [String] the value to search for
@@ -298,8 +298,8 @@ module Appium
     end
 
     # Returns a string that matches the first element that contains value
-    #
-    # example: complex_find_contains 'UIATextField', 'sign in'
+    # For automationName is Appium
+    # example: string_visible_contains 'UIATextField', 'sign in'
     #
     # @param class_name [String] the class name for the element
     # @param value [String] the value to search for
@@ -344,6 +344,7 @@ module Appium
 
     # @private
     # Create an string to exactly match the first element with target value
+    # For automationName is uiautomator2
     # @param class_name [String] the class name for the element
     # @param value [String] the value to search for
     # @return [String]
