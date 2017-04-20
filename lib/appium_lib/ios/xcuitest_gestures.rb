@@ -128,15 +128,18 @@ module Appium
       # https://github.com/appium/appium-xcuitest-driver/pull/420
       # @param order [String] The order to move picker to. "next" or "previous".
       # @param element [Element]  Element id to perform select picker wheel on.
+      # @option opts [Integer] :offset The value in range [0.01, 0.5]. Default is 0.2 in server side.
+      #   https://github.com/facebook/WebDriverAgent/pull/549/files
       #
       #   ```ruby
       #   select_picker_wheel order: "next", element: find_element(:accessibility_id, "some picker")
       #   ```
-      def select_picker_wheel(element:, order:)
+      def select_picker_wheel(element:, order:, offset: nil)
         return 'require XCUITest(WDA)' unless automation_name_is_xcuitest?
         return 'Set "next" or "previous" for :order' unless %w(next previous).include?(order)
 
         args = { element: element.ref, order: order }
+        args[:offset] = offset if offset
         execute_script 'mobile: selectPickerWheelValue', args
       end
     end # module XcuitestGesture
