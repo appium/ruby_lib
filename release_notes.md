@@ -1,3 +1,9 @@
+#### v9.4.1 2017-04-19
+
+- [491a142](https://github.com/appium/ruby_lib/commit/491a142942cc0eb8addfb15e2bbd805d260cebc0) Release 9 4 1 (#550)
+- [d721297](https://github.com/appium/ruby_lib/commit/d721297a634cebc0d22f26a132345126036c71d6) separate find_element/s for uiautomator and xpath (#547)
+
+
 #### v9.4.0 2017-04-17
 
 - [9492690](https://github.com/appium/ruby_lib/commit/9492690f80efaab79ce165e16dd335fca9717c4a) Release 9 4 0 (#545)
