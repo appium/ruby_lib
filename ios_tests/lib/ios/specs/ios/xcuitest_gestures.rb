@@ -24,7 +24,7 @@ describe 'ios/xcuitest_gestures' do
 
   t 'scroll' do
     scroll direction: 'down'
-    text('Style Default').displayed?.must_be true
+    text('Style Default').displayed?.must_equal true
   end
 
   t 'swipe' do
@@ -32,6 +32,11 @@ describe 'ios/xcuitest_gestures' do
     swipe direction: 'down'
 
     proc { text('Style Default') }.must_raise ::Selenium::WebDriver::Error::NoSuchElementError
+  end
+
+  t 'drag_from_to_for_duration' do
+    drag_from_to_for_duration from_x: 100, from_y: 100, to_x: 100, to_y: 400
+    text('Standard Switch').displayed?.must_equal true
   end
 
   t 'pinch' do
@@ -50,12 +55,11 @@ describe 'ios/xcuitest_gestures' do
     select_picker_wheel(element: e, order: 'next')
 
     e.displayed?.must_be false
-    find_element(:name, 'Serena Auroux').displayed?.must_be true
-
-    back_click
+    find_element(:name, 'Serena Auroux').displayed?.must_equal true
   end
 
   t 'after_last' do
+    back_click
     after_last
   end
 end

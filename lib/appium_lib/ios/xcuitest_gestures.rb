@@ -118,7 +118,7 @@ module Appium
       def drag_from_to_for_duration(from_x:, from_y:, to_x:, to_y:, duration: 1.0, element: nil)
         return 'require XCUITest(WDA)' unless automation_name_is_xcuitest?
 
-        args = { from_x: from_x, from_y: from_y, to_x: to_x, to_y: to_y, duration: duration }
+        args = { fromX: from_x, fromY: from_y, toX: to_x, toY: to_y, duration: duration }
         args[:element] = element if element
         execute_script 'mobile: dragFromToForDuration', args
       end
