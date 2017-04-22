@@ -86,5 +86,18 @@ xpaths("//some xpaths")
 - Specs by test code
     - https://github.com/appium/appium-xcuitest-driver/blob/master/test/functional/basic/gesture-e2e-specs.js
 
+### Workaround
+- `mobile:` commands depends on WDA and Apple's framework and the behaviour depends on them.
+- Sometimes issues occur such as "doubleTap isn't tapping #548"
+    - workaround for it:
+        ```ruby
+        def double_tap(element)
+          # Find the object, then go to the middle of it, and double-tap
+          tap_x = element.location.x + element.size.width * 0.50
+          tap_y = element.location.y + element.size.height * 0.50
+          execute_script 'mobile: doubleTap', x: tap_x, y: tap_y
+        end
+        ```
+
 ## Other actions
 Basically, other actions such as `type` are compatible with `automationName = Appium`.
