@@ -90,14 +90,21 @@ xpaths("//some xpaths")
 - `mobile:` commands depends on WDA and Apple's framework and the behaviour depends on them.
 - Sometimes issues occur such as "doubleTap isn't tapping #548"
     - workaround for it:
-        ```ruby
-        def double_tap(element)
-          # Find the object, then go to the middle of it, and double-tap
-          tap_x = element.location.x + element.size.width * 0.50
-          tap_y = element.location.y + element.size.height * 0.50
-          execute_script 'mobile: doubleTap', x: tap_x, y: tap_y
-        end
-        ```
+        - with `selenium-webdriver >= 3.4.0`
+            ```ruby
+            def double_tap(element)
+              rect = element.rect
+              execute_script 'mobile: doubleTap', x: rect.x + rect.width / 2, y: rect.y + rect.height / 2
+            end
+            ```        
+        - with `selenium-webdriver < 3.4.0`
+            ```ruby
+              def double_tap(element)
+                size = element.size
+                location = element.location
+                execute_script 'mobile: doubleTap', x: location.x + size.width / 2, y: location.y + size.height / 2
+              end
+            ```
 
 ## Other actions
 Basically, other actions such as `type` are compatible with `automationName = Appium`.
