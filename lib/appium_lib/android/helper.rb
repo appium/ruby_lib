@@ -324,7 +324,9 @@ module Appium
     # @return [Element]
     def complex_find_contains(element, value)
       if automation_name_is_uiautomator2?
-        find_element :xpath, string_visible_contains_xpath(element, value)
+        elements = find_elements :uiautomator, string_visible_contains(element, value)
+        raise _no_such_element if elements.empty?
+        elements.first
       else
         find_element :uiautomator, string_visible_contains(element, value)
       end
@@ -335,11 +337,7 @@ module Appium
     # @param value [String] the value to search for
     # @return [Array<Element>]
     def complex_finds_contains(element, value)
-      if automation_name_is_uiautomator2?
-        find_elements :xpath, string_visible_contains_xpath(element, value)
-      else
-        find_elements :uiautomator, string_visible_contains(element, value)
-      end
+      find_elements :uiautomator, string_visible_contains(element, value)
     end
 
     # @private
@@ -384,7 +382,9 @@ module Appium
     # @return [Element]
     def complex_find_exact(class_name, value)
       if automation_name_is_uiautomator2?
-        find_element :xpath, string_visible_exact_xpath(class_name, value)
+        elements = find_elements :uiautomator, string_visible_exact(element, value)
+        raise _no_such_element if elements.empty?
+        elements.first
       else
         find_element :uiautomator, string_visible_exact(class_name, value)
       end
@@ -395,11 +395,7 @@ module Appium
     # @param value [String] the value to search for
     # @return [Element]
     def complex_finds_exact(class_name, value)
-      if automation_name_is_uiautomator2?
-        find_elements :xpath, string_visible_exact_xpath(class_name, value)
-      else
-        find_elements :uiautomator, string_visible_exact(class_name, value)
-      end
+      find_elements :uiautomator, string_visible_exact(class_name, value)
     end
 
     # Returns XML string for the current page

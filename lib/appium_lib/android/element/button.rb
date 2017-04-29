@@ -64,7 +64,7 @@ module Appium
         raise "#{index} is not a valid index. Must be >= 1" if index <= 0
 
         if automation_name_is_uiautomator2?
-          result = find_elements(:xpath, _button_visible_selectors_xpath)[value - 1]
+          result = find_elements(:uiautomator, _button_contains_string(value))[value - 1]
           raise Selenium::WebDriver::Error::NoSuchElementError unless result
         else
           result = find_element :uiautomator, _button_visible_selectors(index: index)
@@ -74,7 +74,9 @@ module Appium
       end
 
       if automation_name_is_uiautomator2?
-        find_element :xpath, _button_contains_string_xpath(value)
+        elements = find_elements :uiautomator, _button_contains_string(value)
+        raise _no_such_element if elements.empty?
+        elements.first
       else
         find_element :uiautomator, _button_contains_string(value)
       end
@@ -85,13 +87,8 @@ module Appium
     # @param value [String] the value to search for
     # @return [Array<Button>]
     def buttons(value = false)
-      if automation_name_is_uiautomator2?
-        return find_elements :xpath, _button_visible_selectors_xpath unless value
-        find_elements :xpath, _button_contains_string_xpath(value)
-      else
-        return find_elements :uiautomator, _button_visible_selectors unless value
-        find_elements :uiautomator, _button_contains_string(value)
-      end
+      return find_elements :uiautomator, _button_visible_selectors unless value
+      find_elements :uiautomator, _button_contains_string(value)
     end
 
     # Find the first button.
@@ -130,7 +127,9 @@ module Appium
     # @return [Button]
     def button_exact(value)
       if automation_name_is_uiautomator2?
-        find_element :xpath, _button_exact_string_xpath(value)
+        elements = find_elements :uiautomator, _button_exact_string(value)
+        raise _no_such_element if elements.empty?
+        elements.first
       else
         find_element :uiautomator, _button_exact_string(value)
       end
@@ -140,11 +139,7 @@ module Appium
     # @param value [String] the value to match exactly
     # @return [Array<Button>]
     def buttons_exact(value)
-      if automation_name_is_uiautomator2?
-        find_elements :xpath, _button_exact_string_xpath(value)
-      else
-        find_elements :uiautomator, _button_exact_string(value)
-      end
+      find_elements :uiautomator, _button_exact_string(value)
     end
   end # module Android
 end # module Appium
