@@ -319,25 +319,25 @@ module Appium
     end
 
     # Find the first element that contains value
-    # @param element [String] the class name for the element
+    # @param class_name [String] the class name for the element
     # @param value [String] the value to search for
     # @return [Element]
-    def complex_find_contains(element, value)
+    def complex_find_contains(class_name, value)
       if automation_name_is_uiautomator2?
-        elements = find_elements :uiautomator, string_visible_contains(element, value)
+        elements = find_elements :uiautomator, string_visible_contains(class_name, value)
         raise _no_such_element if elements.empty?
         elements.first
       else
-        find_element :uiautomator, string_visible_contains(element, value)
+        find_element :uiautomator, string_visible_contains(class_name, value)
       end
     end
 
     # Find all elements containing value
-    # @param element [String] the class name for the element
+    # @param class_name [String] the class name for the element
     # @param value [String] the value to search for
     # @return [Array<Element>]
-    def complex_finds_contains(element, value)
-      find_elements :uiautomator, string_visible_contains(element, value)
+    def complex_finds_contains(class_name, value)
+      find_elements :uiautomator, string_visible_contains(class_name, value)
     end
 
     # @private
@@ -382,7 +382,7 @@ module Appium
     # @return [Element]
     def complex_find_exact(class_name, value)
       if automation_name_is_uiautomator2?
-        elements = find_elements :uiautomator, string_visible_exact(element, value)
+        elements = find_elements :uiautomator, string_visible_exact(class_name, value)
         raise _no_such_element if elements.empty?
         elements.first
       else
