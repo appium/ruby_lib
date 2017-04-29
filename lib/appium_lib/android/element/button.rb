@@ -44,13 +44,13 @@ module Appium
         index = value
         raise "#{index} is not a valid index. Must be >= 1" if index <= 0
 
-        if automation_name_is_uiautomator2?
-          result = find_elements :uiautomator, _button_visible_selectors(index: index)
-          raise _no_such_element if result.empty?
-          return result[value - 1]
-        else
+        unless automation_name_is_uiautomator2?
           return find_element :uiautomator, _button_visible_selectors(index: index)
         end
+
+        result = find_elements :uiautomator, _button_visible_selectors(index: index)
+        raise _no_such_element if result.empty?
+        return result[value - 1]
       end
 
       if automation_name_is_uiautomator2?
