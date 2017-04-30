@@ -215,6 +215,7 @@ task :notes do
       next if comment == 'Update release notes'
 
       issue_num = comment.slice(/\(#[0-9]+\)/)
+      # If the issue_num is pull request, GitHub redirects to the pull request.
       comment_note = if issue_num
                        issue_num.gsub!(/[(#)]/, '')
                        "[#{comment}](https://github.com/appium/#{gh_name}/issues/#{issue_num})"
