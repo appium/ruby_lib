@@ -281,6 +281,7 @@ module Appium
     # Returns a string that matches the first element that contains value
     # For automationName is uiautomator2
     # example: string_visible_contains_xpath 'UIATextField', 'sign in'
+    # note for XPath: https://github.com/appium/ruby_lib/pull/561
     #
     # @param class_name [String] the class name for the element
     # @param value [String] the value to search for
@@ -300,6 +301,7 @@ module Appium
     # Returns a string that matches the first element that contains value
     # For automationName is Appium
     # example: string_visible_contains 'UIATextField', 'sign in'
+    # note for XPath: https://github.com/appium/ruby_lib/pull/561
     #
     # @param class_name [String] the class name for the element
     # @param value [String] the value to search for
