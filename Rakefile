@@ -176,8 +176,8 @@ end
 desc 'Update release notes'
 task :notes do
   tag_sort = ->(tag1, tag2) do
-    tag1_numbers = tag1.match(/\.?v(\d+\.\d+\.\d+)$/)[1].split('.').map! { |n| n.to_i }
-    tag2_numbers = tag2.match(/\.?v(\d+\.\d+\.\d+)$/)[1].split('.').map! { |n| n.to_i }
+    tag1_numbers = tag1.match(/\.?v(\d+\.\d+\.\d+)$/)[1].split('.').map!(&:to_i)
+    tag2_numbers = tag2.match(/\.?v(\d+\.\d+\.\d+)$/)[1].split('.').map!(&:to_i)
     tag1_numbers <=> tag2_numbers
   end
 
@@ -213,7 +213,16 @@ task :notes do
       # use first 7 chars to match GitHub
       comment = line.gsub(hex, '').strip
       next if comment == 'Update release notes'
-      new_data += "- [#{hex[0...7]}](https://github.com/appium/#{gh_name}/commit/#{hex}) #{comment}\n"
+
+      issue_num = comment.slice(/\(#[0-9]+\)/)
+      # If the issue_num is pull request, GitHub redirects to the pull request.
+      comment_note = if issue_num
+                       issue_num.gsub!(/[(#)]/, '')
+                       "[#{comment}](https://github.com/appium/#{gh_name}/issues/#{issue_num})"
+                     else
+                       comment
+                     end
+      new_data += "- [#{hex[0...7]}](https://github.com/appium/#{gh_name}/commit/#{hex}) #{comment_note}\n"
     end
     data  = new_data + "\n"
 
