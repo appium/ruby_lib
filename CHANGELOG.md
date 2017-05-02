@@ -3,6 +3,17 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## v9.4.3
+### 1. Enhancements
+- Use uiautomator for uiautomator2 [#561](https://github.com/appium/ruby_lib/pull/561)
+    - improve stability for some methods
+- don't use selenium-webdriver 3.5+ [#559](https://github.com/appium/ruby_lib/pull/559)
+- Auto link bug # from release notes [#239](https://github.com/appium/ruby_lib/issues/239)
+
+### 2. Bug fixes
+
+### 3. Deprecations
+
 ## v9.4.2
 ### 1. Enhancements
 
