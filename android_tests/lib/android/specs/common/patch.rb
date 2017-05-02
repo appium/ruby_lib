@@ -48,9 +48,16 @@ describe 'common/patch' do
     end
 
     t 'id success' do
-      wait do
-        el = id 'autocomplete_3_button_7' # <string name="autocomplete_3_button_7">Text</string>
-        el.name.must_equal 'Text'
+      if !automation_name_is_uiautomator2?
+        wait do
+          el = id 'autocomplete_3_button_7' # <string name="autocomplete_3_button_7">Text</string>
+          el.name.must_equal 'Text'
+        end
+      else
+        wait do
+          el = text 'text' # <string name="autocomplete_3_button_7">Text</string>
+          el.name.must_equal 'Text'
+        end
       end
     end
 
