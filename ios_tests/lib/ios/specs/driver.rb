@@ -303,6 +303,27 @@ describe 'driver' do
       get_settings['cyberdelia'].must_equal 'open'
     end
 
+    # current device orientation should be portrait
+    t 'orientation' do
+      orientation.must_equal :portrait
+    end
+
+    # rotate device orientation
+    t 'rotate' do
+      rotate :landscape
+      orientation.must_equal :landscape
+      rotate :portrait
+      orientation.must_equal :portrait
+    end
+
+    # should fail the call if use other args than ":landscape" or ":portrait"
+    t 'rotate with bad args' do
+      lambda {rotate 'landscape'}.must_raise(ArgumentError)
+      lambda {rotate 'portrait'}.must_raise(ArgumentError)
+      lambda {rotate nil}.must_raise(ArgumentError)
+      lambda {rotate}.must_raise(ArgumentError)
+    end
+
     # Skip: x # x is only used in Pry
   end
 end

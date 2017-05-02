@@ -755,6 +755,24 @@ module Appium
       @driver.set_location(latitude, longitude, altitude)
     end
 
+    # Calls @driver.orientation.
+    # Get the current screen orientation.
+    #
+    # @return [Symbol] either :landscape or :portrait
+    def orientation
+      @driver.orientation
+    end
+
+    # Calls @driver.rotate orientation.
+    # Change the screen orientation.
+    #
+    # @param orientation [Symbol] either :landscape or :portrait. Will fail
+    #        if use other argument than that.
+    # @return [String] orientation.
+    def rotate orientation
+      @driver.rotate orientation
+    end
+
     # Quit the driver and Pry.
     # quit and exit are reserved by Pry.
     # @return [void]
