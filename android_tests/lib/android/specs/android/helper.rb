@@ -63,7 +63,15 @@ describe 'android/helper' do
   t 'find by id' do
     wait { find('accessibility').click }
     wait { find('accessibility node provider').click }
-    wait { id 'accessibility_node_provider' } # Accessibility/Accessibility Node Provider
+
+    if !automation_name_is_uiautomator2?
+      wait { text 'Accessibility/Accessibility Node Provider' }
+    else
+      # With string.xml
+      # Only for uiautomator1
+      wait { id 'accessibility_node_provider' }
+    end
+
     2.times { back }
   end
 
