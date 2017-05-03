@@ -14,6 +14,10 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 
 ### 3. Deprecations
 
+### Special Thanks
+- Thanks for checking uiautomator2
+    - [@Edouard-chin](https://github.com/Edouard-chin), [@rajdeepv](https://github.com/rajdeepv)
+
 ## v9.4.2
 ### 1. Enhancements
 
