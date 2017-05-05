@@ -10,6 +10,7 @@ ruby_lib's Android tests. Requires `Ruby 2.2+` or better.
   - `gem install appium_console` if it's not installed already.
 
 api.apk is from [appium/android-apidemos](https://github.com/appium/android-apidemos)
+The way to generate api.apk is described in the repository.
 
 #### Documentation
 
