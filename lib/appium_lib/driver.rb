@@ -406,11 +406,10 @@ module Appium
       # load common methods
       extend Appium::Common
       extend Appium::Device
+
       if device_is_android?
-        # load Android specific methods
         extend Appium::Android
       else
-        # load iOS specific methods
         extend Appium::Ios
         extend Appium::Ios::XcuitestGesture if automation_name_is_xcuitest? # Override touch actions
       end

@@ -3,7 +3,7 @@ module Appium
     # @private
     # http://nokogiri.org/Nokogiri/XML/SAX.html
     class AndroidElements < Nokogiri::XML::SAX::Document
-      attr_reader :result, :keys, :instance, :filter
+      attr_reader :result, :keys, :filter
 
       # convert to string to support symbols
       def filter=(value)
@@ -15,21 +15,16 @@ module Appium
       def initialize
         reset
         @filter   = false
-        @instance = Hash.new(-1)
       end
 
       def reset
         @result   = ''
         @keys     = %w(text resource-id content-desc)
-        @instance = Hash.new(-1)
       end
 
       # http://nokogiri.org/Nokogiri/XML/SAX/Document.html
       def start_element(name, attrs = [])
         return if filter && !name.downcase.include?(filter)
-
-        # instance numbers start at 0.
-        number = instance[name] += 1
 
         attributes = {}
 
@@ -78,38 +73,9 @@ module Appium
         string += "  id: #{id}\n" unless id.nil?
         string += "  strings.xml: #{string_ids}" unless string_ids.nil?
 
-        @result += "\n#{name} (#{number})\n#{string}" unless attributes.empty?
+        @result += "\n#{name}\n#{string}" unless attributes.empty?
       end
     end # class AndroidElements
-
-    # Fix uiautomator's xml dump.
-    # https://github.com/appium/appium/issues/2822
-    # https://code.google.com/p/android/issues/detail?id=74143
-    def _fix_android_native_source(source)
-      # <android.app.ActionBar$Tab
-      # <android.app.ActionBar  $  Tab
-
-      # find each closing tag that contains a dollar sign.
-      source.scan(/<\/([^>]*\$[^>]*)>/).flatten.uniq.each do |problem_tag|
-        # "android.app.ActionBar$Tab"
-        before, after = problem_tag.split('$')
-        before.strip!
-        after.strip!
-
-        fixed = "#{before}.#{after}"
-
-        # now escape . in before/after because they're used in regex
-        before.gsub!('.', '\.')
-        after.gsub!('.', '\.')
-
-        #  <android.app.ActionBar$Tab   => <android.app.ActionBar.Tab
-        # </android.app.ActionBar$Tab> => </android.app.ActionBar.Tab>
-        source = source.gsub(/<#{before}\s*\$\s*#{after}/,
-                             "<#{fixed}").gsub(/<\/#{before}\s*\$\s*#{after}>/, "</#{fixed}>")
-      end
-
-      source
-    end
 
     # Prints xml of the current page
     # @return [void]
@@ -400,14 +366,10 @@ module Appium
       find_elements :uiautomator, string_visible_exact(class_name, value)
     end
 
-    # Returns XML string for the current page
-    # Fixes uiautomator's $ in node names.
-    # `android.app.ActionBar$Tab` becomes `android.app.ActionBar.Tab`
+    # Returns XML string for the current page via `page_source`
     # @return [String]
     def get_source
-      src = @driver.page_source
-      src = _fix_android_native_source src unless src && src.start_with?('<html>')
-      src
+      @driver.page_source
     end
   end # module Android
 end # module Appium
