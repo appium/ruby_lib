@@ -279,12 +279,10 @@ module Appium
               return execute :hide_keyboard, {}, strategy: :tapOutside
             end
 
-            close_key ||= 'Done' # default to Done key.
             if $driver.automation_name_is_xcuitest?
-              # strategy is not implemented in the following
-              # https://github.com/appium/appium-xcuitest-driver/blob/v2.2.0/lib/commands/general.js#L51
-              execute :hide_keyboard, {}, strategy: :grouped, key: close_key
+              close_key ? execute(:hide_keyboard, {}, key: close_key) : execute(:hide_keyboard, {})
             else
+              close_key ||= 'Done' # default to Done key.
               $driver.hide_ios_keyboard close_key
             end
           end
