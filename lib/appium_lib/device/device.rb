@@ -64,10 +64,14 @@ module Appium
     # @!method hide_keyboard
     #   Hide the onscreen keyboard
     #   @param [String] close_key The name of the key which closes the keyboard.
-    #     Defaults to 'Done' for iOS(not XCUITest).
+    #     Defaults to 'Done' for iOS(except for XCUITest).
+    #   @param [Symbol] strategy The symbol of the strategy which closes the keyboard.
+    #     XCUITest ignore this argument.
+    #     Default for iOS is `:pressKey`. Default for Android is `:tapOutside`.
     #  ```ruby
     #  hide_keyboard # Close a keyboard with the 'Done' button
     #  hide_keyboard('Finished') # Close a keyboard with the 'Finished' button
+    #  hide_keyboard(nil, :tapOutside) # Close a keyboard with tapping out side of keyboard
     #  ```
 
     # @!method press_keycode
@@ -273,18 +277,20 @@ module Appium
         end
 
         add_endpoint_method(:hide_keyboard) do
-          def hide_keyboard(close_key = nil)
-            # Android can only tapOutside.
-            if $driver.device_is_android?
-              return execute :hide_keyboard, {}, strategy: :tapOutside
-            end
+          def hide_keyboard(close_key = nil, strategy = nil)
+            option = {}
 
-            if $driver.automation_name_is_xcuitest?
-              close_key ? execute(:hide_keyboard, {}, key: close_key) : execute(:hide_keyboard, {})
+            if $driver.device_is_android? # Android can only tapOutside.
+              option[:key] = close_key if close_key
+              option[:strategy] = strategy || :tapOutside # default to pressKey
+            elsif $driver.automation_name_is_xcuitest?
+              option[:key] = close_key if close_key
+              option[:strategy] = strategy if strategy
             else
-              close_key ||= 'Done' # default to Done key.
-              $driver.hide_ios_keyboard close_key
+              option[:key] = close_key || 'Done'        # default to Done key.
+              option[:strategy] = strategy || :pressKey # default to pressKey
             end
+            execute :hide_keyboard, {}, option
           end
         end
 
