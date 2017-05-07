@@ -1,0 +1,24 @@
+language: objective-c
+sudo: false
+osx_image: xcode8.3
+
+cache: bundler
+
+rvm:
+  - 2.4
+
+install:
+  - bundle install
+  - npm install -g appium@1.6.4
+
+before_script:
+  - appium --log-level warn &
+
+script:
+  - bundle exec rake rubocop
+  - cd ios_tests; rake ios
+
+notifications:
+  email:
+    on_success: never
+    on_failure: never
