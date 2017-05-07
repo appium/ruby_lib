@@ -64,7 +64,7 @@ module Appium
     # @!method hide_keyboard
     #   Hide the onscreen keyboard
     #   @param [String] close_key The name of the key which closes the keyboard.
-    #     Defaults to 'Done'.
+    #     Defaults to 'Done' for iOS(not XCUITest).
     #  ```ruby
     #  hide_keyboard # Close a keyboard with the 'Done' button
     #  hide_keyboard('Finished') # Close a keyboard with the 'Finished' button
