@@ -1,3 +1,15 @@
+#### v9.4.3 2017-05-03
+
+- [c413bd7](https://github.com/appium/ruby_lib/commit/c413bd77d0fec58e1c2cce6821694bcf659b9e1b) [Release 9 4 3 (#566)](https://github.com/appium/ruby_lib/issues/566)
+- [8e600af](https://github.com/appium/ruby_lib/commit/8e600af469f0e00f1fb6cce331c72b13d11598c8) [fix tests for uiautomator2 (#565)](https://github.com/appium/ruby_lib/issues/565)
+- [ab8ecf8](https://github.com/appium/ruby_lib/commit/ab8ecf860088f690777e7c8086c31753463577c8) [Update android_uiautomator.md (#564)](https://github.com/appium/ruby_lib/issues/564)
+- [4f035d3](https://github.com/appium/ruby_lib/commit/4f035d39a0b3a3c39a9ef6a5cd0d2cb19d39f7d4) [Use uiautomator for uiautomator2 (#561)](https://github.com/appium/ruby_lib/issues/561)
+- [71d8eb6](https://github.com/appium/ruby_lib/commit/71d8eb676bf5ac6d83c5da112d068865d76ebab4) [Add link to issue in generating release notes (#562)](https://github.com/appium/ruby_lib/issues/562)
+- [915e75d](https://github.com/appium/ruby_lib/commit/915e75d08e89b4248ca104124f7430463c13ab22) [don't use selenium-webdriver 3.5+ (#559)](https://github.com/appium/ruby_lib/issues/559)
+- [7e9c8ef](https://github.com/appium/ruby_lib/commit/7e9c8ef7fbed4e076fa6aec49f20d786fa6cbdf6) [update workaround (#557)](https://github.com/appium/ruby_lib/issues/557)
+- [801a5a0](https://github.com/appium/ruby_lib/commit/801a5a07e5c1c062f5d108a844721c7a569765a3) [add workaround (#556)](https://github.com/appium/ruby_lib/issues/556)
+
+
 #### v9.4.2 2017-04-21
 
 - [0cd41ef](https://github.com/appium/ruby_lib/commit/0cd41ef58b6abf8444fcb95db59aebb2c6c2a890) [Release 9 4 2 (#554)](https://github.com/appium/ruby_lib/issues/554)
