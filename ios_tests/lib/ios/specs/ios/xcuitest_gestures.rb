@@ -89,6 +89,8 @@ describe 'ios/xcuitest_gestures' do
     alert action: 'dismiss'
 
     open_alert_custom
+    list = alert action: 'getButtons'
+    list.must_equal %w(Button1 Button2)
     alert action: 'accept', button_label: 'Button1'
   end
 
