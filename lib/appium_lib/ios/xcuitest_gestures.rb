@@ -142,6 +142,18 @@ module Appium
         args[:offset] = offset if offset
         execute_script 'mobile: selectPickerWheelValue', args
       end
+
+      # @param action [String] The following actions are supported: accept, dismiss and getButtons. Mandatory parameter
+      # @param button_label [String] The label text of an existing alert button to click on.
+      #   This is an optional parameter and is only valid in combination with accept and dismiss actions.
+      # Selenium::WebDriver::Error::NoSuchAlertError:
+      def alert(action:, button_label: nil)
+        return 'Set "accept", "dismiss" or "getButtons" for :action' unless %w(accept dismiss getButtons).include?(action)
+
+        args = { action: action }
+        args[:button_label] if button_label
+        execute_script 'mobile: alert', args
+      end
     end # module XcuitestGesture
   end # module Ios
 end # module Appium
