@@ -3,6 +3,18 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## v9.4.4
+### 1. Enhancements
+- add mobile gesture, `mobile: alert`
+    - Required over https://github.com/appium/appium-xcuitest-driver/releases/tag/v2.28.6
+- add travis example for ios [#573](https://github.com/appium/ruby_lib/pull/573)
+- remove some redundant code [#572](https://github.com/appium/ruby_lib/pull/572), [#571](https://github.com/appium/ruby_lib/pull/571)
+- update api-demos [#569](https://github.com/appium/ruby_lib/issues/569)
+
+### 2. Bug fixes
+
+### 3. Deprecations
+
 ## v9.4.3
 ### 1. Enhancements
 - Use uiautomator for uiautomator2 [#561](https://github.com/appium/ruby_lib/pull/561)
