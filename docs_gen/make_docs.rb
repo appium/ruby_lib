@@ -34,7 +34,7 @@ def mobj_to_md obj
 
   indent = space 5
   params = obj.tags.select { |tag| tag.tag_name == 'param' }
-  if !params.empty?
+  unless params.empty?
     out += "__Parameters:__\n\n"
     params.each do |param|
       param_types = param.types ? "[#{param.types.join ', '}] " : ''
@@ -44,7 +44,7 @@ def mobj_to_md obj
   end
 
   ret = obj.tag 'return'
-  if ret
+  if ret&.types
     out += "__Returns:__\n\n"
     out += indent + "[#{ret.types.join ', '}] #{ret.text}\n\n"
   end
