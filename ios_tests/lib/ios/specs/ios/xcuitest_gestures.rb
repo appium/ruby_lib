@@ -8,6 +8,20 @@ describe 'ios/xcuitest_gestures' do
     screen.must_equal catalog
   end
 
+  def open_alert_ok_cancel
+    wait_true do
+      find_element(:name, 'Show OK-Cancel').click
+      find_element(:name, 'UIActionSheet <title>').displayed?
+    end
+  end
+
+  def open_alert_custom
+    wait_true do
+      find_element(:name, 'Show Customized').click
+      find_element(:name, 'UIActionSheet <title>').displayed?
+    end
+  end
+
   t 'before_first' do
     before_first
   end
@@ -58,8 +72,31 @@ describe 'ios/xcuitest_gestures' do
     find_element(:name, 'Serena Auroux').displayed?.must_equal true
   end
 
-  t 'after_last' do
+  t 'back to top' do
     back_click
+  end
+
+  t 'alert' do
+    wait_true do
+      UI::Inventory.xcuitest? ? find_element(:name, 'Alerts').click : text('alerts').click
+      tag(UI::Inventory.navbar).name == 'Alerts' # wait for true
+    end
+
+    open_alert_ok_cancel
+    alert action: 'accept'
+
+    open_alert_ok_cancel
+    alert action: 'dismiss'
+
+    open_alert_custom
+    alert action: 'accept', button_label: 'Button1'
+  end
+
+  t 'back to top' do
+    back_click
+  end
+
+  t 'after_last' do
     after_last
   end
 end
