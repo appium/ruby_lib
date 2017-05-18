@@ -71,6 +71,25 @@ module Appium
         execute_script 'mobile: doubleTap', args
       end
 
+      # @param x [float] Screen x long tap coordinate of type float. Mandatory parameter only if element is not set
+      # @param y [float] Screen y long tap coordinate of type float. Mandatory parameter only if element is not set
+      # @param duration [Float] The float duration of press action in seconds. Mandatory parameter
+      # @option opts [Element] :element The internal element identifier (as hexadecimal hash string) to long tap on
+      #
+      #   ```ruby
+      #   touch_and_hold x: 100, y: 100
+      #   touch_and_hold x: 100, y: 100, duration: 2.0
+      #   touch_and_hold element: find_element(:accessibility_id, "some item")
+      #   ```
+      def touch_and_hold(x: nil, y: nil, element: nil, duration: 1.0)
+        return 'require XCUITest(WDA)' unless automation_name_is_xcuitest?
+        return 'Set x, y or element' if (x.nil? || y.nil?) && element.nil?
+
+        args = element.nil? ? { x: x, y: y } : { element: element.ref }
+        args[:duration] = duration
+        execute_script 'mobile: touchAndHold', args
+      end
+
       # @param [Element] :element Element to long tap on.
       #
       #   ```ruby
