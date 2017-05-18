@@ -146,7 +146,8 @@ module Appium
       # @param action [String] The following actions are supported: accept, dismiss and getButtons. Mandatory parameter
       # @param button_label [String] The label text of an existing alert button to click on.
       #   This is an optional parameter and is only valid in combination with accept and dismiss actions.
-      # @return nil or Selenium::WebDriver::Error::NoSuchAlertError if no action sheet or alert
+      # @return {} or Selenium::WebDriver::Error::NoSuchAlertError if no action sheet or alert
+      #   or button labels if action is equal to getButtons.
       #
       #   ```ruby
       #   alert action: "accept"
