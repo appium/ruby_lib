@@ -36,6 +36,12 @@ describe 'ios/xcuitest_gestures' do
     double_tap(element: element)
   end
 
+  t 'touch_and_hold' do
+    element = button('Tinted')
+    touch_and_hold(element: element, duration: 4.0)
+    touch_and_hold(x: 100, y: 100)
+  end
+
   t 'scroll' do
     scroll direction: 'down'
     text('Style Default').displayed?.must_equal true
