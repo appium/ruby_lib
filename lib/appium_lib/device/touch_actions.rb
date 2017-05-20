@@ -7,6 +7,8 @@ module Appium
   # ```ruby
   # action = TouchAction.new.press(x: 45, y: 100).wait(5).release
   # action.perform
+  # action = TouchAction.new.swipe(....)
+  # action.perform
   # ```
   #
   # Or each methods can call without `TouchAction.new` as the following.
