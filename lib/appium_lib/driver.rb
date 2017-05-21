@@ -276,35 +276,35 @@ module Appium
     # The amount to sleep in seconds before every webdriver http call.
     attr_accessor :global_webdriver_http_sleep
     # Selenium webdriver capabilities
-    attr_accessor :caps
+    attr_reader :caps
     # Custom URL for the selenium server
-    attr_accessor :custom_url
+    attr_reader :custom_url
     # Export session id to textfile in /tmp for 3rd party tools
-    attr_accessor :export_session
+    attr_reader :export_session
     # Default wait time for elements to appear
     # Returns the default client side wait.
     # This value is independent of what the server is using
     # @return [Integer]
     attr_reader :default_wait
     # Username for use on Sauce Labs. Set `false` to disable Sauce, even when SAUCE_USERNAME is in ENV.
-    attr_accessor :sauce_username
+    attr_reader :sauce_username
     # Access Key for use on Sauce Labs. Set `false` to disable Sauce, even when SAUCE_ACCESS_KEY is in ENV.
-    attr_accessor :sauce_access_key
+    attr_reader :sauce_access_key
     # Override the Sauce Appium endpoint to allow e.g. TestObject tests
-    attr_accessor :sauce_endpoint
+    attr_reader :sauce_endpoint
     # Appium's server port
-    attr_accessor :appium_port
+    attr_reader :appium_port
     # Device type to request from the appium server
-    attr_accessor :appium_device
+    attr_reader :appium_device
     # Automation name sent to appium server or received from server
     # If automation_name is nil, it is not set both client side and server side.
     attr_reader :automation_name
     # Appium's server version
     attr_reader :appium_server_status
     # Boolean debug mode for the Appium Ruby bindings
-    attr_accessor :appium_debug
+    attr_reader :appium_debug
     # instance of AbstractEventListener for logging support
-    attr_accessor :listener
+    attr_reader :listener
     # Returns the driver
     # @return [Driver] the driver
     attr_reader :driver
