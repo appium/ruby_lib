@@ -69,3 +69,6 @@ gem install --no-rdoc --no-ri appium_lib
 ```ruby
 Appium::Logger.level = Logger::INFO
 ```
+
+#### Load Pry
+`Pry.config.pager = false` is set if you have no `.pryrc` files and `Pry` is defined.
