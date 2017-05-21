@@ -17,8 +17,8 @@ describe 'device/multi_touch' do
   t 'pinch & zoom' do
     wait { id('Images').click }
     # both of these appear to do nothing on iOS 8
-    zoom 200
-    pinch 75
+    Appium::MultiTouch.zoom 200
+    Appium::MultiTouch.pinch 75
     go_back
   end
 end
