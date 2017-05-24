@@ -1,3 +1,16 @@
+#### v9.4.5 2017-05-25
+
+- [8e7ea79](https://github.com/appium/ruby_lib/commit/8e7ea79ca476bdc172015aea3ed2b4dc3b571d00) [Release 9 4 5 (#590)](https://github.com/appium/ruby_lib/issues/590)
+- [4001282](https://github.com/appium/ruby_lib/commit/40012821fd3a3b5f7f484de951bec9fbb00f225c) [add grid 2.x (#589)](https://github.com/appium/ruby_lib/issues/589)
+- [fa00890](https://github.com/appium/ruby_lib/commit/fa008908ce95d1d8cd76bd9bb1ea927b36a64f9a) [update some grid parameters (#588)](https://github.com/appium/ruby_lib/issues/588)
+- [44e12cb](https://github.com/appium/ruby_lib/commit/44e12cb2f0aec3a9f9954819c68646ed83efb297) [add grid settings (#587)](https://github.com/appium/ruby_lib/issues/587)
+- [4d98683](https://github.com/appium/ruby_lib/commit/4d986830facd0e4ef1978e247a3c8ffd0a02427b) [skip loading Pry.config.pager = false if users have .pryrc (#585)](https://github.com/appium/ruby_lib/issues/585)
+- [517f30d](https://github.com/appium/ruby_lib/commit/517f30d6cdbcbf683311612c705ac876b1e3521a) [fix some ambiguous gesture (#584)](https://github.com/appium/ruby_lib/issues/584)
+- [b69f0e0](https://github.com/appium/ruby_lib/commit/b69f0e0ce061ebeb6462b0118411af85b388addd) [replace attr_accessor to attr_reader (#583)](https://github.com/appium/ruby_lib/issues/583)
+- [5eff035](https://github.com/appium/ruby_lib/commit/5eff0353ee32a40e56dea8b36a9b3bb86269579e) [add touch and hold (#581)](https://github.com/appium/ruby_lib/issues/581)
+- [e736359](https://github.com/appium/ruby_lib/commit/e736359bc9b8b3a369dcbcc727cb858d2f98e94f) [add alert test case (#579)](https://github.com/appium/ruby_lib/issues/579)
+
+
 #### v9.4.4 2017-05-13
 
 - [230bac6](https://github.com/appium/ruby_lib/commit/230bac6fbcf26645111f76caab64dbf46de84897) [Release 9 4 4 (#577)](https://github.com/appium/ruby_lib/issues/577)

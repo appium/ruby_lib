@@ -5,6 +5,15 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 
 ## v9.4.5
 ### 1. Enhancements
+
+### 2. Bug fixes
+- reduce gemfile size [#591](https://github.com/appium/ruby_lib/issues/591)
+    - Exclude `ios_tests`, `android_tests` and `grid` from gem
+
+### 3. Deprecations
+
+## v9.4.5
+### 1. Enhancements
 - add `touch_and_hols` for `mobile:` command in XCUITest [#581](https://github.com/appium/ruby_lib/pull/581)
 - Driver disables Pry pager without asking [#582](https://github.com/appium/ruby_lib/issues/582)
 - add grid environments in this repository.
