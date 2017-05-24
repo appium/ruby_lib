@@ -3,6 +3,16 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## v9.4.5
+### 1. Enhancements
+- add `touch_and_hols` for `mobile:` command in XCUITest [#581](https://github.com/appium/ruby_lib/pull/581)
+- Driver disables Pry pager without asking [#582](https://github.com/appium/ruby_lib/issues/582)
+- add grid environments in this repository.
+
+### 2. Bug fixes
+
+### 3. Deprecations
+
 ## v9.4.4
 ### 1. Enhancements
 - add mobile gesture, `mobile: alert`
