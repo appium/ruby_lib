@@ -1,3 +1,14 @@
+#### v9.4.4 2017-05-13
+
+- [230bac6](https://github.com/appium/ruby_lib/commit/230bac6fbcf26645111f76caab64dbf46de84897) [Release 9 4 4 (#577)](https://github.com/appium/ruby_lib/issues/577)
+- [1facf0f](https://github.com/appium/ruby_lib/commit/1facf0f70d9607ba7d7e062d87ee7a900dbcd90a) [add mobile alert (#575)](https://github.com/appium/ruby_lib/issues/575)
+- [a2b0675](https://github.com/appium/ruby_lib/commit/a2b067520de4237bd2cd71fd2a22f002cc3a8814) [add travis example for ios (#573)](https://github.com/appium/ruby_lib/issues/573)
+- [2ff78b1](https://github.com/appium/ruby_lib/commit/2ff78b190f53011c9f0b26777cb1caf64410eaf8) [clean hide_keybaord for ios (#572)](https://github.com/appium/ruby_lib/issues/572)
+- [27e10f8](https://github.com/appium/ruby_lib/commit/27e10f8ba310ce933171b169607172e593344ad7) [revert _fix_android_native_source and instance counting (#571)](https://github.com/appium/ruby_lib/issues/571)
+- [4a70d78](https://github.com/appium/ruby_lib/commit/4a70d78d1fcf008654d54d47660f341321a3922e) [update latest apk for android tests (#570)](https://github.com/appium/ruby_lib/issues/570)
+- [bd7d67b](https://github.com/appium/ruby_lib/commit/bd7d67b2dd12590937cf059e198d64bde6f9141d) [add special thanks (#567)](https://github.com/appium/ruby_lib/issues/567)
+
+
 #### v9.4.3 2017-05-03
 
 - [c413bd7](https://github.com/appium/ruby_lib/commit/c413bd77d0fec58e1c2cce6821694bcf659b9e1b) [Release 9 4 3 (#566)](https://github.com/appium/ruby_lib/issues/566)
