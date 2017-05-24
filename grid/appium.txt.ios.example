@@ -3,7 +3,6 @@ platformName = "ios"
 platformVersion = "10.3"
 deviceName = "iPhone Simulator"
 browserName = "Safari"
-version = "9.0"
 some_capability = "some_capability"
 
 [appium_lib]

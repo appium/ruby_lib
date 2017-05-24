@@ -1,7 +1,7 @@
 # Run Grid
 
 ```bash
-$ java -jar selenium-server-standalone-3.2.0.jar -role hub -hubConfig hub_config.json
+$ java -jar selenium-server-standalone-2.53.1.jar -role hub -hubConfig hub_config.json
 ```
 
 # Run Appium
