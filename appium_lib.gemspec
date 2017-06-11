@@ -28,6 +28,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'yard', '~> 0.8'
 
   s.add_development_dependency 'rubocop', '~> 0.46.0'
+  s.add_development_dependency 'rainbow', '~> 2.1.0'
   s.add_development_dependency 'pry'
 
   s.files = `git ls-files`.split("\n").select { |v| !v.match /\A^(ios_tests|android_tests|grid)\/.+/ }
