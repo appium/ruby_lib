@@ -1,3 +1,9 @@
+#### v9.4.6 2017-05-25
+
+- [a44ea77](https://github.com/appium/ruby_lib/commit/a44ea770287407ba9b488e25e259884676c89709) [Release 9 4 6 (#593)](https://github.com/appium/ruby_lib/issues/593)
+- [9f9c688](https://github.com/appium/ruby_lib/commit/9f9c688d1a9d0b2213dc41a256a0085a603f128e) [exclude test directories and grids (#592)](https://github.com/appium/ruby_lib/issues/592)
+
+
 #### v9.4.5 2017-05-25
 
 - [8e7ea79](https://github.com/appium/ruby_lib/commit/8e7ea79ca476bdc172015aea3ed2b4dc3b571d00) [Release 9 4 5 (#590)](https://github.com/appium/ruby_lib/issues/590)
