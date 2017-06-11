@@ -241,7 +241,7 @@ module Appium
         add_endpoint_method(:background_app) do
           def background_app(duration = 0)
             # https://github.com/appium/ruby_lib/issues/500, https://github.com/appium/appium/issues/7741
-            if $driver.automation_name_is_xcuitest? && $driver.appium_server_status['build']['version'] >= '1.6.4'
+            if $driver.automation_name_is_xcuitest? # && $driver.appium_server_status['build']['version'] >= '1.6.4'
               duration_milli_sec = duration.nil? ? nil : duration * 1000
               execute :background_app, {}, seconds: { timeout: duration_milli_sec }
             else
