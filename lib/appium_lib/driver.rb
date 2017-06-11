@@ -502,6 +502,12 @@ module Appium
     # }
     # ```
     #
+    # Returns blank hash for Selenium Grid since `remote_status` gets 500 error
+    #
+    # ```ruby
+    # {}
+    # ```
+    #
     # @return [Hash]
     def appium_server_version
       driver.remote_status
