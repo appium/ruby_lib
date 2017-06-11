@@ -2,7 +2,7 @@
   "capabilities":
   [
     {
-      "browserName": "Safari",
+      "browserName": "iPhone Simulator",
       "version":"9.0",
       "platform":"MAC",
       "maxInstances": 1
