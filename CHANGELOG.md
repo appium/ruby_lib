@@ -3,6 +3,14 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## v9.4.7
+### 1. Enhancements
+
+### 2. Bug fixes
+- fix raise 500 error by `driver.remote_status` in `appium_server_version` [#599](https://github.com/appium/ruby_lib/issues/599)
+
+### 3. Deprecations
+
 ## v9.4.6
 ### 1. Enhancements
 
