@@ -1,47 +1,50 @@
 module Appium
   module Common
-    # http://mudge.name/2011/01/26/passing-blocks-in-ruby-without-block.html
-    # Note that the Ruby timeout module is avoided. timeout has problems.
-    # https://coderwall.com/p/1novga
+    class Wait < ::Selenium::WebDriver::Wait
+      def initialize(opts = {})
+        valid_keys = [:timeout, :interval, :message, :ignore, :return_if_true]
+        invalid_keys = []
+        opts.keys.each { |key| invalid_keys << key unless valid_keys.include?(key) }
+        # [:one, :two] => :one, :two
+        raise "Invalid keys #{invalid_keys.to_s[1..-2]}. Valid keys are #{valid_keys.to_s[1..-2]}" unless invalid_keys.empty?
 
-    # Wait code from the selenium Ruby gem
-    # https://github.com/SeleniumHQ/selenium/blob/cf501dda3f0ed12233de51ce8170c0e8090f0c20/rb/lib/selenium/webdriver/common/wait.rb
-    def _generic_wait(opts = {})
-      valid_keys = [:timeout, :interval, :message, :ignore, :return_if_true]
-      invalid_keys = []
-      opts.keys.each { |key| invalid_keys << key unless valid_keys.include?(key) }
-      # [:one, :two] => :one, :two
-      raise "Invalid keys #{invalid_keys.to_s[1..-2]}. Valid keys are #{valid_keys.to_s[1..-2]}" unless invalid_keys.empty?
+        @timeout        = opts.fetch(:timeout, DEFAULT_TIMEOUT)
+        @interval       = opts.fetch(:interval, DEFAULT_INTERVAL)
+        @message        = opts[:message]
+        @ignored        = Array(opts[:ignore] || ::Exception)
+        @return_if_true = opts[:return_if_true]
 
-      timeout        = opts.fetch(:timeout, @appium_wait_timeout)
-      interval       = opts.fetch(:interval, @appium_wait_interval)
-      message        = opts[:message]
-      ignored        = Array(opts[:ignore] || ::Exception)
-      return_if_true = opts[:return_if_true]
-
-      end_time   = Time.now + timeout
-      last_error = nil
-
-      until Time.now > end_time
-        begin
-          return yield unless return_if_true
-
-          result = yield
-          return result if result
-        rescue ::Errno::ECONNREFUSED => e
-          raise e
-        rescue *ignored => last_error # rubocop:disable Lint/HandleExceptions
-          # swallowed
-        end
-
-        sleep interval
+        super(timeout: @timeout, interval: @interval, message: @message, ignore: @ignored)
       end
 
-      msg = message ? message.dup : "timed out after #{timeout} seconds"
+      # Wait code from the selenium Ruby gem
+      # https://github.com/SeleniumHQ/selenium/blob/cf501dda3f0ed12233de51ce8170c0e8090f0c20/rb/lib/selenium/webdriver/common/wait.rb
+      # @override
+      def until
+        end_time   = Time.now + @timeout
+        last_error = nil
 
-      msg << " (#{last_error.message})" if last_error
+        until Time.now > end_time
+          begin
+            return yield unless @return_if_true
 
-      raise Selenium::WebDriver::Error::TimeOutError, msg
+            result = yield
+            return result if result
+          rescue ::Errno::ECONNREFUSED => e
+            raise e
+          rescue *@ignored => last_error # rubocop:disable Lint/HandleExceptions
+            # swallowed
+          end
+
+          sleep @interval
+        end
+
+        msg = @message ? @message.dup : "timed out after #{@timeout} seconds"
+
+        msg << " (#{last_error.message})" if last_error
+
+        raise Selenium::WebDriver::Error::TimeOutError, msg
+      end
     end
 
     # process opts before calling _generic_wait
@@ -66,9 +69,14 @@ module Appium
     # @option opts [Numeric] :interval Seconds to sleep between polls. Set default by `appium_wait_interval` (0.5).
     # @option opts [String] :message Exception message if timed out.
     # @option opts [Array, Exception] :ignore Exceptions to ignore while polling (default: Exception)
-    def wait_true(opts = {}, &block)
+    def wait_true(opts = {})
       opts = _process_wait_opts(opts).merge(return_if_true: true)
-      _generic_wait opts, &block
+
+      opts[:timeout]  ||= @appium_wait_timeout
+      opts[:interval] ||= @appium_wait_interval
+
+      wait = ::Appium::Common::Wait.new opts
+      wait.until { yield }
     end
 
     # Check every interval seconds to see if yield doesn't raise an exception.
@@ -84,9 +92,14 @@ module Appium
     # @option opts [Numeric] :interval Seconds to sleep between polls. Set default by `appium_wait_interval` (0.5).
     # @option opts [String] :message Exception message if timed out.
     # @option opts [Array, Exception] :ignore Exceptions to ignore while polling (default: Exception)
-    def wait(opts = {}, &block)
+    def wait(opts = {})
       opts = _process_wait_opts(opts).merge(return_if_true: false)
-      _generic_wait opts, &block
+
+      opts[:timeout]  ||= @appium_wait_timeout
+      opts[:interval] ||= @appium_wait_interval
+
+      wait = ::Appium::Common::Wait.new opts
+      wait.until { yield }
     end
   end # module Common
 end # module Appium
