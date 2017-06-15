@@ -37,7 +37,6 @@ module Appium
     #   current_package # 'com.example.android.apis'
     #   ```
 
-
     # @!method get_system_bars
     #   Get system bar's information
     #   @return [String] System bar
