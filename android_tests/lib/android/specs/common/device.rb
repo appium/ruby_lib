@@ -49,6 +49,10 @@ describe 'common/device' do
     wait { current_activity.include?('Settings').must_equal true }
   end
 
+  t 'current_package' do
+    wait { current_package.must_equal 'com.example.android.apis' }
+  end
+
   t 'installed' do
     wait { app_installed?('fake_app').must_equal false }
   end

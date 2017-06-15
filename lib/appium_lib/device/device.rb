@@ -22,6 +22,20 @@ module Appium
     #   ```
 
     # @!method current_activity
+    #   Get current activity name
+    #   @return [String] An activity name
+    #
+    #   ```ruby
+    #   current_activity # '.ApiDemos'
+    #   ```
+
+    # @!method current_package
+    #   Get current package name
+    #   @return [String] A package name
+    #
+    #   ```ruby
+    #   current_package # 'com.example.android.apis'
+    #   ```
 
     # @!method get_system_bars
     #   Get system bar's information
