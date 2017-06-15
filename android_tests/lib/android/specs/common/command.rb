@@ -17,6 +17,7 @@ describe 'common/command.rb' do
     Selenium::WebDriver::Remote::Bridge.method_defined?(:open_notifications).must_equal true
     Selenium::WebDriver::Remote::Bridge.method_defined?(:toggle_airplane_mode).must_equal true
     Selenium::WebDriver::Remote::Bridge.method_defined?(:current_activity).must_equal true
+    Selenium::WebDriver::Remote::Bridge.method_defined?(:current_package).must_equal true
     Selenium::WebDriver::Remote::Bridge.method_defined?(:get_network_connection).must_equal true
     Selenium::WebDriver::Remote::Bridge.method_defined?(:get_performance_data_types).must_equal true
     Selenium::WebDriver::Remote::Bridge.method_defined?(:get_performance_data).must_equal true
