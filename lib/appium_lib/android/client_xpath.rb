@@ -33,11 +33,15 @@ module Appium
       _nodeset_to_uiselector nodes: nodes, first: first
     end
 
+    # @deprecated Please use :uiautomator or :xpath strategy directly
     def client_xpath(xpath)
+      warn '[DEPRECATION] client_xpath will be removed. Please use :uiautomator or :xpath strategy directly.'
       find_element :uiautomator, _client_xpath(xpath: xpath, first: true)
     end
 
+    # @deprecated Please use :uiautomator or :xpath strategy directly
     def client_xpaths(xpath)
+      warn '[DEPRECATION] client_xpaths will be removed. Please use :uiautomator or :xpath strategy directly.'
       find_elements :uiautomator, _client_xpath(xpath: xpath, first: false)
     end
   end
