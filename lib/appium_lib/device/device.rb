@@ -597,14 +597,20 @@ module Appium
     # @param context (String) The context to switch to for the duration of the block.
     #
     # ```ruby
-    # within_context('NATIVE_APP') do
-    #   find_element [:tag, "button"]
+    # result = within_context('NATIVE_APP') do
+    #   find_element :tag, "button"
+    # end # The result of `find_element :tag, "button"`
     # ```
     def within_context(context)
       existing_context = current_context
       set_context context
-      yield if block_given?
-      set_context existing_context
+      if block_given?
+        result = yield
+        set_context existing_context
+        result
+      else
+        set_context existing_context
+      end
     end
 
     # Change to the default context.  This is equivalent to `set_context nil`.
