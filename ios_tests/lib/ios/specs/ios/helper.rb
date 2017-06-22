@@ -13,9 +13,13 @@ describe 'ios/helper' do
     ios_password(2).must_equal 8226.chr('UTF-8') * 2
   end
 
-  # TODO: t 'get_page' do
+  t 'get_page' do
+    get_page # writes to std out
+  end
 
-  # t 'page' do # writes to std out
+  t 'page' do
+    page # writes to std out
+  end
 
   t 'source_window' do
     source_window.length.must_be :>=, 14_000
