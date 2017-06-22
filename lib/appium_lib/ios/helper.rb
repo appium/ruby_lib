@@ -12,7 +12,7 @@ module Appium
         _print_attr(type, page['name'], page['label'], page['value'], page['hint'], page['visible'])
       end
 
-      def _print_attr(type, name, label, value, hint, visible)
+      def _print_attr(type, name, label, value, hint, visible) # rubocop:disable Metrics/ParameterLists
         if name == label && name == value
           puts type.to_s if name || label || value || hint || visible
           puts "   name, label, value: #{name}" if name
