@@ -1,3 +1,10 @@
+#### v9.4.7 2017-06-11
+
+- [ef9efbd](https://github.com/appium/ruby_lib/commit/ef9efbd6d3fadfaebaa4245bed40d28aec33be32) [Release 9 4 7 (#601)](https://github.com/appium/ruby_lib/issues/601)
+- [29f031a](https://github.com/appium/ruby_lib/commit/29f031a0b8d180289cfd8a9de4216300916cd5cc) [Ignore server version check for grid (#600)](https://github.com/appium/ruby_lib/issues/600)
+- [1b7a4b4](https://github.com/appium/ruby_lib/commit/1b7a4b45074761141d25b1461d0c23672889905d) [Update CHANGELOG.md (#597)](https://github.com/appium/ruby_lib/issues/597)
+
+
 #### v9.4.6 2017-05-25
 
 - [a44ea77](https://github.com/appium/ruby_lib/commit/a44ea770287407ba9b488e25e259884676c89709) [Release 9 4 6 (#593)](https://github.com/appium/ruby_lib/issues/593)
