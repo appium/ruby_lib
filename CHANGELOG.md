@@ -3,6 +3,19 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## v9.4.8
+### 1. Enhancements
+- within_context swallowing block return value [#311](https://github.com/appium/ruby_lib/issues/311)
+- get current_package for Android [#604](https://github.com/appium/ruby_lib/issues/604)
+- Show visibility on iOS page command [#609](https://github.com/appium/ruby_lib/pull/609)
+    - related: allow showing all elements on ios page command [#310](https://github.com/appium/ruby_lib/issues/310)
+
+### 2. Bug fixes
+
+### 3. Deprecations
+- Android: mark deprecated for client side xpath strategy [#608](https://github.com/appium/ruby_lib/pull/608)
+- iOS: get_page method [#609](https://github.com/appium/ruby_lib/pull/609)
+
 ## v9.4.7
 ### 1. Enhancements
 
