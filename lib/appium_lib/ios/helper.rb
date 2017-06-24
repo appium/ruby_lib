@@ -6,31 +6,32 @@ module Appium
       def start_element(type, attrs = [])
         return if filter && !filter.eql?(type)
         page = attrs.inject({}) do |hash, attr|
-          hash[attr[0]] = attr[1] if %w(name label value hint).include?(attr[0])
+          hash[attr[0]] = attr[1] if %w(name label value hint visible).include?(attr[0])
           hash
         end
-        _print_attr(type, page['name'], page['label'], page['value'], page['hint'])
+        _print_attr(type, page['name'], page['label'], page['value'], page['hint'], page['visible'])
       end
 
-      def _print_attr(type, name, label, value, hint)
+      def _print_attr(type, name, label, value, hint, visible) # rubocop:disable Metrics/ParameterLists
         if name == label && name == value
-          puts type.to_s if name || label || value || hint
+          puts type.to_s if name || label || value || hint || visible
           puts "   name, label, value: #{name}" if name
         elsif name == label
-          puts type.to_s if name || label || value || hint
+          puts type.to_s if name || label || value || hint || visible
           puts "   name, label: #{name}" if name
           puts "   value: #{value}" if value
         elsif name == value
-          puts type.to_s if name || label || value || hint
+          puts type.to_s if name || label || value || hint || visible
           puts "   name, value: #{name}" if name
           puts "  label: #{label}" if label
         else
-          puts type.to_s if name || label || value || hint
+          puts type.to_s if name || label || value || hint || visible
           puts "   name: #{name}" if name
           puts "  label: #{label}" if label
           puts "  value: #{value}" if value
         end
         puts "   hint: #{hint}" if hint
+        puts "   visible: #{visible}" if visible
       end
     end
     # iOS only. On Android uiautomator always returns an empty string for EditText password.
@@ -50,7 +51,10 @@ module Appium
     # @option element [Object] the element to search. omit to search everything
     # @option class_name [String,Symbol] the class name to filter on. case insensitive include match.
     # @return [String]
+    # @deprecated
     def get_page(element = source_window(0), class_name = nil)
+      warn '[DEPRECATION] get_page will be removed. Please use page or source instead.'
+
       lazy_load_strings # populate @strings_xml
       class_name = class_name.to_s.downcase
 
@@ -85,10 +89,10 @@ module Appium
         type    = fix_space element['type']
 
         # if class_name is set, mark non-matches as invisible
-        visible = (type.downcase.include? class_namet).to_s if class_name
+        visible = (type.downcase.include? class_name).to_s if class_name
         if visible && visible == 'true'
 
-          _print_attr(type, name, label, value, hint)
+          _print_attr(type, name, label, value, hint, visible)
 
           # there may be many ids with the same value.
           # output all exact matches.
@@ -128,22 +132,16 @@ module Appium
     #
     # ```ruby
     # page class: :UIAButton # filter on buttons
-    # page window: 1 # show source for window 1
     # page class: :UIAButton, window: 1
     # ```
     #
-    # @option window [Integer] window index. -1 for default
+    # @option visible [Symbol] visible value to filter on
     # @option class [Symbol] class name to filter on
     #
     # @return [void]
     def page(opts = {})
-      if opts.is_a?(Hash)
-        window_number = opts.fetch :window, -1
-        class_name    = opts.fetch :class, nil
-      else
-        window_number = -1
-        class_name    = opts
-      end
+      class_name = opts.is_a?(Hash) ? opts.fetch(:class, nil) : opts
+
       # current_context may be nil which breaks start_with
       if current_context && current_context.start_with?('WEBVIEW')
         s      = get_source
@@ -153,8 +151,7 @@ module Appium
         parser.parse s
         parser.document.result
       else
-
-        s = source_window(window_number || 0)
+        s = source_window
         parser = Nokogiri::XML::SAX::Parser.new(UITestElementsPrinter.new)
         if class_name
           parser.document.filter = class_name.is_a?(Symbol) ? class_name.to_s : class_name
@@ -165,14 +162,9 @@ module Appium
     end
 
     # Gets the JSON source of window number
-    # @param [Integer] _window_number The int index of the target window
     # @return [JSON]
-    def source_window(_window_number = 0)
-      # TODO: update comments
-      # appium 1.0 still returns JSON when getTree() is invoked so this
-      # doesn't need to change to XML. If getTree() is removed then
-      # source_window will need to parse the elements of getTreeForXML()\
-      # https://github.com/appium/appium-uiauto/blob/247eb71383fa1a087ff8f8fc96fac25025731f3f/uiauto/appium/element.js#L145
+    def source_window(window_number = nil)
+      warn '[DEPRECATION] The argument window_number will be removed. Plesse remove window_number' unless window_number
       get_source
     end
 
