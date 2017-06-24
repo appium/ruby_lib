@@ -163,7 +163,8 @@ module Appium
 
     # Gets the JSON source of window number
     # @return [JSON]
-    def source_window(_window_number = 0)
+    def source_window(window_number = nil)
+      warn '[DEPRECATION] The argument window_number will be removed. Plesse remove window_number' unless window_number
       get_source
     end
 
