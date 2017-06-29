@@ -29,6 +29,11 @@ describe 'ios/xcuitest_gestures' do
   t 'tap' do
     element = text('controls')
     tap(x: 0, y: 0, element: element)
+
+    back_click
+
+    rect = element.rect
+    tap(x: rect.x + rect.width / 2, y: rect.y + rect.height / 2)
   end
 
   t 'double_tap' do

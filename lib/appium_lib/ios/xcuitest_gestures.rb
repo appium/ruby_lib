@@ -116,7 +116,7 @@ module Appium
         return 'require XCUITest(WDA)' unless automation_name_is_xcuitest?
 
         args = { x: x, y: y }
-        args[:element] = element.ref
+        args[:element] = element.ref if element
         execute_script 'mobile: tap', args
       end
 
@@ -138,7 +138,7 @@ module Appium
         return 'require XCUITest(WDA)' unless automation_name_is_xcuitest?
 
         args = { fromX: from_x, fromY: from_y, toX: to_x, toY: to_y, duration: duration }
-        args[:element] = element if element
+        args[:element] = element.ref if element
         execute_script 'mobile: dragFromToForDuration', args
       end
       # rubocop:enable Metrics/ParameterLists
