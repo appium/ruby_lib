@@ -1,3 +1,13 @@
+#### v9.4.8 2017-06-24
+
+- [209fb3f](https://github.com/appium/ruby_lib/commit/209fb3fce4f2e567c6d6ba2395eec9b98669d02d) [Release 9 4 8 (#610)](https://github.com/appium/ruby_lib/issues/610)
+- [40c92eb](https://github.com/appium/ruby_lib/commit/40c92eb1a7e01663d2b9b47314d9e7a9fa0e6586) [Add visibility for ios (#609)](https://github.com/appium/ruby_lib/issues/609)
+- [20307a0](https://github.com/appium/ruby_lib/commit/20307a06269aef7123c865091062b97cdbbe8430) [mark deprecated for client side xpath strategy (#608)](https://github.com/appium/ruby_lib/issues/608)
+- [5d40446](https://github.com/appium/ruby_lib/commit/5d40446a913432113931d9430ff36c8179cc6cbb) [Return a result of yield (#606)](https://github.com/appium/ruby_lib/issues/606)
+- [cc913ed](https://github.com/appium/ruby_lib/commit/cc913edb4bc24c18a58c2c5490dfb7b5a705d303) [add getting current package name (#605)](https://github.com/appium/ruby_lib/issues/605)
+- [fa33239](https://github.com/appium/ruby_lib/commit/fa332395c2f4fae70bf672fb12f002a3194cdc2c) [inherit selenium's wait (#603)](https://github.com/appium/ruby_lib/issues/603)
+
+
 #### v9.4.7 2017-06-11
 
 - [ef9efbd](https://github.com/appium/ruby_lib/commit/ef9efbd6d3fadfaebaa4245bed40d28aec33be32) [Release 9 4 7 (#601)](https://github.com/appium/ruby_lib/issues/601)

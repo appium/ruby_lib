@@ -3,6 +3,14 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## v9.4.9
+### 1. Enhancements
+
+### 2. Bug fixes
+- fix handling a tap gesture in xcuitest [#611](https://github.com/appium/ruby_lib/pull/611)
+
+### 3. Deprecations
+
 ## v9.4.8
 ### 1. Enhancements
 - within_context swallowing block return value [#311](https://github.com/appium/ruby_lib/issues/311)
