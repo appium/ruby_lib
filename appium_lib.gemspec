@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.name          = 'appium_lib'
   s.version       = Appium::VERSION
   s.date          = Appium::DATE
-  s.license       = 'Apache'
+  s.license       = 'Apache-2.0'
   s.description   = s.summary = 'Ruby library for Appium'
   s.description   += '.' # avoid identical warning
   s.authors       = s.email = ['code@bootstraponline.com']
