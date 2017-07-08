@@ -439,7 +439,7 @@ module Appium
 
     # Returns a hash of the driver attributes
     def driver_attributes
-      attributes = {
+      {
           caps:             @caps,
           automation_name:  @automation_name,
           custom_url:       @custom_url,
@@ -455,12 +455,6 @@ module Appium
           wait_timeout:     @appium_wait_timeout,
           wait_interval:    @appium_wait_interval
       }
-
-      # Return duplicates so attributes are immutable
-      attributes.each do |key, value|
-        attributes[key] = value.duplicable? ? value.dup : value
-      end
-      attributes
     end
 
     def device_is_android?
