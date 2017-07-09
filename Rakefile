@@ -222,7 +222,10 @@ task :notes do
                      else
                        comment
                      end
-      new_data += "- [#{hex[0...7]}](https://github.com/appium/#{gh_name}/commit/#{hex}) #{comment_note}\n"
+
+      unless match_prefix?(comment_note)
+        new_data += "- [#{hex[0...7]}](https://github.com/appium/#{gh_name}/commit/#{hex}) #{comment_note}\n"
+      end
     end
     data  = new_data + "\n"
 
@@ -231,6 +234,11 @@ task :notes do
   end
 
   File.open('release_notes.md', 'w') { |f| f.write notes.to_s.strip }
+end
+
+# Return true if the comment_note starts with /^(docs|style|chore):/
+def match_prefix?(comment_note)
+  comment_note =~ /^(docs|style|chore|test):/ ? true : false
 end
 
 # Used to purge byte order marks that mess up YARD
