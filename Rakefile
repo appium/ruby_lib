@@ -212,7 +212,7 @@ task :notes do
       hex     = line.match(/[a-zA-Z0-9]+/)[0]
       # use first 7 chars to match GitHub
       comment = line.gsub(hex, '').strip
-      next if comment == 'Update release notes'
+      next if skip_release_note?(comment)
 
       issue_num = comment.slice(/\(#[0-9]+\)/)
       # If the issue_num is pull request, GitHub redirects to the pull request.
@@ -222,6 +222,7 @@ task :notes do
                      else
                        comment
                      end
+
       new_data += "- [#{hex[0...7]}](https://github.com/appium/#{gh_name}/commit/#{hex}) #{comment_note}\n"
     end
     data  = new_data + "\n"
@@ -231,6 +232,13 @@ task :notes do
   end
 
   File.open('release_notes.md', 'w') { |f| f.write notes.to_s.strip }
+end
+
+# Return true if the comment is equal to 'Update release notes'
+# Return true if the comment starts with /^(docs|style|chore):/
+def skip_release_note?(comment)
+  return true if comment == 'Update release notes'
+  comment =~ /^(docs|style|chore|test):/ ? true : false
 end
 
 # Used to purge byte order marks that mess up YARD
