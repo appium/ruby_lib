@@ -31,5 +31,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rainbow', '~> 2.1.0'
   s.add_development_dependency 'pry'
 
-  s.files = `git ls-files`.split("\n").select { |v| !v.match /\A^(ios_tests|android_tests|grid)\/.+/ }
+  s.files = `git ls-files`.split("\n").select { |v| !v.match /\A^(ios_tests|android_tests|grid|test_apps)\/.+/ }
 end

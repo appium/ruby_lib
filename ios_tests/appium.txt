@@ -3,7 +3,7 @@ platformName = "ios"
 platformVersion = "10.3"
 deviceName ="iPhone Simulator"
 automationName = 'XCUITest'
-app = "./UICatalog.app"
+app = "../test_apps/UICatalog.app"
 some_capability = "some_capability"
 
 [appium_lib]
