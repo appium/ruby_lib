@@ -26,9 +26,10 @@ module Appium
       # execute_script 'mobile: tap', :x => 0.0, :y => 0.98
       # ```
       #
-      # https://github.com/appium/appium/wiki/Automating-mobile-gestures
       # @return [OpenStruct] the relative x, y in a struct. ex: { x: 0.50, y: 0.20 }
       def location_rel
+        # TODO: Remove with 'refine Appium ruby binding'
+        #     https://github.com/appium/ruby_lib/issues/602
         if ::Appium.selenium_webdriver_version_more?('3.4.0')
           rect   = self.rect
           location_x = rect.x.to_f
