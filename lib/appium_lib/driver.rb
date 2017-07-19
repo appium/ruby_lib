@@ -248,6 +248,11 @@ module Appium
     nil # return nil
   end
 
+  def self.selenium_webdriver_version_more?(version)
+    require 'rubygems'
+    Gem.loaded_specs['selenium-webdriver'].version >= Gem::Version.new(version)
+  end
+
   class Driver
     module Capabilities
       # except for browser_name, default capability is equal to ::Selenium::WebDriver::Remote::Capabilities.firefox
