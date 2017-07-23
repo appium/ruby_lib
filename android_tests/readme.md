@@ -34,7 +34,7 @@ Finished in 2 mins 57 secs
 - apk
     - [emma-build](https://github.com/appium/android-apidemos/blob/a20597cb97238bf43c073500444b9428fab53f50/README.md#emma-build-for-testing-code-coverage)
 - `appium.txt`
-```apple js
+```
 [caps]
 platformName = "android"
 deviceName = "Nexus 7"
