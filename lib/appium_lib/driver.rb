@@ -369,30 +369,11 @@ module Appium
       raise 'opts must be a hash' unless opts.is_a? Hash
 
       opts              = Appium.symbolize_keys opts
-
       @caps             = Capabilities.init_caps_for_appium(opts[:caps] || {})
 
       appium_lib_opts   = opts[:appium_lib] || {}
 
-      # appium_lib specific values
-      @custom_url       = appium_lib_opts.fetch :server_url, false
-      @export_session   = appium_lib_opts.fetch :export_session, false
-      @default_wait     = appium_lib_opts.fetch :wait, 0
-      @sauce_username   = appium_lib_opts.fetch :sauce_username, ENV['SAUCE_USERNAME']
-      @sauce_username   = nil if !@sauce_username || (@sauce_username.is_a?(String) && @sauce_username.empty?)
-      @sauce_access_key = appium_lib_opts.fetch :sauce_access_key, ENV['SAUCE_ACCESS_KEY']
-      @sauce_access_key = nil if !@sauce_access_key || (@sauce_access_key.is_a?(String) && @sauce_access_key.empty?)
-      @sauce_endpoint   = appium_lib_opts.fetch :sauce_endpoint, ENV['SAUCE_ENDPOINT']
-      @sauce_endpoint   = 'ondemand.saucelabs.com:443/wd/hub' if
-                          !@sauce_endpoint || (@sauce_endpoint.is_a?(String) && @sauce_endpoint.empty?)
-      @appium_port      = appium_lib_opts.fetch :port, 4723
-      # timeout and interval used in ::Appium::Comm.wait/wait_true
-      @appium_wait_timeout  = appium_lib_opts.fetch :wait_timeout, 30
-      @appium_wait_interval = appium_lib_opts.fetch :wait_interval, 0.5
-
-      # to pass it in Selenium.new.
-      # `listener = opts.delete(:listener)` is called in Selenium::Driver.new
-      @listener = appium_lib_opts.fetch :listener, nil
+      set_appium_lib_specific_values(appium_lib_opts)
 
       # Path to the .apk, .app or .app.zip.
       # The path can be local or remote for Sauce.
@@ -439,6 +420,33 @@ module Appium
 
       self # return newly created driver
     end
+
+    private
+
+    def set_appium_lib_specific_values(appium_lib_opts)
+      @custom_url       = appium_lib_opts.fetch :server_url, false
+      @export_session   = appium_lib_opts.fetch :export_session, false
+      @default_wait     = appium_lib_opts.fetch :wait, 0
+
+      @sauce_username   = appium_lib_opts.fetch :sauce_username, ENV['SAUCE_USERNAME']
+      @sauce_username   = nil if !@sauce_username || (@sauce_username.is_a?(String) && @sauce_username.empty?)
+      @sauce_access_key = appium_lib_opts.fetch :sauce_access_key, ENV['SAUCE_ACCESS_KEY']
+      @sauce_access_key = nil if !@sauce_access_key || (@sauce_access_key.is_a?(String) && @sauce_access_key.empty?)
+      @sauce_endpoint   = appium_lib_opts.fetch :sauce_endpoint, ENV['SAUCE_ENDPOINT']
+      @sauce_endpoint   = 'ondemand.saucelabs.com:443/wd/hub' if
+          !@sauce_endpoint || (@sauce_endpoint.is_a?(String) && @sauce_endpoint.empty?)
+
+      @appium_port      = appium_lib_opts.fetch :port, 4723
+      # timeout and interval used in ::Appium::Comm.wait/wait_true
+      @appium_wait_timeout  = appium_lib_opts.fetch :wait_timeout, 30
+      @appium_wait_interval = appium_lib_opts.fetch :wait_interval, 0.5
+
+      # to pass it in Selenium.new.
+      # `listener = opts.delete(:listener)` is called in Selenium::Driver.new
+      @listener = appium_lib_opts.fetch :listener, nil
+    end
+
+    public
 
     # Returns a hash of the driver attributes
     def driver_attributes
