@@ -23,7 +23,6 @@ require_relative 'ios/element/button'
 require_relative 'ios/element/generic'
 require_relative 'ios/element/textfield'
 require_relative 'ios/element/text'
-require_relative 'ios/mobile_methods'
 require_relative 'ios/xcuitest_gestures'
 
 # android
@@ -35,7 +34,6 @@ require_relative 'android/element/button'
 require_relative 'android/element/generic'
 require_relative 'android/element/textfield'
 require_relative 'android/element/text'
-require_relative 'android/mobile_methods'
 
 # device methods
 require_relative 'device/device'
@@ -511,11 +509,11 @@ module Appium
     def appium_server_version
       driver.remote_status
     rescue Selenium::WebDriver::Error::WebDriverError => ex
-      raise unless ex.message.include?('content-type=""')
+      raise ::Appium::Error::ServerError unless ex.message.include?('content-type=""')
       # server (TestObject for instance) does not respond to status call
       {}
     rescue Selenium::WebDriver::Error::ServerError => e
-      raise unless e.message.include?('status code 500')
+      raise ::Appium::Error::ServerError unless e.message.include?('status code 500')
       # driver.remote_status returns 500 error for using selenium grid
       {}
     end
@@ -611,11 +609,33 @@ module Appium
     end
 
     # Creates a new global driver and quits the old one if it exists.
+    # You can customise http_client as the following
+    #
+    # @example
+    #     ```ruby
+    #     require 'rubygems'
+    #     require 'appium_lib'
+    #
+    #     # platformName takes a string or a symbol.
+    #
+    #     # Start iOS driver
+    #     opts = {
+    #              caps: {
+    #                platformName: :ios,
+    #                app: '/path/to/MyiOS.app'
+    #              },
+    #              appium_lib: {
+    #                wait_timeout: 30
+    #              }
+    #            }
+    #     custom_http_client = Custom::Http::Client.new(opts)
+    #     Appium::Driver.new(opts).start_driver(custom_http_client)
     #
     # @return [Selenium::WebDriver] the new global driver
-    def start_driver
+    def start_driver(http_client =
+                         Selenium::WebDriver::Remote::Http::Default.new(open_timeout: 999_999, read_timeout: 999_999))
       # open_timeout and read_timeout are explicit wait.
-      @http_client ||= Selenium::WebDriver::Remote::Http::Default.new(open_timeout: 999_999, read_timeout: 999_999)
+      @http_client ||= http_client
 
       begin
         driver_quit
@@ -630,12 +650,7 @@ module Appium
         @driver.extend Selenium::WebDriver::DriverExtensions::HasLocation
 
         # export session
-        if @export_session
-          # rubocop:disable Style/RescueModifier
-          File.open('/tmp/appium_lib_session', 'w') do |f|
-            f.puts @driver.session_id
-          end rescue nil
-        end
+        write_session_id(@driver.session_id) if @export_session
       rescue Errno::ECONNREFUSED
         raise "ERROR: Unable to connect to Appium. Is the server running on #{server_url}?"
       end
@@ -772,6 +787,13 @@ module Appium
     end
 
     private
+
+    def write_session_id(session_id)
+      File.open('/tmp/appium_lib_session', 'w') { |f| f.puts session_id }
+    rescue IOError => e
+      ::Appium::Logger.warn e
+      nil
+    end
 
     # If "automationName" is set only server side, this method set "automationName" attribute into @automation_name.
     # Since @automation_name is set only client side before start_driver is called.
