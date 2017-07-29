@@ -1,3 +1,9 @@
+#### v9.4.9 2017-07-01
+
+- [cfe84fc](https://github.com/appium/ruby_lib/commit/cfe84fc009c418eebe95babf8160f36209f9fecf) [Release 9 4 9 (#613)](https://github.com/appium/ruby_lib/issues/613)
+- [0e88589](https://github.com/appium/ruby_lib/commit/0e885890e3c9d7f5067869a9893009f0a32f7af0) [fix handling element for xcuitest guestures (#611)](https://github.com/appium/ruby_lib/issues/611)
+
+
 #### v9.4.8 2017-06-24
 
 - [209fb3f](https://github.com/appium/ruby_lib/commit/209fb3fce4f2e567c6d6ba2395eec9b98669d02d) [Release 9 4 8 (#610)](https://github.com/appium/ruby_lib/issues/610)
