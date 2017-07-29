@@ -388,6 +388,7 @@ module Appium
       @appium_device = @appium_device.is_a?(Symbol) ? @appium_device : @appium_device.downcase.strip.intern if @appium_device
 
       @automation_name = @caps[:automationName] if @caps[:automationName]
+      @automation_name = @automation_name.is_a?(Symbol) ? @automation_name : @automation_name.downcase.strip.intern if @automation_name
 
       # load common methods
       extend Appium::Common
@@ -480,13 +481,13 @@ module Appium
     # Return true if automationName is 'XCUITest'
     # @return [Boolean]
     def automation_name_is_xcuitest?
-      !@automation_name.nil? && 'xcuitest'.casecmp(@automation_name).zero?
+      !@automation_name.nil? && @automation_name == :xcuitest
     end
 
     # Return true if automationName is 'uiautomator2'
     # @return [Boolean]
     def automation_name_is_uiautomator2?
-      !@automation_name.nil? && 'uiautomator2'.casecmp(@automation_name).zero?
+      !@automation_name.nil? && @automation_name == :uiautomator2
     end
 
     # Return true if the target Appium server is over REQUIRED_VERSION_XCUITEST.

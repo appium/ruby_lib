@@ -58,9 +58,9 @@ describe 'driver' do
     t 'verify all attributes' do
       actual                = driver_attributes
       caps_app_for_teardown = actual[:caps][:app]
-      expected_app = File.absolute_path('UICatalog.app')
+      expected_app = File.absolute_path('../test_apps/UICatalog.app')
 
-      expected            = { automation_name:  'XCUITest',
+      expected            = { automation_name:  :xcuitest,
                               custom_url:       false,
                               export_session:   false,
                               default_wait:     30,

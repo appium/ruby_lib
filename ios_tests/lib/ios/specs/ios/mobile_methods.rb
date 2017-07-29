@@ -1,5 +1,5 @@
-# rake ios[ios/search_context]
-describe 'ios/search_context' do
+# rake ios[ios/mobile_methods]
+describe 'ios/mobile_methods' do
   def before_first
     screen.must_equal catalog
   end

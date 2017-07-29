@@ -35,7 +35,7 @@ describe 'driver' do
     end
 
     t 'verify Appium::Driver::Capabilities.init_caps_for_appium' do
-      expected_app = File.absolute_path('api.apk')
+      expected_app = File.absolute_path('../test_apps/api.apk')
       caps = ::Appium::Driver::Capabilities.init_caps_for_appium(platformName: 'Android',
                                                                  app:          expected_app,
                                                                  appPackage:   'io.appium.android.apis',
