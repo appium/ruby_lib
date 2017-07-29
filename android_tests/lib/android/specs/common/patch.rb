@@ -3,7 +3,7 @@
 
 # Skip:
 #   status # status patches are already tested in driver.rb
-#   raw_execute # debug output for Pry
+#   execute # debug output for Pry
 
 describe 'common/patch' do
   # Attributes are busted in Android.

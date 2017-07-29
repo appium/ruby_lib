@@ -4,7 +4,7 @@
 #
 #  Skip:
 #    status # status patches are already tested in driver.rb
-#    raw_execute # debug output for Pry
+#    execute # debug output for Pry
 #
 
 # rake ios[common/patch]

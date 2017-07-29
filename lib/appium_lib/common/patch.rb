@@ -62,13 +62,14 @@ end # module Appium
 #
 # Requires from lib/selenium/webdriver/remote.rb
 require 'selenium/webdriver/remote/capabilities'
-require 'selenium/webdriver/remote/w3c_capabilities'
+require 'selenium/webdriver/remote/w3c/capabilities'
 require 'selenium/webdriver/remote/bridge'
-require 'selenium/webdriver/remote/w3c_bridge'
+require 'selenium/webdriver/remote/oss/bridge'
+require 'selenium/webdriver/remote/w3c/bridge'
 require 'selenium/webdriver/remote/server_error'
 require 'selenium/webdriver/remote/response'
-require 'selenium/webdriver/remote/commands'
-require 'selenium/webdriver/remote/w3c_commands'
+require 'selenium/webdriver/remote/oss/commands'
+require 'selenium/webdriver/remote/w3c/commands'
 require 'selenium/webdriver/remote/http/common'
 require 'selenium/webdriver/remote/http/default'
 
@@ -77,9 +78,10 @@ require 'selenium/webdriver/remote/http/default'
 #
 # Invaluable for debugging.
 def patch_webdriver_bridge
-  Selenium::WebDriver::Remote::Bridge.class_eval do
+  Selenium::WebDriver::Remote::OSS::Bridge.class_eval do
     # Code from lib/selenium/webdriver/remote/bridge.rb
-    def raw_execute(command, opts = {}, command_hash = nil)
+
+    def execute(command, opts = {}, command_hash = nil)
       verb, path = commands(command) || raise(ArgumentError, "unknown command: #{command.inspect}")
       path = path.dup
 
@@ -130,7 +132,7 @@ def patch_webdriver_bridge
       delay = $driver.global_webdriver_http_sleep
       sleep delay if !delay.nil? && delay > 0
       # Appium::Logger.info "verb: #{verb}, path #{path}, command_hash #{command_hash.to_json}"
-      http.call verb, path, command_hash
+      http.call(verb, path, command_hash)
     end # def
   end # class
 end
@@ -163,8 +165,9 @@ class Selenium::WebDriver::Remote::Http::Common # rubocop:disable Style/ClassAnd
 end
 
 def patch_remote_driver_commands
-  Selenium::WebDriver::Remote::Bridge.class_eval do
+  Selenium::WebDriver::Remote::OSS::Bridge.class_eval do
     def commands(command)
+      raise NotImplementedError unless command == :new_session
       ::Appium::Driver::Commands::COMMAND[command]
     end
   end
