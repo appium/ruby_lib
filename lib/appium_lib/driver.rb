@@ -388,7 +388,9 @@ module Appium
       @appium_device = @appium_device.is_a?(Symbol) ? @appium_device : @appium_device.downcase.strip.intern if @appium_device
 
       @automation_name = @caps[:automationName] if @caps[:automationName]
-      @automation_name = @automation_name.is_a?(Symbol) ? @automation_name : @automation_name.downcase.strip.intern if @automation_name
+      @automation_name = if @automation_name
+                           @automation_name.is_a?(Symbol) ? @automation_name : @automation_name.downcase.strip.intern
+                         end
 
       # load common methods
       extend Appium::Common

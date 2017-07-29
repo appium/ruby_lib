@@ -3,7 +3,7 @@ module Appium
     module SearchContext
       # rubocop:disable Style/MutableConstant
       FINDERS = {
-        accessibility_id: 'accessibility id',
+        accessibility_id: 'accessibility id'
       }
     end
   end
