@@ -92,7 +92,7 @@ module Appium
         visible = (type.downcase.include? class_name).to_s if class_name
         if visible && visible == 'true'
 
-          _print_attr(type, name, label, value, hint, visible)
+          UITestElementsPrinter.new._print_attr(type, name, label, value, hint, visible)
 
           # there may be many ids with the same value.
           # output all exact matches.

@@ -56,7 +56,7 @@ module Appium
         # iOS
         touch_id:                   [:post, 'session/:session_id/appium/simulator/touch_id'.freeze],
         toggle_touch_id_enrollment: [:post, 'session/:session_id/appium/simulator/toggle_touch_id_enrollment'.freeze]
-      }.merge(COMMAND_NO_ARG).merge(::Selenium::WebDriver::Remote::Bridge::COMMANDS).freeze
+      }.merge(COMMAND_NO_ARG).merge(::Selenium::WebDriver::Remote::OSS::Bridge::COMMANDS).freeze
     end
   end
 end

@@ -78,7 +78,7 @@ require 'selenium/webdriver/remote/http/default'
 #
 # Invaluable for debugging.
 def patch_webdriver_bridge
-  Selenium::WebDriver::Remote::OSS::Bridge.class_eval do
+  Selenium::WebDriver::Remote::Bridge.class_eval do
     # Code from lib/selenium/webdriver/remote/bridge.rb
 
     def execute(command, opts = {}, command_hash = nil)
@@ -148,6 +148,7 @@ class Selenium::WebDriver::Remote::Response
     case val
     when Hash
       msg = val['origValue'] || val['message'] or return 'unknown error'
+      msg << ": #{val['alert']['text'].inspect}" if val['alert'].is_a?(Hash) && val['alert']['text']
       msg << " (#{val['class']})" if val['class']
     when String
       msg = val
@@ -167,7 +168,6 @@ end
 def patch_remote_driver_commands
   Selenium::WebDriver::Remote::OSS::Bridge.class_eval do
     def commands(command)
-      raise NotImplementedError unless command == :new_session
       ::Appium::Driver::Commands::COMMAND[command]
     end
   end
