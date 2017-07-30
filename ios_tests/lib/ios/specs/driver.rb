@@ -297,8 +297,6 @@ describe 'driver' do
     end
 
     t 'update settings' do
-      raise NotImplementedError, "XCUITest(Appium1.6.2) doesn't support yet" if UI::Inventory.xcuitest?
-
       update_settings cyberdelia: 'open'
       get_settings['cyberdelia'].must_equal 'open'
     end

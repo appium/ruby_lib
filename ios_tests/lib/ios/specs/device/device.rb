@@ -83,7 +83,13 @@ describe 'device/device' do
   end
 
   t 'action_chain' do
-    Appium::TouchAction.new.press(element: text(app_strings['ButtonsExplain'])).perform
+    if automation_name_is_xcuitest?
+      element = text(app_strings['ButtonsExplain'])
+      tap(x: 0, y: 0, element: element)
+    else
+      Appium::TouchAction.new.press(element: text(app_strings['ButtonsExplain'])).perform
+    end
+
     wait { id 'ArrowButton' } # successfully transitioned to buttons page
     go_back
   end
