@@ -61,7 +61,7 @@ describe 'driver' do
     t 'verify all attributes' do
       actual                = driver_attributes
       caps_app_for_teardown = actual[:caps][:app]
-      expected_app = File.absolute_path('api.apk')
+      expected_app = File.absolute_path('../test_apps/api.apk')
 
       expected            = { automation_name:   nil,
                               custom_url:       false,
