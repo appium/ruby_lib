@@ -8,46 +8,50 @@ describe 'common/command.rb' do
     before_first
   end
 
+  def parameterized_method_defined_check(array)
+    array.each { |v| Selenium::WebDriver::Remote::OSS::Bridge.method_defined?(v).must_equal true }
+  end
+
   t 'check all command no arg' do
-    Selenium::WebDriver::Remote::OSS::Bridge.method_defined?(:shake).must_equal true
-    Selenium::WebDriver::Remote::OSS::Bridge.method_defined?(:launch_app).must_equal true
-    Selenium::WebDriver::Remote::OSS::Bridge.method_defined?(:close_app).must_equal true
-    Selenium::WebDriver::Remote::OSS::Bridge.method_defined?(:reset).must_equal true
-    Selenium::WebDriver::Remote::OSS::Bridge.method_defined?(:device_locked?).must_equal true
-    Selenium::WebDriver::Remote::OSS::Bridge.method_defined?(:open_notifications).must_equal true
-    Selenium::WebDriver::Remote::OSS::Bridge.method_defined?(:toggle_airplane_mode).must_equal true
-    Selenium::WebDriver::Remote::OSS::Bridge.method_defined?(:current_activity).must_equal true
-    Selenium::WebDriver::Remote::OSS::Bridge.method_defined?(:current_package).must_equal true
-    Selenium::WebDriver::Remote::OSS::Bridge.method_defined?(:get_network_connection).must_equal true
-    Selenium::WebDriver::Remote::OSS::Bridge.method_defined?(:get_performance_data_types).must_equal true
-    Selenium::WebDriver::Remote::OSS::Bridge.method_defined?(:get_performance_data).must_equal true
-    Selenium::WebDriver::Remote::OSS::Bridge.method_defined?(:get_system_bars).must_equal true
-    Selenium::WebDriver::Remote::OSS::Bridge.method_defined?(:get_display_density).must_equal true
-    Selenium::WebDriver::Remote::OSS::Bridge.method_defined?(:is_keyboard_shown).must_equal true
+    parameterized_method_defined_check([:shake,
+                                        :launch_app,
+                                        :close_app,
+                                        :reset,
+                                        :device_locked?,
+                                        :open_notifications,
+                                        :toggle_airplane_mode,
+                                        :current_activity,
+                                        :current_package,
+                                        :get_network_connection,
+                                        :get_performance_data_types,
+                                        :get_performance_data,
+                                        :get_system_bars,
+                                        :get_display_density,
+                                        :is_keyboard_shown])
   end
 
   t 'check all command with arg' do
-    Selenium::WebDriver::Remote::OSS::Bridge.method_defined?(:available_contexts).must_equal true
-    Selenium::WebDriver::Remote::OSS::Bridge.method_defined?(:app_strings).must_equal true
-    Selenium::WebDriver::Remote::OSS::Bridge.method_defined?(:lock).must_equal true
-    Selenium::WebDriver::Remote::OSS::Bridge.method_defined?(:install_app).must_equal true
-    Selenium::WebDriver::Remote::OSS::Bridge.method_defined?(:remove_app).must_equal true
-    Selenium::WebDriver::Remote::OSS::Bridge.method_defined?(:app_installed?).must_equal true
-    Selenium::WebDriver::Remote::OSS::Bridge.method_defined?(:background_app).must_equal true
-    Selenium::WebDriver::Remote::OSS::Bridge.method_defined?(:start_activity).must_equal true
-    Selenium::WebDriver::Remote::OSS::Bridge.method_defined?(:set_context).must_equal true
-    Selenium::WebDriver::Remote::OSS::Bridge.method_defined?(:hide_keyboard).must_equal true
-    Selenium::WebDriver::Remote::OSS::Bridge.method_defined?(:press_keycode).must_equal true
-    Selenium::WebDriver::Remote::OSS::Bridge.method_defined?(:long_press_keycode).must_equal true
-    Selenium::WebDriver::Remote::OSS::Bridge.method_defined?(:set_immediate_value).must_equal true
-    Selenium::WebDriver::Remote::OSS::Bridge.method_defined?(:push_file).must_equal true
-    Selenium::WebDriver::Remote::OSS::Bridge.method_defined?(:pull_file).must_equal true
-    Selenium::WebDriver::Remote::OSS::Bridge.method_defined?(:pull_folder).must_equal true
-    Selenium::WebDriver::Remote::OSS::Bridge.method_defined?(:end_coverage).must_equal true
-    Selenium::WebDriver::Remote::OSS::Bridge.method_defined?(:get_settings).must_equal true
-    Selenium::WebDriver::Remote::OSS::Bridge.method_defined?(:update_settings).must_equal true
-    Selenium::WebDriver::Remote::OSS::Bridge.method_defined?(:set_network_connection).must_equal true
-    Selenium::WebDriver::Remote::OSS::Bridge.method_defined?(:touch_actions).must_equal true
-    Selenium::WebDriver::Remote::OSS::Bridge.method_defined?(:multi_touch).must_equal true
+    parameterized_method_defined_check([:available_contexts,
+                                        :app_strings,
+                                        :lock,
+                                        :install_app,
+                                        :remove_app,
+                                        :app_installed?,
+                                        :background_app,
+                                        :start_activity,
+                                        :set_context,
+                                        :hide_keyboard,
+                                        :press_keycode,
+                                        :long_press_keycode,
+                                        :set_immediate_value,
+                                        :push_file,
+                                        :pull_file,
+                                        :pull_folder,
+                                        :end_coverage,
+                                        :get_settings,
+                                        :update_settings,
+                                        :set_network_connection,
+                                        :touch_actions,
+                                        :multi_touch])
   end
 end
