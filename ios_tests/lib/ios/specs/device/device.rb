@@ -56,7 +56,7 @@ describe 'device/device' do
     background_app(-1) # background_app(nil) should work as same.
 
     # The app goes to background and never come back
-    screen.must_raise ::Selenium::WebDriver::Error::NoSuchElementError
+    proc { screen }.must_raise ::Selenium::WebDriver::Error::NoSuchElementError
   end
 
   t 'reset' do
