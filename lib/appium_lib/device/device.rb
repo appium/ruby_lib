@@ -437,7 +437,7 @@ module Appium
 
       # @private
       def create_bridge_command(method)
-        Selenium::WebDriver::Remote::Bridge.class_eval do
+        Selenium::WebDriver::Remote::OSS::Bridge.class_eval do
           block_given? ? class_eval(&Proc.new) : define_method(method) { execute method }
         end
       end

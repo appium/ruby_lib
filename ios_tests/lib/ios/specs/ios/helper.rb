@@ -22,7 +22,7 @@ describe 'ios/helper' do
   end
 
   t 'source_window' do
-    source_window.length.must_be :>=, 14_000
+    source_window.length.must_be :>=, 10_000
   end
 
   # TODO: t 'page_window' do

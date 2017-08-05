@@ -255,19 +255,12 @@ module Appium
 
   class Driver
     module Capabilities
-      # except for browser_name, default capability is equal to ::Selenium::WebDriver::Remote::Capabilities.firefox
-      # Because Selenium::WebDriver::Remote::Bridge uses Capabilities.firefox by default
-      # https://github.com/SeleniumHQ/selenium/blob/selenium-3.0.1/rb/lib/selenium/webdriver/remote/bridge.rb#L67
       # @param [Hash] opts_caps Capabilities for Appium server. All capability keys are converted to lowerCamelCase when
       #                         this client sends capabilities to Appium server as JSON format.
-      # @return [Selenium::WebDriver::Remote::Capabilities] Return instance of Selenium::WebDriver::Remote::Capabilities
+      # @return [::Selenium::WebDriver::Remote::W3C::Capabilities] Return instance of Appium::Driver::Capabilities
+      #                         inherited ::Selenium::WebDriver::Remote::W3C::Capabilities
       def self.init_caps_for_appium(opts_caps = {})
-        default_caps_opts_firefox = {
-          javascript_enabled: true,
-          takes_screenshot: true,
-          css_selectors_enabled: true
-        }.merge(opts_caps)
-        ::Selenium::WebDriver::Remote::Capabilities.new(default_caps_opts_firefox)
+        ::Selenium::WebDriver::Remote::W3C::Capabilities.new(opts_caps)
       end
     end
   end
@@ -644,14 +637,22 @@ module Appium
     #                wait_timeout: 30
     #              }
     #            }
-    #     custom_http_client = Custom::Http::Client.new(opts)
-    #     Appium::Driver.new(opts).start_driver(custom_http_client)
+    #     Appium::Driver.new(opts).start_driver
     #
+    # @option http_client_ops [Hash] :http_client Custom HTTP Client
+    # @option http_client_ops [Hash] :open_timeout Custom open timeout for http client.
+    # @option http_client_ops [Hash] :read_timeout Custom read timeout for http client.
     # @return [Selenium::WebDriver] the new global driver
-    def start_driver(http_client =
-                         Selenium::WebDriver::Remote::Http::Default.new(open_timeout: 999_999, read_timeout: 999_999))
+    def start_driver(http_client_ops = { http_client: nil, open_timeout: 999_999, read_timeout: 999_999 })
       # open_timeout and read_timeout are explicit wait.
-      @http_client ||= http_client
+      open_timeout = http_client_ops.delete(:open_timeout)
+      read_timeout = http_client_ops.delete(:read_timeout)
+
+      http_client = http_client_ops.delete(:http_client)
+      @http_client ||= http_client ? http_client : Selenium::WebDriver::Remote::Http::Default.new
+
+      @http_client.open_timeout = open_timeout if open_timeout
+      @http_client.read_timeout = read_timeout if read_timeout
 
       begin
         driver_quit

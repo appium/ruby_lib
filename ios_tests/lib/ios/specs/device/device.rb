@@ -55,9 +55,8 @@ describe 'device/device' do
   t 'background_app homescreen' do
     background_app(-1) # background_app(nil) should work as same.
 
-    screen.must_equal 'UICatalog'
-    # TODO: Should update this assert.
-    # screen.must_raise ::Selenium::WebDriver::Error::NoSuchElementError
+    # The app goes to background and never come back
+    proc { screen }.must_raise ::Selenium::WebDriver::Error::NoSuchElementError
   end
 
   t 'reset' do
@@ -83,8 +82,14 @@ describe 'device/device' do
   end
 
   t 'action_chain' do
-    Appium::TouchAction.new.press(element: text(app_strings['ButtonsExplain'])).perform
-    wait { id 'ArrowButton' } # successfully transitioned to buttons page
+    if automation_name_is_xcuitest?
+      element = text(app_strings['ButtonsExplain'])
+      tap(x: 0, y: 0, element: element)
+    else
+      Appium::TouchAction.new.press(element: text(app_strings['ButtonsExplain'])).perform
+    end
+
+    wait { text 'Back' } # successfully transitioned to buttons page
     go_back
   end
 

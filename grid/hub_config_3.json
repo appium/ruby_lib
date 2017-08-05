@@ -1,0 +1,26 @@
+{
+  "capabilities":
+  [
+    {
+      "browserName": "iPhone Simulator",
+      "version":"9.0",
+      "platform":"MAC",
+      "maxInstances": 1
+    }
+  ],
+  "proxy": "org.openqa.grid.selenium.proxy.DefaultRemoteProxy",
+  "maxSession": 5,
+  "port": 4444,
+  "register": true,
+  "registerCycle": 5000,
+  "hub": "http://localhost:4444/wd/hub",
+  "nodeStatusCheckTimeout": 5000,
+  "nodePolling": 5000,
+  "role": "hub",
+  "unregisterIfStillDownAfter": 60000,
+  "downPollingLimit": 2,
+  "debug": true,
+  "servlets" : [],
+  "withoutServlets": [],
+  "custom": {}
+}

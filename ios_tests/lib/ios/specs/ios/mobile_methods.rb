@@ -13,7 +13,7 @@ describe 'ios/mobile_methods' do
   t 'elements with class chain' do
     elements = find_elements :class_chain, 'XCUIElementTypeWindow/*/*'
 
-    elements.size.must_equal 2
+    elements.size.must_equal 4
     elements[0].name.must_equal catalog
     elements[1].name.must_be_nil
   end
