@@ -1,3 +1,17 @@
+#### v9.4.10 2017-07-30
+
+- [6eae1b6](https://github.com/appium/ruby_lib/commit/6eae1b6412ba8dc6c967a44dd9a987944c8e6444) [Release 9 4 10 (#626)](https://github.com/appium/ruby_lib/issues/626)
+- [3df1b2d](https://github.com/appium/ruby_lib/commit/3df1b2d212f1f0ea9975b80009894e4fa138a414) [refactor: search contexts and its structure (#625)](https://github.com/appium/ruby_lib/issues/625)
+- [673bdef](https://github.com/appium/ruby_lib/commit/673bdeffba6946e932096e0bc44d5e8faaf3ec07) [refactor: reduce complexity in android helper (#624)](https://github.com/appium/ruby_lib/issues/624)
+- [d5c9118](https://github.com/appium/ruby_lib/commit/d5c9118ca06f2e3daf3ea41ebe9aaf5769e7493e) [Create ISSUE_TEMPLATE.md (#623)](https://github.com/appium/ruby_lib/issues/623)
+- [355207c](https://github.com/appium/ruby_lib/commit/355207cbb234a1f6fb98da1d5e328f371b35cbd8) [doc: append a documentation for android coverage (#622)](https://github.com/appium/ruby_lib/issues/622)
+- [47a5ba9](https://github.com/appium/ruby_lib/commit/47a5ba98ed2ce7387382c6fbc38721a72331a8d1) [refactor: use element.rect for Selenium Webdriver 3.4.0+ (#621)](https://github.com/appium/ruby_lib/issues/621)
+- [d834c97](https://github.com/appium/ruby_lib/commit/d834c97780e7e95d1488c57a6fae7e751db5fe6f) [feature: add react native app (#619)](https://github.com/appium/ruby_lib/issues/619)
+- [947106f](https://github.com/appium/ruby_lib/commit/947106fdc5a8d2653b65cfa473a4eb1111835085) [feature: add commit message format to handle release note smarter (#616)](https://github.com/appium/ruby_lib/issues/616)
+- [d126ba1](https://github.com/appium/ruby_lib/commit/d126ba14ba0533f3a54cb51a849443adbcf84e91) [add progname (#615)](https://github.com/appium/ruby_lib/issues/615)
+- [9c4d555](https://github.com/appium/ruby_lib/commit/9c4d555c97ad99bbd6f0c8e359713fac959f8717) [remove rails/duplicable and related methods (#614)](https://github.com/appium/ruby_lib/issues/614)
+
+
 #### v9.4.9 2017-07-01
 
 - [cfe84fc](https://github.com/appium/ruby_lib/commit/cfe84fc009c418eebe95babf8160f36209f9fecf) [Release 9 4 9 (#613)](https://github.com/appium/ruby_lib/issues/613)
