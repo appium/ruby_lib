@@ -238,7 +238,7 @@ end
 # Return true if the comment starts with /^(docs|style|chore):/
 def skip_release_note?(comment)
   return true if comment == 'Update release notes'
-  comment =~ /^(docs|style|chore|test):/ ? true : false
+  comment =~ /^(doc|docs|style|chore|test):/ ? true : false
 end
 
 # Used to purge byte order marks that mess up YARD
