@@ -25,14 +25,14 @@ module Appium
       # action = pinch 75 #=> Pinch the screen from the top right and bottom left corners
       # action.perform    #=> to 25% of its size.
       # ```
-      def pinch(percentage = 25, auto_perform = true)
+      def pinch(percentage = 25, auto_perform = true, driver = $driver)
         raise ArgumentError("Can't pinch to greater than screen size.") if percentage > 100
 
         rate = Float(percentage) / 100
 
-        if $driver.automation_name_is_xcuitest?
-          top, bottom = pinch_for_xcuitest(rate)
-        elsif $driver.device_is_android?
+        if driver.automation_name_is_xcuitest?
+          top, bottom = pinch_for_xcuitest(rate, driver)
+        elsif driver.device_is_android?
           top, bottom = pinch_android(rate)
         else
           top, bottom = pinch_ios(rate)
@@ -54,14 +54,14 @@ module Appium
       # action = zoom 200 #=> Zoom in the screen from the center until it doubles in size.
       # action.perform
       # ```
-      def zoom(percentage = 200, auto_perform = true)
+      def zoom(percentage = 200, auto_perform = true, driver = $driver)
         raise ArgumentError("Can't zoom to smaller then screen size.") if percentage < 100
 
         rate = 100 / Float(percentage)
 
-        if $driver.automation_name_is_xcuitest?
-          top, bottom = zoom_for_xcuitest(rate)
-        elsif $driver.device_is_android?
+        if driver.automation_name_is_xcuitest?
+          top, bottom = zoom_for_xcuitest(rate, driver)
+        elsif driver.device_is_android?
           top, bottom = zoom_android(rate)
         else
           top, bottom = zoom_ios(rate)
@@ -76,10 +76,10 @@ module Appium
 
       private
 
-      def pinch_for_xcuitest(rate)
+      def pinch_for_xcuitest(rate, driver)
         height = 100
 
-        ele = $driver.find_element :class, 'XCUIElementTypeApplication'
+        ele = driver.find_element :class, 'XCUIElementTypeApplication'
         top = TouchAction.new
         top.swipe({ start_x: 0.5, start_y: 0.0,
                     offset_x: 0.0, offset_y: (1 - rate) * height }, ele)
@@ -119,10 +119,10 @@ module Appium
         [top, bottom]
       end
 
-      def zoom_for_xcuitest(rate)
+      def zoom_for_xcuitest(rate, driver)
         height = 100
 
-        ele = $driver.find_element :class, 'XCUIElementTypeApplication'
+        ele = driver.find_element :class, 'XCUIElementTypeApplication'
         top = TouchAction.new
         top.swipe({ start_x: 0.5, start_y: (1 - rate) * height,
                     offset_x: 0.0, offset_y: - (1 - rate) * height }, ele)
@@ -177,8 +177,8 @@ module Appium
     end
 
     # Ask Appium to perform the actions
-    def perform
-      $driver.multi_touch @actions
+    def perform(driver = @driver)
+      driver.multi_touch @actions
       @actions.clear
     end
   end # class MultiTouch

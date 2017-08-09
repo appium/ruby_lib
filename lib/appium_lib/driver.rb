@@ -168,8 +168,8 @@ module Appium
   # if modules is a module instead of an array, then the constants of
   # that module are promoted on.
   # otherwise, the array of modules will be used as the promotion target.
-  def self.promote_singleton_appium_methods(modules)
-    raise 'Driver is nil' if $driver.nil?
+  def self.promote_singleton_appium_methods(modules, driver = $driver)
+    raise 'Global $driver is nil' if driver.nil?
 
     target_modules = []
 
@@ -185,15 +185,15 @@ module Appium
     target_modules.each do |const|
       # noinspection RubyResolve
       # rubocop:disable Style/MultilineIfModifier
-      $driver.public_methods(false).each do |m|
+      driver.public_methods(false).each do |m|
         const.send(:define_singleton_method, m) do |*args, &block|
           begin
             super(*args, &block) # promote.rb
           rescue NoMethodError, ArgumentError
-            $driver.send m, *args, &block if $driver.respond_to?(m)
+            driver.send m, *args, &block if driver.respond_to?(m)
           end
           # override unless there's an existing method with matching arity
-        end unless const.respond_to?(m) && const.method(m).arity == $driver.method(m).arity
+        end unless const.respond_to?(m) && const.method(m).arity == driver.method(m).arity
       end
       # rubocop:enable Style/MultilineIfModifier
     end
@@ -221,13 +221,13 @@ module Appium
   # # promote on minispec
   # Appium.promote_appium_methods Minitest::Spec
   # ```
-  def self.promote_appium_methods(class_array)
-    raise 'Driver is nil' if $driver.nil?
+  def self.promote_appium_methods(class_array, driver = $driver)
+    raise 'Driver is nil' if driver.nil?
     # Wrap single class into an array
     class_array = [class_array] unless class_array.class == Array
     # Promote Appium driver methods to class instance methods.
     class_array.each do |klass|
-      $driver.public_methods(false).each do |m|
+      driver.public_methods(false).each do |m|
         klass.class_eval do
           define_method m do |*args, &block|
             begin
@@ -239,7 +239,7 @@ module Appium
               # so rescue argument error
               # and call the name method on $driver
             rescue NoMethodError, ArgumentError
-              $driver.send m, *args, &block if $driver.respond_to?(m)
+              driver.send m, *args, &block if driver.respond_to?(m)
             end
           end
         end
@@ -358,7 +358,7 @@ module Appium
     #
     # @param opts [Object] A hash containing various options.
     # @return [Driver]
-    def initialize(opts = {})
+    def initialize(opts = {}, driver = $driver)
       # quit last driver
       $driver.driver_quit if $driver
       raise 'opts must be a hash' unless opts.is_a? Hash

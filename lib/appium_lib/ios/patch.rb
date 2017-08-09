@@ -13,11 +13,11 @@ module Appium
         end
 
         # Cross platform way of entering text into a textfield
-        def type(text)
-          if $driver.automation_name_is_xcuitest?
+        def type(text, driver = $driver)
+          if driver.automation_name_is_xcuitest?
             send_keys text
           else
-            $driver.execute_script %(au.getElement('#{ref}').setValue('#{text}');)
+            driver.execute_script %(au.getElement('#{ref}').setValue('#{text}');)
           end
         end # def type
       end # Selenium::WebDriver::Element.class_eval

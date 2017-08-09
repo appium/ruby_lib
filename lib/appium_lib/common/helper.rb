@@ -77,9 +77,9 @@ module Appium
       end
 
       # http://nokogiri.org/Nokogiri/XML/SAX/Document.html
-      def start_element(name, attrs = [])
+      def start_element(name, attrs = [], driver = $driver)
         # Count only visible elements. Android is always visible
-        element_visible = $driver.device_is_android? ? true : Hash[attrs]['visible'] == 'true'
+        element_visible = driver.device_is_android? ? true : Hash[attrs]['visible'] == 'true'
         @result[name] += 1 if element_visible
       end
 
@@ -115,8 +115,8 @@ module Appium
     # ```ruby
     # px_to_window_rel x: 50, y: 150
     # ```
-    def px_to_window_rel(opts = {})
-      w = $driver.window_size
+    def px_to_window_rel(opts = {}, driver = $driver)
+      w = driver.window_size
       x = opts.fetch :x, 0
       y = opts.fetch :y, 0
 

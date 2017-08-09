@@ -23,7 +23,7 @@ module Appium
       end
 
       # http://nokogiri.org/Nokogiri/XML/SAX/Document.html
-      def start_element(name, attrs = [])
+      def start_element(name, attrs = [], driver = $driver)
         return if filter && !name.downcase.include?(filter)
 
         attributes = {}
@@ -34,7 +34,7 @@ module Appium
 
         # scoped to: text resource-id content-desc
         attributes_values = attributes.values
-        strings           = $driver.lazy_load_strings
+        strings           = driver.lazy_load_strings
         id_matches = strings.empty? ? [] : strings.select { |_key, value| attributes_values.include? value }
 
         string_ids = nil
