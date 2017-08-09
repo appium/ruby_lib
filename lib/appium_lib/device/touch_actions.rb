@@ -176,21 +176,21 @@ module Appium
     end
 
     # Ask the driver to perform all actions in this action chain.
-    def perform(driver = @driver)
+    def perform(driver = $driver)
       driver.touch_actions @actions
       @actions.clear
       self
     end
 
     # Does nothing, currently.
-    def cancel(driver = @driver)
+    def cancel(driver = $driver)
       @actions << { action: cancel }
       driver.touch_actions @actions
       self
     end
 
     # Visible for testing
-    def swipe_coordinates(end_x: nil, end_y: nil, offset_x: nil, offset_y: nil, driver: @driver)
+    def swipe_coordinates(end_x: nil, end_y: nil, offset_x: nil, offset_y: nil, driver: $driver)
       if driver.device_is_android?
         puts 'end_x and end_y are used for Android. Not offset_x and offset_y.' if end_x.nil? || end_y.nil?
         end_x ||= 0
