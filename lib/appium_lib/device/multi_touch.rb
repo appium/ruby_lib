@@ -177,7 +177,7 @@ module Appium
     end
 
     # Ask Appium to perform the actions
-    def perform(driver = @driver)
+    def perform(driver = $driver)
       driver.multi_touch @actions
       @actions.clear
     end
