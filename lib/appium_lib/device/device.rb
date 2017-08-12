@@ -253,10 +253,10 @@ module Appium
         end
 
         add_endpoint_method(:background_app) do
-          def background_app(duration = 0)
+          def background_app(duration = 0, driver = $driver)
             # https://github.com/appium/ruby_lib/issues/500, https://github.com/appium/appium/issues/7741
             # `execute :background_app, {}, seconds: { timeout: duration_milli_sec }` works over Appium 1.6.4
-            if $driver.automation_name_is_xcuitest?
+            if driver.automation_name_is_xcuitest?
               duration_milli_sec = duration.nil? ? nil : duration * 1000
               execute :background_app, {}, seconds: { timeout: duration_milli_sec }
             else
@@ -292,13 +292,13 @@ module Appium
         end
 
         add_endpoint_method(:hide_keyboard) do
-          def hide_keyboard(close_key = nil, strategy = nil)
+          def hide_keyboard(close_key = nil, strategy = nil, driver = $driver)
             option = {}
 
-            if $driver.device_is_android? # Android can only tapOutside.
+            if driver.device_is_android? # Android can only tapOutside.
               option[:key] = close_key if close_key
               option[:strategy] = strategy || :tapOutside # default to pressKey
-            elsif $driver.automation_name_is_xcuitest?
+            elsif driver.automation_name_is_xcuitest?
               option[:key] = close_key if close_key
               option[:strategy] = strategy if strategy
             else
