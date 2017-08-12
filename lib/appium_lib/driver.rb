@@ -360,7 +360,7 @@ module Appium
     # @return [Driver]
     def initialize(opts = {}, driver = $driver)
       # quit last driver
-      $driver.driver_quit if $driver
+      driver.driver_quit if driver
       raise 'opts must be a hash' unless opts.is_a? Hash
 
       opts              = Appium.symbolize_keys opts
