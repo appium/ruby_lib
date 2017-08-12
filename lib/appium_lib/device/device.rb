@@ -440,6 +440,10 @@ module Appium
         Selenium::WebDriver::Remote::OSS::Bridge.class_eval do
           block_given? ? class_eval(&Proc.new) : define_method(method) { execute method }
         end
+
+        Selenium::WebDriver::Remote::W3C::Bridge.class_eval do
+          block_given? ? class_eval(&Proc.new) : define_method(method) { execute method }
+        end
       end
 
       # @!method find_element_with_appium

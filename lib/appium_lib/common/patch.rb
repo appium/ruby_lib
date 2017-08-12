@@ -173,7 +173,18 @@ end
 def patch_remote_driver_commands
   Selenium::WebDriver::Remote::OSS::Bridge.class_eval do
     def commands(command)
-      ::Appium::Driver::Commands::COMMAND[command]
+      ::Appium::Driver::Commands::COMMANDS_EXTEND_OSS[command]
+    end
+  end
+
+  Selenium::WebDriver::Remote::W3C::Bridge.class_eval do
+    def commands(command)
+      case command
+      when :status, :is_element_displayed
+        ::Appium::Driver::Commands::COMMANDS_EXTEND_OSS[command]
+      else
+        ::Appium::Driver::Commands::COMMANDS_EXTEND_W3C[command]
+      end
     end
   end
 end

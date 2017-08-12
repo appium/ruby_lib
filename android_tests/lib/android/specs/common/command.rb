@@ -10,6 +10,7 @@ describe 'common/command.rb' do
 
   def parameterized_method_defined_check(array)
     array.each { |v| Selenium::WebDriver::Remote::OSS::Bridge.method_defined?(v).must_equal true }
+    array.each { |v| Selenium::WebDriver::Remote::W3C::Bridge.method_defined?(v).must_equal true }
   end
 
   t 'check all command no arg' do
