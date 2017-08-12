@@ -29,16 +29,16 @@ module Appium
         raise ArgumentError("Can't pinch to greater than screen size.") if percentage > 100
 
         rate = Float(percentage) / 100
+        pinch = MultiTouch.new(driver)
 
-        if driver.automation_name_is_xcuitest?
-          top, bottom = pinch_for_xcuitest(rate, driver)
-        elsif driver.device_is_android?
+        if pinch.driver.automation_name_is_xcuitest?
+          top, bottom = pinch_for_xcuitest(rate, pinch.driver)
+        elsif pinch.driver.device_is_android?
           top, bottom = pinch_android(rate)
         else
           top, bottom = pinch_ios(rate)
         end
 
-        pinch = MultiTouch.new
         pinch.add top
         pinch.add bottom
         return pinch unless auto_perform
@@ -58,16 +58,16 @@ module Appium
         raise ArgumentError("Can't zoom to smaller then screen size.") if percentage < 100
 
         rate = 100 / Float(percentage)
+        zoom = MultiTouch.new(driver)
 
-        if driver.automation_name_is_xcuitest?
-          top, bottom = zoom_for_xcuitest(rate, driver)
-        elsif driver.device_is_android?
+        if zoom.driver.automation_name_is_xcuitest?
+          top, bottom = zoom_for_xcuitest(rate, zoom.driver)
+        elsif zoom.driver.device_is_android?
           top, bottom = zoom_android(rate)
         else
           top, bottom = zoom_ios(rate)
         end
 
-        zoom = MultiTouch.new
         zoom.add top
         zoom.add bottom
         return zoom unless auto_perform
@@ -163,11 +163,12 @@ module Appium
       end
     end # self
 
-    attr_reader :actions
+    attr_reader :actions, :driver
 
-    # Create a new multi-action
-    def initialize
+    # Create a new multi-action with Driver
+    def initialize(driver = $driver)
       @actions = []
+      @driver = driver
     end
 
     # Add a touch_action to be performed
@@ -177,8 +178,8 @@ module Appium
     end
 
     # Ask Appium to perform the actions
-    def perform(driver = $driver)
-      driver.multi_touch @actions
+    def perform
+      @driver.multi_touch @actions
       @actions.clear
     end
   end # class MultiTouch
