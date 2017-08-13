@@ -29,6 +29,7 @@ require_relative 'ios/mobile_methods'
 require_relative 'ios/xcuitest/element'
 require_relative 'ios/xcuitest/gestures'
 require_relative 'ios/xcuitest/mobile_methods'
+require_relative 'ios/xcuitest/device'
 
 # android
 require_relative 'android/helper'
@@ -40,6 +41,8 @@ require_relative 'android/element/generic'
 require_relative 'android/element/textfield'
 require_relative 'android/element/text'
 require_relative 'android/mobile_methods'
+
+require_relative 'android/device'
 
 # device methods
 require_relative 'device/device'
@@ -395,12 +398,14 @@ module Appium
 
       if device_is_android?
         extend Appium::Android
+        extend Appium::Android::Device
       else
         extend Appium::Ios
         if automation_name_is_xcuitest?
           # Override touch actions and patch_webdriver_element
           extend Appium::Ios::Xcuitest
           extend Appium::Ios::Xcuitest::Gesture
+          extend Appium::Ios::Xcuitest::Device
         end
       end
 
