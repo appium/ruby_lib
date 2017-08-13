@@ -52,6 +52,11 @@ module Appium
         end_coverage:               [:post, 'session/:session_id/appium/app/end_test_coverage'.freeze],
         set_network_connection:     [:post, 'session/:session_id/network_connection'.freeze],
         get_performance_data:       [:post, 'session/:session_id/appium/getPerformanceData'.freeze],
+        get_ime_available_engines:  [:get,  'session/:session_id/ime/available_engines'.freeze],
+        get_ime_active_engine:      [:get,  'session/:session_id/ime/active_engine'.freeze],
+        get_ime_activated:          [:get,  'session/:session_id/ime/activated'.freeze],
+        ime_deactivate:             [:post, 'session/:session_id/ime/deactivate'.freeze],
+        ime_activate:               [:post, 'session/:session_id/ime/activate'.freeze],
 
         # iOS
         touch_id:                   [:post, 'session/:session_id/appium/simulator/touch_id'.freeze],

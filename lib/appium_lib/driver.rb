@@ -365,9 +365,11 @@ module Appium
     #
     # @param opts [Object] A hash containing various options.
     # @return [Driver]
-    def initialize(opts = {}, driver = $driver)
+    def initialize(opts = {}, skip_quit_driver = false)
       # quit last driver
-      driver.driver_quit if driver
+      unless skip_quit_driver
+        $driver.driver_quit if $driver
+      end
       raise 'opts must be a hash' unless opts.is_a? Hash
 
       opts              = Appium.symbolize_keys opts

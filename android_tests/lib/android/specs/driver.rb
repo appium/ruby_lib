@@ -151,7 +151,8 @@ describe 'driver' do
       validate_path 'my.bundle.id'
 
       # relative path test
-      relative_path = File.join __FILE__, ('..' + File::SEPARATOR) * 4, 'api.apk'
+
+      relative_path = File.join __FILE__, ('..' + File::SEPARATOR) * 5, 'test_apps/api.apk'
       expected_path = File.expand_path relative_path
 
       absolute_app_path(relative_path).must_equal expected_path
@@ -215,7 +216,7 @@ describe 'driver' do
     end
 
     t 'driver' do
-      driver.browser.must_be_empty
+      driver.browser.must_equal('unknown')
     end
 
     # Skip:
