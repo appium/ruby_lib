@@ -50,7 +50,9 @@ describe 'common/device' do
   end
 
   t 'current_package' do
-    wait { current_package.must_equal 'com.example.android.apis' }
+    start_activity app_package: 'io.appium.android.apis',
+                   app_activity: '.accessibility.AccessibilityNodeProviderActivity'
+    wait { current_package.must_equal 'io.appium.android.apis' }
   end
 
   t 'installed' do

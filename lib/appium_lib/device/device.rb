@@ -510,7 +510,7 @@ module Appium
         #   ```
         add_endpoint_method(:ime_activate) do
           def ime_activate(ime_name)
-            execute :imeActivateEngine, {}, engine: ime_name
+            execute :ime_activate, {}, engine: ime_name
           end
         end
 
@@ -523,7 +523,7 @@ module Appium
         #   ```
         add_endpoint_method(:ime_available_engines) do
           def ime_available_engines
-            execute :imeGetAvailableEngines
+            execute :get_ime_available_engines
           end
         end
 
@@ -536,7 +536,7 @@ module Appium
         #   ```
         add_endpoint_method(:ime_active_engine) do
           def ime_active_engine
-            execute :imeGetActiveEngine
+            execute :get_ime_active_engine
           end
         end
 
@@ -549,7 +549,7 @@ module Appium
         #   ```
         add_endpoint_method(:ime_activated) do
           def ime_activated
-            execute :imeIsActivated
+            execute :get_ime_activated
           end
         end
 
@@ -563,7 +563,7 @@ module Appium
         #   ```
         add_endpoint_method(:ime_deactivate) do
           def ime_deactivate
-            execute :imeDeactivate, {}
+            execute :ime_deactivate, {}
           end
         end
       end

@@ -53,6 +53,11 @@ describe 'common/command.rb' do
                                         :update_settings,
                                         :set_network_connection,
                                         :touch_actions,
-                                        :multi_touch])
+                                        :multi_touch,
+                                        :ime_available_engines,
+                                        :ime_active_engine,
+                                        :ime_activated,
+                                        :ime_deactivate,
+                                        :ime_activate])
   end
 end
