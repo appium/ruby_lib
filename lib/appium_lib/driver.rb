@@ -361,13 +361,14 @@ module Appium
     #              }
     #            }
     #     Appium::Driver.new(opts).start_driver
+    #     # or Appium::Driver.new(opts, false).start_driver # Don't use global driver.
     #     ```
     #
     # @param opts [Object] A hash containing various options.
+    # @param global_driver [Bool] A bool require global driver before initialize.
     # @return [Driver]
-    def initialize(opts = {}, skip_quit_driver = false)
-      # quit last driver
-      unless skip_quit_driver
+    def initialize(opts = {}, global_driver = true)
+      if global_driver
         $driver.driver_quit if $driver
       end
       raise 'opts must be a hash' unless opts.is_a? Hash
@@ -429,7 +430,7 @@ module Appium
       end
 
       # Save global reference to last created Appium driver for top level methods.
-      $driver = self
+      $driver = self if global_driver
 
       self # return newly created driver
     end
