@@ -629,6 +629,9 @@ module Appium
       nil
     end
 
+    # Alias for driver_quit
+    alias_method :quit_driver, :driver_quit
+
     # Creates a new global driver and quits the old one if it exists.
     # You can customise http_client as the following
     #
