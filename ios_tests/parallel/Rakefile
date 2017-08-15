@@ -1,0 +1,20 @@
+# ruby_lib Rakefile
+require 'rubygems'
+require 'rake'
+# require 'rspec/core/rake_task'
+
+require_relative 'test'
+
+# TODO: Run tests, `rake ios`, with thread style
+desc 'Run tests with parallel'
+task :run_parallel do
+  threads = []
+  (1..2).each do |number|
+    threads << Thread.new {
+      # RSpec::Core::RakeTask.new(:spec)
+      test number
+    }
+  end
+
+  threads.each(&:join)
+end
