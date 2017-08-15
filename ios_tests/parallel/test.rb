@@ -33,32 +33,19 @@ def des_server_caps
   }
 end
 
-def test
-  caps1 = { caps: device1, appium_lib: des_server_caps }
-  caps2 = { caps: device2, appium_lib: des_server_caps }
+def test(number)
+  caps = case number
+         when 1
+           { caps: device1, appium_lib: des_server_caps }
+         when 2
+           { caps: device2, appium_lib: des_server_caps }
+         end
 
-  threads = []
-  threads << Thread.new {
-    appium = Appium::Driver.new(caps1, false)
-    driver = appium.start_driver
-    e = driver.find_element :name, "Buttons"
-    e.click
+  appium = Appium::Driver.new(caps, false)
+  driver = appium.start_driver
+  e = driver.find_element :name, "Buttons"
+  e.click
 
-    sleep 20
-    appium.driver_quit
-  }
-
-  threads << Thread.new {
-    appium = Appium::Driver.new(caps2, false)
-    driver = appium.start_driver
-    e = driver.find_element :name, "Buttons"
-    e.click
-
-    sleep 20
-    appium.driver_quit
-  }
-
-  threads.each(&:join)
+  sleep 20
+  appium.driver_quit
 end
-
-test
