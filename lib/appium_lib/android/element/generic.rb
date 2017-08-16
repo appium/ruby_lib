@@ -39,12 +39,16 @@ module Appium
     # @return [Element] the element scrolled to
     def scroll_to(text, scrollable_index = 0)
       text = %("#{text}")
-
-      args = scroll_uiselector("new UiSelector().textContains(#{text})", scrollable_index) +
-             scroll_uiselector("new UiSelector().descriptionContains(#{text})", scrollable_index) +
-             scroll_uiselector(resource_id(text, "new UiSelector().resourceId(#{text});"), scrollable_index)
-
-      find_element :uiautomator, args
+      rid  = resource_id(text, "new UiSelector().resourceId(#{text});")
+      args = rid.empty? ? ["new UiSelector().textContains(#{text})", "new UiSelector().descriptionContains(#{text})"] : [rid]
+      args.each_with_index do |arg, index|
+        begin
+          find_element :uiautomator, scroll_uiselector(arg, scrollable_index)
+          return find_element(uiautomator: arg)
+        rescue => e
+          raise e if index == args.size - 1
+        end
+      end
     end
 
     # Scroll to the first element with the exact target text or description.
@@ -53,12 +57,16 @@ module Appium
     # @return [Element] the element scrolled to
     def scroll_to_exact(text, scrollable_index = 0)
       text = %("#{text}")
-
-      args = scroll_uiselector("new UiSelector().text(#{text})", scrollable_index) +
-             scroll_uiselector("new UiSelector().description(#{text})", scrollable_index) +
-             scroll_uiselector(resource_id(text, "new UiSelector().resourceId(#{text});"), scrollable_index)
-
-      find_element :uiautomator, args
+      rid  = resource_id(text, "new UiSelector().resourceId(#{text});")
+      args = rid.empty? ? ["new UiSelector().text(#{text})", "new UiSelector().description(#{text})"] : [rid]
+      args.each_with_index do |arg, index|
+        begin
+          find_element :uiautomator, scroll_uiselector(arg, scrollable_index)
+          return find_element(uiautomator: arg)
+        rescue => e
+          raise e if index == args.size - 1
+        end
+      end
     end
   end # module Android
 end # module Appium
