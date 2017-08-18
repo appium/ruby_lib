@@ -43,8 +43,8 @@ module Appium
       args = rid.empty? ? ["new UiSelector().textContains(#{text})", "new UiSelector().descriptionContains(#{text})"] : [rid]
       args.each_with_index do |arg, index|
         begin
-          find_element :uiautomator, scroll_uiselector(arg, scrollable_index)
-          return find_element(uiautomator: arg)
+          elem = find_element :uiautomator, scroll_uiselector(arg, scrollable_index)
+          return elem
         rescue => e
           raise e if index == args.size - 1
         end
@@ -61,8 +61,8 @@ module Appium
       args = rid.empty? ? ["new UiSelector().text(#{text})", "new UiSelector().description(#{text})"] : [rid]
       args.each_with_index do |arg, index|
         begin
-          find_element :uiautomator, scroll_uiselector(arg, scrollable_index)
-          return find_element(uiautomator: arg)
+          elem = find_element :uiautomator, scroll_uiselector(arg, scrollable_index)
+          return elem
         rescue => e
           raise e if index == args.size - 1
         end
