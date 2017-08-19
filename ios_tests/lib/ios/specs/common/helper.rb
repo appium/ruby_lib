@@ -70,18 +70,18 @@ describe 'common/helper.rb' do
 
   t 'back' do
     # start page
-    tag(UI::Inventory.navbar).name.must_equal 'UICatalog'
+    tag(UI::Inventory.new($driver).navbar).name.must_equal 'UICatalog'
     # nav to new page.
     wait_true do
       text('buttons').click
-      tag(UI::Inventory.navbar).name == 'Buttons'
+      tag(UI::Inventory.new($driver).navbar).name == 'Buttons'
     end
 
-    tag(UI::Inventory.navbar).name.must_equal 'Buttons'
+    tag(UI::Inventory.new($driver).navbar).name.must_equal 'Buttons'
     # go back
     back_click
     # start page
-    tag(UI::Inventory.navbar).name.must_equal 'UICatalog'
+    tag(UI::Inventory.new($driver).navbar).name.must_equal 'UICatalog'
   end
 
   t 'session_id' do
@@ -90,11 +90,11 @@ describe 'common/helper.rb' do
   end
 
   t 'xpath' do
-    xpath("//#{UI::Inventory.static_text}").name.must_equal 'UICatalog'
+    xpath("//#{UI::Inventory.new($driver).static_text}").name.must_equal 'UICatalog'
   end
 
   t 'xpaths' do
-    xpaths("//#{UI::Inventory.static_text}").length.must_equal 25
+    xpaths("//#{UI::Inventory.new($driver).static_text}").length.must_equal 25
   end
 
   def uibutton_text
@@ -102,13 +102,13 @@ describe 'common/helper.rb' do
   end
 
   t 'ele_index' do
-    ele_index(UI::Inventory.static_text, 2).name.must_equal uibutton_text
+    ele_index(UI::Inventory.new($driver).static_text, 2).name.must_equal uibutton_text
   end
 
   # TODO: 'string_attr_exact'
 
   t 'find_ele_by_attr' do
-    el_id = find_ele_by_attr(UI::Inventory.static_text, 'name', uibutton_text).instance_variable_get :@id
+    el_id = find_ele_by_attr(UI::Inventory.new($driver).static_text, 'name', uibutton_text).instance_variable_get :@id
     el_id.must_match(/\d+/)
   end
 
@@ -117,10 +117,10 @@ describe 'common/helper.rb' do
     # no space after the !
     set_wait 1
     # empty array returned when no match
-    found = !find_eles_by_attr(UI::Inventory.static_text, 'name', uibutton_text).empty?
+    found = !find_eles_by_attr(UI::Inventory.new($driver).static_text, 'name', uibutton_text).empty?
     found.must_equal true
 
-    found = !find_eles_by_attr(UI::Inventory.static_text, 'name', 'zz').empty?
+    found = !find_eles_by_attr(UI::Inventory.new($driver).static_text, 'name', 'zz').empty?
     found.must_equal false
     set_wait
   end
@@ -144,16 +144,16 @@ describe 'common/helper.rb' do
   # TODO: 'string_attr_include'
 
   t 'find_ele_by_attr_include' do
-    el_text = find_ele_by_attr_include(UI::Inventory.static_text, :name, 'button').text
+    el_text = find_ele_by_attr_include(UI::Inventory.new($driver).static_text, :name, 'button').text
     el_text.must_equal uibutton_text
 
-    el_name = find_ele_by_attr_include(UI::Inventory.static_text, :name, 'button').name
+    el_name = find_ele_by_attr_include(UI::Inventory.new($driver).static_text, :name, 'button').name
     el_name.must_equal uibutton_text
   end
 
   t 'find_eles_by_attr_include' do
-    ele_count = find_eles_by_attr_include(UI::Inventory.static_text, :name, 'e').length
-    expected = UI::Inventory.xcuitest? ? 20 : 19
+    ele_count = find_eles_by_attr_include(UI::Inventory.new($driver).static_text, :name, 'e').length
+    expected = UI::Inventory.new($driver).xcuitest? ? 20 : 19
     ele_count.must_equal expected
   end
 
@@ -170,13 +170,13 @@ describe 'common/helper.rb' do
   end
 
   t 'first_ele' do
-    first_ele(UI::Inventory.static_text).name.must_equal 'UICatalog'
+    first_ele(UI::Inventory.new($driver).static_text).name.must_equal 'UICatalog'
   end
 
   t 'last_ele' do
     expected = 'Transitions'
 
-    el = last_ele(UI::Inventory.static_text)
+    el = last_ele(UI::Inventory.new($driver).static_text)
     el.text.must_equal expected
     el.name.must_equal expected
   end
@@ -195,15 +195,15 @@ describe 'common/helper.rb' do
   end
 
   t 'tag' do
-    tag(UI::Inventory.navbar).name.must_equal 'UICatalog'
+    tag(UI::Inventory.new($driver).navbar).name.must_equal 'UICatalog'
   end
 
   t 'tags' do
-    tags(UI::Inventory.table_cell).length.must_equal 12
+    tags(UI::Inventory.new($driver).table_cell).length.must_equal 12
   end
 
   t 'find_eles_by_attr_include_length' do
-    find_eles_by_attr_include(UI::Inventory.static_text, 'name', 'Use').length.must_equal 7
+    find_eles_by_attr_include(UI::Inventory.new($driver).static_text, 'name', 'Use').length.must_equal 7
   end
 
   t 'get_page_class' do

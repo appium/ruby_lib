@@ -189,12 +189,8 @@ module Appium
     # Return the iOS version as an array of integers
     # @return [Array<Integer>]
     def ios_version
-      if automation_name_is_xcuitest?
-        @driver.capabilities['platformVersion']
-      else
-        ios_version = execute_script 'UIATarget.localTarget().systemVersion()'
-        ios_version.split('.').map(&:to_i)
-      end
+      ios_version = execute_script 'UIATarget.localTarget().systemVersion()'
+      ios_version.split('.').map(&:to_i)
     end
 
     # Get the element of type class_name at matching index.
@@ -219,15 +215,7 @@ module Appium
 
     # @private
     def string_attr_exact(class_name, attr, value)
-      if automation_name_is_xcuitest?
-        if attr == '*'
-          %((//#{class_name})[@*[.="#{value}"]])
-        else
-          %((//#{class_name})[@#{attr}="#{value}"])
-        end
-      else
-        %(//#{class_name}[@visible="true" and @#{attr}="#{value}"])
-      end
+      %(//#{class_name}[@visible="true" and @#{attr}="#{value}"])
     end
 
     # Find the first element exactly matching class and attribute value.
@@ -254,15 +242,7 @@ module Appium
 
     # @private
     def string_attr_include(class_name, attr, value)
-      if automation_name_is_xcuitest?
-        if attr == '*'
-          %((//#{class_name})[@*[contains(translate(., "#{value.upcase}", "#{value}"), "#{value}")]])
-        else
-          %((//#{class_name})[contains(translate(@#{attr}, "#{value.upcase}", "#{value}"), "#{value}")])
-        end
-      else
-        %(//#{class_name}[@visible="true" and contains(translate(@#{attr},"#{value.upcase}", "#{value}"), "#{value}")])
-      end
+      %(//#{class_name}[@visible="true" and contains(translate(@#{attr},"#{value.upcase}", "#{value}"), "#{value}")])
     end
 
     # Find the first element exactly matching attribute case insensitive value.
@@ -346,13 +326,7 @@ module Appium
     # @param class_name [String] the tag to match
     # @return [Element]
     def last_ele(class_name)
-      if automation_name_is_xcuitest?
-        visible_elements = tags class_name
-        raise _no_such_element if visible_elements.empty?
-        visible_elements.last
-      else
-        ele_index class_name, 'last()'
-      end
+      ele_index class_name, 'last()'
     end
 
     # Returns the first **visible** element matching class_name
@@ -360,11 +334,7 @@ module Appium
     # @param class_name [String] the class_name to search for
     # @return [Element]
     def tag(class_name)
-      if automation_name_is_xcuitest?
-        raise_error_if_no_element tags(class_name).first
-      else
-        ele_by_json(typeArray: [class_name], onlyVisible: true)
-      end
+      ele_by_json(typeArray: [class_name], onlyVisible: true)
     end
 
     # Returns all visible elements matching class_name
@@ -372,12 +342,7 @@ module Appium
     # @param class_name [String] the class_name to search for
     # @return [Element]
     def tags(class_name)
-      if automation_name_is_xcuitest?
-        elements = @driver.find_elements :class, class_name
-        select_visible_elements elements
-      else
-        eles_by_json(typeArray: [class_name], onlyVisible: true)
-      end
+      eles_by_json(typeArray: [class_name], onlyVisible: true)
     end
 
     # Returns all visible elements matching class_names and value
@@ -390,22 +355,8 @@ module Appium
     def tags_include(class_names:, value: nil)
       return unless class_names.is_a? Array
 
-      if automation_name_is_xcuitest?
-        c_names = class_names.map { |class_name| %(type == "#{class_name}") }.join(' || ')
-
-        predicate = if value
-                      %((#{c_names}) && ) +
-                        %((name contains[c] "#{value}" || label contains[c] "#{value}" || value contains[c] "#{value}"))
-                    else
-                      c_names
-                    end
-
-        elements = @driver.find_elements :predicate, predicate
-        select_visible_elements elements
-      else
-        class_names.flat_map do |class_name|
-          value ? eles_by_json_visible_contains(class_name, value) : tags(class_name)
-        end
+      class_names.flat_map do |class_name|
+        value ? eles_by_json_visible_contains(class_name, value) : tags(class_name)
       end
     end
 
@@ -419,22 +370,8 @@ module Appium
     def tags_exact(class_names:, value: nil)
       return unless class_names.is_a? Array
 
-      if automation_name_is_xcuitest?
-        c_names = class_names.map { |class_name| %(type == "#{class_name}") }.join(' || ')
-
-        predicate = if value
-                      %((#{c_names}) && ) +
-                        %((name ==[c] "#{value}" || label ==[c] "#{value}" || value ==[c] "#{value}"))
-                    else
-                      c_names
-                    end
-
-        elements = @driver.find_elements :predicate, predicate
-        select_visible_elements elements
-      else
-        class_names.flat_map do |class_name|
-          value ? eles_by_json_visible_exact(class_name, value) : tags(class_name)
-        end
+      class_names.flat_map do |class_name|
+        value ? eles_by_json_visible_exact(class_name, value) : tags(class_name)
       end
     end
 

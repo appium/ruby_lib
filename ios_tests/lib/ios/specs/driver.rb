@@ -233,7 +233,7 @@ describe 'driver' do
     end
 
     t 'automation_name_is_xcuitest?' do
-      automation_name_is_xcuitest?.must_equal UI::Inventory.xcuitest?
+      automation_name_is_xcuitest?.must_equal UI::Inventory.new($driver).xcuitest?
     end
 
     #
@@ -276,23 +276,21 @@ describe 'driver' do
 
     # simple integration sanity test to check for unexpected exceptions
     t 'set_location' do
-      raise NotImplementedError, "XCUITest(Appium1.6.2) doesn't support yet" if UI::Inventory.xcuitest?
       set_location latitude: 55, longitude: -72, altitude: 33
     end
 
     # any elements
     t 'find_elements' do
-      find_elements(:class, UI::Inventory.table_cell).length.must_equal 12
+      find_elements(:class, UI::Inventory.new($driver).table_cell).length.must_equal 12
     end
 
     # any element
     t 'find_element' do
-      find_element(:class, UI::Inventory.static_text).class.must_equal Selenium::WebDriver::Element
+      find_element(:class, UI::Inventory.new($driver).static_text).class.must_equal Selenium::WebDriver::Element
     end
 
     # settings
     t 'get settings' do
-      raise NotImplementedError, "XCUITest(Appium1.6.2) doesn't support yet" if UI::Inventory.xcuitest?
       get_settings.wont_be_nil
     end
 

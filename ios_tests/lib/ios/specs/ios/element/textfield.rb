@@ -34,7 +34,7 @@ describe 'ios/element/textfield' do
   end
 
   t 'predicate textfields' do
-    textfields = if UI::Inventory.xcuitest?
+    textfields = if UI::Inventory.new($driver).xcuitest?
                    find_elements(:predicate, "type contains[c] 'textfield'")
                  else
                    execute_script(%(au.mainApp().getAllWithPredicate("type contains[c] 'textfield'", true)))
@@ -73,13 +73,13 @@ describe 'ios/element/textfield' do
 
   t 'textfield type' do
     # Regular send keys triggers the keyboard and doesn't dismiss
-    keyboard_must_not_exist unless UI::Inventory.xcuitest? # xcuitest doesn't support JS command
+    keyboard_must_not_exist unless UI::Inventory.new($driver).xcuitest? # xcuitest doesn't support JS command
     textfield(1).send_keys "o'k"
-    keyboard_must_exist unless UI::Inventory.xcuitest? # xcuitest doesn't support JS command
+    keyboard_must_exist unless UI::Inventory.new($driver).xcuitest? # xcuitest doesn't support JS command
 
     find_exact("o'k").text.must_equal "o'k"
 
-    unless UI::Inventory.xcuitest?
+    unless UI::Inventory.new($driver).xcuitest?
       # type should not dismiss the keyboard
       message = 'type test type'
       textfield(1).type message

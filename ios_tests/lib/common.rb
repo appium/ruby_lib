@@ -18,13 +18,13 @@ end
 def go_to_textfields
   screen.must_equal catalog
   wait_true do
-    UI::Inventory.xcuitest? ? find_element(:name, 'TextFields').click : text('textfield').click
+    UI::Inventory.new($driver).xcuitest? ? find_element(:name, 'TextFields').click : text('textfield').click
     screen == 'TextFields' # wait for screen transition
   end
 end
 
 def screen
-  $driver.find_element(:class, UI::Inventory.navbar).name
+  $driver.find_element(:class, UI::Inventory.new($driver).navbar).name
 end
 
 def catalog
@@ -32,52 +32,56 @@ def catalog
 end
 
 module UI
-  module Inventory
-    def self.xcuitest?
-      $driver.automation_name_is_xcuitest?
+  class Inventory
+    def initialize(driver)
+      @driver = driver
     end
 
-    def self.navbar
+    def xcuitest?
+      @driver.automation_name_is_xcuitest?
+    end
+
+    def navbar
       xcuitest? ? 'XCUIElementTypeNavigationBar' : 'UIANavigationBar'
     end
 
-    def self.button
+    def button
       xcuitest? ? 'XCUIElementTypeButton' : 'UIAButton'
     end
 
-    def self.static_text
+    def static_text
       xcuitest? ? 'XCUIElementTypeStaticText' : 'UIAStaticText'
     end
 
-    def self.text_field
+    def text_field
       xcuitest? ? 'XCUIElementTypeTextField' : 'UIATextField'
     end
 
-    def self.secure_text_field
+    def secure_text_field
       xcuitest? ? 'XCUIElementTypeSecureTextField' : 'UIASecureTextField'
     end
 
-    def self.picker
+    def picker
       xcuitest? ? 'XCUIElementTypePicker' : 'UIAPicker'
     end
 
-    def self.action_sheet
+    def action_sheet
       xcuitest? ? 'XCUIElementTypeActionSheet' : 'UIActionSheet'
     end
 
-    def self.table
+    def table
       xcuitest? ? 'XCUIElementTypeTable' : 'UIATable'
     end
 
-    def self.table_cell
+    def table_cell
       xcuitest? ? 'XCUIElementTypeCell' : 'UIATableCell'
     end
 
-    def self.other
+    def other
       xcuitest? ? 'XCUIElementTypeOther' : raise('unknown UIA element: other')
     end
 
-    def self.status_bar
+    def status_bar
       xcuitest? ? 'XCUIElementTypeStatusBar' : 'UIAStatusBar'
     end
   end
