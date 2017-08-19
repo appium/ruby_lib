@@ -386,8 +386,8 @@ module Appium
     # @return [Driver]
     def initialize(opts = {}, global_driver = true)
       if global_driver
-        warn '[DEPRECATION] Appium::Driver.new(opts) will not generate global driver by default.' +
-                 'If you would like to generate the global driver dy default, ' +
+        warn '[DEPRECATION] Appium::Driver.new(opts) will not generate global driver by default.' \
+                 'If you would like to generate the global driver dy default, ' \
                  'please initialise driver with Appium::Driver.new(opts, true)'
         $driver.driver_quit if $driver
       end
