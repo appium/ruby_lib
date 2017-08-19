@@ -52,3 +52,43 @@ RuboCop::RakeTask.new(:rubocop) do |t|
   t.options = %w(-D)
   t.fail_on_error = false
 end
+
+# TODO: Run tests, `rake ios`, with thread style
+desc 'Run tests with parallel'
+task :run_parallel do
+  require 'thread'
+  require 'rake/testtask'
+
+  require_relative 'parallel/test'
+  def device1
+    {
+        automationName: "xcuitest",
+        platformName: "ios",
+        platformVersion: "11.0",
+        deviceName: "iPhone 6",
+        app: "#{Dir.pwd}/../test_apps/UICatalog.app",
+        wdaLocalPort: 8100
+    }
+  end
+
+  def device2
+    {
+        automationName: "xcuitest",
+        platformName: "ios",
+        platformVersion: "11.0",
+        deviceName: "iPhone 6s",
+        app: "#{Dir.pwd}/../test_apps/UICatalog.app",
+        wdaLocalPort: 8200
+    }
+  end
+
+  threads = []
+  [device1, device2].each do |capability|
+    threads << Thread.new {
+      TestParallelRun.new(capability).test_run
+      # RSpec::Core::RakeTask.new(:spec)
+    }
+  end
+
+  threads.each(&:join)
+end

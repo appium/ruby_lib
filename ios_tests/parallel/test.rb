@@ -1,27 +1,4 @@
-require 'thread'
 require_relative '../../lib/appium_lib'
-
-def device1
-  {
-      automationName: "xcuitest",
-      platformName: "ios",
-      platformVersion: "11.0",
-      deviceName: "iPhone 6",
-      app: "#{Dir.pwd}/../../test_apps/UICatalog.app",
-      wdaLocalPort: 8100
-  }
-end
-
-def device2
-  {
-      automationName: "xcuitest",
-      platformName: "ios",
-      platformVersion: "11.0",
-      deviceName: "iPhone 6s",
-      app: "#{Dir.pwd}/../../test_apps/UICatalog.app",
-      wdaLocalPort: 8200
-  }
-end
 
 def des_server_caps
   {
@@ -33,19 +10,42 @@ def des_server_caps
   }
 end
 
-def test(number)
-  caps = case number
-         when 1
-           { caps: device1, appium_lib: des_server_caps }
-         when 2
-           { caps: device2, appium_lib: des_server_caps }
-         end
+class TestParallelRun
+  def initialize(capability)
+    @capability = capability
+  end
 
-  appium = Appium::Driver.new(caps, false)
-  driver = appium.start_driver
-  e = driver.find_element :name, "Buttons"
-  e.click
+  def setup
+    @appium = Appium::Driver.new({ caps: @capability, appium_lib: des_server_caps }, false)
+    @appium.start_driver
 
-  sleep 20
-  appium.driver_quit
+    Appium.promote_appium_methods [self.class], @appium
+  end
+
+  def teardown
+    quit_driver
+    puts "finish: #{@capability}"
+  end
+
+  def test_run
+    setup
+
+    # tap alert
+    find_element(:name, 'Alerts').click
+    wait_true do
+      find_element(:name, 'Show OK-Cancel').click
+      find_element(:name, 'UIActionSheet <title>').displayed?
+    end
+    alert action: 'accept'
+    back
+
+    sleep 5
+
+    # TouchAction
+    text_elem = text(app_strings['ButtonsExplain'])
+    tap x: 0, y: 0, element: text_elem
+    back
+
+    teardown
+  end
 end
