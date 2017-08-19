@@ -32,7 +32,7 @@ describe 'android/element/generic' do
 
   # scroll_to is broken
   t 'scroll_to' do
-    wait { find('Views').click }
+    wait { scroll_to('Views').click }
     wait { scroll_to('scrollbars').text.must_equal 'ScrollBars' }
 
     wait { find('ScrollBars').click }
@@ -45,7 +45,7 @@ describe 'android/element/generic' do
   end
 
   t 'scroll_to_exact' do
-    wait { find('Views').click }
+    wait { scroll_to('Views').click }
 
     wait { scroll_to_exact('ScrollBars').text.must_equal 'ScrollBars' }
     wait { find('ScrollBars').click }
