@@ -8,6 +8,10 @@
     - [ios-xctest-mobile-gestures](https://github.com/appium/appium/blob/master/docs/en/writing-running-appium/ios-xctest-mobile-gestures.md)
     - Required Appium1.6.4+
 
+## Run tests on Multiple Simulators with Xcode 9
+- https://github.com/appium/appium-xcuitest-driver/tree/master/test/functional/parallel
+- https://github.com/appium/ruby_lib/tree/master/ios_tests/parallel
+
 ## find elements
 - supported elements by find_element are:
     - [appium-xcuitest-driver](https://github.com/appium/appium-xcuitest-driver/blob/master/lib/commands/find.js#L17)
