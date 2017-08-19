@@ -1,6 +1,6 @@
 module Appium
   # Perform a series of gestures, one after another.  Gestures are chained
-  # together and only performed when `perform()` is called.
+  # together and only performed when `perform()` is called. Default is conducted by global driver.
   #
   # Each method returns the object itself, so calls can be chained.
   #
@@ -17,7 +17,15 @@ module Appium
   # # called `swipe(...).perform` in this method.
   # swipe(start_x: 75, start_y: 500, offset_x: 75, offset_y: 20, duration: 500)
   # ```
-
+  #
+  # If you'd like to perform the chain with an arbitrary driver:
+  # ```ruby
+  # driver =  Appium::Driver.new(opts, false).start_driver
+  # action = TouchAction.new.press(x: 45, y: 100).wait(5).release
+  # action.perform(@driver)
+  # action = TouchAction.new.swipe(....)
+  # action.perform(@driver)
+  # ```
   class TouchAction
     ACTIONS         = [:move_to, :long_press, :double_tap, :two_finger_tap, :press, :release, :tap, :wait, :perform].freeze
     COMPLEX_ACTIONS = [:swipe].freeze

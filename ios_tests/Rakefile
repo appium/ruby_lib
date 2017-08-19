@@ -64,7 +64,8 @@ task :run_parallel do
         platformVersion: '11.0',
         deviceName: 'iPhone 6',
         app: "#{Dir.pwd}/../test_apps/UICatalog.app",
-        wdaLocalPort: 8100
+        wdaLocalPort: 8100,
+        isCommandsQueueEnabled: false
     }
   end
 
@@ -75,7 +76,8 @@ task :run_parallel do
         platformVersion: '11.0',
         deviceName: 'iPhone 6s',
         app: "#{Dir.pwd}/../test_apps/UICatalog.app",
-        wdaLocalPort: 8200
+        wdaLocalPort: 8200,
+        isCommandsQueueEnabled: false
     }
   end
 

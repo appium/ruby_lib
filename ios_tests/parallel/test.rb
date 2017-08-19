@@ -18,12 +18,10 @@ class TestParallelRun
   def setup
     @appium = Appium::Driver.new({ caps: @capability, appium_lib: des_server_caps }, false)
     @appium.start_driver
-
-    Appium.promote_appium_methods [self.class], @appium
   end
 
   def teardown
-    quit_driver
+    @appium.quit_driver
     puts "finish: #{@capability}"
   end
 
@@ -31,20 +29,20 @@ class TestParallelRun
     setup
 
     # tap alert
-    find_element(:name, 'Alerts').click
-    wait_true do
-      find_element(:name, 'Show OK-Cancel').click
-      find_element(:name, 'UIActionSheet <title>').displayed?
+    @appium.find_element(:name, 'Alerts').click
+    @appium.wait_true do
+      @appium.find_element(:name, 'Show OK-Cancel').click
+      @appium.find_element(:name, 'UIActionSheet <title>').displayed?
     end
-    alert action: 'accept'
-    back
+    @appium.alert action: 'accept'
+    @appium.back
 
     sleep 5
 
     # TouchAction
-    text_elem = text(app_strings['ButtonsExplain'])
-    tap x: 0, y: 0, element: text_elem
-    back
+    text_elem = @appium.text(@appium.app_strings['ButtonsExplain'])
+    @appium.tap x: 0, y: 0, element: text_elem
+    @appium.back
 
     teardown
   end

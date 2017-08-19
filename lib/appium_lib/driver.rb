@@ -332,7 +332,8 @@ module Appium
     # @return [Integer]
     attr_reader :appium_wait_interval
 
-    # Creates a new driver
+    # Creates a new driver. The driver is defined as global scope by default.
+    # We can avoid defining global driver.
     #
     # @example
     #
@@ -342,7 +343,7 @@ module Appium
     #
     #     # platformName takes a string or a symbol.
     #
-    #     # Start iOS driver
+    #     # Start iOS driver with global scope
     #     opts = {
     #              caps: {
     #                platformName: :ios,
@@ -354,7 +355,7 @@ module Appium
     #            }
     #     Appium::Driver.new(opts).start_driver
     #
-    #     # Start Android driver
+    #     # Start Android driver with global scope
     #     opts = {
     #              caps: {
     #                platformName: :android,
@@ -366,7 +367,18 @@ module Appium
     #              }
     #            }
     #     Appium::Driver.new(opts).start_driver
-    #     # or Appium::Driver.new(opts, false).start_driver # Don't use global driver.
+    #
+    #     # Start iOS driver without global scope
+    #     opts = {
+    #              caps: {
+    #                platformName: :ios,
+    #                app: '/path/to/MyiOS.app'
+    #              },
+    #              appium_lib: {
+    #                wait_timeout: 30
+    #              }
+    #            }
+    #     Appium::Driver.new(opts, false).start_driver
     #     ```
     #
     # @param opts [Object] A hash containing various options.
@@ -374,6 +386,9 @@ module Appium
     # @return [Driver]
     def initialize(opts = {}, global_driver = true)
       if global_driver
+        warn '[DEPRECATION] Appium::Driver.new(opts) will not generate global driver by default.' \
+                 'If you would like to generate the global driver dy default, ' \
+                 'please initialise driver with Appium::Driver.new(opts, true)'
         $driver.driver_quit if $driver
       end
       raise 'opts must be a hash' unless opts.is_a? Hash

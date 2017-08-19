@@ -7,6 +7,7 @@ ruby_lib's iOS tests. Requires `Ruby 2.2+` or better.
 - `rake ios` Run all tests.
 - `rake` Run all the test. Same as `rake ios`
 - `rake ios['ios/element/generic']` Run a single test.
+- `rake run_parallel` Run a test in parallel.
 - `arc` Opens the Appium Ruby Console (arc). Enables interactive testing.
   - `gem install appium_console` if it's not installed already.
 
