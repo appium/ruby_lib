@@ -66,11 +66,13 @@ module Appium
 
     private
 
+    # @private
     def raise_no_such_element_if_empty(elements)
       raise _no_such_element if elements.empty?
       elements.first
     end
 
+    # @private
     def _button_visible_selectors(opts = {})
       button_index       = opts.fetch :button_index, false
       image_button_index = opts.fetch :image_button_index, false
@@ -84,12 +86,14 @@ module Appium
       end
     end
 
+    # @private
     def _button_exact_string(value)
       button       = string_visible_exact Button, value
       image_button = string_visible_exact ImageButton, value
       button + image_button
     end
 
+    # @private
     def _button_contains_string(value)
       button       = string_visible_contains Button, value
       image_button = string_visible_contains ImageButton, value

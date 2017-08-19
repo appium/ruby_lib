@@ -1,3 +1,9 @@
+#### v9.5.0 2017-08-05
+
+- [19177f5](https://github.com/appium/ruby_lib/commit/19177f5348300a0e2e1e0510b99efac2f3067201) [Release 9 5 0 (#628)](https://github.com/appium/ruby_lib/issues/628)
+- [4219f1d](https://github.com/appium/ruby_lib/commit/4219f1d3f639a421bc4fc6a772c242d782357ae1) [feature: support selenium-webdriver3.4.1+ (#627)](https://github.com/appium/ruby_lib/issues/627)
+
+
 #### v9.4.10 2017-07-30
 
 - [6eae1b6](https://github.com/appium/ruby_lib/commit/6eae1b6412ba8dc6c967a44dd9a987944c8e6444) [Release 9 4 10 (#626)](https://github.com/appium/ruby_lib/issues/626)

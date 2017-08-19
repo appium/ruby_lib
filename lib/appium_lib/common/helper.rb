@@ -214,6 +214,7 @@ module Appium
       end
     end
 
+    # @private
     def _no_such_element
       error_message = 'An element could not be located on the page using the given search parameters.'
       raise Selenium::WebDriver::Error::NoSuchElementError, error_message
