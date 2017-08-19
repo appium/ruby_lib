@@ -6,12 +6,12 @@ describe 'device/touch_actions' do
 
   t 'swipe_default_duration' do
     wait_true do
-      wait { UI::Inventory.xcuitest? ? find_element(:name, 'Pickers').click : text('pickers').click }
+      wait { automation_name_is_xcuitest? ? find_element(:name, 'Pickers').click : text('pickers').click }
       screen == 'Pickers'
     end
 
-    ele_index(UI::Inventory.static_text, 2).text.must_equal 'John Appleseed - 0'
-    picker = ele_index(UI::Inventory.picker, 1)
+    ele_index(ui_ios.static_text, 2).text.must_equal 'John Appleseed - 0'
+    picker = ele_index(ui_ios.picker, 1)
     loc = picker.location.to_h
     size = picker.size.to_h
     start_x = loc[:x] + size[:width] / 2
@@ -45,7 +45,7 @@ describe 'device/touch_actions' do
     # [HTTP] <-- POST /wd/hub/session/8b651f03-0fbc-43f0-aaf2-243d0650f6aa/touch/perform 200 1895 ms - 74
     # rubocop:enable Metrics/LineLength
     Appium::TouchAction.new.swipe(start_x: start_x, start_y: start_y, offset_x: 0, offset_y: - 50).perform
-    ele_index(UI::Inventory.static_text, 2).text.must_equal 'Chris Armstrong - 0'
+    ele_index(ui_ios.static_text, 2).text.must_equal 'Chris Armstrong - 0'
   end
 
   t 'swipe_coordinates_end_x_end_y' do

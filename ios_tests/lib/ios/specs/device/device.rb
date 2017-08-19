@@ -18,10 +18,8 @@ describe 'device/device' do
   end
 
   t 'lock' do
-    raise NotImplementedError, "XCUITest(Appium1.6.2) doesn't support yet" if UI::Inventory.xcuitest?
-
     lock 5
-    tag(UI::Inventory.button).name.must_equal 'SlideToUnlock'
+    tag(ui_ios).name.must_equal 'SlideToUnlock'
 
     # It appears that lockForDuration doesn't.
     close_app
@@ -34,22 +32,18 @@ describe 'device/device' do
   end
 
   t 'app_installed' do
-    raise NotImplementedError, "XCUITest(Appium1.6.2) doesn't support yet" if UI::Inventory.xcuitest?
-
     installed = app_installed? 'Derrp'
     installed.must_equal false
   end
 
   t 'shake' do
-    raise NotImplementedError, "XCUITest(Appium1.6.2) doesn't support yet" if UI::Inventory.xcuitest?
-
     shake
   end
 
   t 'close and launch' do
     close_app
     launch_app
-    tag(UI::Inventory.navbar).name.must_equal 'UICatalog'
+    tag(ui_ios.navbar).name.must_equal 'UICatalog'
   end
 
   t 'background_app homescreen' do
@@ -118,8 +112,6 @@ describe 'device/device' do
   t 'pull_file' do
     # Selenium::WebDriver::Error::UnknownError: An unknown server-side error occurred while processing the command.
     # Original error: Cannot read property 'getDir' of undefined
-    raise NotImplementedError, "XCUITest(Appium1.6.2) doesn't support yet" if UI::Inventory.xcuitest?
-
     read_file = pull_file 'Library/AddressBook/AddressBook.sqlitedb'
     read_file.start_with?('SQLite format').must_equal true
   end
@@ -127,8 +119,6 @@ describe 'device/device' do
   t 'pull_folder' do
     # Selenium::WebDriver::Error::UnknownError: An unknown server-side error occurred while processing the command.
     # Original error: Cannot read property 'getDir' of undefined
-    raise NotImplementedError, "XCUITest(Appium1.6.2) doesn't support yet" if UI::Inventory.xcuitest?
-
     data = pull_folder 'Library/AddressBook'
     data.length.must_be :>, 1
   end

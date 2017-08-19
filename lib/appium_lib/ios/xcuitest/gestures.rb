@@ -9,12 +9,10 @@ module Appium
         #   swipe direction: "down"
         #   ```
         def swipe(direction:, element: nil)
-          return unless %w(up down left right).include?(direction)
-
           args = { direction: direction }
           args[:element] = element.ref if element
 
-          execute_script 'mobile: swipe', args
+          @driver.execute_script 'mobile: swipe', args
         end
 
         # @param [string] direction Either 'up', 'down', 'left' or 'right'.
@@ -37,7 +35,7 @@ module Appium
           args[:toVisible] = to_visible if to_visible
           args[:predicateString] = predicate_string if predicate_string
 
-          execute_script 'mobile: scroll', args
+          @driver.execute_script 'mobile: scroll', args
         end
 
         # @param scale [scale] X tap coordinate of type float. Mandatory parameter
@@ -48,12 +46,10 @@ module Appium
         #   pinch scale: 0.5, velocity: -1
         #   ```
         def pinch(scale:, velocity: 1.0, element: nil)
-          return unless automation_name_is_xcuitest?
-
           args = { scale: scale, velocity: velocity }
           args[:element] = element.ref if element
 
-          execute_script 'mobile: pinch', args
+          @driver.execute_script 'mobile: pinch', args
         end
 
         # @param x [float] X Screen x tap coordinate of type float. Mandatory parameter only if element is not set
@@ -65,11 +61,10 @@ module Appium
         #   double_tap element: find_element(:accessibility_id, "some item")
         #   ```
         def double_tap(x: nil, y: nil, element: nil)
-          return 'require XCUITest(WDA)' unless automation_name_is_xcuitest?
           return 'Set x, y or element' if (x.nil? || y.nil?) && element.nil?
 
           args = element.nil? ? { x: x, y: y } : { element: element.ref }
-          execute_script 'mobile: doubleTap', args
+          @driver.execute_script 'mobile: doubleTap', args
         end
 
         # @param x [float] Screen x long tap coordinate of type float. Mandatory parameter only if element is not set
@@ -83,12 +78,11 @@ module Appium
         #   touch_and_hold element: find_element(:accessibility_id, "some item")
         #   ```
         def touch_and_hold(x: nil, y: nil, element: nil, duration: 1.0)
-          return 'require XCUITest(WDA)' unless automation_name_is_xcuitest?
           return 'Set x, y or element' if (x.nil? || y.nil?) && element.nil?
 
           args = element.nil? ? { x: x, y: y } : { element: element.ref }
           args[:duration] = duration
-          execute_script 'mobile: touchAndHold', args
+          @driver.execute_script 'mobile: touchAndHold', args
         end
 
         # @param [Element] :element Element to long tap on.
@@ -97,10 +91,8 @@ module Appium
         #   two_finger_tap element: find_element(:accessibility_id, "some item")
         #   ```
         def two_finger_tap(element:)
-          return 'require XCUITest(WDA)' unless automation_name_is_xcuitest?
-
           args = { element: element.ref }
-          execute_script 'mobile: twoFingerTap', args
+          @driver.execute_script 'mobile: twoFingerTap', args
         end
 
         # @param x [float] X tap coordinate of type float. Mandatory parameter
@@ -114,11 +106,9 @@ module Appium
         #   tap x: 100, y: 100, element: find_element(:accessibility_id, "some item")
         #   ```
         def tap(x:, y:, element: nil)
-          return 'require XCUITest(WDA)' unless automation_name_is_xcuitest?
-
           args = { x: x, y: y }
           args[:element] = element.ref if element
-          execute_script 'mobile: tap', args
+          @driver.execute_script 'mobile: tap', args
         end
 
         # rubocop:disable Metrics/ParameterLists
@@ -136,11 +126,9 @@ module Appium
         #   drag_from_to_for_duration from_x: 100, from_y: 100, to_x: 150, to_y: 150
         #   ```
         def drag_from_to_for_duration(from_x:, from_y:, to_x:, to_y:, duration: 1.0, element: nil)
-          return 'require XCUITest(WDA)' unless automation_name_is_xcuitest?
-
           args = { fromX: from_x, fromY: from_y, toX: to_x, toY: to_y, duration: duration }
           args[:element] = element.ref if element
-          execute_script 'mobile: dragFromToForDuration', args
+          @driver.execute_script 'mobile: dragFromToForDuration', args
         end
         # rubocop:enable Metrics/ParameterLists
 
@@ -155,12 +143,11 @@ module Appium
         #   select_picker_wheel order: "next", element: find_element(:accessibility_id, "some picker")
         #   ```
         def select_picker_wheel(element:, order:, offset: nil)
-          return 'require XCUITest(WDA)' unless automation_name_is_xcuitest?
           return 'Set "next" or "previous" for :order' unless %w(next previous).include?(order)
 
           args = { element: element.ref, order: order }
           args[:offset] = offset if offset
-          execute_script 'mobile: selectPickerWheelValue', args
+          @driver.execute_script 'mobile: selectPickerWheelValue', args
         end
 
         # @param action [String] The following actions are supported: accept, dismiss and getButtons. Mandatory parameter
@@ -178,7 +165,7 @@ module Appium
 
           args = { action: action }
           args[:button_label] if button_label
-          execute_script 'mobile: alert', args
+          @driver.execute_script 'mobile: alert', args
         end
       end # module Gesture
     end # module Xcuitest

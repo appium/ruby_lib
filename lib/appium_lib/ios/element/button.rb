@@ -6,7 +6,7 @@ module Appium
 
     # @return [String] Class name for button
     def button_class
-      automation_name_is_xcuitest? ? XCUIElementTypeButton : UIAButton
+      UIAButton
     end
 
     # Find the first UIAButton|XCUIElementTypeButton that contains value or by index.
@@ -16,12 +16,7 @@ module Appium
     def button(value)
       # return button at index.
       return ele_index button_class, value if value.is_a? Numeric
-
-      if automation_name_is_xcuitest?
-        raise_error_if_no_element buttons(value).first
-      else
-        ele_by_json_visible_contains button_class, value
-      end
+      ele_by_json_visible_contains button_class, value
     end
 
     # Find all UIAButtons|XCUIElementTypeButtons containing value.
@@ -30,13 +25,7 @@ module Appium
     # @return [Array<UIAButton|XCUIElementTypeButton>]
     def buttons(value = false)
       return tags button_class unless value
-
-      if automation_name_is_xcuitest?
-        elements = find_eles_by_predicate_include(class_name: button_class, value: value)
-        select_visible_elements elements
-      else
-        eles_by_json_visible_contains button_class, value
-      end
+      eles_by_json_visible_contains button_class, value
     end
 
     # Find the first UIAButton|XCUIElementTypeButton.
@@ -57,23 +46,14 @@ module Appium
     # @param value [String] the value to match exactly
     # @return [UIAButton|XCUIElementTypeButton]
     def button_exact(value)
-      if automation_name_is_xcuitest?
-        raise_error_if_no_element buttons_exact(value).first
-      else
-        ele_by_json_visible_exact button_class, value
-      end
+      ele_by_json_visible_exact button_class, value
     end
 
     # Find all UIAButtons|XCUIElementTypeButtons that exactly match value.
     # @param value [String] the value to match exactly
     # @return [Array<UIAButton|XCUIElementTypeButton>]
     def buttons_exact(value)
-      if automation_name_is_xcuitest?
-        elements = find_eles_by_predicate(class_name: button_class, value: value)
-        select_visible_elements elements
-      else
-        eles_by_json_visible_exact button_class, value
-      end
+      eles_by_json_visible_exact button_class, value
     end
   end # module Ios
 end # module Appium
