@@ -285,13 +285,7 @@ module Appium
     # @param value [String] the value to search for
     # @return [Element]
     def complex_find_contains(class_name, value)
-      if automation_name_is_uiautomator2?
-        elements = find_elements :uiautomator, string_visible_contains(class_name, value)
-        raise _no_such_element if elements.empty?
-        elements.first
-      else
-        find_element :uiautomator, string_visible_contains(class_name, value)
-      end
+      find_element :uiautomator, string_visible_contains(class_name, value)
     end
 
     # Find all elements containing value
@@ -343,13 +337,7 @@ module Appium
     # @param value [String] the value to search for
     # @return [Element]
     def complex_find_exact(class_name, value)
-      if automation_name_is_uiautomator2?
-        elements = find_elements :uiautomator, string_visible_exact(class_name, value)
-        raise _no_such_element if elements.empty?
-        elements.first
-      else
-        find_element :uiautomator, string_visible_exact(class_name, value)
-      end
+      find_element :uiautomator, string_visible_exact(class_name, value)
     end
 
     # Find all elements exactly matching value
