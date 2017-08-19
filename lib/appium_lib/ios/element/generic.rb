@@ -4,46 +4,28 @@ module Appium
     # @param value [String] the value to search for
     # @return [Element]
     def find(value)
-      if automation_name_is_xcuitest?
-        raise_error_if_no_element finds(value).first
-      else
-        ele_by_json_visible_contains '*', value
-      end
+      ele_by_json_visible_contains '*', value
     end
 
     # Find all elements containing value
     # @param value [String] the value to search for
     # @return [Array<Element>]
     def finds(value)
-      if automation_name_is_xcuitest?
-        elements = find_eles_by_predicate_include value: value
-        select_visible_elements elements
-      else
-        eles_by_json_visible_contains '*', value
-      end
+      eles_by_json_visible_contains '*', value
     end
 
     # Find the first element exactly matching value
     # @param value [String] the value to search for
     # @return [Element]
     def find_exact(value)
-      if automation_name_is_xcuitest?
-        raise_error_if_no_element finds_exact(value).first
-      else
-        ele_by_json_visible_exact '*', value
-      end
+      ele_by_json_visible_exact '*', value
     end
 
     # Find all elements exactly matching value
     # @param value [String] the value to search for
     # @return [Array<Element>]
     def finds_exact(value)
-      if automation_name_is_xcuitest?
-        elements = find_eles_by_predicate value: value
-        select_visible_elements elements
-      else
-        eles_by_json_visible_exact '*', value
-      end
+      eles_by_json_visible_exact '*', value
     end
 
     private

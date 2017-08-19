@@ -30,6 +30,10 @@ require_relative 'ios/xcuitest/element'
 require_relative 'ios/xcuitest/gestures'
 require_relative 'ios/xcuitest/mobile_methods'
 require_relative 'ios/xcuitest/device'
+require_relative 'ios/xcuitest/element/text'
+require_relative 'ios/xcuitest/element/textfield'
+require_relative 'ios/xcuitest/element/generic'
+require_relative 'ios/xcuitest/element/button'
 
 # android
 require_relative 'android/helper'
@@ -409,6 +413,7 @@ module Appium
           extend Appium::Ios::Xcuitest
           extend Appium::Ios::Xcuitest::Gesture
           extend Appium::Ios::Xcuitest::Device
+          extend Appium::Ios::Xcuitest::Element
         end
       end
 

@@ -8,12 +8,12 @@ module Appium
 
     # @return [String] Class name for text field
     def text_field_class
-      automation_name_is_xcuitest? ? XCUIElementTypeTextField : UIATextField
+      UIATextField
     end
 
     # @return [String] Class name for secure text field
     def secure_text_field_class
-      automation_name_is_xcuitest? ? XCUIElementTypeSecureTextField : UIASecureTextField
+      UIASecureTextField
     end
 
     private
@@ -62,21 +62,13 @@ module Appium
         index = value
         raise "#{index} is not a valid index. Must be >= 1" if index <= 0
         index -= 1 # eles_by_json and _textfields_with_predicate is 0 indexed.
-        result = if automation_name_is_xcuitest?
-                   _textfields_with_predicate[index]
-                 else
-                   eles_by_json(_textfield_visible)[index]
-                 end
+        result = eles_by_json(_textfield_visible)[index]
         raise _no_such_element if result.nil?
         return result
 
       end
 
-      if automation_name_is_xcuitest?
-        raise_error_if_no_element textfields(value).first
-      else
-        ele_by_json _textfield_contains_string value
-      end
+      ele_by_json _textfield_contains_string value
     end
 
     # Find all TextFields containing value.
@@ -84,35 +76,20 @@ module Appium
     # @param value [String] the value to search for
     # @return [Array<TextField>]
     def textfields(value = false)
-      if automation_name_is_xcuitest?
-        return tags_include(class_names: [text_field_class, secure_text_field_class]) unless value
-
-        elements = tags_include class_names: [text_field_class, secure_text_field_class], value: value
-        select_visible_elements elements
-      else
-        return eles_by_json _textfield_visible unless value
-        eles_by_json _textfield_contains_string value
-      end
+      return eles_by_json _textfield_visible unless value
+      eles_by_json _textfield_contains_string value
     end
 
     # Find the first TextField.
     # @return [TextField]
     def first_textfield
-      if automation_name_is_xcuitest?
-        _textfield_with_predicate
-      else
-        ele_by_json _textfield_visible
-      end
+      ele_by_json _textfield_visible
     end
 
     # Find the last TextField.
     # @return [TextField]
     def last_textfield
-      result = if automation_name_is_xcuitest?
-                 _textfields_with_predicate.last
-               else
-                 eles_by_json(_textfield_visible).last
-               end
+      result = eles_by_json(_textfield_visible).last
       raise _no_such_element if result.nil?
       result
     end
@@ -121,23 +98,14 @@ module Appium
     # @param value [String] the value to match exactly
     # @return [TextField]
     def textfield_exact(value)
-      if automation_name_is_xcuitest?
-        raise_error_if_no_element textfields_exact(value).first
-      else
-        ele_by_json _textfield_exact_string value
-      end
+      ele_by_json _textfield_exact_string value
     end
 
     # Find all TextFields that exactly match value.
     # @param value [String] the value to match exactly
     # @return [Array<TextField>]
     def textfields_exact(value)
-      if automation_name_is_xcuitest?
-        elements = tags_exact class_names: [text_field_class, secure_text_field_class], value: value
-        select_visible_elements elements
-      else
-        eles_by_json _textfield_exact_string value
-      end
+      eles_by_json _textfield_exact_string value
     end
   end # module Ios
 end # module Appium
