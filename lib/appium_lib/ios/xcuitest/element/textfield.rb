@@ -15,42 +15,6 @@ module Appium
           ::Appium::Ios::XCUIElementTypeSecureTextField
         end
 
-        private
-
-        # @private
-        # for XCUITest
-        def _textfield_with_predicate
-          raise_error_if_no_element _textfields_with_predicate.first
-        end
-
-        # @private
-        # for XCUITest
-        def _textfields_with_predicate
-          elements = tags_include(class_names: [text_field_class, secure_text_field_class])
-          select_visible_elements elements
-        end
-
-        # Appium
-        def _textfield_visible
-          { typeArray: [UIATextField, UIASecureTextField], onlyVisible: true }
-        end
-
-        # Appium
-        def _textfield_exact_string(value)
-          exact = { target: value, substring: false, insensitive: false }
-          exact_obj = { name:  exact, label: exact, value: exact }
-          _textfield_visible.merge(exact_obj)
-        end
-
-        # Appium
-        def _textfield_contains_string(value)
-          contains = { target: value, substring: true, insensitive: true }
-          contains_obj = { name: contains, label: contains, value: contains }
-          _textfield_visible.merge(contains_obj)
-        end
-
-        public
-
         # Find the first TextField that contains value or by index.
         # Note: Uses XPath
         # @param value [String, Integer] the text to match exactly.
@@ -107,6 +71,21 @@ module Appium
         # @return [Array<TextField>]
         def textfields_exact(value)
           elements = tags_exact class_names: [text_field_class, secure_text_field_class], value: value
+          select_visible_elements elements
+        end
+
+        private
+
+        # @private
+        # for XCUITest
+        def _textfield_with_predicate
+          raise_error_if_no_element _textfields_with_predicate.first
+        end
+
+        # @private
+        # for XCUITest
+        def _textfields_with_predicate
+          elements = tags_include(class_names: [text_field_class, secure_text_field_class])
           select_visible_elements elements
         end
       end # module TextField
