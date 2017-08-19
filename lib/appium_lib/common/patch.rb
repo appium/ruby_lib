@@ -130,7 +130,7 @@ def patch_webdriver_bridge
         Appium::Logger.ap_info command_hash
       end
 
-      if $driver.global_webdriver_http_sleep
+      if !$driver.nil? && $driver.global_webdriver_http_sleep
         warn '[DEPRECATION] global_webdriver_http_sleep will be removed. Please arrange with timeout.'
 
         delay = $driver.global_webdriver_http_sleep
