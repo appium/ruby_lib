@@ -14,16 +14,41 @@ module Appium
   # multi_touch_action.add action_1
   # multi_touch_action.add action_2
   # multi_touch_action.perform
+  # ```
+  #
+  # ```
+  # # with an arbitrary driver
+  # driver =  Appium::Driver.new(opts, false).start_driver
+  # multi_touch_action = MultiTouch.new(driver)
+  # multi_touch_action.add action_1
+  # multi_touch_action.add action_2
+  # multi_touch_action.perform
+  # ```
+
   class MultiTouch
     class << self
       # Convenience method for pinching the screen.
       # Places two fingers at the edges of the screen and brings them together.
       # @param percentage (int) The percent size by which to shrink the screen when pinched.
       # @param auto_perform (boolean) Whether to perform the action immediately (default true)
+      # @param driver (Driver) Set a driver to conduct the action. DEfault is global driver($driver)
       #
       # ```ruby
-      # action = pinch 75 #=> Pinch the screen from the top right and bottom left corners
+      # pinch 75 #=> Pinch the screen from the top right and bottom left corners
+      # ```
+      #
+      # Without auto_perform
+      #
+      # ```ruby
+      # action = pinch 75, false #=> Pinch the screen from the top right and bottom left corners
       # action.perform    #=> to 25% of its size.
+      # ```
+      #
+      # With driver
+      #
+      # ```ruby
+      # driver =  Appium::Driver.new(opts, false).start_driver
+      # pinch 75, true, driver #=> Pinch the screen from the top right and bottom left corners
       # ```
       def pinch(percentage = 25, auto_perform = true, driver = $driver)
         raise ArgumentError("Can't pinch to greater than screen size.") if percentage > 100
@@ -49,10 +74,24 @@ module Appium
       # Places two fingers at the edges of the screen and brings them together.
       # @param percentage (int) The percent size by which to shrink the screen when pinched.
       # @param auto_perform (boolean) Whether to perform the action immediately (default true)
+      # @param driver (Driver) Set a driver to conduct the action. DEfault is global driver($driver)
       #
       # ```ruby
       # action = zoom 200 #=> Zoom in the screen from the center until it doubles in size.
-      # action.perform
+      # ```
+      #
+      # Without auto_perform
+      #
+      # ```ruby
+      # action = zoom 200, false #=> Zoom in the screen from the center until it doubles in size.
+      # action.perform    #=> to 25% of its size.
+      # ```
+      #
+      # With driver
+      #
+      # ```ruby
+      # driver =  Appium::Driver.new(opts, false).start_driver
+      # pinch 200, true, driver #=> Zoom in the screen from the center until it doubles in size.
       # ```
       def zoom(percentage = 200, auto_perform = true, driver = $driver)
         raise ArgumentError("Can't zoom to smaller then screen size.") if percentage < 100
