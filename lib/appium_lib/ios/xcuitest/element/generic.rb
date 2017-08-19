@@ -43,8 +43,8 @@ module Appium
         # Return visible elements.
         def select_visible_elements(elements)
           elements.select(&:displayed?)
-    end
-      end
-    end
+        end
+      end # module Element
+    end # module Xcuitest
   end # module Ios
 end # module Appium

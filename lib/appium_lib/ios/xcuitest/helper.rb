@@ -2,7 +2,6 @@ module Appium
   module Ios
     module Xcuitest
       module Helper
-
         # Return the iOS version as an array of integers
         # @return [Array<Integer>]
         def ios_version
@@ -17,7 +16,6 @@ module Appium
             %((//#{class_name})[@#{attr}="#{value}"])
           end
         end
-
 
         # @private
         def string_attr_include(class_name, attr, value)
