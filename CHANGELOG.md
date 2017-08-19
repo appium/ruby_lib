@@ -5,6 +5,39 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 
 ## v9.5.0
 ### 1. Enhancements
+- Reduce Global Driver
+    - We need to provide `driver` to work `TouchAction` and `MultiAction` without global driver
+        - `TouchAction`
+            ```ruby
+            driver =  Appium::Driver.new(opts, false).start_driver
+            action = TouchAction.new.press(x: 45, y: 100).wait(5).release
+            action.perform(driver)
+            action = TouchAction.new.swipe(....)
+            action.perform(driver)
+            ```
+
+        - `MultiAction`
+            ```ruby
+            driver =  Appium::Driver.new(opts, false).start_driver
+            pinch 200, true, driver
+            ```
+- Add example to run multiple iOS Simulators [doc](https://github.com/appium/ruby_lib/blob/master/docs/ios_xcuitest.md#run-tests-on-multiple-simulators-with-xcode-9)
+    - Require Xcode 9 and Appium 1.6.6
+
+### 2. Bug fixes
+- `scroll_to` is failed on some Android 5.0 and 5.1 devices
+    - https://github.com/appium/ruby_lib/pull/638
+
+### 3. Deprecations
+
+### Special Thanks
+- Fixing `acroll_to`
+    - [@emen](https://github.com/emen)
+- Add alias `quit_driver`
+    - [@DylanLacey ](https://github.com/DylanLacey)
+
+## v9.5.0
+### 1. Enhancements
 - Support `selenium-webdriver3.4.1+`
     - Support new `createSession`
 
