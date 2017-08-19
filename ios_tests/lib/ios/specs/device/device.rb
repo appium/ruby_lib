@@ -19,7 +19,7 @@ describe 'device/device' do
 
   t 'lock' do
     lock 5
-    tag(UI::Inventory.new($driver).button).name.must_equal 'SlideToUnlock'
+    tag(ui_ios).name.must_equal 'SlideToUnlock'
 
     # It appears that lockForDuration doesn't.
     close_app
@@ -43,7 +43,7 @@ describe 'device/device' do
   t 'close and launch' do
     close_app
     launch_app
-    tag(UI::Inventory.new($driver).navbar).name.must_equal 'UICatalog'
+    tag(ui_ios.navbar).name.must_equal 'UICatalog'
   end
 
   t 'background_app homescreen' do

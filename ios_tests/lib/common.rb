@@ -18,71 +18,73 @@ end
 def go_to_textfields
   screen.must_equal catalog
   wait_true do
-    UI::Inventory.new($driver).xcuitest? ? find_element(:name, 'TextFields').click : text('textfield').click
+    automation_name_is_xcuitest? ? find_element(:name, 'TextFields').click : text('textfield').click
     screen == 'TextFields' # wait for screen transition
   end
 end
 
 def screen
-  $driver.find_element(:class, UI::Inventory.new($driver).navbar).name
+  $driver.find_element(:class, ui_ios.navbar).name
 end
 
 def catalog
   'UICatalog'
 end
 
-module UI
-  class Inventory
-    def initialize(driver)
-      @driver = driver
-    end
+def ui_ios
+  UI.new($driver)
+end
 
-    def xcuitest?
-      @driver.automation_name_is_xcuitest?
-    end
+class UI
+  def initialize(driver)
+    @driver = driver
+  end
 
-    def navbar
-      xcuitest? ? 'XCUIElementTypeNavigationBar' : 'UIANavigationBar'
-    end
+  def xcuitest?
+    @driver.automation_name_is_xcuitest?
+  end
 
-    def button
-      xcuitest? ? 'XCUIElementTypeButton' : 'UIAButton'
-    end
+  def navbar
+    xcuitest? ? 'XCUIElementTypeNavigationBar' : 'UIANavigationBar'
+  end
 
-    def static_text
-      xcuitest? ? 'XCUIElementTypeStaticText' : 'UIAStaticText'
-    end
+  def button
+    xcuitest? ? 'XCUIElementTypeButton' : 'UIAButton'
+  end
 
-    def text_field
-      xcuitest? ? 'XCUIElementTypeTextField' : 'UIATextField'
-    end
+  def static_text
+    xcuitest? ? 'XCUIElementTypeStaticText' : 'UIAStaticText'
+  end
 
-    def secure_text_field
-      xcuitest? ? 'XCUIElementTypeSecureTextField' : 'UIASecureTextField'
-    end
+  def text_field
+    xcuitest? ? 'XCUIElementTypeTextField' : 'UIATextField'
+  end
 
-    def picker
-      xcuitest? ? 'XCUIElementTypePicker' : 'UIAPicker'
-    end
+  def secure_text_field
+    xcuitest? ? 'XCUIElementTypeSecureTextField' : 'UIASecureTextField'
+  end
 
-    def action_sheet
-      xcuitest? ? 'XCUIElementTypeActionSheet' : 'UIActionSheet'
-    end
+  def picker
+    xcuitest? ? 'XCUIElementTypePicker' : 'UIAPicker'
+  end
 
-    def table
-      xcuitest? ? 'XCUIElementTypeTable' : 'UIATable'
-    end
+  def action_sheet
+    xcuitest? ? 'XCUIElementTypeActionSheet' : 'UIActionSheet'
+  end
 
-    def table_cell
-      xcuitest? ? 'XCUIElementTypeCell' : 'UIATableCell'
-    end
+  def table
+    xcuitest? ? 'XCUIElementTypeTable' : 'UIATable'
+  end
 
-    def other
-      xcuitest? ? 'XCUIElementTypeOther' : raise('unknown UIA element: other')
-    end
+  def table_cell
+    xcuitest? ? 'XCUIElementTypeCell' : 'UIATableCell'
+  end
 
-    def status_bar
-      xcuitest? ? 'XCUIElementTypeStatusBar' : 'UIAStatusBar'
-    end
+  def other
+    xcuitest? ? 'XCUIElementTypeOther' : raise('unknown UIA element: other')
+  end
+
+  def status_bar
+    xcuitest? ? 'XCUIElementTypeStatusBar' : 'UIAStatusBar'
   end
 end

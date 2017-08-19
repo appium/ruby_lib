@@ -233,7 +233,7 @@ describe 'driver' do
     end
 
     t 'automation_name_is_xcuitest?' do
-      automation_name_is_xcuitest?.must_equal UI::Inventory.new($driver).xcuitest?
+      automation_name_is_xcuitest?.must_equal automation_name_is_xcuitest?
     end
 
     #
@@ -281,12 +281,12 @@ describe 'driver' do
 
     # any elements
     t 'find_elements' do
-      find_elements(:class, UI::Inventory.new($driver).table_cell).length.must_equal 12
+      find_elements(:class, ui_ios.table_cell).length.must_equal 12
     end
 
     # any element
     t 'find_element' do
-      find_element(:class, UI::Inventory.new($driver).static_text).class.must_equal Selenium::WebDriver::Element
+      find_element(:class, ui_ios.static_text).class.must_equal Selenium::WebDriver::Element
     end
 
     # settings

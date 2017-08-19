@@ -89,8 +89,8 @@ describe 'ios/xcuitest_gestures' do
 
   t 'alert' do
     wait_true do
-      UI::Inventory.new($driver).xcuitest? ? find_element(:name, 'Alerts').click : text('alerts').click
-      tag(UI::Inventory.new($driver).navbar).name == 'Alerts' # wait for true
+      automation_name_is_xcuitest? ? find_element(:name, 'Alerts').click : text('alerts').click
+      tag(ui_ios.navbar).name == 'Alerts' # wait for true
     end
 
     open_alert_ok_cancel

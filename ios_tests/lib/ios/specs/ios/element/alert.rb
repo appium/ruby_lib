@@ -3,8 +3,8 @@ describe 'ios/element/alert' do
   def nav_once
     screen.must_equal catalog
     wait_true do
-      UI::Inventory.new($driver).xcuitest? ? find_element(:name, 'Alerts').click : text('alerts').click
-      tag(UI::Inventory.new($driver).navbar).name == 'Alerts' # wait for true
+      automation_name_is_xcuitest? ? find_element(:name, 'Alerts').click : text('alerts').click
+      tag(ui_ios.navbar).name == 'Alerts' # wait for true
     end
 
     # redefine method as no-op after it's invoked once
@@ -13,7 +13,7 @@ describe 'ios/element/alert' do
 
   def after_last
     alert_accept if exists do
-      UI::Inventory.new($driver).xcuitest? ? find_elements(:name, 'UIActionSheet <title>') : text('UIActionSheet <title>')
+      automation_name_is_xcuitest? ? find_elements(:name, 'UIActionSheet <title>') : text('UIActionSheet <title>')
     end
     back_click
     screen.must_equal catalog
@@ -27,7 +27,7 @@ describe 'ios/element/alert' do
 
   def open_alert
     wait_true do
-      if  UI::Inventory.new($driver).xcuitest?
+      if  automation_name_is_xcuitest?
         find_element(:name, 'Show OK-Cancel').click
         find_element(:name, 'UIActionSheet <title>').displayed?
       else
