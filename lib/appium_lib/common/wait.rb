@@ -48,6 +48,7 @@ module Appium
     end
 
     # process opts before calling _generic_wait
+    # @private
     def _process_wait_opts(opts)
       opts = { timeout: opts } if opts.is_a?(Numeric)
       raise 'opts must be a hash' unless opts.is_a? Hash
