@@ -53,11 +53,10 @@ RuboCop::RakeTask.new(:rubocop) do |t|
   t.fail_on_error = false
 end
 
-# TODO: Run tests, `rake ios`, with thread style
+
 desc 'Run tests with parallel'
 task :run_parallel do
   require 'thread'
-  require 'rake/testtask'
 
   require_relative 'parallel/test'
   def device1
