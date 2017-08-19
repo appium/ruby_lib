@@ -49,6 +49,9 @@ require_relative 'android/mobile_methods'
 
 require_relative 'android/device'
 
+# android - uiautomator2
+require_relative 'android/uiautomator2/helper.rb'
+
 # device methods
 require_relative 'device/device'
 require_relative 'device/touch_actions'
@@ -422,6 +425,9 @@ module Appium
       if device_is_android?
         extend Appium::Android
         extend Appium::Android::Device
+        if automation_name_is_uiautomator2?
+          extend Appium::Android::Uiautomator2::Helper
+        end
       else
         extend Appium::Ios
         if automation_name_is_xcuitest?
@@ -518,6 +524,12 @@ module Appium
     # @return [Boolean]
     def automation_name_is_uiautomator2?
       !@automation_name.nil? && @automation_name == :uiautomator2
+    end
+
+    # Return true if automationName is 'Espresso'
+    # @return [Boolean]
+    def automation_name_is_espresso?
+      !@automation_name.nil? && @automation_name == :espresso
     end
 
     # Return true if the target Appium server is over REQUIRED_VERSION_XCUITEST.
@@ -715,9 +727,19 @@ module Appium
       check_server_version_xcuitest
       set_automation_name_if_nil
 
-      @driver.manage.timeouts.implicit_wait = @default_wait
+      set_implicit_wait(@default_wait)
 
       @driver
+    end
+
+    # To ignore error for Espresso Driver
+    def set_implicit_wait(wait)
+      @driver.manage.timeouts.implicit_wait = wait
+    rescue Selenium::WebDriver::Error::UnknownError => e
+      unless e.message.include?('The operation requested is not yet implemented by Espresso driver')
+        raise ::Appium::Error::ServerError
+      end
+      {}
     end
 
     # Set implicit wait to zero.
