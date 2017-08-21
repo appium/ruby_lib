@@ -3,7 +3,7 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
-## v9.5.0
+## v9.6.0
 ### 1. Enhancements
 - Reduce Global Driver
     - We need to provide `driver` to work `TouchAction` and `MultiAction` without global driver
