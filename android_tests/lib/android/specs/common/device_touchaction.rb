@@ -1,9 +1,21 @@
 # rake android[common/device_touchaction]
 describe 'common/device_touchaction' do
-  t 'action_chain' do
+  t 'action_chain_press_release' do
     wait do
       e = text('Accessibility')
       touch_action = Appium::TouchAction.new.press(element: e, x: 0.5, y: 0.5).release(element: e)
+      touch_action.perform
+      touch_action.actions.must_equal []
+    end
+    wait { text('Custom View') }
+    back
+    wait { text_exact 'NFC' }
+  end
+
+  t 'action_chain_tap' do
+    wait do
+      e = text('Accessibility')
+      touch_action = Appium::TouchAction.new.tap(element: e)
       touch_action.perform
       touch_action.actions.must_equal []
     end
