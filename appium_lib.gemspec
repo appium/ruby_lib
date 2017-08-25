@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
 
   s.add_runtime_dependency 'selenium-webdriver', '~> 3.4', '>= 3.4.1'
-  s.add_runtime_dependency 'awesome_print', '~> 1.7'
+  s.add_runtime_dependency 'awesome_print', '~> 1.8'
   s.add_runtime_dependency 'json', '>= 1.8'
   s.add_runtime_dependency 'tomlrb', '~> 1.1'
   s.add_runtime_dependency 'nokogiri', '~> 1.6', '>= 1.6.6'
