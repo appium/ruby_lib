@@ -433,6 +433,7 @@ module Appium
         if automation_name_is_xcuitest?
           # Override touch actions and patch_webdriver_element
           extend Appium::Ios::Xcuitest
+          extend Appium::Ios::Xcuitest::Method
           extend Appium::Ios::Xcuitest::Helper
           extend Appium::Ios::Xcuitest::Gesture
           extend Appium::Ios::Xcuitest::Device
