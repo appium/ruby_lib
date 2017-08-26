@@ -1,6 +1,6 @@
-# rake ios[common/method]
-describe 'common/method' do
-  t 'pastboard' do
+# rake ios[common/pasteboard]
+describe 'ios/command/pasteboard' do
+  t 'pasteboard' do
     get_pasteboard.must_be_empty
 
     set_pasteboard content: 'sample content'
