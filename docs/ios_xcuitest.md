@@ -112,3 +112,7 @@ xpaths("//some xpaths")
 
 ## Other actions
 Basically, other actions such as `type` are compatible with `automationName = Appium`.
+
+## Pasteboard
+- Simulator only
+    - https://github.com/appium/appium/blob/master/docs/en/writing-running-appium/ios-xctest-pasteboard.md

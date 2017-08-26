@@ -1,5 +1,5 @@
-# rake ios[ios/mobile_methods]
-describe 'ios/mobile_methods' do
+# rake ios[ios/command/pasteboard]
+describe 'ios/command/pasteboard' do
   def before_first
     screen.must_equal catalog
   end

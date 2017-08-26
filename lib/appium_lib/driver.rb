@@ -26,9 +26,10 @@ require_relative 'ios/element/text'
 require_relative 'ios/mobile_methods'
 
 # ios - xcuitest
+require_relative 'ios/xcuitest/search_context'
 require_relative 'ios/xcuitest/element'
 require_relative 'ios/xcuitest/gestures'
-require_relative 'ios/xcuitest/mobile_methods'
+require_relative 'ios/xcuitest/command/pasteboard'
 require_relative 'ios/xcuitest/device'
 require_relative 'ios/xcuitest/helper'
 require_relative 'ios/xcuitest/element/text'
@@ -433,6 +434,8 @@ module Appium
         if automation_name_is_xcuitest?
           # Override touch actions and patch_webdriver_element
           extend Appium::Ios::Xcuitest
+          extend Appium::Ios::Xcuitest::SearchContext
+          extend Appium::Ios::Xcuitest::Command
           extend Appium::Ios::Xcuitest::Helper
           extend Appium::Ios::Xcuitest::Gesture
           extend Appium::Ios::Xcuitest::Device
