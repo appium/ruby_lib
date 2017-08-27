@@ -11,7 +11,7 @@ require_relative '../../lib/appium_lib'
 #   ruby run.rb ios view_album
 
 def start_driver(caps)
-  driver = Appium::Driver.new(caps)
+  driver = Appium::Driver.new(caps, true)
   # Tests expect methods defined on the minispec object
   Appium.promote_appium_methods ::Minitest::Spec
   driver.start_driver

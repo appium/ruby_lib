@@ -44,7 +44,7 @@ require_relative 'android/mobile_methods'
 require_relative 'android/device'
 
 # android - uiautomator2
-require_relative 'android/uiautomator2/helper.rb'
+require_relative 'android/uiautomator2'
 
 # device methods
 require_relative 'device/device'
@@ -369,11 +369,15 @@ module Appium
     # @param opts [Object] A hash containing various options.
     # @param global_driver [Bool] A bool require global driver before initialize.
     # @return [Driver]
-    def initialize(opts = {}, global_driver = true)
-      if global_driver
+    def initialize(opts = {}, global_driver = nil)
+      if global_driver.nil?
         warn '[DEPRECATION] Appium::Driver.new(opts) will not generate global driver by default.' \
                  'If you would like to generate the global driver dy default, ' \
                  'please initialise driver with Appium::Driver.new(opts, true)'
+        global_driver = true # if global_driver is nil, then global_driver must be default value.
+      end
+
+      if global_driver
         $driver.driver_quit if $driver
       end
       raise 'opts must be a hash' unless opts.is_a? Hash
@@ -408,7 +412,9 @@ module Appium
         extend Appium::Android
         extend Appium::Android::Device
         if automation_name_is_uiautomator2?
+          extend Appium::Android::Uiautomator2
           extend Appium::Android::Uiautomator2::Helper
+          extend Appium::Android::Uiautomator2::Element
         end
       else
         extend Appium::Ios
