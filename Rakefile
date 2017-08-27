@@ -206,7 +206,7 @@ task :notes do
   end
 
   pairs.each_index do |a|
-    data     =`git log --pretty=oneline #{pairs[a]}`
+    data     =`git log --pretty=oneline #{pairs[a]}`.force_encoding('UTF-8')
     new_data = ''
     data.split("\n").each do |line|
       hex     = line.match(/[a-zA-Z0-9]+/)[0]
