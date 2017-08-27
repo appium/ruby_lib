@@ -3,6 +3,9 @@ require 'ap'
 require 'selenium-webdriver'
 require 'nokogiri'
 
+# base
+require_relative 'capabilities'
+
 # common
 require_relative 'common/helper'
 require_relative 'common/wait'
@@ -25,17 +28,7 @@ require_relative 'ios/element/textfield'
 require_relative 'ios/element/text'
 require_relative 'ios/mobile_methods'
 
-# ios - xcuitest
-require_relative 'ios/xcuitest/search_context'
-require_relative 'ios/xcuitest/element'
-require_relative 'ios/xcuitest/gestures'
-require_relative 'ios/xcuitest/command/pasteboard'
-require_relative 'ios/xcuitest/device'
-require_relative 'ios/xcuitest/helper'
-require_relative 'ios/xcuitest/element/text'
-require_relative 'ios/xcuitest/element/textfield'
-require_relative 'ios/xcuitest/element/generic'
-require_relative 'ios/xcuitest/element/button'
+require_relative 'ios/xcuitest'
 
 # android
 require_relative 'android/helper'
@@ -270,18 +263,6 @@ module Appium
   end
 
   class Driver
-    module Capabilities
-      # @param [Hash] opts_caps Capabilities for Appium server. All capability keys are converted to lowerCamelCase when
-      #                         this client sends capabilities to Appium server as JSON format.
-      # @return [::Selenium::WebDriver::Remote::W3C::Capabilities] Return instance of Appium::Driver::Capabilities
-      #                         inherited ::Selenium::WebDriver::Remote::W3C::Capabilities
-      def self.init_caps_for_appium(opts_caps = {})
-        ::Selenium::WebDriver::Remote::W3C::Capabilities.new(opts_caps)
-      end
-    end
-  end
-
-  class Driver
     # attr readers are promoted to global scope. To avoid clobbering, they're
     # made available via the driver_attributes method
     #
@@ -432,7 +413,6 @@ module Appium
       else
         extend Appium::Ios
         if automation_name_is_xcuitest?
-          # Override touch actions and patch_webdriver_element
           extend Appium::Ios::Xcuitest
           extend Appium::Ios::Xcuitest::SearchContext
           extend Appium::Ios::Xcuitest::Command

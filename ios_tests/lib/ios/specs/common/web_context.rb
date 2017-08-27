@@ -1,5 +1,13 @@
 # Tests specifically for areas where the web_context differs in behaviour
+# rake ios[common/web_context]
 describe 'the web context' do
+  def before_first
+    screen.must_equal catalog
+  end
+
+  t 'before_first' do
+    before_first
+  end
   t 'get_android_inspect' do
     text('Web').click
 
