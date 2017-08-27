@@ -1,3 +1,19 @@
+#### v9.6.0 2017-08-20
+
+- [e1a2cd4](https://github.com/appium/ruby_lib/commit/e1a2cd493a370655b390a1d3803a85fbdb5f7f9d) [Release 9 6 0 (#643)](https://github.com/appium/ruby_lib/issues/643)
+- [6c6e916](https://github.com/appium/ruby_lib/commit/6c6e9165998a457188b1e53476c9bdbb18fa2ef7) [refactor: separate uiautomator2 (#642)](https://github.com/appium/ruby_lib/issues/642)
+- [2b1a5ee](https://github.com/appium/ruby_lib/commit/2b1a5eef44be48df5e14dc42000b4a776a2bae5b) [Append documentations (#640)](https://github.com/appium/ruby_lib/issues/640)
+- [6ee404d](https://github.com/appium/ruby_lib/commit/6ee404ddbe932b97d50904a2f273b7404485d79e) [refactor: Separate xcuitest more (#639)](https://github.com/appium/ruby_lib/issues/639)
+- [8a7c386](https://github.com/appium/ruby_lib/commit/8a7c386a51e9f83826e1d5d799cc509cd0c7e3ae) [feature: test code for multiple iOS simulators (#637)](https://github.com/appium/ruby_lib/issues/637)
+- [b7daaac](https://github.com/appium/ruby_lib/commit/b7daaac9b2262c80ee679263a809bd98371b312b) [fix: Fix Android scroll_to and scroll_to_exact (#638)](https://github.com/appium/ruby_lib/issues/638)
+- [65b2c7a](https://github.com/appium/ruby_lib/commit/65b2c7a9edb65e50c61c5e64408e9d7ee36465cf) [refactor: remove unused definition and rename arguments for initilizer (#635)](https://github.com/appium/ruby_lib/issues/635)
+- [35d3b11](https://github.com/appium/ruby_lib/commit/35d3b11dafac3363902fc0352a62d957fd90a947) [Alias `quit_driver` to `driver_quit`. (#634)](https://github.com/appium/ruby_lib/issues/634)
+- [214cf72](https://github.com/appium/ruby_lib/commit/214cf72bd8aefffb974d5757d218a668e14a87c7) [fix: Fix android tests and add broken ime methods (#633)](https://github.com/appium/ruby_lib/issues/633)
+- [aaf307d](https://github.com/appium/ruby_lib/commit/aaf307d9bacc30d5c9edb0507d1541ef626d3308) [refactor: loading xcuitest related methods only for XCUITest case (#631)](https://github.com/appium/ruby_lib/issues/631)
+- [20bc86a](https://github.com/appium/ruby_lib/commit/20bc86a5195ef0f6d51ccba68019c1228cd2a0f1) [add extending bridge commands for W3C (#632)](https://github.com/appium/ruby_lib/issues/632)
+- [6288409](https://github.com/appium/ruby_lib/commit/62884095bd59b420c1eb0d9295e9d3f31ca16195) [refactor: set global driver as arguments (#629)](https://github.com/appium/ruby_lib/issues/629)
+
+
 #### v9.5.0 2017-08-05
 
 - [19177f5](https://github.com/appium/ruby_lib/commit/19177f5348300a0e2e1e0510b99efac2f3067201) [Release 9 5 0 (#628)](https://github.com/appium/ruby_lib/issues/628)
