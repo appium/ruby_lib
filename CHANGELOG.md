@@ -3,6 +3,15 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## v9.6.1
+### 1. Enhancements
+- Refactor `XCUItest` for iOS and `uiautomator2` for Android a bit
+
+### 2. Bug fixes
+- missing extending `button` methods for `uiautomator2`, Android
+
+### 3. Deprecations
+
 ## v9.6.0
 ### 1. Enhancements
 - Reduce Global Driver
