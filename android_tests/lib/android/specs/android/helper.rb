@@ -64,7 +64,7 @@ describe 'android/helper' do
     wait { find('accessibility').click }
     wait { find('accessibility node provider').click }
 
-    if !automation_name_is_uiautomator2?
+    if automation_name_is_uiautomator2?
       wait { text 'Accessibility/Accessibility Node Provider' }
     else
       # With string.xml

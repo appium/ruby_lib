@@ -3,6 +3,9 @@ require 'ap'
 require 'selenium-webdriver'
 require 'nokogiri'
 
+# base
+require_relative 'capabilities'
+
 # common
 require_relative 'common/helper'
 require_relative 'common/wait'
@@ -25,17 +28,7 @@ require_relative 'ios/element/textfield'
 require_relative 'ios/element/text'
 require_relative 'ios/mobile_methods'
 
-# ios - xcuitest
-require_relative 'ios/xcuitest/search_context'
-require_relative 'ios/xcuitest/element'
-require_relative 'ios/xcuitest/gestures'
-require_relative 'ios/xcuitest/command/pasteboard'
-require_relative 'ios/xcuitest/device'
-require_relative 'ios/xcuitest/helper'
-require_relative 'ios/xcuitest/element/text'
-require_relative 'ios/xcuitest/element/textfield'
-require_relative 'ios/xcuitest/element/generic'
-require_relative 'ios/xcuitest/element/button'
+require_relative 'ios/xcuitest'
 
 # android
 require_relative 'android/helper'
@@ -51,7 +44,7 @@ require_relative 'android/mobile_methods'
 require_relative 'android/device'
 
 # android - uiautomator2
-require_relative 'android/uiautomator2/helper.rb'
+require_relative 'android/uiautomator2'
 
 # device methods
 require_relative 'device/device'
@@ -270,18 +263,6 @@ module Appium
   end
 
   class Driver
-    module Capabilities
-      # @param [Hash] opts_caps Capabilities for Appium server. All capability keys are converted to lowerCamelCase when
-      #                         this client sends capabilities to Appium server as JSON format.
-      # @return [::Selenium::WebDriver::Remote::W3C::Capabilities] Return instance of Appium::Driver::Capabilities
-      #                         inherited ::Selenium::WebDriver::Remote::W3C::Capabilities
-      def self.init_caps_for_appium(opts_caps = {})
-        ::Selenium::WebDriver::Remote::W3C::Capabilities.new(opts_caps)
-      end
-    end
-  end
-
-  class Driver
     # attr readers are promoted to global scope. To avoid clobbering, they're
     # made available via the driver_attributes method
     #
@@ -388,11 +369,15 @@ module Appium
     # @param opts [Object] A hash containing various options.
     # @param global_driver [Bool] A bool require global driver before initialize.
     # @return [Driver]
-    def initialize(opts = {}, global_driver = true)
-      if global_driver
+    def initialize(opts = {}, global_driver = nil)
+      if global_driver.nil?
         warn '[DEPRECATION] Appium::Driver.new(opts) will not generate global driver by default.' \
                  'If you would like to generate the global driver dy default, ' \
                  'please initialise driver with Appium::Driver.new(opts, true)'
+        global_driver = true # if global_driver is nil, then global_driver must be default value.
+      end
+
+      if global_driver
         $driver.driver_quit if $driver
       end
       raise 'opts must be a hash' unless opts.is_a? Hash
@@ -427,12 +412,13 @@ module Appium
         extend Appium::Android
         extend Appium::Android::Device
         if automation_name_is_uiautomator2?
+          extend Appium::Android::Uiautomator2
           extend Appium::Android::Uiautomator2::Helper
+          extend Appium::Android::Uiautomator2::Element
         end
       else
         extend Appium::Ios
         if automation_name_is_xcuitest?
-          # Override touch actions and patch_webdriver_element
           extend Appium::Ios::Xcuitest
           extend Appium::Ios::Xcuitest::SearchContext
           extend Appium::Ios::Xcuitest::Command
