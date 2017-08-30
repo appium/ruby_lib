@@ -18,34 +18,10 @@ require_relative 'common/command'
 require_relative 'common/element/window'
 
 # ios
-require_relative 'ios/helper'
-require_relative 'ios/patch'
-require_relative 'ios/errors'
-
-require_relative 'ios/element/alert'
-require_relative 'ios/element/button'
-require_relative 'ios/element/generic'
-require_relative 'ios/element/textfield'
-require_relative 'ios/element/text'
-require_relative 'ios/search_context'
-
-require_relative 'ios/xcuitest'
+require_relative 'ios/ios'
 
 # android
-require_relative 'android/helper'
-require_relative 'android/patch'
-require_relative 'android/client_xpath'
-require_relative 'android/element/alert'
-require_relative 'android/element/button'
-require_relative 'android/element/generic'
-require_relative 'android/element/textfield'
-require_relative 'android/element/text'
-require_relative 'android/search_context'
-
-require_relative 'android/device'
-
-# android - uiautomator2
-require_relative 'android/uiautomator2'
+require_relative 'android/android'
 
 # device methods
 require_relative 'device/device'
