@@ -1,5 +1,5 @@
 module Appium
-  class Core
+  module Core
     module Commands
       COMMAND_NO_ARG = {
         # core

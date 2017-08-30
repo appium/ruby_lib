@@ -463,7 +463,7 @@ module Appium
           end
 
           def _set_by_from_finders(how)
-            finders = ::Appium::Core::SearchContext::FINDERS
+            finders = ::Appium::Driver::SearchContext::FINDERS
             by = finders[how.to_sym]
             raise ArgumentError, "cannot find element by #{how.inspect}" unless by
             by

@@ -4,7 +4,7 @@ require_relative 'ios/search_context'
 module Appium
   class Driver
     module SearchContext
-      FINDERS = {}.merge(::Appium::Core::SearchContext)
+      FINDERS = {}.merge(::Appium::Core::SearchContext::FINDERS)
     end
   end
 end

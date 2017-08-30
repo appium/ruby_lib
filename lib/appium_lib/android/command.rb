@@ -1,5 +1,5 @@
 module Appium
-  class Android
+  module Android
     module Commands
       COMMAND_NO_ARG = {
           # Android

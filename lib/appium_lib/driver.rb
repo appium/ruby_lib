@@ -149,7 +149,6 @@ module Appium
       # load core methods
       extend Appium::Core
       extend Appium::Device
-      extend Appium::Common::Wait
 
       if device_is_android?
         extend Appium::Android
