@@ -1,7 +1,9 @@
 # rake ios[common/pasteboard]
 describe 'ios/command/pasteboard' do
   t 'pasteboard' do
-    get_pasteboard.must_be_empty
+    # set blank before testing because pasteboard is remaining during launching simulators
+    set_pasteboard content: 'before'
+    get_pasteboard.must_equal 'before'
 
     set_pasteboard content: 'sample content'
 

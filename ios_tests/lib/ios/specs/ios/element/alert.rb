@@ -6,23 +6,12 @@ describe 'ios/element/alert' do
       automation_name_is_xcuitest? ? find_element(:name, 'Alerts').click : text('alerts').click
       tag(ui_ios.navbar).name == 'Alerts' # wait for true
     end
-
-    # redefine method as no-op after it's invoked once
-    self.class.send :define_method, :nav_once, proc {}
   end
 
   def after_last
-    alert_accept if exists do
-      automation_name_is_xcuitest? ? find_elements(:name, 'UIActionSheet <title>') : text('UIActionSheet <title>')
-    end
     back_click
     screen.must_equal catalog
     sleep 1
-  end
-
-  before do
-    nav_once
-    open_alert
   end
 
   def open_alert
@@ -37,11 +26,17 @@ describe 'ios/element/alert' do
     end
   end
 
+  t 'before' do
+    nav_once
+  end
+
   t 'alert_accept' do
+    open_alert
     alert_accept
   end
 
   t 'alert_dismiss' do
+    open_alert
     alert_dismiss
   end
 

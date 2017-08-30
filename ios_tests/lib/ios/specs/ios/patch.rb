@@ -5,27 +5,26 @@ describe 'ios/patch' do
     go_to_textfields
   end
 
-  def after_last
-    leave_textfields
-  end
-
   t 'before_first' do
     before_first
   end
 
   t 'label' do
-    textfield('<enter text>').label.must_equal 'Rounded'
+    textfields[1].label.must_equal 'Rounded'
   end
 
   t 'type' do
-    # nav to textfield
-    text('textfields').click
+    text('textfields').click # nav to textfield
 
     ele = first_textfield
 
     ele.clear
     ele.type 'ok'
     ele.text.must_equal 'ok'
+  end
+
+  def after_last
+    leave_textfields
   end
 
   t 'after_last' do

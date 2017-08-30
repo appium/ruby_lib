@@ -8,4 +8,4 @@ require 'forwardable' unless defined? Forwardable
 $driver = nil
 
 require_relative 'appium_lib/logger'
-require_relative 'appium_lib/driver'
+require_relative 'appium_lib/appium'
