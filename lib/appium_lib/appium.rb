@@ -7,15 +7,15 @@ require 'nokogiri'
 require_relative 'driver'
 require_relative 'capabilities'
 
-# common
-require_relative 'common/helper'
-require_relative 'common/wait'
-require_relative 'common/patch'
-require_relative 'common/version'
-require_relative 'common/error'
-require_relative 'common/search_context'
-require_relative 'common/command'
-require_relative 'common/element/window'
+# core
+require_relative 'core/helper'
+require_relative 'core/wait'
+require_relative 'core/patch'
+require_relative 'core/on'
+require_relative 'core/error'
+require_relative 'core/search_context'
+require_relative 'core/command'
+require_relative 'core/element/window'
 
 # ios
 require_relative 'ios/ios'
@@ -131,7 +131,7 @@ module Appium
   end
 
   # This method is intended to work with page objects that share
-  # a common module. For example, Page::HomePage, Page::SignIn
+  # a core module. For example, Page::HomePage, Page::SignIn
   # those could be promoted on with Appium.promote_singleton_appium_methods Page
   #
   # If you are promoting on an individual class then you should use

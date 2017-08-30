@@ -510,7 +510,8 @@ module Appium
         #   ```
         add_endpoint_method(:ime_activate) do
           def ime_activate(ime_name)
-            execute :ime_activate, {}, engine: ime_name
+            # from Selenium::WebDriver::Remote::OSS
+            execute :ime_activate_engine, {}, engine: ime_name
           end
         end
 
@@ -523,7 +524,7 @@ module Appium
         #   ```
         add_endpoint_method(:ime_available_engines) do
           def ime_available_engines
-            execute :get_ime_available_engines
+            execute :ime_get_available_engines
           end
         end
 
@@ -535,8 +536,9 @@ module Appium
         #   ime_active_engine #=> Get the current active IME such as 'com.android.inputmethod.latin/.LatinIME'
         #   ```
         add_endpoint_method(:ime_active_engine) do
+          # from Selenium::WebDriver::Remote::OSS
           def ime_active_engine
-            execute :get_ime_active_engine
+            execute :ime_get_active_engine
           end
         end
 
@@ -548,8 +550,9 @@ module Appium
         #   ime_activated #=> True if IME is activated
         #   ```
         add_endpoint_method(:ime_activated) do
+          # from Selenium::WebDriver::Remote::OSS
           def ime_activated
-            execute :get_ime_activated
+            execute :ime_is_activated
           end
         end
 
@@ -562,6 +565,7 @@ module Appium
         #   ime_deactivate #=> Deactivate current IME engine
         #   ```
         add_endpoint_method(:ime_deactivate) do
+          # from Selenium::WebDriver::Remote::OSS
           def ime_deactivate
             execute :ime_deactivate, {}
           end

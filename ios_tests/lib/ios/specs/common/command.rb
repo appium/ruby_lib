@@ -1,5 +1,5 @@
-# rake ios[common/command]
-describe 'common/command.rb' do
+# rake ios[core/command]
+describe 'core/command.rb' do
   def before_first
     screen.must_equal catalog
   end

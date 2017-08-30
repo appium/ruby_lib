@@ -1,5 +1,5 @@
-# rake android[common/device]
-describe 'common/device' do
+# rake android[core/device]
+describe 'core/device' do
   # Not yet implemented
   t 'shake' do
     # TODO: write test

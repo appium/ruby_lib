@@ -146,7 +146,7 @@ module Appium
       set_appium_device
       set_automation_name
 
-      # load common methods
+      # load core methods
       extend Appium::Common
       extend Appium::Device
 

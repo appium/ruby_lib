@@ -1,4 +1,4 @@
-describe 'common/helper' do
+describe 'core/helper' do
   wait_opts = { timeout: 0.2, interval: 0.2 } # max_wait, interval
 
   # There's no `must_not_raise` as the opposite of must_raise

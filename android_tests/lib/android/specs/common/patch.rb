@@ -5,7 +5,7 @@
 #   status # status patches are already tested in driver.rb
 #   execute # debug output for Pry
 
-describe 'common/patch' do
+describe 'core/patch' do
   # Attributes are busted in Android.
   # Blocked on https://github.com/appium/appium/issues/628
   describe 'Selenium::WebDriver::Element methods' do
@@ -29,7 +29,7 @@ describe 'common/patch' do
     end
   end
 
-  describe 'common patch' do
+  describe 'core patch' do
     # By default, the webdriver gem will return message instead of origValue
     # {"message":"An unknown server-side error occurred while processing the command.","origValue":"Strategy id is not valid."}
     t 'id error_message' do

@@ -17,7 +17,7 @@ end
 
 # the name as used on github.com
 def version_file
-  "lib/#{repo_name}/common/version.rb"
+  "lib/#{repo_name}/version.rb"
 end
 
 def version_rgx

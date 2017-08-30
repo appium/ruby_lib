@@ -1,5 +1,5 @@
 # Tests specifically for areas where the web_context differs in behaviour
-# rake ios[common/web_context]
+# rake ios[core/web_context]
 describe 'the web context' do
   def before_first
     screen.must_equal catalog

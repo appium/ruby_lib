@@ -56,7 +56,7 @@ if one_test
   raise "\nTest #{one_test} does not exist.\n" unless File.exist?(one_test)
   start_driver(caps)
 
-  # require support (common.rb)
+  # require support (core.rb)
   file_name = File.join dir, test_dir + '/*.rb'
   Dir.glob(file_name) do |test|
     require test

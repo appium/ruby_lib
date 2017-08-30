@@ -7,8 +7,8 @@
 #    execute # debug output for Pry
 #
 
-# rake ios[common/patch]
-describe 'common/patch.rb' do
+# rake ios[core/patch]
+describe 'core/patch.rb' do
   def before_first
     screen.must_equal catalog
   end
@@ -35,7 +35,7 @@ describe 'common/patch.rb' do
     end
   end
 
-  describe 'common patch' do
+  describe 'core patch' do
     # By default, the webdriver gem will return message instead of origValue
     # {"message":"An unknown server-side error occurred while processing the command.","origValue":"Strategy id is not valid."}
     t 'error_message' do

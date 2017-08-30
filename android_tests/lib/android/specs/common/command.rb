@@ -1,5 +1,5 @@
-# rake android[common/command]
-describe 'common/command.rb' do
+# rake android[core/command]
+describe 'core/command.rb' do
   def before_first
     wait { current_activity.must_equal '.ApiDemos' }
   end
