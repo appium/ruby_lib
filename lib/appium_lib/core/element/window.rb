@@ -1,6 +1,6 @@
 # UIAWindow methods
 module Appium
-  module Common
+  module Core
     # Get the window's size
     def window_size
       return nil if @driver.nil?

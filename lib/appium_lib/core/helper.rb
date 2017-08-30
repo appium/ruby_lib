@@ -1,9 +1,7 @@
-require 'selenium/webdriver/common/error'
-
 # Generic helper methods not specific
 # to a particular tag name
 module Appium
-  module Common
+  module Core
     # json and ap are required for the source method.
     require 'json'
     require 'ap' # awesome print
@@ -217,7 +215,7 @@ module Appium
     # @private
     def _no_such_element
       error_message = 'An element could not be located on the page using the given search parameters.'
-      raise Selenium::WebDriver::Error::NoSuchElementError, error_message
+      raise ::Appium::Core::Error::NoSuchElementError, error_message
     end
-  end # module Common
+  end # module Core
 end # module Appium

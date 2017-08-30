@@ -6,15 +6,12 @@ require 'nokogiri'
 # base
 require_relative 'driver'
 require_relative 'capabilities'
+require_relative 'search_context'
+require_relative 'command'
+require_relative 'wait'
 
 # core
-require_relative 'core/helper'
-require_relative 'core/wait'
-require_relative 'core/patch'
-require_relative 'core/error'
-require_relative 'core/search_context'
-require_relative 'core/command'
-require_relative 'core/element/window'
+require_relative 'core/core'
 
 # ios
 require_relative 'ios/ios'

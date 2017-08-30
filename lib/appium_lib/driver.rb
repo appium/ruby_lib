@@ -147,8 +147,9 @@ module Appium
       set_automation_name
 
       # load core methods
-      extend Appium::Common
+      extend Appium::Core
       extend Appium::Device
+      extend Appium::Common::Wait
 
       if device_is_android?
         extend Appium::Android
@@ -306,7 +307,7 @@ module Appium
       if automation_name_is_xcuitest? &&
           !@appium_server_status.empty? &&
           (@appium_server_status['build']['version'] < REQUIRED_VERSION_XCUITEST)
-        raise Appium::Error::NotSupportedAppiumServer, "XCUITest requires Appium version >= #{REQUIRED_VERSION_XCUITEST}"
+        raise Appium::Core::Error::NotSupportedAppiumServer, "XCUITest requires Appium version >= #{REQUIRED_VERSION_XCUITEST}"
       end
       true
     end
@@ -332,11 +333,11 @@ module Appium
     def appium_server_version
       driver.remote_status
     rescue Selenium::WebDriver::Error::WebDriverError => ex
-      raise ::Appium::Error::ServerError unless ex.message.include?('content-type=""')
+      raise ::Appium::Core::Error::ServerError unless ex.message.include?('content-type=""')
       # server (TestObject for instance) does not respond to status call
       {}
     rescue Selenium::WebDriver::Error::ServerError => e
-      raise ::Appium::Error::ServerError unless e.message.include?('status code 500')
+      raise ::Appium::Core::Error::ServerError unless e.message.include?('status code 500')
       # driver.remote_status returns 500 error for using selenium grid
       {}
     end
@@ -504,7 +505,7 @@ module Appium
       @driver.manage.timeouts.implicit_wait = wait
     rescue Selenium::WebDriver::Error::UnknownError => e
       unless e.message.include?('The operation requested is not yet implemented by Espresso driver')
-        raise ::Appium::Error::ServerError
+        raise ::Appium::Core::Error::ServerError
       end
       {}
     end

@@ -1,7 +1,7 @@
 require_relative '../version'
 
 module Appium
-  module Common
+  module Core
     # Implement useful features for element.
     class Selenium::WebDriver::Element # rubocop:disable Style/ClassAndModuleChildren
       # Note: For testing .text should be used over value, and name.
@@ -55,7 +55,7 @@ module Appium
                        y: "#{center_y} / #{w.height.to_f}")
       end
     end
-  end # module Common
+  end # module Core
 end # module Appium
 
 # Print JSON posted to Appium. Not scoped to an Appium module.

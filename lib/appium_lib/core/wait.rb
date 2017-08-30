@@ -1,5 +1,5 @@
 module Appium
-  module Common
+  module Core
     class Wait < ::Selenium::WebDriver::Wait
       def initialize(opts = {})
         valid_keys = [:timeout, :interval, :message, :ignore, :return_if_true]
@@ -102,5 +102,5 @@ module Appium
       wait = ::Appium::Common::Wait.new opts
       wait.until { yield }
     end
-  end # module Common
+  end # module Core
 end # module Appium
