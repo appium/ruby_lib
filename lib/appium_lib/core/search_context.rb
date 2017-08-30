@@ -1,10 +1,7 @@
 module Appium
-  class Driver
+  class Core
     module SearchContext
-      # rubocop:disable Style/MutableConstant
-      FINDERS = {
-        accessibility_id: 'accessibility id'
-      }
+      FINDERS = ::Selenium::WebDriver::SearchContext::FINDERS.merge(accessibility_id: 'accessibility id').freeze
     end
   end
 end
