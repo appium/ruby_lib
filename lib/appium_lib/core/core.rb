@@ -5,4 +5,6 @@ require_relative 'patch'
 require_relative 'search_context'
 require_relative 'wait'
 
+require_relative 'common/log'
+
 require_relative 'element/window'

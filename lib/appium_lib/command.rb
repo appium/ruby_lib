@@ -3,7 +3,7 @@ require_relative 'ios/command'
 require_relative 'android/command'
 
 module Appium
-  class Drive
+  class Driver
     module Commands
       COMMAND_NO_ARG = {}.merge(::Appium::Core::Commands::COMMAND_NO_ARG)
                            .merge(::Appium::Android::Commands::COMMAND_NO_ARG)

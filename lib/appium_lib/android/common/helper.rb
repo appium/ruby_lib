@@ -91,7 +91,7 @@ module Appium
       source_is_html = source_header.start_with?(doctype_string, '<html')
 
       parser = if source_is_html # parse html from webview
-                 @android_html_parser ||= Nokogiri::HTML::SAX::Parser.new(Common::HTMLElements.new)
+                 @android_html_parser ||= Nokogiri::HTML::SAX::Parser.new(Appium::Core::HTMLElements.new)
                else
                  @android_native_parser ||= Nokogiri::XML::SAX::Parser.new(AndroidElements.new)
                end

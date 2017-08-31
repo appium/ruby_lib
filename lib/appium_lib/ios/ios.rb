@@ -1,4 +1,5 @@
 require_relative 'search_context'
+require_relative 'command'
 
 require_relative 'common/helper'
 require_relative 'common/patch'

@@ -214,6 +214,11 @@ module Appium
           add_endpoint_method method
         end
 
+        # TODO: Don't define selenium-side methods. We pick up from them.
+        # ::Selenium::WebDriver::Remote::OSS::Bridge::COMMANDS.each_key do |method|
+        #   add_endpoint_method method
+        # end
+
         add_endpoint_method(:available_contexts) do
           def available_contexts
             # return empty array instead of nil on failure

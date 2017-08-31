@@ -56,7 +56,7 @@ describe 'ios/xcuitest_gestures' do
     swipe direction: 'down'
     swipe direction: 'down'
 
-    proc { text('Style Default') }.must_raise ::Selenium::WebDriver::Error::NoSuchElementError
+    proc { text('Style Default') }.must_raise Selenium::WebDriver::Error::NoSuchElementError
   end
 
   t 'drag_from_to_for_duration' do
