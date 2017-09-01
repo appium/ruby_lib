@@ -148,6 +148,7 @@ module Appium
 
       # load core methods
       extend Appium::Core
+      extend Appium::Core::Device
       extend Appium::Device
 
       if device_is_android?
@@ -162,6 +163,7 @@ module Appium
       else
         extend Appium::Ios
         extend Appium::Ios::SearchContext
+        extend Appium::Ios::Device
         if automation_name_is_xcuitest?
           extend Appium::Ios::Xcuitest
           extend Appium::Ios::Xcuitest::SearchContext

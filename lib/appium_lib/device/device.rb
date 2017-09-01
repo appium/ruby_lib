@@ -263,6 +263,7 @@ module Appium
           end
         end
 
+        # Android
         add_endpoint_method(:start_activity) do
           def start_activity(opts)
             raise 'opts must be a hash' unless opts.is_a? Hash
@@ -346,6 +347,7 @@ module Appium
         end
 
         # TODO: TEST ME
+        # iOS
         add_endpoint_method(:touch_id) do
           def touch_id(match = true)
             execute :touch_id, {}, match: match
@@ -353,6 +355,7 @@ module Appium
         end
 
         # TODO: TEST ME
+        # iOS
         add_endpoint_method(:toggle_touch_id_enrollment) do
           def toggle_touch_id_enrollment
             execute :toggle_touch_id_enrollment, {}
@@ -360,6 +363,7 @@ module Appium
         end
 
         # TODO: TEST ME
+        # android
         add_endpoint_method(:end_coverage) do
           def end_coverage(path, intent)
             execute :end_coverage, {}, path: path, intent: intent
@@ -378,12 +382,14 @@ module Appium
           end
         end
 
+        # Android
         add_endpoint_method(:set_network_connection) do
           def set_network_connection(mode)
             execute :set_network_connection, {}, type: mode
           end
         end
 
+        # Android
         add_endpoint_method(:get_performance_data) do
           def get_performance_data(package_name:, data_type:, data_read_timeout: 1000)
             execute :get_performance_data, {}, packageName: package_name,
