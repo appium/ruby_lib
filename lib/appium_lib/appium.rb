@@ -20,9 +20,8 @@ require_relative 'ios/ios'
 require_relative 'android/android'
 
 # device methods
-require_relative 'device/device'
-require_relative 'device/touch_actions'
-require_relative 'device/multi_touch'
+require_relative 'core/device/touch_actions'
+require_relative 'core/device/multi_touch'
 
 module Appium
   # Load arbitrary text ([toml format](https://github.com/toml-lang/toml))
