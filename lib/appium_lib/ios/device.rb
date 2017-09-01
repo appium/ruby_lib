@@ -18,7 +18,7 @@ module Appium
       #   iOS Simulator only:  Toggle touch id enrollment on an iOS Simulator.
       class << self
         def extended(_mod)
-          Appium::Core::Device.extend_webdriver_with_forwardable
+          ::Appium::Core::Device.extend_webdriver_with_forwardable
 
           ::Appium::Ios::Commands::COMMAND_NO_ARG.each_key do |method|
             ::Appium::Core::Device.add_endpoint_method method

@@ -30,9 +30,9 @@ module Appium
 
         class << self
           def extended(_mod)
-            ::Appium::Device.extend_webdriver_with_forwardable
+            ::Appium::Core::Device.extend_webdriver_with_forwardable
 
-            ::Appium::Device.add_endpoint_method(:hide_keyboard) do
+            ::Appium::Core::Device.add_endpoint_method(:hide_keyboard) do
               def hide_keyboard(close_key = nil, strategy = nil)
                 option = {}
 
@@ -43,7 +43,7 @@ module Appium
               end
             end
 
-            ::Appium::Device.add_endpoint_method(:background_app) do
+            ::Appium::Core::Device.add_endpoint_method(:background_app) do
               def background_app(duration = 0)
                 # https://github.com/appium/ruby_lib/issues/500, https://github.com/appium/appium/issues/7741
                 # `execute :background_app, {}, seconds: { timeout: duration_milli_sec }` works over Appium 1.6.4
