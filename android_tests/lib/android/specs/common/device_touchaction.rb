@@ -1,5 +1,5 @@
-# rake android[core/device_touchaction]
-describe 'core/device_touchaction' do
+# rake android[common/device_touchaction]
+describe 'common/device_touchaction' do
   def before_first
     wait { text('Accessibility') }
   end

@@ -1,5 +1,5 @@
-# rake ios[core/helper]
-describe 'core/helper.rb' do
+# rake ios[common/helper]
+describe 'common/helper.rb' do
   def before_first
     screen.must_equal catalog
   end

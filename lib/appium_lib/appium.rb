@@ -10,6 +10,7 @@ require_relative 'command'
 require_relative 'wait'
 require_relative 'patch'
 require_relative 'sauce_labs'
+require_relative 'common/log'
 
 # core
 require_relative 'core/core'

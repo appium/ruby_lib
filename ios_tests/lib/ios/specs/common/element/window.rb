@@ -1,5 +1,5 @@
-# rake ios[core/element/window]
-describe 'core/element/window' do
+# rake ios[common/element/window]
+describe 'common/element/window' do
   def before_first
     screen.must_equal catalog
   end

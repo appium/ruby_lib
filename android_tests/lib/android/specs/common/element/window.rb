@@ -1,5 +1,5 @@
-# rake android[core/element/window]
-describe 'core/element/window' do
+# rake android[common/element/window]
+describe 'common/element/window' do
   # rubocop:disable Lint/UnifiedInteger
   t 'window_size' do
     wait do

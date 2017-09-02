@@ -7,8 +7,8 @@
 #    execute # debug output for Pry
 #
 
-# rake ios[core/patch]
-describe 'core/patch.rb' do
+# rake ios[common/patch]
+describe 'common/patch.rb' do
   def before_first
     screen.must_equal catalog
   end
