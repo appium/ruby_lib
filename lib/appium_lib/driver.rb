@@ -178,7 +178,10 @@ module Appium
       patch_webdriver_element
 
       # for command
-      patch_remote_driver_commands
+      patch_remote_driver_core_commands(bridge: :oss)
+      patch_remote_driver_core_commands(bridge: :w3c)
+      patch_remote_driver_commands(bridge: :oss) # override
+      patch_remote_driver_commands(bridge: :w3c) # override
 
       if @appium_debug
         Appium::Logger.ap_debug opts unless opts.empty?
@@ -197,7 +200,7 @@ module Appium
 
     # @private
     def get_caps(opts)
-      Capabilities.init_caps_for_appium(opts[:caps] || {})
+      Core::Driver::Capabilities.init_caps_for_appium(opts[:caps] || {})
     end
 
     # @private

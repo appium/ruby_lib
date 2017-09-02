@@ -8,6 +8,7 @@ module Appium
         close_app:                  [:post, 'session/:session_id/appium/app/close'.freeze],
         reset:                      [:post, 'session/:session_id/appium/app/reset'.freeze],
         device_locked?:             [:post, 'session/:session_id/appium/device/is_locked'.freeze],
+        current_context:            [:get,  'session/:session_id/context'.freeze]
       }.freeze
 
       COMMAND = {

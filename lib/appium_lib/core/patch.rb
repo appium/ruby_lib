@@ -28,8 +28,6 @@ module Appium
       #
       # @return [OpenStruct] the relative x, y in a struct. ex: { x: 0.50, y: 0.20 }
       def location_rel(driver = $driver)
-        # TODO: Remove with 'refine Appium ruby binding'
-        #     https://github.com/appium/ruby_lib/issues/602
         if ::Appium.selenium_webdriver_version_more?('3.4.0')
           rect   = self.rect
           location_x = rect.x.to_f
@@ -58,8 +56,6 @@ module Appium
   end # module Core
 end # module Appium
 
-# Print JSON posted to Appium. Not scoped to an Appium module.
-#
 # Requires from lib/selenium/webdriver/remote.rb
 require 'selenium/webdriver/remote/capabilities'
 require 'selenium/webdriver/remote/w3c/capabilities'
@@ -170,20 +166,24 @@ class Selenium::WebDriver::Remote::Http::Common # rubocop:disable Style/ClassAnd
   DEFAULT_HEADERS = { 'Accept' => CONTENT_TYPE, 'User-Agent' => "appium/ruby_lib/#{::Appium::VERSION}" }.freeze
 end
 
-def patch_remote_driver_commands
-  Selenium::WebDriver::Remote::OSS::Bridge.class_eval do
-    def commands(command)
-      ::Appium::Driver::Commands::COMMANDS_EXTEND_OSS[command]
+# TODO: Should consider here if we define for core commands, not monkey patch
+def patch_remote_driver_core_commands(bridge:)
+  case bridge
+  when :oss
+    Selenium::WebDriver::Remote::OSS::Bridge.class_eval do
+      def commands(command)
+        ::Appium::Core::Commands::COMMANDS_EXTEND_OSS[command]
+      end
     end
-  end
-
-  Selenium::WebDriver::Remote::W3C::Bridge.class_eval do
-    def commands(command)
-      case command
-      when :status, :is_element_displayed
-        ::Appium::Driver::Commands::COMMANDS_EXTEND_OSS[command]
-      else
-        ::Appium::Driver::Commands::COMMANDS_EXTEND_W3C[command]
+  when :w3c
+    Selenium::WebDriver::Remote::W3C::Bridge.class_eval do
+      def commands(command)
+        case command
+          when :status, :is_element_displayed
+            ::Appium::Core::Commands::COMMANDS_EXTEND_OSS[command]
+          else
+            ::Appium::Core::Commands::COMMANDS_EXTEND_W3C[command]
+        end
       end
     end
   end

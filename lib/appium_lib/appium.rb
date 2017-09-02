@@ -5,10 +5,10 @@ require 'nokogiri'
 
 # base
 require_relative 'driver'
-require_relative 'capabilities'
 require_relative 'search_context'
 require_relative 'command'
 require_relative 'wait'
+require_relative 'patch'
 
 # core
 require_relative 'core/core'
