@@ -17,10 +17,10 @@ def patch_remote_driver_commands(bridge: :oss)
     Selenium::WebDriver::Remote::W3C::Bridge.class_eval do
       def commands(command)
         case command
-          when :status, :is_element_displayed
-            ::Appium::Driver::Commands::COMMANDS_EXTEND_OSS[command]
-          else
-            ::Appium::Driver::Commands::COMMANDS_EXTEND_W3C[command]
+        when :status, :is_element_displayed
+          ::Appium::Driver::Commands::COMMANDS_EXTEND_OSS[command]
+        else
+          ::Appium::Driver::Commands::COMMANDS_EXTEND_W3C[command]
         end
       end
     end

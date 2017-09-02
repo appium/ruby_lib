@@ -32,7 +32,7 @@ module Appium
         get_settings:               [:get,  'session/:session_id/appium/settings'.freeze],
         update_settings:            [:post, 'session/:session_id/appium/settings'.freeze],
         touch_actions:              [:post, 'session/:session_id/touch/perform'.freeze],
-        multi_touch:                [:post, 'session/:session_id/touch/multi/perform'.freeze],
+        multi_touch:                [:post, 'session/:session_id/touch/multi/perform'.freeze]
       }.merge(COMMAND_NO_ARG).freeze
 
       # TODO: Be able to remove?

@@ -230,7 +230,9 @@ module Appium
     def set_appium_device
       # https://code.google.com/p/selenium/source/browse/spec-draft.md?repo=mobile
       @appium_device = @caps[:platformName]
-      @appium_device = @appium_device.is_a?(Symbol) ? @appium_device : @appium_device.downcase.strip.intern if @appium_device
+      return @appium_device unless @appium_device
+
+      @appium_device = @appium_device.is_a?(Symbol) ? @appium_device : @appium_device.downcase.strip.intern
     end
 
     # @private
@@ -319,7 +321,8 @@ module Appium
       if automation_name_is_xcuitest? &&
           !@appium_server_status.empty? &&
           (@appium_server_status['build']['version'] < REQUIRED_VERSION_XCUITEST)
-        raise Appium::Core::Error::NotSupportedAppiumServer, "XCUITest requires Appium version >= #{REQUIRED_VERSION_XCUITEST}"
+        raise(Appium::Core::Error::NotSupportedAppiumServer,
+              "XCUITest requires Appium version >= #{REQUIRED_VERSION_XCUITEST}")
       end
       true
     end
