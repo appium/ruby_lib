@@ -128,7 +128,7 @@ module Appium
   end
 
   # This method is intended to work with page objects that share
-  # a core module. For example, Page::HomePage, Page::SignIn
+  # a common module. For example, Page::HomePage, Page::SignIn
   # those could be promoted on with Appium.promote_singleton_appium_methods Page
   #
   # If you are promoting on an individual class then you should use

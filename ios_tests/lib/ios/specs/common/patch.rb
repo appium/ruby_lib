@@ -35,7 +35,7 @@ describe 'common/patch.rb' do
     end
   end
 
-  describe 'core patch' do
+  describe 'common patch' do
     # By default, the webdriver gem will return message instead of origValue
     # {"message":"An unknown server-side error occurred while processing the command.","origValue":"Strategy id is not valid."}
     t 'error_message' do
