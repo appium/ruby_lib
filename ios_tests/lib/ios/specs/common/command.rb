@@ -1,5 +1,5 @@
-# rake ios[core/command]
-describe 'core/command.rb' do
+# rake ios[common/command]
+describe 'common/command.rb' do
   def before_first
     screen.must_equal catalog
   end
@@ -30,7 +30,6 @@ describe 'core/command.rb' do
                                         :remove_app,
                                         :app_installed?,
                                         :background_app,
-                                        :start_activity,
                                         :set_context,
                                         :hide_keyboard,
                                         :press_keycode,
