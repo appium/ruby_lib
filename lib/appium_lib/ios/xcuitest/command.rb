@@ -2,7 +2,9 @@ require_relative 'command/pasteboard'
 
 module Appium
   module Ios
-    module Command
+    module Xcuitest
+      module Command
+      end
     end
   end
 end
