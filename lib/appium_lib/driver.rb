@@ -31,12 +31,19 @@ module Appium
     # This value is independent of what the server is using
     # @return [Integer]
     attr_reader :default_wait
+
+    # SauceLab's settings
+    attr_reader :sauce
     # Username for use on Sauce Labs. Set `false` to disable Sauce, even when SAUCE_USERNAME is in ENV.
+    # same as @sauce.username
     attr_reader :sauce_username
     # Access Key for use on Sauce Labs. Set `false` to disable Sauce, even when SAUCE_ACCESS_KEY is in ENV.
+    # same as @sauce.access_key
     attr_reader :sauce_access_key
     # Override the Sauce Appium endpoint to allow e.g. TestObject tests
+    # same as @sauce.endpoint
     attr_reader :sauce_endpoint
+
     # Appium's server port
     attr_reader :appium_port
     # Device type to request from the appium server
@@ -138,6 +145,7 @@ module Appium
 
       appium_lib_opts = get_appium_lib_opts(opts)
       set_appium_lib_specific_values(appium_lib_opts)
+      set_sauce_related_values(appium_lib_opts)
       # enable debug patch
       @appium_debug = appium_lib_opts.fetch :debug, !!defined?(Pry)
 
@@ -149,6 +157,7 @@ module Appium
       # load core methods
       extend Appium::Core
       extend Appium::Core::Device
+      extend Appium::Common
 
       if device_is_android?
         extend Appium::Android
@@ -237,15 +246,8 @@ module Appium
       @export_session   = appium_lib_opts.fetch :export_session, false
       @default_wait     = appium_lib_opts.fetch :wait, 0
 
-      @sauce_username   = appium_lib_opts.fetch :sauce_username, ENV['SAUCE_USERNAME']
-      @sauce_username   = nil if !@sauce_username || (@sauce_username.is_a?(String) && @sauce_username.empty?)
-      @sauce_access_key = appium_lib_opts.fetch :sauce_access_key, ENV['SAUCE_ACCESS_KEY']
-      @sauce_access_key = nil if !@sauce_access_key || (@sauce_access_key.is_a?(String) && @sauce_access_key.empty?)
-      @sauce_endpoint   = appium_lib_opts.fetch :sauce_endpoint, ENV['SAUCE_ENDPOINT']
-      @sauce_endpoint   = 'ondemand.saucelabs.com:443/wd/hub' if
-          !@sauce_endpoint || (@sauce_endpoint.is_a?(String) && @sauce_endpoint.empty?)
-
       @appium_port      = appium_lib_opts.fetch :port, 4723
+
       # timeout and interval used in ::Appium::Comm.wait/wait_true
       @appium_wait_timeout  = appium_lib_opts.fetch :wait_timeout, 30
       @appium_wait_interval = appium_lib_opts.fetch :wait_interval, 0.5
@@ -253,6 +255,13 @@ module Appium
       # to pass it in Selenium.new.
       # `listener = opts.delete(:listener)` is called in Selenium::Driver.new
       @listener = appium_lib_opts.fetch :listener, nil
+    end
+
+    def set_sauce_related_values(appium_lib_opts)
+      @sauce = Appium::SauceLabs.new(appium_lib_opts)
+      @sauce_username   = @sauce.username
+      @sauce_access_key = @sauce.access_key
+      @sauce_endpoint   = @sauce.endpoint
     end
 
     public
@@ -265,9 +274,9 @@ module Appium
           custom_url:       @custom_url,
           export_session:   @export_session,
           default_wait:     @default_wait,
-          sauce_username:   @sauce_username,
-          sauce_access_key: @sauce_access_key,
-          sauce_endpoint:   @sauce_endpoint,
+          sauce_username:   @sauce.username,
+          sauce_access_key: @sauce.access_key,
+          sauce_endpoint:   @sauce.endpoint,
           port:             @appium_port,
           device:           @appium_device,
           debug:            @appium_debug,
@@ -401,11 +410,8 @@ module Appium
     # @return [String] the server url
     def server_url
       return @custom_url if @custom_url
-      if !@sauce_username.nil? && !@sauce_access_key.nil?
-        "https://#{@sauce_username}:#{@sauce_access_key}@#{@sauce_endpoint}"
-      else
-        "http://127.0.0.1:#{@appium_port}/wd/hub"
-      end
+      return @sauce.server_url if @sauce.sauce_server_url?
+      "http://127.0.0.1:#{@appium_port}/wd/hub"
     end
 
     # Restarts the driver

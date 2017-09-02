@@ -9,6 +9,7 @@ require_relative 'search_context'
 require_relative 'command'
 require_relative 'wait'
 require_relative 'patch'
+require_relative 'sauce_labs'
 
 # core
 require_relative 'core/core'
