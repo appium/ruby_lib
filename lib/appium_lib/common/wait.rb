@@ -1,4 +1,4 @@
-require_relative 'core/wait'
+require_relative '../core/wait'
 
 module Appium
   module Common

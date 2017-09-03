@@ -198,12 +198,14 @@ module Appium
 
     private
 
+    # @private
     def set_app_path(opts)
       return unless @core.caps && @core.caps[:app] && !@core.caps[:app].empty?
 
       @core.caps[:app] = self.class.absolute_app_path opts
     end
 
+    # @private
     def set_sauce_related_values(appium_lib_opts)
       @sauce = Appium::SauceLabs.new(appium_lib_opts)
       @sauce_username   = @sauce.username
@@ -552,6 +554,7 @@ module Appium
 
     private
 
+    # @private
     def write_session_id(session_id)
       File.open('/tmp/appium_lib_session', 'w') { |f| f.puts session_id }
     rescue IOError => e

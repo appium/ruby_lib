@@ -5,11 +5,13 @@ require 'nokogiri'
 
 # base
 require_relative 'driver'
-require_relative 'search_context'
 require_relative 'command'
-require_relative 'wait'
-require_relative 'patch'
 require_relative 'sauce_labs'
+
+# common
+require_relative 'common/search_context'
+require_relative 'common/wait'
+require_relative 'common/patch'
 require_relative 'common/log'
 
 # core
