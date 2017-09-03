@@ -146,33 +146,13 @@ module Appium
       @appium_debug = appium_lib_opts.fetch :debug, !!defined?(Pry)
       set_sauce_related_values(appium_lib_opts)
 
+      # Extend core methods
       extend Appium::Core
       extend Appium::Core::Device
       extend Appium::Common
 
-      if device_is_android?
-        extend Appium::Android
-        extend Appium::Android::SearchContext
-        extend Appium::Android::Device
-        if automation_name_is_uiautomator2?
-          extend Appium::Android::Uiautomator2
-          extend Appium::Android::Uiautomator2::Helper
-          extend Appium::Android::Uiautomator2::Element
-        end
-      else
-        extend Appium::Ios
-        extend Appium::Ios::SearchContext
-        extend Appium::Ios::Device
-        if automation_name_is_xcuitest?
-          extend Appium::Ios::Xcuitest
-          extend Appium::Ios::Xcuitest::SearchContext
-          extend Appium::Ios::Xcuitest::Command
-          extend Appium::Ios::Xcuitest::Helper
-          extend Appium::Ios::Xcuitest::Gesture
-          extend Appium::Ios::Xcuitest::Device
-          extend Appium::Ios::Xcuitest::Element
-        end
-      end
+      # Extend each driver's methods
+      extend_for(device: @core.device, driver: @core.automation_name)
 
       # apply os specific patches
       patch_webdriver_element
@@ -197,6 +177,44 @@ module Appium
     end
 
     private
+
+    # @private
+    def extend_for(device:, driver:)
+      case device
+      when :android
+        case driver
+        when :uiautomator2
+          extend Appium::Android
+          extend Appium::Android::SearchContext
+          extend Appium::Android::Device
+          extend Appium::Android::Uiautomator2
+          extend Appium::Android::Uiautomator2::Helper
+          extend Appium::Android::Uiautomator2::Element
+        else
+          extend Appium::Android
+          extend Appium::Android::SearchContext
+          extend Appium::Android::Device
+        end
+      else # :ios, default
+        case driver
+        when :xcuitest
+          extend Appium::Ios
+          extend Appium::Ios::SearchContext
+          extend Appium::Ios::Device
+          extend Appium::Ios::Xcuitest
+          extend Appium::Ios::Xcuitest::SearchContext
+          extend Appium::Ios::Xcuitest::Command
+          extend Appium::Ios::Xcuitest::Helper
+          extend Appium::Ios::Xcuitest::Gesture
+          extend Appium::Ios::Xcuitest::Device
+          extend Appium::Ios::Xcuitest::Element
+        else
+          extend Appium::Ios
+          extend Appium::Ios::SearchContext
+          extend Appium::Ios::Device
+        end
+      end
+    end
 
     # @private
     def set_app_path(opts)
@@ -410,8 +428,16 @@ module Appium
     def start_driver(http_client_ops = { http_client: nil, open_timeout: 999_999, read_timeout: 999_999 })
       driver_quit
 
+      # If automationName is set only in server side, then the following automation_name should be nil before
+      # starting driver.
+      automation_name = @core.automation_name
+
       @driver = @core.start_driver(server_url: server_url, http_client_ops: http_client_ops)
       @http_client = @core.http_client
+
+      # if automation_name was nil before start_driver, then re-extend driver specific methods
+      # to be able to extend correctly.
+      extend_for(device: @core.device, driver: @core.automation_name) if automation_name.nil?
 
       @appium_server_status = appium_server_version
       check_server_version_xcuitest
