@@ -9,6 +9,8 @@ module Minitest
   end
 end
 
+require_relative 'core/core'
+
 module Appium
   REQUIRED_VERSION_XCUITEST = '1.6.0'.freeze
 
@@ -20,17 +22,6 @@ module Appium
 
     # The amount to sleep in seconds before every webdriver http call.
     attr_accessor :global_webdriver_http_sleep
-    # Selenium webdriver capabilities
-    attr_reader :caps
-    # Custom URL for the selenium server
-    attr_reader :custom_url
-    # Export session id to textfile in /tmp for 3rd party tools
-    attr_reader :export_session
-    # Default wait time for elements to appear
-    # Returns the default client side wait.
-    # This value is independent of what the server is using
-    # @return [Integer]
-    attr_reader :default_wait
 
     # SauceLab's settings
     attr_reader :sauce
@@ -44,35 +35,28 @@ module Appium
     # same as @sauce.endpoint
     attr_reader :sauce_endpoint
 
-    # Appium's server port
+    # from Core
+    attr_reader :caps
+    attr_reader :custom_url
+    attr_reader :export_session
+    attr_reader :default_wait
     attr_reader :appium_port
-    # Device type to request from the appium server
     attr_reader :appium_device
-    # Automation name sent to appium server or received from server
-    # If automation_name is nil, it is not set both client side and server side.
     attr_reader :automation_name
+    attr_reader :listener
+    attr_reader :http_client
+    attr_reader :appium_wait_timeout
+    attr_reader :appium_wait_interval
+
     # Appium's server version
     attr_reader :appium_server_status
     # Boolean debug mode for the Appium Ruby bindings
     attr_reader :appium_debug
-    # instance of AbstractEventListener for logging support
-    attr_reader :listener
     # Returns the driver
     # @return [Driver] the driver
     attr_reader :driver
-    # Return http client called in start_driver()
-    # @return [Selenium::WebDriver::Remote::Http::Default] the http client
-    attr_reader :http_client
-    # Return a time wait timeout
-    # Wait time for ::Appium::Common.wait or ::Appium::Common.wait_true.
-    # Provide Appium::Drive like { appium_lib: { wait_timeout: 20 } }
-    # @return [Integer]
-    attr_reader :appium_wait_timeout
-    # Return a time wait timeout
-    # Wait interval time for ::Appium::Common.wait or ::Appium::Common.wait_true.
-    # Provide Appium::Drive like { appium_lib: { wait_interval: 20 } }
-    # @return [Integer]
-    attr_reader :appium_wait_interval
+    # Instance of Appium::Core::Driver
+    attr_reader :core
 
     # Creates a new driver. The driver is defined as global scope by default.
     # We can avoid defining global driver.
@@ -139,20 +123,28 @@ module Appium
       end
       raise 'opts must be a hash' unless opts.is_a? Hash
 
+      @core = Appium::Core::Driver.new(opts)
+
       opts = Appium.symbolize_keys opts
+      appium_lib_opts = opts[:appium_lib] || {}
 
-      @caps = get_caps(opts)
+      @caps = @core.caps
+      @custom_url = @core.custom_url
+      @export_session = @core.export_session
+      @default_wait = @core.default_wait
+      @appium_port = @core.appium_port
+      @appium_wait_timeout = @core.appium_wait_timeout
+      @appium_wait_interval = @core.appium_wait_interval
+      @listener = @core.listener
+      @appium_device = @core.appium_device
+      @automation_name = @core.automation_name
 
-      appium_lib_opts = get_appium_lib_opts(opts)
-      set_appium_lib_specific_values(appium_lib_opts)
-      set_sauce_related_values(appium_lib_opts)
+      # override opts[:app] if sauce labs
+      set_app_path(opts)
+
       # enable debug patch
       @appium_debug = appium_lib_opts.fetch :debug, !!defined?(Pry)
-
-      # with caps
-      set_app_path(opts)
-      set_appium_device
-      set_automation_name
+      set_sauce_related_values(appium_lib_opts)
 
       # load core methods
       extend Appium::Core
@@ -207,56 +199,10 @@ module Appium
 
     private
 
-    # @private
-    def get_caps(opts)
-      Core::Driver::Capabilities.init_caps_for_appium(opts[:caps] || {})
-    end
-
-    # @private
-    def get_appium_lib_opts(opts)
-      opts[:appium_lib] || {}
-    end
-
-    # @private
-    # Path to the .apk, .app or .app.zip.
-    # The path can be local or remote for Sauce.
     def set_app_path(opts)
-      return unless @caps && @caps[:app] && !@caps[:app].empty?
+      return unless @core.caps && @core.caps[:app] && !@core.caps[:app].empty?
 
-      @caps[:app] = self.class.absolute_app_path opts
-    end
-
-    # @private
-    def set_appium_device
-      # https://code.google.com/p/selenium/source/browse/spec-draft.md?repo=mobile
-      @appium_device = @caps[:platformName]
-      return @appium_device unless @appium_device
-
-      @appium_device = @appium_device.is_a?(Symbol) ? @appium_device : @appium_device.downcase.strip.intern
-    end
-
-    # @private
-    def set_automation_name
-      @automation_name = @caps[:automationName] if @caps[:automationName]
-      @automation_name = if @automation_name
-                           @automation_name.is_a?(Symbol) ? @automation_name : @automation_name.downcase.strip.intern
-                         end
-    end
-
-    def set_appium_lib_specific_values(appium_lib_opts)
-      @custom_url       = appium_lib_opts.fetch :server_url, false
-      @export_session   = appium_lib_opts.fetch :export_session, false
-      @default_wait     = appium_lib_opts.fetch :wait, 0
-
-      @appium_port      = appium_lib_opts.fetch :port, 4723
-
-      # timeout and interval used in ::Appium::Comm.wait/wait_true
-      @appium_wait_timeout  = appium_lib_opts.fetch :wait_timeout, 30
-      @appium_wait_interval = appium_lib_opts.fetch :wait_interval, 0.5
-
-      # to pass it in Selenium.new.
-      # `listener = opts.delete(:listener)` is called in Selenium::Driver.new
-      @listener = appium_lib_opts.fetch :listener, nil
+      @core.caps[:app] = self.class.absolute_app_path opts
     end
 
     def set_sauce_related_values(appium_lib_opts)
@@ -271,8 +217,8 @@ module Appium
     # Returns a hash of the driver attributes
     def driver_attributes
       {
-          caps:             @caps,
-          automation_name:  @automation_name,
+          caps:             @core.caps,
+          automation_name:  @core.automation_name,
           custom_url:       @custom_url,
           export_session:   @export_session,
           default_wait:     @default_wait,
@@ -280,7 +226,7 @@ module Appium
           sauce_access_key: @sauce.access_key,
           sauce_endpoint:   @sauce.endpoint,
           port:             @appium_port,
-          device:           @appium_device,
+          device:           @core.appium_device,
           debug:            @appium_debug,
           listener:         @listener,
           wait_timeout:     @appium_wait_timeout,
@@ -289,29 +235,29 @@ module Appium
     end
 
     def device_is_android?
-      @appium_device == :android
+      @core.appium_device == :android
     end
 
     def device_is_ios?
-      @appium_device == :ios
+      @core.appium_device == :ios
     end
 
     # Return true if automationName is 'XCUITest'
     # @return [Boolean]
     def automation_name_is_xcuitest?
-      !@automation_name.nil? && @automation_name == :xcuitest
+      !@core.automation_name.nil? && @core.automation_name == :xcuitest
     end
 
     # Return true if automationName is 'uiautomator2'
     # @return [Boolean]
     def automation_name_is_uiautomator2?
-      !@automation_name.nil? && @automation_name == :uiautomator2
+      !@core.automation_name.nil? && @core.automation_name == :uiautomator2
     end
 
     # Return true if automationName is 'Espresso'
     # @return [Boolean]
     def automation_name_is_espresso?
-      !@automation_name.nil? && @automation_name == :espresso
+      !@core.automation_name.nil? && @core.automation_name == :espresso
     end
 
     # Return true if the target Appium server is over REQUIRED_VERSION_XCUITEST.
@@ -419,6 +365,7 @@ module Appium
 
     # Restarts the driver
     # @return [Driver] the driver
+    # TODO: Core
     def restart
       driver_quit
       start_driver
@@ -430,6 +377,7 @@ module Appium
     #
     # @param png_save_path [String] the full path to save the png
     # @return [nil]
+    # TODO: Core
     def screenshot(png_save_path)
       @driver.save_screenshot png_save_path
       nil
@@ -437,6 +385,7 @@ module Appium
 
     # Quits the driver
     # @return [void]
+    # TODO: Core
     def driver_quit
       # rescue NoSuchDriverError or nil driver
       @driver.quit
@@ -474,38 +423,13 @@ module Appium
     # @option http_client_ops [Hash] :read_timeout Custom read timeout for http client.
     # @return [Selenium::WebDriver] the new global driver
     def start_driver(http_client_ops = { http_client: nil, open_timeout: 999_999, read_timeout: 999_999 })
-      # open_timeout and read_timeout are explicit wait.
-      open_timeout = http_client_ops.delete(:open_timeout)
-      read_timeout = http_client_ops.delete(:read_timeout)
+      driver_quit
 
-      http_client = http_client_ops.delete(:http_client)
-      @http_client ||= http_client ? http_client : Selenium::WebDriver::Remote::Http::Default.new
-
-      @http_client.open_timeout = open_timeout if open_timeout
-      @http_client.read_timeout = read_timeout if read_timeout
-
-      begin
-        driver_quit
-        @driver =  Selenium::WebDriver.for(:remote,
-                                           http_client: @http_client,
-                                           desired_capabilities: @caps,
-                                           url: server_url,
-                                           listener: @listener)
-
-        # Load touch methods.
-        @driver.extend Selenium::WebDriver::DriverExtensions::HasTouchScreen
-        @driver.extend Selenium::WebDriver::DriverExtensions::HasLocation
-
-        # export session
-        write_session_id(@driver.session_id) if @export_session
-      rescue Errno::ECONNREFUSED
-        raise "ERROR: Unable to connect to Appium. Is the server running on #{server_url}?"
-      end
+      @driver = @core.start_driver(server_url: server_url, http_client_ops: http_client_ops)
+      @http_client = @core.http_client
 
       @appium_server_status = appium_server_version
-
       check_server_version_xcuitest
-      set_automation_name_if_nil
 
       set_implicit_wait(@default_wait)
 
@@ -523,6 +447,7 @@ module Appium
     end
 
     # Set implicit wait to zero.
+    # TODO core
     def no_wait
       @driver.manage.timeouts.implicit_wait = 0
     end
@@ -537,6 +462,7 @@ module Appium
     #
     # @param timeout [Integer] the timeout in seconds
     # @return [void]
+    # TODO core
     def set_wait(timeout = nil)
       timeout = @default_wait if timeout.nil?
       @driver.manage.timeouts.implicit_wait = timeout
@@ -554,6 +480,7 @@ module Appium
     #                             wait to after checking existence
     # @yield The block to call
     # @return [Boolean]
+    # TODO core
     def exists(pre_check = 0, post_check = @default_wait)
       # do not uset set_wait here.
       # it will cause problems with other methods reading the default_wait of 0
@@ -578,6 +505,7 @@ module Appium
     # @param [String] script The script to execute
     # @param [*args] args The args to pass to the script
     # @return [Object]
+    # TODO core?
     def execute_script(script, *args)
       @driver.execute_script script, *args
     end
@@ -600,6 +528,7 @@ module Appium
     #
     # @param [*args] args The args to use
     # @return [Array<Element>] Array is empty when no elements are found.
+    # TODO core?
     def find_elements(*args)
       @driver.find_elements(*args)
     end
@@ -615,6 +544,7 @@ module Appium
     #
     # @param [*args] args The args to use
     # @return [Element]
+    # TODO core?
     def find_element(*args)
       @driver.find_element(*args)
     end
@@ -650,13 +580,6 @@ module Appium
     rescue IOError => e
       ::Appium::Logger.warn e
       nil
-    end
-
-    # If "automationName" is set only server side, this method set "automationName" attribute into @automation_name.
-    # Since @automation_name is set only client side before start_driver is called.
-    def set_automation_name_if_nil
-      return unless @automation_name.nil?
-      @automation_name = @driver.capabilities['automationName']
     end
   end # class Driver
 end # module Appium
