@@ -195,7 +195,7 @@ module Appium
           extend Appium::Android::SearchContext
           extend Appium::Android::Device
         end
-      else # :ios, default
+      when :ios
         case driver
         when :xcuitest
           extend Appium::Ios
@@ -213,6 +213,9 @@ module Appium
           extend Appium::Ios::SearchContext
           extend Appium::Ios::Device
         end
+      when :windows
+        # no windows specific extentions
+        Appium::Logger.debug('windows')
       end
     end
 
@@ -261,10 +264,8 @@ module Appium
       @core.device == :ios
     end
 
-    # Return true if automationName is 'XCUITest'
-    # @return [Boolean]
-    def automation_name_is_xcuitest?
-      !@core.automation_name.nil? && @core.automation_name == :xcuitest
+    def device_is_windows?
+      @core.device == :windows
     end
 
     # Return true if automationName is 'uiautomator2'
@@ -277,6 +278,12 @@ module Appium
     # @return [Boolean]
     def automation_name_is_espresso?
       !@core.automation_name.nil? && @core.automation_name == :espresso
+    end
+
+    # Return true if automationName is 'XCUITest'
+    # @return [Boolean]
+    def automation_name_is_xcuitest?
+      !@core.automation_name.nil? && @core.automation_name == :xcuitest
     end
 
     # Return true if the target Appium server is over REQUIRED_VERSION_XCUITEST.
