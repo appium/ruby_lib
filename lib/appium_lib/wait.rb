@@ -34,8 +34,8 @@ module Appium
     def wait_true(opts = {})
       opts = _process_wait_opts(opts).merge(return_if_true: true)
 
-      opts[:timeout]  ||= @appium_wait_timeout
-      opts[:interval] ||= @appium_wait_interval
+      opts[:timeout]  ||= @core.wait_timeout
+      opts[:interval] ||= @core.wait_interval
 
       wait = ::Appium::Common::Wait.new opts
       wait.until { yield }
@@ -57,8 +57,8 @@ module Appium
     def wait(opts = {})
       opts = _process_wait_opts(opts).merge(return_if_true: false)
 
-      opts[:timeout]  ||= @appium_wait_timeout
-      opts[:interval] ||= @appium_wait_interval
+      opts[:timeout]  ||= @core.wait_timeout
+      opts[:interval] ||= @core.wait_interval
 
       wait = ::Appium::Common::Wait.new opts
       wait.until { yield }

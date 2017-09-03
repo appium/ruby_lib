@@ -132,11 +132,11 @@ module Appium
       @custom_url = @core.custom_url
       @export_session = @core.export_session
       @default_wait = @core.default_wait
-      @appium_port = @core.appium_port
-      @appium_wait_timeout = @core.appium_wait_timeout
-      @appium_wait_interval = @core.appium_wait_interval
+      @appium_port = @core.port
+      @appium_wait_timeout = @core.wait_timeout
+      @appium_wait_interval = @core.wait_interval
       @listener = @core.listener
-      @appium_device = @core.appium_device
+      @appium_device = @core.device
       @automation_name = @core.automation_name
 
       # override opts[:app] if sauce labs
@@ -146,7 +146,6 @@ module Appium
       @appium_debug = appium_lib_opts.fetch :debug, !!defined?(Pry)
       set_sauce_related_values(appium_lib_opts)
 
-      # load core methods
       extend Appium::Core
       extend Appium::Core::Device
       extend Appium::Common
@@ -187,7 +186,7 @@ module Appium
       if @appium_debug
         Appium::Logger.ap_debug opts unless opts.empty?
         Appium::Logger.debug "Debug is: #{@appium_debug}"
-        Appium::Logger.debug "Device is: #{@appium_device}"
+        Appium::Logger.debug "Device is: #{@core.device}"
         patch_webdriver_bridge
       end
 
@@ -219,27 +218,27 @@ module Appium
       {
           caps:             @core.caps,
           automation_name:  @core.automation_name,
-          custom_url:       @custom_url,
-          export_session:   @export_session,
-          default_wait:     @default_wait,
+          custom_url:       @core.custom_url,
+          export_session:   @core.export_session,
+          default_wait:     @core.default_wait,
           sauce_username:   @sauce.username,
           sauce_access_key: @sauce.access_key,
           sauce_endpoint:   @sauce.endpoint,
-          port:             @appium_port,
-          device:           @core.appium_device,
+          port:             @core.port,
+          device:           @core.device,
           debug:            @appium_debug,
           listener:         @listener,
-          wait_timeout:     @appium_wait_timeout,
-          wait_interval:    @appium_wait_interval
+          wait_timeout:     @core.wait_timeout,
+          wait_interval:    @core.wait_interval
       }
     end
 
     def device_is_android?
-      @core.appium_device == :android
+      @core.device == :android
     end
 
     def device_is_ios?
-      @core.appium_device == :ios
+      @core.device == :ios
     end
 
     # Return true if automationName is 'XCUITest'
@@ -284,22 +283,12 @@ module Appium
     # }
     # ```
     #
-    # Returns blank hash for Selenium Grid since `remote_status` gets 500 error
-    #
-    # ```ruby
-    # {}
-    # ```
-    #
     # @return [Hash]
     def appium_server_version
-      driver.remote_status
+      @core.appium_server_version
     rescue Selenium::WebDriver::Error::WebDriverError => ex
       raise ::Appium::Core::Error::ServerError unless ex.message.include?('content-type=""')
       # server (TestObject for instance) does not respond to status call
-      {}
-    rescue Selenium::WebDriver::Error::ServerError => e
-      raise ::Appium::Core::Error::ServerError unless e.message.include?('status code 500')
-      # driver.remote_status returns 500 error for using selenium grid
       {}
     end
 
@@ -358,14 +347,13 @@ module Appium
     # Get the server url
     # @return [String] the server url
     def server_url
-      return @custom_url if @custom_url
+      return @core.custom_url if @core.custom_url
       return @sauce.server_url if @sauce.sauce_server_url?
-      "http://127.0.0.1:#{@appium_port}/wd/hub"
+      "http://127.0.0.1:#{@core.port}/wd/hub"
     end
 
     # Restarts the driver
     # @return [Driver] the driver
-    # TODO: Core
     def restart
       driver_quit
       start_driver
@@ -377,7 +365,6 @@ module Appium
     #
     # @param png_save_path [String] the full path to save the png
     # @return [nil]
-    # TODO: Core
     def screenshot(png_save_path)
       @driver.save_screenshot png_save_path
       nil
@@ -385,12 +372,8 @@ module Appium
 
     # Quits the driver
     # @return [void]
-    # TODO: Core
     def driver_quit
-      # rescue NoSuchDriverError or nil driver
-      @driver.quit
-    rescue
-      nil
+      @core.quit_driver
     end
 
     # Alias for driver_quit
@@ -431,7 +414,7 @@ module Appium
       @appium_server_status = appium_server_version
       check_server_version_xcuitest
 
-      set_implicit_wait(@default_wait)
+      set_implicit_wait(@core.default_wait)
 
       @driver
     end
@@ -447,24 +430,22 @@ module Appium
     end
 
     # Set implicit wait to zero.
-    # TODO core
     def no_wait
       @driver.manage.timeouts.implicit_wait = 0
     end
 
-    # Set implicit wait. Default to @default_wait.
+    # Set implicit wait. Default to @core.default_wait.
     #
     # ```ruby
     # set_wait 2
-    # set_wait # @default_wait
+    # set_wait # @core.default_wait
     #
     # ```
     #
     # @param timeout [Integer] the timeout in seconds
     # @return [void]
-    # TODO core
     def set_wait(timeout = nil)
-      timeout = @default_wait if timeout.nil?
+      timeout = @core.default_wait if timeout.nil?
       @driver.manage.timeouts.implicit_wait = timeout
     end
 
@@ -480,8 +461,7 @@ module Appium
     #                             wait to after checking existence
     # @yield The block to call
     # @return [Boolean]
-    # TODO core
-    def exists(pre_check = 0, post_check = @default_wait)
+    def exists(pre_check = 0, post_check = @core.default_wait)
       # do not uset set_wait here.
       # it will cause problems with other methods reading the default_wait of 0
       # which then gets converted to a 1 second wait.
@@ -505,7 +485,6 @@ module Appium
     # @param [String] script The script to execute
     # @param [*args] args The args to pass to the script
     # @return [Object]
-    # TODO core?
     def execute_script(script, *args)
       @driver.execute_script script, *args
     end
@@ -528,7 +507,6 @@ module Appium
     #
     # @param [*args] args The args to use
     # @return [Array<Element>] Array is empty when no elements are found.
-    # TODO core?
     def find_elements(*args)
       @driver.find_elements(*args)
     end
@@ -544,7 +522,6 @@ module Appium
     #
     # @param [*args] args The args to use
     # @return [Element]
-    # TODO core?
     def find_element(*args)
       @driver.find_element(*args)
     end

@@ -35,7 +35,6 @@ module Appium
         multi_touch:                [:post, 'session/:session_id/touch/multi/perform'.freeze]
       }.merge(COMMAND_NO_ARG).freeze
 
-      # TODO: Be able to remove?
       COMMANDS_EXTEND_OSS = COMMAND.merge(::Selenium::WebDriver::Remote::OSS::Bridge::COMMANDS).freeze
       COMMANDS_EXTEND_W3C = COMMAND.merge(::Selenium::WebDriver::Remote::W3C::Bridge::COMMANDS).freeze
     end

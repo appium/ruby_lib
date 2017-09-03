@@ -1,14 +1,3 @@
-# Fix uninitialized constant Minitest (NameError)
-module Minitest
-  # Fix superclass mismatch for class Spec
-  class Runnable
-  end
-  class Test < Runnable
-  end
-  class Spec < Test
-  end
-end
-
 module Appium
   module Core
     class Driver
@@ -24,9 +13,9 @@ module Appium
       # @return [Integer]
       attr_reader :default_wait
       # Appium's server port
-      attr_reader :appium_port
+      attr_reader :port
       # Device type to request from the appium server
-      attr_reader :appium_device
+      attr_reader :device
       # Automation name sent to appium server or received from server
       # If automation_name is nil, it is not set both client side and server side.
       attr_reader :automation_name
@@ -34,12 +23,12 @@ module Appium
       # Wait time for ::Appium::Common.wait or ::Appium::Common.wait_true.
       # Provide Appium::Drive like { appium_lib: { wait_timeout: 20 } }
       # @return [Integer]
-      attr_reader :appium_wait_timeout
+      attr_reader :wait_timeout
       # Return a time wait timeout
       # Wait interval time for ::Appium::Common.wait or ::Appium::Common.wait_true.
       # Provide Appium::Drive like { appium_lib: { wait_interval: 20 } }
       # @return [Integer]
-      attr_reader :appium_wait_interval
+      attr_reader :wait_interval
       # Return http client called in start_driver()
       # @return [Selenium::WebDriver::Remote::Http::Default] the http client
       attr_reader :http_client
@@ -54,6 +43,8 @@ module Appium
         set_app_path
         set_appium_device
         set_automation_name
+
+        self
       end
 
       # Creates a new global driver and quits the old one if it exists.
@@ -96,6 +87,7 @@ module Appium
         @http_client.read_timeout = read_timeout if read_timeout
 
         begin
+          # included https://github.com/SeleniumHQ/selenium/blob/43f8b3f66e7e01124eff6a5805269ee441f65707/rb/lib/selenium/webdriver/remote/driver.rb#L29
           @driver =  Selenium::WebDriver.for(:remote,
                                              http_client: @http_client,
                                              desired_capabilities: @caps,
@@ -105,6 +97,7 @@ module Appium
           # Load touch methods.
           @driver.extend Selenium::WebDriver::DriverExtensions::HasTouchScreen
           @driver.extend Selenium::WebDriver::DriverExtensions::HasLocation
+          @driver.extend Selenium::WebDriver::DriverExtensions::HasNetworkConnection
 
           # export session
           write_session_id(@driver.session_id) if @export_session
@@ -117,6 +110,40 @@ module Appium
         set_automation_name_if_nil
 
         @driver
+      end
+
+      # Quits the driver
+      # @return [void]
+      def quit_driver
+        @driver.quit
+      rescue
+        nil
+      end
+
+      # Returns the server's version info
+      #
+      # ```ruby
+      # {
+      #     "build" => {
+      #         "version" => "0.18.1",
+      #         "revision" => "d242ebcfd92046a974347ccc3a28f0e898595198"
+      #     }
+      # }
+      # ```
+      #
+      # Returns blank hash for Selenium Grid since `remote_status` gets 500 error
+      #
+      # ```ruby
+      # {}
+      # ```
+      #
+      # @return [Hash]
+      def appium_server_version
+        @driver.remote_status
+      rescue Selenium::WebDriver::Error::ServerError => e
+        raise ::Appium::Core::Error::ServerError unless e.message.include?('status code 500')
+        # driver.remote_status returns 500 error for using selenium grid
+        {}
       end
 
       private
@@ -145,11 +172,11 @@ module Appium
         @export_session   = appium_lib_opts.fetch :export_session, false
         @default_wait     = appium_lib_opts.fetch :wait, 0
 
-        @appium_port      = appium_lib_opts.fetch :port, 4723
+        @port      = appium_lib_opts.fetch :port, 4723
 
         # timeout and interval used in ::Appium::Comm.wait/wait_true
-        @appium_wait_timeout  = appium_lib_opts.fetch :wait_timeout, 30
-        @appium_wait_interval = appium_lib_opts.fetch :wait_interval, 0.5
+        @wait_timeout  = appium_lib_opts.fetch :wait_timeout, 30
+        @wait_interval = appium_lib_opts.fetch :wait_interval, 0.5
 
         # to pass it in Selenium.new.
         # `listener = opts.delete(:listener)` is called in Selenium::Driver.new
@@ -159,10 +186,10 @@ module Appium
       # @private
       def set_appium_device
         # https://code.google.com/p/selenium/source/browse/spec-draft.md?repo=mobile
-        @appium_device = @caps[:platformName]
-        return @appium_device unless @appium_device
+        @device = @caps[:platformName]
+        return @device unless @device
 
-        @appium_device = @appium_device.is_a?(Symbol) ? @appium_device : @appium_device.downcase.strip.intern
+        @device = @device.is_a?(Symbol) ? @device : @device.downcase.strip.intern
       end
 
       # @private
