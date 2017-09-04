@@ -26,7 +26,7 @@ Driver types.
 
 ```ruby
 # appium specific driver with helpers available
-@appium_driver = Appium::Driver.new @options
+@appium_driver = Appium::Driver.new @options, false
 # standard selenium driver without any appium methods
 @selenium_driver = @appium_driver.start_driver
 ```
@@ -44,7 +44,7 @@ apk = {
         appActivity: '.Settings',
         appWaitActivity: '.Settings'
       }
-Appium::Driver.new(caps: apk).start_driver
+Appium::Driver.new({caps: apk}, false).start_driver
 ```
 
 --

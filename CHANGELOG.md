@@ -15,6 +15,12 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 ## v9.6.0
 ### 1. Enhancements
 - Reduce Global Driver
+    - We'll stop defining global scope driver by default. So, if you'd like to continue to define global scope, please call `start_driver` as the following.
+      ```ruby
+      Appium::Driver.new(opts, true).start_driver # $driver is defined.
+      Appium::Driver.new(opts, false).start_driver # $driver isn't defined.
+      ``` 
+        - [link](https://github.com/appium/ruby_lib/blob/master/docs/ios_docs.md#initialize)
     - We need to provide `driver` to work `TouchAction` and `MultiAction` without global driver
         - `TouchAction`
             ```ruby
