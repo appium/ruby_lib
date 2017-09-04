@@ -30,7 +30,6 @@ describe 'common/command.rb' do
                                         :remove_app,
                                         :app_installed?,
                                         :background_app,
-                                        :start_activity,
                                         :set_context,
                                         :hide_keyboard,
                                         :press_keycode,

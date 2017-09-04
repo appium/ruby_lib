@@ -32,12 +32,12 @@ describe 'driver' do
 
   t 'verify Appium::Driver::Capabilities.init_caps_for_appium' do
     expected_app = File.absolute_path('UICatalog.app')
-    caps = ::Appium::Driver::Capabilities.init_caps_for_appium(platformName:    'ios',
-                                                               platformVersion: '10.3',
-                                                               automationName:  'XCUITest',
-                                                               deviceName:      'iPhone Simulator',
-                                                               app:             expected_app,
-                                                               some_capability: 'some_capability')
+    caps = ::Appium::Core::Driver::Capabilities.init_caps_for_appium(platformName:    'ios',
+                                                                     platformVersion: '10.3',
+                                                                     automationName:  'XCUITest',
+                                                                     deviceName:      'iPhone Simulator',
+                                                                     app:             expected_app,
+                                                                     some_capability: 'some_capability')
     caps_with_json = JSON.parse(caps.to_json)
     caps_with_json['platformName'].must_equal 'ios'
     caps_with_json['platformVersion'].must_equal '10.3'

@@ -1,9 +1,10 @@
 require_relative 'search_context'
+require_relative 'command'
+require_relative 'device'
 
 require_relative 'common/helper'
 require_relative 'common/patch'
 require_relative 'common/client_xpath'
-require_relative 'common/device'
 
 require_relative 'element/alert'
 require_relative 'element/button'

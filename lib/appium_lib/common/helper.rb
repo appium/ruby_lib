@@ -1,14 +1,7 @@
-require 'selenium/webdriver/common/error'
-
 # Generic helper methods not specific
 # to a particular tag name
 module Appium
   module Common
-    # json and ap are required for the source method.
-    require 'json'
-    require 'ap' # awesome print
-    require 'timeout' # for wait
-
     # iOS .name returns the accessibility attribute if it's set. if not set, the string value is used.
     # Android .name returns the accessibility attribute and nothing if it's not set.
     #
@@ -42,7 +35,7 @@ module Appium
     # @param xpath_str [String] the XPath string
     # @return [Element]
     def xpath(xpath_str)
-      find_element :xpath, xpath_str
+      @driver.find_element :xpath, xpath_str
     end
 
     # Returns all elements that match the provided xpath.
@@ -50,18 +43,12 @@ module Appium
     # @param xpath_str [String] the XPath string
     # @return [Array<Element>]
     def xpaths(xpath_str)
-      find_elements :xpath, xpath_str
+      @driver.find_elements :xpath, xpath_str
     end
 
-    def _print_source(source)
-      opts = Nokogiri::XML::ParseOptions::NOBLANKS | Nokogiri::XML::ParseOptions::NONET
-      doc = if source.start_with? '<html'
-              Nokogiri::HTML(source) { |cfg| cfg.options = opts }
-            else
-              Nokogiri::XML(source)  { |cfg| cfg.options = opts }
-            end
-      puts doc.to_xml indent: 2
-    end
+    # json and ap are required for the source method.
+    require 'json'
+    require 'ap' # awesome print
 
     # @private
     # http://nokogiri.org/Nokogiri/XML/SAX.html
@@ -219,5 +206,16 @@ module Appium
       error_message = 'An element could not be located on the page using the given search parameters.'
       raise Selenium::WebDriver::Error::NoSuchElementError, error_message
     end
-  end # module Common
-end # module Appium
+
+    # @private
+    def _print_source(source)
+      opts = Nokogiri::XML::ParseOptions::NOBLANKS | Nokogiri::XML::ParseOptions::NONET
+      doc = if source.start_with? '<html'
+              Nokogiri::HTML(source) { |cfg| cfg.options = opts }
+            else
+              Nokogiri::XML(source)  { |cfg| cfg.options = opts }
+            end
+      puts doc.to_xml indent: 2
+    end
+  end
+end

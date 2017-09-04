@@ -1,49 +1,10 @@
+require_relative '../core/wait'
+
 module Appium
   module Common
-    class Wait < ::Selenium::WebDriver::Wait
+    class Wait < ::Appium::Core::Wait
       def initialize(opts = {})
-        valid_keys = [:timeout, :interval, :message, :ignore, :return_if_true]
-        invalid_keys = []
-        opts.keys.each { |key| invalid_keys << key unless valid_keys.include?(key) }
-        # [:one, :two] => :one, :two
-        raise "Invalid keys #{invalid_keys.to_s[1..-2]}. Valid keys are #{valid_keys.to_s[1..-2]}" unless invalid_keys.empty?
-
-        @timeout        = opts.fetch(:timeout, DEFAULT_TIMEOUT)
-        @interval       = opts.fetch(:interval, DEFAULT_INTERVAL)
-        @message        = opts[:message]
-        @ignored        = Array(opts[:ignore] || ::Exception)
-        @return_if_true = opts[:return_if_true]
-
-        super(timeout: @timeout, interval: @interval, message: @message, ignore: @ignored)
-      end
-
-      # Wait code from the selenium Ruby gem
-      # https://github.com/SeleniumHQ/selenium/blob/cf501dda3f0ed12233de51ce8170c0e8090f0c20/rb/lib/selenium/webdriver/common/wait.rb
-      # @override
-      def until
-        end_time   = Time.now + @timeout
-        last_error = nil
-
-        until Time.now > end_time
-          begin
-            return yield unless @return_if_true
-
-            result = yield
-            return result if result
-          rescue ::Errno::ECONNREFUSED => e
-            raise e
-          rescue *@ignored => last_error # rubocop:disable Lint/HandleExceptions
-            # swallowed
-          end
-
-          sleep @interval
-        end
-
-        msg = @message ? @message.dup : "timed out after #{@timeout} seconds"
-
-        msg << " (#{last_error.message})" if last_error
-
-        raise Selenium::WebDriver::Error::TimeOutError, msg
+        super(opts)
       end
     end
 
@@ -73,8 +34,8 @@ module Appium
     def wait_true(opts = {})
       opts = _process_wait_opts(opts).merge(return_if_true: true)
 
-      opts[:timeout]  ||= @appium_wait_timeout
-      opts[:interval] ||= @appium_wait_interval
+      opts[:timeout]  ||= @core.wait_timeout
+      opts[:interval] ||= @core.wait_interval
 
       wait = ::Appium::Common::Wait.new opts
       wait.until { yield }
@@ -96,11 +57,11 @@ module Appium
     def wait(opts = {})
       opts = _process_wait_opts(opts).merge(return_if_true: false)
 
-      opts[:timeout]  ||= @appium_wait_timeout
-      opts[:interval] ||= @appium_wait_interval
+      opts[:timeout]  ||= @core.wait_timeout
+      opts[:interval] ||= @core.wait_interval
 
       wait = ::Appium::Common::Wait.new opts
       wait.until { yield }
     end
-  end # module Common
-end # module Appium
+  end
+end

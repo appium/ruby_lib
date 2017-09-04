@@ -1,4 +1,4 @@
-# rake ios[common/pasteboard]
+# rake ios[ios/command/pasteboard]
 describe 'ios/command/pasteboard' do
   t 'pasteboard' do
     # set blank before testing because pasteboard is remaining during launching simulators

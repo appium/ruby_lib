@@ -5,17 +5,18 @@ require 'nokogiri'
 
 # base
 require_relative 'driver'
-require_relative 'capabilities'
+require_relative 'command'
+require_relative 'sauce_labs'
 
 # common
-require_relative 'common/helper'
+require_relative 'common/search_context'
 require_relative 'common/wait'
 require_relative 'common/patch'
-require_relative 'common/version'
-require_relative 'common/error'
-require_relative 'common/search_context'
-require_relative 'common/command'
-require_relative 'common/element/window'
+require_relative 'common/log'
+require_relative 'common/helper'
+
+# core
+require_relative 'core/core'
 
 # ios
 require_relative 'ios/ios'
@@ -24,9 +25,8 @@ require_relative 'ios/ios'
 require_relative 'android/android'
 
 # device methods
-require_relative 'device/device'
-require_relative 'device/touch_actions'
-require_relative 'device/multi_touch'
+require_relative 'core/device/touch_actions'
+require_relative 'core/device/multi_touch'
 
 module Appium
   # Load arbitrary text ([toml format](https://github.com/toml-lang/toml))
@@ -114,20 +114,6 @@ module Appium
     end
 
     files
-  end
-
-  # convert all keys (including nested) to symbols
-  #
-  # based on deep_symbolize_keys & deep_transform_keys from rails
-  # https://github.com/rails/docrails/blob/a3b1105ada3da64acfa3843b164b14b734456a50/activesupport/lib/active_support/core_ext/hash/keys.rb#L84
-  def self.symbolize_keys(hash)
-    raise 'symbolize_keys requires a hash' unless hash.is_a? Hash
-    result = {}
-    hash.each do |key, value|
-      key = key.to_sym rescue key # rubocop:disable Style/RescueModifier
-      result[key] = value.is_a?(Hash) ? symbolize_keys(value) : value
-    end
-    result
   end
 
   # This method is intended to work with page objects that share

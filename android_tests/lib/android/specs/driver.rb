@@ -36,12 +36,12 @@ describe 'driver' do
 
     t 'verify Appium::Driver::Capabilities.init_caps_for_appium' do
       expected_app = File.absolute_path('../test_apps/api.apk')
-      caps = ::Appium::Driver::Capabilities.init_caps_for_appium(platformName: 'Android',
-                                                                 app:          expected_app,
-                                                                 appPackage:   'io.appium.android.apis',
-                                                                 appActivity:  '.ApiDemos',
-                                                                 deviceName:   'Nexus 7',
-                                                                 some_capability: 'some_capability')
+      caps = ::Appium::Core::Driver::Capabilities.init_caps_for_appium(platformName: 'Android',
+                                                                       app:          expected_app,
+                                                                       appPackage:   'io.appium.android.apis',
+                                                                       appActivity:  '.ApiDemos',
+                                                                       deviceName:   'Nexus 7',
+                                                                       some_capability: 'some_capability')
       caps_with_json = JSON.parse(caps.to_json)
       caps_with_json['platformName'].must_equal 'Android'
       caps_with_json['app'].must_equal expected_app

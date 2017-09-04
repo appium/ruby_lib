@@ -5,6 +5,10 @@ describe 'ios/patch' do
     go_to_textfields
   end
 
+  def after_last
+    leave_textfields
+  end
+
   t 'before_first' do
     before_first
   end
@@ -21,10 +25,6 @@ describe 'ios/patch' do
     ele.clear
     ele.type 'ok'
     ele.text.must_equal 'ok'
-  end
-
-  def after_last
-    leave_textfields
   end
 
   t 'after_last' do

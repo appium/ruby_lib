@@ -28,7 +28,8 @@ describe 'common/command.rb' do
                                         :get_performance_data,
                                         :get_system_bars,
                                         :get_display_density,
-                                        :is_keyboard_shown])
+                                        :is_keyboard_shown,
+                                        :current_context])
   end
 
   t 'check all command with arg' do

@@ -1,32 +1,19 @@
 module Appium
-  class Driver
+  module Core
     module Commands
       COMMAND_NO_ARG = {
-        # common
+        # core
         shake:                      [:post, 'session/:session_id/appium/device/shake'.freeze],
         launch_app:                 [:post, 'session/:session_id/appium/app/launch'.freeze],
         close_app:                  [:post, 'session/:session_id/appium/app/close'.freeze],
         reset:                      [:post, 'session/:session_id/appium/app/reset'.freeze],
         device_locked?:             [:post, 'session/:session_id/appium/device/is_locked'.freeze],
-
-        # Android
-        open_notifications:         [:post, 'session/:session_id/appium/device/open_notifications'.freeze],
-        toggle_airplane_mode:       [:post, 'session/:session_id/appium/device/toggle_airplane_mode'.freeze],
-        current_activity:           [:get,  'session/:session_id/appium/device/current_activity'.freeze],
-        current_package:            [:get,  'session/:session_id/appium/device/current_package'.freeze],
-        get_system_bars:            [:get,  'session/:session_id/appium/device/system_bars'.freeze],
-        get_display_density:        [:get,  'session/:session_id/appium/device/display_density'.freeze],
-        is_keyboard_shown:          [:get,  'session/:session_id/appium/device/is_keyboard_shown'.freeze],
-        get_network_connection:     [:get,  'session/:session_id/network_connection'.freeze],
-        get_performance_data_types: [:post, 'session/:session_id/appium/performanceData/types'.freeze],
-
-        # iOS
         device_time:                [:get,  'session/:session_id/appium/device/system_time'.freeze],
         current_context:            [:get,  'session/:session_id/context'.freeze]
       }.freeze
 
       COMMAND = {
-        # common
+        # core
         available_contexts:         [:get,  'session/:session_id/contexts'.freeze],
         set_context:                [:post, 'session/:session_id/context'.freeze],
         app_strings:                [:post, 'session/:session_id/appium/app/strings'.freeze],
@@ -45,22 +32,7 @@ module Appium
         get_settings:               [:get,  'session/:session_id/appium/settings'.freeze],
         update_settings:            [:post, 'session/:session_id/appium/settings'.freeze],
         touch_actions:              [:post, 'session/:session_id/touch/perform'.freeze],
-        multi_touch:                [:post, 'session/:session_id/touch/multi/perform'.freeze],
-
-        # Android
-        start_activity:             [:post, 'session/:session_id/appium/device/start_activity'.freeze],
-        end_coverage:               [:post, 'session/:session_id/appium/app/end_test_coverage'.freeze],
-        set_network_connection:     [:post, 'session/:session_id/network_connection'.freeze],
-        get_performance_data:       [:post, 'session/:session_id/appium/getPerformanceData'.freeze],
-        get_ime_available_engines:  [:get,  'session/:session_id/ime/available_engines'.freeze],
-        get_ime_active_engine:      [:get,  'session/:session_id/ime/active_engine'.freeze],
-        get_ime_activated:          [:get,  'session/:session_id/ime/activated'.freeze],
-        ime_deactivate:             [:post, 'session/:session_id/ime/deactivate'.freeze],
-        ime_activate:               [:post, 'session/:session_id/ime/activate'.freeze],
-
-        # iOS
-        touch_id:                   [:post, 'session/:session_id/appium/simulator/touch_id'.freeze],
-        toggle_touch_id_enrollment: [:post, 'session/:session_id/appium/simulator/toggle_touch_id_enrollment'.freeze]
+        multi_touch:                [:post, 'session/:session_id/touch/multi/perform'.freeze]
       }.merge(COMMAND_NO_ARG).freeze
 
       COMMANDS_EXTEND_OSS = COMMAND.merge(::Selenium::WebDriver::Remote::OSS::Bridge::COMMANDS).freeze
