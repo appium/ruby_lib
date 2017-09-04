@@ -13,6 +13,7 @@ require_relative 'common/search_context'
 require_relative 'common/wait'
 require_relative 'common/patch'
 require_relative 'common/log'
+require_relative 'common/helper'
 
 # core
 require_relative 'core/core'

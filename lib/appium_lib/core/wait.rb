@@ -1,6 +1,8 @@
 module Appium
   module Core
     class Wait < ::Selenium::WebDriver::Wait
+      require 'timeout' # for wait
+
       def initialize(opts = {})
         valid_keys = [:timeout, :interval, :message, :ignore, :return_if_true]
         invalid_keys = []
