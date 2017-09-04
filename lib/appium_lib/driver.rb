@@ -111,6 +111,7 @@ module Appium
     # @param global_driver [Bool] A bool require global driver before initialize.
     # @return [Driver]
     def initialize(opts = {}, global_driver = nil)
+      # TODO: set `global_driver = false` by default in the future.
       if global_driver.nil?
         warn '[DEPRECATION] Appium::Driver.new(opts) will not generate global driver by default.' \
                  'If you would like to generate the global driver dy default, ' \
