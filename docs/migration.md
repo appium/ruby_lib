@@ -1,3 +1,20 @@
+### Breaking Changes in 9.6.0
+Raise warning if users call `Appium::Driver.new(opts)`.
+
+- After
+
+```ruby
+Appium::Driver.new(opts).start_driver # Raise warning.
+Appium::Driver.new(opts, true).start_driver # $driver is defined.
+Appium::Driver.new(opts, false).start_driver # $driver isn't defined.
+```
+
+- Before
+
+```ruby
+Appium::Driver.new(opts).start_driver # $driver is defined.
+```
+
 ### Breaking Changes in 9.3.7
 change `@selenium_driver.find_element/s_with_appium` to `@selenium_driver.find_element/s`.
 ref: https://github.com/appium/ruby_lib/pull/532

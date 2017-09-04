@@ -79,7 +79,7 @@ module Appium
     #                wait_timeout: 30
     #              }
     #            }
-    #     Appium::Driver.new(opts).start_driver
+    #     Appium::Driver.new(opts, true).start_driver
     #
     #     # Start Android driver with global scope
     #     opts = {
@@ -92,7 +92,7 @@ module Appium
     #                wait_interval: 1
     #              }
     #            }
-    #     Appium::Driver.new(opts).start_driver
+    #     Appium::Driver.new(opts, true).start_driver
     #
     #     # Start iOS driver without global scope
     #     opts = {
@@ -528,14 +528,14 @@ module Appium
     # Calls @driver.find_elements_with_appium
     #
     # ```
-    # @driver = Appium::Driver.new()
+    # @driver = Appium::Driver.new(opts, false)
     # @driver.find_elements :predicate, yyy
     # ```
     #
     # If you call `Appium.promote_appium_methods`, you can call `find_elements` directly.
     #
     # ```
-    # @driver = Appium::Driver.new()
+    # @driver = Appium::Driver.new(opts, false)
     # @driver.find_elements :predicate, yyy
     # ```
     #
@@ -550,7 +550,7 @@ module Appium
     # Calls @driver.find_element
     #
     # ```
-    # @driver = Appium::Driver.new()
+    # @driver = Appium::Driver.new(opts, false)
     # @driver.find_element :accessibility_id, zzz
     # ```
     #
