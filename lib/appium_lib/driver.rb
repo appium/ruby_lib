@@ -217,6 +217,8 @@ module Appium
       when :windows
         # no windows specific extentions
         Appium::Logger.debug('windows')
+      else
+        Appium::Logger.warn('no device matched')
       end
     end
 
