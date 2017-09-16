@@ -94,7 +94,6 @@ module Appium
                                              url: server_url,
                                              listener: @listener)
 
-          # Load touch methods.
           @driver.extend Selenium::WebDriver::DriverExtensions::HasTouchScreen
           @driver.extend Selenium::WebDriver::DriverExtensions::HasLocation
           @driver.extend Selenium::WebDriver::DriverExtensions::HasNetworkConnection
