@@ -153,7 +153,7 @@ module Appium
       extend Appium::Common
 
       # Extend each driver's methods
-      extend_for(device: @core.device, driver: @core.automation_name)
+      extend_for(device: @core.device, automation_name: @core.automation_name)
 
       # apply os specific patches
       patch_webdriver_element
@@ -180,10 +180,10 @@ module Appium
     private
 
     # @private
-    def extend_for(device:, driver:)
+    def extend_for(device:, automation_name:)
       case device
       when :android
-        case driver
+        case automation_name
         when :uiautomator2
           extend Appium::Android
           extend Appium::Android::SearchContext
@@ -191,7 +191,7 @@ module Appium
           extend Appium::Android::Uiautomator2
           extend Appium::Android::Uiautomator2::Helper
           extend Appium::Android::Uiautomator2::Element
-        else
+        else # default and UiAutomator
           extend Appium::Android
           extend Appium::Android::SearchContext
           extend Appium::Android::Device
@@ -209,11 +209,14 @@ module Appium
           extend Appium::Ios::Xcuitest::Gesture
           extend Appium::Ios::Xcuitest::Device
           extend Appium::Ios::Xcuitest::Element
-        else
+        else # default and UIAutomation
           extend Appium::Ios
           extend Appium::Ios::SearchContext
           extend Appium::Ios::Device
         end
+      when :mac
+        # no Mac specific extentions
+        Appium::Logger.debug('mac')
       when :windows
         # no windows specific extentions
         Appium::Logger.debug('windows')
@@ -447,7 +450,7 @@ module Appium
 
       # if automation_name was nil before start_driver, then re-extend driver specific methods
       # to be able to extend correctly.
-      extend_for(device: @core.device, driver: @core.automation_name) if automation_name.nil?
+      extend_for(device: @core.device, automation_name: @core.automation_name) if automation_name.nil?
 
       @appium_server_status = appium_server_version
       check_server_version_xcuitest

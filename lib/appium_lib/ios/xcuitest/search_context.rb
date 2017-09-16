@@ -14,6 +14,10 @@ module Appium
           #    find_elements :class_chain, 'XCUIElementTypeWindow'
           #    # select the second last child of the second child window
           #    find_elements :class_chain, 'XCUIElementTypeWindow[2]/XCUIElementTypeAny[-2]'
+          #    # matching predicate. <code>`</code> is the mark.
+          #    find_elements :class_chain, 'XCUIElementTypeWindow[`visible = 1][`name = \"bla\"`]'
+          #    # containing predicate. `$` is the mark.
+          #    find_elements :class_chain, 'XCUIElementTypeWindow[$name = \"bla$$$bla\"$]'
           #   ```
           def extended(_mod)
             ::Appium::Driver::SearchContext::FINDERS[:class_chain] = '-ios class chain'
