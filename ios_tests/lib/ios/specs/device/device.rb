@@ -122,4 +122,10 @@ describe 'device/device' do
     data = pull_folder 'Library/AddressBook'
     data.length.must_be :>, 1
   end
+
+  t 'toggle_touch_id_enrollment' do
+    toggle_touch_id_enrollment.must_be_nil
+    toggle_touch_id_enrollment(true).must_be_nil
+    toggle_touch_id_enrollment(false).must_be_nil
+  end
 end

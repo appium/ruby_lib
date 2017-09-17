@@ -1,5 +1,3 @@
-require 'base64'
-
 module Appium
   module Ios
     module Xcuitest
