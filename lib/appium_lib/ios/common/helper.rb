@@ -12,6 +12,7 @@ module Appium
         _print_attr(type, page['name'], page['label'], page['value'], page['hint'], page['visible'])
       end
 
+      # @private
       def _print_attr(type, name, label, value, hint, visible) # rubocop:disable Metrics/ParameterLists
         if name == label && name == value
           puts type.to_s if name || label || value || hint || visible
@@ -81,10 +82,11 @@ module Appium
     # Gets the JSON source of window number
     # @return [JSON]
     def source_window(window_number = nil)
-      warn '[DEPRECATION] The argument window_number will be removed. Plesse remove window_number' unless window_number
+      warn '[DEPRECATION] source_window will be removed. Please use source instead.'
       get_source
     end
 
+    # @private
     # Prints parsed page source to console.
     #
     # example: page_window 0
@@ -92,8 +94,7 @@ module Appium
     # @param window_number [Integer] the int index of the target window
     # @return [void]
     def page_window(window_number = 0)
-      get_page source_window window_number
-      nil
+      warn '[DEPRECATION] page_window will be removed. Please use source instead.'
     end
 
     # Find by id
