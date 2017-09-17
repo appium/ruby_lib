@@ -155,9 +155,6 @@ module Appium
       # Extend each driver's methods
       extend_for(device: @core.device, automation_name: @core.automation_name)
 
-      # apply os specific patches
-      patch_webdriver_element
-
       # for command
       patch_remote_driver_core_commands(bridge: :oss)
       patch_remote_driver_core_commands(bridge: :w3c)
@@ -197,7 +194,7 @@ module Appium
           extend Appium::Android::Device
         end
       when :ios
-        case driver
+        case automation_name
         when :xcuitest
           extend Appium::Ios
           extend Appium::Ios::SearchContext
@@ -213,6 +210,7 @@ module Appium
           extend Appium::Ios
           extend Appium::Ios::SearchContext
           extend Appium::Ios::Device
+          patch_webdriver_element
         end
       when :mac
         # no Mac specific extentions

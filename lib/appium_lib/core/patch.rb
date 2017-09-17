@@ -20,6 +20,15 @@ module Appium
         attribute :name
       end
 
+      # Enable access to iOS accessibility label
+      # accessibility identifier is supported as 'name'
+      def label
+        attribute :label
+      end
+
+      # Alias for type
+      alias type send_keys
+
       # For use with mobile tap.
       #
       # ```ruby

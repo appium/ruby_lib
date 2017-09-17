@@ -6,12 +6,6 @@ module Appium
     # will trigger only when invoked.
     def patch_webdriver_element
       Selenium::WebDriver::Element.class_eval do
-        # Enable access to iOS accessibility label
-        # accessibility identifier is supported as 'name'
-        def label
-          attribute('label')
-        end
-
         # Cross platform way of entering text into a textfield
         def type(text, driver = $driver)
           driver.execute_script %(au.getElement('#{ref}').setValue('#{text}');)
