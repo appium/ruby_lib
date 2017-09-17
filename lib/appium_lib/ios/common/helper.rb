@@ -81,7 +81,7 @@ module Appium
 
     # Gets the JSON source of window number
     # @return [JSON]
-    def source_window(window_number = nil)
+    def source_window(_window_number = nil)
       warn '[DEPRECATION] source_window will be removed. Please use source instead.'
       get_source
     end
@@ -93,7 +93,7 @@ module Appium
     #
     # @param window_number [Integer] the int index of the target window
     # @return [void]
-    def page_window(window_number = 0)
+    def page_window(_window_number = 0)
       warn '[DEPRECATION] page_window will be removed. Please use source instead.'
     end
 
