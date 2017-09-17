@@ -13,10 +13,6 @@ describe 'ios/helper' do
     ios_password(2).must_equal 8226.chr('UTF-8') * 2
   end
 
-  t 'get_page' do
-    get_page # writes to std out
-  end
-
   t 'page' do
     page # writes to std out
   end
@@ -31,8 +27,8 @@ describe 'ios/helper' do
     id 'Buttons' # 'Various uses of UIButton'
   end
 
-  t 'ios_version' do
-    ios_version.wont_be_empty
+  t 'platform_version' do
+    platform_version.wont_be_empty
   end
 
   t 'tags_include' do

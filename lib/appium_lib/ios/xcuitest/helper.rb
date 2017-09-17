@@ -2,12 +2,6 @@ module Appium
   module Ios
     module Xcuitest
       module Helper
-        # Return the iOS version as an array of integers
-        # @return [Array<Integer>]
-        def ios_version
-          @driver.capabilities['platformVersion']
-        end
-
         # @private
         def string_attr_exact(class_name, attr, value)
           if attr == '*'

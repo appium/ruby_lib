@@ -145,6 +145,13 @@ module Appium
         {}
       end
 
+      # Return the platform version as an array of integers
+      # @return [Array<Integer>]
+      def platform_version
+        p_version = @driver.capabilities['platformVersion']
+        p_version.split('.').map(&:to_i)
+      end
+
       private
 
       # @private
