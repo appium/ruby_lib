@@ -16,6 +16,13 @@ module Appium
 
       # @!method toggle_touch_id_enrollment
       #   iOS Simulator only:  Toggle touch id enrollment on an iOS Simulator.
+      #   @param [Boolean] enabled Enable toggle touch id enrollment. Set true by default.
+      #   ```ruby
+      #   toggle_touch_id_enrollment       #=> Enable toggle enrolled
+      #   toggle_touch_id_enrollment true  #=> Enable toggle enrolled
+      #   toggle_touch_id_enrollment false #=> Disable toggle enrolled
+      #   ```
+      # toggle_touch_id_enrollment
       class << self
         def extended(_mod)
           ::Appium::Core::Device.extend_webdriver_with_forwardable
@@ -33,8 +40,8 @@ module Appium
 
           # TODO: TEST ME
           ::Appium::Core::Device.add_endpoint_method(:toggle_touch_id_enrollment) do
-            def toggle_touch_id_enrollment
-              execute :toggle_touch_id_enrollment, {}
+            def toggle_touch_id_enrollment(enabled = true)
+              execute :toggle_touch_id_enrollment, {}, enabled: enabled
             end
           end
         end
