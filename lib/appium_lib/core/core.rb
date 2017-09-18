@@ -1,13 +1,13 @@
 require_relative 'command'
-require_relative 'error'
 require_relative 'patch'
 require_relative 'search_context'
-require_relative 'wait'
 require_relative 'device'
 require_relative 'capabilities'
 require_relative 'driver'
 
+require_relative 'common/error'
 require_relative 'common/log'
+require_relative 'common/wait'
 
 require_relative 'element/window'
 
