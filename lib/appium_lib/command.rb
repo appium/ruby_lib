@@ -4,6 +4,7 @@ require_relative 'android/command'
 
 module Appium
   class Driver
+    # ref: https://github.com/appium/appium-base-driver/blob/master/lib/mjsonwp/routes.js
     module Commands
       COMMAND = {}.merge(::Appium::Core::Commands::COMMAND)
                   .merge(::Appium::Android::Commands::COMMAND)

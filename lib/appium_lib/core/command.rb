@@ -1,5 +1,6 @@
 module Appium
   module Core
+    # ref: https://github.com/appium/appium-base-driver/blob/master/lib/mjsonwp/routes.js
     module Commands
       COMMAND_NO_ARG = {
         shake:                      [:post, 'session/:session_id/appium/device/shake'.freeze],
