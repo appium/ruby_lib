@@ -145,6 +145,24 @@ module Appium
         {}
       end
 
+      # Return the platform version as an array of integers
+      # @return [Array<Integer>]
+      def platform_version
+        p_version = @driver.capabilities['platformVersion']
+        p_version.split('.').map(&:to_i)
+      end
+
+      # Takes a png screenshot and saves to the target path.
+      #
+      # Example: screenshot '/tmp/hi.png'
+      #
+      # @param png_save_path [String] the full path to save the png
+      # @return [nil]
+      def screenshot(png_save_path)
+        @driver.save_screenshot png_save_path
+        nil
+      end
+
       private
 
       # @private

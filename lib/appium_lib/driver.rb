@@ -155,9 +155,6 @@ module Appium
       # Extend each driver's methods
       extend_for(device: @core.device, automation_name: @core.automation_name)
 
-      # apply os specific patches
-      patch_webdriver_element
-
       # for command
       patch_remote_driver_core_commands(bridge: :oss)
       patch_remote_driver_core_commands(bridge: :w3c)
@@ -197,7 +194,7 @@ module Appium
           extend Appium::Android::Device
         end
       when :ios
-        case driver
+        case automation_name
         when :xcuitest
           extend Appium::Ios
           extend Appium::Ios::SearchContext
@@ -213,6 +210,7 @@ module Appium
           extend Appium::Ios
           extend Appium::Ios::SearchContext
           extend Appium::Ios::Device
+          patch_webdriver_element
         end
       when :mac
         # no Mac specific extentions
@@ -325,6 +323,18 @@ module Appium
       {}
     end
 
+    # Return the platform version as an array of integers
+    # @return [Array<Integer>]
+    def platform_version
+      @core.platform_version
+    end
+
+    # @private
+    def ios_version
+      warn '[DEPRECATION] ios_version will be removed. Please use platform_version instead.'
+      platform_version
+    end
+
     # Returns the client's version info
     #
     # ```ruby
@@ -399,8 +409,7 @@ module Appium
     # @param png_save_path [String] the full path to save the png
     # @return [nil]
     def screenshot(png_save_path)
-      @driver.save_screenshot png_save_path
-      nil
+      @core.screenshot png_save_path
     end
 
     # Quits the driver

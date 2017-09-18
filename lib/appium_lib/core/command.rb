@@ -2,7 +2,6 @@ module Appium
   module Core
     module Commands
       COMMAND_NO_ARG = {
-        # core
         shake:                      [:post, 'session/:session_id/appium/device/shake'.freeze],
         launch_app:                 [:post, 'session/:session_id/appium/app/launch'.freeze],
         close_app:                  [:post, 'session/:session_id/appium/app/close'.freeze],
@@ -13,7 +12,6 @@ module Appium
       }.freeze
 
       COMMAND = {
-        # core
         available_contexts:         [:get,  'session/:session_id/contexts'.freeze],
         set_context:                [:post, 'session/:session_id/context'.freeze],
         app_strings:                [:post, 'session/:session_id/appium/app/strings'.freeze],

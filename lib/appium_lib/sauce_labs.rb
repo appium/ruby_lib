@@ -15,8 +15,7 @@ module Appium
       @access_key = nil if !@access_key || (@access_key.is_a?(String) && @access_key.empty?)
 
       @endpoint   = appium_lib_opts.fetch :sauce_endpoint, ENV['SAUCE_ENDPOINT']
-      @endpoint   = 'ondemand.saucelabs.com:443/wd/hub' if
-          !@endpoint || (@endpoint.is_a?(String) && @endpoint.empty?)
+      @endpoint   = 'ondemand.saucelabs.com:443/wd/hub' if !@endpoint || (@endpoint.is_a?(String) && @endpoint.empty?)
     end
 
     def sauce_server_url?

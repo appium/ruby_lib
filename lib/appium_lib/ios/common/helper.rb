@@ -12,6 +12,7 @@ module Appium
         _print_attr(type, page['name'], page['label'], page['value'], page['hint'], page['visible'])
       end
 
+      # @private
       def _print_attr(type, name, label, value, hint, visible) # rubocop:disable Metrics/ParameterLists
         if name == label && name == value
           puts type.to_s if name || label || value || hint || visible
@@ -41,89 +42,6 @@ module Appium
     # @return [String] the returned string is of size length
     def ios_password(length = 1)
       8226.chr('UTF-8') * length
-    end
-
-    # Returns a string of interesting elements. iOS only.
-    #
-    # Defaults to inspecting the 1st windows source only.
-    # use get_page(get_source) for all window sources
-    #
-    # @option element [Object] the element to search. omit to search everything
-    # @option class_name [String,Symbol] the class name to filter on. case insensitive include match.
-    # @return [String]
-    # @deprecated
-    def get_page(element = source_window(0), class_name = nil)
-      warn '[DEPRECATION] get_page will be removed. Please use page or source instead.'
-
-      lazy_load_strings # populate @strings_xml
-      class_name = class_name.to_s.downcase
-
-      # @private
-      def empty(ele)
-        (ele['name'] || ele['label'] || ele['value']).nil?
-      end
-
-      # @private
-      def fix_space(s)
-        # if s is an int, we can't call .empty
-        return nil if s.nil? || (s.respond_to?(:empty) && s.empty?)
-        # ints don't respond to force encoding
-        # ensure we're converting to a string
-        unless s.respond_to? :force_encoding
-          s_s = s.to_s
-          return s_s.empty? ? nil : s_s
-        end
-        # char code 160 (name, label) vs 32 (value) will break comparison.
-        # convert string to binary and remove 160.
-        # \xC2\xA0
-        s = s.force_encoding('binary').gsub("\xC2\xA0".force_encoding('binary'), ' ') if s
-        s.empty? ? nil : s.force_encoding('UTF-8')
-      end
-
-      unless empty(element) || element['visible'] == false
-        name    = fix_space element['name']
-        label   = fix_space element['label']
-        value   = fix_space element['value']
-        hint    = fix_space element['hint']
-        visible = fix_space element['visible']
-        type    = fix_space element['type']
-
-        # if class_name is set, mark non-matches as invisible
-        visible = (type.downcase.include? class_name).to_s if class_name
-        if visible && visible == 'true'
-
-          UITestElementsPrinter.new._print_attr(type, name, label, value, hint, visible)
-
-          # there may be many ids with the same value.
-          # output all exact matches.
-          attributes = [name, label, value, hint].select { |attr| !attr.nil? }
-          partial    = {}
-          id_matches = @strings_xml.select do |key, val|
-            next if val.nil? || val.empty?
-            partial[key] = val if attributes.detect { |attr| attr.include?(val) }
-            attributes.detect { |attr| val == attr }
-          end
-
-          # If there are no exact matches, display partial matches.
-          id_matches = partial if id_matches.empty?
-
-          unless id_matches.empty?
-            match_str = ''
-            max_len   = id_matches.keys.max_by(&:length).length
-
-            # [0] = key, [1] = val
-            id_matches.each do |key, val|
-              arrow_space = ' ' * (max_len - key.length).to_i
-              match_str += ' ' * 7 + "#{key} #{arrow_space}=> #{val}\n"
-            end
-            puts "   id: #{match_str.strip}\n"
-          end
-        end
-      end
-
-      children = element['children']
-      children.each { |c| get_page c, class_name } if children
-      nil
     end
 
     # Prints a string of interesting elements to the console.
@@ -163,20 +81,20 @@ module Appium
 
     # Gets the JSON source of window number
     # @return [JSON]
-    def source_window(window_number = nil)
-      warn '[DEPRECATION] The argument window_number will be removed. Plesse remove window_number' unless window_number
+    def source_window(_window_number = nil)
+      warn '[DEPRECATION] source_window will be removed. Please use source instead.'
       get_source
     end
 
+    # @private
     # Prints parsed page source to console.
     #
     # example: page_window 0
     #
     # @param window_number [Integer] the int index of the target window
     # @return [void]
-    def page_window(window_number = 0)
-      get_page source_window window_number
-      nil
+    def page_window(_window_number = 0)
+      warn '[DEPRECATION] page_window will be removed. Please use source instead.'
     end
 
     # Find by id
@@ -184,13 +102,6 @@ module Appium
     # @return [Element]
     def id(id)
       find_element(:id, id)
-    end
-
-    # Return the iOS version as an array of integers
-    # @return [Array<Integer>]
-    def ios_version
-      ios_version = execute_script 'UIATarget.localTarget().systemVersion()'
-      ios_version.split('.').map(&:to_i)
     end
 
     # Get the element of type class_name at matching index.
