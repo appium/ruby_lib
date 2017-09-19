@@ -1,8 +1,8 @@
 module Appium
   module Android
+    # ref: https://github.com/appium/appium-base-driver/blob/master/lib/mjsonwp/routes.js
     module Commands
       COMMAND_NO_ARG = {
-          # Android
           open_notifications:         [:post, 'session/:session_id/appium/device/open_notifications'.freeze],
           toggle_airplane_mode:       [:post, 'session/:session_id/appium/device/toggle_airplane_mode'.freeze],
           current_activity:           [:get,  'session/:session_id/appium/device/current_activity'.freeze],
@@ -15,7 +15,6 @@ module Appium
       }.freeze
 
       COMMAND = {
-          # Android
           start_activity:             [:post, 'session/:session_id/appium/device/start_activity'.freeze],
           end_coverage:               [:post, 'session/:session_id/appium/app/end_test_coverage'.freeze],
           set_network_connection:     [:post, 'session/:session_id/network_connection'.freeze],
