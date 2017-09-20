@@ -16,6 +16,12 @@ require_relative 'xcuitest'
 
 module Appium
   module Ios
-    # iOS
+    class Bridge
+      def self.for(target)
+        target.extend Appium::Ios
+        target.extend Appium::Ios::SearchContext
+        target.extend Appium::Ios::Device
+      end
+    end
   end
 end

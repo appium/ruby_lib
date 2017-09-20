@@ -182,34 +182,16 @@ module Appium
       when :android
         case automation_name
         when :uiautomator2
-          extend Appium::Android
-          extend Appium::Android::SearchContext
-          extend Appium::Android::Device
-          extend Appium::Android::Uiautomator2
-          extend Appium::Android::Uiautomator2::Helper
-          extend Appium::Android::Uiautomator2::Element
+          ::Appium::Android::Uiautomator2::Bridge.for(self)
         else # default and UiAutomator
-          extend Appium::Android
-          extend Appium::Android::SearchContext
-          extend Appium::Android::Device
+          ::Appium::Android::Bridge.for(self)
         end
       when :ios
         case automation_name
         when :xcuitest
-          extend Appium::Ios
-          extend Appium::Ios::SearchContext
-          extend Appium::Ios::Device
-          extend Appium::Ios::Xcuitest
-          extend Appium::Ios::Xcuitest::SearchContext
-          extend Appium::Ios::Xcuitest::Command
-          extend Appium::Ios::Xcuitest::Helper
-          extend Appium::Ios::Xcuitest::Gesture
-          extend Appium::Ios::Xcuitest::Device
-          extend Appium::Ios::Xcuitest::Element
+          ::Appium::Ios::Xcuitest::Bridge.for(self)
         else # default and UIAutomation
-          extend Appium::Ios
-          extend Appium::Ios::SearchContext
-          extend Appium::Ios::Device
+          ::Appium::Ios::Bridge.for(self)
           patch_webdriver_element
         end
       when :mac
