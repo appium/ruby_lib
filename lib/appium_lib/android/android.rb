@@ -15,6 +15,12 @@ require_relative 'uiautomator2'
 
 module Appium
   module Android
-    # Android
+    class Bridge
+      def self.for(target)
+        target.extend Appium::Android
+        target.extend Appium::Android::SearchContext
+        target.extend Appium::Android::Device
+      end
+    end
   end
 end
