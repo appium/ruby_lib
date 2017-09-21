@@ -1,5 +1,4 @@
 require 'rubygems'
-require 'ap'
 require 'selenium-webdriver'
 require 'nokogiri'
 

@@ -35,6 +35,47 @@ module Appium
       # instance of AbstractEventListener for logging support
       attr_reader :listener
 
+
+      # @private
+      # @see Appium::Core.for
+      #
+      # @return [Driver]
+      #
+      def self.for(opts = {})
+        driver_core = new(opts)
+
+        device = driver_core.device
+        automation_name = driver_core.automation_name
+
+        case device
+        when :android
+          case automation_name
+          when :uiautomator2
+            # Android::Uiautomator2::Driver.new(opts)
+          else # default and UiAutomator
+            # Android::Driver.new(opts)
+          end
+        when :ios
+          case automation_name
+          when :xcuitest
+            # Ios::Xcuitest::Driver.new(opts)
+          else # default and UIAutomation
+            # Ios::Driver.new(opts)
+          end
+        when :mac
+          # no Mac specific extentions
+          Appium::Logger.debug('mac')
+        when :windows
+          # no windows specific extentions
+          Appium::Logger.debug('windows')
+        else
+          Appium::Logger.warn('no device matched')
+        end
+
+        driver_core
+      end
+
+      # @private
       def initialize(opts = {})
         opts = Appium.symbolize_keys opts
         @caps = get_caps(opts)
@@ -45,6 +86,12 @@ module Appium
         set_automation_name
 
         self
+      end
+
+      # @private
+      def extend_for(target)
+        target.extend Appium::Core
+        target.extend Appium::Core::Device
       end
 
       # Creates a new global driver and quits the old one if it exists.
@@ -167,7 +214,7 @@ module Appium
 
       # @private
       def get_caps(opts)
-        Core::Driver::Capabilities.init_caps_for_appium(opts[:caps] || {})
+        Core::Driver::Capabilities.create_capabilities(opts[:caps] || {})
       end
 
       # @private

@@ -124,7 +124,7 @@ module Appium
       end
       raise 'opts must be a hash' unless opts.is_a? Hash
 
-      @core = Appium::Core::Driver.new(opts)
+      @core = Appium::Core.for(opts)
 
       opts = Appium.symbolize_keys opts
       appium_lib_opts = opts[:appium_lib] || {}
@@ -148,8 +148,7 @@ module Appium
       set_sauce_related_values(appium_lib_opts)
 
       # Extend core methods
-      extend Appium::Core
-      extend Appium::Core::Device
+      @core.extend_for(self)
       extend Appium::Common
 
       # Extend each driver's methods

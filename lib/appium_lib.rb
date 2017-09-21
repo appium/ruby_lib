@@ -7,5 +7,4 @@ require 'forwardable' unless defined? Forwardable
 # Init global driver
 $driver = nil
 
-require_relative 'appium_lib/core/logger'
 require_relative 'appium_lib/appium'
