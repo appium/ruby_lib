@@ -1,4 +1,3 @@
-require_relative 'search_context'
 require_relative 'command'
 require_relative 'device'
 
@@ -19,7 +18,6 @@ module Appium
     class Bridge
       def self.for(target)
         target.extend Appium::Ios
-        target.extend Appium::Ios::SearchContext
         target.extend Appium::Ios::Device
       end
     end

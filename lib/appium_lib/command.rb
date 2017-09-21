@@ -1,4 +1,4 @@
-require_relative 'core/command'
+require_relative 'core/common/command'
 require_relative 'ios/command'
 require_relative 'android/command'
 

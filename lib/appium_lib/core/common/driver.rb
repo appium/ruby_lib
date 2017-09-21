@@ -42,37 +42,7 @@ module Appium
       # @return [Driver]
       #
       def self.for(opts = {})
-        driver_core = new(opts)
-
-        device = driver_core.device
-        automation_name = driver_core.automation_name
-
-        case device
-        when :android
-          case automation_name
-          when :uiautomator2
-            # Android::Uiautomator2::Driver.new(opts)
-          else # default and UiAutomator
-            # Android::Driver.new(opts)
-          end
-        when :ios
-          case automation_name
-          when :xcuitest
-            # Ios::Xcuitest::Driver.new(opts)
-          else # default and UIAutomation
-            # Ios::Driver.new(opts)
-          end
-        when :mac
-          # no Mac specific extentions
-          Appium::Logger.debug('mac')
-        when :windows
-          # no windows specific extentions
-          Appium::Logger.debug('windows')
-        else
-          Appium::Logger.warn('no device matched')
-        end
-
-        driver_core
+        new(opts)
       end
 
       # @private
@@ -88,10 +58,46 @@ module Appium
         self
       end
 
-      # @private
       def extend_for(target)
         target.extend Appium::Core
         target.extend Appium::Core::Device
+
+        device = @device
+        automation_name = @automation_name
+
+        case device
+        when :android
+          case automation_name
+          when :uiautomator2
+            require_relative '../android'
+            require_relative '../android_uiautomator2'
+            target.extend Core::Android::SearchContext
+          else # default and UiAutomator
+            require_relative '../android'
+            target.extend Core::Android::SearchContext
+          end
+        when :ios
+          case automation_name
+          when :xcuitest
+            require_relative '../ios'
+            require_relative '../ios_xcuitest'
+            target.extend Core::Ios::SearchContext
+            target.extend Core::Ios::Xcuitest::SearchContext
+          else # default and UIAutomation
+            require_relative '../ios'
+            target.extend Core::Ios::SearchContext
+          end
+        when :mac
+          # no Mac specific extentions
+          Appium::Logger.debug('mac')
+        when :windows
+          # no windows specific extentions
+          Appium::Logger.debug('windows')
+        else
+          Appium::Logger.warn('no device matched')
+        end
+
+        target
       end
 
       # Creates a new global driver and quits the old one if it exists.

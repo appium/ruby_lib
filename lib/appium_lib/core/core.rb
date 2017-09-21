@@ -1,11 +1,8 @@
 require 'selenium-webdriver'
 
-require_relative 'command'
 require_relative 'common'
 require_relative 'patch'
-require_relative 'search_context'
 require_relative 'device'
-require_relative 'capabilities'
 
 require_relative 'element/window'
 

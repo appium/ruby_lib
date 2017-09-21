@@ -20,7 +20,7 @@ module Appium
           #    find_elements :class_chain, 'XCUIElementTypeWindow[$name = \"bla$$$bla\"$]'
           #   ```
           def extended(_mod)
-            ::Appium::Driver::SearchContext::FINDERS[:class_chain] = '-ios class chain'
+            # ::Appium::Driver::SearchContext::FINDERS[:class_chain] = '-ios class chain'
           end
         end
       end
