@@ -45,7 +45,7 @@ module Appium
           when :oss
             CoreBridge.new(capabilities, bridge.session_id, opts)
           when :w3c
-            CoreBridge.new(capabilities, bridge.session_id, opts)
+            CoreBridgeW3C.new(capabilities, bridge.session_id, opts)
           else
             raise WebDriverError, 'cannot understand dialect'
           end
@@ -55,6 +55,17 @@ module Appium
       class CoreBridge < ::Selenium::WebDriver::Remote::OSS::Bridge
         def commands(command)
           ::Appium::Core::Commands::COMMANDS_EXTEND_OSS[command]
+        end
+      end
+
+      class CoreBridgeW3C < ::Selenium::WebDriver::Remote::W3C::Bridge
+        def commands(command)
+          case command
+          when :status, :is_element_displayed
+            ::Appium::Core::Commands::COMMANDS_EXTEND_OSS[command]
+          else
+            ::Appium::Core::Commands::COMMANDS_EXTEND_W3C[command]
+          end
         end
       end
     end
