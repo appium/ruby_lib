@@ -1,6 +1,10 @@
+require_relative 'search_context'
+
 module Appium
   module Core
     class Driver
+      include ::Appium::Core::SearchContext
+
       # Selenium webdriver capabilities
       attr_reader :caps
       # Custom URL for the selenium server
@@ -58,12 +62,9 @@ module Appium
         self
       end
 
-      def extend_for(target)
+      def extend_for(device:, automation_name:, target:)
         target.extend Appium::Core
         target.extend Appium::Core::Device
-
-        device = @device
-        automation_name = @automation_name
 
         case device
         when :android
@@ -71,21 +72,21 @@ module Appium
           when :uiautomator2
             require_relative '../android'
             require_relative '../android_uiautomator2'
-            target.extend Core::Android::SearchContext
+            Core::Android::SearchContext.extend
           else # default and UiAutomator
             require_relative '../android'
-            target.extend Core::Android::SearchContext
+            Core::Android::SearchContext.extend
           end
         when :ios
           case automation_name
           when :xcuitest
             require_relative '../ios'
             require_relative '../ios_xcuitest'
-            target.extend Core::Ios::SearchContext
-            target.extend Core::Ios::Xcuitest::SearchContext
+            Core::Ios::SearchContext.extend
+            Core::Ios::Xcuitest::SearchContext.extend
           else # default and UIAutomation
             require_relative '../ios'
-            target.extend Core::Ios::SearchContext
+            Core::Ios::SearchContext.extend
           end
         when :mac
           # no Mac specific extentions

@@ -332,6 +332,7 @@ module Appium
         #    find_elements :accessibility_id, 'Animation'
         #   ```
         def extend_search_contexts
+          # TODO: remove this patch
           Selenium::WebDriver::SearchContext.class_eval do
             def find_element(*args)
               how, what = extract_args(args)

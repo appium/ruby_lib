@@ -148,7 +148,7 @@ module Appium
       set_sauce_related_values(appium_lib_opts)
 
       # Extend core methods
-      @core.extend_for(self)
+      @core.extend_for(device: @appium_device, automation_name: @automation_name, target: self)
       extend Appium::Common
 
       # Extend each driver's methods
