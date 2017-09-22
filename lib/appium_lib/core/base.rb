@@ -1,5 +1,7 @@
 require_relative 'common/search_context'
 
+# TODO: should clean
+
 module Appium
   module Core
     class Base

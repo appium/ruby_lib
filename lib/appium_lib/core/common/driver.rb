@@ -67,11 +67,10 @@ module Appium
           when :uiautomator2
             require_relative '../android'
             require_relative '../android_uiautomator2'
-            Core::Android::SearchContext.extend
           else # default and UiAutomator
             require_relative '../android'
-            Core::Android::SearchContext.extend
           end
+          Core::Android::SearchContext.extend
         when :ios
           case automation_name
           when :xcuitest

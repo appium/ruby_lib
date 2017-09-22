@@ -25,7 +25,7 @@ module Appium
         def extended(_mod)
           ::Appium::Core::Device.extend_webdriver_with_forwardable
 
-          ::Appium::Ios::Commands::COMMAND_NO_ARG.each_key do |method|
+          ::Appium::Core::Commands::COMMAND_NO_ARG_IOS.each_key do |method|
             ::Appium::Core::Device.add_endpoint_method method
           end
 
