@@ -295,16 +295,16 @@ module Appium
 
         # @private
         def extend_webdriver_with_forwardable
-          return if Selenium::WebDriver::Driver.is_a? Forwardable
-          Selenium::WebDriver::Driver.class_eval do
+          return if ::Appium::Core::Base::Driver.is_a? Forwardable
+          ::Appium::Core::Base::Driver.class_eval do
             extend Forwardable
           end
         end
 
         # @private
         def delegate_driver_method(method)
-          return if Selenium::WebDriver::Driver.method_defined? method
-          Selenium::WebDriver::Driver.class_eval { def_delegator :@bridge, method }
+          return if ::Appium::Core::Base::Driver.method_defined? method
+          ::Appium::Core::Base::Driver.class_eval { def_delegator :@bridge, method }
         end
 
         # @private
@@ -314,11 +314,7 @@ module Appium
 
         # @private
         def create_bridge_command(method)
-          Selenium::WebDriver::Remote::OSS::Bridge.class_eval do
-            block_given? ? class_eval(&Proc.new) : define_method(method) { execute method }
-          end
-
-          Selenium::WebDriver::Remote::W3C::Bridge.class_eval do
+          ::Appium::Core::Base::CoreBridge.class_eval do
             block_given? ? class_eval(&Proc.new) : define_method(method) { execute method }
           end
         end

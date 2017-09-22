@@ -4,12 +4,10 @@ require 'nokogiri'
 
 # base
 require_relative 'driver'
-require_relative 'command'
 require_relative 'sauce_labs'
 
 # common
 require_relative 'common/wait'
-require_relative 'common/patch'
 require_relative 'common/log'
 require_relative 'common/helper'
 

@@ -66,15 +66,9 @@ module Appium
 end # module Appium
 
 # Requires from lib/selenium/webdriver/remote.rb
-require 'selenium/webdriver/remote/capabilities'
-require 'selenium/webdriver/remote/w3c/capabilities'
 require 'selenium/webdriver/remote/bridge'
-require 'selenium/webdriver/remote/oss/bridge'
-require 'selenium/webdriver/remote/w3c/bridge'
 require 'selenium/webdriver/remote/server_error'
 require 'selenium/webdriver/remote/response'
-require 'selenium/webdriver/remote/oss/commands'
-require 'selenium/webdriver/remote/w3c/commands'
 require 'selenium/webdriver/remote/http/common'
 require 'selenium/webdriver/remote/http/default'
 
@@ -173,27 +167,4 @@ end
 class Selenium::WebDriver::Remote::Http::Common # rubocop:disable Style/ClassAndModuleChildren
   remove_const :DEFAULT_HEADERS if defined? DEFAULT_HEADERS
   DEFAULT_HEADERS = { 'Accept' => CONTENT_TYPE, 'User-Agent' => "appium/ruby_lib/#{::Appium::VERSION}" }.freeze
-end
-
-# TODO: Should consider here if we define for core commands, not monkey patch
-def patch_remote_driver_core_commands(bridge:)
-  case bridge
-  when :oss
-    Selenium::WebDriver::Remote::OSS::Bridge.class_eval do
-      def commands(command)
-        ::Appium::Core::Commands::COMMANDS_EXTEND_OSS[command]
-      end
-    end
-  when :w3c
-    Selenium::WebDriver::Remote::W3C::Bridge.class_eval do
-      def commands(command)
-        case command
-        when :status, :is_element_displayed
-          ::Appium::Core::Commands::COMMANDS_EXTEND_OSS[command]
-        else
-          ::Appium::Core::Commands::COMMANDS_EXTEND_W3C[command]
-        end
-      end
-    end
-  end
 end

@@ -1,10 +1,6 @@
-require_relative 'search_context'
-
 module Appium
   module Core
     class Driver
-      include ::Appium::Core::SearchContext
-
       # Selenium webdriver capabilities
       attr_reader :caps
       # Custom URL for the selenium server
@@ -38,7 +34,6 @@ module Appium
       attr_reader :http_client
       # instance of AbstractEventListener for logging support
       attr_reader :listener
-
 
       # @private
       # @see Appium::Core.for
@@ -142,15 +137,10 @@ module Appium
 
         begin
           # included https://github.com/SeleniumHQ/selenium/blob/43f8b3f66e7e01124eff6a5805269ee441f65707/rb/lib/selenium/webdriver/remote/driver.rb#L29
-          @driver =  Selenium::WebDriver.for(:remote,
-                                             http_client: @http_client,
-                                             desired_capabilities: @caps,
-                                             url: server_url,
-                                             listener: @listener)
-
-          @driver.extend Selenium::WebDriver::DriverExtensions::HasTouchScreen
-          @driver.extend Selenium::WebDriver::DriverExtensions::HasLocation
-          @driver.extend Selenium::WebDriver::DriverExtensions::HasNetworkConnection
+          @driver = ::Appium::Core::Base::Driver.new(http_client: @http_client,
+                                                     desired_capabilities: @caps,
+                                                     url: server_url,
+                                                     listener: @listener)
 
           # export session
           write_session_id(@driver.session_id) if @export_session

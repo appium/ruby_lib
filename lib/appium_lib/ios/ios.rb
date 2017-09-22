@@ -1,4 +1,3 @@
-require_relative 'command'
 require_relative 'device'
 
 require_relative 'common/helper'

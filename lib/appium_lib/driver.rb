@@ -155,16 +155,12 @@ module Appium
       extend_for(device: @core.device, automation_name: @core.automation_name)
 
       # for command
-      patch_remote_driver_core_commands(bridge: :oss)
-      patch_remote_driver_core_commands(bridge: :w3c)
-      patch_remote_driver_commands(bridge: :oss) # override
-      patch_remote_driver_commands(bridge: :w3c) # override
 
       if @appium_debug
         Appium::Logger.ap_debug opts unless opts.empty?
         Appium::Logger.debug "Debug is: #{@appium_debug}"
         Appium::Logger.debug "Device is: #{@core.device}"
-        patch_webdriver_bridge
+        # patch_webdriver_bridge
       end
 
       # Save global reference to last created Appium driver for top level methods.

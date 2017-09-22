@@ -36,8 +36,6 @@ module Appium
         raise ArgumentError, "cannot find element by #{how.inspect}" unless by
         by
       end
-
-
     end
   end
 end
