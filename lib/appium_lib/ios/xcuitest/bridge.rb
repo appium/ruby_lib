@@ -11,7 +11,6 @@ module Appium
           target.extend Appium::Ios::Xcuitest::Command
           target.extend Appium::Ios::Xcuitest::Helper
           target.extend Appium::Ios::Xcuitest::Gesture
-          target.extend Appium::Ios::Xcuitest::Device
           target.extend Appium::Ios::Xcuitest::Element
         end
       end

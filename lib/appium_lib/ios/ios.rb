@@ -1,7 +1,4 @@
-require_relative 'device'
-
 require_relative 'common/helper'
-require_relative 'common/patch'
 require_relative 'common/errors'
 
 require_relative 'element/alert'
@@ -17,7 +14,6 @@ module Appium
     class Bridge
       def self.for(target)
         target.extend Appium::Ios
-        target.extend Appium::Ios::Device
       end
     end
   end

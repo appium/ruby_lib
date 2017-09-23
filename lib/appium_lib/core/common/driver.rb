@@ -71,6 +71,7 @@ module Appium
             require_relative '../android'
           end
           Core::Android::SearchContext.extend
+          target.extend Appium::Android::Device
         when :ios
           case automation_name
           when :xcuitest
@@ -78,9 +79,13 @@ module Appium
             require_relative '../ios_xcuitest'
             Core::Ios::SearchContext.extend
             Core::Ios::Xcuitest::SearchContext.extend
+            target.extend Appium::Ios::Device
+            target.extend Appium::Ios::Xcuitest::Device
           else # default and UIAutomation
             require_relative '../ios'
             Core::Ios::SearchContext.extend
+            target.extend Appium::Ios::Device
+            patch_webdriver_element
           end
         when :mac
           # no Mac specific extentions

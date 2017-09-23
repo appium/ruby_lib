@@ -186,7 +186,6 @@ module Appium
           ::Appium::Ios::Xcuitest::Bridge.for(self)
         else # default and UIAutomation
           ::Appium::Ios::Bridge.for(self)
-          patch_webdriver_element
         end
       when :mac
         # no Mac specific extentions
