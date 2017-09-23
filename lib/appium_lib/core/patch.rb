@@ -77,6 +77,7 @@ require 'selenium/webdriver/remote/http/default'
 #
 # Invaluable for debugging.
 def patch_webdriver_bridge
+  # TODO: add `type` in CoreBridge
   Selenium::WebDriver::Remote::Bridge.class_eval do
     # Code from lib/selenium/webdriver/remote/bridge.rb
 
@@ -145,6 +146,7 @@ end
 # rubocop:disable Style/ClassAndModuleChildren
 # rubocop:disable Style/AndOr
 class Selenium::WebDriver::Remote::Response
+  # TODO: re-consider this pert(if we can remove, I'll remove this patch.)
   # @private
   def error_message
     val = value
@@ -165,6 +167,7 @@ class Selenium::WebDriver::Remote::Response
 end
 
 class Selenium::WebDriver::Remote::Http::Common # rubocop:disable Style/ClassAndModuleChildren
+  # TODO: Use inherit and customise header in Core::Driver?
   remove_const :DEFAULT_HEADERS if defined? DEFAULT_HEADERS
   DEFAULT_HEADERS = { 'Accept' => CONTENT_TYPE, 'User-Agent' => "appium/ruby_lib/#{::Appium::VERSION}" }.freeze
 end
