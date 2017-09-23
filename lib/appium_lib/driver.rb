@@ -160,7 +160,6 @@ module Appium
         Appium::Logger.ap_debug opts unless opts.empty?
         Appium::Logger.debug "Debug is: #{@appium_debug}"
         Appium::Logger.debug "Device is: #{@core.device}"
-        patch_webdriver_bridge
       end
 
       # Save global reference to last created Appium driver for top level methods.
