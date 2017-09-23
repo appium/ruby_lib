@@ -280,7 +280,6 @@ module Appium
 
           add_touch_actions
           add_ime_actions
-          extend_search_contexts
         end
 
         # def extended
@@ -293,7 +292,7 @@ module Appium
           delegate_from_appium_driver method
         end
 
-        # @private
+        # @private CoreBridge
         def extend_webdriver_with_forwardable
           return if ::Appium::Core::Base::Driver.is_a? Forwardable
           ::Appium::Core::Base::Driver.class_eval do
@@ -317,45 +316,8 @@ module Appium
           ::Appium::Core::Base::CoreBridge.class_eval do
             block_given? ? class_eval(&Proc.new) : define_method(method) { execute method }
           end
-        end
-
-        # @!method find_element_with_appium
-        # @!method find_elements_with_appium
-        #
-        #   find_element/s_with_appium with their accessibility_id
-        #
-        #   ```ruby
-        #    find_elements :accessibility_id, 'Animation'
-        #   ```
-        def extend_search_contexts
-          # TODO: remove this patch
-          Selenium::WebDriver::SearchContext.class_eval do
-            def find_element(*args)
-              how, what = extract_args(args)
-              by = _set_by_from_finders(how)
-              begin
-                bridge.find_element_by by, what.to_s, ref
-              rescue Selenium::WebDriver::Error::TimeOutError
-                raise Selenium::WebDriver::Error::NoSuchElementError
-              end
-            end
-
-            def find_elements(*args)
-              how, what = extract_args(args)
-              by = _set_by_from_finders(how)
-              begin
-                bridge.find_elements_by by, what.to_s, ref
-              rescue Selenium::WebDriver::Error::TimeOutError
-                raise Selenium::WebDriver::Error::NoSuchElementError
-              end
-            end
-
-            def _set_by_from_finders(how)
-              finders = ::Appium::Core::SearchContext::FINDERS
-              by = finders[how.to_sym]
-              raise ArgumentError, "cannot find element by #{how.inspect}" unless by
-              by
-            end
+          ::Appium::Core::Base::CoreBridgeW3C.class_eval do
+            block_given? ? class_eval(&Proc.new) : define_method(method) { execute method }
           end
         end
 

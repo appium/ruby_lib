@@ -9,7 +9,23 @@ module Appium
         FINDERS.merge!(finders)
       end
 
-      # TODO: Move find_element from core/device to here
+      #
+      # Find the first element matching the given arguments
+      #
+      # @overload find_element(how, what)
+      #   @param [Symbol, String] how The method to find the element by
+      #   @param [String] what The locator to use
+      # @overload find_element(opts)
+      #   @param [Hash] opts Find options
+      #   @option opts [Symbol] :how Key named after the method to find the element by, containing the locator
+      # @return [Element]
+      #
+      # @raise [Error::NoSuchElementError] if the element doesn't exist
+      #
+      # @example Find element with accessibility id
+      #    find_elements :accessibility_id, 'Animation'
+      #    find_elements :accessibility_id, 'Animation'
+      #
       def find_element(*args)
         how, what = extract_args(args)
         by = _set_by_from_finders(how)
@@ -20,6 +36,11 @@ module Appium
         end
       end
 
+      #
+      # Find all elements matching the given arguments
+      #
+      # @see SearchContext#find_element
+      #
       def find_elements(*args)
         how, what = extract_args(args)
         by = _set_by_from_finders(how)
@@ -29,6 +50,8 @@ module Appium
           raise Selenium::WebDriver::Error::NoSuchElementError
         end
       end
+
+      private
 
       def _set_by_from_finders(how)
         finders = FINDERS

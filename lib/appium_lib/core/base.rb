@@ -52,12 +52,14 @@ module Appium
         end
       end
 
+      # TODO: implement bridge commands for Appium
       class CoreBridge < ::Selenium::WebDriver::Remote::OSS::Bridge
         def commands(command)
           ::Appium::Core::Commands::COMMANDS_EXTEND_OSS[command]
         end
       end
 
+      # TODO: implement bridge commands for Appium
       class CoreBridgeW3C < ::Selenium::WebDriver::Remote::W3C::Bridge
         def commands(command)
           case command
