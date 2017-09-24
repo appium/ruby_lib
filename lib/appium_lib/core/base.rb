@@ -25,7 +25,7 @@ module Appium
           end
           super(@bridge, listener: listener)
         end
-      end
+      end # class Driver
 
       class Bridge < ::Selenium::WebDriver::Remote::Bridge
         def self.handshake(**opts)
@@ -47,17 +47,17 @@ module Appium
           when :w3c
             CoreBridgeW3C.new(capabilities, bridge.session_id, opts)
           else
-            raise WebDriverError, 'cannot understand dialect'
+            raise CoreError, 'cannot understand dialect'
           end
         end
-      end
+      end # class Bridge
 
       # TODO: implement bridge commands for Appium
       class CoreBridge < ::Selenium::WebDriver::Remote::OSS::Bridge
         def commands(command)
           ::Appium::Core::Commands::COMMANDS_EXTEND_OSS[command]
         end
-      end
+      end # class CoreBridge
 
       # TODO: implement bridge commands for Appium
       class CoreBridgeW3C < ::Selenium::WebDriver::Remote::W3C::Bridge
@@ -69,7 +69,7 @@ module Appium
             ::Appium::Core::Commands::COMMANDS_EXTEND_W3C[command]
           end
         end
-      end
-    end
-  end
-end
+      end # class CoreBridgeW3C
+    end # class Base
+  end # module Core
+end # module Appium

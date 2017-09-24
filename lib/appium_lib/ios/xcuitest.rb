@@ -1,5 +1,4 @@
 require_relative 'xcuitest/element'
-require_relative 'xcuitest/gestures'
 require_relative 'xcuitest/command'
 require_relative 'xcuitest/helper'
 require_relative 'xcuitest/element'

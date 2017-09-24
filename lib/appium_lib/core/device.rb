@@ -284,6 +284,7 @@ module Appium
 
         # def extended
 
+        # TODO: move all method definition to CoreBridge and Core::Base::Driver
         # @private
         def add_endpoint_method(method)
           block_given? ? create_bridge_command(method, &Proc.new) : create_bridge_command(method)
