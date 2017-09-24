@@ -2,8 +2,7 @@ require 'selenium-webdriver'
 
 require_relative 'common'
 require_relative 'patch'
-require_relative 'device'
-require_relative 'base'
+require_relative 'driver'
 
 require_relative 'element/window'
 

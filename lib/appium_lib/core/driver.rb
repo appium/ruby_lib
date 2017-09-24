@@ -65,24 +65,24 @@ module Appium
         when :android
           case automation_name
           when :uiautomator2
-            require_relative '../android'
-            require_relative '../android_uiautomator2'
+            require_relative 'android'
+            require_relative 'android_uiautomator2'
           else # default and UiAutomator
-            require_relative '../android'
+            require_relative 'android'
           end
           Core::Android::SearchContext.extend
           target.extend Appium::Android::Device
         when :ios
           case automation_name
           when :xcuitest
-            require_relative '../ios'
-            require_relative '../ios_xcuitest'
+            require_relative 'ios'
+            require_relative 'ios_xcuitest'
             Core::Ios::SearchContext.extend
             Core::Ios::Xcuitest::SearchContext.extend
             target.extend Appium::Ios::Device
             target.extend Appium::Ios::Xcuitest::Device
           else # default and UIAutomation
-            require_relative '../ios'
+            require_relative 'ios'
             Core::Ios::SearchContext.extend
             target.extend Appium::Ios::Device
             patch_webdriver_element
@@ -215,7 +215,7 @@ module Appium
 
       # @private
       def get_caps(opts)
-        Core::Driver::Capabilities.create_capabilities(opts[:caps] || {})
+        Core::Base::Capabilities.create_capabilities(opts[:caps] || {})
       end
 
       # @private
