@@ -1,3 +1,5 @@
+require_relative 'base/command'
+
 module Appium
   module Core
     # ref: https://github.com/appium/appium-base-driver/blob/master/lib/mjsonwp/routes.js
