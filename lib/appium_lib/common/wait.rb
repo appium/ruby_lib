@@ -1,8 +1,8 @@
-require_relative '../core/common/wait'
+require_relative '../core/common/base/wait'
 
 module Appium
   module Common
-    class Wait < ::Appium::Core::Wait
+    class Wait < ::Appium::Core::Base::Wait
       def initialize(opts = {})
         super(opts)
       end

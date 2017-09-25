@@ -65,8 +65,8 @@ module Appium
       COMMANDS = {}.merge(COMMAND).merge(COMMAND_ANDROID).merge(COMMAND_IOS)
                    .merge(COMMAND_NO_ARG).merge(COMMAND_NO_ARG_ANDROID).merge(COMMAND_NO_ARG_IOS).freeze
 
-      COMMANDS_EXTEND_OSS = COMMANDS.merge(::Selenium::WebDriver::Remote::OSS::Bridge::COMMANDS).freeze
-      COMMANDS_EXTEND_W3C = COMMANDS.merge(::Selenium::WebDriver::Remote::W3C::Bridge::COMMANDS).freeze
+      COMMANDS_EXTEND_OSS = COMMANDS.merge(::Appium::Core::Base::Commands::OSS).freeze
+      COMMANDS_EXTEND_W3C = COMMANDS.merge(::Appium::Core::Base::Commands::W3C).freeze
     end
   end
 end

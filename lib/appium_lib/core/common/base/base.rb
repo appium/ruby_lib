@@ -1,4 +1,4 @@
-require_relative '../search_context'
+require_relative '../rch_context'
 
 module Appium
   module Core
@@ -11,7 +11,7 @@ module Appium
         include ::Selenium::WebDriver::DriverExtensions::HasRemoteStatus
         include ::Selenium::WebDriver::DriverExtensions::HasWebStorage
 
-        include ::Appium::Core::SearchContext
+        include ::Appium::Core::Base::SearchContext
 
         def initialize(opts = {})
           listener = opts.delete(:listener)

@@ -9,7 +9,7 @@ module Appium
         #    find_elements :uiautomator, 'new UiSelector().clickable(true)'
         #   ```
         def self.extend
-          ::Appium::Core::SearchContext.add_finders(uiautomator: '-android uiautomator')
+          ::Appium::Core::Base::SearchContext.add_finders(uiautomator: '-android uiautomator')
         end
       end # class << self
     end # module Ios

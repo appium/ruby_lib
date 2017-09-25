@@ -30,7 +30,7 @@ module Appium
       # @return [Integer]
       attr_reader :wait_interval
       # Return http client called in start_driver()
-      # @return [Selenium::WebDriver::Remote::Http::Default] the http client
+      # @return [Appium::Core::Base::Http::Default] the http client
       attr_reader :http_client
       # instance of AbstractEventListener for logging support
       attr_reader :listener
@@ -134,7 +134,7 @@ module Appium
         read_timeout = http_client_ops.delete(:read_timeout)
 
         http_client = http_client_ops.delete(:http_client)
-        @http_client ||= http_client ? http_client : Appium::Http::Default.new
+        @http_client ||= http_client ? http_client : Appium::Core::Base::Http::Default.new
 
         @http_client.open_timeout = open_timeout if open_timeout
         @http_client.read_timeout = read_timeout if read_timeout

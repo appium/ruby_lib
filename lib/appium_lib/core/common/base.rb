@@ -1,3 +1,7 @@
 require_relative 'base/base'
 require_relative 'base/bridge'
 require_relative 'base/capabilities'
+require_relative 'base/http_default'
+require_relative 'base/search_context'
+require_relative 'base/command'
+require_relative 'base/wait'

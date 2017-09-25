@@ -18,8 +18,8 @@ module Appium
         #    find_elements :predicate, 'wdValue == "SearchBar" AND isWDDivisible == 1'
         #   ```
         def self.extend
-          ::Appium::Core::SearchContext.add_finders(uiautomation: '-ios uiautomation')
-          ::Appium::Core::SearchContext.add_finders(predicate: '-ios predicate string')
+          ::Appium::Core::Base::SearchContext.add_finders(uiautomation: '-ios uiautomation')
+          ::Appium::Core::Base::SearchContext.add_finders(predicate: '-ios predicate string')
         end
       end # class << self
     end # module Ios

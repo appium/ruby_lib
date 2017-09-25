@@ -64,11 +64,3 @@ module Appium
     end
   end # module Core
 end # module Appium
-
-module Appium
-  module Http
-    class Default < Appium::Core::Http::Default
-      DEFAULT_HEADERS = { 'Accept' => CONTENT_TYPE, 'User-Agent' => "appium/ruby_lib/#{::Appium::VERSION}" }.freeze
-    end
-  end
-end
