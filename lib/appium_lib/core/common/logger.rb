@@ -1,4 +1,6 @@
+require 'forwardable'
 require 'logger'
+require 'ap'
 
 module Appium
   module Logger

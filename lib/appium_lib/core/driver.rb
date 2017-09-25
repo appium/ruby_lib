@@ -30,11 +30,21 @@ module Appium
       # @return [Integer]
       attr_reader :wait_interval
       # Return http client called in start_driver()
-      # @return [Selenium::WebDriver::Remote::Http::Default] the http client
+      # @return [Appium::Core::Base::Http::Default] the http client
       attr_reader :http_client
       # instance of AbstractEventListener for logging support
       attr_reader :listener
 
+      # @private
+      # @see Appium::Core.for
+      #
+      # @return [Driver]
+      #
+      def self.for(opts = {})
+        new(opts)
+      end
+
+      # @private
       def initialize(opts = {})
         opts = Appium.symbolize_keys opts
         @caps = get_caps(opts)
@@ -45,6 +55,49 @@ module Appium
         set_automation_name
 
         self
+      end
+
+      def extend_for(device:, automation_name:, target:)
+        target.extend Appium::Core
+        target.extend Appium::Core::Device
+
+        case device
+        when :android
+          case automation_name
+          when :uiautomator2
+            require_relative 'android'
+            require_relative 'android_uiautomator2'
+          else # default and UiAutomator
+            require_relative 'android'
+          end
+          Core::Android::SearchContext.extend
+          target.extend Appium::Android::Device
+        when :ios
+          case automation_name
+          when :xcuitest
+            require_relative 'ios'
+            require_relative 'ios_xcuitest'
+            Core::Ios::SearchContext.extend
+            Core::Ios::Xcuitest::SearchContext.extend
+            target.extend Appium::Ios::Device
+            target.extend Appium::Ios::Xcuitest::Device
+          else # default and UIAutomation
+            require_relative 'ios'
+            Core::Ios::SearchContext.extend
+            target.extend Appium::Ios::Device
+            patch_webdriver_element
+          end
+        when :mac
+          # no Mac specific extentions
+          Appium::Logger.debug('mac')
+        when :windows
+          # no windows specific extentions
+          Appium::Logger.debug('windows')
+        else
+          Appium::Logger.warn('no device matched')
+        end
+
+        target
       end
 
       # Creates a new global driver and quits the old one if it exists.
@@ -81,22 +134,17 @@ module Appium
         read_timeout = http_client_ops.delete(:read_timeout)
 
         http_client = http_client_ops.delete(:http_client)
-        @http_client ||= http_client ? http_client : Selenium::WebDriver::Remote::Http::Default.new
+        @http_client ||= http_client ? http_client : Appium::Core::Base::Http::Default.new
 
         @http_client.open_timeout = open_timeout if open_timeout
         @http_client.read_timeout = read_timeout if read_timeout
 
         begin
           # included https://github.com/SeleniumHQ/selenium/blob/43f8b3f66e7e01124eff6a5805269ee441f65707/rb/lib/selenium/webdriver/remote/driver.rb#L29
-          @driver =  Selenium::WebDriver.for(:remote,
-                                             http_client: @http_client,
-                                             desired_capabilities: @caps,
-                                             url: server_url,
-                                             listener: @listener)
-
-          @driver.extend Selenium::WebDriver::DriverExtensions::HasTouchScreen
-          @driver.extend Selenium::WebDriver::DriverExtensions::HasLocation
-          @driver.extend Selenium::WebDriver::DriverExtensions::HasNetworkConnection
+          @driver = ::Appium::Core::Base::Driver.new(http_client: @http_client,
+                                                     desired_capabilities: @caps,
+                                                     url: server_url,
+                                                     listener: @listener)
 
           # export session
           write_session_id(@driver.session_id) if @export_session
@@ -167,7 +215,7 @@ module Appium
 
       # @private
       def get_caps(opts)
-        Core::Driver::Capabilities.init_caps_for_appium(opts[:caps] || {})
+        Core::Base::Capabilities.create_capabilities(opts[:caps] || {})
       end
 
       # @private

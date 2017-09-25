@@ -1,13 +1,8 @@
-require_relative 'command'
-require_relative 'patch'
-require_relative 'search_context'
-require_relative 'device'
-require_relative 'capabilities'
-require_relative 'driver'
+require 'selenium-webdriver'
 
-require_relative 'common/error'
-require_relative 'common/log'
-require_relative 'common/wait'
+require_relative 'common'
+require_relative 'patch'
+require_relative 'driver'
 
 require_relative 'element/window'
 
@@ -24,5 +19,11 @@ module Appium
       result[key] = value.is_a?(Hash) ? symbolize_keys(value) : value
     end
     result
+  end
+
+  module Core
+    def self.for(*args)
+      Core::Driver.for(*args)
+    end
   end
 end

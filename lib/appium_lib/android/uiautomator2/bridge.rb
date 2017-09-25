@@ -6,8 +6,6 @@ module Appium
       class Bridge
         def self.for(target)
           target.extend Appium::Android
-          target.extend Appium::Android::SearchContext
-          target.extend Appium::Android::Device
           target.extend Appium::Android::Uiautomator2
           target.extend Appium::Android::Uiautomator2::Helper
           target.extend Appium::Android::Uiautomator2::Element

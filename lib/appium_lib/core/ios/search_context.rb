@@ -1,7 +1,7 @@
 module Appium
-  module Ios
-    module SearchContext
-      class << self
+  module Core
+    module Ios
+      module SearchContext
         # @!method uiautomation_find
         #   find_element/s can be used with a [UIAutomation command](https://developer.apple.com/library/ios/documentation/ToolsLanguages/Reference/UIAWindowClassReference/UIAWindow/UIAWindow.html#//apple_ref/doc/uid/TP40009930).
         #
@@ -17,11 +17,11 @@ module Appium
         #    find_elements :predicate, 'wdName == "Buttons"'
         #    find_elements :predicate, 'wdValue == "SearchBar" AND isWDDivisible == 1'
         #   ```
-        def extended(_mod)
-          ::Appium::Driver::SearchContext::FINDERS[:uiautomation] = '-ios uiautomation'
-          ::Appium::Driver::SearchContext::FINDERS[:predicate] = '-ios predicate string'
+        def self.extend
+          ::Appium::Core::Base::SearchContext.add_finders(uiautomation: '-ios uiautomation')
+          ::Appium::Core::Base::SearchContext.add_finders(predicate: '-ios predicate string')
         end
-    end
-    end # class << self
-  end # module Ios
+      end # class << self
+    end # module Ios
+  end # module Core
 end # module Appium

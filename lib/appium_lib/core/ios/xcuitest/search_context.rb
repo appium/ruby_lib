@@ -1,8 +1,8 @@
 module Appium
-  module Ios
-    module Xcuitest
-      module SearchContext
-        class << self
+  module Core
+    module Ios
+      module Xcuitest
+        module SearchContext
           # @!method ios_class_chain_find
           #   Only for XCUITest(WebDriverAgent)
           #   find_element/s can be used with a [class chain]( https://github.com/facebook/WebDriverAgent/wiki/Queries)
@@ -19,11 +19,11 @@ module Appium
           #    # containing predicate. `$` is the mark.
           #    find_elements :class_chain, 'XCUIElementTypeWindow[$name = \"bla$$$bla\"$]'
           #   ```
-          def extended(_mod)
-            ::Appium::Driver::SearchContext::FINDERS[:class_chain] = '-ios class chain'
+          def self.extend
+            ::Appium::Core::Base::SearchContext.add_finders(class_chain: '-ios class chain')
           end
         end
-      end
-    end # module Xcuitest
-  end # module Ios
+      end # class << self
+    end # module Ios
+  end # module Core
 end # module Appium

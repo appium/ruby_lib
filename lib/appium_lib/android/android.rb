@@ -1,7 +1,3 @@
-require_relative 'search_context'
-require_relative 'command'
-require_relative 'device'
-
 require_relative 'common/helper'
 
 require_relative 'element/alert'
@@ -18,8 +14,6 @@ module Appium
     class Bridge
       def self.for(target)
         target.extend Appium::Android
-        target.extend Appium::Android::SearchContext
-        target.extend Appium::Android::Device
       end
     end
   end

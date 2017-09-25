@@ -1,0 +1,6 @@
+require_relative 'common/logger'
+require_relative 'common/error'
+require_relative 'common/log'
+require_relative 'common/command'
+require_relative 'common/device'
+require_relative 'common/base'

@@ -124,7 +124,7 @@ module Appium
       end
       raise 'opts must be a hash' unless opts.is_a? Hash
 
-      @core = Appium::Core::Driver.new(opts)
+      @core = Appium::Core.for(opts)
 
       opts = Appium.symbolize_keys opts
       appium_lib_opts = opts[:appium_lib] || {}
@@ -148,24 +148,18 @@ module Appium
       set_sauce_related_values(appium_lib_opts)
 
       # Extend core methods
-      extend Appium::Core
-      extend Appium::Core::Device
+      @core.extend_for(device: @appium_device, automation_name: @automation_name, target: self)
       extend Appium::Common
 
       # Extend each driver's methods
       extend_for(device: @core.device, automation_name: @core.automation_name)
 
       # for command
-      patch_remote_driver_core_commands(bridge: :oss)
-      patch_remote_driver_core_commands(bridge: :w3c)
-      patch_remote_driver_commands(bridge: :oss) # override
-      patch_remote_driver_commands(bridge: :w3c) # override
 
       if @appium_debug
         Appium::Logger.ap_debug opts unless opts.empty?
         Appium::Logger.debug "Debug is: #{@appium_debug}"
         Appium::Logger.debug "Device is: #{@core.device}"
-        patch_webdriver_bridge
       end
 
       # Save global reference to last created Appium driver for top level methods.
@@ -192,7 +186,6 @@ module Appium
           ::Appium::Ios::Xcuitest::Bridge.for(self)
         else # default and UIAutomation
           ::Appium::Ios::Bridge.for(self)
-          patch_webdriver_element
         end
       when :mac
         # no Mac specific extentions

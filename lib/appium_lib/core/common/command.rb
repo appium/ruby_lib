@@ -12,7 +12,23 @@ module Appium
         current_context:            [:get,  'session/:session_id/context'.freeze]
       }.freeze
 
+      COMMAND_NO_ARG_ANDROID = {
+        open_notifications:         [:post, 'session/:session_id/appium/device/open_notifications'.freeze],
+        toggle_airplane_mode:       [:post, 'session/:session_id/appium/device/toggle_airplane_mode'.freeze],
+        current_activity:           [:get,  'session/:session_id/appium/device/current_activity'.freeze],
+        current_package:            [:get,  'session/:session_id/appium/device/current_package'.freeze],
+        get_system_bars:            [:get,  'session/:session_id/appium/device/system_bars'.freeze],
+        get_display_density:        [:get,  'session/:session_id/appium/device/display_density'.freeze],
+        is_keyboard_shown:          [:get,  'session/:session_id/appium/device/is_keyboard_shown'.freeze],
+        get_network_connection:     [:get,  'session/:session_id/network_connection'.freeze],
+        get_performance_data_types: [:post, 'session/:session_id/appium/performanceData/types'.freeze]
+      }.freeze
+
+      COMMAND_NO_ARG_IOS = {
+      }.freeze
+
       COMMAND = {
+        # common
         available_contexts:         [:get,  'session/:session_id/contexts'.freeze],
         set_context:                [:post, 'session/:session_id/context'.freeze],
         app_strings:                [:post, 'session/:session_id/appium/app/strings'.freeze],
@@ -32,10 +48,25 @@ module Appium
         update_settings:            [:post, 'session/:session_id/appium/settings'.freeze],
         touch_actions:              [:post, 'session/:session_id/touch/perform'.freeze],
         multi_touch:                [:post, 'session/:session_id/touch/multi/perform'.freeze]
-      }.merge(COMMAND_NO_ARG).freeze
+      }.freeze
 
-      COMMANDS_EXTEND_OSS = COMMAND.merge(::Selenium::WebDriver::Remote::OSS::Bridge::COMMANDS).freeze
-      COMMANDS_EXTEND_W3C = COMMAND.merge(::Selenium::WebDriver::Remote::W3C::Bridge::COMMANDS).freeze
+      COMMAND_ANDROID = {
+        start_activity:             [:post, 'session/:session_id/appium/device/start_activity'.freeze],
+        end_coverage:               [:post, 'session/:session_id/appium/app/end_test_coverage'.freeze],
+        set_network_connection:     [:post, 'session/:session_id/network_connection'.freeze],
+        get_performance_data:       [:post, 'session/:session_id/appium/getPerformanceData'.freeze]
+      }.freeze
+
+      COMMAND_IOS = {
+        touch_id:                   [:post, 'session/:session_id/appium/simulator/touch_id'.freeze],
+        toggle_touch_id_enrollment: [:post, 'session/:session_id/appium/simulator/toggle_touch_id_enrollment'.freeze]
+      }.freeze
+
+      COMMANDS = {}.merge(COMMAND).merge(COMMAND_ANDROID).merge(COMMAND_IOS)
+                   .merge(COMMAND_NO_ARG).merge(COMMAND_NO_ARG_ANDROID).merge(COMMAND_NO_ARG_IOS).freeze
+
+      COMMANDS_EXTEND_OSS = COMMANDS.merge(::Appium::Core::Base::Commands::OSS).freeze
+      COMMANDS_EXTEND_W3C = COMMANDS.merge(::Appium::Core::Base::Commands::W3C).freeze
     end
   end
 end

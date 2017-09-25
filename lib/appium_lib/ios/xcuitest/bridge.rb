@@ -6,14 +6,11 @@ module Appium
       class Bridge
         def self.for(target)
           target.extend Appium::Ios
-          target.extend Appium::Ios::SearchContext
           target.extend Appium::Ios::Device
           target.extend Appium::Ios::Xcuitest
-          target.extend Appium::Ios::Xcuitest::SearchContext
           target.extend Appium::Ios::Xcuitest::Command
           target.extend Appium::Ios::Xcuitest::Helper
           target.extend Appium::Ios::Xcuitest::Gesture
-          target.extend Appium::Ios::Xcuitest::Device
           target.extend Appium::Ios::Xcuitest::Element
         end
       end

@@ -280,11 +280,11 @@ module Appium
 
           add_touch_actions
           add_ime_actions
-          extend_search_contexts
         end
 
         # def extended
 
+        # TODO: move all method definition to CoreBridge and Core::Base::Driver
         # @private
         def add_endpoint_method(method)
           block_given? ? create_bridge_command(method, &Proc.new) : create_bridge_command(method)
@@ -293,18 +293,18 @@ module Appium
           delegate_from_appium_driver method
         end
 
-        # @private
+        # @private CoreBridge
         def extend_webdriver_with_forwardable
-          return if Selenium::WebDriver::Driver.is_a? Forwardable
-          Selenium::WebDriver::Driver.class_eval do
+          return if ::Appium::Core::Base::Driver.is_a? Forwardable
+          ::Appium::Core::Base::Driver.class_eval do
             extend Forwardable
           end
         end
 
         # @private
         def delegate_driver_method(method)
-          return if Selenium::WebDriver::Driver.method_defined? method
-          Selenium::WebDriver::Driver.class_eval { def_delegator :@bridge, method }
+          return if ::Appium::Core::Base::Driver.method_defined? method
+          ::Appium::Core::Base::Driver.class_eval { def_delegator :@bridge, method }
         end
 
         # @private
@@ -314,51 +314,11 @@ module Appium
 
         # @private
         def create_bridge_command(method)
-          Selenium::WebDriver::Remote::OSS::Bridge.class_eval do
+          ::Appium::Core::Base::CoreBridge.class_eval do
             block_given? ? class_eval(&Proc.new) : define_method(method) { execute method }
           end
-
-          Selenium::WebDriver::Remote::W3C::Bridge.class_eval do
+          ::Appium::Core::Base::CoreBridgeW3C.class_eval do
             block_given? ? class_eval(&Proc.new) : define_method(method) { execute method }
-          end
-        end
-
-        # @!method find_element_with_appium
-        # @!method find_elements_with_appium
-        #
-        #   find_element/s_with_appium with their accessibility_id
-        #
-        #   ```ruby
-        #    find_elements :accessibility_id, 'Animation'
-        #   ```
-        def extend_search_contexts
-          Selenium::WebDriver::SearchContext.class_eval do
-            def find_element(*args)
-              how, what = extract_args(args)
-              by = _set_by_from_finders(how)
-              begin
-                bridge.find_element_by by, what.to_s, ref
-              rescue Selenium::WebDriver::Error::TimeOutError
-                raise Selenium::WebDriver::Error::NoSuchElementError
-              end
-            end
-
-            def find_elements(*args)
-              how, what = extract_args(args)
-              by = _set_by_from_finders(how)
-              begin
-                bridge.find_elements_by by, what.to_s, ref
-              rescue Selenium::WebDriver::Error::TimeOutError
-                raise Selenium::WebDriver::Error::NoSuchElementError
-              end
-            end
-
-            def _set_by_from_finders(how)
-              finders = ::Appium::Driver::SearchContext::FINDERS
-              by = finders[how.to_sym]
-              raise ArgumentError, "cannot find element by #{how.inspect}" unless by
-              by
-            end
           end
         end
 
