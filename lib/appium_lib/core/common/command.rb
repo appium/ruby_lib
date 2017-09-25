@@ -13,15 +13,15 @@ module Appium
       }.freeze
 
       COMMAND_NO_ARG_ANDROID = {
-          open_notifications:         [:post, 'session/:session_id/appium/device/open_notifications'.freeze],
-          toggle_airplane_mode:       [:post, 'session/:session_id/appium/device/toggle_airplane_mode'.freeze],
-          current_activity:           [:get,  'session/:session_id/appium/device/current_activity'.freeze],
-          current_package:            [:get,  'session/:session_id/appium/device/current_package'.freeze],
-          get_system_bars:            [:get,  'session/:session_id/appium/device/system_bars'.freeze],
-          get_display_density:        [:get,  'session/:session_id/appium/device/display_density'.freeze],
-          is_keyboard_shown:          [:get,  'session/:session_id/appium/device/is_keyboard_shown'.freeze],
-          get_network_connection:     [:get,  'session/:session_id/network_connection'.freeze],
-          get_performance_data_types: [:post, 'session/:session_id/appium/performanceData/types'.freeze]
+        open_notifications:         [:post, 'session/:session_id/appium/device/open_notifications'.freeze],
+        toggle_airplane_mode:       [:post, 'session/:session_id/appium/device/toggle_airplane_mode'.freeze],
+        current_activity:           [:get,  'session/:session_id/appium/device/current_activity'.freeze],
+        current_package:            [:get,  'session/:session_id/appium/device/current_package'.freeze],
+        get_system_bars:            [:get,  'session/:session_id/appium/device/system_bars'.freeze],
+        get_display_density:        [:get,  'session/:session_id/appium/device/display_density'.freeze],
+        is_keyboard_shown:          [:get,  'session/:session_id/appium/device/is_keyboard_shown'.freeze],
+        get_network_connection:     [:get,  'session/:session_id/network_connection'.freeze],
+        get_performance_data_types: [:post, 'session/:session_id/appium/performanceData/types'.freeze]
       }.freeze
 
       COMMAND_NO_ARG_IOS = {
@@ -51,15 +51,15 @@ module Appium
       }.freeze
 
       COMMAND_ANDROID = {
-          start_activity:             [:post, 'session/:session_id/appium/device/start_activity'.freeze],
-          end_coverage:               [:post, 'session/:session_id/appium/app/end_test_coverage'.freeze],
-          set_network_connection:     [:post, 'session/:session_id/network_connection'.freeze],
-          get_performance_data:       [:post, 'session/:session_id/appium/getPerformanceData'.freeze]
+        start_activity:             [:post, 'session/:session_id/appium/device/start_activity'.freeze],
+        end_coverage:               [:post, 'session/:session_id/appium/app/end_test_coverage'.freeze],
+        set_network_connection:     [:post, 'session/:session_id/network_connection'.freeze],
+        get_performance_data:       [:post, 'session/:session_id/appium/getPerformanceData'.freeze]
       }.freeze
 
       COMMAND_IOS = {
-          touch_id:                   [:post, 'session/:session_id/appium/simulator/touch_id'.freeze],
-          toggle_touch_id_enrollment: [:post, 'session/:session_id/appium/simulator/toggle_touch_id_enrollment'.freeze]
+        touch_id:                   [:post, 'session/:session_id/appium/simulator/touch_id'.freeze],
+        toggle_touch_id_enrollment: [:post, 'session/:session_id/appium/simulator/toggle_touch_id_enrollment'.freeze]
       }.freeze
 
       COMMANDS = {}.merge(COMMAND).merge(COMMAND_ANDROID).merge(COMMAND_IOS)

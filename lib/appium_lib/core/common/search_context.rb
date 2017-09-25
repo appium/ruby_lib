@@ -1,7 +1,7 @@
 module Appium
   module Core
     module SearchContext
-      # include Selenium::WebDriver::SearchContext
+      # referenced: ::Selenium::WebDriver::SearchContext
 
       FINDERS = ::Selenium::WebDriver::SearchContext::FINDERS.merge(accessibility_id: 'accessibility id')
 
@@ -58,6 +58,29 @@ module Appium
         by = finders[how.to_sym]
         raise ArgumentError, "cannot find element by #{how.inspect}" unless by
         by
+      end
+
+      def extract_args(args)
+        case args.size
+        when 2
+          args
+        when 1
+          arg = args.first
+
+          unless arg.respond_to?(:shift)
+            raise ArgumentError, "expected #{arg.inspect}:#{arg.class} to respond to #shift"
+          end
+
+          # this will be a single-entry hash, so use #shift over #first or #[]
+          arr = arg.dup.shift
+          unless arr.size == 2
+            raise ArgumentError, "expected #{arr.inspect} to have 2 elements"
+          end
+
+          arr
+        else
+          raise ArgumentError, "wrong number of arguments (#{args.size} for 2)"
+        end
       end
     end
   end
