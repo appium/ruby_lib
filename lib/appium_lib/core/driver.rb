@@ -134,7 +134,7 @@ module Appium
         read_timeout = http_client_ops.delete(:read_timeout)
 
         http_client = http_client_ops.delete(:http_client)
-        @http_client ||= http_client ? http_client : Selenium::WebDriver::Remote::Http::Default.new
+        @http_client ||= http_client ? http_client : Appium::Http::Default.new
 
         @http_client.open_timeout = open_timeout if open_timeout
         @http_client.read_timeout = read_timeout if read_timeout

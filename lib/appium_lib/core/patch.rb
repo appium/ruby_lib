@@ -65,11 +65,10 @@ module Appium
   end # module Core
 end # module Appium
 
-# Requires from lib/selenium/webdriver/remote.rb
-require 'selenium/webdriver/remote/http/common'
-
-class Selenium::WebDriver::Remote::Http::Common # rubocop:disable Style/ClassAndModuleChildren
-  # TODO: Use inherit and customise header in Core::Driver?
-  remove_const :DEFAULT_HEADERS if defined? DEFAULT_HEADERS
-  DEFAULT_HEADERS = { 'Accept' => CONTENT_TYPE, 'User-Agent' => "appium/ruby_lib/#{::Appium::VERSION}" }.freeze
+module Appium
+  module Http
+    class Default < Appium::Core::Http::Default
+      DEFAULT_HEADERS = { 'Accept' => CONTENT_TYPE, 'User-Agent' => "appium/ruby_lib/#{::Appium::VERSION}" }.freeze
+    end
+  end
 end
