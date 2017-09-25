@@ -1,4 +1,4 @@
-require_relative '../rch_context'
+require_relative 'search_context'
 
 module Appium
   module Core

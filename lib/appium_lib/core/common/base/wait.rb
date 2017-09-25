@@ -1,6 +1,6 @@
 module Appium
   module Core
-    module Base
+    class Base
       class Wait < ::Selenium::WebDriver::Wait
         require 'timeout' # for wait
 
