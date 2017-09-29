@@ -156,7 +156,7 @@ module Appium
           end
 
           # TODO: Don't define selenium-side methods. We pick up from them.
-          # ::Selenium::WebDriver::Remote::OSS::Bridge::COMMANDS.each_key do |method|
+          # ::Appium::Core::Base::Commands::OSS.each_key do |method|
           #   add_endpoint_method method
           # end
 
@@ -284,7 +284,6 @@ module Appium
 
         # def extended
 
-        # TODO: move all method definition to CoreBridge and Core::Base::Driver
         # @private
         def add_endpoint_method(method)
           block_given? ? create_bridge_command(method, &Proc.new) : create_bridge_command(method)
@@ -314,7 +313,7 @@ module Appium
 
         # @private
         def create_bridge_command(method)
-          ::Appium::Core::Base::CoreBridge.class_eval do
+          ::Appium::Core::Base::CoreBridgeOSS.class_eval do
             block_given? ? class_eval(&Proc.new) : define_method(method) { execute method }
           end
           ::Appium::Core::Base::CoreBridgeW3C.class_eval do

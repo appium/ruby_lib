@@ -36,7 +36,6 @@ module Appium
             end
           end
 
-          # TODO: TEST ME
           ::Appium::Core::Device.add_endpoint_method(:toggle_touch_id_enrollment) do
             def toggle_touch_id_enrollment(enabled = true)
               execute :toggle_touch_id_enrollment, {}, enabled: enabled
