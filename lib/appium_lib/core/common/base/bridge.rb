@@ -17,7 +17,7 @@ module Appium
 
           case bridge.dialect
           when :oss
-            CoreBridge.new(capabilities, bridge.session_id, opts)
+            CoreBridgeOSS.new(capabilities, bridge.session_id, opts)
           when :w3c
             CoreBridgeW3C.new(capabilities, bridge.session_id, opts)
           else
@@ -26,14 +26,12 @@ module Appium
         end
       end # class Bridge
 
-      # TODO: implement bridge commands for Appium
-      class CoreBridge < ::Selenium::WebDriver::Remote::OSS::Bridge
+      class CoreBridgeOSS < ::Selenium::WebDriver::Remote::OSS::Bridge
         def commands(command)
           ::Appium::Core::Commands::COMMANDS_EXTEND_OSS[command]
         end
-      end # class CoreBridge
+      end # class CoreBridgeOSS
 
-      # TODO: implement bridge commands for Appium
       class CoreBridgeW3C < ::Selenium::WebDriver::Remote::W3C::Bridge
         def commands(command)
           case command

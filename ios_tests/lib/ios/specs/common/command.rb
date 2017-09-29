@@ -9,7 +9,7 @@ describe 'common/command.rb' do
   end
 
   def parameterized_method_defined_check(array)
-    array.each { |v| ::Appium::Core::Base::CoreBridge.method_defined?(v).must_equal true }
+    array.each { |v| ::Appium::Core::Base::CoreBridgeOSS.method_defined?(v).must_equal true }
   end
 
   t 'check all command no arg' do
