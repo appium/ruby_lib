@@ -21,8 +21,6 @@ describe 'ios/helper' do
     source_window.length.must_be :>=, 10_000
   end
 
-  # TODO: t 'page_window' do
-
   t 'id' do
     id 'Buttons' # 'Various uses of UIButton'
   end

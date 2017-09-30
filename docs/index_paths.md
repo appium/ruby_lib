@@ -1,3 +1,5 @@
+**Deprecated** Because iOS driver for UIAutomation is deprecated.
+
 # Index Paths on iOS
 
 Elements on iOS have an [index path attribute](https://github.com/appium/appium-uiauto/blob/2cf1e30801263dfc01627ded28a1be5af1083bc5/uiauto/lib/element-patch/tree-patch.js#L9)
