@@ -85,7 +85,7 @@ module Appium
           @driver.execute_script 'mobile: touchAndHold', args
         end
 
-        # @param [Element] :element Element to long tap on.
+        # @param [Element] element Element to long tap on.
         #
         #   ```ruby
         #   two_finger_tap element: find_element(:accessibility_id, "some item")

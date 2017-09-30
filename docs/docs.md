@@ -10,15 +10,8 @@
 - [All methods supported by Appium](https://github.com/appium/appium-base-driver/blob/master/docs/mjsonwp/protocol-methods.md)
 - [MiniTest Expectations](http://docs.seattlerb.org/minitest/Minitest/Expectations.html)
 
-##### iOS
-- [iOS UI Automation](http://developer.apple.com/library/ios/#documentation/DeveloperTools/Reference/UIAutomationRef/_index.html) Example use `@driver.execute_script "UIATarget.localTarget().frontMostApp().mainWindow().rect()"
-`
-    - [mechanic names of elements](https://github.com/jaykz52/mechanic/blob/8c490e1d225f384847e47ffdafb47cc2248bb96c/src/mechanic-core.js#L28)
-- [WebDriverAgent](https://github.com/facebook/WebDriverAgent)
-
-##### Android
-- [Android UIAutomator](http://developer.android.com/tools/help/uiautomator/index.html)
-- [UiSelector.java](https://android.googlesource.com/platform/frameworks/testing/+/master/uiautomator/library/core-src/com/android/uiautomator/core/UiSelector.java)
+#### Drivers
+- [platform-support](https://github.com/appium/appium/blob/master/docs/en/about-appium/platform-support.md)
 
 --
 
@@ -51,29 +44,28 @@ Appium::Driver.new({caps: apk}, false).start_driver
 
 Example use of Appium's mobile gesture.
 
-> @driver.find_element_with_appium()
+> @driver.find_element()
 
 `console.rb` uses some code from [simple_test.rb](
-https://github.com/appium/appium/blob/82995f47408530c80c3376f4e07a1f649d96ba22/sample-code/examples/ruby/simple_test.rb) and is released under the [same license](https://github.com/appium/appium/blob/c58eeb66f2d6fa3b9a89d188a2e657cca7cb300f/LICENSE) as Appium. The [Accessibility Inspector](https://developer.apple.com/library/ios/#documentation/UserExperience/Conceptual/iPhoneAccessibility/Testing_Accessibility/Testing_Accessibility.html) is helpful for discovering button names and textfield values.
-
+https://github.com/appium/sample-code/blob/master/sample-code/examples/ruby/simple_test.rb) and is released under the [same license](https://github.com/appium/appium/blob/c58eeb66f2d6fa3b9a89d188a2e657cca7cb300f/LICENSE) as Appium.
+The Accessibility Inspector is helpful for discovering button names and textfield values.
 
 Long click on an ImageView in Android.
 
 ```
-last_image = find_elements(:tag_name, :ImageView).last
+last_image = find_elements(:class, 'ImageView').last
 long_press(element: last_image)
 ```
 
-Rotate examples.
+Rotate examples. The behaviour is depends on devices.
 
 ```ruby
 driver.rotate :landscape
 driver.rotate :portrait
 ```
 
-
 - `status["value"]["build"]["revision"]` Discover the Appium rev running on the server.
-- `driver.keyboard.send_keys "msg"` Sends keys to currently active element
+- `element.send_keys "msg"` Sends keys to currently active element
 
 #### generic
 
@@ -188,50 +180,6 @@ s.value == ios_password('hello'.length)
 .click to tap an element.
 .send_keys to type on an element.
 
-#### Raw UIAutomation
-
-`execute_script "au.lookup('button')[0].tap()"` is the same as
-`execute_script 'UIATarget.localTarget().frontMostApp().buttons()[0].tap()'`
-
-See [app.js](https://github.com/appium/appium/blob/master/app/uiauto/appium/app.js#L3) for more au methods.
-Note that raw UIAutomation commands are not officially supported.
-
-Advanced au.
-
-In this example we lookup two tags, combine the results, wrap with $, and then return the elements.
-
-```ruby
-s = %(
-var t = au.lookup('textfield');
-var s = au.lookup('secure');
-var r = $(t.concat(s));
-au._returnElems(r);
-)
-
-execute_script s
-```
-
-#### XPath(UIAutomation)
-
-See [#194](https://github.com/appium/appium/pull/194/files) for details.
-
-```ruby
-find_element  :xpath, 'button'
-find_elements :xpath, 'button'
-
-find_element  :xpath, 'button[@name="Sign In"]'
-find_elements :xpath, 'button[@name="Sign In"]'
-
-find_element  :xpath, 'button[contains(@name, "Sign In")]'
-find_elements :xpath, 'button[contains(@name, "Sign")]'
-
-find_element :xpath, 'textfield[@value="Email"]'
-find_element :xpath, 'textfield[contains(@value, "Email")]'
-
-find_element  :xpath, 'text[contains(@name, "Reset")]'
-find_elements :xpath, 'text[contains(@name, "agree")]'
-```
-
 #### Cucumber Sauce Integration
 
 Reset after each test and when done report the result to Sauce after quiting the driver.
@@ -254,39 +202,6 @@ After do |scenario|
 end
 ```
 
-#### Set iOS version
-
-```bash
-# git clone
-export V=`git rev-parse --verify HEAD`
-
-# Delete all old DerivedData
-rm -rf "/Users/`whoami`/Library/Developer/Xcode/DerivedData/ProjectName*"
-# xcode build
-cd "/Users/`whoami`/Library/Developer/Xcode/DerivedData/ProjectName*/Build/Products/Debug-iphonesimulator/ProjectName.app"
-
-# set version
-/usr/libexec/PlistBuddy -c "Set :CFBundleVersion $V" Info.plist
-/usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $V" Info.plist
-/usr/bin/plutil -convert binary1 Info.plist
-
-# zip app
-cd ..
-zip -r -X "$WORKSPACE/ProjectName.zip" ProjectName.app
-```
-
-#### Set Android version
-
-```ruby
-# Save as set_version.rb and pass version as first arg.
-# android:versionCode must be an int
-Dir.glob('./**/AndroidManifest.xml') do |xml|
-  data = File.read xml
-  data.scan(/android:versionName="[^"]*"/).each { |m| data.gsub!(m, m.sub(/"[^"]*"/, '"' + ARGV.first + '"')) }
-  File.open(xml, 'w') { |f| f.write data }
-end
-```
-
 #### Android notes
 
 list all ids on API 18
@@ -294,14 +209,6 @@ list all ids on API 18
 `get_source.to_s.scan(/id\/([^\"]*)\"/)`
 
 #### iOS notes
-
-mobile gestures on iOS are known to be crashy. Fix by adding pre/post event sleep.
-
-```ruby
-sleep 3
-tap(x: 10, y: 100)
-sleep 1
-```
 
 Accept an alert if it exists.
 

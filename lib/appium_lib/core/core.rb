@@ -17,6 +17,7 @@ module Appium
   #
   # based on deep_symbolize_keys & deep_transform_keys from rails
   # https://github.com/rails/docrails/blob/a3b1105ada3da64acfa3843b164b14b734456a50/activesupport/lib/active_support/core_ext/hash/keys.rb#L84
+  # @param [Hash] hash Hash value to make symbolise
   def self.symbolize_keys(hash)
     raise 'symbolize_keys requires a hash' unless hash.is_a? Hash
     result = {}

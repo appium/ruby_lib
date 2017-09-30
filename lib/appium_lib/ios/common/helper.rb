@@ -46,12 +46,11 @@ module Appium
 
     # Prints a string of interesting elements to the console.
     #
-    # Example
-    #
-    # ```ruby
-    # page class: :UIAButton # filter on buttons
-    # page class: :UIAButton, window: 1
-    # ```
+    # @example
+    #     ```ruby
+    #     page class: :UIAButton # filter on buttons
+    #     page class: :UIAButton, window: 1
+    #     ```
     #
     # @option visible [Symbol] visible value to filter on
     # @option class [Symbol] class name to filter on
@@ -84,17 +83,6 @@ module Appium
     def source_window(_window_number = nil)
       warn '[DEPRECATION] source_window will be removed. Please use source instead.'
       get_source
-    end
-
-    # @private
-    # Prints parsed page source to console.
-    #
-    # example: page_window 0
-    #
-    # @param window_number [Integer] the int index of the target window
-    # @return [void]
-    def page_window(_window_number = 0)
-      warn '[DEPRECATION] page_window will be removed. Please use source instead.'
     end
 
     # Find by id

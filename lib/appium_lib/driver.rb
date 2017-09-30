@@ -515,17 +515,19 @@ module Appium
 
     # Calls @driver.find_elements_with_appium
     #
-    # ```
-    # @driver = Appium::Driver.new(opts, false)
-    # @driver.find_elements :predicate, yyy
-    # ```
+    # @example
+    #     ```ruby
+    #     @driver = Appium::Driver.new(opts, false)
+    #     @driver.find_elements :predicate, yyy
+    #     ```
     #
     # If you call `Appium.promote_appium_methods`, you can call `find_elements` directly.
     #
-    # ```
-    # @driver = Appium::Driver.new(opts, false)
-    # @driver.find_elements :predicate, yyy
-    # ```
+    # @example
+    #     ```ruby
+    #     @driver = Appium::Driver.new(opts, false)
+    #     @driver.find_elements :predicate, yyy
+    #     ```
     #
     # If you call `Appium.promote_appium_methods`, you can call `find_elements` directly.
     #
@@ -537,10 +539,11 @@ module Appium
 
     # Calls @driver.find_element
     #
-    # ```
-    # @driver = Appium::Driver.new(opts, false)
-    # @driver.find_element :accessibility_id, zzz
-    # ```
+    # @example
+    #     ```ruby
+    #     @driver = Appium::Driver.new(opts, false)
+    #     @driver.find_element :accessibility_id, zzz
+    #     ```
     #
     # If you call `Appium.promote_appium_methods`, you can call `find_element` directly.
     #
