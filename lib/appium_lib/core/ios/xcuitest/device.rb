@@ -30,6 +30,7 @@ module Appium
           def extended(_mod)
             ::Appium::Core::Device.extend_webdriver_with_forwardable
 
+            # Override
             ::Appium::Core::Device.add_endpoint_method(:hide_keyboard) do
               def hide_keyboard(close_key = nil, strategy = nil)
                 option = {}
@@ -41,6 +42,7 @@ module Appium
               end
             end
 
+            # Override
             ::Appium::Core::Device.add_endpoint_method(:background_app) do
               def background_app(duration = 0)
                 # https://github.com/appium/ruby_lib/issues/500, https://github.com/appium/appium/issues/7741
