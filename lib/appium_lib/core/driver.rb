@@ -40,12 +40,12 @@ module Appium
       #
       # @return [Driver]
       #
-      def self.for(opts = {})
-        new(opts)
+      def self.for(target, opts = {})
+        new(target, opts)
       end
 
       # @private
-      def initialize(opts = {})
+      def initialize(target, opts = {})
         opts = Appium.symbolize_keys opts
         @caps = get_caps(opts)
 
@@ -54,39 +54,9 @@ module Appium
         set_appium_device
         set_automation_name
 
+        extend_for(device: @device, automation_name: @automation_name, target: target)
+
         self
-      end
-
-      def extend_for(device:, automation_name:, target:)
-        target.extend Appium::Core
-        target.extend Appium::Core::Device
-
-        case device
-        when :android
-          case automation_name
-          when :uiautomator2
-            ::Appium::Core::Android::Uiautomator2::Bridge.for(self)
-          else # default and UiAutomator
-            ::Appium::Core::Android::Uiautomator1::Bridge.for(self)
-          end
-        when :ios
-          case automation_name
-          when :xcuitest
-            ::Appium::Core::Ios::Xcuitest::Bridge.for(self)
-          else # default and UIAutomation
-            ::Appium::Core::Ios::Uiautomation::Bridge.for(self)
-          end
-        when :mac
-          # no Mac specific extentions
-          Appium::Logger.debug('mac')
-        when :windows
-          # no windows specific extentions
-          Appium::Logger.debug('windows')
-        else
-          Appium::Logger.warn('no device matched')
-        end
-
-        target
       end
 
       # Creates a new global driver and quits the old one if it exists.
@@ -201,6 +171,39 @@ module Appium
       end
 
       private
+
+      # @private
+      def extend_for(device:, automation_name:, target:)
+        target.extend Appium::Core
+        target.extend Appium::Core::Device
+
+        case device
+        when :android
+          case automation_name
+          when :uiautomator2
+            ::Appium::Core::Android::Uiautomator2::Bridge.for(self)
+          else # default and UiAutomator
+            ::Appium::Core::Android::Uiautomator1::Bridge.for(self)
+          end
+        when :ios
+          case automation_name
+          when :xcuitest
+            ::Appium::Core::Ios::Xcuitest::Bridge.for(self)
+          else # default and UIAutomation
+            ::Appium::Core::Ios::Uiautomation::Bridge.for(self)
+          end
+        when :mac
+          # no Mac specific extentions
+          Appium::Logger.debug('mac')
+        when :windows
+          # no windows specific extentions
+          Appium::Logger.debug('windows')
+        else
+          Appium::Logger.warn('no device matched')
+        end
+
+        target
+      end
 
       # @private
       def get_caps(opts)

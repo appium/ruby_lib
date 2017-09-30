@@ -124,7 +124,7 @@ module Appium
       end
       raise 'opts must be a hash' unless opts.is_a? Hash
 
-      @core = Appium::Core.for(opts)
+      @core = Appium::Core.for(self, opts)
 
       opts = Appium.symbolize_keys opts
       appium_lib_opts = opts[:appium_lib] || {}
@@ -147,8 +147,7 @@ module Appium
       @appium_debug = appium_lib_opts.fetch :debug, !!defined?(Pry)
       set_sauce_related_values(appium_lib_opts)
 
-      # Extend core methods
-      @core.extend_for(device: @appium_device, automation_name: @automation_name, target: self)
+      # Extend Common methods
       extend Appium::Common
 
       # Extend each driver's methods
