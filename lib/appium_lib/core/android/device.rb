@@ -14,38 +14,6 @@ module Appium
       #   background_app(-1) #=> the app never come back. https://github.com/appium/appium/issues/7741
       #   ```
 
-      # @!method current_activity
-      #   Get current activity name
-      #   @return [String] An activity name
-      #
-      #   ```ruby
-      #   current_activity # '.ApiDemos'
-      #   ```
-
-      # @!method current_package
-      #   Get current package name
-      #   @return [String] A package name
-      #
-      #   ```ruby
-      #   current_package # 'com.example.android.apis'
-      #   ```
-
-      # @!method get_system_bars
-      #   Get system bar's information
-      #   @return [String] System bar
-      #
-      #   ```ruby
-      #   get_system_bars
-      #   ```
-
-      # @!method get_display_density
-      #   Get connected device's density.
-      #   @return [Integer] The size of density
-      #
-      #   ```ruby
-      #   get_display_density # 320
-      #   ```
-
       # @!method hide_keyboard
       #   Hide the onscreen keyboard
       #   @param [String] close_key The name of the key which closes the keyboard.
@@ -77,10 +45,6 @@ module Appium
       #   start_activity app_package: 'io.appium.android.apis',
       #     app_activity: '.accessibility.AccessibilityNodeProviderActivity'
       #   ```
-
-      # @!method get_network_connection
-      #   Get the device network connection current status
-      #   See set_network_connection method for return value
 
       # @!method set_network_connection
       #   Set the device network connection mode
@@ -118,10 +82,6 @@ module Appium
         def extended(_mod)
           Appium::Core::Device.extend_webdriver_with_forwardable
 
-          ::Appium::Core::Commands::COMMAND_NO_ARG_ANDROID.each_key do |method|
-            Appium::Core::Device.add_endpoint_method method
-          end
-
           # Android
           Appium::Core::Device.add_endpoint_method(:start_activity) do
             def start_activity(opts)
@@ -143,7 +103,7 @@ module Appium
             end
           end
 
-          # Android
+          # Android, Override
           Appium::Core::Device.add_endpoint_method(:hide_keyboard) do
             def hide_keyboard(close_key = nil, strategy = nil)
               option = {}

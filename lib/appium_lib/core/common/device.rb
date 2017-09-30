@@ -140,6 +140,10 @@ module Appium
       #   set_immediate_value element, 'hello'
       #   ```
 
+      # @!method get_network_connection
+      #   Get the device network connection current status
+      #   See set_network_connection method for return value
+
       class << self
         def extended(_mod)
           extend_webdriver_with_forwardable

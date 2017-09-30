@@ -5,16 +5,16 @@ module Appium
     # ref: https://github.com/appium/appium-base-driver/blob/master/lib/mjsonwp/routes.js
     module Commands
       COMMAND_NO_ARG = {
+        # Common
         shake:                      [:post, 'session/:session_id/appium/device/shake'.freeze],
         launch_app:                 [:post, 'session/:session_id/appium/app/launch'.freeze],
         close_app:                  [:post, 'session/:session_id/appium/app/close'.freeze],
         reset:                      [:post, 'session/:session_id/appium/app/reset'.freeze],
         device_locked?:             [:post, 'session/:session_id/appium/device/is_locked'.freeze],
         device_time:                [:get,  'session/:session_id/appium/device/system_time'.freeze],
-        current_context:            [:get,  'session/:session_id/context'.freeze]
-      }.freeze
+        current_context:            [:get,  'session/:session_id/context'.freeze],
 
-      COMMAND_NO_ARG_ANDROID = {
+        # Android
         open_notifications:         [:post, 'session/:session_id/appium/device/open_notifications'.freeze],
         toggle_airplane_mode:       [:post, 'session/:session_id/appium/device/toggle_airplane_mode'.freeze],
         current_activity:           [:get,  'session/:session_id/appium/device/current_activity'.freeze],
@@ -23,12 +23,12 @@ module Appium
         get_display_density:        [:get,  'session/:session_id/appium/device/display_density'.freeze],
         is_keyboard_shown:          [:get,  'session/:session_id/appium/device/is_keyboard_shown'.freeze],
         get_network_connection:     [:get,  'session/:session_id/network_connection'.freeze],
-        get_performance_data_types: [:post, 'session/:session_id/appium/performanceData/types'.freeze]
+        get_performance_data_types: [:post, 'session/:session_id/appium/performanceData/types'.freeze],
+
+        # iOS
       }.freeze
 
-      COMMAND_NO_ARG_IOS = {
-      }.freeze
-
+      # Some commands differ for each driver.
       COMMAND = {
         # common
         available_contexts:         [:get,  'session/:session_id/contexts'.freeze],
@@ -65,7 +65,7 @@ module Appium
       }.freeze
 
       COMMANDS = {}.merge(COMMAND).merge(COMMAND_ANDROID).merge(COMMAND_IOS)
-                   .merge(COMMAND_NO_ARG).merge(COMMAND_NO_ARG_ANDROID).merge(COMMAND_NO_ARG_IOS).freeze
+                   .merge(COMMAND_NO_ARG).freeze
 
       COMMANDS_EXTEND_OSS = COMMANDS.merge(::Appium::Core::Base::Commands::OSS).freeze
       COMMANDS_EXTEND_W3C = COMMANDS.merge(::Appium::Core::Base::Commands::W3C).freeze
