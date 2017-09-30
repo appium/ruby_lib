@@ -6,6 +6,12 @@ require_relative 'driver'
 
 require_relative 'element/window'
 
+require_relative 'android'
+require_relative 'android_uiautomator2'
+
+require_relative 'ios'
+require_relative 'ios_xcuitest'
+
 module Appium
   # convert all keys (including nested) to symbols
   #
