@@ -23,6 +23,17 @@ module Appium
           end
           super(@bridge, listener: listener)
         end
+
+        # Get the device window's size.
+        # @return [Selenium::WebDriver::Dimension]
+        #
+        # @example
+        #   size = @driver.window_size
+        #   size.width #=> Integer
+        #   size.height #=> Integer
+        def window_size
+          manage.window.size
+        end
       end # class Driver
     end # class Base
   end # module Core

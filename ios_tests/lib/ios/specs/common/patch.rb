@@ -1,5 +1,4 @@
 # rubocop:disable Lint/RescueException
-# rubocop:disable Metrics/LineLength
 
 #
 #  Skip:
