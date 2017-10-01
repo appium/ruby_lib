@@ -1,3 +1,11 @@
+#### v9.6.1 2017-08-27
+
+- [a542287](https://github.com/appium/ruby_lib/commit/a5422874b4ab60430ab9d58289aac001ecd90ecf) [Release 9 6 1 (#650)](https://github.com/appium/ruby_lib/issues/650)
+- [cb9450d](https://github.com/appium/ruby_lib/commit/cb9450d207fb2e23b4dfef4318f47ea3d04c7689) [refactor: divide dependencies (#649)](https://github.com/appium/ruby_lib/issues/649)
+- [0673ad7](https://github.com/appium/ruby_lib/commit/0673ad71a0c13e72c96fa7928ce1077c3684d4c2) [feature: add commands for get_pasteboard and set_pasteboard (#648)](https://github.com/appium/ruby_lib/issues/648)
+- [420c855](https://github.com/appium/ruby_lib/commit/420c855efb27e2dd84fce8b0dbeb0e86d41f72ee) [use 1.8.0 to reduce constant ::Fixnum error (#647)](https://github.com/appium/ruby_lib/issues/647)
+
+
 #### v9.6.0 2017-08-20
 
 - [e1a2cd4](https://github.com/appium/ruby_lib/commit/e1a2cd493a370655b390a1d3803a85fbdb5f7f9d) [Release 9 6 0 (#643)](https://github.com/appium/ruby_lib/issues/643)
