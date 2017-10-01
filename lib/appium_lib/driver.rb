@@ -430,7 +430,8 @@ module Appium
     # @option http_client_ops [Hash] :open_timeout Custom open timeout for http client.
     # @option http_client_ops [Hash] :read_timeout Custom read timeout for http client.
     # @return [Selenium::WebDriver] the new global driver
-    def start_driver(http_client_ops = { http_client: ::Appium::Http::Default.new, open_timeout: 999_999, read_timeout: 999_999 })
+    def start_driver(http_client_ops =
+                         { http_client: ::Appium::Http::Default.new, open_timeout: 999_999, read_timeout: 999_999 })
       driver_quit
 
       # If automationName is set only in server side, then the following automation_name should be nil before
