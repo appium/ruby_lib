@@ -3,6 +3,9 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## v9.7.1
+Hot-fix for v9.7.0: [uninitialized constant Appium::VERSION #680](https://github.com/appium/ruby_lib/issues/680)
+
 ## v9.7.0
 
 _v9.7.0_ has [a bunch of refactoring](https://github.com/appium/ruby_lib/issues/602#issuecomment-331140219) but the behaviours must be the same as well as previous versions.
