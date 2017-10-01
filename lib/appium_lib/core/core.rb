@@ -4,8 +4,6 @@ require_relative 'common'
 require_relative 'patch'
 require_relative 'driver'
 
-require_relative 'element/window'
-
 require_relative 'android'
 require_relative 'android_uiautomator2'
 

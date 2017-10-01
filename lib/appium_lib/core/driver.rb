@@ -35,6 +35,13 @@ module Appium
       # instance of AbstractEventListener for logging support
       attr_reader :listener
 
+      private
+
+      # @return [Appium::Core::Base::Driver]
+      attr_reader :driver
+
+      public
+
       # @private
       # @see Appium::Core.for
       #

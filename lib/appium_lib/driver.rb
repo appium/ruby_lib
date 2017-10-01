@@ -392,6 +392,10 @@ module Appium
       @core.quit_driver
     end
 
+    def window_size
+      @driver.window_size
+    end
+
     # Alias for driver_quit
     alias quit_driver driver_quit
 
