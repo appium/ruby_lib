@@ -391,13 +391,18 @@ module Appium
     def driver_quit
       @core.quit_driver
     end
+    alias quit_driver driver_quit
 
+    # Get the device window's size.
+    # @return [Selenium::WebDriver::Dimension]
+    #
+    # @example
+    #   size = @driver.window_size
+    #   size.width #=> Integer
+    #   size.height #=> Integer
     def window_size
       @driver.window_size
     end
-
-    # Alias for driver_quit
-    alias quit_driver driver_quit
 
     # Creates a new global driver and quits the old one if it exists.
     # You can customise http_client as the following

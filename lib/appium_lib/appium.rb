@@ -10,6 +10,8 @@ require_relative 'sauce_labs'
 require_relative 'common/wait'
 require_relative 'common/log'
 require_relative 'common/helper'
+require_relative 'common/multi_touch'
+require_relative 'common/touch_actions'
 
 # core
 require_relative 'core/core'
@@ -19,10 +21,6 @@ require_relative 'ios/ios'
 
 # android
 require_relative 'android/android'
-
-# device methods
-require_relative 'core/device/touch_actions'
-require_relative 'core/device/multi_touch'
 
 module Appium
   class << self

@@ -4,6 +4,10 @@ require_relative 'common'
 require_relative 'patch'
 require_relative 'driver'
 
+# for multi touch related methods
+require_relative 'device/touch_actions'
+require_relative 'device/multi_touch'
+
 require_relative 'android'
 require_relative 'android_uiautomator2'
 
