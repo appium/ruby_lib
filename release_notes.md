@@ -1,3 +1,21 @@
+#### v9.7.0 2017-10-01
+
+- [bf12459](https://github.com/appium/ruby_lib/commit/bf124597977514e4d338efaaea5a29bdcbef5578) [Release 9 7 0 (#679)](https://github.com/appium/ruby_lib/issues/679)
+- [a6240cb](https://github.com/appium/ruby_lib/commit/a6240cb3144679865b9ca455a3906586268c20db) [refactor: Move window size method and touch related actions (#678)](https://github.com/appium/ruby_lib/issues/678)
+- [e3f5b0d](https://github.com/appium/ruby_lib/commit/e3f5b0d91b35d5b2b3b11e63911e2bf48ca11f08) [refactor: define bridge in core (#676)](https://github.com/appium/ruby_lib/issues/676)
+- [eb7680f](https://github.com/appium/ruby_lib/commit/eb7680f6db1e821901045beacba0a8b80de722fb) [refactor: collect no agrs in core/command (#675)](https://github.com/appium/ruby_lib/issues/675)
+- [f174e75](https://github.com/appium/ruby_lib/commit/f174e75e81912ddd5118e066349774caf54b4a74) [remove some todos which isn't need more (#673)](https://github.com/appium/ruby_lib/issues/673)
+- [8471880](https://github.com/appium/ruby_lib/commit/84718805fb4c6246692564295294073b90ada700) [refactor: separate core android ios more (#670)](https://github.com/appium/ruby_lib/issues/670)
+- [2e09e83](https://github.com/appium/ruby_lib/commit/2e09e839cce26571fb5857097d3c7f3391bfe3ff) [refactor: move some drivers in core (#669)](https://github.com/appium/ruby_lib/issues/669)
+- [35b0ded](https://github.com/appium/ruby_lib/commit/35b0dedcfc08e66e6e7a9414db645e129bf5d373) [refactor: replace extend for to bridge for in driver (#668)](https://github.com/appium/ruby_lib/issues/668)
+- [d44f00a](https://github.com/appium/ruby_lib/commit/d44f00a6cb8f52770da4ae7b7d69b8eaf3ae1581) [refactor: Reduce patch_webdriver_element and some DEPRECATIONs (#663)](https://github.com/appium/ruby_lib/issues/663)
+- [2f24cb2](https://github.com/appium/ruby_lib/commit/2f24cb2ba17becbbe0e5e96bd2e4eb672f026024) [feature: update toggle touch id enrollment (#664)](https://github.com/appium/ruby_lib/issues/664)
+- [895874d](https://github.com/appium/ruby_lib/commit/895874d51f5491db6a26669ae8e6f78c243c6eb3) [refactor: add some comments and remote_status (#662)](https://github.com/appium/ruby_lib/issues/662)
+- [e813dfe](https://github.com/appium/ruby_lib/commit/e813dfe5689c450945df41d8c1973d9d58b8b0ff) [refactor: put warn if no device matched (#658)](https://github.com/appium/ruby_lib/issues/658)
+- [d95b02e](https://github.com/appium/ruby_lib/commit/d95b02e6fa6a78525af120e0096beb3559dc6f72) [refactor: re-struct directories (#655)](https://github.com/appium/ruby_lib/issues/655)
+- [f600fe6](https://github.com/appium/ruby_lib/commit/f600fe6fbc55281c58b2593d0aa55ae93a32a913) [refactor: separate some methods and modules (#651)](https://github.com/appium/ruby_lib/issues/651)
+
+
 #### v9.6.1 2017-08-27
 
 - [a542287](https://github.com/appium/ruby_lib/commit/a5422874b4ab60430ab9d58289aac001ecd90ecf) [Release 9 6 1 (#650)](https://github.com/appium/ruby_lib/issues/650)
