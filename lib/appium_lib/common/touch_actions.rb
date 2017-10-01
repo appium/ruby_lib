@@ -30,7 +30,7 @@ module Appium
     COMPLEX_ACTIONS = ::Appium::Core::TouchAction::COMPLEX_ACTIONS
 
     class << self
-     COMPLEX_ACTIONS.each do |action|
+      COMPLEX_ACTIONS.each do |action|
         define_method(action) do |opts|
           auto_perform = opts.delete(:auto_perform) { |_k| true }
           ta           = ::Appium::TouchAction.new($driver)

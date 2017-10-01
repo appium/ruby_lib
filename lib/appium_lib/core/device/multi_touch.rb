@@ -35,7 +35,8 @@ module Appium
         #
         # ```ruby
         # driver =  Appium::Driver.new(opts, false).start_driver
-        # action = pinch percentage: 75, auto_perform: false, driver: driver #=> Pinch the screen from the top right and bottom left corners
+        # action = pinch percentage: 75, auto_perform: false, driver: driver
+        #   #=> Pinch the screen from the top right and bottom left corners
         # action.perform    #=> to 25% of its size.
         # ```
         def pinch(percentage: 25, auto_perform: true, driver:)
@@ -74,7 +75,8 @@ module Appium
         #
         # ```ruby
         # driver =  Appium::Driver.new(opts, false).start_driver
-        # action = zoom percentage: 200, auto_perform: false, driver: driver #=> Zoom in the screen from the center until it doubles in size.
+        # action = zoom percentage: 200, auto_perform: false, driver: driver
+        #   #=> Zoom in the screen from the center until it doubles in size.
         # action.perform    #=> to 25% of its size.
         # ```
         def zoom(percentage: 200, auto_perform: true, driver:)
