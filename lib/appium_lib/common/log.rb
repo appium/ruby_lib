@@ -4,7 +4,7 @@ module Appium
     # @return [[Selenium::WebDriver::LogEntry]] A list of logs data.
     #
     # @example
-    #   @driver.get_log(“syslog”) #=> [[Selenium::WebDriver::LogEntry]]
+    #   @driver.get_log("syslog") #=> [[Selenium::WebDriver::LogEntry]]
     #   @driver.get_log(:syslog)  #=> [[Selenium::WebDriver::LogEntry]]
     #
     def get_log(type)
