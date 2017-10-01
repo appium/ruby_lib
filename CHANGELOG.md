@@ -3,6 +3,43 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## v9.7.0
+
+_v9.7.0_ has [a bunch of refactoring](https://github.com/appium/ruby_lib/issues/602#issuecomment-331140219) but the behaviours must be the same as well as previous versions.
+I've checked the behaviour and confirmed test cases in this repository. So, please create issues if you have any issues against this version.
+
+### 1. Enhancements
+- Refactoring
+```
+lib/appium_lib         # root directory
+              /core    # Minumul driver files for the Appium server and dependencies for Selenium Driver.
+              /common  # Appium related(some methods to make ruby_lib useful)
+              /android # for Android
+              /ios     # for iOS
+```
+
+- The `core` directory will separate as the other gem in [separate core as core ruby gem #665](https://github.com/appium/ruby_lib/issues/665)
+- Logs
+    - `get_available_log_types`: To get a list of available log types
+    - `get_log(type)`: To get logs associated with `type`
+
+### 2. Bug fixes
+
+### 3. Deprecations
+- [refactor: Reduce patch_webdriver_element and some DEPRECATIONs #663](https://github.com/appium/ruby_lib/pull/663)
+    - Remove deprecated methods:
+        - Android
+            - `client_xpath/client_xpaths`
+                - Please use `xpath` or `find_element/s(:xpath, "xpaths")`
+        - iOS
+            - `get_page`
+                - Please use `source` instead
+    - Deprecated
+        - iOS
+            - `ios_version`, `source_window`, `page_window`
+              - Please use `source` instead
+
+
 ## v9.6.1
 ### 1. Enhancements
 - Refactor `XCUItest` for iOS and `uiautomator2` for Android a bit
