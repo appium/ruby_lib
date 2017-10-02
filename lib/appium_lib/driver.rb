@@ -63,49 +63,46 @@ module Appium
     #
     # @example
     #
-    #     ```ruby
-    #     require 'rubygems'
-    #     require 'appium_lib'
+    #   require 'rubygems'
+    #   require 'appium_lib'
     #
-    #     # platformName takes a string or a symbol.
-    #
-    #     # Start iOS driver with global scope
-    #     opts = {
-    #              caps: {
-    #                platformName: :ios,
-    #                app: '/path/to/MyiOS.app'
-    #              },
-    #              appium_lib: {
-    #                wait_timeout: 30
-    #              }
+    #   # platformName takes a string or a symbol.
+    #   # Start iOS driver with global scope
+    #   opts = {
+    #            caps: {
+    #              platformName: :ios,
+    #              app: '/path/to/MyiOS.app'
+    #            },
+    #            appium_lib: {
+    #              wait_timeout: 30
     #            }
-    #     Appium::Driver.new(opts, true).start_driver
+    #          }
+    #   Appium::Driver.new(opts, true).start_driver
     #
-    #     # Start Android driver with global scope
-    #     opts = {
-    #              caps: {
-    #                platformName: :android,
-    #                app: '/path/to/my.apk'
-    #              },
-    #              appium_lib: {
-    #                wait_timeout: 30,
-    #                wait_interval: 1
-    #              }
+    #   # Start Android driver with global scope
+    #   opts = {
+    #            caps: {
+    #              platformName: :android,
+    #              app: '/path/to/my.apk'
+    #            },
+    #            appium_lib: {
+    #              wait_timeout: 30,
+    #              wait_interval: 1
     #            }
-    #     Appium::Driver.new(opts, true).start_driver
+    #          }
+    #   Appium::Driver.new(opts, true).start_driver
     #
-    #     # Start iOS driver without global scope
-    #     opts = {
-    #              caps: {
-    #                platformName: :ios,
-    #                app: '/path/to/MyiOS.app'
-    #              },
-    #              appium_lib: {
-    #                wait_timeout: 30
-    #              }
+    #   # Start iOS driver without global scope
+    #   opts = {
+    #            caps: {
+    #              platformName: :ios,
+    #              app: '/path/to/MyiOS.app'
+    #            },
+    #            appium_lib: {
+    #              wait_timeout: 30
     #            }
-    #     Appium::Driver.new(opts, false).start_driver
-    #     ```
+    #          }
+    #   Appium::Driver.new(opts, false).start_driver
     #
     # @param opts [Object] A hash containing various options.
     # @param global_driver [Bool] A bool require global driver before initialize.
@@ -279,14 +276,13 @@ module Appium
 
     # Returns the server's version info
     #
-    # ```ruby
-    # {
+    # @example
+    #   {
     #     "build" => {
     #         "version" => "0.18.1",
     #         "revision" => "d242ebcfd92046a974347ccc3a28f0e898595198"
     #     }
-    # }
-    # ```
+    #   }
     #
     # @return [Hash]
     def appium_server_version
@@ -311,11 +307,11 @@ module Appium
 
     # Returns the client's version info
     #
-    # ```ruby
-    # {
-    #     "version" => "9.1.1"
-    # }
-    # ```
+    # @example
+    #
+    #   {
+    #       "version" => "9.1.1"
+    #   }
     #
     # @return [Hash]
     def appium_client_version
@@ -378,7 +374,9 @@ module Appium
 
     # Takes a png screenshot and saves to the target path.
     #
-    # Example: screenshot '/tmp/hi.png'
+    # @example
+    #
+    #   screenshot '/tmp/hi.png'
     #
     # @param png_save_path [String] the full path to save the png
     # @return [nil]
@@ -397,9 +395,11 @@ module Appium
     # @return [Selenium::WebDriver::Dimension]
     #
     # @example
+    #
     #   size = @driver.window_size
     #   size.width #=> Integer
     #   size.height #=> Integer
+    #
     def window_size
       @driver.window_size
     end
@@ -408,23 +408,22 @@ module Appium
     # You can customise http_client as the following
     #
     # @example
-    #     ```ruby
-    #     require 'rubygems'
-    #     require 'appium_lib'
     #
-    #     # platformName takes a string or a symbol.
+    #   require 'rubygems'
+    #   require 'appium_lib'
     #
-    #     # Start iOS driver
-    #     opts = {
-    #              caps: {
-    #                platformName: :ios,
-    #                app: '/path/to/MyiOS.app'
-    #              },
-    #              appium_lib: {
-    #                wait_timeout: 30
-    #              }
+    #   # platformName takes a string or a symbol.
+    #   # Start iOS driver
+    #   opts = {
+    #            caps: {
+    #              platformName: :ios,
+    #              app: '/path/to/MyiOS.app'
+    #            },
+    #            appium_lib: {
+    #              wait_timeout: 30
     #            }
-    #     Appium::Driver.new(opts).start_driver
+    #          }
+    #   Appium::Driver.new(opts).start_driver
     #
     # @option http_client_ops [Hash] :http_client Custom HTTP Client
     # @option http_client_ops [Hash] :open_timeout Custom open timeout for http client.
@@ -470,11 +469,11 @@ module Appium
 
     # Set implicit wait. Default to @core.default_wait.
     #
-    # ```ruby
-    # set_wait 2
-    # set_wait # @core.default_wait
+    # @example
     #
-    # ```
+    #   set_wait 2
+    #   set_wait # @core.default_wait
+    #
     #
     # @param timeout [Integer] the timeout in seconds
     # @return [void]
@@ -526,18 +525,16 @@ module Appium
     # Calls @driver.find_elements_with_appium
     #
     # @example
-    #     ```ruby
-    #     @driver = Appium::Driver.new(opts, false)
-    #     @driver.find_elements :predicate, yyy
-    #     ```
+    #
+    #   @driver = Appium::Driver.new(opts, false)
+    #   @driver.find_elements :predicate, yyy
     #
     # If you call `Appium.promote_appium_methods`, you can call `find_elements` directly.
     #
     # @example
-    #     ```ruby
-    #     @driver = Appium::Driver.new(opts, false)
-    #     @driver.find_elements :predicate, yyy
-    #     ```
+    #
+    #   @driver = Appium::Driver.new(opts, false)
+    #   @driver.find_elements :predicate, yyy
     #
     # If you call `Appium.promote_appium_methods`, you can call `find_elements` directly.
     #
@@ -550,10 +547,9 @@ module Appium
     # Calls @driver.find_element
     #
     # @example
-    #     ```ruby
-    #     @driver = Appium::Driver.new(opts, false)
-    #     @driver.find_element :accessibility_id, zzz
-    #     ```
+    #
+    #   @driver = Appium::Driver.new(opts, false)
+    #   @driver.find_element :accessibility_id, zzz
     #
     # If you call `Appium.promote_appium_methods`, you can call `find_element` directly.
     #

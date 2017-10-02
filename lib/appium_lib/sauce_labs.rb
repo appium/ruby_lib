@@ -14,20 +14,21 @@ module Appium
     # @return [Appium::SauceLabs]
     #
     # @example
-    #     opts_blank = {}
-    #     sauce_labs_blank = Appium::SauceLabs.new(opts_blank)
-    #     sauce_labs_blank.username   #=> nil
-    #     sauce_labs_blank.access_key #=> nil
-    #     sauce_labs_blank.endpoint   #=> "ondemand.saucelabs.com:443/wd/hub"
     #
-    #     opts = { sauce_username: "user-name",
-    #              sauce_access_key: "access-key-to-sauce-labs",
-    #              sauce_endpoint: "ondemand.other_saucelabs.com:443/wd/hub",
-    #            }
-    #     sauce_labs = Appium::SauceLabs.new(opts)
-    #     sauce_labs.username   #=> "user-name"
-    #     sauce_labs.access_key #=> "access-key-to-sauce-labs"
-    #     sauce_labs.endpoint   #=> "ondemand.other-saucelabs.com:443/wd/hub"
+    #   opts_blank = {}
+    #   sauce_labs_blank = Appium::SauceLabs.new(opts_blank)
+    #   sauce_labs_blank.username   #=> nil
+    #   sauce_labs_blank.access_key #=> nil
+    #   sauce_labs_blank.endpoint   #=> "ondemand.saucelabs.com:443/wd/hub"
+    #
+    #   opts = { sauce_username: "user-name",
+    #            sauce_access_key: "access-key-to-sauce-labs",
+    #            sauce_endpoint: "ondemand.other_saucelabs.com:443/wd/hub",
+    #          }
+    #   sauce_labs = Appium::SauceLabs.new(opts)
+    #   sauce_labs.username   #=> "user-name"
+    #   sauce_labs.access_key #=> "access-key-to-sauce-labs"
+    #   sauce_labs.endpoint   #=> "ondemand.other-saucelabs.com:443/wd/hub"
     #
     def initialize(appium_lib_opts)
       @username   = appium_lib_opts.fetch :sauce_username, ENV['SAUCE_USERNAME']
@@ -45,8 +46,9 @@ module Appium
     # @return [Boolean]
     #
     # @example
-    #     sauce_labs_blank.sauce_server_url? #=> false
-    #     sauce_labs.sauce_server_url?       #=> true
+    #
+    #   sauce_labs_blank.sauce_server_url? #=> false
+    #   sauce_labs.sauce_server_url?       #=> true
     #
     def sauce_server_url?
       !username.nil? && !access_key.nil?
@@ -57,8 +59,9 @@ module Appium
     # @return [String]
     #
     # @example
-    #     sauce_labs_blank.server_url #=> "http://127.0.0.1:4723/wd/hub"
-    #     sauce_labs.server_url #=> "https://user-name:access-key-to-sauce-labs@ondemand.other-saucelabs.com:443/wd/hub"
+    #
+    #   sauce_labs_blank.server_url #=> "http://127.0.0.1:4723/wd/hub"
+    #   sauce_labs.server_url #=> "https://user-name:access-key-to-sauce-labs@ondemand.other-saucelabs.com:443/wd/hub"
     #
     def server_url
       sauce_server_url? ? "https://#{username}:#{access_key}@#{endpoint}" : 'http://127.0.0.1:4723/wd/hub'

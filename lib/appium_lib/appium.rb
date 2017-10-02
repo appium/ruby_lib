@@ -162,21 +162,22 @@ module Appium
     #
     # To promote methods to all classes:
     #
-    # ```ruby
-    # Appium.promote_appium_methods Object
-    # ```
+    # @example
+    #
+    #   Appium.promote_appium_methods Object
     #
     # It's better to promote on specific classes instead of Object
     #
-    # ```ruby
-    # # promote on rspec
-    # Appium.promote_appium_methods RSpec::Core::ExampleGroup
-    # ```
+    # @example
     #
-    # ```ruby
-    # # promote on minispec
-    # Appium.promote_appium_methods Minitest::Spec
-    # ```
+    #   # promote on rspec
+    #   Appium.promote_appium_methods RSpec::Core::ExampleGroup
+    #
+    # @example
+    #
+    #   # promote on minispec
+    #   Appium.promote_appium_methods Minitest::Spec
+    #
     def promote_appium_methods(class_array, driver = $driver)
       raise 'Driver is nil' if driver.nil?
       # Wrap single class into an array

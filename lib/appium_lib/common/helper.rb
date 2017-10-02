@@ -1,5 +1,4 @@
-# Generic helper methods not specific
-# to a particular tag name
+# Generic helper methods not specific to a particular tag name
 module Appium
   module Common
     # iOS .name returns the accessibility attribute if it's set. if not set, the string value is used.
@@ -99,9 +98,10 @@ module Appium
 
     # Converts pixel values to window relative values
     #
-    # ```ruby
-    # px_to_window_rel x: 50, y: 150
-    # ```
+    # @example
+    #
+    #   px_to_window_rel x: 50, y: 150
+    #
     def px_to_window_rel(opts = {}, driver = $driver)
       w = driver.window_size
       x = opts.fetch :x, 0
