@@ -75,6 +75,7 @@ module Appium
 
       data
     end
+    # @see load_settings
     alias load_appium_txt load_settings
 
     # @param [String] base_dir parent directory of loaded appium.txt (toml)
@@ -119,6 +120,9 @@ module Appium
     # if modules is a module instead of an array, then the constants of
     # that module are promoted on.
     # otherwise, the array of modules will be used as the promotion target.
+    #
+    # @param [Array<Module>] modules An array of modules
+    # @param [Driver] driver A driver to extend for
     def promote_singleton_appium_methods(modules, driver = $driver)
       raise 'Global $driver is nil' if driver.nil?
 
@@ -153,25 +157,27 @@ module Appium
     ##
     # Promote appium methods to class instance methods
     #
-    # @param class_array [Array<Class>] An array of classes
+    # @param [Array<Class>] class_array An array of classes
+    # @param [Driver] driver A driver to extend for
     #
     # To promote methods to all classes:
     #
-    # ```ruby
-    # Appium.promote_appium_methods Object
-    # ```
+    # @example
+    #
+    #   Appium.promote_appium_methods Object
     #
     # It's better to promote on specific classes instead of Object
     #
-    # ```ruby
-    # # promote on rspec
-    # Appium.promote_appium_methods RSpec::Core::ExampleGroup
-    # ```
+    # @example
     #
-    # ```ruby
-    # # promote on minispec
-    # Appium.promote_appium_methods Minitest::Spec
-    # ```
+    #   # promote on rspec
+    #   Appium.promote_appium_methods RSpec::Core::ExampleGroup
+    #
+    # @example
+    #
+    #   # promote on minispec
+    #   Appium.promote_appium_methods Minitest::Spec
+    #
     def promote_appium_methods(class_array, driver = $driver)
       raise 'Driver is nil' if driver.nil?
       # Wrap single class into an array
@@ -198,5 +204,5 @@ module Appium
       end
       nil # return nil
     end
-  end
-end
+  end # class << self
+end # module Appium
