@@ -71,6 +71,8 @@ module Appium
       # @private
       def initialize(target, opts = {})
         opts = Appium.symbolize_keys opts
+        validate_keys(opts)
+
         @caps = get_caps(opts)
 
         set_appium_lib_specific_values(get_appium_lib_opts(opts))
@@ -81,6 +83,30 @@ module Appium
         extend_for(device: @device, automation_name: @automation_name, target: target)
 
         self
+      end
+
+      # TODO: add test cases.
+      # opts = { no: { caps: {} }, ruby_lib: {}} # raise No capability
+      # opts = { caps: {} } # ok
+      # opts = { caps: {}, ruby_lib: {}}  # ok
+      # opts = { caps: { ruby_lib: {} }} # raise Structure for capability is wrong
+      # opts = { caps: { something: { ruby_lib: {} } } } # raise Structure for capability is wrong
+      def validate_keys(opts)
+        flatten_ops = flatten_hash_keys(opts)
+
+        raise 'No capability' unless opts.member?(:caps)
+        raise 'Structure for capability is wrong' if !opts.member?(:appium_lib) && flatten_ops.member?(:appium_lib)
+
+        true
+      end
+
+      def flatten_hash_keys(hash, flatten_keys_result = [])
+        hash.each do |key, value|
+          flatten_keys_result << key
+          flatten_hash_keys(value, flatten_keys_result) if value.is_a?(Hash)
+        end
+
+        flatten_keys_result
       end
 
       # Creates a new global driver and quits the old one if it exists.
