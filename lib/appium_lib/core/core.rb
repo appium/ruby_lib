@@ -31,6 +31,34 @@ module Appium
   end
 
   module Core
+    # Creates a new global driver and extend particular methods to `target`
+    # @param [Class] target Extend particular methods to this target.
+    # @param [Hash] opts A options include capabilities for the Appium Server and for the client.
+    #
+    # @example
+    #
+    #     require 'rubygems'
+    #     require 'appium_lib'
+    #
+    #     # Start iOS driver
+    #     opts = {
+    #              caps: {
+    #                platformName: :ios,
+    #                app: '/path/to/MyiOS.app'
+    #              },
+    #              appium_lib: {
+    #                server_url: "http://custom-host:8080/wd/hub.com",
+    #                export_session: false,
+    #                port: 8080,
+    #                wait: 0,
+    #                wait_timeout: 20,
+    #                wait_interval: 0.3,
+    #                listener: nil,
+    #              }
+    #            }
+    #     @core_driver = Appium::Core.for(self, opts) # create a core driver with `opts` and extend methods into `self`
+    #     @core_driver.start_driver(server_url: server_url, http_client_ops: http_client_ops) # start driver
+    #
     def self.for(*args)
       Core::Driver.for(*args)
     end
