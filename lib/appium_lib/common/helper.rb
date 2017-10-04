@@ -90,7 +90,9 @@ module Appium
     #
     # @example
     #
-    #   get_page_class #=> => "24x XCUIElementTypeStaticText\n12x XCUIElementTypeCell\n8x XCUIElementTypeOther\n2x XCUIElementTypeWindow\n1x XCUIElementTypeStatusBar\n1x XCUIElementTypeTable\n1x XCUIElementTypeNavigationBar\n1x XCUIElementTypeApplication"
+    #   get_page_class #=> "24x XCUIElementTypeStaticText\n12x XCUIElementTypeCell\n8x XCUIElementTypeOther\n
+    #                  #    2x XCUIElementTypeWindow\n1x XCUIElementTypeStatusBar\n1x XCUIElementTypeTable\n1
+    #                  #    x XCUIElementTypeNavigationBar\n1x XCUIElementTypeApplication"
     #
     def get_page_class
       parser = @count_elements_parser ||= Nokogiri::XML::SAX::Parser.new(CountElements.new)
