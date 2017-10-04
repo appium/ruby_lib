@@ -25,6 +25,12 @@ module Appium
     end
 
     # For Sauce Labs reporting. Returns the current session id.
+    # @return [String]
+    #
+    # @example
+    #
+    #   @driver.session_id #=> "some-session-ids"
+    #
     def session_id
       @driver.session_id
     end
@@ -80,6 +86,12 @@ module Appium
     end # class CountElements
 
     # Returns a string of class counts of visible elements.
+    # @return [String]
+    #
+    # @example
+    #
+    #   get_page_class #=> => "24x XCUIElementTypeStaticText\n12x XCUIElementTypeCell\n8x XCUIElementTypeOther\n2x XCUIElementTypeWindow\n1x XCUIElementTypeStatusBar\n1x XCUIElementTypeTable\n1x XCUIElementTypeNavigationBar\n1x XCUIElementTypeApplication"
+    #
     def get_page_class
       parser = @count_elements_parser ||= Nokogiri::XML::SAX::Parser.new(CountElements.new)
 
@@ -91,6 +103,20 @@ module Appium
 
     # Count all classes on screen and print to stdout.
     # Useful for appium_console.
+    # @return [nil]
+    #
+    # @example
+    #
+    #   page_class
+    #     # 24x XCUIElementTypeStaticText
+    #     # 12x XCUIElementTypeCell
+    #     # 8x XCUIElementTypeOther
+    #     # 2x XCUIElementTypeWindow
+    #     # 1x XCUIElementTypeStatusBar
+    #     # 1x XCUIElementTypeTable
+    #     # 1x XCUIElementTypeNavigationBar
+    #     # 1x XCUIElementTypeApplication
+    #
     def page_class
       puts get_page_class
       nil
@@ -100,7 +126,7 @@ module Appium
     #
     # @example
     #
-    #   px_to_window_rel x: 50, y: 150
+    #   px_to_window_rel x: 50, y: 150 #=> #<OpenStruct x="50.0 / 375.0", y="150.0 / 667.0">
     #
     def px_to_window_rel(opts = {}, driver = $driver)
       w = driver.window_size
@@ -142,6 +168,7 @@ module Appium
       @strings_xml[id]
     end
 
+    # @private
     class HTMLElements < Nokogiri::XML::SAX::Document
       attr_reader :filter
 
