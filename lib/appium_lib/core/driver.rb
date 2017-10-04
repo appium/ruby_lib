@@ -86,8 +86,14 @@ module Appium
       # Creates a new global driver and quits the old one if it exists.
       # You can customise http_client as the following
       #
+      # @param [String] server_url Custom server url to send to requests. Default is "http://127.0.0.1:4723/wd/hub".
+      # @option http_client_ops [Hash] :http_client Custom HTTP Client
+      # @option http_client_ops [Hash] :open_timeout Custom open timeout for http client.
+      # @option http_client_ops [Hash] :read_timeout Custom read timeout for http client.
+      # @return [Selenium::WebDriver] the new global driver
+      #
       # @example
-      #     ```ruby
+      #
       #     require 'rubygems'
       #     require 'appium_lib'
       #
@@ -111,10 +117,6 @@ module Appium
       #            }
       #     @driver = Appium::Driver.new(opts).start_driver
       #
-      # @option http_client_ops [Hash] :http_client Custom HTTP Client
-      # @option http_client_ops [Hash] :open_timeout Custom open timeout for http client.
-      # @option http_client_ops [Hash] :read_timeout Custom read timeout for http client.
-      # @return [Selenium::WebDriver] the new global driver
       def start_driver(server_url: nil,
                        http_client_ops: { http_client: nil, open_timeout: 999_999, read_timeout: 999_999 })
         server_url = server_url ? server_url : "http://127.0.0.1:#{@port}/wd/hub"
@@ -158,25 +160,24 @@ module Appium
       end
 
       # Returns the server's version info
+      # @return [Hash]
       #
       # @example
-      #     ```ruby
+      #
+      #   @driver.appium_server_version
       #     {
       #         "build" => {
       #             "version" => "0.18.1",
       #             "revision" => "d242ebcfd92046a974347ccc3a28f0e898595198"
       #         }
       #     }
-      #     ```
       #
       # Returns blank hash for Selenium Grid since `remote_status` gets 500 error
       #
       # @example
-      #     ```ruby
-      #     {}
-      #     ```
       #
-      # @return [Hash]
+      #   @driver.appium_server_version #=> {}
+      #
       def appium_server_version
         @driver.remote_status
       rescue Selenium::WebDriver::Error::ServerError => e
@@ -189,7 +190,9 @@ module Appium
       # @return [Array<Integer>]
       #
       # @example
+      #
       #     @driver.platform_version #=> [10.1.1]
+      #
       def platform_version
         p_version = @driver.capabilities['platformVersion']
         p_version.split('.').map(&:to_i)
@@ -197,10 +200,13 @@ module Appium
 
       # Takes a png screenshot and saves to the target path.
       #
-      # Example: screenshot '/tmp/hi.png'
-      #
       # @param png_save_path [String] the full path to save the png
       # @return [nil]
+      #
+      # @example
+      #
+      #   @driver.screenshot '/tmp/hi.png' #=> nil
+      #
       def screenshot(png_save_path)
         @driver.save_screenshot png_save_path
         nil

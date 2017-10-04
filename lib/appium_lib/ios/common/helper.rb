@@ -1,5 +1,6 @@
 module Appium
   module Ios
+    # @private
     class UITestElementsPrinter < Nokogiri::XML::SAX::Document
       attr_accessor :filter
 
