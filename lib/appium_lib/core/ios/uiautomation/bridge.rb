@@ -8,7 +8,8 @@ module Appium
           def self.for(target)
             Core::Ios::SearchContext.extend
             target.extend Appium::Ios::Device
-            patch_webdriver_element
+
+            Core::Ios::Uiautomation.patch_webdriver_element
           end
         end
       end
