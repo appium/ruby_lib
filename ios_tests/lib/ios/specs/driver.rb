@@ -84,6 +84,11 @@ describe 'driver' do
     caps[:some_capability].must_equal 'some_capability'
   end
 
+  t 'verify export session' do
+    # @driver.session_id
+    File.read('/tmp/appium_lib_session').strip.must_equal session_id
+  end
+
   describe 'Appium::Driver attributes' do
     t 'verify all attributes' do
       actual                = driver_attributes
@@ -92,7 +97,7 @@ describe 'driver' do
 
       expected            = { automation_name:  :xcuitest,
                               custom_url:       false,
-                              export_session:   false,
+                              export_session:   true,
                               default_wait:     30,
                               sauce_username:   nil,
                               sauce_access_key: nil,
