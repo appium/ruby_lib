@@ -30,6 +30,36 @@ describe 'driver' do
     assert_equal expected, actual
   end
 
+  describe Appium::Core::Driver do
+    require_relative '../../../../lib/appium_lib/core/core'
+
+    class ExampleDriver
+      def initialize(opts)
+        ::Appium::Core::Driver.new(self, opts)
+      end
+    end
+
+    t 'no caps' do
+      opts = { no: { caps: {} }, appium_lib: {} }
+      proc { ExampleDriver.new(opts) }.must_raise ::Appium::Core::Error::NoCapabilityError
+    end
+
+    t 'with caps' do
+      opts = { caps: {} }
+      ExampleDriver.new(opts).wont_be_nil
+    end
+
+    t 'with caps and appium_lib' do
+      opts = { caps: {}, appium_lib: {} }
+      ExampleDriver.new(opts).wont_be_nil
+    end
+
+    t 'with caps and wrong appium_lib' do
+      opts = { caps: { appium_lib: {} } }
+      proc { ExampleDriver.new(opts) }.must_raise ::Appium::Core::Error::CapabilityStructureError
+    end
+  end
+
   t 'verify Appium::Core::Base::Capabilities.create_capabilities' do
     expected_app = File.absolute_path('UICatalog.app')
     caps = ::Appium::Core::Base::Capabilities.create_capabilities(platformName:    'ios',

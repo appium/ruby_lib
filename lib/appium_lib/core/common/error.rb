@@ -3,6 +3,9 @@ module Appium
     module Error
       class CoreError < StandardError; end
 
+      class NoCapabilityError < CoreError; end
+      class CapabilityStructureError < CoreError; end
+
       class NotSupportedAppiumServer < CoreError; end
       class NoSuchElementError < CoreError; end
 

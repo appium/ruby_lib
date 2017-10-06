@@ -71,6 +71,8 @@ module Appium
       # @private
       def initialize(target, opts = {})
         opts = Appium.symbolize_keys opts
+        validate_keys(opts)
+
         @caps = get_caps(opts)
 
         set_appium_lib_specific_values(get_appium_lib_opts(opts))
@@ -245,6 +247,26 @@ module Appium
         end
 
         target
+      end
+
+      # @private
+      def validate_keys(opts)
+        flatten_ops = flatten_hash_keys(opts)
+
+        raise Error::NoCapabilityError unless opts.member?(:caps)
+        raise Error::CapabilityStructureError if !opts.member?(:appium_lib) && flatten_ops.member?(:appium_lib)
+
+        true
+      end
+
+      # @private
+      def flatten_hash_keys(hash, flatten_keys_result = [])
+        hash.each do |key, value|
+          flatten_keys_result << key
+          flatten_hash_keys(value, flatten_keys_result) if value.is_a?(Hash)
+        end
+
+        flatten_keys_result
       end
 
       # @private
