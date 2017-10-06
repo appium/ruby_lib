@@ -304,6 +304,14 @@ module Appium
         return unless @automation_name.nil?
         @automation_name = @driver.capabilities['automationName']
       end
-    end
-  end
+
+      # @private
+      def write_session_id(session_id)
+        File.open('/tmp/appium_lib_session', 'w') { |f| f.puts session_id }
+      rescue IOError => e
+        ::Appium::Logger.warn e
+        nil
+      end
+    end # class Driver
+  end # module Core
 end # module Appium
