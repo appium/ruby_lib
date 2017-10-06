@@ -85,17 +85,11 @@ module Appium
         self
       end
 
-      # TODO: add test cases.
-      # opts = { no: { caps: {} }, ruby_lib: {}} # raise No capability
-      # opts = { caps: {} } # ok
-      # opts = { caps: {}, ruby_lib: {}}  # ok
-      # opts = { caps: { ruby_lib: {} }} # raise Structure for capability is wrong
-      # opts = { caps: { something: { ruby_lib: {} } } } # raise Structure for capability is wrong
       def validate_keys(opts)
         flatten_ops = flatten_hash_keys(opts)
 
-        raise 'No capability' unless opts.member?(:caps)
-        raise 'Structure for capability is wrong' if !opts.member?(:appium_lib) && flatten_ops.member?(:appium_lib)
+        raise Error::NoCapabilityError unless opts.member?(:caps)
+        raise Error::CapabilityStructureError if !opts.member?(:appium_lib) && flatten_ops.member?(:appium_lib)
 
         true
       end
