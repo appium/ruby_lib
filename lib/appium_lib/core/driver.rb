@@ -254,7 +254,9 @@ module Appium
         flatten_ops = flatten_hash_keys(opts)
 
         raise Error::NoCapabilityError unless opts.member?(:caps)
-        raise Error::CapabilityStructureError if !opts.member?(:appium_lib) && flatten_ops.member?(:appium_lib)
+        if !opts.member?(:appium_lib) && flatten_ops.member?(:appium_lib)
+          raise Error::CapabilityStructureError, 'Please check the value of appium_lib in the capability'
+        end
 
         true
       end
