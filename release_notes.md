@@ -1,3 +1,9 @@
+#### v9.7.1 2017-10-01
+
+- [ebde85f](https://github.com/appium/ruby_lib/commit/ebde85fac616ac09e19a5f8215195e536d88344d) [Release 9 7 1 (#682)](https://github.com/appium/ruby_lib/issues/682)
+- [db29b66](https://github.com/appium/ruby_lib/commit/db29b664172935f7814266c7357e099969404fe3) [fix: Fix appium version error (#681)](https://github.com/appium/ruby_lib/issues/681)
+
+
 #### v9.7.0 2017-10-01
 
 - [bf12459](https://github.com/appium/ruby_lib/commit/bf124597977514e4d338efaaea5a29bdcbef5578) [Release 9 7 0 (#679)](https://github.com/appium/ruby_lib/issues/679)
