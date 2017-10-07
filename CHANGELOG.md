@@ -3,6 +3,18 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## v9.7.2
+
+### 1. Enhancements
+- Raise error if capability is wrong
+    - [validate `caps` and `appium_lib` #684](https://github.com/appium/ruby_lib/issues/684)
+
+### 2. Bug fixes
+- `Bug: NoMethodError: undefined method 'write_session_id' for #<Appium::Core::Driver:0x00007fa69119ce88>` [#686](https://github.com/appium/ruby_lib/issues/686)
+- undefined local variable or method `patch_webdriver_element' [#687](https://github.com/appium/ruby_lib/issues/687)
+
+### 3. Deprecations
+
 ## v9.7.1
 Hot-fix for v9.7.0: [uninitialized constant Appium::VERSION #680](https://github.com/appium/ruby_lib/issues/680)
 
