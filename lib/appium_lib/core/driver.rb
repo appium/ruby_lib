@@ -24,6 +24,8 @@ module Appium
       # Export session id to textfile in /tmp for 3rd party tools
       # @return [Boolean]
       attr_reader :export_session
+      # @return [String] By default, session id is exported in '/tmp/appium_lib_session'
+      attr_reader :export_session_path
 
       # Default wait time for elements to appear
       # Returns the default client side wait.
@@ -141,7 +143,7 @@ module Appium
                                                      listener: @listener)
 
           # export session
-          write_session_id(@driver.session_id) if @export_session
+          write_session_id(@driver.session_id, @export_session_path) if @export_session
         rescue Errno::ECONNREFUSED
           raise "ERROR: Unable to connect to Appium. Is the server running on #{server_url}?"
         end
@@ -291,9 +293,12 @@ module Appium
 
       # @private
       def set_appium_lib_specific_values(appium_lib_opts)
-        @custom_url       = appium_lib_opts.fetch :server_url, false
-        @export_session   = appium_lib_opts.fetch :export_session, false
-        @default_wait     = appium_lib_opts.fetch :wait, 0
+        @custom_url          = appium_lib_opts.fetch :server_url, false
+        @default_wait        = appium_lib_opts.fetch :wait, 0
+
+        # bump current session id into a particular file
+        @export_session      = appium_lib_opts.fetch :export_session, false
+        @export_session_path = appium_lib_opts.fetch :export_session_path, '/tmp/appium_lib_session'
 
         @port      = appium_lib_opts.fetch :port, 4723
 
@@ -330,8 +335,8 @@ module Appium
       end
 
       # @private
-      def write_session_id(session_id)
-        File.open('/tmp/appium_lib_session', 'w') { |f| f.puts session_id }
+      def write_session_id(session_id, export_path = '/tmp/appium_lib_session')
+        File.open(export_path, 'w') { |f| f.puts session_id }
       rescue IOError => e
         ::Appium::Logger.warn e
         nil

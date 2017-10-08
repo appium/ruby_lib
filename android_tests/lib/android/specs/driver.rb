@@ -66,6 +66,7 @@ describe 'driver' do
       expected            = { automation_name:   nil,
                               custom_url:       false,
                               export_session:   false,
+                              export_session_path: '/tmp/appium_lib_session',
                               default_wait:     1,
                               sauce_username:   nil,
                               sauce_access_key: nil,

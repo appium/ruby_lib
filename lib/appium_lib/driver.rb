@@ -39,6 +39,7 @@ module Appium
     attr_reader :caps
     attr_reader :custom_url
     attr_reader :export_session
+    attr_reader :export_session_path
     attr_reader :default_wait
     attr_reader :appium_port
     attr_reader :appium_device
@@ -129,6 +130,7 @@ module Appium
       @caps = @core.caps
       @custom_url = @core.custom_url
       @export_session = @core.export_session
+      @export_session_path = @core.export_session_path
       @default_wait = @core.default_wait
       @appium_port = @core.port
       @appium_wait_timeout = @core.wait_timeout
@@ -214,20 +216,21 @@ module Appium
     # Returns a hash of the driver attributes
     def driver_attributes
       {
-          caps:             @core.caps,
-          automation_name:  @core.automation_name,
-          custom_url:       @core.custom_url,
-          export_session:   @core.export_session,
-          default_wait:     @core.default_wait,
-          sauce_username:   @sauce.username,
-          sauce_access_key: @sauce.access_key,
-          sauce_endpoint:   @sauce.endpoint,
-          port:             @core.port,
-          device:           @core.device,
-          debug:            @appium_debug,
-          listener:         @listener,
-          wait_timeout:     @core.wait_timeout,
-          wait_interval:    @core.wait_interval
+          caps:                @core.caps,
+          automation_name:     @core.automation_name,
+          custom_url:          @core.custom_url,
+          export_session:      @core.export_session,
+          export_session_path: @core.export_session_path,
+          default_wait:        @core.default_wait,
+          sauce_username:      @sauce.username,
+          sauce_access_key:    @sauce.access_key,
+          sauce_endpoint:      @sauce.endpoint,
+          port:                @core.port,
+          device:              @core.device,
+          debug:               @appium_debug,
+          listener:            @listener,
+          wait_timeout:        @core.wait_timeout,
+          wait_interval:       @core.wait_interval
       }
     end
 
