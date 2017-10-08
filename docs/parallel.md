@@ -1,4 +1,4 @@
-Appium 1.7.0+ supports single server and multiple session and Xcode 9 is required for iOS.
+Appium 1.7.0+ supports single server and multiple sessions, and it requires Xcode 9 for iOS.
 
 # Example
 ## Run tests on Multiple Simulators with Xcode 9
