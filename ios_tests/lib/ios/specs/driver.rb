@@ -84,9 +84,15 @@ describe 'driver' do
     caps[:some_capability].must_equal 'some_capability'
   end
 
-  t 'verify export session' do
-    # @driver.session_id
-    File.read('/tmp/appium_lib_session').strip.must_equal session_id
+  describe 'export session' do
+    t 'verify session id in the `export_session_path` variable' do
+      File.read(export_session_path).strip.must_equal session_id
+    end
+
+    t 'verify export session from default value' do
+      # @driver.session_id
+      File.read('/tmp/appium_lib_session').strip.must_equal session_id
+    end
   end
 
   describe 'Appium::Driver attributes' do
@@ -98,6 +104,7 @@ describe 'driver' do
       expected            = { automation_name:  :xcuitest,
                               custom_url:       false,
                               export_session:   true,
+                              export_session_path: '/tmp/appium_lib_session',
                               default_wait:     30,
                               sauce_username:   nil,
                               sauce_access_key: nil,
