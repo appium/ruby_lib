@@ -452,6 +452,8 @@ module Appium
 
       set_implicit_wait(@core.default_wait)
 
+      @driver.
+
       @driver
     end
 
