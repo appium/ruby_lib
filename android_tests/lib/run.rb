@@ -13,7 +13,7 @@ require_relative '../../lib/appium_lib'
 def start_driver(caps)
   driver = Appium::Driver.new(caps, true)
   # Tests expect methods defined on the minispec object
-  Appium.promote_appium_methods ::Minitest::Spec
+  Appium.promote_appium_methods ::Minitest::Spec, driver
   driver.start_driver
 end
 

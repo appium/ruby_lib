@@ -53,41 +53,56 @@ RuboCop::RakeTask.new(:rubocop) do |t|
   t.fail_on_error = false
 end
 
-desc 'Run tests with parallel'
-task :run_parallel do
+class Device
+  def self.one
+    {
+      automationName: 'xcuitest',
+      platformName: 'ios',
+      platformVersion: '11.0',
+      deviceName: 'iPhone 6',
+      app: "#{Dir.pwd}/../test_apps/UICatalog.app",
+      wdaLocalPort: 8100,
+      isCommandsQueueEnabled: false
+    }
+  end
+
+  def self.two
+    {
+      automationName: 'xcuitest',
+      platformName: 'ios',
+      platformVersion: '11.0',
+      deviceName: 'iPhone 6s',
+      app: "#{Dir.pwd}/../test_apps/UICatalog.app",
+      wdaLocalPort: 8200,
+      isCommandsQueueEnabled: false
+    }
+  end
+end
+
+desc 'Run tests with parallel thread'
+task :run_parallel_t do
   require 'thread'
   require_relative 'parallel/test'
-  def device1
-    {
-        automationName: 'xcuitest',
-        platformName: 'ios',
-        platformVersion: '11.0',
-        deviceName: 'iPhone 6',
-        app: "#{Dir.pwd}/../test_apps/UICatalog.app",
-        wdaLocalPort: 8100,
-        isCommandsQueueEnabled: false
-    }
-  end
-
-  def device2
-    {
-        automationName: 'xcuitest',
-        platformName: 'ios',
-        platformVersion: '11.0',
-        deviceName: 'iPhone 6s',
-        app: "#{Dir.pwd}/../test_apps/UICatalog.app",
-        wdaLocalPort: 8200,
-        isCommandsQueueEnabled: false
-    }
-  end
 
   threads = []
-  [device1, device2].each do |capability|
+  [Device.one, Device.two].each do |capability|
     threads << Thread.new do
-      # RSpec::Core::RakeTask.new(:spec)
-      TestParallelRun.new(capability).test_run
+      TestParallelRunThread.new(capability).test_run
     end
   end
 
   threads.each(&:join)
+end
+
+desc 'Run tests with parallel processes'
+task :run_parallel_p do
+  require_relative 'parallel/test'
+
+  [Device.one, Device.two].each do |capability|
+    fork do
+      TestParallelRunProcess.new(capability).test_run
+    end
+  end
+
+  Process.waitall
 end
