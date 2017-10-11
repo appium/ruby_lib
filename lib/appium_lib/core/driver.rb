@@ -10,6 +10,7 @@ module Appium
       attr_reader :http_client
 
       # Device type to request from the appium server
+      # @return [Symbol] :android and :ios, for example
       attr_reader :device
 
       # Automation name sent to appium server or received from server
@@ -40,13 +41,13 @@ module Appium
       attr_reader :port
 
       # Return a time wait timeout
-      # Wait time for ::Appium::Common.wait or ::Appium::Common.wait_true.
+      # Wait time for ::Appium::Core::Base::Wait, wait and wait_true
       # Provide Appium::Drive like { appium_lib: { wait_timeout: 20 } }
       # @return [Integer]
       attr_reader :wait_timeout
 
       # Return a time wait timeout
-      # Wait interval time for ::Appium::Common.wait or ::Appium::Common.wait_true.
+      # Wait interval time for ::Appium::Core::Base::Wait, wait and wait_true
       # Provide Appium::Drive like { appium_lib: { wait_interval: 20 } }
       # @return [Integer]
       attr_reader :wait_interval
@@ -54,12 +55,8 @@ module Appium
       # instance of AbstractEventListener for logging support
       attr_reader :listener
 
-      private
-
       # @return [Appium::Core::Base::Driver]
       attr_reader :driver
-
-      public
 
       # @private
       # @see Appium::Core.for
@@ -158,6 +155,11 @@ module Appium
 
       # Quits the driver
       # @return [void]
+      #
+      # @example
+      #
+      #   @core.quit_driver
+      #
       def quit_driver
         @driver.quit
       rescue
@@ -218,7 +220,72 @@ module Appium
         nil
       end
 
+      # Check every interval seconds to see if yield returns a truthy value.
+      # Note this isn't a strict boolean true, any truthy value is accepted.
+      # false and nil are considered failures.
+      # Give up after timeout seconds.
+      #
+      # Wait code from the selenium Ruby gem
+      # https://github.com/SeleniumHQ/selenium/blob/cf501dda3f0ed12233de51ce8170c0e8090f0c20/rb/lib/selenium/webdriver/common/wait.rb
+      #
+      # If only a number is provided then it's treated as the timeout value.
+      #
+      # @param [Hash] opts Options
+      # @option opts [Numeric] :timeout Seconds to wait before timing out. Set default by `appium_wait_timeout` (30).
+      # @option opts [Numeric] :interval Seconds to sleep between polls. Set default by `appium_wait_interval` (0.5).
+      # @option opts [String] :message Exception message if timed out.
+      # @option opts [Array, Exception] :ignore Exceptions to ignore while polling (default: Exception)
+      #
+      # @example
+      #
+      #   @core.wait_true { @driver.find_element :accessibility_id, 'something' }
+      #
+      def wait_true(opts = {})
+        opts = process_wait_opts(opts).merge(return_if_true: true)
+
+        opts[:timeout]  ||= @wait_timeout
+        opts[:interval] ||= @wait_interval
+
+        wait = ::Appium::Core::Base::Wait.new opts
+        wait.until { yield }
+      end
+
+      # Check every interval seconds to see if yield doesn't raise an exception.
+      # Give up after timeout seconds.
+      #
+      # Wait code from the selenium Ruby gem
+      # https://github.com/SeleniumHQ/selenium/blob/cf501dda3f0ed12233de51ce8170c0e8090f0c20/rb/lib/selenium/webdriver/common/wait.rb
+      #
+      # If only a number is provided then it's treated as the timeout value.
+      #
+      # @param [Hash] opts Options
+      # @option opts [Numeric] :timeout Seconds to wait before timing out. Set default by `appium_wait_timeout` (30).
+      # @option opts [Numeric] :interval Seconds to sleep between polls. Set default by `appium_wait_interval` (0.5).
+      # @option opts [String] :message Exception message if timed out.
+      # @option opts [Array, Exception] :ignore Exceptions to ignore while polling (default: Exception)
+      #
+      # @example
+      #
+      #   @core.wait_true { @driver.find_element :accessibility_id, 'something' }
+      #
+      def wait(opts = {})
+        opts = process_wait_opts(opts).merge(return_if_true: false)
+
+        opts[:timeout]  ||= @wait_timeout
+        opts[:interval] ||= @wait_interval
+
+        wait = ::Appium::Core::Base::Wait.new opts
+        wait.until { yield }
+      end
+
       private
+
+      # @private
+      def process_wait_opts(opts)
+        opts = { timeout: opts } if opts.is_a?(Numeric)
+        raise 'opts must be a hash' unless opts.is_a? Hash
+        opts
+      end
 
       # @private
       def extend_for(device:, automation_name:, target:)

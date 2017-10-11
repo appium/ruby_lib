@@ -8,14 +8,6 @@ module Appium
       end
     end
 
-    # process opts before calling _generic_wait
-    # @private
-    def _process_wait_opts(opts)
-      opts = { timeout: opts } if opts.is_a?(Numeric)
-      raise 'opts must be a hash' unless opts.is_a? Hash
-      opts
-    end
-
     # Check every interval seconds to see if yield returns a truthy value.
     # Note this isn't a strict boolean true, any truthy value is accepted.
     # false and nil are considered failures.
@@ -32,13 +24,7 @@ module Appium
     # @option opts [String] :message Exception message if timed out.
     # @option opts [Array, Exception] :ignore Exceptions to ignore while polling (default: Exception)
     def wait_true(opts = {})
-      opts = _process_wait_opts(opts).merge(return_if_true: true)
-
-      opts[:timeout]  ||= @core.wait_timeout
-      opts[:interval] ||= @core.wait_interval
-
-      wait = ::Appium::Common::Wait.new opts
-      wait.until { yield }
+      @core.wait_true(opts) { yield }
     end
 
     # Check every interval seconds to see if yield doesn't raise an exception.
@@ -55,13 +41,7 @@ module Appium
     # @option opts [String] :message Exception message if timed out.
     # @option opts [Array, Exception] :ignore Exceptions to ignore while polling (default: Exception)
     def wait(opts = {})
-      opts = _process_wait_opts(opts).merge(return_if_true: false)
-
-      opts[:timeout]  ||= @core.wait_timeout
-      opts[:interval] ||= @core.wait_interval
-
-      wait = ::Appium::Common::Wait.new opts
-      wait.until { yield }
+      @core.wait(opts) { yield }
     end
   end
 end
