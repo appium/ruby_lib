@@ -79,7 +79,6 @@ class Device
   end
 end
 
-
 desc 'Run tests with parallel thread'
 task :run_parallel_t do
   require 'thread'
@@ -107,4 +106,3 @@ task :run_parallel_p do
 
   Process.waitall
 end
-
