@@ -42,7 +42,7 @@ class TestParallelRun
 
   def setup
     @appium = Appium::Driver.new({ caps: @capability, appium_lib: des_server_caps }, false)
-    @driver = @appium.start_driver
+    @appium.start_driver
   end
 
   def teardown
@@ -54,10 +54,10 @@ class TestParallelRun
     setup
 
     # tap alert
-    @driver.find_element(:name, 'Alerts').click
+    @appium.find_element(:name, 'Alerts').click
     @appium.wait_true do
-      @driver.find_element(:name, 'Show OK-Cancel').click
-      @driver.find_element(:name, 'UIActionSheet <title>').displayed?
+      @appium.find_element(:name, 'Show OK-Cancel').click
+      @appium.find_element(:name, 'UIActionSheet <title>').displayed?
     end
     @appium.alert action: 'accept'
     @appium.back
