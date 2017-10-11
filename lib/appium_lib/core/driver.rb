@@ -119,7 +119,8 @@ module Appium
       #                listener: nil,
       #              }
       #            }
-      #     @driver = Appium::Driver.new(opts).start_driver
+      #     @core = Appium::Driver.new(opts)
+      #     @driver = @core.start_driver
       #
       def start_driver(server_url: nil,
                        http_client_ops: { http_client: nil, open_timeout: 999_999, read_timeout: 999_999 })
@@ -168,7 +169,7 @@ module Appium
       #
       # @example
       #
-      #   @driver.appium_server_version
+      #   @core.appium_server_version
       #     {
       #         "build" => {
       #             "version" => "0.18.1",
@@ -180,7 +181,7 @@ module Appium
       #
       # @example
       #
-      #   @driver.appium_server_version #=> {}
+      #   @core.appium_server_version #=> {}
       #
       def appium_server_version
         @driver.remote_status
@@ -195,7 +196,7 @@ module Appium
       #
       # @example
       #
-      #     @driver.platform_version #=> [10.1.1]
+      #     @core.platform_version #=> [10.1.1]
       #
       def platform_version
         p_version = @driver.capabilities['platformVersion']
@@ -209,7 +210,8 @@ module Appium
       #
       # @example
       #
-      #   @driver.screenshot '/tmp/hi.png' #=> nil
+      #   @core.screenshot '/tmp/hi.png' #=> nil
+      #   # same as `@driver.save_screenshot png_save_path`
       #
       def screenshot(png_save_path)
         @driver.save_screenshot png_save_path
