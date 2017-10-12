@@ -23,7 +23,10 @@ module Appium
           #
           #   # containing predicate. `$` is the mark.
           #   # Require appium-xcuitest-driver 2.54.0+
+          #   # PR: https://github.com/facebook/WebDriverAgent/pull/707/files
           #   find_elements :class_chain, 'XCUIElementTypeWindow[$name = \"bla$$$bla\"$]'
+          #   find_elements :class_chain, "**/XCUIElementTypeWindow[$name == 'Buttons'$]"
+          #   find_elements :class_chain, "**/XCUIElementTypeStaticText[$name == 'Buttons'$]"
           #
           def self.extend
             ::Appium::Core::Base::SearchContext.add_finders(class_chain: '-ios class chain')
