@@ -11,47 +11,40 @@
 - [appium_lib on RubyGems](https://rubygems.org/gems/appium_lib)
 - [Documentation for appium_lib](https://github.com/appium/ruby_lib/tree/master/docs)
 - [Appium Ruby Console](https://github.com/appium/ruby_console)
-- [Bootcamp quick start guide](http://sauceio.com/index.php/tag/appium-bootcamp/) & [Bootcamp example source](https://github.com/tourdedave/appium-getting-started-code-exampes)
-- [Mobile automation walkthrough with Ruby and Sauce](http://stackshare.io/sauce-labs/mobile-automation-with-appium-and-sauce-labs) & [code examples](https://github.com/jlipps/appium-ruby-example)
+- [Getting Started](https://github.com/appium/appium/blob/master/docs/en/about-appium/getting-started.md)
+- [code examples](https://github.com/appium/sample-code/tree/master/sample-code/examples/ruby)
 
 Helper methods for writing cross platform (iOS, Android) tests in Ruby using Appium. Note that user waits should not exceed 120 seconds if they're going to run on Sauce Labs.
 
 Make sure you're using Appium 1.0.0 or newer and Ruby 2.2+ with upgraded rubygems and bundler.
 
-XCUITest for iOS requires `Appium 1.6.0+`. `appium_lib9.1.0+` requires `selenium-webdriver3.0.2+`.(`appium_lib9.0.0` or less requires `selenium-webdriver2.x`)
-
 #### Start appium server
 
-`node .`
-
-#### Install / Upgrade
-
-Update rubygems and bundler.
-
-```ruby
-gem update --system ;\
-gem update bundler
+```bash
+$ npm install -g appium
+$ appium
 ```
 
-Install the latest gem release.
+#### Install / Upgrade
+- Update rubygems and bundler
+```bash
+$ gem update --system
+$ gem update bundler
+```
 
-```ruby
-gem uninstall -aIx appium_lib ;\
+- Install the latest gem release
+```bash
+gem uninstall -aIx appium_lib
 gem install --no-rdoc --no-ri appium_lib
 ```
 
-#### Sauce Labs env vars
+#### [Sauce Labs env vars](https://github.com/appium/ruby_lib/blob/master/lib/appium_lib/sauce_labs.rb)
 
 - `SAUCE_USERNAME` Sauce username
 - `SAUCE_ACCESS_KEY` Sauce API key
 - `SAUCE_ENDPOINT` Alternative Sauce Appium Server endpoint (only use if directed)
 
 (Note: If these variables are set, all tests will use Sauce Labs unless over-ridden in configuration.)
-
-#### Troubleshooting
-
-1. Does `adb kill-server; adb devices` list an active Android device?
-3. Are you running appium from source? `node .`
 
 #### Documentation
 
@@ -61,14 +54,6 @@ gem install --no-rdoc --no-ri appium_lib
 - [Ruby iOS methods](https://github.com/appium/ruby_lib/blob/master/docs/ios_docs.md)
     - [Tips for XCUITest for iOS](https://github.com/appium/ruby_lib/blob/master/docs/ios_xcuitest.md)
 - [Appium Server docs](https://github.com/appium/appium/tree/master/docs)
-
-#### Logging
-
-[Log level](https://github.com/appium/ruby_lib/blob/1673a694121d2ae24ffd1530eb71b7015d44dc52/lib/appium_lib/logger.rb) can be adjusted. The default level is `Logger::WARN`
-
-```ruby
-Appium::Logger.level = Logger::INFO
-```
 
 #### Load Pry
 `Pry.config.pager = false` is set if you have no `.pryrc` files and `Pry` is defined.

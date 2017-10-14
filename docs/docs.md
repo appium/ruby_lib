@@ -64,7 +64,7 @@ driver.rotate :landscape
 driver.rotate :portrait
 ```
 
-- `status["value"]["build"]["revision"]` Discover the Appium rev running on the server.
+- `appium_server_version` Discover the Appium rev running on the server.
 - `element.send_keys "msg"` Sends keys to currently active element
 
 #### generic
@@ -132,17 +132,16 @@ e.tag_name # calls .type (patch.rb)
 e.text
 e.size
 e.location
-e.rel_location
+e.location_rel
 e.click
 e.send_keys 'keys to send'
-e.set_value 'value to set' # ruby_console specific
 e.displayed? # true or false depending if the element is visible
 e.selected? # is the tab selected?
 e.attribute('checked') # is the checkbox checked?
 
 
 # alert example without helper methods
-alert = $driver.switch_to.alert
+alert = @driver.switch_to.alert
 alert.text
 alert.accept
 alert.dismiss
@@ -160,25 +159,16 @@ s.value == ios_password('hello'.length)
 --
 
 #### Driver
-
-`start_driver` will restart the driver.
-
-`x` will quit the driver and exit Pry.
-
-`execute_script` calls `$driver.execute_script`
-
-`find_element` calls `$driver.find_element`
-
-`find_elements` calls `$driver.find_elements`
-
-`no_wait` will set implicit wait to 0. `$driver.manage.timeouts.implicit_wait = 0`
-
-`set_wait` will set implicit wait to default seconds. `$driver.manage.timeouts.implicit_wait = default`
-
-`set_wait(timeout_seconds)` will set implicit wait to desired timeout. `$driver.manage.timeouts.implicit_wait = timeout`
-
-.click to tap an element.
-.send_keys to type on an element.
+- `start_driver` will restart the driver.
+- `x` will quit the driver and exit Pry.
+- `execute_script` calls `@driver.execute_script`
+- `find_element` calls `@driver.find_element`
+- `find_elements` calls `@driver.find_elements`
+- `no_wait` will set implicit wait to 0. `@driver.manage.timeouts.implicit_wait = 0`
+- `set_wait` will set implicit wait to default seconds. `@driver.manage.timeouts.implicit_wait = default`
+- `set_wait(timeout_seconds)` will set implicit wait to desired timeout. `@driver.manage.timeouts.implicit_wait = timeout`
+- `.click` to tap an element.
+- `.send_keys` or `.type` to type on an element.
 
 #### Cucumber Sauce Integration
 
@@ -200,18 +190,4 @@ After do |scenario|
     SauceWhisk::Jobs.change_status $driver.driver.session_id, passed
   end
 end
-```
-
-#### Android notes
-
-list all ids on API 18
-
-`get_source.to_s.scan(/id\/([^\"]*)\"/)`
-
-#### iOS notes
-
-Accept an alert if it exists.
-
-```ruby
-alert_accept if exists { alert_text }
 ```
