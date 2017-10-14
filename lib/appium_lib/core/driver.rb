@@ -295,6 +295,8 @@ module Appium
         case device
         when :android
           case automation_name
+          when :espresso
+            ::Appium::Core::Android::Espresso::Bridge.for(self)
           when :uiautomator2
             ::Appium::Core::Android::Uiautomator2::Bridge.for(self)
           else # default and UiAutomator
