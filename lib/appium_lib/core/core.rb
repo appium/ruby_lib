@@ -10,6 +10,7 @@ require_relative 'device/multi_touch'
 
 require_relative 'android'
 require_relative 'android_uiautomator2'
+require_relative 'android_espresso'
 
 require_relative 'ios'
 require_relative 'ios_xcuitest'

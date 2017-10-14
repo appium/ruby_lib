@@ -40,7 +40,7 @@ platformName = "android"
 deviceName = "Nexus 7"
 app = "../test_apps/api.apk"
 appPackage = "io.appium.android.apis"
-appActivity = ".ApiDemos"
+appActivity = "io.appium.android.apis.ApiDemos"
 some_capability = "some_capability"
 androidCoverage = 'io.appium.android.apis/io.appium.android.apis.app.LocalSampleInstrumentation'
 

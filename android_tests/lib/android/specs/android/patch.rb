@@ -11,7 +11,7 @@ describe 'android/patch.rb' do
 
     # TODO: how to invoke random am start commands?
     # nav to start activity
-    # io.appium.android.apis/.ApiDemos
+    # io.appium.android.apis/io.appium.android.apis.ApiDemos
 
     # keyboard may exist, if it doesn't then an error will raise
     ignore { hide_keyboard }

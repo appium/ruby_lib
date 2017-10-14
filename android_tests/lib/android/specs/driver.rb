@@ -39,14 +39,14 @@ describe 'driver' do
       caps = ::Appium::Core::Base::Capabilities.create_capabilities(platformName: 'Android',
                                                                     app:          expected_app,
                                                                     appPackage:   'io.appium.android.apis',
-                                                                    appActivity:  '.ApiDemos',
+                                                                    appActivity:  'io.appium.android.apis.ApiDemos',
                                                                     deviceName:   'Nexus 7',
                                                                     some_capability: 'some_capability')
       caps_with_json = JSON.parse(caps.to_json)
       caps_with_json['platformName'].must_equal 'Android'
       caps_with_json['app'].must_equal expected_app
       caps_with_json['appPackage'].must_equal 'io.appium.android.apis'
-      caps_with_json['appActivity'].must_equal '.ApiDemos'
+      caps_with_json['appActivity'].must_equal 'io.appium.android.apis.ApiDemos'
       caps_with_json['deviceName'].must_equal 'Nexus 7'
       caps_with_json['someCapability'].must_equal 'some_capability'
 
