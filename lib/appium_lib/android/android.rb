@@ -9,6 +9,9 @@ require_relative 'element/text'
 # android - uiautomator2
 require_relative 'uiautomator2'
 
+# android - espresso
+require_relative 'espresso'
+
 module Appium
   module Android
     class Bridge
