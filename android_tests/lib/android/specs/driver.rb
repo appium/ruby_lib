@@ -53,7 +53,7 @@ describe 'driver' do
       caps[:platformName].must_equal 'Android'
       caps[:app].must_equal expected_app
       caps[:appPackage].must_equal 'io.appium.android.apis'
-      caps[:appActivity].must_equal '.ApiDemos'
+      caps[:appActivity].must_equal 'io.appium.android.apis.ApiDemos'
       caps[:deviceName].must_equal 'Nexus 7'
       caps[:some_capability].must_equal 'some_capability'
     end
@@ -63,7 +63,7 @@ describe 'driver' do
       caps_app_for_teardown = actual[:caps][:app]
       expected_app = File.absolute_path('../test_apps/api.apk')
 
-      expected            = { automation_name:   nil,
+      expected            = { automation_name:  :uiautomator2,
                               custom_url:       false,
                               export_session:   false,
                               export_session_path: '/tmp/appium_lib_session',
@@ -83,14 +83,14 @@ describe 'driver' do
       caps_with_json['platformName'].must_equal 'android'
       caps_with_json['app'].must_equal expected_app
       caps_with_json['appPackage'].must_equal 'io.appium.android.apis'
-      caps_with_json['appActivity'].must_equal '.ApiDemos'
+      caps_with_json['appActivity'].must_equal 'io.appium.android.apis.ApiDemos'
       caps_with_json['deviceName'].must_equal 'Nexus 7'
       caps_with_json['someCapability'].must_equal 'some_capability'
 
       actual[:caps][:platformName].must_equal 'android'
       actual[:caps][:app].must_equal expected_app
       actual[:caps][:appPackage].must_equal 'io.appium.android.apis'
-      actual[:caps][:appActivity].must_equal '.ApiDemos'
+      actual[:caps][:appActivity].must_equal 'io.appium.android.apis.ApiDemos'
       actual[:caps][:deviceName].must_equal 'Nexus 7'
       actual[:caps][:some_capability].must_equal 'some_capability'
 
@@ -196,6 +196,8 @@ describe 'driver' do
     #   server_url # sauce labs only
 
     t 'set_immediate_value' do
+      back # To go to top
+
       wait { find('app').click }
       wait { find('activity').click }
       wait { find('custom title').click }
