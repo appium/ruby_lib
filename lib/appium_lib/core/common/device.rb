@@ -27,7 +27,7 @@ module Appium
       #   @return [String] An activity name
       #
       #   ```ruby
-      #   current_activity # 'io.appium.android.apis.ApiDemos'
+      #   current_activity # '.ApiDemos'
       #   ```
 
       # @!method current_package
