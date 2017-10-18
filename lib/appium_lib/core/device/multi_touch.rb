@@ -40,24 +40,7 @@ module Appium
         # action.perform    #=> to 25% of its size.
         # ```
         def pinch(percentage: 25, auto_perform: true, driver:)
-          raise ArgumentError("Can't pinch to greater than screen size.") if percentage > 100
-
-          rate = Float(percentage) / 100
-          pinch = MultiTouch.new(driver)
-
-          # TODO: Don't use driver automation handler here.
-          if pinch.driver.automation_name_is_xcuitest?
-            top, bottom = pinch_for_xcuitest(rate, pinch.driver)
-          elsif pinch.driver.device_is_android?
-            top, bottom = pinch_android(rate, pinch.driver)
-          else
-            top, bottom = pinch_ios(rate, pinch.driver)
-          end
-
-          pinch.add top
-          pinch.add bottom
-          return pinch unless auto_perform
-          pinch.perform
+          raise NotImplementedError
         end
 
         # Convenience method for zooming the screen.
@@ -80,112 +63,7 @@ module Appium
         # action.perform    #=> to 25% of its size.
         # ```
         def zoom(percentage: 200, auto_perform: true, driver:)
-          raise ArgumentError("Can't zoom to smaller then screen size.") if percentage < 100
-
-          rate = 100 / Float(percentage)
-          zoom = MultiTouch.new(driver)
-
-          # TODO: Don't use driver automation handler here.
-          if zoom.driver.automation_name_is_xcuitest?
-            top, bottom = zoom_for_xcuitest(rate, zoom.driver)
-          elsif zoom.driver.device_is_android?
-            top, bottom = zoom_android(rate, zoom.driver)
-          else
-            top, bottom = zoom_ios(rate, zoom.driver)
-          end
-
-          zoom.add top
-          zoom.add bottom
-          return zoom unless auto_perform
-          zoom.perform
-        end
-
-        private
-
-        def pinch_for_xcuitest(rate, driver)
-          height = 100
-
-          ele = driver.find_element :class, 'XCUIElementTypeApplication'
-          top = ::Appium::Core::TouchAction.new(driver)
-          top.swipe({ start_x: 0.5, start_y: 0.0,
-                      offset_x: 0.0, offset_y: (1 - rate) * height }, ele)
-
-          bottom = ::Appium::Core::TouchAction.new(driver)
-          bottom.swipe({ start_x: 0.5, start_y: 1.0,
-                         offset_x: 0.0, offset_y: rate * height }, ele)
-
-          [top, bottom]
-        end
-
-        def pinch_android(rate, driver)
-          height = 100
-
-          top = ::Appium::Core::TouchAction.new(driver)
-          top.swipe start_x: 0.5, start_y: 1.0 * height,
-                    end_x: 0.5, end_y: rate * height, duration: 1_000
-
-          bottom = ::Appium::Core::TouchAction.new(driver)
-          bottom.swipe start_x: 0.5, start_y: 0.0,
-                       end_x: 0.5, end_y: (1 - rate) * height, duration: 1_000
-
-          [top, bottom]
-        end
-
-        def pinch_ios(rate, driver)
-          height = 100
-
-          top = ::Appium::Core::TouchAction.new(driver)
-          top.swipe start_x: 0.5, start_y: 0.0,
-                    offset_x: 0.0, offset_y: (1 - rate) * height, duration: 1_000
-
-          bottom = ::Appium::Core::TouchAction.new(driver)
-          bottom.swipe start_x: 0.5, start_y: 1.0,
-                       offset_x: 0.0, offset_y: rate * height, duration: 1_000
-
-          [top, bottom]
-        end
-
-        def zoom_for_xcuitest(rate, driver)
-          height = 100
-
-          ele = driver.find_element :class, 'XCUIElementTypeApplication'
-          top = ::Appium::Core::TouchAction.new(driver)
-          top.swipe({ start_x: 0.5, start_y: (1 - rate) * height,
-                      offset_x: 0.0, offset_y: - (1 - rate) * height }, ele)
-
-          bottom = ::Appium::Core::TouchAction.new(driver)
-          bottom.swipe({ start_x: 0.5, start_y: rate * height,
-                         offset_x: 0.0, offset_y: (1 - rate) * height }, ele)
-
-          [top, bottom]
-        end
-
-        def zoom_android(rate, driver)
-          height = 100
-
-          top = ::Appium::Core::TouchAction.new(driver)
-          top.swipe start_x: 0.5, start_y: (1.0 - rate) * height,
-                    end_x: 0.5, end_y: 0.0, duration: 1_000
-
-          bottom = ::Appium::Core::TouchAction.new(driver)
-          bottom.swipe start_x: 0.5, start_y: rate * height,
-                       end_x: 0.5, end_y: 1.0 * height, duration: 1_000
-
-          [top, bottom]
-        end
-
-        def zoom_ios(rate, driver)
-          height = 100
-
-          top = ::Appium::Core::TouchAction.new(driver)
-          top.swipe start_x: 0.5, start_y: (1 - rate) * height,
-                    offset_x: 0.0, offset_y: - (1 - rate) * height, duration: 1_000
-
-          bottom = ::Appium::Core::TouchAction.new(driver)
-          bottom.swipe start_x: 0.5, start_y: rate * height,
-                       offset_x: 0.0, offset_y: (1 - rate) * height, duration: 1_000
-
-          [top, bottom]
+          raise NotImplementedError
         end
       end # self
 

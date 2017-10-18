@@ -10,6 +10,9 @@ module Appium
             target.extend Appium::Ios::Device
 
             Core::Ios::Uiautomation.patch_webdriver_element
+
+            ::Appium::Core::Ios::Touch.extend_touch_actions
+            ::Appium::Core::Ios::Touch.extend_multi_touch
           end
         end
       end
