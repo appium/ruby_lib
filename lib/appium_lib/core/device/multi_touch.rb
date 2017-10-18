@@ -40,7 +40,7 @@ module Appium
         # action.perform    #=> to 25% of its size.
         # ```
         def pinch(percentage: 25, auto_perform: true, driver:)
-          raise NotImplementedError
+          raise NotImplementedError, "percentage: #{percentage}, auto_perform: #{auto_perform}, driver: #{driver} are set"
         end
 
         # Convenience method for zooming the screen.
@@ -63,7 +63,7 @@ module Appium
         # action.perform    #=> to 25% of its size.
         # ```
         def zoom(percentage: 200, auto_perform: true, driver:)
-          raise NotImplementedError
+          raise NotImplementedError, "percentage: #{percentage}, auto_perform: #{auto_perform}, driver: #{driver} are set"
         end
       end # self
 

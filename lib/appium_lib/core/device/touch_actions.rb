@@ -174,7 +174,7 @@ module Appium
       # Visible for testing
       # @private
       def swipe_coordinates(end_x: nil, end_y: nil, offset_x: nil, offset_y: nil)
-        raise NotImplementedError
+        raise NotImplementedError, "#{end_x}, #{end_y}, #{offset_x}, #{offset_y} are set"
       end
 
       private

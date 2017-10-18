@@ -8,7 +8,7 @@ module Appium
             # @private
             def swipe_coordinates(end_x: nil, end_y: nil, offset_x: nil, offset_y: nil)
               if offset_x.nil? || offset_y.nil?
-                puts 'offset_x and offset_y are used for iOS. Not end_x and end_y point.'
+                puts "offset_x and offset_y are used for iOS. Not end_x: #{end_x} and end_y: #{end_y} point."
               end
 
               offset_x ||= 0
