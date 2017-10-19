@@ -128,21 +128,17 @@ module Appium
       #
       # @option opts [int] :start_x Where to start swiping, on the x axis.  Default 0.
       # @option opts [int] :start_y Where to start swiping, on the y axis.  Default 0.
-      # @option opts [int] :offset_x For iOS. Offset, on the x axis.  Default 0.
-      # @option opts [int] :offset_y For iOS. Offset, on the y axis.  Default 0.
-      # @option opts [int] :end_x For Android. Where to end swiping, on the x axis.  Default 0.
-      # @option opts [int] :end_y For Android. Where to end swiping, on the y axis.  Default 0.
+      # @option opts [int] :offset_x Offset, on the x axis.  Default 0.
+      # @option opts [int] :offset_y Offset, on the y axis.  Default 0.
       # @option opts [int] :duration How long the actual swipe takes to complete in milliseconds. Default 200.
       def swipe(opts, ele = nil)
         start_x  = opts.fetch :start_x, 0
         start_y  = opts.fetch :start_y, 0
         offset_x = opts.fetch :offset_x, nil
         offset_y = opts.fetch :offset_y, nil
-        end_x    = opts.fetch :end_x, nil
-        end_y    = opts.fetch :end_y, nil
         duration = opts.fetch :duration, 200
 
-        coordinates = swipe_coordinates(end_x: end_x, end_y: end_y, offset_x: offset_x, offset_y: offset_y)
+        coordinates = swipe_coordinates(start_x: start_x, start_y: start_y, offset_x: offset_x, offset_y: offset_y)
 
         if ele # pinch/zoom for XCUITest
           press x: start_x, y: start_y, element: ele
@@ -173,8 +169,9 @@ module Appium
 
       # Visible for testing
       # @private
-      def swipe_coordinates(end_x: nil, end_y: nil, offset_x: nil, offset_y: nil)
-        raise NotImplementedError, "#{end_x}, #{end_y}, #{offset_x}, #{offset_y} are set"
+      def swipe_coordinates(start_x: nil, start_y: nil, offset_x: nil, offset_y: nil)
+        raise NotImplementedError,
+              "Please define swipe_coordinates with #{start_x}, #{start_y}, #{offset_x}, #{offset_y}"
       end
 
       private
