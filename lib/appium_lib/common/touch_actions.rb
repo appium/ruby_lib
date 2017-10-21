@@ -47,5 +47,27 @@ module Appium
     def initialize(driver = $driver)
       super driver
     end
+
+    def swipe(opts, ele = nil)
+      start_x  = opts.fetch :start_x, 0
+      start_y  = opts.fetch :start_y, 0
+      offset_x = opts.fetch :offset_x, nil
+      offset_y = opts.fetch :offset_y, nil
+      end_x    = opts.fetch :end_x, nil
+      end_y    = opts.fetch :end_y, nil
+      duration = opts.fetch :duration, 200
+
+      if end_x || end_y
+        warn '[DEPRECATION] end_x and end_y will be removed. Please use offset_x and offset_y for all platform.'
+        end_x ||= 0
+        end_y ||= 0
+
+        offset_x = end_x - start_x
+        offset_y = end_y - start_y
+      end
+
+      super(start_x: start_x, start_y: start_y, offset_x: offset_x, offset_y: offset_y, duration: duration, ele: ele)
+    end
+
   end # class TouchAction
 end # module Appium
