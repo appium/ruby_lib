@@ -134,8 +134,8 @@ module Appium
       def swipe(opts, ele = nil)
         start_x  = opts.fetch :start_x, 0
         start_y  = opts.fetch :start_y, 0
-        offset_x = opts.fetch :offset_x, nil
-        offset_y = opts.fetch :offset_y, nil
+        offset_x = opts.fetch :offset_x, 0
+        offset_y = opts.fetch :offset_y, 0
         duration = opts.fetch :duration, 200
 
         coordinates = swipe_coordinates(start_x: start_x, start_y: start_y, offset_x: offset_x, offset_y: offset_y)
@@ -169,7 +169,7 @@ module Appium
 
       # Visible for testing
       # @private
-      def swipe_coordinates(start_x: nil, start_y: nil, offset_x: nil, offset_y: nil)
+      def swipe_coordinates(start_x: 0, start_y: 0, offset_x: 0, offset_y: 0)
         raise NotImplementedError,
               "Please define swipe_coordinates with #{start_x}, #{start_y}, #{offset_x}, #{offset_y}"
       end

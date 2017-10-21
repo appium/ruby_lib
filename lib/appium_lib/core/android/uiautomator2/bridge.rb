@@ -7,10 +7,9 @@ module Appium
         module Bridge
           def self.for(target)
             target.extend Appium::Android::Device
-            ::Appium::Core::Android::SearchContext.extend
+            Core::Android::SearchContext.extend
 
-            ::Appium::Core::Android::Touch.extend_touch_actions
-            ::Appium::Core::Android::Touch.extend_multi_touch
+            Core::Android::Touch.extend_touch_actions
           end
         end
       end
