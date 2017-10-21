@@ -3,6 +3,19 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+
+## v9.7.3
+
+### 1. Enhancements
+- Get source from XCUITest with `xcuitest_source format: :json`
+    - https://github.com/appium/ruby_lib/pull/699
+- `:espresso` support
+
+### 2. Bug fixes
+
+
+### 3. Deprecations
+
 ## v9.7.2
 
 ### 1. Enhancements
