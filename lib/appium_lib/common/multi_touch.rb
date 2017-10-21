@@ -23,7 +23,7 @@ module Appium
   #   multi_touch_action.add action_2
   #   multi_touch_action.perform
   #
-  class MultiTouch < ::Appium::Core::MultiTouch
+  class MultiTouch
     class << self
       # Convenience method for pinching the screen.
       # Places two fingers at the edges of the screen and brings them together.
@@ -49,7 +49,23 @@ module Appium
       #   pinch 75, true, driver #=> Pinch the screen from the top right and bottom left corners
       #
       def pinch(percentage = 25, auto_perform = true, driver = $driver)
-        ::Appium::Core::MultiTouch.pinch percentage: percentage, auto_perform: auto_perform, driver: driver
+        raise ArgumentError("Can't pinch to greater than screen size.") if percentage > 100
+
+        rate = Float(percentage) / 100
+        pinch = MultiTouch.new(driver)
+
+        if driver.automation_name_is_xcuitest?
+          top, bottom = pinch_for_xcuitest(rate, pinch.driver)
+        elsif driver.device_is_android?
+          top, bottom = pinch_android(rate, pinch.driver)
+        else
+          top, bottom = pinch_ios(rate, pinch.driver)
+        end
+
+        pinch.add top
+        pinch.add bottom
+        return pinch unless auto_perform
+        pinch.perform
       end
 
       # Convenience method for zooming the screen.
@@ -77,12 +93,143 @@ module Appium
       #   pinch 200, true, driver #=> Zoom in the screen from the center until it doubles in size.
       #
       def zoom(percentage = 200, auto_perform = true, driver = $driver)
-        ::Appium::Core::MultiTouch.zoom percentage: percentage, auto_perform: auto_perform, driver: driver
+        raise ArgumentError("Can't zoom to smaller then screen size.") if percentage < 100
+
+        rate = 100 / Float(percentage)
+        zoom = MultiTouch.new(driver)
+
+        if driver.automation_name_is_xcuitest?
+          top, bottom = zoom_for_xcuitest(rate, zoom.driver)
+        elsif driver.device_is_android?
+          top, bottom = zoom_android(rate, zoom.driver)
+        else
+          top, bottom = zoom_ios(rate, zoom.driver)
+        end
+
+        zoom.add top
+        zoom.add bottom
+        return zoom unless auto_perform
+        zoom.perform
+      end
+
+      private
+
+      # @private
+      def pinch_android(rate, driver)
+        height = 100
+        offset = 100
+
+        top = ::Appium::Core::TouchAction.new(driver)
+        top.swipe start_x: offset, start_y: 1.0 * height + offset,
+                  offset_x: 0.0, offset_y: (rate - 1) * height, duration: 1_000
+
+        bottom = ::Appium::Core::TouchAction.new(driver)
+        bottom.swipe start_x: offset, start_y: 0.0 + offset,
+                     offset_x: 0.0, offset_y: (1 - rate) * height, duration: 1_000
+
+        [top, bottom]
+      end
+
+      # @private
+      def pinch_for_xcuitest(rate, driver)
+        height = 100
+        offset = 100
+
+        ele = driver.find_element :class, 'XCUIElementTypeApplication'
+        top = ::Appium::Core::TouchAction.new(driver)
+        top.swipe({ start_x: 0.5, start_y: 0.0 + offset,
+                    offset_x: 0.0, offset_y: (1 - rate) * height }, ele)
+
+        bottom = ::Appium::Core::TouchAction.new(driver)
+        bottom.swipe({ start_x: 0.5, start_y: 1.0 + offset,
+                       offset_x: 0.0, offset_y: rate * height }, ele)
+
+        [top, bottom]
+      end
+
+      # @private
+      def pinch_ios(rate, driver)
+        height = 100
+        offset = 100
+
+        top = ::Appium::Core::TouchAction.new(driver)
+        top.swipe start_x: 0.5, start_y: 0.0 + offset,
+                  offset_x: 0.0, offset_y: (1 - rate) * height, duration: 1_000
+
+        bottom = ::Appium::Core::TouchAction.new(driver)
+        bottom.swipe start_x: 0.5, start_y: 1.0 + offset,
+                     offset_x: 0.0, offset_y: rate * height, duration: 1_000
+
+        [top, bottom]
+      end
+
+      # @private
+      def zoom_android(rate, driver)
+        height = 100
+        offset = 100
+
+        top = ::Appium::Core::TouchAction.new(driver)
+        top.swipe start_x: offset, start_y: (1.0 - rate) * height + offset,
+                  offset_x: 0.0, offset_y: (rate - 1.0) * height, duration: 1_000
+
+        bottom = ::Appium::Core::TouchAction.new(driver)
+        bottom.swipe start_x: offset, start_y: rate * height + offset,
+                     offset_x: 0.0, offset_y: (1.0 - rate) * height, duration: 1_000
+
+        [top, bottom]
+      end
+
+      # @private
+      def zoom_for_xcuitest(rate, driver)
+        height = 100
+        offset = 100
+
+        ele = driver.find_element :class, 'XCUIElementTypeApplication'
+        top = ::Appium::Core::TouchAction.new(driver)
+        top.swipe({ start_x: 0.5, start_y: (1 - rate) * height + offset,
+                    offset_x: 0.0, offset_y: - (1 - rate) * height }, ele)
+
+        bottom = ::Appium::Core::TouchAction.new(driver)
+        bottom.swipe({ start_x: 0.5, start_y: rate * height + offset,
+                       offset_x: 0.0, offset_y: (1 - rate) * height }, ele)
+
+        [top, bottom]
+      end
+
+      # @private
+      def zoom_ios(rate, driver)
+        height = 100
+        offset = 100
+
+        top = ::Appium::Core::TouchAction.new(driver)
+        top.swipe start_x: 0.5, start_y: (1 - rate) * height + offset,
+                  offset_x: 0.0, offset_y: - (1 - rate) * height, duration: 1_000
+
+        bottom = ::Appium::Core::TouchAction.new(driver)
+        bottom.swipe start_x: 0.5, start_y: rate * height + offset,
+                     offset_x: 0.0, offset_y: (1 - rate) * height, duration: 1_000
+
+        [top, bottom]
       end
     end # self
 
+    attr_reader :driver
+
     def initialize(driver = $driver)
-      super driver
+      @actions = []
+      @driver = driver
+    end
+
+    # Add a touch_action to be performed
+    # @param chain (TouchAction) The action to add to the chain
+    def add(chain)
+      @actions << chain.actions
+    end
+
+    # Ask Appium to perform the actions
+    def perform
+      @driver.multi_touch @actions
+      @actions.clear
     end
   end # class MultiTouch
 end # module Appium

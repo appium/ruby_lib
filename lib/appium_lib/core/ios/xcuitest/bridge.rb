@@ -10,6 +10,8 @@ module Appium
             Core::Ios::Xcuitest::SearchContext.extend
             target.extend Appium::Ios::Device
             target.extend Appium::Ios::Xcuitest::Device
+
+            Core::Ios::Touch.extend_touch_actions
           end
         end
       end
