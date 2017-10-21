@@ -1,3 +1,11 @@
+#### v9.7.2 2017-10-07
+
+- [1f20df4](https://github.com/appium/ruby_lib/commit/1f20df4ea663c881d10d173c2df178169f257c95) [Release 9 7 2 (#692)](https://github.com/appium/ruby_lib/issues/692)
+- [b9bb275](https://github.com/appium/ruby_lib/commit/b9bb2751313ea478ee775d979543f05dc44f9e21) [feature: add flatten_hash_keys (#688)](https://github.com/appium/ruby_lib/issues/688)
+- [3bdc1f9](https://github.com/appium/ruby_lib/commit/3bdc1f9cf6ad5eb2279dfd6cb43e35fc469720de) [fix: path for uiautomation (#690)](https://github.com/appium/ruby_lib/issues/690)
+- [3102784](https://github.com/appium/ruby_lib/commit/31027845774373e22b907242944f391ddf755581) [fix: export session (#689)](https://github.com/appium/ruby_lib/issues/689)
+
+
 #### v9.7.1 2017-10-01
 
 - [ebde85f](https://github.com/appium/ruby_lib/commit/ebde85fac616ac09e19a5f8215195e536d88344d) [Release 9 7 1 (#682)](https://github.com/appium/ruby_lib/issues/682)
