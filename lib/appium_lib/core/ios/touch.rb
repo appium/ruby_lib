@@ -5,6 +5,7 @@ module Appium
         def self.extend_touch_actions
           ::Appium::Core::TouchAction.class_eval do
             def swipe_coordinates(start_x: 0, start_y: 0, offset_x: 0, offset_y: 0)
+              Appium::Logger.info "start_x: #{start_x}, start_y: #{start_y}, offset_x: #{offset_x}, offset_y: #{offset_y}"
               { offset_x: offset_x, offset_y: offset_y }
             end
           end

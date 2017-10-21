@@ -62,7 +62,6 @@ module Appium
           top, bottom = pinch_ios(rate, pinch.driver)
         end
 
-
         pinch.add top
         pinch.add bottom
         return pinch unless auto_perform
