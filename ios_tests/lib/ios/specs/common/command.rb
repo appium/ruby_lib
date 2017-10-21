@@ -18,6 +18,7 @@ describe 'common/command.rb' do
                                         :close_app,
                                         :reset,
                                         :device_locked?,
+                                        :unlock,
                                         :device_time,
                                         :current_context])
   end

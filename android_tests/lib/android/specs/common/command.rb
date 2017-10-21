@@ -18,6 +18,8 @@ describe 'common/command.rb' do
                                         :close_app,
                                         :reset,
                                         :device_locked?,
+                                        :unlock,
+                                        :device_time,
                                         :open_notifications,
                                         :toggle_airplane_mode,
                                         :current_activity,
