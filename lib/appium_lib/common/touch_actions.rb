@@ -68,6 +68,5 @@ module Appium
 
       super(start_x: start_x, start_y: start_y, offset_x: offset_x, offset_y: offset_y, duration: duration, ele: ele)
     end
-
   end # class TouchAction
 end # module Appium
