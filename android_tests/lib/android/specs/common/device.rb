@@ -64,10 +64,10 @@ describe 'common/device' do
     wait { text(1).text.must_equal 'API Demos' }
   end
 
-  t 'device_locked?' do
+  t 'device_locked? and unlock' do
     lock 5
     wait { device_locked?.must_equal true }
-    press_keycode 82
+    unlock
     wait { device_locked?.must_equal false }
   end
 
