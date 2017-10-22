@@ -23,7 +23,7 @@ module Appium
   #   multi_touch_action.add action_2
   #   multi_touch_action.perform
   #
-  class MultiTouch
+  class MultiTouch < Core::MultiTouch
     class << self
       # Convenience method for pinching the screen.
       # Places two fingers at the edges of the screen and brings them together.
@@ -213,23 +213,8 @@ module Appium
       end
     end # self
 
-    attr_reader :driver
-
     def initialize(driver = $driver)
-      @actions = []
-      @driver = driver
-    end
-
-    # Add a touch_action to be performed
-    # @param chain (TouchAction) The action to add to the chain
-    def add(chain)
-      @actions << chain.actions
-    end
-
-    # Ask Appium to perform the actions
-    def perform
-      @driver.multi_touch @actions
-      @actions.clear
+      super(driver)
     end
   end # class MultiTouch
 end # module Appium

@@ -384,7 +384,8 @@ module Appium
     # @param png_save_path [String] the full path to save the png
     # @return [nil]
     def screenshot(png_save_path)
-      @core.screenshot png_save_path
+      @driver.save_screenshot png_save_path
+      nil
     end
 
     # Quits the driver
