@@ -338,15 +338,6 @@ module Appium
               execute :multi_touch, {}, actions: actions
             end
           end
-
-          # TODO: separate
-          actions = Appium::TouchAction::COMPLEX_ACTIONS
-          actions.each do |method|
-            delegate_from_appium_driver(method, Appium::TouchAction)
-          end
-
-          delegate_from_appium_driver(:pinch, Appium::MultiTouch)
-          delegate_from_appium_driver(:zoom, Appium::MultiTouch)
         end
 
         def add_ime_actions
