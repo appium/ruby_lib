@@ -25,7 +25,6 @@ module Appium
     #   multi_touch_action.perform
     #
     class MultiTouch
-
       attr_reader :driver
 
       def initialize(driver)
