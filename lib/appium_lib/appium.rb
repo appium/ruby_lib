@@ -13,6 +13,7 @@ require_relative 'common/helper'
 require_relative 'common/multi_touch'
 require_relative 'common/touch_actions'
 require_relative 'common/http_client'
+require_relative 'common/device'
 
 # core
 require_relative 'core/core'

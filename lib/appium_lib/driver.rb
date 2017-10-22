@@ -148,6 +148,7 @@ module Appium
 
       # Extend Common methods
       extend Appium::Common
+      extend Appium::Device
 
       # Extend each driver's methods
       extend_for(device: @core.device, automation_name: @core.automation_name)
