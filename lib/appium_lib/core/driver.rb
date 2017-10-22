@@ -208,7 +208,7 @@ module Appium
       # Takes a png screenshot and saves to the target path.
       #
       # @param png_save_path [String] the full path to save the png
-      # @return [nil]
+      # @return [File]
       #
       # @example
       #
@@ -216,8 +216,8 @@ module Appium
       #   # same as `@driver.save_screenshot png_save_path`
       #
       def screenshot(png_save_path)
+        warn '[DEPRECATION] screenshot will be removed. Please use driver.save_screenshot instead.'
         @driver.save_screenshot png_save_path
-        nil
       end
 
       # Check every interval seconds to see if yield returns a truthy value.

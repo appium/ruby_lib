@@ -148,6 +148,7 @@ module Appium
 
       # Extend Common methods
       extend Appium::Common
+      extend Appium::Device
 
       # Extend each driver's methods
       extend_for(device: @core.device, automation_name: @core.automation_name)
@@ -384,7 +385,8 @@ module Appium
     # @param png_save_path [String] the full path to save the png
     # @return [nil]
     def screenshot(png_save_path)
-      @core.screenshot png_save_path
+      @driver.save_screenshot png_save_path
+      nil
     end
 
     # Quits the driver
