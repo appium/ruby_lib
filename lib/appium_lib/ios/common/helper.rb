@@ -389,12 +389,6 @@ module Appium
       find_elements(:uiautomation, _all_pred(opts))
     end
 
-    # Prints xml of the current page
-    # @return [void]
-    def source
-      _print_source get_source
-    end
-
     def _validate_object(*objects)
       raise 'objects must be an array' unless objects.is_a? Array
       objects.each do |obj|
@@ -505,13 +499,6 @@ module Appium
       result           = _by_json(opts).first
       raise _no_such_element if result.nil?
       result
-    end
-
-    # Returns XML string for the current page
-    # Same as driver.page_source
-    # @return [String]
-    def get_source
-      @driver.page_source
     end
   end # module Ios
 end # module Appium

@@ -124,6 +124,19 @@ module Appium
       nil
     end
 
+    # Prints xml of the current page
+    # @return [void]
+    def source
+      _print_source get_source
+    end
+
+    # Returns XML string for the current page
+    # Same as driver.page_source
+    # @return [String]
+    def get_source
+      @driver.page_source
+    end
+
     # Converts pixel values to window relative values
     #
     # @example
