@@ -71,12 +71,6 @@ module Appium
       end
     end # class AndroidElements
 
-    # Prints xml of the current page
-    # @return [void]
-    def source
-      _print_source get_source
-    end
-
     # Android only.
     # Returns a string containing interesting elements.
     # The text, content description, and id are returned.
@@ -349,12 +343,6 @@ module Appium
     # @return [Element]
     def complex_finds_exact(class_name, value)
       find_elements :uiautomator, string_visible_exact(class_name, value)
-    end
-
-    # Returns XML string for the current page via `page_source`
-    # @return [String]
-    def get_source
-      @driver.page_source
     end
   end # module Android
 end # module Appium
