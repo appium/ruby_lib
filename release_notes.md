@@ -1,3 +1,17 @@
+#### v9.7.3 2017-10-21
+
+- [e570a64](https://github.com/appium/ruby_lib/commit/e570a640106c57521335f837082cf00abf0d8c10) [update changelog (#709)](https://github.com/appium/ruby_lib/issues/709)
+- [f598950](https://github.com/appium/ruby_lib/commit/f5989500dabcd21cd6daaacab828942de998497a) [Release 9 7 3 (#708)](https://github.com/appium/ruby_lib/issues/708)
+- [67385e9](https://github.com/appium/ruby_lib/commit/67385e9c203c4bbd062c7bf3397fca7bbb8d636b) [refactor: Separate touch actions (#707)](https://github.com/appium/ruby_lib/issues/707)
+- [d1dd4fb](https://github.com/appium/ruby_lib/commit/d1dd4fbea8958e0b317c59fd2a5aaa0d027078e9) [refactor: set uiautomator2 by default for android (#706)](https://github.com/appium/ruby_lib/issues/706)
+- [8c92ace](https://github.com/appium/ruby_lib/commit/8c92ace7c3c27ee31714c8f3e7d2ebeb48bc07ec) [feature: Add espresso bridge (#705)](https://github.com/appium/ruby_lib/issues/705)
+- [cc4f9e7](https://github.com/appium/ruby_lib/commit/cc4f9e7f67ab66ca0f20849b3b249b99b0671783) [feature: Add espresso (#704)](https://github.com/appium/ruby_lib/issues/704)
+- [dd4ace1](https://github.com/appium/ruby_lib/commit/dd4ace10ee650e8b1e2c8bb50a4a29288a350949) [add an example for the predicate (#701)](https://github.com/appium/ruby_lib/issues/701)
+- [3ea887d](https://github.com/appium/ruby_lib/commit/3ea887d17b6c0b7235f21e3424ada65fe662df22) [feature: add get source for xcuitest (#699)](https://github.com/appium/ruby_lib/issues/699)
+- [798c3aa](https://github.com/appium/ruby_lib/commit/798c3aae8f5ec42f0286b17624e2d667e362b24c) [feature: introduce process model (#698)](https://github.com/appium/ruby_lib/issues/698)
+- [c73ed12](https://github.com/appium/ruby_lib/commit/c73ed12973efb4c4fea031810e2ca6678f363191) [refactor: make export session path manageable (#694)](https://github.com/appium/ruby_lib/issues/694)
+
+
 #### v9.7.2 2017-10-07
 
 - [1f20df4](https://github.com/appium/ruby_lib/commit/1f20df4ea663c881d10d173c2df178169f257c95) [Release 9 7 2 (#692)](https://github.com/appium/ruby_lib/issues/692)
