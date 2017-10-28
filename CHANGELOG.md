@@ -3,6 +3,15 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## v9.7.4
+
+### 1. Enhancements
+- Add unlock command: [PR](https://github.com/appium/ruby_lib/pull/710/files)
+- Be able to call `source` command from any `automationName`
+
+### 2. Bug fixes
+
+### 3. Deprecations
 
 ## v9.7.3
 
