@@ -105,11 +105,27 @@ module Appium
     #          }
     #   Appium::Driver.new(opts, false).start_driver
     #
+    #   # Start iOS driver without global scope
+    #   opts = {
+    #            caps: {
+    #              platformName: :ios,
+    #              app: '/path/to/MyiOS.app'
+    #            },
+    #            appium_lib: {
+    #              wait_timeout: 30
+    #            },
+    #            global_driver: false
+    #          }
+    #   Appium::Driver.new(opts).start_driver
+    #
     # @param opts [Object] A hash containing various options.
     # @param global_driver [Bool] A bool require global driver before initialize.
     # @return [Driver]
     def initialize(opts = {}, global_driver = nil)
       # TODO: set `global_driver = false` by default in the future.
+      # Capybara can't put `global_driver` as the 2nd argument.
+      global_driver = opts.delete :global_driver if global_driver.nil?
+
       if global_driver.nil?
         warn '[DEPRECATION] Appium::Driver.new(opts) will not generate global driver by default.' \
                  'If you would like to generate the global driver dy default, ' \
