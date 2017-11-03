@@ -1,3 +1,12 @@
+#### v9.7.4 2017-10-28
+
+- [8522f49](https://github.com/appium/ruby_lib/commit/8522f496eff2a72648a563af8ce06cb8c7270256) [Release 9 7 4 (#715)](https://github.com/appium/ruby_lib/issues/715)
+- [ad6ca97](https://github.com/appium/ruby_lib/commit/ad6ca9709351b99f547b789846be3faf62f6558f) [fix: Define source in common section (#714)](https://github.com/appium/ruby_lib/issues/714)
+- [bb80136](https://github.com/appium/ruby_lib/commit/bb80136adf909f49582ff69f2c9276669b4edf78) [remove todo (#712)](https://github.com/appium/ruby_lib/issues/712)
+- [b7a6e1d](https://github.com/appium/ruby_lib/commit/b7a6e1d3e2ed0a04de571c857f6c469ac6f24153) [refactor: Define multi touch base class (#711)](https://github.com/appium/ruby_lib/issues/711)
+- [14ff169](https://github.com/appium/ruby_lib/commit/14ff169cf91b36750d1e8cb498723884dcdc66b8) [feature: add unlock (#710)](https://github.com/appium/ruby_lib/issues/710)
+
+
 #### v9.7.3 2017-10-21
 
 - [e570a64](https://github.com/appium/ruby_lib/commit/e570a640106c57521335f837082cf00abf0d8c10) [update changelog (#709)](https://github.com/appium/ruby_lib/issues/709)

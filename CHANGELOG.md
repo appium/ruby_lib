@@ -3,6 +3,15 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## v9.7.5
+
+### 1. Enhancements
+
+### 2. Bug fixes
+- [fix: take care capybara case #716](https://github.com/appium/ruby_lib/pull/716)
+
+### 3. Deprecations
+
 ## v9.7.4
 
 ### 1. Enhancements
@@ -93,7 +102,7 @@ lib/appium_lib         # root directory
       ```ruby
       Appium::Driver.new(opts, true).start_driver # $driver is defined.
       Appium::Driver.new(opts, false).start_driver # $driver isn't defined.
-      ``` 
+      ```
         - [link](https://github.com/appium/ruby_lib/blob/master/docs/ios_docs.md#initialize)
     - We need to provide `driver` to work `TouchAction` and `MultiAction` without global driver
         - `TouchAction`
