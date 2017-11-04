@@ -2,6 +2,8 @@ require 'rubygems'
 require 'selenium-webdriver'
 require 'nokogiri'
 
+require 'appium_lib_core'
+
 # base
 require_relative 'driver'
 require_relative 'sauce_labs'
@@ -14,9 +16,6 @@ require_relative 'common/multi_touch'
 require_relative 'common/touch_actions'
 require_relative 'common/http_client'
 require_relative 'common/device'
-
-# core
-require_relative 'core/core'
 
 # ios
 require_relative 'ios/ios'
@@ -62,7 +61,7 @@ module Appium
 
       data = Tomlrb.load_file(toml, symbolize_keys: true)
       if verbose
-        Appium::Logger.ap_info data unless data.empty?
+        Appium::Logger.info data unless data.empty?
       end
 
       if data && data[:caps] && data[:caps][:app] && !data[:caps][:app].empty?

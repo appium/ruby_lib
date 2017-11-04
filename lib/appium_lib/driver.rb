@@ -9,7 +9,7 @@ module Minitest
   end
 end
 
-require_relative 'core/core'
+require 'appium_lib_core'
 
 module Appium
   REQUIRED_VERSION_XCUITEST = '1.6.0'.freeze
@@ -172,7 +172,7 @@ module Appium
       # for command
 
       if @appium_debug
-        Appium::Logger.ap_debug opts unless opts.empty?
+        Appium::Logger.debug opts unless opts.empty?
         Appium::Logger.debug "Debug is: #{@appium_debug}"
         Appium::Logger.debug "Device is: #{@core.device}"
       end

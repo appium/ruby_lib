@@ -1,4 +1,4 @@
-require_relative '../core/core'
+require 'appium_lib_core'
 require_relative '../version'
 
 module Appium

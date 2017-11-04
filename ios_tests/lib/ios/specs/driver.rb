@@ -31,7 +31,7 @@ describe 'driver' do
   end
 
   describe Appium::Core::Driver do
-    require_relative '../../../../lib/appium_lib/core/core'
+    require 'appium_lib_core'
 
     class ExampleDriver
       def initialize(opts)
