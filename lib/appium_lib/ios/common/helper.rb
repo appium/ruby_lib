@@ -79,13 +79,6 @@ module Appium
       end
     end
 
-    # Gets the JSON source of window number
-    # @return [JSON]
-    def source_window(_window_number = nil)
-      warn '[DEPRECATION] source_window will be removed. Please use source instead.'
-      get_source
-    end
-
     # Find by id
     # @param id [String] the id to search for
     # @return [Element]
