@@ -53,7 +53,6 @@ module Appium
 
     # json and ap are required for the source method.
     require 'json'
-    require 'ap' # awesome print
 
     # @private
     # http://nokogiri.org/Nokogiri/XML/SAX.html

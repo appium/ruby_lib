@@ -30,7 +30,9 @@ describe 'common/command.rb' do
                                         :get_system_bars,
                                         :get_display_density,
                                         :is_keyboard_shown,
-                                        :current_context])
+                                        :current_context,
+                                        :stop_recording_screen,
+                                        :start_recording_screen])
   end
 
   t 'check all command with arg' do
