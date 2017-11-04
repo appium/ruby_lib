@@ -69,7 +69,7 @@ module Appium
         parser.parse s
         parser.document.result
       else
-        s = source_window
+        s = get_source
         parser = Nokogiri::XML::SAX::Parser.new(UITestElementsPrinter.new)
         if class_name
           parser.document.filter = class_name.is_a?(Symbol) ? class_name.to_s : class_name

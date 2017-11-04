@@ -109,36 +109,6 @@ module Appium
       nil
     end
 
-    # Lists package, activity, and adb shell am start -n value for current app.
-    # Works on local host only (not remote).
-
-    # example line:
-    # "mFocusedApp=AppWindowToken{b1420058 token=Token{b128add0
-    #  ActivityRecord{b1264d10 u0 com.example.android.apis/.ApiDemos t23}}}"
-    def current_app
-      warn '[DEPRECATION] current_app will be removed since it work only local.' \
-             'Please use current_activity and current_app to know package and activity for current app'
-
-      line = `adb shell dumpsys window windows`.each_line.grep(/mFocusedApp/).first.strip
-
-      _parse_current_app_line line
-    end
-
-    # @private
-    # noinspection RubyArgCount
-    def _parse_current_app_line(line)
-      match = line.match(/ ([^\/ ]+\/[^ }]+)[ }]/)
-      return nil unless match && match[1]
-
-      pair = match[1].split '/'
-      pkg  = pair.first
-      act  = pair.last
-      OpenStruct.new(line:     line,
-                     package:  pkg,
-                     activity: act,
-                     am_start: pkg + '/' + act)
-    end
-
     # Find the first matching element by id
     # @param id [String] the id to search for
     # @return [Element]

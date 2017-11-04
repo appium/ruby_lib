@@ -319,12 +319,6 @@ module Appium
       @core.platform_version
     end
 
-    # @private
-    def ios_version
-      warn '[DEPRECATION] ios_version will be removed. Please use platform_version instead.'
-      platform_version
-    end
-
     # Returns the client's version info
     #
     # @example
