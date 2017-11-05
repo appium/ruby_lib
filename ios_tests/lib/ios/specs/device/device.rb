@@ -13,37 +13,9 @@ describe 'device/device' do
     before_first
   end
 
-  t 'device_time' do
-    Date.parse(device_time)
-  end
-
-  t 'lock' do
-    lock 5
-    tag(ui_ios).name.must_equal 'SlideToUnlock'
-
-    # It appears that lockForDuration doesn't.
-    close_app
-    launch_app
-  end
-
-  t 'background_app' do
-    background_app 5
-    screen.must_equal catalog
-  end
-
   t 'app_installed' do
     installed = app_installed? 'Derrp'
     installed.must_equal false
-  end
-
-  t 'shake' do
-    shake
-  end
-
-  t 'close and launch' do
-    close_app
-    launch_app
-    tag(ui_ios.navbar).name.must_equal 'UICatalog'
   end
 
   t 'background_app homescreen' do
@@ -55,19 +27,6 @@ describe 'device/device' do
 
   t 'reset' do
     reset
-  end
-
-  t 'available_contexts' do
-    available_contexts.must_equal ['NATIVE_APP']
-  end
-
-  t 'current_context' do
-    current_context.must_equal 'NATIVE_APP'
-  end
-
-  t 'switch_to_default_context' do
-    switch_to_default_context
-    current_context.must_equal 'NATIVE_APP'
   end
 
   t 'app_strings' do
@@ -107,25 +66,5 @@ describe 'device/device' do
 
     touch_action.perform
     touch_action.actions.must_equal []
-  end
-
-  t 'pull_file' do
-    # Selenium::WebDriver::Error::UnknownError: An unknown server-side error occurred while processing the command.
-    # Original error: Cannot read property 'getDir' of undefined
-    read_file = pull_file 'Library/AddressBook/AddressBook.sqlitedb'
-    read_file.start_with?('SQLite format').must_equal true
-  end
-
-  t 'pull_folder' do
-    # Selenium::WebDriver::Error::UnknownError: An unknown server-side error occurred while processing the command.
-    # Original error: Cannot read property 'getDir' of undefined
-    data = pull_folder 'Library/AddressBook'
-    data.length.must_be :>, 1
-  end
-
-  t 'toggle_touch_id_enrollment' do
-    toggle_touch_id_enrollment.must_be_nil
-    toggle_touch_id_enrollment(true).must_be_nil
-    toggle_touch_id_enrollment(false).must_be_nil
   end
 end

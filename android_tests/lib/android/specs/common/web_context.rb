@@ -41,20 +41,4 @@ describe 'the web context' do
 
     undo_setcontext_nav
   end
-
-  t 'within_context' do
-    $driver.within_context 'NATIVE_APP' do
-      wait { current_context.must_equal 'NATIVE_APP' }
-    end
-  end
-
-  t 'switch_to_default_context' do
-    wait do
-      switch_to_default_context
-      current_context.must_equal 'NATIVE_APP'
-    end
-
-    wait { set_context 'NATIVE_APP' }
-    wait { current_context.must_equal 'NATIVE_APP' }
-  end
 end
