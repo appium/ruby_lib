@@ -34,30 +34,6 @@ describe 'driver' do
       apk_name.must_equal 'api.apk'
     end
 
-    t 'verify Appium::Core::Base::Capabilities.create_capabilities' do
-      expected_app = File.absolute_path('../test_apps/api.apk')
-      caps = ::Appium::Core::Base::Capabilities.create_capabilities(platformName: 'Android',
-                                                                    app:          expected_app,
-                                                                    appPackage:   'io.appium.android.apis',
-                                                                    appActivity:  'io.appium.android.apis.ApiDemos',
-                                                                    deviceName:   'Nexus 7',
-                                                                    some_capability: 'some_capability')
-      caps_with_json = JSON.parse(caps.to_json)
-      caps_with_json['platformName'].must_equal 'Android'
-      caps_with_json['app'].must_equal expected_app
-      caps_with_json['appPackage'].must_equal 'io.appium.android.apis'
-      caps_with_json['appActivity'].must_equal 'io.appium.android.apis.ApiDemos'
-      caps_with_json['deviceName'].must_equal 'Nexus 7'
-      caps_with_json['someCapability'].must_equal 'some_capability'
-
-      caps[:platformName].must_equal 'Android'
-      caps[:app].must_equal expected_app
-      caps[:appPackage].must_equal 'io.appium.android.apis'
-      caps[:appActivity].must_equal 'io.appium.android.apis.ApiDemos'
-      caps[:deviceName].must_equal 'Nexus 7'
-      caps[:some_capability].must_equal 'some_capability'
-    end
-
     t 'verify all attributes' do
       actual                = driver_attributes
       caps_app_for_teardown = actual[:caps][:app]
@@ -108,11 +84,6 @@ describe 'driver' do
         message = "\n\nactual:\n\n: #{actual.ai}expected:\n\n#{expected.ai}\n\n#{diff}"
         raise message
       end
-    end
-
-    t 'default timeout for http client' do
-      http_client.open_timeout.must_equal 999_999
-      http_client.read_timeout.must_equal 999_999
     end
   end
 
