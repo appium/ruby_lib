@@ -1,5 +1,3 @@
-# rubocop:disable Metrics/LineLength
-
 # rake android[android/helper]
 describe 'android/helper' do
   t 'tags' do
