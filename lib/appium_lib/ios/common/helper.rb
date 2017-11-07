@@ -69,7 +69,7 @@ module Appium
         parser.parse s
         parser.document.result
       else
-        s = source_window
+        s = get_source
         parser = Nokogiri::XML::SAX::Parser.new(UITestElementsPrinter.new)
         if class_name
           parser.document.filter = class_name.is_a?(Symbol) ? class_name.to_s : class_name
@@ -77,13 +77,6 @@ module Appium
         parser.parse s
         nil
       end
-    end
-
-    # Gets the JSON source of window number
-    # @return [JSON]
-    def source_window(_window_number = nil)
-      warn '[DEPRECATION] source_window will be removed. Please use source instead.'
-      get_source
     end
 
     # Find by id

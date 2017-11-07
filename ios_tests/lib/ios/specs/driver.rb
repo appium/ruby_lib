@@ -30,71 +30,6 @@ describe 'driver' do
     assert_equal expected, actual
   end
 
-  describe Appium::Core::Driver do
-    require_relative '../../../../lib/appium_lib/core/core'
-
-    class ExampleDriver
-      def initialize(opts)
-        ::Appium::Core::Driver.new(self, opts)
-      end
-    end
-
-    t 'no caps' do
-      opts = { no: { caps: {} }, appium_lib: {} }
-      proc { ExampleDriver.new(opts) }.must_raise ::Appium::Core::Error::NoCapabilityError
-    end
-
-    t 'with caps' do
-      opts = { caps: {} }
-      ExampleDriver.new(opts).wont_be_nil
-    end
-
-    t 'with caps and appium_lib' do
-      opts = { caps: {}, appium_lib: {} }
-      ExampleDriver.new(opts).wont_be_nil
-    end
-
-    t 'with caps and wrong appium_lib' do
-      opts = { caps: { appium_lib: {} } }
-      proc { ExampleDriver.new(opts) }.must_raise ::Appium::Core::Error::CapabilityStructureError
-    end
-  end
-
-  t 'verify Appium::Core::Base::Capabilities.create_capabilities' do
-    expected_app = File.absolute_path('UICatalog.app')
-    caps = ::Appium::Core::Base::Capabilities.create_capabilities(platformName:    'ios',
-                                                                  platformVersion: '10.3',
-                                                                  automationName:  'XCUITest',
-                                                                  deviceName:      'iPhone Simulator',
-                                                                  app:             expected_app,
-                                                                  some_capability: 'some_capability')
-    caps_with_json = JSON.parse(caps.to_json)
-    caps_with_json['platformName'].must_equal 'ios'
-    caps_with_json['platformVersion'].must_equal '10.3'
-    caps_with_json['app'].must_equal expected_app
-    caps_with_json['automationName'].must_equal 'XCUITest'
-    caps_with_json['deviceName'].must_equal 'iPhone Simulator'
-    caps_with_json['someCapability'].must_equal 'some_capability'
-
-    caps[:platformName].must_equal 'ios'
-    caps[:platformVersion].must_equal '10.3'
-    caps[:app].must_equal expected_app
-    caps[:automationName].must_equal 'XCUITest'
-    caps[:deviceName].must_equal 'iPhone Simulator'
-    caps[:some_capability].must_equal 'some_capability'
-  end
-
-  describe 'export session' do
-    t 'verify session id in the `export_session_path` variable' do
-      File.read(export_session_path).strip.must_equal session_id
-    end
-
-    t 'verify export session from default value' do
-      # @driver.session_id
-      File.read('/tmp/appium_lib_session').strip.must_equal session_id
-    end
-  end
-
   describe 'Appium::Driver attributes' do
     t 'verify all attributes' do
       actual                = driver_attributes
@@ -175,10 +110,6 @@ describe 'driver' do
       set_wait
     end
 
-    t 'default_wait attr' do
-      default_wait.must_equal 30
-    end
-
     t 'app_path attr' do
       apk_name = File.basename driver_attributes[:caps][:app]
 
@@ -216,11 +147,6 @@ describe 'driver' do
         sauce_access_key.must_be_nil
       end
     end
-
-    t 'default timeout for http client' do
-      http_client.open_timeout.must_equal 999_999
-      http_client.read_timeout.must_equal 999_999
-    end
   end
 
   describe 'Appium::Driver' do
@@ -247,22 +173,6 @@ describe 'driver' do
       client_version = appium_client_version
       expected = { version: ::Appium::VERSION }
       client_version.must_equal expected
-    end
-
-    t 'set_immediate_value' do
-      go_to_textfields
-
-      message = 'hello'
-
-      element = textfield(1)
-      element.click
-      element.clear
-
-      set_immediate_value(element, message)
-      element.text.must_equal message
-
-      set_wait 10
-      leave_textfields
     end
 
     t 'restart' do
