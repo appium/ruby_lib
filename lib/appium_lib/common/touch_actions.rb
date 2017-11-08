@@ -24,10 +24,10 @@ module Appium
   # @example
   #
   #   driver =  Appium::Driver.new(opts, false).start_driver
-  #   action = TouchAction.new.press(x: 45, y: 100).wait(5).release
-  #   action.perform(@driver)
-  #   action = TouchAction.new.swipe(....)
-  #   action.perform(@driver)
+  #   action = TouchAction.new(driver).press(x: 45, y: 100).wait(5).release
+  #   action.perform
+  #   action = TouchAction.new(driver).swipe(....)
+  #   action.perform
   #
   class TouchAction < ::Appium::Core::TouchAction
     COMPLEX_ACTIONS = ::Appium::Core::TouchAction::COMPLEX_ACTIONS
