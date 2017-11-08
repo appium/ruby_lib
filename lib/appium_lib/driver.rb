@@ -36,6 +36,7 @@ module Appium
     attr_reader :sauce_endpoint
 
     # from Core
+    # read http://www.rubydoc.info/github/appium/ruby_lib_core/Appium/Core/Driver
     attr_reader :caps
     attr_reader :custom_url
     attr_reader :export_session
@@ -421,6 +422,9 @@ module Appium
 
     # Creates a new global driver and quits the old one if it exists.
     # You can customise http_client as the following
+    #
+    # Read http://www.rubydoc.info/github/appium/ruby_lib_core/Appium/Core/Device to understand more what the driver
+    # can call instance methods.
     #
     # @example
     #
