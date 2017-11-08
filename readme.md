@@ -15,9 +15,14 @@
 
 Helper methods for writing cross platform (iOS, Android) tests in Ruby using Appium. Note that user waits should not exceed 120 seconds if they're going to run on Sauce Labs.
 
-Make sure you're using Appium 1.0.0 or newer and Ruby 2.2+ with upgraded rubygems and bundler.
+[Ruby_lib_core](https://github.com/appium/ruby_lib_core) is the core driver library which provide `selenium-webdriver` related features and driver methods for Appium.
+The `ruby_lib` wrap the driver and serve many helpful methods for users.
 
 # Setup
+## Requirement
+- [Appium](https://github.com/appium/appium#requirements)
+- Ruby: 2.2+
+
 ## Start appium server
 
 ```bash
