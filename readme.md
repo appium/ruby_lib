@@ -10,6 +10,8 @@
 
 - [appium_lib on RubyGems](https://rubygems.org/gems/appium_lib)
 - [Documentation for appium_lib](https://github.com/appium/ruby_lib/tree/master/docs)
+    - [Documentation for core lib](http://www.rubydoc.info/github/appium/ruby_lib_core)
+        - Especially [driver method for Appium](http://www.rubydoc.info/github/appium/ruby_lib_core/Appium/Core/Device)
 - [Getting Started](https://github.com/appium/appium/blob/master/docs/en/about-appium/getting-started.md)
 - [code examples](https://github.com/appium/sample-code/tree/master/sample-code/examples/ruby)
 
@@ -62,12 +64,12 @@ gem install --no-rdoc --no-ri appium_lib
 
 # Related libraries
 - [ruby_lib_core](https://github.com/appium/ruby_lib_core): Bridged commands, WebDriver dependencies
+    - We add new endpoints for Appium in the core library, and `ruby_lib` call the methods.
 - [ruby_console](https://github.com/appium/ruby_console): Appium Ruby Console
 - [appium_capybara](https://github.com/appium/appium_capybara): Gem enabling appium support in capybara
 
 # Load Pry
 `Pry.config.pager = false` is set if you have no `.pryrc` files and `Pry` is defined.
-
 
 
 # Contribute
