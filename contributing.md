@@ -2,6 +2,8 @@
 
 For features or bug fixes, please submit a pull request. Ideally there would be a test as well. The remainder of this doc details how to run the tests.
 
+If you'd like to adding new driver commands, please refer to https://github.com/appium/ruby_lib_core
+
 ## Tests
 
 - Tests are run against [appium's master branch](https://github.com/appium/appium/blob/master/docs/en/contributing-to-appium/appium-from-source.md)
