@@ -3,6 +3,21 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## v9.8.0
+
+### 1. Enhancements
+- Add start/stop recording screen [#674](https://github.com/appium/ruby_lib/issues/674)
+- replace core directory to core library [#665](https://github.com/appium/ruby_lib/issues/665), [#718](https://github.com/appium/ruby_lib/pull/718)
+    - No change for users
+
+### 2. Bug fixes
+
+### 3. Deprecations
+- `ap_` prefixed logging
+- `source_window`: use `get_source` instead
+- `ios_version`: use `platform_version` instead
+- `current_app`: use `current_activity`, for example to know current app.
+
 ## v9.7.5
 
 ### 1. Enhancements

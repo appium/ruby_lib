@@ -1,3 +1,9 @@
+#### v9.7.5 2017-11-04
+
+- [1e1bb7e](https://github.com/appium/ruby_lib/commit/1e1bb7e3f1f500fa0dffe361b875b6b16941e290) [Release 9 7 5 (#717)](https://github.com/appium/ruby_lib/issues/717)
+- [6a6d07e](https://github.com/appium/ruby_lib/commit/6a6d07e80686a171f76ea4fa013996e7f81f6fb9) [fix: take care capybara case (#716)](https://github.com/appium/ruby_lib/issues/716)
+
+
 #### v9.7.4 2017-10-28
 
 - [8522f49](https://github.com/appium/ruby_lib/commit/8522f496eff2a72648a563af8ce06cb8c7270256) [Release 9 7 4 (#715)](https://github.com/appium/ruby_lib/issues/715)

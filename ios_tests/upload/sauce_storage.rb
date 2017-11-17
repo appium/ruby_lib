@@ -1,29 +1,26 @@
-=begin
-See docs @ http://saucelabs.com/docs/rest#storage
-
-s = SauceStorage.new username: 'my_user_name', key: '00', debug: true
-
-# or if you have  SAUCE_USERNAME and SAUCE_ACCESS_KEY in env already
-
-s = SauceStorage.new debug: true
-
-# list all files
-s.files
-
-# upload a file
-s.upload '/tmp/sauce/test.zip'
-
-> s.files
-=> [{"size"=>8,
-  "mtime"=>1367700857.1011374,
-  "name"=>"test.zip",
-  "md5"=>"d8064dccc0b399d37c73ffa9661a79b6"}]
-> s.upload '/tmp/sauce/test.zip'
-Uploaded /tmp/sauce/test.zip
- local_md5: 764efa883dda1e11db47671c4a3bbd9e
-remote_md5: 764efa883dda1e11db47671c4a3bbd9e
-=end
-require 'rubygems'
+# See docs @ http://saucelabs.com/docs/rest#storage
+#
+# s = SauceStorage.new username: 'my_user_name', key: '00', debug: true
+#
+# # or if you have  SAUCE_USERNAME and SAUCE_ACCESS_KEY in env already
+#
+# s = SauceStorage.new debug: true
+#
+# # list all files
+# s.files
+#
+# # upload a file
+# s.upload '/tmp/sauce/test.zip'
+#
+# > s.files
+# => [{"size"=>8,
+#      "mtime"=>1367700857.1011374,
+#      "name"=>"test.zip",
+#      "md5"=>"d8064dccc0b399d37c73ffa9661a79b6"}]
+# > s.upload '/tmp/sauce/test.zip'
+# Uploaded /tmp/sauce/test.zip
+# local_md5: 764efa883dda1e11db47671c4a3bbd9e
+# remote_md5: 764efa883dda1e11db47671c4a3bbd9erequire 'rubygems'
 require 'restclient'
 require 'json'
 
@@ -49,7 +46,7 @@ class SauceStorage
       end
     end
 
-    url        = "#{@url}/#{file_name}?overwrite=plz"
+    url = "#{@url}/#{file_name}?overwrite=plz"
     json = RestClient.post(url, file, content_type: 'application/octet-stream')
     remote_md_5 = JSON.parse(json)['md5']
     if @debug
