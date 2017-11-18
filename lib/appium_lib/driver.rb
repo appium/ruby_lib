@@ -313,6 +313,7 @@ module Appium
       # server (TestObject for instance) does not respond to status call
       {}
     end
+    alias remote_status appium_server_version
 
     # Return the platform version as an array of integers
     # @return [Array<Integer>]
