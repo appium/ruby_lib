@@ -82,7 +82,7 @@ xpaths("//some xpaths")
 ## Gesture
 - `mobile:` commands are provided by WDA.
 - Documentations
-    - https://github.com/appium/appium/blob/master/docs/en/writing-running-appium/ios-xctest-mobile-gestures.md
+    - https://github.com/appium/appium/blob/master/docs/en/writing-running-appium/ios/ios-xctest-mobile-gestures.md
 - Specs by test code
     - https://github.com/appium/appium-xcuitest-driver/blob/master/test/functional/basic/gesture-e2e-specs.js
 
