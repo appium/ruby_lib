@@ -3,6 +3,16 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+
+## v9.8.1
+### 1. Enhancements
+
+### 2. Bug fixes
+- Fix creating session for the new W3C createSession
+    - https://github.com/appium/appium/pull/9791
+
+### 3. Deprecations
+
 ## v9.8.0
 
 ### 1. Enhancements
