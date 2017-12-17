@@ -1,4 +1,5 @@
 require_relative 'common/helper'
+require_relative 'common/command/command'
 
 require_relative 'element/alert'
 require_relative 'element/button'
