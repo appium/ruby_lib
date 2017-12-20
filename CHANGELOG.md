@@ -3,6 +3,13 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## v9.8.2
+### 1. Enhancements
+- add `shell` command wrapped `mobile: shell` for Android []
+
+### 2. Bug fixes
+
+### 3. Deprecations
 
 ## v9.8.1
 ### 1. Enhancements

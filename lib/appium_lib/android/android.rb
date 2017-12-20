@@ -1,4 +1,5 @@
 require_relative 'common/helper'
+require_relative 'common/command/command'
 
 require_relative 'element/alert'
 require_relative 'element/button'
@@ -17,6 +18,7 @@ module Appium
     class Bridge
       def self.for(target)
         target.extend Appium::Android
+        target.extend Appium::Android::Command
       end
     end
   end

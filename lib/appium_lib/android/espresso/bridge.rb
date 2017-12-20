@@ -6,6 +6,7 @@ module Appium
       class Bridge
         def self.for(target)
           target.extend Appium::Android
+          target.extend Appium::Android::Command
           target.extend Appium::Android::Espresso
         end
       end
