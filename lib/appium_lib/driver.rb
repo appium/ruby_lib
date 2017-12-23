@@ -501,8 +501,6 @@ module Appium
       @appium_server_status = appium_server_version
       check_server_version_xcuitest
 
-      set_implicit_wait(@core.default_wait)
-
       @driver
     end
 
