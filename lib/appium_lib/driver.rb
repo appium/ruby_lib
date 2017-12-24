@@ -282,6 +282,26 @@ module Appium
       !@core.automation_name.nil? && @core.automation_name == :xcuitest
     end
 
+    # Get the dialect value whether current driver is OSS or W3C
+    #
+    # @return [:oss | :w3c]
+    #
+    #  @example
+    #
+    #      if dialect == :w3c
+    #        driver.action
+    #              .move_to_location(500, 500).pointer_down(:left)
+    #              .move_to_location(0, 700)
+    #              .release.perform
+    #      else
+    #        action = TouchAction.new(driver).press(x: 500, y: 500).move_to(500, 700).release
+    #        action.perform
+    #      end
+    #
+    def dialect
+      @driver.dialect
+    end
+
     # Return true if the target Appium server is over REQUIRED_VERSION_XCUITEST.
     # If the Appium server is under REQUIRED_VERSION_XCUITEST, then error is raised.
     # @return [Boolean]
@@ -395,9 +415,23 @@ module Appium
     #   screenshot '/tmp/hi.png'
     #
     # @param png_save_path [String] the full path to save the png
-    # @return [nil]
+    # @return [File]
     def screenshot(png_save_path)
       @driver.save_screenshot png_save_path
+    end
+
+    # Takes a png screenshot of particular element's area
+    #
+    # @example
+    #
+    #   el = find_element :accessibility_id, zzz
+    #   element_screenshot el, '/tmp/hi.png'
+    #
+    # @param [String] element Element take a screenshot
+    # @param [String] png_save_path the full path to save the png
+    # @return [File]
+    def element_screenshot(element, png_save_path)
+      @driver.take_element_screenshot element, png_save_path
       nil
     end
 
@@ -466,8 +500,6 @@ module Appium
 
       @appium_server_status = appium_server_version
       check_server_version_xcuitest
-
-      set_implicit_wait(@core.default_wait)
 
       @driver
     end

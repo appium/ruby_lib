@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.homepage      = 'https://github.com/appium/ruby_lib' # published as appium_lib
   s.require_paths = ['lib']
 
-  s.add_runtime_dependency 'appium_lib_core', '~> 1.1'
+  s.add_runtime_dependency 'appium_lib_core', '~> 1.2.1'
   s.add_runtime_dependency 'tomlrb', '~> 1.1'
   s.add_runtime_dependency 'nokogiri', '~> 1.6', '>= 1.6.6'
 
@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'fakefs', '~> 0.6.7'
 
   s.add_development_dependency 'rake', '~> 12.0'
-  s.add_development_dependency 'yard', '~> 0.8'
+  s.add_development_dependency 'yard', '~> 0.9.11'
 
   s.add_development_dependency 'rubocop', '~> 0.46.0'
   s.add_development_dependency 'rainbow', '~> 2.1.0'
