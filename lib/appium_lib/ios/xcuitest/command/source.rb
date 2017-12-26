@@ -1,6 +1,7 @@
 module Appium
   module Ios
     module Xcuitest
+      # Instance method have `xcuitest_` prefix to prevent conflicts for core commands.
       module Source
         # @param [String|Symbol] format :xml or :json. :xml is by default.
         # @option opts [Element] :element Element to swipe on

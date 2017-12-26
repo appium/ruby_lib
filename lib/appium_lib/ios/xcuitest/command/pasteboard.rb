@@ -1,7 +1,7 @@
 module Appium
   module Ios
     module Xcuitest
-      module Command
+      module PasteBoard
         # @param [string] content The content of the pasteboard. The previous content is going to be overridden.
         #                         The parameter is mandatory
         # @option opts [string] :encoding Encoding of the given content. UTF-8 by default.
