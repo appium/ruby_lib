@@ -1,6 +1,7 @@
 module Appium
   module Ios
     module Xcuitest
+      # **Note** Works only for Xcode 9+
       module MultiAppHandler
         # TODO: consider xcuitest prefix whether override existing methods or define the other word.
         # https://github.com/appium/ruby_lib_core/blob/82e2526de95b05e8a49872e0b69835e99acc66e5/lib/appium_lib_core/common/command.rb#L39
