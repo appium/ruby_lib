@@ -1,11 +1,10 @@
 module Appium
   module Ios
     module Xcuitest
-      # **Note** Works only for Xcode 9+
+      # **Note** Works only for Xcode 9+.
+      # Instance methods have `xcuitest_` prefix to prevent conflicts for core commands.
+      # see: https://github.com/appium/ruby_lib_core/blob/82e2526de95b05e8a49872e0b69835e99acc66e5/lib/appium_lib_core/common/command.rb#L39
       module MultiAppHandler
-        # TODO: consider xcuitest prefix whether override existing methods or define the other word.
-        # https://github.com/appium/ruby_lib_core/blob/82e2526de95b05e8a49872e0b69835e99acc66e5/lib/appium_lib_core/common/command.rb#L39
-
         # Installs given application to the device under test. If the same application is already installed
         # then it's going to be installed over it, which allows to test upgrades.
         # Be careful while reinstalling the main application under test - make sure you called terminateApp
