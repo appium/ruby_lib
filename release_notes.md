@@ -1,3 +1,12 @@
+#### v9.8.1 2017-12-17
+
+- [1081ae0](https://github.com/appium/ruby_lib/commit/1081ae01e7cf5c4682cadcf0219b07912cc3734f) [Release 9 8 1 (#731)](https://github.com/appium/ruby_lib/issues/731)
+- [8212de4](https://github.com/appium/ruby_lib/commit/8212de4037f8c0bcd0c9a5d828dec6db32ace697) [update ruby_core to fix creating session for the W3C createSession for Appium (#730)](https://github.com/appium/ruby_lib/issues/730)
+- [e12787d](https://github.com/appium/ruby_lib/commit/e12787dc1ebd35a9760e9e59e094bc30b2dfe627) [add alias (#725)](https://github.com/appium/ruby_lib/issues/725)
+- [047ed32](https://github.com/appium/ruby_lib/commit/047ed3296ce5a33a4ea9814348dc4b8af2fbebcc) [Release 9 8 0 (#724)](https://github.com/appium/ruby_lib/issues/724)
+- [9dfa0b9](https://github.com/appium/ruby_lib/commit/9dfa0b9c0c3df6f7ec88d578e304ad1fd3704742) [refactor: replace core directory to core library (#718)](https://github.com/appium/ruby_lib/issues/718)
+
+
 #### v9.7.5 2017-11-04
 
 - [1e1bb7e](https://github.com/appium/ruby_lib/commit/1e1bb7e3f1f500fa0dffe361b875b6b16941e290) [Release 9 7 5 (#717)](https://github.com/appium/ruby_lib/issues/717)
