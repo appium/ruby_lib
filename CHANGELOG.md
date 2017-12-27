@@ -5,7 +5,10 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 
 ## v9.8.2
 ### 1. Enhancements
-- add `shell` command wrapped `mobile: shell` for Android []
+- add `shell` command wrapped `mobile: shell` for Android [#732](https://github.com/appium/ruby_lib/pull/732)
+- add handling multiple apps for iOS [#729](https://github.com/appium/ruby_lib/issues/729)
+- Adapt W3C commands and make sure to work Appium 1.7.2+
+    - Which module, msjsonwp or w3c, used depends on server side's response.
 
 ### 2. Bug fixes
 
