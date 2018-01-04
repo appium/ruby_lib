@@ -9,7 +9,7 @@ module Appium
     #   @driver.get_log(:syslog)  #=> [[Selenium::WebDriver::LogEntry]]
     #
     def get_log(type)
-      Appium::Core::Logs.new(@driver.manage.logs).get type
+      @driver.logs.get type
     end
 
     # Get a list of available log types
@@ -21,7 +21,7 @@ module Appium
     #   @driver.get_available_log_types #=> [:syslog, :crashlog, :performance]
     #
     def get_available_log_types
-      Appium::Core::Logs.new(@driver.manage.logs).available_types
+      @driver.logs.available_types
     end
   end # module Common
 end # module Appium

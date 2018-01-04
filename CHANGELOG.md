@@ -3,6 +3,15 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## [Unreleased]
+### 1. Enhancements
+- Bump the core library to 1.2.4
+    - The changelog is [here](https://github.com/appium/ruby_lib_core/blob/master/CHANGELOG.md#124---2018-01-03)
+
+### 2. Bug fixes
+
+### 3. Deprecations
+
 ## v9.8.2
 ### 1. Enhancements
 - add `shell` command wrapped `mobile: shell` for Android [#732](https://github.com/appium/ruby_lib/pull/732)
