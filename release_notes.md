@@ -1,3 +1,12 @@
+#### v9.8.2 2017-12-27
+
+- [500a7a3](https://github.com/appium/ruby_lib/commit/500a7a39e9db4642332ff5e1816d342cf5b4d4d5) [Release 9 8 2 (#741)](https://github.com/appium/ruby_lib/issues/741)
+- [d465462](https://github.com/appium/ruby_lib/commit/d465462d1ba315a201ab11a01f5272046353fa27) [update core (#740)](https://github.com/appium/ruby_lib/issues/740)
+- [987c4e3](https://github.com/appium/ruby_lib/commit/987c4e37372ca5c5d42a58ead6423b3e941e5ad7) [add handling multiple apps (#738)](https://github.com/appium/ruby_lib/issues/738)
+- [1b8f8e3](https://github.com/appium/ruby_lib/commit/1b8f8e362359a1486508f23bc7f6b9cfafa103c5) [Update and add description for actions (#737)](https://github.com/appium/ruby_lib/issues/737)
+- [c691c36](https://github.com/appium/ruby_lib/commit/c691c360e6052cf6adf369bc4c222478b18ab716) [Add run shell sortcut for android (#732)](https://github.com/appium/ruby_lib/issues/732)
+
+
 #### v9.8.1 2017-12-17
 
 - [1081ae0](https://github.com/appium/ruby_lib/commit/1081ae01e7cf5c4682cadcf0219b07912cc3734f) [Release 9 8 1 (#731)](https://github.com/appium/ruby_lib/issues/731)
