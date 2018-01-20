@@ -4,7 +4,7 @@ module Minitest
   class Runnable
   end
 
-  # To switch to load class
+  # To switch load class
   def self.left_greater_than_or_equal_to_right?(left, right)
     left.split('.').zip(right.split('.')).each do |value|
       diff = value[0].to_i - value[1].to_i
