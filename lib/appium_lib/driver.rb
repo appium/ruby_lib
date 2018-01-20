@@ -15,6 +15,8 @@ module Minitest
   end
 
   if left_greater_than_or_equal_to_right?(VERSION, '5.11.0')
+    # http://docs.seattlerb.org/minitest/History_rdoc.html#label-5.11.0+-2F+2018-01-01
+    # `Minitest::Test` became a subclass of `Minitest::Result`
     class Test < Result
     end
   else
