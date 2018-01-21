@@ -7,6 +7,7 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 ### 1. Enhancements
 
 ### 2. Bug fixes
+- Fix `TypeError: superclass mismatch for class Test` for minitest `5.11.0`+ [PR](https://github.com/appium/ruby_lib/pull/748)
 
 ### 3. Deprecations
 
