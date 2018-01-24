@@ -1,3 +1,10 @@
+#### v9.8.3 2018-01-14
+
+- [5de0bec](https://github.com/appium/ruby_lib/commit/5de0bec7bed7096a92531e866f75f95ec29941bf) [Release 9 8 3 (#746)](https://github.com/appium/ruby_lib/issues/746)
+- [d45ab00](https://github.com/appium/ruby_lib/commit/d45ab00320e4ceac60d01e4dadf5a171ecee9c14) [Bump core to 124 (#743)](https://github.com/appium/ruby_lib/issues/743)
+- [275b0a3](https://github.com/appium/ruby_lib/commit/275b0a3ffe9d189e9876dbfcaa748302d6951755) [add ruby 2.5 for travis (#742)](https://github.com/appium/ruby_lib/issues/742)
+
+
 #### v9.8.2 2017-12-27
 
 - [500a7a3](https://github.com/appium/ruby_lib/commit/500a7a39e9db4642332ff5e1816d342cf5b4d4d5) [Release 9 8 2 (#741)](https://github.com/appium/ruby_lib/issues/741)

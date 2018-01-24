@@ -3,7 +3,15 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+
 ## [Unreleased]
+### 1. Enhancements
+
+### 2. Bug fixes
+
+### 3. Deprecations
+
+## v9.8.4
 ### 1. Enhancements
 
 ### 2. Bug fixes
