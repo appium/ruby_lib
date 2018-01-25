@@ -1,4 +1,4 @@
-# Load only for Minitest is loaded
+# Load only Minitest is loaded
 if defined?(Minitest::VERSION)
   # Fix uninitialized constant Minitest (NameError)
   module Minitest
