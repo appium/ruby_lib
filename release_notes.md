@@ -1,3 +1,9 @@
+#### v9.8.4 2018-01-25
+
+- [7b72377](https://github.com/appium/ruby_lib/commit/7b72377d4541c9e7d313631fc543ca93037b892c) [Release 9 8 4 (#749)](https://github.com/appium/ruby_lib/issues/749)
+- [eeea236](https://github.com/appium/ruby_lib/commit/eeea2362bb4660f53cf274c155c57169de225e6a) [fix: add condition flow for minitest (#748)](https://github.com/appium/ruby_lib/issues/748)
+
+
 #### v9.8.3 2018-01-14
 
 - [5de0bec](https://github.com/appium/ruby_lib/commit/5de0bec7bed7096a92531e866f75f95ec29941bf) [Release 9 8 3 (#746)](https://github.com/appium/ruby_lib/issues/746)
