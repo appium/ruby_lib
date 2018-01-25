@@ -73,7 +73,7 @@ describe 'driver' do
       actual[:caps][:app].must_equal expected_app
       actual[:caps][:automationName].must_equal 'XCUITest'
       actual[:caps][:deviceName].must_equal 'iPhone Simulator'
-      actual[:caps][:some_capability].must_equal 'some_capability'
+      actual[:caps][:someCapability].must_equal 'some_capability'
 
       dup_actual = actual.dup
       dup_actual.delete(:caps)
