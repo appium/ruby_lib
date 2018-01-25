@@ -8,6 +8,7 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 ### 1. Enhancements
 
 ### 2. Bug fixes
+- Fix _Bug: NameError: uninitialized constant Minitest::VERSION [#750](https://github.com/appium/ruby_lib/issues/750)_
 
 ### 3. Deprecations
 
