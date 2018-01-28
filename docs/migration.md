@@ -1,3 +1,19 @@
+### Breaking Changes in 9.9.0
+Change `start_recording_screen` interface. Please read [documentation](https://github.com/appium/ruby_lib_core/blob/0ba7b1c726f02e11d6daa46481309b1e0e54b00e/lib/appium_lib_core/android/device.rb#L84) for more details.
+
+- After
+
+```ruby
+start_recording_screen(remote_path: nil, user: nil, pass: nil, method: 'PUT', force_restart: nil, video_size: nil, time_limit: '180', bit_rate: '4000000')
+```
+
+- Before
+
+```ruby
+start_recording_screen(file_path: 'file path in /sdcard/...', video_size: 'videosize', time_limit: '180', bit_rate: '4000000')
+```
+
+
 ### Breaking Changes in 9.6.0
 Raise warning if users call `Appium::Driver.new(opts)`.
 
