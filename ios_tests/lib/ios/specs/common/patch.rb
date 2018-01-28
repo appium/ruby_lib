@@ -28,7 +28,7 @@ describe 'common/patch.rb' do
     # t 'tag_name' do; end # Doesn't work on Android
 
     t 'location_rel' do
-      loc = first_text.location_rel
+      loc = first_text.location_rel($driver)
       loc.x.class.must_equal String
       loc.y.class.must_equal String
     end

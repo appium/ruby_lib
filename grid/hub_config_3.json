@@ -4,8 +4,8 @@
     {
       "browserName": "iPhone Simulator",
       "version":"9.0",
-      "platform":"MAC",
-      "maxInstances": 1
+      "maxInstances": 1,
+      "seleniumProtocol": "WebDriver"
     }
   ],
   "proxy": "org.openqa.grid.selenium.proxy.DefaultRemoteProxy",

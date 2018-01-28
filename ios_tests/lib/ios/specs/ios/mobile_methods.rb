@@ -1,11 +1,11 @@
-# rake ios[ios/command/pasteboard]
-describe 'ios/command/pasteboard' do
+# rake ios[ios/mobile_methods]
+describe 'ios/mobile_methods' do
   def before_first
     screen.must_equal catalog
   end
 
   t 'an element with class chain' do
-    element = find_element :class_chain, 'XCUIElementTypeWindow/*/*/XCUIElementTypeStaticText'
+    element = find_element :class_chain, '**/XCUIElementTypeStaticText'
 
     element.name.must_equal catalog
   end

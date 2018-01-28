@@ -21,7 +21,7 @@ describe 'common/patch' do
 
     t 'location_rel' do
       wait do
-        loc = first_text.location_rel
+        loc = first_text.location_rel($driver)
         loc.x.class.must_equal String
         loc.y.class.must_equal String
       end
