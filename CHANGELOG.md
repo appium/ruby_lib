@@ -3,8 +3,11 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
-## [Unreleased]
+## v9.9.0
 ### 1. Enhancements
+- Bump the core library to 1.3.0
+    - The change have one breaking change for `start_recording_screen`(Android) 
+    - Read `docs/migration.md`
 
 ### 2. Bug fixes
 
