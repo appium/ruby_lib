@@ -1,3 +1,10 @@
+#### v9.8.5 2018-01-26
+
+- [228c5dd](https://github.com/appium/ruby_lib/commit/228c5dd39189b61e4b541852d740fb5d67c8dfbd) [Release 9 8 5 (#753)](https://github.com/appium/ruby_lib/issues/753)
+- [4dc8882](https://github.com/appium/ruby_lib/commit/4dc888211c605ad1d3fc7b38cd8427109698c0cd) [Update CHANGELOG.md (#752)](https://github.com/appium/ruby_lib/issues/752)
+- [d185307](https://github.com/appium/ruby_lib/commit/d185307774bf2a9bc8a3d4e2ef871b0c00e1d73c) [fix Minitest::VERSION error (#751)](https://github.com/appium/ruby_lib/issues/751)
+
+
 #### v9.8.4 2018-01-25
 
 - [7b72377](https://github.com/appium/ruby_lib/commit/7b72377d4541c9e7d313631fc543ca93037b892c) [Release 9 8 4 (#749)](https://github.com/appium/ruby_lib/issues/749)
