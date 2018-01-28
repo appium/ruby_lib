@@ -5,7 +5,7 @@ describe 'ios/mobile_methods' do
   end
 
   t 'an element with class chain' do
-    element = find_element :class_chain, 'XCUIElementTypeWindow/**/XCUIElementTypeStaticText'
+    element = find_element :class_chain, '**/XCUIElementTypeStaticText'
 
     element.name.must_equal catalog
   end
