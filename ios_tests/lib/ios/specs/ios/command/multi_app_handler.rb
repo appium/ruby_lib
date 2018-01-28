@@ -9,13 +9,13 @@ describe 'ios/command/source' do
     xcuitest_terminate_app(bundle_id: test_app_bundle).must_equal true
     xcuitest_query_app_status(bundle_id: test_app_bundle).must_equal 1
 
-    xcuitest_activate_app(bundle_id: test_app_bundle).must_equal {}
+    xcuitest_activate_app(bundle_id: test_app_bundle).must_be_empty
     xcuitest_query_app_status(bundle_id: test_app_bundle).must_equal 4
 
-    xcuitest_activate_app(bundle_id: 'com.apple.Preferences').must_equal {}
+    xcuitest_activate_app(bundle_id: 'com.apple.Preferences').must_be_empty
     xcuitest_query_app_status(bundle_id: test_app_bundle).must_equal 2
 
-    xcuitest_activate_app(bundle_id: test_app_bundle).must_equal {}
+    xcuitest_activate_app(bundle_id: test_app_bundle).must_be_empty
     xcuitest_query_app_status(bundle_id: test_app_bundle).must_equal 4
   end
 end
