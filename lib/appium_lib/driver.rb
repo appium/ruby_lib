@@ -6,16 +6,6 @@ if defined?(Minitest::VERSION)
     class Runnable
     end
 
-    # To switch load class
-    def self.left_greater_than_or_equal_to_right?(left, right)
-      left.split('.').zip(right.split('.')).each do |value|
-        diff = value[0].to_i - value[1].to_i
-        return true if diff > 0
-        return false if diff < 0
-      end
-      true
-    end
-
     begin
       class Test < Runnable
       end
