@@ -23,9 +23,9 @@ if defined?(Minitest::VERSION)
       # http://docs.seattlerb.org/minitest/History_rdoc.html#label-5.11.0+-2F+2018-01-01
       # for 5.11.0/5.11.1
       # `Minitest::Test` became a subclass of `Minitest::Result`
-      if te.message == 'superclass mismatch for class Test'
-        class Test < Result
-        end
+      raise TypeError, te.message unless te.message == 'superclass mismatch for class Test'
+
+      class Test < Result
       end
     end
   end
