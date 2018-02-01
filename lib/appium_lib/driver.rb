@@ -6,8 +6,6 @@ if defined?(Minitest::VERSION)
     class Runnable
     end
 
-    # defined? 'Minitest' # expression
-
     # To switch load class
     def self.left_greater_than_or_equal_to_right?(left, right)
       left.split('.').zip(right.split('.')).each do |value|
@@ -18,16 +16,17 @@ if defined?(Minitest::VERSION)
       true
     end
 
-    if left_greater_than_or_equal_to_right?(VERSION, '5.11.0')
-      # http://docs.seattlerb.org/minitest/History_rdoc.html#label-5.11.0+-2F+2018-01-01
-      # `Minitest::Test` became a subclass of `Minitest::Result`
-      class Test < Result
-      end
-    else
+    begin
       class Test < Runnable
       end
-    end
-    class Spec < Test
+    rescue TypeError => te
+      # http://docs.seattlerb.org/minitest/History_rdoc.html#label-5.11.0+-2F+2018-01-01
+      # for 5.11.0/5.11.1
+      # `Minitest::Test` became a subclass of `Minitest::Result`
+      if te.message == 'superclass mismatch for class Test'
+        class Test < Result
+        end
+      end
     end
   end
 end
