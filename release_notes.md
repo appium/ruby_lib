@@ -1,3 +1,9 @@
+#### v9.9.0 2018-01-29
+
+- [913c6b5](https://github.com/appium/ruby_lib/commit/913c6b5098ebdd6659d949121b42f4a38d8c34d4) [Release 9 9 0 (#756)](https://github.com/appium/ruby_lib/issues/756)
+- [b8d73ca](https://github.com/appium/ruby_lib/commit/b8d73cafcc429e04f06b891d688513a9622c730a) [fix test and add the latest grid (#754)](https://github.com/appium/ruby_lib/issues/754)
+
+
 #### v9.8.5 2018-01-26
 
 - [228c5dd](https://github.com/appium/ruby_lib/commit/228c5dd39189b61e4b541852d740fb5d67c8dfbd) [Release 9 8 5 (#753)](https://github.com/appium/ruby_lib/issues/753)
