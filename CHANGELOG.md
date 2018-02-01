@@ -3,6 +3,14 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## v9.9.1
+### 1. Enhancements
+
+### 2. Bug fixes
+- fix `Minitest`'s revert: [URL](http://docs.seattlerb.org/minitest/History_rdoc.html#label-5.11.2+-2F+2018-01-25)
+
+### 3. Deprecations
+
 ## v9.9.0
 ### 1. Enhancements
 - Bump the core library to 1.3.0
@@ -12,7 +20,6 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 ### 2. Bug fixes
 
 ### 3. Deprecations
-
 
 ## v9.8.5
 ### 1. Enhancements
