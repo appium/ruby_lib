@@ -33,17 +33,29 @@ module Appium
         #
         # @param class_name [String] the class_name to search for
         # @return [Element]
-        def tag(class_name)
-          raise_error_if_no_element tags(class_name).first
+        def tag(class_name, visible = true)
+          raise_error_if_no_element tags(class_name, visible).first
         end
 
         # Returns all visible elements matching class_name
         #
         # @param class_name [String] the class_name to search for
         # @return [Element]
-        def tags(class_name)
-          elements = @driver.find_elements :class, class_name
-          select_visible_elements elements
+        def tags(class_name, visible = true)
+          tags_predicate class_name, visible
+        end
+
+        def tag_predicate(class_name, visible = false)
+          raise_error_if_no_element tags_predicate(class_name, visible).first
+        end
+
+        @private
+        def tags_predicate(class_name, visible = false)
+          if visible
+            find_elements :predicate, %(type == "#{class_name}" && visible == true)
+          else
+            find_elements :predicate, %(type == "#{class_name}" && visible == false)
+          end
         end
 
         # Returns all visible elements matching class_names and value
@@ -53,7 +65,7 @@ module Appium
         # @param class_names [Array[String]] the class_names to search for
         # @param value [String] the value to search for
         # @return [Array[Element]]
-        def tags_include(class_names:, value: nil)
+        def tags_include(class_names:, value: nil, visible: true)
           return unless class_names.is_a? Array
 
           c_names = class_names.map { |class_name| %(type == "#{class_name}") }.join(' || ')
@@ -65,8 +77,8 @@ module Appium
                         c_names
                       end
 
-          elements = @driver.find_elements :predicate, predicate
-          select_visible_elements elements
+          predicate = visible ? %((#{predicate}) && visible == true) : %((#{predicate}) && visible == false)
+          @driver.find_elements :predicate, predicate
         end
 
         # Returns all visible elements matching class_names and value.
@@ -76,7 +88,7 @@ module Appium
         # @param class_names [Array[String]] the class_names to search for
         # @param value [String] the value to search for
         # @return [Array[Element]]
-        def tags_exact(class_names:, value: nil)
+        def tags_exact(class_names:, value: nil, visible: true)
           return unless class_names.is_a? Array
 
           c_names = class_names.map { |class_name| %(type == "#{class_name}") }.join(' || ')
@@ -88,8 +100,8 @@ module Appium
                         c_names
                       end
 
-          elements = @driver.find_elements :predicate, predicate
-          select_visible_elements elements
+          predicate = visible ? %((#{predicate}) && visible == true) : %((#{predicate}) && visible == false)
+          @driver.find_elements :predicate, predicate
         end
       end # module Helper
     end # module Xcuitest

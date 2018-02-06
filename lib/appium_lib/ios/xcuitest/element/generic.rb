@@ -13,8 +13,7 @@ module Appium
         # @param value [String] the value to search for
         # @return [Array<Element>]
         def finds(value)
-          elements = find_eles_by_predicate_include value: value
-          select_visible_elements elements
+          find_eles_by_predicate_include value: value, visible: false
         end
 
         # Find the first element exactly matching value
@@ -28,8 +27,7 @@ module Appium
         # @param value [String] the value to search for
         # @return [Array<Element>]
         def finds_exact(value)
-          elements = find_eles_by_predicate value: value
-          select_visible_elements elements
+          find_eles_by_predicate value: value, visible: false
         end
 
         private

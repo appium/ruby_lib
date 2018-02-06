@@ -5,6 +5,7 @@ deviceName ="iPhone Simulator"
 automationName = 'XCUITest'
 app = "../test_apps/UICatalog.app"
 someCapability = "some_capability"
+useNewWDA = true
 
 [appium_lib]
 sauce_username = ""

@@ -142,8 +142,8 @@ module Appium
     # Note: Uses Predicate
     # @param value [String] the expected value of the attribute
     # @return [Element]
-    def find_ele_by_predicate(class_name: '*', value:)
-      elements = find_eles_by_predicate(class_name: class_name, value: value)
+    def find_ele_by_predicate(class_name: '*', value:, visible: true)
+      elements = find_eles_by_predicate(class_name: class_name, value: value, visible: visible)
       raise _no_such_element if elements.empty?
       elements.first
     end
@@ -153,13 +153,15 @@ module Appium
     # @param value [String] the value of the attribute that the element must have
     # @param class_name [String] the tag name to match
     # @return [Array<Element>]
-    def find_eles_by_predicate(class_name: '*', value:)
+    def find_eles_by_predicate(class_name: '*', value:,  visible: true)
       predicate =  if class_name == '*'
                      %(name ==[c] "#{value}" || label ==[c] "#{value}" || value ==[c] "#{value}")
                    else
                      %(type == "#{class_name}" && ) +
                        %((name ==[c] "#{value}" || label ==[c] "#{value}" || value ==[c] "#{value}"))
                    end
+
+      predicate = visible ? %((#{predicate}) && visible == true) : %((#{predicate}) && visible == false)
       @driver.find_elements :predicate, predicate
     end
 
@@ -187,8 +189,8 @@ module Appium
     # Note: Uses Predicate
     # @param value [String] the value of the attribute that the element must include
     # @return [Element] the element of type tag who's attribute includes value
-    def find_ele_by_predicate_include(class_name: '*', value:)
-      elements = find_eles_by_predicate_include(class_name: class_name, value: value)
+    def find_ele_by_predicate_include(class_name: '*', value:, visible: true)
+      elements = find_eles_by_predicate_include(class_name: class_name, value: value, visible: visible)
       raise _no_such_element if elements.empty?
       elements.first
     end
@@ -198,13 +200,15 @@ module Appium
     # @param value [String] the value of the attribute that the element must include
     # @param class_name [String] the tag name to match
     # @return [Array<Element>] the elements of type tag who's attribute includes value
-    def find_eles_by_predicate_include(class_name: '*', value:)
+    def find_eles_by_predicate_include(class_name: '*', value:, visible: true)
       predicate = if class_name == '*'
                     %(name contains[c] "#{value}" || label contains[c] "#{value}" || value contains[c] "#{value}")
                   else
                     %(type == "#{class_name}" && ) +
                       %((name contains[c] "#{value}" || label contains[c] "#{value}" || value contains[c] "#{value}"))
                   end
+
+      predicate = visible ? %((#{predicate}) && visible == true) : %((#{predicate}) && visible == false)
       @driver.find_elements :predicate, predicate
     end
 
