@@ -25,8 +25,7 @@ module Appium
         # @return [Array<UIAStaticText|XCUIElementTypeStaticText>]
         def texts(value = false)
           return tags static_text_class unless value
-          elements = find_eles_by_predicate_include(class_name: static_text_class, value: value)
-          select_visible_elements elements
+          find_eles_by_predicate_include(class_name: static_text_class, value: value, visible: true)
         end
 
         # Find the first UIAStaticText|XCUIElementTypeStaticText.
@@ -52,8 +51,7 @@ module Appium
         # @param value [String] the value to match exactly
         # @return [Array<UIAStaticText|XCUIElementTypeStaticText>]
         def texts_exact(value)
-          elements = find_eles_by_predicate(class_name: static_text_class, value: value)
-          select_visible_elements elements
+          find_eles_by_predicate(class_name: static_text_class, value: value, visible: true)
         end
       end # module Text
     end # module XCUITest

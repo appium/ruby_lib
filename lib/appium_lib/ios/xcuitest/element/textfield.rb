@@ -41,8 +41,7 @@ module Appium
         def textfields(value = false)
           return tags_include(class_names: [text_field_class, secure_text_field_class]) unless value
 
-          elements = tags_include class_names: [text_field_class, secure_text_field_class], value: value
-          select_visible_elements elements
+          tags_include class_names: [text_field_class, secure_text_field_class], value: value, visible: true
         end
 
         # Find the first TextField.
@@ -70,8 +69,7 @@ module Appium
         # @param value [String] the value to match exactly
         # @return [Array<TextField>]
         def textfields_exact(value)
-          elements = tags_exact class_names: [text_field_class, secure_text_field_class], value: value
-          select_visible_elements elements
+          tags_exact class_names: [text_field_class, secure_text_field_class], value: value, visible: true
         end
 
         private
@@ -85,8 +83,7 @@ module Appium
         # @private
         # for XCUITest
         def _textfields_with_predicate
-          elements = tags_include(class_names: [text_field_class, secure_text_field_class])
-          select_visible_elements elements
+          tags_include(class_names: [text_field_class, secure_text_field_class], visible: true)
         end
       end # module TextField
     end # module XCUITest

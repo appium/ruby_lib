@@ -26,8 +26,7 @@ module Appium
         # @return [Array<UIAButton|XCUIElementTypeButton>]
         def buttons(value = false)
           return tags button_class unless value
-          elements = find_eles_by_predicate_include(class_name: button_class, value: value)
-          select_visible_elements elements
+          find_eles_by_predicate_include(class_name: button_class, value: value, visible: true)
         end
 
         # Find the first UIAButton|XCUIElementTypeButton.
@@ -55,8 +54,7 @@ module Appium
         # @param value [String] the value to match exactly
         # @return [Array<UIAButton|XCUIElementTypeButton>]
         def buttons_exact(value)
-          elements = find_eles_by_predicate(class_name: button_class, value: value)
-          select_visible_elements elements
+          find_eles_by_predicate(class_name: button_class, value: value, visible: true)
         end
       end # moudule button
     end # module Xcuitest
