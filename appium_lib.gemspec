@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency 'appium_lib_core', '~> 1.3.0'
   s.add_runtime_dependency 'tomlrb', '~> 1.1'
-  s.add_runtime_dependency 'nokogiri', '~> 1.6', '>= 1.6.6'
+  s.add_runtime_dependency 'nokogiri', '~> 1.8', '>= 1.8.1'
 
   s.add_development_dependency 'posix-spawn', '~> 0.3'
   s.add_development_dependency 'hashdiff', '~> 0.2.2'
