@@ -3,6 +3,14 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## v9.9.2
+### 1. Enhancements
+- Fix Security Vulnerability(Nokogiri)[#761](https://github.com/appium/ruby_lib/pull/761)
+
+### 2. Bug fixes
+
+### 3. Deprecations
+
 ## v9.9.1
 ### 1. Enhancements
 
