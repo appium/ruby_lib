@@ -1,3 +1,9 @@
+#### v9.9.2 2018-02-12
+
+- [31908a9](https://github.com/appium/ruby_lib/commit/31908a96bf6389f93e6dc3c013bf9d0a9a5b9e12) [Release 9 9 2 (#762)](https://github.com/appium/ruby_lib/issues/762)
+- [51eb451](https://github.com/appium/ruby_lib/commit/51eb451348005a7f6b8e0677570811690b7208da) [Fix Security Vulnerability (#761)](https://github.com/appium/ruby_lib/issues/761)
+
+
 #### v9.9.1 2018-02-02
 
 - [591048d](https://github.com/appium/ruby_lib/commit/591048d98b63f1cde559227e166705147880902e) [Release 9 9 1 (#759)](https://github.com/appium/ruby_lib/issues/759)
