@@ -16,6 +16,16 @@ module Appium
         # --relaxed-security
         @driver.execute_script 'mobile: shell', args
       end
+
+      # Starts Android logcat broadcast websocket on the same host and port
+      def start_logs_broadcast
+        @driver.execute_script 'mobile: startLogsBroadcast'
+      end
+
+      # Stops the previously started logcat broadcasting wesocket server.
+      def stop_logs_broadcast
+        @driver.execute_script 'mobile: stopLogsBroadcast'
+      end
     end
   end
 end
