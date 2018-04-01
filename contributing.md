@@ -24,19 +24,6 @@ Android tests require running on physical hardware with Android 5.0 (API 21). Th
 - `cd android_tests`
 - `flake 3 android` - Run all the Android tests up to 3 times
 
-## Commit Message Format
-- `#{type}: some commit messages`
-- `docs`, `style`, `test` and `chore` are ignored when generating release note with `rake release`.
-
-### Type
-- `feature`: A new feature
-- `fix`: A bug fix
-- `docs`: Documentation only changes
-- `style`: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
-- `refactor`: A code change that neither fixes a bug nor adds a feature
-- `test`: Adding missing or correcting existing tests
-- `chore`: Changes to the build process or auxiliary tools and libraries such as documentation generation
-
 ## Publishing
 
 0. Ensure you have `~/.gem/credentials` If not run [the following command](http://guides.rubygems.org/make-your-own-gem/) (replace username with your rubygems user)
