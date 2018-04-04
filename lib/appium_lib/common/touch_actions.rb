@@ -23,7 +23,7 @@ module Appium
   #
   # @example
   #
-  #   driver =  Appium::Driver.new(opts, false).start_driver
+  #   driver =  Appium::Driver.new(opts, false).start_driver # return an Appium::Core::Base::Driver instance
   #   action = TouchAction.new(driver).press(x: 45, y: 100).wait(5).release
   #   action.perform
   #   action = TouchAction.new(driver).swipe(....)
