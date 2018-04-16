@@ -235,10 +235,9 @@ task :notes do
 end
 
 # Return true if the comment is equal to 'Update release notes'
-# Return true if the comment starts with /^(docs|style|chore):/
 def skip_release_note?(comment)
-  return true if comment == 'Update release notes'
-  comment =~ /^(doc|docs|style|chore|test):/ ? true : false
+  true if comment == 'Update release notes'
+  false
 end
 
 # Used to purge byte order marks that mess up YARD

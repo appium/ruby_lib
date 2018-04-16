@@ -17,17 +17,15 @@ ruby_lib's iOS tests. Requires `Ruby 2.2+` or better.
 There are two backend drivers available for iOS (automationName). UIAutomation which is supported up-to iOS 9.3 and XCUITest which is supported from 10.0 on. UIAutomation is deprecated but will continue to be supported for the time being.
 
 By default, the tests are now run against `iPhone 6 Simulator 10.1 (14A345)`
-#### Documentation
-
-- [Installing Appium on OS X](https://github.com/appium/ruby_console/blob/master/osx.md)
-- [Overview](https://github.com/appium/ruby_lib/blob/master/docs/docs.md)
-- [iOS methods](https://github.com/appium/ruby_lib/blob/master/docs/ios_docs.md)
-- [Minitest Expectations](http://ruby-doc.org/stdlib-1.9.3/libdoc/minitest/spec/rdoc/MiniTest/Expectations.html)
 
 --
 
-```java
+```ruby
 Finished in 1 min 57 secs
 
 123 runs, 164 assertions, 0 failures, 0 errors, 0 skips
 ```
+
+### Tips for parallel 
+
+- https://github.com/grosser/parallel_tests

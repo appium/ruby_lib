@@ -17,7 +17,7 @@ module Appium
   #   multi_touch_action.perform
   #
   #   # with an arbitrary driver
-  #   driver = Appium::Driver.new(opts, false).start_driver
+  #   driver = Appium::Driver.new(opts, false).start_driver # return an Appium::Core::Base::Driver instance
   #   multi_touch_action = MultiTouch.new(driver)
   #   multi_touch_action.add action_1
   #   multi_touch_action.add action_2

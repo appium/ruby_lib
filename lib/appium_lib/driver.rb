@@ -91,7 +91,8 @@ module Appium
     #              wait_timeout: 30
     #            }
     #          }
-    #   Appium::Driver.new(opts, true).start_driver
+    #   appium_driver = Appium::Driver.new(opts, true)
+    #   appium_driver.start_driver
     #
     #   # Start Android driver with global scope
     #   opts = {
@@ -104,7 +105,8 @@ module Appium
     #              wait_interval: 1
     #            }
     #          }
-    #   Appium::Driver.new(opts, true).start_driver
+    #   appium_driver = Appium::Driver.new(opts, true)
+    #   appium_driver.start_driver
     #
     #   # Start iOS driver without global scope
     #   opts = {
@@ -116,7 +118,8 @@ module Appium
     #              wait_timeout: 30
     #            }
     #          }
-    #   Appium::Driver.new(opts, false).start_driver
+    #   appium_driver = Appium::Driver.new(opts, false)
+    #   appium_driver.start_driver
     #
     #   # Start iOS driver without global scope
     #   opts = {
@@ -129,7 +132,8 @@ module Appium
     #            },
     #            global_driver: false
     #          }
-    #   Appium::Driver.new(opts).start_driver
+    #   appium_driver = Appium::Driver.new(opts)
+    #   appium_driver.start_driver
     #
     # @param opts [Object] A hash containing various options.
     # @param global_driver [Bool] A bool require global driver before initialize.
@@ -489,7 +493,8 @@ module Appium
     #              wait_timeout: 30
     #            }
     #          }
-    #   Appium::Driver.new(opts).start_driver
+    #   appium_driver = Appium::Driver.new(opts) #=> return an Appium::Driver instance
+    #   appium_driver.start_driver #=> return an Appium::Core::Base::Driver
     #
     # @option http_client_ops [Hash] :http_client Custom HTTP Client
     # @option http_client_ops [Hash] :open_timeout Custom open timeout for http client.
@@ -591,6 +596,7 @@ module Appium
     # @example
     #
     #   @driver = Appium::Driver.new(opts, false)
+    #   @driver.start_driver
     #   @driver.find_elements :predicate, yyy
     #
     # If you call `Appium.promote_appium_methods`, you can call `find_elements` directly.
@@ -598,6 +604,7 @@ module Appium
     # @example
     #
     #   @driver = Appium::Driver.new(opts, false)
+    #   @driver.start_driver
     #   @driver.find_elements :predicate, yyy
     #
     # If you call `Appium.promote_appium_methods`, you can call `find_elements` directly.
@@ -613,6 +620,7 @@ module Appium
     # @example
     #
     #   @driver = Appium::Driver.new(opts, false)
+    #   @driver.start_driver
     #   @driver.find_element :accessibility_id, zzz
     #
     # If you call `Appium.promote_appium_methods`, you can call `find_element` directly.
