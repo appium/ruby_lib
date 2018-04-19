@@ -1,3 +1,5 @@
+require_relative 'ws_logcat'
+
 module Appium
   module Android
     module Command
@@ -15,6 +17,33 @@ module Appium
         args = { command: command, args: arguments }
         # --relaxed-security
         @driver.execute_script 'mobile: shell', args
+      end
+
+      # Starts Android logcat broadcast websocket
+      #
+      # @param [String] logcat_file A file path to write messages from a logcat WebSocket client
+      #
+      # @example
+      #
+      #   start_logs_broadcast 'outputfile.log' #=> #<Appium::Android::Command::WsLogcat:...>
+      #
+      def start_logs_broadcast(logcat_file = 'logcat.log')
+        @driver.execute_script 'mobile: startLogsBroadcast'
+
+        socket_url = "ws://#{URI.parse(server_url).host}:#{@core.port}/ws/session/#{@driver.session_id}/appium/device/logcat"
+        @logcat_client = Command::WsLogcat.new(url: socket_url, output_file: logcat_file)
+      end
+
+      # Stop Android logcat broadcast websocket
+      #
+      # @example
+      #
+      #   stop_logs_broadcast #=> nil
+      #
+      def stop_logs_broadcast
+        @logcat_client.close
+
+        @driver.execute_script 'mobile: stopLogsBroadcast'
       end
     end
   end
