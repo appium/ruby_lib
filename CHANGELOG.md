@@ -3,6 +3,22 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## Unreleased
+### 1. Enhancements
+
+### 2. Bug fixes
+
+### 3. Deprecations
+
+## v9.11.0
+### 1. Enhancements
+- Add `start_logs_broadcast` and `stop_logs_broadcast` which use WebSocket to get logcat.
+    - Include https://github.com/appium/ruby_lib_core/blob/master/CHANGELOG.md#140---2018-04-15
+
+### 2. Bug fixes
+
+### 3. Deprecations
+
 ## v9.10.0
 ### 1. Enhancements
 - Some changes for Appium 1.8.0
