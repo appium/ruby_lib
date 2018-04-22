@@ -22,10 +22,10 @@ module Appium
     # @option opts [String] :message Exception message if timed out.
     # @option opts [Array, Exception] :ignore Exceptions to ignore while polling (default: Exception)
     def wait_true(opts = {})
-      if opts.empty?
-        @core.wait_true { yield }
+      if opts.is_a? Hash
+        opts.empty? ? @core.wait_true { yield } : @core.wait_true(opts) { yield }
       else
-        @core.wait_true(opts) { yield }
+        ::Appium::Logger.warn('Arguments should be Hash like {timeout: 100}')
       end
     end
 
@@ -43,10 +43,10 @@ module Appium
     # @option opts [String] :message Exception message if timed out.
     # @option opts [Array, Exception] :ignore Exceptions to ignore while polling (default: Exception)
     def wait(opts = {})
-      if opts.empty?
-        @core.wait { yield }
+      if opts.is_a? Hash
+        opts.empty? ? @core.wait { yield } : @core.wait(opts) { yield }
       else
-        @core.wait(opts) { yield }
+        ::Appium::Logger.warn('Arguments should be Hash like {timeout: 100}')
       end
     end
   end

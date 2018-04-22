@@ -24,15 +24,16 @@ describe 'common/helper.rb' do
     wait(wait_opts) { nil }
 
     # failed wait should error
-    proc { wait(wait_opts) { raise } }.must_raise Selenium::WebDriver::Error::TimeOutError
+    proc { wait(wait_opts) { raise } }.must_raise ::Appium::Core::Wait::TimeoutError
 
     # regular rescue will not handle exceptions outside of StandardError hierarchy
     # must rescue Exception explicitly to rescue everything
-    proc { wait(wait_opts) { raise NoMemoryError } }.must_raise Selenium::WebDriver::Error::TimeOutError
-    proc { wait(timeout: 0.2, interval: 0.0) { raise NoMemoryError } }.must_raise Selenium::WebDriver::Error::TimeOutError
+    proc { wait(wait_opts) { raise NoMemoryError } }.must_raise ::Appium::Core::Wait::TimeoutError
+    proc { wait(timeout: 0.2, interval: 0.0) { raise NoMemoryError } }.must_raise ::Appium::Core::Wait::TimeoutError
 
-    # invalid keys are rejected
-    proc { wait(invalidkey: 2) { true } }.must_raise RuntimeError
+    proc { wait(invalidkey: 2) { true } }.must_raise ArgumentError do |e|
+      assert_equal'unknown keyword: invalidkey', e.message
+    end
   end
 
   t 'ignore' do
@@ -50,20 +51,21 @@ describe 'common/helper.rb' do
     wait_true(wait_opts) { true }
 
     # failed wait should error
-    proc { wait_true(wait_opts) { false } }.must_raise Selenium::WebDriver::Error::TimeOutError
-    proc { wait_true(wait_opts) { nil } }.must_raise Selenium::WebDriver::Error::TimeOutError
+    proc { wait_true(wait_opts) { false } }.must_raise ::Appium::Core::Wait::TimeoutError
+    proc { wait_true(wait_opts) { nil } }.must_raise ::Appium::Core::Wait::TimeoutError
 
     # raise should error
-    proc { wait_true(wait_opts) { raise } }.must_raise Selenium::WebDriver::Error::TimeOutError
+    proc { wait_true(wait_opts) { raise } }.must_raise ::Appium::Core::Wait::TimeoutError
 
     # regular rescue will not handle exceptions outside of StandardError hierarchy
     # must rescue Exception explicitly to rescue everything
-    proc { wait_true(wait_opts) { raise NoMemoryError } }.must_raise Selenium::WebDriver::Error::TimeOutError
+    proc { wait_true(wait_opts) { raise NoMemoryError } }.must_raise ::Appium::Core::Wait::TimeoutError
     proc { wait_true(timeout: 0.2, interval: 0.0) { raise NoMemoryError } }
-      .must_raise Selenium::WebDriver::Error::TimeOutError
+      .must_raise ::Appium::Core::Wait::TimeoutError
 
-    # invalid keys are rejected
-    proc { wait_true(invalidkey: 2) { true } }.must_raise RuntimeError
+    proc { wait_true(invalidkey: 2) { true } }.must_raise ArgumentError do
+      assert_equal'unknown keyword: invalidkey', e.message
+    end
   end
 
   # t 'id' # id is for Selendroid
