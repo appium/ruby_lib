@@ -7,6 +7,16 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 ### 1. Enhancements
 
 ### 2. Bug fixes
+
+### 3. Deprecations
+
+## v9.11.1
+### 1. Enhancements
+- Apply `ruby_lib_core ~> 1.4.2`
+   - Support image comparison features
+       - http://www.rubydoc.info/gems/appium_lib_core/Appium/Core/Device/ImageComparison
+
+### 2. Bug fixes
 - Fix `wait` compatibility for `ruby_lib_core ~> 1.4.1`
 
 ### 3. Deprecations

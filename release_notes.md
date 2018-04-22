@@ -1,3 +1,12 @@
+#### v9.11.0 2018-04-19
+
+- [91f4db4](https://github.com/appium/ruby_lib/commit/91f4db40f0b1e29bc77231f3ce850bee193d4968) [Release 9 11 0 (#770)](https://github.com/appium/ruby_lib/issues/770)
+- [74437a7](https://github.com/appium/ruby_lib/commit/74437a7d10203ae6125dbcecd11d761b0dad3819) [add mobile logs broadcast (#764)](https://github.com/appium/ruby_lib/issues/764)
+- [97c6421](https://github.com/appium/ruby_lib/commit/97c6421a557adb40dc134e0a6d65687e918498f3) [remove old docs (#768)](https://github.com/appium/ruby_lib/issues/768)
+- [f58dace](https://github.com/appium/ruby_lib/commit/f58dacea3a003c8c7f4871fd788e9545185cb958) [add some comments in examples for drivers (#767)](https://github.com/appium/ruby_lib/issues/767)
+- [0852bc7](https://github.com/appium/ruby_lib/commit/0852bc7c894015312f42ed252d1cfce185c6cf4e) [clean docs up (#765)](https://github.com/appium/ruby_lib/issues/765)
+
+
 #### v9.10.0 2018-02-14
 
 - [5538a43](https://github.com/appium/ruby_lib/commit/5538a43c96adda5b7400fd50e60f650873fef8b2) [Release 9 10 0 (#763)](https://github.com/appium/ruby_lib/issues/763)
