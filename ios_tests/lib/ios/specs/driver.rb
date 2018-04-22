@@ -12,14 +12,6 @@ describe 'driver' do
     ENV['UPLOAD_FILE'] && ENV['SAUCE_USERNAME']
   end
 
-  t 'left_greater_than_or_equal_to_right?' do
-    assert Minitest.left_greater_than_or_equal_to_right? '5.11.1', '5.11.0'
-    assert Minitest.left_greater_than_or_equal_to_right? '5.11.0', '5.11.0'
-    assert !Minitest.left_greater_than_or_equal_to_right?('5.10.1', '5.11.0')
-    assert !Minitest.left_greater_than_or_equal_to_right?('5.10.0', '5.11.0')
-    assert !Minitest.left_greater_than_or_equal_to_right?('4.10.0', '5.11.0')
-  end
-
   t 'unicode defaults' do
     data = File.read File.expand_path '../../../../data/unicode.txt', __FILE__
     data.strip.must_equal 174.chr('UTF-8')

@@ -45,31 +45,7 @@ describe 'device/touch_actions' do
     # [HTTP] <-- POST /wd/hub/session/8b651f03-0fbc-43f0-aaf2-243d0650f6aa/touch/perform 200 1895 ms - 74
     # rubocop:enable Metrics/LineLength
     Appium::TouchAction.new.swipe(start_x: start_x, start_y: start_y, offset_x: 0, offset_y: - 50).perform
-    ele_index(ui_ios.static_text, 2).text.must_equal 'Chris Armstrong - 0'
-  end
-
-  t 'swipe_coordinates_end_x_end_y' do
-    s = Appium::TouchAction.new.swipe_coordinates(offset_x: 1, offset_y: 2)
-    s[:offset_x].must_equal 1
-    s[:offset_y].must_equal 2
-  end
-
-  t 'swipe_coordinates_end_x' do
-    s = Appium::TouchAction.new.swipe_coordinates(offset_x: 1)
-    s[:offset_x].must_equal 1
-    s[:offset_y].must_equal 0
-  end
-
-  t 'swipe_coordinates_end_y' do
-    s = Appium::TouchAction.new.swipe_coordinates(offset_y: 1)
-    s[:offset_x].must_equal 0
-    s[:offset_y].must_equal 1
-  end
-
-  t 'swipe_coordinates_offset' do
-    s = Appium::TouchAction.new.swipe_coordinates
-    s[:offset_x].must_equal 0
-    s[:offset_y].must_equal 0
+    ele_index(ui_ios.static_text, 2).text.must_equal 'Chris Armstrong - 0' # depends on iOS
   end
 
   t 'after_last' do

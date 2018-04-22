@@ -1,4 +1,5 @@
-# Custom config for RuboCop static code analysis
+AllCops:
+  TargetRubyVersion: 2.2
 Metrics/LineLength:
   Max: 128
 Metrics/MethodLength:

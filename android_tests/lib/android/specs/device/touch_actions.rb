@@ -3,7 +3,7 @@ describe 'device/touch_actions' do
   def swipe_till_text_visible(seen_text)
     start_x = window_size[:width] / 2
     start_y = window_size[:height] / 2
-    wait(60) do
+    wait(timeout: 0.6) do
       # rubocop:disable Metrics/LineLength
       # Example for Android's log
       # [0] pry(#<device/touch_actions>)> swipe start_x: start_x, start_y: start_y, end_x: start_y, end_y: start_y - 100
@@ -21,12 +21,6 @@ describe 'device/touch_actions' do
       swipe start_x: start_x, start_y: start_y, offset_x: 0.0, offset_y: - 100
       text(seen_text).displayed?
     end
-  end
-
-  t 'swipe_coordinates_offset' do
-    s = Appium::TouchAction.new.swipe_coordinates
-    s[:offset_x].must_equal 0
-    s[:offset_y].must_equal 0
   end
 
   t 'swipe_default_duration' do

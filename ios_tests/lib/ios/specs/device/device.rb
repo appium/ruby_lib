@@ -1,3 +1,4 @@
+# $ rake ios[device/device]
 describe 'device/device' do
   def before_first
     screen.must_equal catalog

@@ -2,10 +2,8 @@ require 'appium_lib_core'
 
 module Appium
   module Common
-    class Wait < ::Appium::Core::Base::Wait
-      def initialize(opts = {})
-        super(opts)
-      end
+    class Wait
+      include ::Appium::Core::Waitable
     end
 
     # Check every interval seconds to see if yield returns a truthy value.
@@ -24,7 +22,11 @@ module Appium
     # @option opts [String] :message Exception message if timed out.
     # @option opts [Array, Exception] :ignore Exceptions to ignore while polling (default: Exception)
     def wait_true(opts = {})
-      @core.wait_true(opts) { yield }
+      if opts.is_a? Hash
+        opts.empty? ? @core.wait_true { yield } : @core.wait_true(opts) { yield }
+      else
+        ::Appium::Logger.warn('Arguments should be Hash like {timeout: 100}')
+      end
     end
 
     # Check every interval seconds to see if yield doesn't raise an exception.
@@ -41,7 +43,11 @@ module Appium
     # @option opts [String] :message Exception message if timed out.
     # @option opts [Array, Exception] :ignore Exceptions to ignore while polling (default: Exception)
     def wait(opts = {})
-      @core.wait(opts) { yield }
+      if opts.is_a? Hash
+        opts.empty? ? @core.wait { yield } : @core.wait(opts) { yield }
+      else
+        ::Appium::Logger.warn('Arguments should be Hash like {timeout: 100}')
+      end
     end
   end
 end

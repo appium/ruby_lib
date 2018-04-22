@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.homepage      = 'https://github.com/appium/ruby_lib' # published as appium_lib
   s.require_paths = ['lib']
 
-  s.add_runtime_dependency 'appium_lib_core', '~> 1.4.0'
+  s.add_runtime_dependency 'appium_lib_core', '~> 1.4.2'
   s.add_runtime_dependency 'tomlrb', '~> 1.1'
   s.add_runtime_dependency 'nokogiri', '~> 1.8', '>= 1.8.1'
 
