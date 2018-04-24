@@ -17,7 +17,7 @@ module Appium
   # @example
   #
   #   # called `swipe(...).perform` in this method.
-  #   swipe(start_x: 75, start_y: 500, offset_x: 75, offset_y: 20, duration: 500)
+  #   swipe(start_x: 75, start_y: 500, end_x: 75, end_y: 20, duration: 500)
   #
   # If you'd like to perform the chain with an arbitrary driver:
   #
@@ -48,25 +48,23 @@ module Appium
       super driver
     end
 
-    def swipe(opts, ele = nil)
+    def swipe(opts)
       start_x  = opts.fetch :start_x, 0
       start_y  = opts.fetch :start_y, 0
-      offset_x = opts.fetch :offset_x, nil
-      offset_y = opts.fetch :offset_y, nil
-      end_x    = opts.fetch :end_x, nil
-      end_y    = opts.fetch :end_y, nil
+      end_x    = opts.fetch :end_x, 0
+      end_y    = opts.fetch :end_y, 0
       duration = opts.fetch :duration, 200
 
-      if end_x || end_y
-        warn '[DEPRECATION] end_x and end_y will be removed. Please use offset_x and offset_y for all platform.'
-        end_x ||= 0
-        end_y ||= 0
-
-        offset_x = end_x - start_x
-        offset_y = end_y - start_y
+      if opts[:offset_x]
+        ::Appium::Logger.warn('[DEPRECATED] :offset_x was renamed to :end_x to indicate as an absolute point.')
+        end_x = opts.fetch :offset_x, 0
+      end
+      if opts[:offset_y]
+        ::Appium::Logger.warn('[DEPRECATED] :offset_y was renamed to :end_y to indicate as an absolute point.')
+        end_y = opts.fetch :offset_y, 0
       end
 
-      super(start_x: start_x, start_y: start_y, offset_x: offset_x, offset_y: offset_y, duration: duration, ele: ele)
+      super(start_x: start_x, start_y: start_y, end_x: end_x, end_y: end_y, duration: duration)
     end
   end # class TouchAction
 end # module Appium

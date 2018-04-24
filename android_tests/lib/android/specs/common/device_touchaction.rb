@@ -35,7 +35,7 @@ describe 'common/device_touchaction' do
   t 'swipe' do
     wait { text('Animation').click }
     wait { text_exact('Bouncing Balls').click }
-    wait { Appium::TouchAction.new.swipe(start_x: 0.75, start_y: 0.25, offset_x: 0.0, offset_y: 49.75).perform }
+    wait { Appium::TouchAction.new.swipe(start_x: 0.75, start_y: 0.25, end_x: 0.0, end_y: 49.75).perform }
     2.times { back }
     wait { text_exact 'NFC' }
   end

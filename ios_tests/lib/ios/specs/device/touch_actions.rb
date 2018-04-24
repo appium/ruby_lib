@@ -44,7 +44,7 @@ describe 'device/touch_actions' do
     # [debug] [MJSONWP] Responding to client with driver.performTouch() result: ""
     # [HTTP] <-- POST /wd/hub/session/8b651f03-0fbc-43f0-aaf2-243d0650f6aa/touch/perform 200 1895 ms - 74
     # rubocop:enable Metrics/LineLength
-    Appium::TouchAction.new.swipe(start_x: start_x, start_y: start_y, offset_x: 0, offset_y: - 50).perform
+    Appium::TouchAction.new.swipe(start_x: start_x, start_y: start_y, end_x: 0, end_y: - 50).perform
     ele_index(ui_ios.static_text, 2).text.must_equal 'Chris Armstrong - 0' # depends on iOS
   end
 

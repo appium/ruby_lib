@@ -9,6 +9,8 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 ### 2. Bug fixes
 
 ### 3. Deprecations
+- Changed the name of arguments
+    - `swipe(start_x:, start_y:, end_x:, end_y:)` instead of `swipe(start_x:, start_y:, offset_x:, offset_y:)`
 
 ## v9.11.1
 ### 1. Enhancements
