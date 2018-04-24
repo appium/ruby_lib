@@ -54,9 +54,7 @@ module Appium
         rate = Float(percentage) / 100
         pinch = MultiTouch.new(driver)
 
-        if driver.automation_name_is_xcuitest?
-          top, bottom = pinch_for_xcuitest(rate, pinch.driver)
-        elsif driver.device_is_android?
+        if driver.device_is_android?
           top, bottom = pinch_android(rate, pinch.driver)
         else
           top, bottom = pinch_ios(rate, pinch.driver)
@@ -98,9 +96,7 @@ module Appium
         rate = 100 / Float(percentage)
         zoom = MultiTouch.new(driver)
 
-        if driver.automation_name_is_xcuitest?
-          top, bottom = zoom_for_xcuitest(rate, zoom.driver)
-        elsif driver.device_is_android?
+        if driver.device_is_android?
           top, bottom = zoom_android(rate, zoom.driver)
         else
           top, bottom = zoom_ios(rate, zoom.driver)
@@ -121,28 +117,11 @@ module Appium
 
         top = ::Appium::Core::TouchAction.new(driver)
         top.swipe start_x: offset, start_y: 1.0 * height + offset,
-                  offset_x: 0.0, offset_y: (rate - 1) * height, duration: 1_000
+                  end_x: 0.0, end_y: (rate - 1) * height, duration: 1_000
 
         bottom = ::Appium::Core::TouchAction.new(driver)
         bottom.swipe start_x: offset, start_y: 0.0 + offset,
-                     offset_x: 0.0, offset_y: (1 - rate) * height, duration: 1_000
-
-        [top, bottom]
-      end
-
-      # @private
-      def pinch_for_xcuitest(rate, driver)
-        height = 100
-        offset = 100
-
-        ele = driver.find_element :class, 'XCUIElementTypeApplication'
-        top = ::Appium::Core::TouchAction.new(driver)
-        top.swipe({ start_x: 0.5, start_y: 0.0 + offset,
-                    offset_x: 0.0, offset_y: (1 - rate) * height }, ele)
-
-        bottom = ::Appium::Core::TouchAction.new(driver)
-        bottom.swipe({ start_x: 0.5, start_y: 1.0 + offset,
-                       offset_x: 0.0, offset_y: rate * height }, ele)
+                     end_x: 0.0, end_y: (1 - rate) * height, duration: 1_000
 
         [top, bottom]
       end
@@ -154,11 +133,11 @@ module Appium
 
         top = ::Appium::Core::TouchAction.new(driver)
         top.swipe start_x: 0.5, start_y: 0.0 + offset,
-                  offset_x: 0.0, offset_y: (1 - rate) * height, duration: 1_000
+                  end_x: 0.0, end_y: (1 - rate) * height, duration: 1_000
 
         bottom = ::Appium::Core::TouchAction.new(driver)
         bottom.swipe start_x: 0.5, start_y: 1.0 + offset,
-                     offset_x: 0.0, offset_y: rate * height, duration: 1_000
+                     end_x: 0.0, end_y: rate * height, duration: 1_000
 
         [top, bottom]
       end
@@ -170,28 +149,11 @@ module Appium
 
         top = ::Appium::Core::TouchAction.new(driver)
         top.swipe start_x: offset, start_y: (1.0 - rate) * height + offset,
-                  offset_x: 0.0, offset_y: (rate - 1.0) * height, duration: 1_000
+                  end_x: 0.0, end_y: (rate - 1.0) * height, duration: 1_000
 
         bottom = ::Appium::Core::TouchAction.new(driver)
         bottom.swipe start_x: offset, start_y: rate * height + offset,
-                     offset_x: 0.0, offset_y: (1.0 - rate) * height, duration: 1_000
-
-        [top, bottom]
-      end
-
-      # @private
-      def zoom_for_xcuitest(rate, driver)
-        height = 100
-        offset = 100
-
-        ele = driver.find_element :class, 'XCUIElementTypeApplication'
-        top = ::Appium::Core::TouchAction.new(driver)
-        top.swipe({ start_x: 0.5, start_y: (1 - rate) * height + offset,
-                    offset_x: 0.0, offset_y: - (1 - rate) * height }, ele)
-
-        bottom = ::Appium::Core::TouchAction.new(driver)
-        bottom.swipe({ start_x: 0.5, start_y: rate * height + offset,
-                       offset_x: 0.0, offset_y: (1 - rate) * height }, ele)
+                     end_x: 0.0, end_y: (1.0 - rate) * height, duration: 1_000
 
         [top, bottom]
       end
@@ -203,11 +165,11 @@ module Appium
 
         top = ::Appium::Core::TouchAction.new(driver)
         top.swipe start_x: 0.5, start_y: (1 - rate) * height + offset,
-                  offset_x: 0.0, offset_y: - (1 - rate) * height, duration: 1_000
+                  end_x: 0.0, end_y: - (1 - rate) * height, duration: 1_000
 
         bottom = ::Appium::Core::TouchAction.new(driver)
         bottom.swipe start_x: 0.5, start_y: rate * height + offset,
-                     offset_x: 0.0, offset_y: (1 - rate) * height, duration: 1_000
+                     end_x: 0.0, end_y: (1 - rate) * height, duration: 1_000
 
         [top, bottom]
       end

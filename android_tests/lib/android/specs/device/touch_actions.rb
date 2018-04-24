@@ -18,7 +18,7 @@ describe 'device/touch_actions' do
       # [AndroidBootstrap] [BOOTSTRAP LOG] [debug] Swiping from [x=600.0, y=919.0] to [x=600.0, y=819.0] with steps: 6
       # [debug] [AndroidBootstrap] Received command result from bootstrap
       # rubocop:enable Metrics/LineLength
-      swipe start_x: start_x, start_y: start_y, offset_x: 0.0, offset_y: - 100
+      swipe start_x: start_x, start_y: start_y, end_x: 0.0, end_y: - 100
       text(seen_text).displayed?
     end
   end
