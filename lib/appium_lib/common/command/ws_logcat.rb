@@ -1,5 +1,5 @@
 module Appium
-  module Android
+  module Common
     module Command
       class WsLogcat < ::Appium::Core::WebSocket
         def initialize(url:, output_file: 'logcat.log')
