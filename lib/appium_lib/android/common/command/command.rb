@@ -1,5 +1,3 @@
-require_relative 'ws_logcat'
-
 module Appium
   module Android
     module Command
@@ -31,7 +29,7 @@ module Appium
         @driver.execute_script 'mobile: startLogsBroadcast'
 
         socket_url = "ws://#{URI.parse(server_url).host}:#{@core.port}/ws/session/#{@driver.session_id}/appium/device/logcat"
-        @logcat_client = Command::WsLogcat.new(url: socket_url, output_file: logcat_file)
+        @logcat_client = ::Appium::Common::Command::WsLogcat.new(url: socket_url, output_file: logcat_file)
       end
 
       # Stop Android logcat broadcast websocket

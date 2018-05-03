@@ -19,7 +19,7 @@ module Appium
           @driver.execute_script 'mobile: startLogsBroadcast'
 
           socket_url = "ws://#{URI.parse(server_url).host}:#{@core.port}/ws/session/#{@driver.session_id}/appium/device/syslog"
-          @logcat_client = Command::WsLogcat.new(url: socket_url, output_file: syslog_file)
+          @logcat_client = ::Appium::Common::Command::WsLogcat.new(url: socket_url, output_file: syslog_file)
         end
 
         # Stop iOS syslog broadcast websocket
