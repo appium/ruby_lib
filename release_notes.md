@@ -1,3 +1,9 @@
+#### v9.11.1 2018-04-22
+
+- [778aaf4](https://github.com/appium/ruby_lib/commit/778aaf4dfd5879759fd296f770aef59a6eca685e) [Release 9 11 1 (#772)](https://github.com/appium/ruby_lib/issues/772)
+- [c89f526](https://github.com/appium/ruby_lib/commit/c89f526e97be008b4320c89d7a02267dcb23aa1d) [fix some tests and fix compatibility for wait (#771)](https://github.com/appium/ruby_lib/issues/771)
+
+
 #### v9.11.0 2018-04-19
 
 - [91f4db4](https://github.com/appium/ruby_lib/commit/91f4db40f0b1e29bc77231f3ce850bee193d4968) [Release 9 11 0 (#770)](https://github.com/appium/ruby_lib/issues/770)

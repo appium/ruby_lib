@@ -49,10 +49,10 @@ describe 'device/device' do
 
   t 'swipe' do
     touch_action = Appium::TouchAction.new.swipe(start_x: 75, start_y: 500,
-                                                 offset_x: 75, offset_y: 20, duration: 500).perform
+                                                 end_x: 75, end_y: 20, duration: 500).perform
     touch_action.actions.must_equal []
 
-    touch_action = Appium::TouchAction.new.swipe(start_x: 75, start_y: 500, offset_x: 75, offset_y: 20, duration: 500)
+    touch_action = Appium::TouchAction.new.swipe(start_x: 75, start_y: 500, end_x: 75, end_y: 20, duration: 500)
 
     touch_action.actions[0][:action].must_equal :press
     touch_action.actions[0][:options].must_equal(x: 75, y: 500)
