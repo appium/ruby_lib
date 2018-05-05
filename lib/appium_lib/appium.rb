@@ -16,6 +16,7 @@ require_relative 'common/multi_touch'
 require_relative 'common/touch_actions'
 require_relative 'common/http_client'
 require_relative 'common/device'
+require_relative 'common/command'
 
 # ios
 require_relative 'ios/ios'
