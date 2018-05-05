@@ -5,6 +5,13 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 
 ## Unreleased
 ### 1. Enhancements
+
+### 2. Bug fixes
+
+### 3. Deprecations
+
+## v9.12.1
+### 1. Enhancements
 - Support `start_logs_broadcast` and `stop_logs_broadcast` for iOS
 
 ### 2. Bug fixes
