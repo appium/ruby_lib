@@ -1,3 +1,9 @@
+#### v9.12.0 2018-04-25
+
+- [7a5a12c](https://github.com/appium/ruby_lib/commit/7a5a12ce78ce0a8154ea55ff7f44ecd10ba5b771) [Release 9 12 0 (#775)](https://github.com/appium/ruby_lib/issues/775)
+- [7dcb4fa](https://github.com/appium/ruby_lib/commit/7dcb4fa287e61c813ab8f522e5a4d397a95f5039) [remove hot fix actions (#773)](https://github.com/appium/ruby_lib/issues/773)
+
+
 #### v9.11.1 2018-04-22
 
 - [778aaf4](https://github.com/appium/ruby_lib/commit/778aaf4dfd5879759fd296f770aef59a6eca685e) [Release 9 11 1 (#772)](https://github.com/appium/ruby_lib/issues/772)
