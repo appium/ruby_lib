@@ -2,10 +2,10 @@
 # common methods
 def back_click(opts = {})
   opts ||= {}
-  search_wait = opts.fetch(:wait, 1.7)
+  search_wait = opts.fetch(:wait, 60 * 1.7)
   # iOS may have multiple 'back' buttons
   # select the first displayed? back button.
-  wait(timeout: search_wait) { button_exact('Back') }.click
+  wait(search_wait) { button_exact('Back') }.click
 end
 
 def leave_textfields
