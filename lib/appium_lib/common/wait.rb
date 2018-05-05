@@ -16,12 +16,20 @@ module Appium
     #
     # If only a number is provided then it's treated as the timeout value.
     #
-    # @param [Hash] opts Options
+    # @param [Hash|Numeric] opts Options. If the value is _Numeric_, the value is set as `{ timeout: value }`
     # @option opts [Numeric] :timeout Seconds to wait before timing out. Set default by `appium_wait_timeout` (30).
     # @option opts [Numeric] :interval Seconds to sleep between polls. Set default by `appium_wait_interval` (0.5).
     # @option opts [String] :message Exception message if timed out.
     # @option opts [Array, Exception] :ignore Exceptions to ignore while polling (default: Exception)
+    #
+    # @example
+    #
+    #     wait_true(timeout: 20, interval: 0.2, message: 'custom message') { button_exact('Back') }.click
+    #     wait_true(20) { button_exact('Back') }.click
+    #
     def wait_true(opts = {})
+      opts = opts.is_a?(Numeric) ? { timeout: opts } : opts
+
       if opts.is_a? Hash
         opts.empty? ? @core.wait_true { yield } : @core.wait_true(opts) { yield }
       else
@@ -37,12 +45,20 @@ module Appium
     #
     # If only a number is provided then it's treated as the timeout value.
     #
-    # @param [Hash] opts Options
+    # @param [Hash|Numeric] opts Options. If the value is _Numeric_, the value is set as `{ timeout: value }`
     # @option opts [Numeric] :timeout Seconds to wait before timing out. Set default by `appium_wait_timeout` (30).
     # @option opts [Numeric] :interval Seconds to sleep between polls. Set default by `appium_wait_interval` (0.5).
     # @option opts [String] :message Exception message if timed out.
     # @option opts [Array, Exception] :ignore Exceptions to ignore while polling (default: Exception)
+    #
+    # @example
+    #
+    #     wait(timeout: 20, interval: 0.2, message: 'custom message') { button_exact('Back') }.click
+    #     wait(20) { button_exact('Back') }.click
+    #
     def wait(opts = {})
+      opts = opts.is_a?(Numeric) ? { timeout: opts } : opts
+
       if opts.is_a? Hash
         opts.empty? ? @core.wait { yield } : @core.wait(opts) { yield }
       else
