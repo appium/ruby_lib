@@ -8,6 +8,7 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 - Support `start_logs_broadcast` and `stop_logs_broadcast` for iOS
 
 ### 2. Bug fixes
+- Back compatible for `wait(number) {}` and `wait_true(number) {}`
 
 ### 3. Deprecations
 
