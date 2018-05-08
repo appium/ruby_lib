@@ -1,3 +1,16 @@
+### Breaking Changes in 9.13.0
+Change the results of `app_state`
+
+- After
+```
+driver.app_state('com.example.apple-samplecode.UICatalog') #=> :running_in_foreground
+```
+
+- Before
+```
+driver.app_state('com.example.apple-samplecode.UICatalog') #=> 1
+```
+
 ### Breaking Changes in 9.9.0
 Change `start_recording_screen` interface. Please read [documentation](https://github.com/appium/ruby_lib_core/blob/0ba7b1c726f02e11d6daa46481309b1e0e54b00e/lib/appium_lib_core/android/device.rb#L84) for more details.
 
