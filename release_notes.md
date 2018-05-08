@@ -1,3 +1,10 @@
+#### v9.12.1 2018-05-06
+
+- [8ce022f](https://github.com/appium/ruby_lib/commit/8ce022f0f8eabe668230f9aa63a0228d60704c05) [Release 9 12 1 (#780)](https://github.com/appium/ruby_lib/issues/780)
+- [c9b0470](https://github.com/appium/ruby_lib/commit/c9b0470e866c6e70ba689628d4e0924db39f452c) [add no hash but numeric case in wait (#779)](https://github.com/appium/ruby_lib/issues/779)
+- [9a8356b](https://github.com/appium/ruby_lib/commit/9a8356b84198c6c9afb4d1dcf9a9c4067424b4c8) [Add syslog websocket ios re (#777)](https://github.com/appium/ruby_lib/issues/777)
+
+
 #### v9.12.0 2018-04-25
 
 - [7a5a12c](https://github.com/appium/ruby_lib/commit/7a5a12ce78ce0a8154ea55ff7f44ecd10ba5b771) [Release 9 12 0 (#775)](https://github.com/appium/ruby_lib/issues/775)

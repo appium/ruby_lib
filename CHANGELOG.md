@@ -13,7 +13,7 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 ## v9.13.0
 ### 1. Enhancements
 - Requires `appium_lib_core` 1.6.0+
-    - Breaking change for `app_state`: https://github.com/appium/ruby_lib_core/blob/master/CHANGELOG.md#enhancements-1
+    - Breaking change for `app_state`: https://github.com/appium/ruby_lib_core/blob/master/CHANGELOG.md#160---2018-05-08
 
 ### 2. Bug fixes
 
