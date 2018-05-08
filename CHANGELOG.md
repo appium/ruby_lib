@@ -10,6 +10,15 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 
 ### 3. Deprecations
 
+## v9.13.0
+### 1. Enhancements
+- Requires `appium_lib_core` 1.6.0+
+    - Breaking change for `app_state`: https://github.com/appium/ruby_lib_core/blob/master/CHANGELOG.md#enhancements-1
+
+### 2. Bug fixes
+
+### 3. Deprecations
+
 ## v9.12.1
 ### 1. Enhancements
 - Support `start_logs_broadcast` and `stop_logs_broadcast` for iOS
