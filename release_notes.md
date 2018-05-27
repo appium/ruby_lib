@@ -1,3 +1,8 @@
+#### v9.13.0 2018-05-08
+
+- [c8b797e](https://github.com/appium/ruby_lib/commit/c8b797ef404c57a24b00e9c355ec36b3335f4a5f) [Release 9 13 0 (#781)](https://github.com/appium/ruby_lib/issues/781)
+
+
 #### v9.12.1 2018-05-06
 
 - [8ce022f](https://github.com/appium/ruby_lib/commit/8ce022f0f8eabe668230f9aa63a0228d60704c05) [Release 9 12 1 (#780)](https://github.com/appium/ruby_lib/issues/780)

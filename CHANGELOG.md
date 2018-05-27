@@ -10,6 +10,15 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 
 ### 3. Deprecations
 
+## v9.14.0
+### 1. Enhancements
+- Breaking changes for `press_keycode` and `long_press_keycode`
+    - Detail: https://github.com/appium/ruby_lib_core/blob/master/CHANGELOG.md#170---2018-05-28
+
+### 2. Bug fixes
+
+### 3. Deprecations
+
 ## v9.13.0
 ### 1. Enhancements
 - Requires `appium_lib_core` 1.6.0+
