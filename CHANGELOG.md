@@ -7,6 +7,13 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 ### 1. Enhancements
 
 ### 2. Bug fixes
+
+### 3. Deprecations
+
+## v9.14.1
+### 1. Enhancements
+
+### 2. Bug fixes
 - Fix an initialisation error for iOS with `appium_lib_core 1.7.0` [#785](https://github.com/appium/ruby_lib/issues/785)
 
 ### 3. Deprecations
