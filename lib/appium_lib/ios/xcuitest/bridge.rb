@@ -6,7 +6,6 @@ module Appium
       class Bridge
         def self.for(target)
           target.extend Appium::Ios
-          target.extend Appium::Ios::Device
           target.extend Appium::Ios::Xcuitest
           target.extend Appium::Ios::Xcuitest::PasteBoard
           target.extend Appium::Ios::Xcuitest::Source
