@@ -8,6 +8,7 @@ describe 'the web context' do
   t 'before_first' do
     before_first
   end
+
   t 'get_android_inspect' do
     text('Web').click
 
@@ -17,7 +18,18 @@ describe 'the web context' do
     set_context web_view_context
     current_context.must_equal web_view_context
     sleep 1  # Give a chance to load
+
+    require 'pry'
+    binding.pry
+
+    ids "ac-ls-continue"
+    $driver.driver.window_size
+
     page.start_with?("\nhtml\n").must_equal true
+  end
+
+  t 'xcuitest_get_contexts' do
+    xcuitest_get_contexts
   end
 
   t 'after_last' do
