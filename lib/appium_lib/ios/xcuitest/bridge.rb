@@ -14,6 +14,7 @@ module Appium
           target.extend Appium::Ios::Xcuitest::MultiAppHandler
           target.extend Appium::Ios::Xcuitest::Element
           target.extend Appium::Ios::Xcuitest::Command
+          target.extend Appium::Ios::Xcuitest::GetContext
         end
       end
     end

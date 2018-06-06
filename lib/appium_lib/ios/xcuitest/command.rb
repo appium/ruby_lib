@@ -2,6 +2,7 @@ require_relative 'command/pasteboard'
 require_relative 'command/gestures'
 require_relative 'command/source'
 require_relative 'command/multi_app_handler'
+require_relative 'command/get_context'
 
 module Appium
   module Ios
