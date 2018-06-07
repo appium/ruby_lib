@@ -8,7 +8,8 @@ module Appium
         #
         # @example
         #
-        #     xcuitest_get_contexts #=> [{ 'id' => 'NATIVE_APP' }, { 'id' => 'WEBVIEW_41467.1', 'title' => 'Apple', 'url' => 'https://www.apple.com/' }]
+        #     xcuitest_get_contexts #=> [{ 'id' => 'NATIVE_APP' },
+        #                       # { 'id' => 'WEBVIEW_41467.1', 'title' => 'Apple', 'url' => 'https://www.apple.com/' }]
         #
         def xcuitest_get_contexts
           @driver.execute_script 'mobile: getContexts', {}
