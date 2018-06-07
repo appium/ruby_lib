@@ -23,7 +23,8 @@ describe 'the web context' do
 
   t 'xcuitest_get_contexts' do
     context = xcuitest_get_contexts
-    assert 1 < context.size
+    assert_equal [{ 'id' => 'NATIVE_APP' },
+                  { 'id' => 'WEBVIEW_41467.1', 'title' => 'Apple', 'url' => 'https://www.apple.com/' }], context
   end
 
   t 'after_last' do
