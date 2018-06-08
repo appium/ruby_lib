@@ -1,7 +1,6 @@
 # appium_lib
 
 [![Gem Version](https://badge.fury.io/rb/appium_lib.svg)](http://badge.fury.io/rb/appium_lib)
-[![Dependency Status](https://gemnasium.com/appium/ruby_lib.svg)](https://gemnasium.com/appium/ruby_lib)
 [![Travis Master](https://travis-ci.org/appium/ruby_lib.svg?branch=master)](https://travis-ci.org/appium/ruby_lib/builds)
 
 [![Downloads](https://img.shields.io/gem/dt/appium_lib.svg)](https://rubygems.org/gems/appium_lib)
@@ -55,7 +54,7 @@ gem install --no-rdoc --no-ri appium_lib
 
 # Documentation
 
-- [Installing Appium on OS X](https://github.com/appium/ruby_console/blob/master/osx.md)
+- [Getting started](https://github.com/appium/appium/blob/master/docs/en/about-appium/getting-started.md)
 - [Overview](https://github.com/appium/ruby_lib/blob/master/docs/docs.md)
 - [Ruby Android methods](https://github.com/appium/ruby_lib/blob/master/docs/android_docs.md)
 - [Ruby iOS methods](https://github.com/appium/ruby_lib/blob/master/docs/ios_docs.md)
