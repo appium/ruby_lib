@@ -5,6 +5,8 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 
 ## Unreleased
 ### 1. Enhancements
+- add `mobile: installCertificate` shortcut for XCUITest
+- add `mobile: getContexts` shortcut for XCUITest
 
 ### 2. Bug fixes
 
