@@ -4,6 +4,11 @@ module Appium
   module Ios
     module Xcuitest
       module Certificate
+        # Generates Apple's over-the-air configuration profile for certificate deployment
+        # based on the given PEM certificate content.
+        # https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/iPhoneOTAConfiguration/Introduction/Introduction.html
+        # https://github.com/appium/appium-xcuitest-driver/pull/652
+        #
         # @param [string] cer_file The content of the certificate file.
         #
         # @example
