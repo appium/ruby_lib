@@ -7,6 +7,9 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 ### 1. Enhancements
 - add `mobile: installCertificate` shortcut for XCUITest
 - add `mobile: getContexts` shortcut for XCUITest
+- Add `find_element_by_image` and `find_elements_by_image` to handle `ImageElement`
+   - Read a [PR](https://github.com/appium/ruby_lib/pull/795/files) and [Core](https://github.com/appium/ruby_lib_core/blob/master/CHANGELOG.md#enhancements-1) for more details
+   - Experimental feature
 
 ### 2. Bug fixes
 
