@@ -1,3 +1,9 @@
+#### v9.14.1 2018-05-31
+
+- [cc322d6](https://github.com/appium/ruby_lib/commit/cc322d6a36ad85014b3eed1cdec4481f07b6a95d) [Release 9 14 1 (#787)](https://github.com/appium/ruby_lib/issues/787)
+- [b2772d9](https://github.com/appium/ruby_lib/commit/b2772d952117a9e5d760904ddbfaf5828e8d44cf) [Fix an initialisation error (#786)](https://github.com/appium/ruby_lib/issues/786)
+
+
 #### v9.14.0 2018-05-28
 
 - [d60947d](https://github.com/appium/ruby_lib/commit/d60947df856da65dd31fcdbc34d71719a75d9003) [Release 9 14 0 (#783)](https://github.com/appium/ruby_lib/issues/783)
