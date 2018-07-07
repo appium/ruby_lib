@@ -5,6 +5,13 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 
 ## Unreleased
 ### 1. Enhancements
+
+### 2. Bug fixes
+
+### 3. Deprecations
+
+## v9.14.3
+### 1. Enhancements
 - Add Tizen
 - Use [ruby_lib_core](https://github.com/appium/ruby_lib_core) 1.8.0
 
