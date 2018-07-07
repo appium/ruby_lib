@@ -1,3 +1,12 @@
+#### v9.14.2 2018-06-25
+
+- [15d656c](https://github.com/appium/ruby_lib/commit/15d656c7de10a52f3da233a78e939733d9ca4f2a) [Release 9 14 2 (#796)](https://github.com/appium/ruby_lib/issues/796)
+- [4a8261f](https://github.com/appium/ruby_lib/commit/4a8261fc24274a876d03aa61ea81028d070c3a46) [add find element/s by image (#795)](https://github.com/appium/ruby_lib/issues/795)
+- [23bf449](https://github.com/appium/ruby_lib/commit/23bf44916c9e97af4e6cd0b9b64f87078aae05d2) [add install certificate (#789)](https://github.com/appium/ruby_lib/issues/789)
+- [3791c86](https://github.com/appium/ruby_lib/commit/3791c86940d52d6eba5aeb29afd4d26698ec9777) [Update readme.md (#791)](https://github.com/appium/ruby_lib/issues/791)
+- [b9679e1](https://github.com/appium/ruby_lib/commit/b9679e1295a031933b124530b85b30f9f086d2f3) [Add get contexts (#788)](https://github.com/appium/ruby_lib/issues/788)
+
+
 #### v9.14.1 2018-05-31
 
 - [cc322d6](https://github.com/appium/ruby_lib/commit/cc322d6a36ad85014b3eed1cdec4481f07b6a95d) [Release 9 14 1 (#787)](https://github.com/appium/ruby_lib/issues/787)
