@@ -24,6 +24,10 @@ The `ruby_lib` wrap the driver and serve many helpful methods for users.
 - [Appium](https://github.com/appium/appium#requirements)
 - Ruby: 2.2+
 
+### Ruby Lib and Appium
+- Ruby library version over `9.8.0` requires Appium over `1.8`
+- Ruby library version under `9.7.5` can work with Appium under `1.7`
+
 ## Start appium server
 
 ```bash
