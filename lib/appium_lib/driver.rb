@@ -22,6 +22,7 @@ if defined?(Minitest::VERSION)
 end
 
 require 'appium_lib_core'
+require 'uri'
 
 module Appium
   REQUIRED_VERSION_XCUITEST = '1.6.0'.freeze
@@ -384,31 +385,15 @@ module Appium
     def self.absolute_app_path(opts)
       raise 'opts must be a hash' unless opts.is_a? Hash
       caps            = opts[:caps] || {}
-      appium_lib_opts = opts[:appium_lib] || {}
-      server_url      = appium_lib_opts.fetch :server_url, false
-
       app_path        = caps[:app]
       raise 'absolute_app_path invoked and app is not set!' if app_path.nil? || app_path.empty?
-      # may be absolute path to file on remote server.
-      # if the file is on the remote server then we can't check if it exists
-      return app_path if server_url
       # Sauce storage API. http://saucelabs.com/docs/rest#storage
       return app_path if app_path.start_with? 'sauce-storage:'
-      return app_path if app_path =~ /^http/ # public URL for Sauce
-      if app_path =~ /^(\/|[a-zA-Z]:)/ # absolute file path
-        app_path = File.expand_path app_path unless File.exist? app_path
-        raise "App doesn't exist. #{app_path}" unless File.exist? app_path
-        return app_path
-      end
+      return app_path if app_path =~ URI::DEFAULT_PARSER.make_regexp # public URL for Sauce
 
-      # if it doesn't contain a slash then it's a bundle id
-      return app_path unless app_path =~ /[\/\\]/
-
-      # relative path that must be expanded.
-      # absolute_app_path is called from load_settings
-      # and the txt file path is the base of the app path in that case.
       app_path = File.expand_path app_path
-      raise "App doesn't exist #{app_path}" unless File.exist? app_path
+      raise "App doesn't exist. #{app_path}" unless File.exist? app_path
+
       app_path
     end
 
