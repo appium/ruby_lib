@@ -5,6 +5,11 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 
 ## Unreleased
 ### 1. Enhancements
+- Requires `appium_lib_core` 1.9.0+
+    - Requires `selenium-webdriver 3.14+`
+    - Support `find_element :image, image` [appium-base-driver#235](https://github.com/appium/appium-base-driver/pull/235)
+        - Requires Appium1.8.2
+    - Read [changelog](https://github.com/appium/ruby_lib_core/blob/master/CHANGELOG.md#190---2018-08-05) for more details
 
 ### 2. Bug fixes
 
