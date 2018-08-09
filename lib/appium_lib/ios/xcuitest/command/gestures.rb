@@ -16,6 +16,8 @@ module Appium
         end
 
         # @param [string] direction Either 'up', 'down', 'left' or 'right'.
+        # @option opts [Double] :distance scroll distance, proportional to scroll view height.
+        #   the value is supposed to be in between 0.0 and 1.0.
         # @option opts [String] :name the accessibility id of the child element, to which scrolling is performed.
         # @option opts [Element] :element Element id to long tap on.
         # @option opts [bool] :to_visible Boolean parameter. If set to true then asks to scroll to the first visible
@@ -26,11 +28,17 @@ module Appium
         #   ```ruby
         #   scroll direction: "down"
         #   ```
-        def scroll(direction:, name: nil, element: nil, to_visible: nil, predicate_string: nil)
+        def scroll(direction:, # rubocop:disable Metrics/ParameterLists
+                   distance: nil,
+                   name: nil,
+                   element: nil,
+                   to_visible: nil,
+                   predicate_string: nil)
           return 'Set "up", "down", "left" or "right" for :direction' unless %w(up down left right).include?(direction)
 
           args =  { direction: direction }
           args[:element] = element.ref if element
+          args[:distance] = distance if distance
           args[:name] = name if name
           args[:toVisible] = to_visible if to_visible
           args[:predicateString] = predicate_string if predicate_string
