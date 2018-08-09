@@ -29,3 +29,4 @@ Finished in 1 min 57 secs
 ### Tips for parallel 
 
 - https://github.com/grosser/parallel_tests
+   - Usage: https://github.com/appium/ruby_lib_core#run-parallel-tests-with-parallel_tests-gem
