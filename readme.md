@@ -74,6 +74,8 @@ gem install --no-rdoc --no-ri appium_lib
 # Load Pry
 `Pry.config.pager = false` is set if you have no `.pryrc` files and `Pry` is defined.
 
+# Run tests in parallel
+This repository has examples for running tests in parallel. Read [ios_tests](https://github.com/appium/ruby_lib/tree/master/ios_tests) to see them.
 
 # Contribute
 ## How to add new commands for `driver`
