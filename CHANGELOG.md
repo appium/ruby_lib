@@ -10,6 +10,7 @@ Release tags are https://github.com/appium/ruby_lib/releases .
     - Support `find_element :image, image` [appium-base-driver#235](https://github.com/appium/appium-base-driver/pull/235)
         - Requires Appium1.8.2
     - Read [changelog](https://github.com/appium/ruby_lib_core/blob/master/CHANGELOG.md#190---2018-08-05) for more details
+- Add `distance` option in `scroll` for XCUITest [#805](https://github.com/appium/ruby_lib/pull/805). Thanks @saim80
 
 ### 2. Bug fixes
 
