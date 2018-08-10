@@ -1,3 +1,10 @@
+#### v9.14.3 2018-07-07
+
+- [355ce1a](https://github.com/appium/ruby_lib/commit/355ce1a1618a06353da5dbc02eeb339031e9ded1) [Release 9 14 3 (#799)](https://github.com/appium/ruby_lib/issues/799)
+- [cc35f60](https://github.com/appium/ruby_lib/commit/cc35f60ee1b42204a9a368e1e7679354e4f05ee7) [update (#798)](https://github.com/appium/ruby_lib/issues/798)
+- [08edb8c](https://github.com/appium/ruby_lib/commit/08edb8c92aa62d7227a9a49c9d33bcbb82de7841) [add tizen (#797)](https://github.com/appium/ruby_lib/issues/797)
+
+
 #### v9.14.2 2018-06-25
 
 - [15d656c](https://github.com/appium/ruby_lib/commit/15d656c7de10a52f3da233a78e939733d9ca4f2a) [Release 9 14 2 (#796)](https://github.com/appium/ruby_lib/issues/796)
