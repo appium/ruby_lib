@@ -15,6 +15,3 @@ Please describe the tests that you ran to verify your changes. If the change has
 # Checklist
 
 - [ ] `bundle exec rake rubocop`
-- [ ] `bundle exec rake test:unit`
-- [ ] `bundle exec rake test:fund` (Doesn't run on CI)
-    - `bundle exec rake test:fund:android`, `bundle exec rake test:fund:ios`
