@@ -55,28 +55,30 @@ module Appium
     require 'json'
 
     # @private
-    # http://nokogiri.org/Nokogiri/XML/SAX.html
-    class CountElements < Nokogiri::XML::SAX::Document
-      attr_reader :result
+    class CountElements
+      require 'rexml/document'
 
-      def initialize
-        reset
+      def initialize(is_android)
+        @types = {}
+        @is_android = is_android
       end
 
-      def reset
-        @result = Hash.new 0
-      end
+      def parse(get_source)
+        xml = ::REXML::Document.new get_source
+        query = @is_android ? '//*' : "//*[@visible='true']"
+        type = @is_android ? 'class' : 'type'
 
-      # http://nokogiri.org/Nokogiri/XML/SAX/Document.html
-      def start_element(name, attrs = [], driver = $driver)
-        # Count only visible elements. Android is always visible
-        element_visible = driver.device_is_android? ? true : Hash[attrs]['visible'] == 'true'
-        @result[name] += 1 if element_visible
+        xml.elements.each(query) do |element|
+          hash = element.attributes
+          @types[hash[type]] ? @types[hash[type]] += 1 : @types[hash[type]] = 1
+        end
+
+        self
       end
 
       def formatted_result
         message = ''
-        sorted  = @result.sort_by { |_element, count| count }.reverse
+        sorted  = @types.sort_by { |_element, count| count }.reverse
         sorted.each do |element, count|
           message += "#{count}x #{element}\n"
         end
@@ -94,12 +96,7 @@ module Appium
     #                  #    x XCUIElementTypeNavigationBar\n1x XCUIElementTypeApplication"
     #
     def get_page_class
-      parser = @count_elements_parser ||= Nokogiri::XML::SAX::Parser.new(CountElements.new)
-
-      parser.document.reset
-      parser.parse get_source
-
-      parser.document.formatted_result
+      CountElements.new(device_is_android?).parse(get_source).formatted_result
     end
 
     # Count all classes on screen and print to stdout.

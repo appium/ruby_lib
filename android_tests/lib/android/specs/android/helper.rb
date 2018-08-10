@@ -10,10 +10,10 @@ describe 'android/helper' do
     # larger screens have more elements
 
     act = get_page_class
+    # "13x android.widget.TextView\n3x android.widget.FrameLayout\n2x android.view.ViewGroup\n1x android.widget.ListView\n1x"
     act.must_include 'android.widget.TextView'
     act.must_include 'android.widget.ListView'
     act.must_include 'android.widget.FrameLayout'
-    act.must_include 'hierarchy'
   end
 
   # t 'page_class' do # tested by get_page_class

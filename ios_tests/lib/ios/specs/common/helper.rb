@@ -210,6 +210,7 @@ describe 'common/helper.rb' do
 
   t 'get_page_class' do
     # 8 local. 9 on sauce.
+    # 24x XCUIElementTypeStaticText\n12x XCUIElementTypeCell\n8x XCUIElementTypeOther\n2x XCUIElementTypeWindow\n1x XCUIElementTypeStatusBar\n1x XCUIElementTypeTable\n1x XCUIElementTypeNavigationBar\n1x XCUIElementTypeApplication
     get_page_class.split("\n").length.must_be :>=, 8
   end
 
