@@ -245,13 +245,12 @@ module Appium
 
     # @private
     def _print_source(source)
-      opts = Nokogiri::XML::ParseOptions::NOBLANKS | Nokogiri::XML::ParseOptions::NONET
-      doc = if source.start_with? '<html'
-              Nokogiri::HTML(source) { |cfg| cfg.options = opts }
-            else
-              Nokogiri::XML(source)  { |cfg| cfg.options = opts }
-            end
-      puts doc.to_xml indent: 2
+      require 'rexml/formatters/pretty'
+
+      xml = ::REXML::Document.new source
+      formatter = ::REXML::Formatters::Pretty.new 2, false
+      formatter.write(xml, $stdout)
+      puts "\n"
     end
   end
 end
