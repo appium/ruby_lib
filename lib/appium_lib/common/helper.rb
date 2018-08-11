@@ -66,11 +66,9 @@ module Appium
       def parse(get_source)
         xml = ::REXML::Document.new get_source
         query = @is_android ? '//*' : "//*[@visible='true']"
-        type = @is_android ? 'class' : 'type'
 
         xml.elements.each(query) do |element|
-          hash = element.attributes
-          @types[hash[type]] ? @types[hash[type]] += 1 : @types[hash[type]] = 1
+          @types[element.name] ? @types[element.name] += 1 : @types[element.name] = 1
         end
 
         self
