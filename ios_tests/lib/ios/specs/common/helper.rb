@@ -209,7 +209,6 @@ describe 'common/helper.rb' do
   end
 
   t 'get_page_class' do
-    # 24x XCUIElementTypeStaticText\n12x XCUIElementTypeCell\n8x XCUIElementTypeOther\n2x XCUIElementTypeWindow\n1x XCUIElementTypeStatusBar\n1x XCUIElementTypeTable\n1x XCUIElementTypeNavigationBar\n1x XCUIElementTypeApplication
     act = get_page_class
 
     act.split("\n").length.must_be :>=, 8
