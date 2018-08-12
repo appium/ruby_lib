@@ -209,8 +209,16 @@ describe 'common/helper.rb' do
   end
 
   t 'get_page_class' do
-    # 8 local. 9 on sauce.
-    get_page_class.split("\n").length.must_be :>=, 8
+    act = get_page_class
+    act.split("\n").length.must_be :>=, 8
+    act.must_include '24x XCUIElementTypeStaticText'
+    act.must_include '12x XCUIElementTypeCell'
+    act.must_include '8x XCUIElementTypeOther'
+    act.must_include '2x XCUIElementTypeWindow'
+    act.must_include '1x XCUIElementTypeStatusBar'
+    act.must_include '1x XCUIElementTypeTable'
+    act.must_include '1x XCUIElementTypeNavigationBar'
+    act.must_include '1x XCUIElementTypeApplication'
   end
 
   # TODO: write tests
