@@ -58,14 +58,19 @@ module Appium
     class CountElements
       require 'rexml/document'
 
-      def initialize(is_android)
+      def initialize(platform)
         @types = {}
-        @is_android = is_android
+        @platform = platform
       end
 
       def parse(get_source)
         xml = ::REXML::Document.new get_source
-        query = @is_android ? '//*' : "//*[@visible='true']"
+        query = case @platform.to_sym
+                when :android
+                  '//*'
+                else # :ios, :windows
+                  "//*[@visible='true']"
+                end
 
         xml.elements.each(query) do |element|
           @types[element.name] ? @types[element.name] += 1 : @types[element.name] = 1
@@ -75,12 +80,11 @@ module Appium
       end
 
       def formatted_result
-        message = ''
-        sorted  = @types.sort_by { |_element, count| count }.reverse
-        sorted.each do |element, count|
-          message += "#{count}x #{element}\n"
-        end
-        message.strip
+        @types
+          .sort_by { |_element, count| count }
+          .reverse
+          .each_with_object('') { |element, acc| acc << "#{element[1]}x #{element[0]}\n" }
+          .strip
       end
     end # class CountElements
 
@@ -94,7 +98,7 @@ module Appium
     #                  #    x XCUIElementTypeNavigationBar\n1x XCUIElementTypeApplication"
     #
     def get_page_class
-      CountElements.new(device_is_android?).parse(get_source).formatted_result
+      CountElements.new(@core.device).parse(get_source).formatted_result
     end
 
     # Count all classes on screen and print to stdout.
