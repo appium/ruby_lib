@@ -59,8 +59,9 @@ module Appium
     class CountElements < Nokogiri::XML::SAX::Document
       attr_reader :result
 
-      def initialize
+      def initialize(platform)
         reset
+        @platform = platform
       end
 
       def reset
@@ -68,19 +69,23 @@ module Appium
       end
 
       # http://nokogiri.org/Nokogiri/XML/SAX/Document.html
-      def start_element(name, attrs = [], driver = $driver)
-        # Count only visible elements. Android is always visible
-        element_visible = driver.device_is_android? ? true : Hash[attrs]['visible'] == 'true'
+      def start_element(name, attrs = [])
+        element_visible = case @platform.to_sym
+                          when :android
+                            true
+                          else # :ios, :windows
+                            Hash[attrs]['visible'] == 'true'
+                          end
+
         @result[name] += 1 if element_visible
       end
 
       def formatted_result
-        message = ''
-        sorted  = @result.sort_by { |_element, count| count }.reverse
-        sorted.each do |element, count|
-          message += "#{count}x #{element}\n"
-        end
-        message.strip
+        @result
+          .sort_by { |_element, count| count }
+          .reverse
+          .each_with_object('') { |element, acc| acc << "#{element[1]}x #{element[0]}\n" }
+          .strip
       end
     end # class CountElements
 
@@ -94,7 +99,7 @@ module Appium
     #                  #    x XCUIElementTypeNavigationBar\n1x XCUIElementTypeApplication"
     #
     def get_page_class
-      parser = @count_elements_parser ||= Nokogiri::XML::SAX::Parser.new(CountElements.new)
+      parser = @count_elements_parser ||= Nokogiri::XML::SAX::Parser.new(CountElements.new(@core.device))
 
       parser.document.reset
       parser.parse get_source
