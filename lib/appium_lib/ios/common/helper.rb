@@ -67,7 +67,9 @@ module Appium
         parser.document.reset
         parser.document.filter = class_name
         parser.parse s
-        parser.document.result
+        result = parser.document.result
+        puts result
+        result
       else
         s = get_source
         parser = Nokogiri::XML::SAX::Parser.new(UITestElementsPrinter.new)

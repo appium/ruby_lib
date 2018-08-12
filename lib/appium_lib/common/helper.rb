@@ -77,7 +77,6 @@ module Appium
                             Hash[attrs]['visible'] == 'true'
                           end
 
-
         @result[name] += 1 if element_visible
       end
 
