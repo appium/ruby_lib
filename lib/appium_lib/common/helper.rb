@@ -55,36 +55,32 @@ module Appium
     require 'json'
 
     # @private
-    class CountElements
-      require 'rexml/document'
+    # http://nokogiri.org/Nokogiri/XML/SAX.html
+    class CountElements < Nokogiri::XML::SAX::Document
+      attr_reader :result
 
-      def initialize(platform)
-        @types = {}
-        @platform = platform
+      def initialize
+        reset
       end
 
-      def parse(get_source)
-        xml = ::REXML::Document.new get_source
-        query = case @platform.to_sym
-                when :android
-                  '//*'
-                else # :ios, :windows
-                  "//*[@visible='true']"
-                end
+      def reset
+        @result = Hash.new 0
+      end
 
-        xml.elements.each(query) do |element|
-          @types[element.name] ? @types[element.name] += 1 : @types[element.name] = 1
-        end
-
-        self
+      # http://nokogiri.org/Nokogiri/XML/SAX/Document.html
+      def start_element(name, attrs = [], driver = $driver)
+        # Count only visible elements. Android is always visible
+        element_visible = driver.device_is_android? ? true : Hash[attrs]['visible'] == 'true'
+        @result[name] += 1 if element_visible
       end
 
       def formatted_result
-        @types
-          .sort_by { |_element, count| count }
-          .reverse
-          .each_with_object('') { |element, acc| acc << "#{element[1]}x #{element[0]}\n" }
-          .strip
+        message = ''
+        sorted  = @result.sort_by { |_element, count| count }.reverse
+        sorted.each do |element, count|
+          message += "#{count}x #{element}\n"
+        end
+        message.strip
       end
     end # class CountElements
 
@@ -98,7 +94,12 @@ module Appium
     #                  #    x XCUIElementTypeNavigationBar\n1x XCUIElementTypeApplication"
     #
     def get_page_class
-      CountElements.new(@core.device).parse(get_source).formatted_result
+      parser = @count_elements_parser ||= Nokogiri::XML::SAX::Parser.new(CountElements.new)
+
+      parser.document.reset
+      parser.parse get_source
+
+      parser.document.formatted_result
     end
 
     # Count all classes on screen and print to stdout.
@@ -249,12 +250,13 @@ module Appium
 
     # @private
     def _print_source(source)
-      require 'rexml/formatters/pretty'
-
-      xml = ::REXML::Document.new source
-      formatter = ::REXML::Formatters::Pretty.new 2, false
-      formatter.write(xml, $stdout)
-      puts "\n"
+      opts = Nokogiri::XML::ParseOptions::NOBLANKS | Nokogiri::XML::ParseOptions::NONET
+      doc = if source.start_with? '<html'
+              Nokogiri::HTML(source) { |cfg| cfg.options = opts }
+            else
+              Nokogiri::XML(source)  { |cfg| cfg.options = opts }
+            end
+      puts doc.to_xml indent: 2
     end
   end
 end

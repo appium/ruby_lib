@@ -5,9 +5,6 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 
 ## Unreleased
 ### 1. Enhancements
-- Use `::REXML::Document` to parse XML/HTML instead of `Nokogiri`
-    - This change will affect following methods
-        - `get_page_class`, `source`
 
 ### 2. Bug fixes
 
