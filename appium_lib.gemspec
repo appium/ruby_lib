@@ -9,7 +9,8 @@ Gem::Specification.new do |s|
   s.license       = 'Apache-2.0'
   s.description   = s.summary = 'Ruby library for Appium'
   s.description   += '.' # avoid identical warning
-  s.authors       = s.email = ['code@bootstraponline.com']
+  s.authors       = ['code@bootstraponline.com', 'Kazuaki Matsuo']
+  s.email         = %w(code@bootstraponline.com fly.49.89.over@gmail.com)
   s.homepage      = 'https://github.com/appium/ruby_lib' # published as appium_lib
   s.require_paths = ['lib']
 
