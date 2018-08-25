@@ -39,7 +39,7 @@ describe 'android/element/alert' do
     # Android L: 'Something, Cancel, Ok'
     # Android 19: 'Cancel, Something, Ok'
 
-    wait { alert_dismiss_text.must_equal 'Cancel' }
+    wait { alert_dismiss_text.downcase.must_equal 'cancel' }
     wait { alert_dismiss }
 
     # nav to start activity
