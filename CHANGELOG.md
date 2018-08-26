@@ -5,6 +5,8 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 
 ## Unreleased
 ### 1. Enhancements
+- [Internal] Use [ruby_lib_core](https://github.com/appium/ruby_lib_core) 2.0
+    - The change shouldn't affect this version since the change influence `Core.new`.
 
 ### 2. Bug fixes
 
