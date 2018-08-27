@@ -1,3 +1,14 @@
+#### v9.15.0 2018-08-10
+
+- [b09ea84](https://github.com/appium/ruby_lib/commit/b09ea848cc595d8d3ef6494e0a26770521b9432c) [Release 9 15 0 (#810)](https://github.com/appium/ruby_lib/issues/810)
+- [2e05c62](https://github.com/appium/ruby_lib/commit/2e05c62b07d7c8e395e429fe8b5add58cd41d2d2) [Fix rubocop for mighty (#809)](https://github.com/appium/ruby_lib/issues/809)
+- [b4da941](https://github.com/appium/ruby_lib/commit/b4da94126b8f7791c510e81d7f080b248bbcdb72) [add a pull reqeust template (#808)](https://github.com/appium/ruby_lib/issues/808)
+- [e553b3f](https://github.com/appium/ruby_lib/commit/e553b3fab6e733cb91a42dab93ea5331af79fa76) [add a section about parallel tests (#807)](https://github.com/appium/ruby_lib/issues/807)
+- [6c6b73f](https://github.com/appium/ruby_lib/commit/6c6b73f18e76c73e71fde1ddf265913472423bce) [update core version (#806)](https://github.com/appium/ruby_lib/issues/806)
+- [a1b2182](https://github.com/appium/ruby_lib/commit/a1b2182ac1f85b0f48ff934221876e9fd3292189) [Relax absolute app path (#804)](https://github.com/appium/ruby_lib/issues/804)
+- [30ca236](https://github.com/appium/ruby_lib/commit/30ca236d871e06efc069ff59c5f13753dc109971) [add a limitation in readme (#803)](https://github.com/appium/ruby_lib/issues/803)
+
+
 #### v9.14.3 2018-07-07
 
 - [355ce1a](https://github.com/appium/ruby_lib/commit/355ce1a1618a06353da5dbc02eeb339031e9ded1) [Release 9 14 3 (#799)](https://github.com/appium/ruby_lib/issues/799)
