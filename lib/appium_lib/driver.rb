@@ -156,7 +156,8 @@ module Appium
       end
       raise 'opts must be a hash' unless opts.is_a? Hash
 
-      @core = Appium::Core.for(self, opts)
+      @core = ::Appium::Core.for(opts)
+      extend ::Appium::Core::Device
 
       opts = Appium.symbolize_keys opts
       appium_lib_opts = opts[:appium_lib] || {}

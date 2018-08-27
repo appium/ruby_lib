@@ -224,8 +224,8 @@ describe 'driver' do
     end
 
     t 'update settings' do
-      update_settings cyberdelia: 'open'
-      get_settings['cyberdelia'].must_equal 'open'
+      update_settings allowInvisibleElements: true
+      get_settings['allowInvisibleElements'].must_equal 'true'
     end
 
     # Skip: x # x is only used in Pry

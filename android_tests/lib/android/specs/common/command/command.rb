@@ -1,7 +1,7 @@
 # rake android[common/command/command]
 describe 'common/command/command' do
   t 'command' do
-    File.delete 'logcat.log'
+    File.delete 'logcat.log' if File.exist? 'logcat.log'
 
     start_logs_broadcast
     sleep 5
