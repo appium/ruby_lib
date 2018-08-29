@@ -3,8 +3,8 @@
   [
     {
       "browserName": "iPhone Simulator",
-      "version":"9.0",
-      "platform":"MAC",
+      "version":"11.4",
+      "platform":"ios",
       "maxInstances": 1
     }
   ],

@@ -1,6 +1,6 @@
 [caps]
 platformName = "ios"
-platformVersion = "10.3"
+platformVersion = "11.4"
 deviceName ="iPhone Simulator"
 automationName = 'XCUITest'
 app = "/absolute/path/to/UICatalog.app"
