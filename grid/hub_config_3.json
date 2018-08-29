@@ -3,7 +3,7 @@
   [
     {
       "browserName": "iPhone Simulator",
-      "version":"9.0",
+      "version":"11.4",
       "maxInstances": 1,
       "seleniumProtocol": "WebDriver"
     }
