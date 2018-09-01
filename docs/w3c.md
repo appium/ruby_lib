@@ -15,6 +15,15 @@ driver.action
       .move_to_location(500, 500).pointer_down(:left)
       .move_to_location(0, 700)
       .release.perform
+
+# multiple action chains
+a1 = driver.action.add_pointer_input(:touch, 'finger1') # some action chain
+a1.create_pointer_down(:left)
+
+a2 = driver.action.add_pointer_input(:touch, 'finger1') # some action chain
+a2.create_pointer_down(:left)
+ 
+driver.perform_actions [a1, a2]
 ```
 
 # Note
