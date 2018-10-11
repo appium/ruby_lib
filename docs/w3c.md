@@ -17,13 +17,25 @@ driver.action
       .release.perform
 
 # multiple action chains
-a1 = driver.action.add_pointer_input(:touch, 'finger1') # some action chain
-a1.create_pointer_down(:left)
+f1 = driver.action.add_pointer_input(:touch, 'finger1')
+f1.create_pointer_move(duration: 1, x: 200, y: 500,
+                   origin: ::Selenium::WebDriver::Interactions::PointerMove::VIEWPORT)
+f1.create_pointer_down(:left)
+f1.create_pause(0.5)
+f1.create_pointer_move(duration: 1, x: 200, y: 200,
+                   origin: ::Selenium::WebDriver::Interactions::PointerMove::VIEWPORT)
+f1.create_pointer_up(:left)
 
-a2 = driver.action.add_pointer_input(:touch, 'finger1') # some action chain
-a2.create_pointer_down(:left)
- 
-driver.perform_actions [a1, a2]
+f2 = driver.action.add_pointer_input(:touch, 'finger2')
+f2.create_pointer_move(duration: 1, x: 200, y: 500,
+                   origin: ::Selenium::WebDriver::Interactions::PointerMove::VIEWPORT)
+f2.create_pointer_down(:left)
+f2.create_pause(0.5)
+f2.create_pointer_move(duration: 1, x: 200, y: 800,
+                   origin: ::Selenium::WebDriver::Interactions::PointerMove::VIEWPORT)
+f2.create_pointer_up(:left)
+
+driver.perform_actions [f1, f2]
 ```
 
 # Note
