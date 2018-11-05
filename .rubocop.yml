@@ -20,28 +20,14 @@ Style/Documentation:
   Enabled: false
 Style/RegexpLiteral:
   Enabled: false
-Style/ConstantName:
-  Enabled: false
 # blocked on https://github.com/appium/ruby_lib/issues/312. Already removed from core part
 Style/GlobalVars:
-  Enabled: false
-Style/AccessorMethodName:
   Enabled: false
 Style/DoubleNegation:
   Enabled: false
 Style/EachWithObject:
   Enabled: false
-Style/SpaceAroundOperators:
-  Enabled: false
-Style/ExtraSpacing:
-  Enabled: false
-Style/IndentHash:
-  Enabled: false
-Style/VariableNumber:
-  EnforcedStyle: 'snake_case'
-Style/MultilineOperationIndentation:
-  Enabled: false
-Lint/NestedMethodDefinition:
+Style/PercentLiteralDelimiters:
   Enabled: false
 # Should enable and fix for Ruby3
 Style/FrozenStringLiteralComment:
@@ -51,4 +37,10 @@ Style/SafeNavigation:
   Enabled: false
 # Can use over Ruby2.3
 Style/NumericPredicate:
+  Enabled: false
+Lint/NestedMethodDefinition:
+  Enabled: false
+Naming/ConstantName:
+  Enabled: false
+Naming/AccessorMethodName:
   Enabled: false
