@@ -7,7 +7,7 @@ describe 'device/multi_touch' do
   # go back to the main page
   def go_back
     back
-    wait { !exists { id 'ArrowButton'  } } # successfully transitioned back
+    wait { !exists { id 'ArrowButton' } } # successfully transitioned back
   end
 
   t 'before_first' do

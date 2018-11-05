@@ -36,7 +36,7 @@ module Appium
                    predicate_string: nil)
           return 'Set "up", "down", "left" or "right" for :direction' unless %w(up down left right).include?(direction)
 
-          args =  { direction: direction }
+          args = { direction: direction }
           args[:element] = element.ref if element
           args[:distance] = distance if distance
           args[:name] = name if name
@@ -68,7 +68,7 @@ module Appium
         #   double_tap x: 100, y: 100
         #   double_tap element: find_element(:accessibility_id, "some item")
         #   ```
-        def double_tap(x: nil, y: nil, element: nil)
+        def double_tap(x: nil, y: nil, element: nil) # rubocop:disable Naming/UncommunicativeMethodParamName
           return 'Set x, y or element' if (x.nil? || y.nil?) && element.nil?
 
           args = element.nil? ? { x: x, y: y } : { element: element.ref }
@@ -85,7 +85,7 @@ module Appium
         #   touch_and_hold x: 100, y: 100, duration: 2.0
         #   touch_and_hold element: find_element(:accessibility_id, "some item")
         #   ```
-        def touch_and_hold(x: nil, y: nil, element: nil, duration: 1.0)
+        def touch_and_hold(x: nil, y: nil, element: nil, duration: 1.0) # rubocop:disable Naming/UncommunicativeMethodParamName
           return 'Set x, y or element' if (x.nil? || y.nil?) && element.nil?
 
           args = element.nil? ? { x: x, y: y } : { element: element.ref }
@@ -113,7 +113,7 @@ module Appium
         #   tap x: 100, y: 100
         #   tap x: 100, y: 100, element: find_element(:accessibility_id, "some item")
         #   ```
-        def tap(x:, y:, element: nil)
+        def tap(x:, y:, element: nil) # rubocop:disable Naming/UncommunicativeMethodParamName
           args = { x: x, y: y }
           args[:element] = element.ref if element
           @driver.execute_script 'mobile: tap', args

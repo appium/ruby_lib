@@ -16,6 +16,7 @@ module Appium
     def button(value)
       # return button at index.
       return ele_index button_class, value if value.is_a? Numeric
+
       ele_by_json_visible_contains button_class, value
     end
 
@@ -25,6 +26,7 @@ module Appium
     # @return [Array<UIAButton|XCUIElementTypeButton>]
     def buttons(value = false)
       return tags button_class unless value
+
       eles_by_json_visible_contains button_class, value
     end
 

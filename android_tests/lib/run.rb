@@ -21,16 +21,16 @@ end
 a = OpenStruct.new x: 'ok'
 raise 'x issue' unless a.x == 'ok'
 
-dir  = File.expand_path(File.join(Dir.pwd, 'lib'))
+dir = File.expand_path(File.join(Dir.pwd, 'lib'))
 appium_txt = File.join(Dir.pwd, 'appium.txt')
-device  = ARGV[0].downcase.strip
+device = ARGV[0].downcase.strip
 devices = %w(android selendroid ios)
 raise 'Expected android, selendroid or ios as first argument' unless devices.include? device
 
 one_test = ARGV[1]
 test_dir = "/#{device}/"
 
-caps       = Appium.load_settings file: appium_txt, verbose: true
+caps = Appium.load_settings file: appium_txt, verbose: true
 caps = if caps[:appium_lib]
          appium_lib = caps[:appium_lib]
          appium_lib = appium_lib.merge(debug: true) unless appium_lib[:debug]
@@ -54,6 +54,7 @@ if one_test
   end
 
   raise "\nTest #{one_test} does not exist.\n" unless File.exist?(one_test)
+
   start_driver(caps)
 
   # require support (common.rb)

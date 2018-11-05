@@ -13,7 +13,7 @@ describe 'driver' do
   end
 
   t 'unicode defaults' do
-    data = File.read File.expand_path '../../../../data/unicode.txt', __FILE__
+    data = File.read File.expand_path('../../../data/unicode.txt', __dir__)
     data.strip.must_equal 174.chr('UTF-8')
   end
 
@@ -36,20 +36,24 @@ describe 'driver' do
       caps_app_for_teardown = actual[:caps][:app]
       expected_app = File.absolute_path('../test_apps/UICatalog.app')
 
-      expected            = { automation_name:  :xcuitest,
-                              custom_url:       false,
-                              export_session:   true,
-                              export_session_path: '/tmp/appium_lib_session',
-                              default_wait:     30,
-                              sauce_username:   nil,
-                              sauce_access_key: nil,
-                              sauce_endpoint:   'ondemand.saucelabs.com:443/wd/hub',
-                              port:             4723,
-                              device:           :ios,
-                              debug:            true,
-                              listener:         nil,
-                              wait_timeout:     20,  # defined in appium.txt
-                              wait_interval:    1 }  # defined in appium.txt
+      # rubocop:disable Layout/AlignHash
+      expected = {
+        automation_name:     :xcuitest,
+        custom_url:          false,
+        export_session:      true,
+        export_session_path: '/tmp/appium_lib_session',
+        default_wait:        30,
+        sauce_username:      nil,
+        sauce_access_key:    nil,
+        sauce_endpoint:      'ondemand.saucelabs.com:443/wd/hub',
+        port:                4723,
+        device:              :ios,
+        debug:               true,
+        listener:            nil,
+        wait_timeout:        20, # defined in appium.txt
+        wait_interval:       1 # defined in appium.txt
+      }
+      # rubocop:enable Layout/AlignHash
 
       # actual[:caps].to_json send to Appium server
       caps_with_json = JSON.parse(actual[:caps].to_json)

@@ -15,6 +15,7 @@ module Appium
     # @return [UIAStaticText|XCUIElementTypeStaticText]
     def text(value)
       return ele_index static_text_class, value if value.is_a? Numeric
+
       ele_by_json_visible_contains static_text_class, value
     end
 
@@ -24,6 +25,7 @@ module Appium
     # @return [Array<UIAStaticText|XCUIElementTypeStaticText>]
     def texts(value = false)
       return tags static_text_class unless value
+
       eles_by_json_visible_contains static_text_class, value
     end
 

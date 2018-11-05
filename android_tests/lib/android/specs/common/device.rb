@@ -13,8 +13,10 @@ describe 'common/device' do
     start_activity app_package: 'io.appium.android.apis',
                    app_activity: '.accessibility.AccessibilityNodeProviderActivity'
     wait { current_activity.include?('Node').must_equal true }
-    start_activity app_package:      'com.android.settings', app_activity:      '.Settings',
-                   app_wait_package: 'com.android.settings', app_wait_activity: '.Settings'
+    start_activity app_package: 'com.android.settings',
+                   app_activity: '.Settings',
+                   app_wait_package: 'com.android.settings',
+                   app_wait_activity: '.Settings'
     wait { current_activity.include?('Settings').must_equal true }
   end
 

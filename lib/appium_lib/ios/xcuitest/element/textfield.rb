@@ -24,9 +24,11 @@ module Appium
           if value.is_a? Numeric
             index = value
             raise "#{index} is not a valid index. Must be >= 1" if index <= 0
+
             index -= 1 # eles_by_json and _textfields_with_predicate is 0 indexed.
             result = _textfields_with_predicate[index]
             raise _no_such_element if result.nil?
+
             return result
 
           end
@@ -56,6 +58,7 @@ module Appium
         def last_textfield
           result = _textfields_with_predicate.last
           raise _no_such_element if result.nil?
+
           result
         end
 

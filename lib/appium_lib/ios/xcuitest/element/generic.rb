@@ -37,6 +37,7 @@ module Appium
         def raise_error_if_no_element(element)
           error_message = 'An element could not be located on the page using the given search parameters.'
           raise(::Selenium::WebDriver::Error::NoSuchElementError, error_message) if element.nil?
+
           element
         end
 

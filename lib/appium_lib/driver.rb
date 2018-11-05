@@ -199,7 +199,7 @@ module Appium
       # Save global reference to last created Appium driver for top level methods.
       $driver = self if global_driver
 
-      self # return newly created driver
+      self # rubocop:disable Lint/Void # return newly created driver
     end
 
     private
@@ -254,23 +254,25 @@ module Appium
 
     # Returns a hash of the driver attributes
     def driver_attributes
+      # rubocop:disable Layout/AlignHash
       {
-          caps:                @core.caps,
-          automation_name:     @core.automation_name,
-          custom_url:          @core.custom_url,
-          export_session:      @core.export_session,
-          export_session_path: @core.export_session_path,
-          default_wait:        @core.default_wait,
-          sauce_username:      @sauce.username,
-          sauce_access_key:    @sauce.access_key,
-          sauce_endpoint:      @sauce.endpoint,
-          port:                @core.port,
-          device:              @core.device,
-          debug:               @appium_debug,
-          listener:            @listener,
-          wait_timeout:        @core.wait_timeout,
-          wait_interval:       @core.wait_interval
+        caps:                @core.caps,
+        automation_name:     @core.automation_name,
+        custom_url:          @core.custom_url,
+        export_session:      @core.export_session,
+        export_session_path: @core.export_session_path,
+        default_wait:        @core.default_wait,
+        sauce_username:      @sauce.username,
+        sauce_access_key:    @sauce.access_key,
+        sauce_endpoint:      @sauce.endpoint,
+        port:                @core.port,
+        device:              @core.device,
+        debug:               @appium_debug,
+        listener:            @listener,
+        wait_timeout:        @core.wait_timeout,
+        wait_interval:       @core.wait_interval
       }
+      # rubocop:enable Layout/AlignHash
     end
 
     def device_is_android?
@@ -328,8 +330,9 @@ module Appium
     # @return [Boolean]
     def check_server_version_xcuitest
       if automation_name_is_xcuitest? &&
-          !@appium_server_status.empty? &&
-          (@appium_server_status['build']['version'] < REQUIRED_VERSION_XCUITEST)
+         !@appium_server_status.empty? &&
+         (@appium_server_status['build']['version'] < REQUIRED_VERSION_XCUITEST)
+
         raise(Appium::Core::Error::NotSupportedAppiumServer,
               "XCUITest requires Appium version >= #{REQUIRED_VERSION_XCUITEST}")
       end
@@ -351,6 +354,7 @@ module Appium
       @core.appium_server_version
     rescue Selenium::WebDriver::Error::WebDriverError => ex
       raise ::Appium::Core::Error::ServerError unless ex.message.include?('content-type=""')
+
       # server (TestObject for instance) does not respond to status call
       {}
     end
@@ -385,6 +389,7 @@ module Appium
     # @return [String] APP_PATH as an absolute path
     def self.absolute_app_path(opts)
       raise 'opts must be a hash' unless opts.is_a? Hash
+
       caps            = opts[:caps] || {}
       app_path        = caps[:app]
       raise 'absolute_app_path invoked and app is not set!' if app_path.nil? || app_path.empty?
@@ -403,6 +408,7 @@ module Appium
     def server_url
       return @core.custom_url if @core.custom_url
       return @sauce.server_url if @sauce.sauce_server_url?
+
       "http://127.0.0.1:#{@core.port}/wd/hub"
     end
 
@@ -517,6 +523,7 @@ module Appium
       unless e.message.include?('The operation requested is not yet implemented by Espresso driver')
         raise ::Appium::Core::Error::ServerError
       end
+
       {}
     end
 
@@ -562,7 +569,7 @@ module Appium
 
       begin
         yield # search for element
-      rescue
+      rescue StandardError
         exists = false # error means it's not there
       end
 

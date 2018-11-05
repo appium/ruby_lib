@@ -14,14 +14,14 @@ module Appium
           value = %("#{value}")
           if class_name == '*'
             return (resource_id(value, "new UiSelector().resourceId(#{value});") +
-                "new UiSelector().descriptionContains(#{value});" \
-                "new UiSelector().textContains(#{value});")
+              "new UiSelector().descriptionContains(#{value});" \
+              "new UiSelector().textContains(#{value});")
           end
 
           class_name = %("#{class_name}")
           resource_id(value, "new UiSelector().className(#{class_name}).resourceId(#{value});") +
-              "new UiSelector().className(#{class_name}).descriptionContains(#{value});" \
-              "new UiSelector().className(#{class_name}).textContains(#{value});"
+            "new UiSelector().className(#{class_name}).descriptionContains(#{value});" \
+            "new UiSelector().className(#{class_name}).textContains(#{value});"
         end
 
         # Find the first element that contains value
@@ -31,6 +31,7 @@ module Appium
         def complex_find_contains(class_name, value)
           elements = find_elements :uiautomator, string_visible_contains(class_name, value)
           raise _no_such_element if elements.empty?
+
           elements.first
         end
 
@@ -52,14 +53,14 @@ module Appium
 
           if class_name == '*'
             return (resource_id(value, "new UiSelector().resourceId(#{value});") +
-                "new UiSelector().description(#{value});" \
-                "new UiSelector().text(#{value});")
+              "new UiSelector().description(#{value});" \
+              "new UiSelector().text(#{value});")
           end
 
           class_name = %("#{class_name}")
           resource_id(value, "new UiSelector().className(#{class_name}).resourceId(#{value});") +
-              "new UiSelector().className(#{class_name}).description(#{value});" \
-              "new UiSelector().className(#{class_name}).text(#{value});"
+            "new UiSelector().className(#{class_name}).description(#{value});" \
+            "new UiSelector().className(#{class_name}).text(#{value});"
         end
 
         # Find the first element exactly matching value
@@ -69,6 +70,7 @@ module Appium
         def complex_find_exact(class_name, value)
           elements = find_elements :uiautomator, string_visible_exact(class_name, value)
           raise _no_such_element if elements.empty?
+
           elements.first
         end
 

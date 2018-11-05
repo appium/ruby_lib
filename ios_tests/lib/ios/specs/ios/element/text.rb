@@ -1,4 +1,4 @@
-# rubocop:disable Lint/HandleExceptions
+# rubocop:disable Lint/HandleExceptions,Style/RescueStandardError
 
 # rake ios['ios/element/text']
 describe 'ios/element/text' do
@@ -46,10 +46,10 @@ describe 'ios/element/text' do
     # should fail
     set_wait 0
     act = begin
-      text_exact 'mos'
-    rescue
-      # nop
-    end
+            text_exact 'mos'
+          rescue
+            # nop
+          end
     act.must_be_nil
     set_wait
 
@@ -61,3 +61,4 @@ describe 'ios/element/text' do
     texts_exact('UICatalog').length.must_equal 1
   end
 end
+# rubocop:enable Lint/HandleExceptions,Style/RescueStandardError

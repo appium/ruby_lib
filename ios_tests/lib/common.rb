@@ -1,4 +1,3 @@
-
 # common methods
 def back_click(opts = {})
   opts ||= {}

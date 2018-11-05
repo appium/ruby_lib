@@ -2,11 +2,11 @@ require_relative '../../lib/appium_lib'
 
 def des_server_caps
   {
-      debug: true,
-      server_url: "#{ENV['appium_server'] ||= 'http://127.0.0.1:4723'}/wd/hub",
-      wait: 25,
-      wait_timeout: 20,
-      wait_interval: 0.3
+    debug: true,
+    server_url: "#{ENV['appium_server'] ||= 'http://127.0.0.1:4723'}/wd/hub",
+    wait: 25,
+    wait_timeout: 20,
+    wait_interval: 0.3
   }
 end
 

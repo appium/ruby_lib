@@ -45,7 +45,7 @@ module Appium
         begin
           elem = find_element :uiautomator, scroll_uiselector(arg, scrollable_index)
           return elem
-        rescue => e
+        rescue StandardError => e
           raise e if index == args.size - 1
         end
       end
@@ -63,7 +63,7 @@ module Appium
         begin
           elem = find_element :uiautomator, scroll_uiselector(arg, scrollable_index)
           return elem
-        rescue => e
+        rescue StandardError => e
           raise e if index == args.size - 1
         end
       end

@@ -9,6 +9,7 @@ module Appium
     # @return [TextView]
     def text(value)
       return ele_index TextView, value if value.is_a? Numeric
+
       complex_find_contains TextView, value
     end
 
@@ -18,6 +19,7 @@ module Appium
     # @return [Array<TextView>]
     def texts(value = false)
       return tags TextView unless value
+
       complex_finds_contains TextView, value
     end
 

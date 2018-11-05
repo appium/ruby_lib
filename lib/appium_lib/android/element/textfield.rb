@@ -8,6 +8,7 @@ module Appium
     # @return [EditText]
     def textfield(value)
       return ele_index EditText, value if value.is_a? Numeric
+
       complex_find_contains EditText, value
     end
 
@@ -17,6 +18,7 @@ module Appium
     # @return [Array<EditText>]
     def textfields(value = false)
       return tags EditText unless value
+
       complex_finds_contains EditText, value
     end
 

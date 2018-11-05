@@ -49,6 +49,7 @@ module Appium
 
       toml = opts[:file]
       raise 'Must pass a capability file which has [caps] and [appium_lib]' unless toml
+
       verbose = opts.fetch :verbose, false
 
       Appium::Logger.info "appium settings path: #{toml}" if verbose
@@ -57,6 +58,7 @@ module Appium
       Appium::Logger.info "Exists? #{toml_exists}" if verbose
 
       raise "toml doesn't exist #{toml}" unless toml_exists
+
       require 'tomlrb'
       Appium::Logger.info "Loading #{toml}" if verbose
 
@@ -135,6 +137,7 @@ module Appium
         end
       else
         raise 'modules must be a module or an array' unless modules.is_a? Array
+
         target_modules = modules
       end
 
@@ -181,6 +184,7 @@ module Appium
     #
     def promote_appium_methods(class_array, driver = $driver)
       raise 'Driver is nil' if driver.nil?
+
       # Wrap single class into an array
       class_array = [class_array] unless class_array.class == Array
       # Promote Appium driver methods to class instance methods.

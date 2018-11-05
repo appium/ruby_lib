@@ -38,9 +38,15 @@ Style/SafeNavigation:
 # Can use over Ruby2.3
 Style/NumericPredicate:
   Enabled: false
+Style/CommentedKeyword:
+  Enabled: false
 Lint/NestedMethodDefinition:
   Enabled: false
 Naming/ConstantName:
   Enabled: false
 Naming/AccessorMethodName:
+  Enabled: false
+Naming/MemoizedInstanceVariableName:
+  Enabled: false
+Layout/IndentHeredoc:
   Enabled: false
