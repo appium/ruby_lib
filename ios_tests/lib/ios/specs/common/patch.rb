@@ -1,6 +1,3 @@
-# rubocop:disable Lint/RescueException
-
-#
 #  Skip:
 #    status # status patches are already tested in driver.rb
 #    execute # debug output for Pry
@@ -42,7 +39,7 @@ describe 'common/patch.rb' do
       begin
         set_wait 0
         find_element(:css, 'ok')
-      rescue Exception => e
+      rescue StandardError => e
         value = e.message
       ensure
         set_wait

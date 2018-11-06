@@ -6,6 +6,7 @@ module Appium
 
       def start_element(type, attrs = [])
         return if filter && !filter.eql?(type)
+
         page = attrs.inject({}) do |hash, attr|
           hash[attr[0]] = attr[1] if %w(name label value hint visible).include?(attr[0])
           hash
@@ -15,19 +16,17 @@ module Appium
 
       # @private
       def _print_attr(type, name, label, value, hint, visible) # rubocop:disable Metrics/ParameterLists
+        puts type.to_s if name || label || value || hint || visible
+
         if name == label && name == value
-          puts type.to_s if name || label || value || hint || visible
           puts "   name, label, value: #{name}" if name
         elsif name == label
-          puts type.to_s if name || label || value || hint || visible
           puts "   name, label: #{name}" if name
           puts "   value: #{value}" if value
         elsif name == value
-          puts type.to_s if name || label || value || hint || visible
           puts "   name, value: #{name}" if name
           puts "  label: #{label}" if label
         else
-          puts type.to_s if name || label || value || hint || visible
           puts "   name: #{name}" if name
           puts "  label: #{label}" if label
           puts "  value: #{value}" if value
@@ -60,23 +59,23 @@ module Appium
     def page(opts = {})
       class_name = opts.is_a?(Hash) ? opts.fetch(:class, nil) : opts
 
+      source = get_source
+
       # current_context may be nil which breaks start_with
       if current_context && current_context.start_with?('WEBVIEW')
-        s      = get_source
         parser = @android_html_parser ||= Nokogiri::HTML::SAX::Parser.new(Appium::Common::HTMLElements.new)
         parser.document.reset
         parser.document.filter = class_name
-        parser.parse s
+        parser.parse source
         result = parser.document.result
         puts result
         result
       else
-        s = get_source
         parser = Nokogiri::XML::SAX::Parser.new(UITestElementsPrinter.new)
         if class_name
           parser.document.filter = class_name.is_a?(Symbol) ? class_name.to_s : class_name
         end
-        parser.parse s
+        parser.parse source
         nil
       end
     end
@@ -94,6 +93,7 @@ module Appium
     # @return [Element]
     def ele_index(class_name, index)
       raise 'Index must be >= 1' unless index == 'last()' || (index.is_a?(Integer) && index >= 1)
+
       elements = tags(class_name)
 
       if index == 'last()'
@@ -105,6 +105,7 @@ module Appium
       end
 
       raise _no_such_element if result.nil?
+
       result
     end
 
@@ -147,6 +148,7 @@ module Appium
     def find_ele_by_predicate(class_name: '*', value:)
       elements = find_eles_by_predicate(class_name: class_name, value: value)
       raise _no_such_element if elements.empty?
+
       elements.first
     end
 
@@ -156,12 +158,12 @@ module Appium
     # @param class_name [String] the tag name to match
     # @return [Array<Element>]
     def find_eles_by_predicate(class_name: '*', value:)
-      predicate =  if class_name == '*'
-                     %(name ==[c] "#{value}" || label ==[c] "#{value}" || value ==[c] "#{value}")
-                   else
-                     %(type == "#{class_name}" && ) +
-                       %((name ==[c] "#{value}" || label ==[c] "#{value}" || value ==[c] "#{value}"))
-                   end
+      predicate = if class_name == '*'
+                    %(name ==[c] "#{value}" || label ==[c] "#{value}" || value ==[c] "#{value}")
+                  else
+                    %(type == "#{class_name}" && ) +
+                      %((name ==[c] "#{value}" || label ==[c] "#{value}" || value ==[c] "#{value}"))
+                  end
       @driver.find_elements :predicate, predicate
     end
 
@@ -192,6 +194,7 @@ module Appium
     def find_ele_by_predicate_include(class_name: '*', value:)
       elements = find_eles_by_predicate_include(class_name: class_name, value: value)
       raise _no_such_element if elements.empty?
+
       elements.first
     end
 
@@ -280,17 +283,17 @@ module Appium
     # @return [String]
     def string_visible_contains(element, value)
       contains = {
-        target:      value,
-        substring:   true,
+        target: value,
+        substring: true,
         insensitive: true
       }
 
       {
-        typeArray:   [element],
+        typeArray: [element],
         onlyVisible: true,
-        name:        contains,
-        label:       contains,
-        value:       contains
+        name: contains,
+        label: contains,
+        value: contains
       }
     end
 
@@ -319,17 +322,17 @@ module Appium
     # @return [String]
     def string_visible_exact(element, value)
       exact = {
-        target:      value,
-        substring:   false,
+        target: value,
+        substring: false,
         insensitive: false
       }
 
       {
-        typeArray:   [element],
+        typeArray: [element],
         onlyVisible: true,
-        name:        exact,
-        label:       exact,
-        value:       exact
+        name: exact,
+        label: exact,
+        value: exact
       }
     end
 
@@ -359,6 +362,7 @@ module Appium
     def _all_pred(opts)
       predicate = opts[:predicate]
       raise 'predicate must be provided' unless predicate
+
       visible = opts.fetch :visible, true
       %($.mainApp().getAllWithPredicate("#{predicate}", #{visible});)
     end
@@ -386,10 +390,11 @@ module Appium
 
     def _validate_object(*objects)
       raise 'objects must be an array' unless objects.is_a? Array
+
       objects.each do |obj|
         next unless obj # obj may be nil. if so, ignore.
 
-        valid_keys   = [:target, :substring, :insensitive]
+        valid_keys   = %i[target substring insensitive]
         unknown_keys = obj.keys - valid_keys
         raise "Unknown keys: #{unknown_keys}" unless unknown_keys.empty?
 
@@ -434,7 +439,7 @@ module Appium
     # }
     #
     def _by_json(opts)
-      valid_keys   = [:typeArray, :onlyFirst, :onlyVisible, :name, :label, :value]
+      valid_keys = %i(typeArray onlyFirst onlyVisible name label value)
       unknown_keys = opts.keys - valid_keys
       raise "Unknown keys: #{unknown_keys}" unless unknown_keys.empty?
 
@@ -468,7 +473,7 @@ module Appium
       JS
 
       res = execute_script element_or_elements_by_type
-      res ? res : raise(Appium::Ios::CommandError, 'mainWindow is nil')
+      res || raise(Appium::Ios::CommandError, 'mainWindow is nil')
     end
 
     # For Appium(automation name), not XCUITest
@@ -491,8 +496,9 @@ module Appium
     # see eles_by_json
     def ele_by_json(opts)
       opts[:onlyFirst] = true
-      result           = _by_json(opts).first
+      result = _by_json(opts).first
       raise _no_such_element if result.nil?
+
       result
     end
   end # module Ios

@@ -14,4 +14,5 @@ describe 'common/element/window' do
     size.width.class.must_equal Fixnum
     size.height.class.must_equal Fixnum
   end
+  # rubocop:enable Lint/UnifiedInteger
 end

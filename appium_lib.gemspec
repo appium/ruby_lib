@@ -15,20 +15,17 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
 
   s.add_runtime_dependency 'appium_lib_core', '~> 2.0.0'
-  s.add_runtime_dependency 'tomlrb', '~> 1.1'
   s.add_runtime_dependency 'nokogiri', '~> 1.8', '>= 1.8.1'
+  s.add_runtime_dependency 'tomlrb', '~> 1.1'
 
+  s.add_development_dependency 'fakefs', '~> 0.13.0'
+  s.add_development_dependency 'hashdiff', '~> 0.3.7'
   s.add_development_dependency 'posix-spawn', '~> 0.3'
-  s.add_development_dependency 'hashdiff', '~> 0.2.2'
-  s.add_development_dependency 'spec', '~> 5.3', '>= 5.3.4'
-  s.add_development_dependency 'fakefs', '~> 0.6.7'
-
+  s.add_development_dependency 'pry'
   s.add_development_dependency 'rake', '~> 12.0'
+  s.add_development_dependency 'rubocop', '~> 0.60.0'
+  s.add_development_dependency 'spec', '~> 5.3', '>= 5.3.4'
   s.add_development_dependency 'yard', '~> 0.9.11'
 
-  s.add_development_dependency 'rubocop', '~> 0.46.0'
-  s.add_development_dependency 'rainbow', '~> 2.1.0'
-  s.add_development_dependency 'pry'
-
-  s.files = `git ls-files`.split("\n").select { |v| !v.match /\A^(ios_tests|android_tests|grid|test_apps)\/.+/ }
+  s.files = `git ls-files`.split("\n").reject { |v| v.match /\A^(ios_tests|android_tests|grid|test_apps)\/.+/ }
 end

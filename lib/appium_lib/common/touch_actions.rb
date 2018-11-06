@@ -36,9 +36,10 @@ module Appium
       COMPLEX_ACTIONS.each do |action|
         define_method(action) do |opts|
           auto_perform = opts.delete(:auto_perform) { |_k| true }
-          ta           = ::Appium::TouchAction.new($driver)
+          ta = ::Appium::TouchAction.new($driver)
           ta.send(action, opts)
           return ta unless auto_perform
+
           ta.perform
         end
       end
@@ -49,10 +50,10 @@ module Appium
     end
 
     def swipe(opts)
-      start_x  = opts.fetch :start_x, 0
-      start_y  = opts.fetch :start_y, 0
-      end_x    = opts.fetch :end_x, 0
-      end_y    = opts.fetch :end_y, 0
+      start_x = opts.fetch :start_x, 0
+      start_y = opts.fetch :start_y, 0
+      end_x = opts.fetch :end_x, 0
+      end_y = opts.fetch :end_y, 0
       duration = opts.fetch :duration, 200
 
       if opts[:offset_x]

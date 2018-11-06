@@ -63,6 +63,7 @@ module Appium
         pinch.add top
         pinch.add bottom
         return pinch unless auto_perform
+
         pinch.perform
       end
 
@@ -105,6 +106,7 @@ module Appium
         zoom.add top
         zoom.add bottom
         return zoom unless auto_perform
+
         zoom.perform
       end
 

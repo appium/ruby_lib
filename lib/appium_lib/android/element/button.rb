@@ -26,6 +26,7 @@ module Appium
     # @return [Array<Button>]
     def buttons(value = false)
       return find_elements :uiautomator, _button_visible_selectors unless value
+
       find_elements :uiautomator, _button_contains_string(value)
     end
 
@@ -69,6 +70,7 @@ module Appium
     # @private
     def raise_no_such_element_if_empty(elements)
       raise _no_such_element if elements.empty?
+
       elements.first
     end
 

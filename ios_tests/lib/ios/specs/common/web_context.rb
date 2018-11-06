@@ -17,7 +17,7 @@ describe 'the web context' do
 
     set_context web_view_context
     current_context.must_equal web_view_context
-    sleep 1  # Give a chance to load
+    sleep 1 # Give a chance to load
     page.start_with?("\nhtml\n").must_equal true
   end
 

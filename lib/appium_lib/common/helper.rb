@@ -194,7 +194,8 @@ module Appium
       # convert to string to support symbols
       def filter=(value)
         # nil and false disable the filter
-        return @filter = false unless value
+        return @filter = false unless value # rubocop:disable Lint/ReturnInVoidContext
+
         @filter = value.to_s.downcase
       end
 
@@ -211,16 +212,13 @@ module Appium
 
       def result
         @elements_in_order.reduce('') do |r, e|
-          name        = e.delete :name
+          name = e.delete :name
           attr_string = e.reduce('') do |string, attr|
-            attr_1 = attr[1]
-            attr_1 = attr_1 ? attr_1.strip : attr_1
-            string + "  #{attr[0]}: #{attr_1}\n"
+            attr1 = attr[1] ? attr[1].strip : attr[1]
+            "#{string}  #{attr[0]}: #{attr1}\n"
           end
 
-          unless attr_string.nil? || attr_string.empty?
-            r += "\n#{name}\n#{attr_string}"
-          end
+          r.concat "\n#{name}\n#{attr_string}" unless attr_string.nil? || attr_string.empty?
           r
         end
       end
@@ -228,6 +226,7 @@ module Appium
       def start_element(name, attrs = [])
         @skip_element = filter && !filter.include?(name.downcase)
         return if @skip_element
+
         element = { name: name }
         attrs.each { |a| element[a[0]] = a[1] }
         @element_stack.push element
@@ -236,12 +235,14 @@ module Appium
 
       def end_element(name)
         return if filter && !filter.include?(name.downcase)
+
         element_index = @element_stack.rindex { |e| e[:name] == name }
         @element_stack.delete_at element_index
       end
 
       def characters(chars)
         return if @skip_element
+
         element        = @element_stack.last
         element[:text] = chars
       end

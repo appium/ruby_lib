@@ -25,11 +25,12 @@ module Appium
       if value.is_a? Numeric
         index = value
         raise "#{index} is not a valid index. Must be >= 1" if index <= 0
+
         index -= 1 # eles_by_json and _textfields_with_predicate is 0 indexed.
         result = eles_by_json(_textfield_visible)[index]
         raise _no_such_element if result.nil?
-        return result
 
+        return result
       end
 
       ele_by_json _textfield_contains_string value
@@ -41,6 +42,7 @@ module Appium
     # @return [Array<TextField>]
     def textfields(value = false)
       return eles_by_json _textfield_visible unless value
+
       eles_by_json _textfield_contains_string value
     end
 
@@ -55,6 +57,7 @@ module Appium
     def last_textfield
       result = eles_by_json(_textfield_visible).last
       raise _no_such_element if result.nil?
+
       result
     end
 
@@ -82,7 +85,7 @@ module Appium
     # Appium
     def _textfield_exact_string(value)
       exact = { target: value, substring: false, insensitive: false }
-      exact_obj = { name:  exact, label: exact, value: exact }
+      exact_obj = { name: exact, label: exact, value: exact }
       _textfield_visible.merge(exact_obj)
     end
 

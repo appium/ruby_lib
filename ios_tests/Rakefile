@@ -5,11 +5,12 @@ require 'rubocop/rake_task'
 task default: :ios
 
 # Run sh and ignore exception
-# rubocop:disable Lint/HandleExceptions
+# rubocop:disable Lint/HandleExceptions,Style/RescueStandardError
 def run_sh(cmd)
   sh cmd
 rescue
 end
+# rubocop:enable Lint/HandleExceptions,Style/RescueStandardError
 
 # Run cmd. On failure run install and try again.
 def bash(cmd)
@@ -35,9 +36,9 @@ task :ios, :args, :test_file do |_args, test_file|
   # rake android['ok']
   # args = android
   # test_file = {:args=>"ok"}
-  test_file         = test_file[:args]
+  test_file = test_file[:args]
   cmd = 'bundle exec ruby ./lib/run.rb ios'
-  cmd += %( "#{test_file}") if test_file
+  cmd.concat %( "#{test_file}") if test_file
   bash cmd
 end
 
@@ -81,7 +82,6 @@ end
 
 desc 'Run tests with parallel thread'
 task :run_parallel_t do
-  require 'thread'
   require_relative 'parallel/test'
 
   threads = []

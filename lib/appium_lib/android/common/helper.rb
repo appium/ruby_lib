@@ -8,7 +8,8 @@ module Appium
       # convert to string to support symbols
       def filter=(value)
         # nil and false disable the filter
-        return @filter = false unless value
+        return @filter = false unless value # rubocop:disable Lint/ReturnInVoidContext
+
         @filter = value.to_s.downcase
       end
 
@@ -136,6 +137,7 @@ module Appium
         index -= 1 if index >= 0
       else
         raise 'Index must be >= 1' unless index >= 1
+
         index -= 1 if index >= 1
       end
 
@@ -218,7 +220,7 @@ module Appium
 
       if class_name == '*'
         return "//*[contains(translate(@text,'#{value.upcase}', '#{value}'), '#{value}')" \
-            " or contains(translate(@content-desc,'#{value.upcase}', '#{value}'), '#{value}')" + r_id + ']'
+          " or contains(translate(@content-desc,'#{value.upcase}', '#{value}'), '#{value}')" + r_id + ']'
       end
 
       "//#{class_name}[contains(translate(@text,'#{value.upcase}', '#{value}'), '#{value}')" \
@@ -237,14 +239,14 @@ module Appium
       value = %("#{value}")
       if class_name == '*'
         return (resource_id(value, "new UiSelector().resourceId(#{value});") +
-            "new UiSelector().descriptionContains(#{value});" \
-            "new UiSelector().textContains(#{value});")
+          "new UiSelector().descriptionContains(#{value});" \
+          "new UiSelector().textContains(#{value});")
       end
 
       class_name = %("#{class_name}")
       resource_id(value, "new UiSelector().className(#{class_name}).resourceId(#{value});") +
-          "new UiSelector().className(#{class_name}).descriptionContains(#{value});" \
-          "new UiSelector().className(#{class_name}).textContains(#{value});"
+        "new UiSelector().className(#{class_name}).descriptionContains(#{value});" \
+        "new UiSelector().className(#{class_name}).textContains(#{value});"
     end
 
     # Find the first element that contains value
@@ -272,9 +274,7 @@ module Appium
     def string_visible_exact_xpath(class_name, value)
       r_id = resource_id(value, " or @resource-id='#{value}'")
 
-      if class_name == '*'
-        return "//*[@text='#{value}' or @content-desc='#{value}'" + r_id + ']'
-      end
+      return "//*[@text='#{value}' or @content-desc='#{value}'" + r_id + ']' if class_name == '*'
 
       "//#{class_name}[@text='#{value}' or @content-desc='#{value}'" + r_id + ']'
     end
@@ -289,14 +289,14 @@ module Appium
 
       if class_name == '*'
         return (resource_id(value, "new UiSelector().resourceId(#{value});") +
-            "new UiSelector().description(#{value});" \
-            "new UiSelector().text(#{value});")
+          "new UiSelector().description(#{value});" \
+          "new UiSelector().text(#{value});")
       end
 
       class_name = %("#{class_name}")
       resource_id(value, "new UiSelector().className(#{class_name}).resourceId(#{value});") +
-          "new UiSelector().className(#{class_name}).description(#{value});" \
-          "new UiSelector().className(#{class_name}).text(#{value});"
+        "new UiSelector().className(#{class_name}).description(#{value});" \
+        "new UiSelector().className(#{class_name}).text(#{value});"
     end
 
     # Find the first element exactly matching value

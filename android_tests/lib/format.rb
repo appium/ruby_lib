@@ -1,5 +1,5 @@
 # helper code useful for writing and verifying tests using Pry
-list = <<TXT
+list = <<-TXT
 find
 text
 texts
@@ -31,12 +31,12 @@ list.split("\n").each do |method|
   klass = pair[2]
 
   indent = 6
-  puts ' ' * indent + "when '" + tag + "'"
-  line_2 = ' ' * (indent + 2) + "prefix '" + klass + "'"
+  puts "#{' ' * indent}when '#{tag}'"
+  line2 = "#{' ' * (indent + 2)}prefix '#{klass}'"
   # button must translate to both button and image button
   # for ruby_lib to find all buttons
-  line_2 += ", 'ImageButton'" if klass == 'Button'
-  puts line_2
+  line2.concat(", 'ImageButton'") if klass == 'Button'
+  puts line2
 end
 
 # for Pry

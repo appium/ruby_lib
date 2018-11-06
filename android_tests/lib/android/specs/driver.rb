@@ -1,5 +1,3 @@
-# rubocop:disable Lint/RescueException
-
 # rake android[driver]
 describe 'driver' do
   def sauce?
@@ -35,24 +33,28 @@ describe 'driver' do
     end
 
     t 'verify all attributes' do
-      actual                = driver_attributes
+      actual = driver_attributes
       caps_app_for_teardown = actual[:caps][:app]
       expected_app = File.absolute_path('../test_apps/api.apk')
 
-      expected            = { automation_name:  :uiautomator2,
-                              custom_url:       false,
-                              export_session:   false,
-                              export_session_path: '/tmp/appium_lib_session',
-                              default_wait:     1,
-                              sauce_username:   nil,
-                              sauce_access_key: nil,
-                              sauce_endpoint:   'ondemand.saucelabs.com:443/wd/hub',
-                              port:             4723,
-                              device:           :android,
-                              debug:            true,
-                              listener:         nil,
-                              wait_timeout:     30,    # default
-                              wait_interval:    0.5 }  # default
+      # rubocop:disable Layout/AlignHash
+      expected = {
+        automation_name:     :uiautomator2,
+        custom_url:          false,
+        export_session:      false,
+        export_session_path: '/tmp/appium_lib_session',
+        default_wait:        1,
+        sauce_username:      nil,
+        sauce_access_key:    nil,
+        sauce_endpoint:      'ondemand.saucelabs.com:443/wd/hub',
+        port:                4723,
+        device:              :android,
+        debug:               true,
+        listener:            nil,
+        wait_timeout:        30, # default
+        wait_interval:       0.5 # default
+      }
+      # rubocop:enable Layout/AlignHash
 
       # actual[:caps].to_json send to Appium server
       caps_with_json = JSON.parse(actual[:caps].to_json)
@@ -133,7 +135,7 @@ describe 'driver' do
       invalid_path_errors = false
       begin
         absolute_app_path('../../does_not_exist.apk')
-      rescue Exception
+      rescue StandardError
         invalid_path_errors = true
       ensure
         invalid_path_errors.must_equal true

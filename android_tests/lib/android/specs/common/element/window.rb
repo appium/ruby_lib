@@ -8,4 +8,5 @@ describe 'common/element/window' do
       size.height.class.must_equal Fixnum
     end
   end
+  # rubocop:enable Lint/UnifiedInteger
 end

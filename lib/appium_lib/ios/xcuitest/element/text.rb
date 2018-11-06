@@ -16,6 +16,7 @@ module Appium
         # @return [UIAStaticText|XCUIElementTypeStaticText]
         def text(value)
           return ele_index static_text_class, value if value.is_a? Numeric
+
           raise_error_if_no_element texts(value).first
         end
 
@@ -25,6 +26,7 @@ module Appium
         # @return [Array<UIAStaticText|XCUIElementTypeStaticText>]
         def texts(value = false)
           return tags static_text_class unless value
+
           elements = find_eles_by_predicate_include(class_name: static_text_class, value: value)
           select_visible_elements elements
         end

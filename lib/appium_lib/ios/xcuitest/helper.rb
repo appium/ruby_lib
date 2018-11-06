@@ -26,6 +26,7 @@ module Appium
         def last_ele(class_name)
           visible_elements = tags class_name
           raise _no_such_element if visible_elements.empty?
+
           visible_elements.last
         end
 
@@ -59,8 +60,7 @@ module Appium
           c_names = class_names.map { |class_name| %(type == "#{class_name}") }.join(' || ')
 
           predicate = if value
-                        %((#{c_names}) && ) +
-                            %((name contains[c] "#{value}" || label contains[c] "#{value}" || value contains[c] "#{value}"))
+                        %((#{c_names}) && (name contains[c] "#{value}" || label contains[c] "#{value}" || value contains[c] "#{value}")) # rubocop:disable Metrics/LineLength
                       else
                         c_names
                       end
@@ -82,8 +82,7 @@ module Appium
           c_names = class_names.map { |class_name| %(type == "#{class_name}") }.join(' || ')
 
           predicate = if value
-                        %((#{c_names}) && ) +
-                            %((name ==[c] "#{value}" || label ==[c] "#{value}" || value ==[c] "#{value}"))
+                        %((#{c_names}) && (name ==[c] "#{value}" || label ==[c] "#{value}" || value ==[c] "#{value}"))
                       else
                         c_names
                       end

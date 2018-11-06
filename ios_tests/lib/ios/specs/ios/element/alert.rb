@@ -16,7 +16,7 @@ describe 'ios/element/alert' do
 
   def open_alert
     wait_true do
-      if  automation_name_is_xcuitest?
+      if automation_name_is_xcuitest?
         find_element(:name, 'Show OK-Cancel').click
         find_element(:name, 'UIActionSheet <title>').displayed?
       else

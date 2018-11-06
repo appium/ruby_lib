@@ -17,6 +17,7 @@ module Appium
         def button(value)
           # return button at index.
           return ele_index button_class, value if value.is_a? Numeric
+
           raise_error_if_no_element buttons(value).first
         end
 
@@ -26,6 +27,7 @@ module Appium
         # @return [Array<UIAButton|XCUIElementTypeButton>]
         def buttons(value = false)
           return tags button_class unless value
+
           elements = find_eles_by_predicate_include(class_name: button_class, value: value)
           select_visible_elements elements
         end
