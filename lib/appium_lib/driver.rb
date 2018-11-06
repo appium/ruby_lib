@@ -587,6 +587,48 @@ module Appium
       @driver.execute_script script, *args
     end
 
+    ###
+    # Wrap calling selenium webdrier APIs via ruby_core
+    ###
+    # Get the window handles of open browser windows
+    def window_handles
+      @driver.window_handles
+    end
+
+    # Get the current window handle
+    def window_handle
+      @driver.window_handle
+    end
+
+    def navigate
+      @driver.navigate
+    end
+
+    def manage
+      @driver.manage
+    end
+
+    def get(url)
+      @driver.get(url)
+    end
+
+    def current_url
+      @driver.current_url
+    end
+
+    def title
+      @driver.title
+    end
+
+    # @return [TargetLocator]
+    # @see TargetLocator
+    def switch_to
+      @driver.switch_to
+    end
+    ###
+    # End core
+    ###
+
     # Calls @driver.find_elements_with_appium
     #
     # @example
