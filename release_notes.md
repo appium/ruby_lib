@@ -1,3 +1,13 @@
+#### v9.15.1 2018-08-27
+
+- [14d1835](https://github.com/appium/ruby_lib/commit/14d1835fc2d8385af5b8b4489d6b6bb077e510e4) [Release 9 15 1 (#817)](https://github.com/appium/ruby_lib/issues/817)
+- [5f6c18e](https://github.com/appium/ruby_lib/commit/5f6c18ed9774fe027ee748e812ff91ee6d15a130) [Add extend core (#816)](https://github.com/appium/ruby_lib/issues/816)
+- [c6e5321](https://github.com/appium/ruby_lib/commit/c6e532186b7552212ba61ab2e351dba247a35312) [Tweak gemspec (#814)](https://github.com/appium/ruby_lib/issues/814)
+- [2864eec](https://github.com/appium/ruby_lib/commit/2864eec1d05fb69a461c37e4295f159aebe406ca) [add tests and tweak helpers which handle xml (#813)](https://github.com/appium/ruby_lib/issues/813)
+- [e04afe9](https://github.com/appium/ruby_lib/commit/e04afe92dbe6ea38773c234deb97cb4a7f8ffdd2) [Revert "Use ::REXML::Document by default in CountElements (#811)" (#812)](https://github.com/appium/ruby_lib/issues/811)
+- [1dcc665](https://github.com/appium/ruby_lib/commit/1dcc6650974a57369cc6b087b577cc1146bdaa1f) [Use ::REXML::Document by default in CountElements (#811)](https://github.com/appium/ruby_lib/issues/811)
+
+
 #### v9.15.0 2018-08-10
 
 - [b09ea84](https://github.com/appium/ruby_lib/commit/b09ea848cc595d8d3ef6494e0a26770521b9432c) [Release 9 15 0 (#810)](https://github.com/appium/ruby_lib/issues/810)
