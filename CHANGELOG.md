@@ -5,6 +5,13 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 
 ## Unreleased
 ### 1. Enhancements
+
+### 2. Bug fixes
+
+### 3. Deprecations
+
+## v9.15.2
+### 1. Enhancements
 - Wrap selenium-webdriver apis via `Appium::Driver` through Appium Core Bridge [#827](https://github.com/appium/ruby_lib/pull/827/files)
 
 ### 2. Bug fixes
