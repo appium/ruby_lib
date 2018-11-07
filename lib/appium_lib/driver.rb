@@ -591,6 +591,10 @@ module Appium
     # Wrap calling selenium webdrier APIs via ruby_core
     ###
     # Get the window handles of open browser windows
+    def execute_async_script(script, *args)
+      @driver.execute_async_script script, *args
+    end
+
     def window_handles
       @driver.window_handles
     end
