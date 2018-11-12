@@ -174,7 +174,7 @@ module Appium
       @appium_device = @core.device
       @automation_name = @core.automation_name
 
-      # override opts[:app] if sauce labs
+      # Arrange the app capability. This must be after @core = ::Appium::Core.for(opts)
       set_app_path(opts)
 
       # enable debug patch
@@ -238,6 +238,7 @@ module Appium
     # @private
     def set_app_path(opts)
       return unless @core.caps && @core.caps[:app] && !@core.caps[:app].empty?
+      return if device_is_windows? # Windows Phone must accept non-path app https://github.com/Microsoft/WinAppDriver
 
       @core.caps[:app] = self.class.absolute_app_path opts
     end
