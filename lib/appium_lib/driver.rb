@@ -174,7 +174,7 @@ module Appium
       @appium_device = @core.device
       @automation_name = @core.automation_name
 
-      # override opts[:app] if sauce labs
+      # Arrange the app capability. This must be after @core = ::Appium::Core.for(opts)
       set_app_path(opts)
 
       # enable debug patch
@@ -397,8 +397,13 @@ module Appium
       return app_path if app_path.start_with? 'sauce-storage:'
       return app_path if app_path =~ URI::DEFAULT_PARSER.make_regexp # public URL for Sauce
 
-      app_path = File.expand_path app_path
-      raise "App doesn't exist. #{app_path}" unless File.exist? app_path
+      absolute_app_path = File.expand_path app_path
+      app_path = if File.exist? absolute_app_path
+                   absolute_app_path
+                 else
+                   ::Appium::Logger.info("Use #{app_path}")
+                   app_path
+                 end
 
       app_path
     end

@@ -7,6 +7,20 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 ### 1. Enhancements
 
 ### 2. Bug fixes
+- `:app` can be non-path capability like [Windows](https://github.com/Microsoft/WinAppDriver)
+    ```ruby
+    { caps:
+      { platformName: :windows,
+        app: 'Microsoft.WindowsCalculator_8wekyb3d8bbwe!App'
+      }
+    } # `:app` is bundle id.
+
+    { caps:
+      { platformName: :windows,
+        app: 'relative/path/to/app'
+      }
+    } # `:app` will be alsolute path to the `:app` if the path exists    
+    ```
 
 ### 3. Deprecations
 
