@@ -7,6 +7,29 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 ### 1. Enhancements
 
 ### 2. Bug fixes
+- **Breaking change for Windows user**
+    - `:app` can be non-path capability for [Windows](https://github.com/Microsoft/WinAppDriver)
+        - Users must set a path correctly if they would like to set a path in `:app` for Windows
+            ```ruby
+            { caps:
+              { platformName: :windows,
+                app: 'Microsoft.WindowsCalculator_8wekyb3d8bbwe!App'
+              }
+            } # `:app` is bundle id.
+            { caps:
+              { platformName: :windows,
+                app: '/absolute/path/to/app'
+              }
+            } # `:app` is an absplute path.
+              # If you would like to set a path, you **must** set absolute path properly by yourself
+    
+            { caps:
+              { platformName: :android,
+                app: 'something.apk'
+              }
+            } # `:app` will be an absolute path by ruby_lib    
+            
+            ```
 
 ### 3. Deprecations
 
