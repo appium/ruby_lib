@@ -21,7 +21,7 @@ Release tags are https://github.com/appium/ruby_lib/releases .
                 app: '/absolute/path/to/app'
               }
             } # `:app` is an absplute path.
-              # If you would like to set a path, you **must** set absolute path properly by yourself
+              # If you would like to set a path, you **must** set absolute style properly by yourself
     
             { caps:
               { platformName: :android,
