@@ -238,7 +238,6 @@ module Appium
     # @private
     def set_app_path(opts)
       return unless @core.caps && @core.caps[:app] && !@core.caps[:app].empty?
-      return if device_is_windows? # Windows Phone must accept non-path app https://github.com/Microsoft/WinAppDriver
 
       @core.caps[:app] = self.class.absolute_app_path opts
     end
@@ -398,8 +397,13 @@ module Appium
       return app_path if app_path.start_with? 'sauce-storage:'
       return app_path if app_path =~ URI::DEFAULT_PARSER.make_regexp # public URL for Sauce
 
-      app_path = File.expand_path app_path
-      raise "App doesn't exist. #{app_path}" unless File.exist? app_path
+      absolute_app_path = File.expand_path app_path
+      app_path = if File.exist? absolute_app_path
+                   absolute_app_path
+                 else
+                   ::Appium::Logger.info("Use #{app_path}")
+                   app_path
+                 end
 
       app_path
     end
