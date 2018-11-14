@@ -3,8 +3,17 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+
 ## Unreleased
 ### 1. Enhancements
+
+### 2. Bug fixes
+
+### 3. Deprecations
+
+## v9.16.0
+### 1. Enhancements
+- Introduce `appium_thor` in order to automate release
 
 ### 2. Bug fixes
 - `:app` can be non-path capability like [Windows](https://github.com/Microsoft/WinAppDriver)

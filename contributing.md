@@ -30,17 +30,6 @@ Android tests require running on physical hardware with Android 5.0 (API 21). Th
 > $ curl -u username https://rubygems.org/api/v1/api_key.yaml >
 ~/.gem/credentials; chmod 0600 ~/.gem/credentials
 
-1. Bump the version number `rake bump`
-2. Generate release note and create a branch with `rake release`
-    - Push and merge the branch to the master
-3. Build and publish gem with `rake publish`
-4. Add release information on GitHub: https://github.com/appium/ruby_lib/releases
-    - Template
- ```
-### 1. Enhancements
-
-### 2. Bug fixes
-
-### 3. Deprecations
-```
-
+1. Bump the version number: `thor bump` (`bumpy`, `bumpz`)
+2. Update `CHANGELOG.md`
+3. Generate release note, publish release gem and push the tag to this repository: `thor release`
