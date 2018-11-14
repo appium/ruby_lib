@@ -18,6 +18,7 @@ Helper methods for writing cross platform (iOS, Android) tests in Ruby using App
 
 [Ruby_lib_core](https://github.com/appium/ruby_lib_core) is the core driver library which provide `selenium-webdriver` related features and driver methods for Appium.
 The `ruby_lib` wrap the driver and serve many helpful methods for users.
+You can use the ruby_core_lib directly if you would like to use minimal Ruby client for Appium.
 
 # Setup
 ## Requirement
