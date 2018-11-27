@@ -1,3 +1,12 @@
+#### v9.16.1 2018-11-28
+
+- [fa8d4ed](https://github.com/appium/ruby_lib/commit/fa8d4ed2aaa5259a1fa744be955555cf775ead3e) Release 9.16.1
+- [5172e19](https://github.com/appium/ruby_lib/commit/5172e19fc55d4649f679b50d0560d146b9e9ac71) fix version comparision, show warning if the appium version is under 1.6.0 (#837)
+- [152d04a](https://github.com/appium/ruby_lib/commit/152d04aa3c428e610c7e511a05a3563195e7cc81) remove a wrong comment
+- [65efdfd](https://github.com/appium/ruby_lib/commit/65efdfd121a5a01e2c8c0a7ca26df9c66ab446f0) fix generated docs (#835)
+- [81f369b](https://github.com/appium/ruby_lib/commit/81f369bca6d393eb273375035602e39bc89f13a6) update a description of ruby_lib_core
+
+
 #### v9.16.0 2018-11-14
 
 - [621a9eb](https://github.com/appium/ruby_lib/commit/621a9ebaf18bcd80eb0e1f5fc17fbb4dddf5293a) Release 9.16.0
