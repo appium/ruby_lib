@@ -331,10 +331,9 @@ module Appium
     def check_server_version_xcuitest
       if automation_name_is_xcuitest? &&
          !@appium_server_status.empty? &&
-         (@appium_server_status['build']['version'] < REQUIRED_VERSION_XCUITEST)
+         (Gem::Version.new(@appium_server_status['build']['version']) < Gem::Version.new(REQUIRED_VERSION_XCUITEST))
 
-        raise(Appium::Core::Error::NotSupportedAppiumServer,
-              "XCUITest requires Appium version >= #{REQUIRED_VERSION_XCUITEST}")
+        Appium::Logger.warn("XCUITest requires Appium version >= #{REQUIRED_VERSION_XCUITEST}")
       end
       true
     end
