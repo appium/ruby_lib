@@ -8,6 +8,7 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 ### 1. Enhancements
 
 ### 2. Bug fixes
+- Fix failing Appium version comparison [#836](https://github.com/appium/ruby_lib/issues/836)
 
 ### 3. Deprecations
 
