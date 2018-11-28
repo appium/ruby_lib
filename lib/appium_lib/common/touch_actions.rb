@@ -56,15 +56,6 @@ module Appium
       end_y = opts.fetch :end_y, 0
       duration = opts.fetch :duration, 200
 
-      if opts[:offset_x]
-        ::Appium::Logger.warn('[DEPRECATED] :offset_x was renamed to :end_x to indicate as an absolute point.')
-        end_x = opts.fetch :offset_x, 0
-      end
-      if opts[:offset_y]
-        ::Appium::Logger.warn('[DEPRECATED] :offset_y was renamed to :end_y to indicate as an absolute point.')
-        end_y = opts.fetch :offset_y, 0
-      end
-
       super(start_x: start_x, start_y: start_y, end_x: end_x, end_y: end_y, duration: duration)
     end
   end # class TouchAction

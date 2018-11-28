@@ -9,6 +9,8 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 ### 2. Bug fixes
 
 ### 3. Deprecations
+- `:offset_x` and `:offset_y` in `TouchAction#swipe` is deprecated in favor of `:end_x` and `:end_y`
+- [internal] Remove `check_server_version_xcuitest`
 
 ## v9.16.1
 ### 1. Enhancements
