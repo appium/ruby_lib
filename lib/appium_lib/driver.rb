@@ -25,8 +25,6 @@ require 'appium_lib_core'
 require 'uri'
 
 module Appium
-  REQUIRED_VERSION_XCUITEST = '1.6.0'.freeze
-
   class Driver
     # attr readers are promoted to global scope. To avoid clobbering, they're
     # made available via the driver_attributes method
@@ -325,19 +323,6 @@ module Appium
       @driver.dialect
     end
 
-    # Return true if the target Appium server is over REQUIRED_VERSION_XCUITEST.
-    # If the Appium server is under REQUIRED_VERSION_XCUITEST, then error is raised.
-    # @return [Boolean]
-    def check_server_version_xcuitest
-      if automation_name_is_xcuitest? &&
-         !@appium_server_status.empty? &&
-         (Gem::Version.new(@appium_server_status['build']['version']) < Gem::Version.new(REQUIRED_VERSION_XCUITEST))
-
-        Appium::Logger.warn("XCUITest requires Appium version >= #{REQUIRED_VERSION_XCUITEST}")
-      end
-      true
-    end
-
     # Returns the server's version info
     #
     # @example
@@ -515,7 +500,6 @@ module Appium
       extend_for(device: @core.device, automation_name: @core.automation_name) if automation_name.nil?
 
       @appium_server_status = appium_server_version
-      check_server_version_xcuitest
 
       @driver
     end
