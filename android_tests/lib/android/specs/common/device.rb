@@ -5,7 +5,7 @@ describe 'common/device' do
     get_performance_data_types.sort.must_equal expected
 
     get_performance_data(package_name: 'io.appium.android.apis',
-                         data_type: 'cpuinfo').must_equal [%w(user kernel), %w(0 0)]
+                         data_type: 'cpuinfo')[0].must_equal %w(user kernel)
   end
 
   t 'start_activity' do

@@ -82,7 +82,7 @@ describe 'driver' do
         # example:
         # change :ios in expected to match 'ios' in actual
         # [["~", "caps.platformName", :ios, "ios"]]
-        message = "\n\nactual:\n\n: #{actual.ai}expected:\n\n#{expected.ai}\n\n#{diff}"
+        message = "\n\nactual:\n\n: #{actual}expected:\n\n#{expected}\n\n#{diff}"
         raise message
       end
 
