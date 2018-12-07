@@ -75,14 +75,14 @@ describe 'driver' do
       dup_actual.delete(:caps)
 
       if dup_actual != expected
-        diff    = HashDiff.diff expected, actual
+        diff    = HashDiff.diff expected, dup_actual
         diff    = "diff (expected, actual):\n#{diff}"
 
-        actual[:caps][:app] = caps_app_for_teardown
+        dup_actual[:caps][:app] = caps_app_for_teardown
         # example:
         # change :ios in expected to match 'ios' in actual
         # [["~", "caps.platformName", :ios, "ios"]]
-        message = "\n\nactual:\n\n: #{actual}expected:\n\n#{expected}\n\n#{diff}"
+        message = "\n\nactual:\n\n: #{dup_actual}expected:\n\n#{expected}\n\n#{diff}"
         raise message
       end
 
