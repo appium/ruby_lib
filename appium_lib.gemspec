@@ -7,8 +7,8 @@ Gem::Specification.new do |s|
   s.version       = Appium::VERSION
   s.date          = Appium::DATE
   s.license       = 'Apache-2.0'
-  s.description   = s.summary = 'Ruby library for Appium'
-  s.description   += '.' # avoid identical warning
+  s.description   = 'Ruby library for Appium.'
+  s.summary       = 'Ruby library for Appium'
   s.authors       = ['code@bootstraponline.com', 'Kazuaki Matsuo']
   s.email         = %w(code@bootstraponline.com fly.49.89.over@gmail.com)
   s.homepage      = 'https://github.com/appium/ruby_lib' # published as appium_lib
@@ -28,5 +28,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'spec', '~> 5.3', '>= 5.3.4'
   s.add_development_dependency 'yard', '~> 0.9.11'
 
-  s.files = `git ls-files`.split("\n").reject { |v| v.match /\A^(ios_tests|android_tests|grid|test_apps)\/.+/ }
+  s.files = `git ls-files`.split("\n").reject { |v| v.match(/\A^(ios_tests|android_tests|grid|test_apps)\/.+/) }
 end

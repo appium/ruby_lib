@@ -40,7 +40,7 @@ describe 'driver' do
       # rubocop:disable Layout/AlignHash
       expected = {
         automation_name:     :uiautomator2,
-        custom_url:          false,
+        custom_url:          'http://127.0.0.1:4723/wd/hub',
         export_session:      false,
         export_session_path: '/tmp/appium_lib_session',
         default_wait:        1,
@@ -76,14 +76,14 @@ describe 'driver' do
       dup_actual.delete(:caps)
 
       if dup_actual != expected
-        diff    = HashDiff.diff expected, actual
+        diff    = HashDiff.diff expected, dup_actual
         diff    = "diff (expected, actual):\n#{diff}"
 
-        actual[:caps][:app] = caps_app_for_teardown
+        dup_actual[:caps][:app] = caps_app_for_teardown
         # example:
         # change :ios in expected to match 'ios' in actual
         # [["~", "caps.platformName", :ios, "ios"]]
-        message = "\n\nactual:\n\n: #{actual.ai}expected:\n\n#{expected.ai}\n\n#{diff}"
+        message = "\n\nactual:\n\n: #{dup_actual}expected:\n\n#{expected}\n\n#{diff}"
         raise message
       end
     end
@@ -132,20 +132,13 @@ describe 'driver' do
       absolute_app_path(relative_path).must_equal expected_path
 
       # invalid path test
-      invalid_path_errors = false
-      begin
-        absolute_app_path('../../does_not_exist.apk')
-      rescue StandardError
-        invalid_path_errors = true
-      ensure
-        invalid_path_errors.must_equal true
-      end
+      absolute_app_path('../../does_not_exist.apk').must_equal '../../does_not_exist.apk'
     end
   end
 
   describe 'methods' do
     t 'status' do
-      appium_server_version['build'].keys.sort.must_equal %w(revision version)
+      appium_server_version['build'].keys.sort.include? 'version'
     end
 
     t 'server_version' do
@@ -227,7 +220,7 @@ describe 'driver' do
 
     t 'update settings' do
       update_settings allowInvisibleElements: true
-      get_settings['allowInvisibleElements'].must_equal 'true'
+      get_settings['allowInvisibleElements'].must_equal true
     end
 
     # Skip: x # x is only used in Pry
