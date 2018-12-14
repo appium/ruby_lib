@@ -326,17 +326,20 @@ module Appium
     # An entry point to chain W3C actions. Returns `TouchAction.new` if it works as MJSONWP instead of W3C action.
     # Read https://www.rubydoc.info/github/appium/ruby_lib_core/Appium/Core/Base/Bridge/W3C#action-instance_method
     #
+    # @param [bool] async Run actions async
+    # @return [TouchAction|Selenium::WebDriver::PointerActions]
+    #
     # @example
     #
-    #     element = @driver.find_element(:id, "some id")
+    #     element = find_element(:id, "some id")
     #     action.click(element).perform # The `click` is a part of `PointerActions`
     #
-    def action
+    def action(async = false)
       if @driver.dialect != :w3c
         ::Appium::Logger.info('Calls TouchAction instead of W3C actions for MJSONWP module')
-        TouchAction.new(@driver)
+        TouchAction.new($driver || @driver)
       else
-        @driver.action
+        @driver.action async
       end
     end
 
