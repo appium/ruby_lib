@@ -1,3 +1,11 @@
+#### v9.17.0 2018-12-15
+
+- [84f71e4](https://github.com/appium/ruby_lib/commit/84f71e47b86a2f7a1de71c13888adce68622a35b) Release 9.17.0
+- [13f9551](https://github.com/appium/ruby_lib/commit/13f9551f8273cbf1ef959dfd79dc0c53a2c2e0d0) Can call w3c action (#842)
+- [908c3f0](https://github.com/appium/ruby_lib/commit/908c3f08cfea7895a2128b606f6b258c60b894dd) tweak android test code (#841)
+- [af27d01](https://github.com/appium/ruby_lib/commit/af27d011862163653c73aab037d16bcfb3abd28a) remove deprecation or unnecessary code (#839)
+
+
 #### v9.16.1 2018-11-28
 
 - [fa8d4ed](https://github.com/appium/ruby_lib/commit/fa8d4ed2aaa5259a1fa744be955555cf775ead3e) Release 9.16.1
