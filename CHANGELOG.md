@@ -5,6 +5,8 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 
 ## Unreleased
 ### 1. Enhancements
+- Add `action` wrapping _ruby_lib_core_ for [W3C actions](https://github.com/appium/ruby_lib_core/blob/master/lib/appium_lib_core/common/base/bridge/w3c.rb#L39)
+    - Returns `TouchAction.new` if the driver works as _MJSONWP_
 
 ### 2. Bug fixes
 
