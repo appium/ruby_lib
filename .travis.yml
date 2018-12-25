@@ -9,7 +9,6 @@ rvm:
   - 2.6
 
 before_install:
-  - gem update --system
   - gem update bundler
 install:
   - bundle install --retry=3
