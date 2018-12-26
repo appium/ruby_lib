@@ -50,3 +50,5 @@ Naming/MemoizedInstanceVariableName:
   Enabled: false
 Layout/IndentHeredoc:
   Enabled: false
+Layout/RescueEnsureAlignment:
+  Enabled: false
