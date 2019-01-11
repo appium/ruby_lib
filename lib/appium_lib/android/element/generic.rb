@@ -38,6 +38,8 @@ module Appium
     # @param scrollable_index [Integer] the index for scrollable views.
     # @return [Element] the element scrolled to
     def scroll_to(text, scrollable_index = 0)
+      ::Appium::Logger.warn("Scroll to the #{text} automatically in Espresso") if automation_name_is_espresso?
+
       text = %("#{text}")
       rid  = resource_id(text, "new UiSelector().resourceId(#{text});")
       args = rid.empty? ? ["new UiSelector().textContains(#{text})", "new UiSelector().descriptionContains(#{text})"] : [rid]
@@ -56,6 +58,8 @@ module Appium
     # @param scrollable_index [Integer] the index for scrollable views.
     # @return [Element] the element scrolled to
     def scroll_to_exact(text, scrollable_index = 0)
+      ::Appium::Logger.warn("Scroll to the #{text} automatically in Espresso") if automation_name_is_espresso?
+
       text = %("#{text}")
       rid  = resource_id(text, "new UiSelector().resourceId(#{text});")
       args = rid.empty? ? ["new UiSelector().text(#{text})", "new UiSelector().description(#{text})"] : [rid]
