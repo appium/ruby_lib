@@ -20,10 +20,10 @@ describe 'android/element/button' do
 
   t 'button' do
     # by index
-    2.times { wait { button(1).name.must_equal fade_in } }
+    2.times { wait { button(1).text.must_equal fade_in } }
 
     # by name contains
-    wait { button('ade').name.must_equal fade_in }
+    wait { button('ade').text.must_equal fade_in }
   end
 
   t 'buttons' do
@@ -33,19 +33,19 @@ describe 'android/element/button' do
   end
 
   t 'first_button' do
-    wait { first_button.name.must_equal fade_in }
+    wait { first_button.text.must_equal fade_in }
   end
 
   t 'last_button' do
-    wait { last_button.name.must_equal 'THUMBNAIL ZOOM' }
+    wait { last_button.text.must_equal 'THUMBNAIL ZOOM' }
   end
 
   t 'button_exact' do
-    wait { button_exact(fade_in).name.must_equal fade_in }
+    wait { button_exact(fade_in).text.must_equal fade_in }
   end
 
   t 'buttons_exact' do
-    2.times { wait { buttons_exact(fade_in).first.name.must_equal fade_in } }
+    2.times { wait { buttons_exact(fade_in).first.text.must_equal fade_in } }
   end
 
   t { after_last }

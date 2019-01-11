@@ -77,7 +77,7 @@ describe 'common/helper' do
   end
 
   t 'xpath' do
-    wait { xpath('//android.widget.TextView').name.must_equal 'API Demos' }
+    wait { xpath('//android.widget.TextView').text.must_equal 'API Demos' }
   end
 
   t 'xpaths' do
@@ -85,7 +85,7 @@ describe 'common/helper' do
   end
 
   t 'ele_index' do
-    wait { ele_index('android.widget.TextView', 3).name.must_equal 'Accessibility' }
+    wait { ele_index('android.widget.TextView', 3).text.must_equal 'Accessibility' }
   end
 
   t 'tags' do
