@@ -5,7 +5,7 @@ describe 'android/element/text' do
   end
 
   t 'text' do
-    wait { text(1).text.must_equal 'API Demos' }
+    wait { ['API Demos', "Access'ibility"].must_include text(1).text }
     wait { text('mos').text.must_equal 'API Demos' }
   end
 
@@ -15,11 +15,11 @@ describe 'android/element/text' do
   end
 
   t 'first_text' do
-    wait { first_text.text.must_equal 'API Demos' }
+    wait { ['API Demos', "Access'ibility"].must_include first_text.text }
   end
 
   t 'last_text' do
-    wait { last_text.text.must_equal 'Views' }
+    wait { ['API Demos', 'Views'].must_include last_text.text }
   end
 
   t 'text_exact' do

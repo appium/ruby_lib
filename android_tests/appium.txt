@@ -1,5 +1,5 @@
 [caps]
-automationName = "uiautomator2"
+automationName = "espresso"
 platformName = "android"
 deviceName = "Nexus 7"
 app = "../test_apps/api.apk"

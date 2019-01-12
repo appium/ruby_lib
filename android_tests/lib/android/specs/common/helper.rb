@@ -77,7 +77,8 @@ describe 'common/helper' do
   end
 
   t 'xpath' do
-    wait { xpath('//android.widget.TextView').text.must_equal 'API Demos' }
+    #  Access'ibility is for Espresso
+    wait { ['API Demos', "Access'ibility"].must_include xpath('//android.widget.TextView').text }
   end
 
   t 'xpaths' do
@@ -85,7 +86,8 @@ describe 'common/helper' do
   end
 
   t 'ele_index' do
-    wait { ele_index('android.widget.TextView', 3).text.must_equal 'Accessibility' }
+    # Animation is for Espresso
+    wait { %w(Accessibility Animation).must_include ele_index('android.widget.TextView', 3).text }
   end
 
   t 'tags' do
@@ -94,13 +96,15 @@ describe 'common/helper' do
 
   t 'first_ele' do
     wait do
-      first_ele('android.widget.TextView').text.must_equal 'API Demos'
+      # Access'ibility is for Espresso
+      ['API Demos', "Access'ibility"].must_include first_ele('android.widget.TextView').text
     end
   end
 
   t 'last_ele' do
     wait do
-      last_ele('android.widget.TextView').text.must_equal 'Views'
+      # "API Demos" is for Espresso
+      ['API Demos', 'Views'].must_include last_ele('android.widget.TextView').text
     end
   end
 

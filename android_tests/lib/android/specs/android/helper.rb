@@ -11,11 +11,25 @@ describe 'android/helper' do
 
     act = get_page_class
     act.split("\n").length.must_be :>=, 5
+
     act.must_include '13x android.widget.TextView'
-    act.must_include '3x android.widget.FrameLayout'
-    act.must_include '2x android.view.ViewGroup'
-    act.must_include '1x android.widget.ListView'
-    act.must_include '1x hierarchy'
+    if automation_name_is_espresso?
+      # 13x android.widget.TextView
+      # 1x android.widget.ActionMenuView
+      # 1x android.widget.Toolbar
+      # 1x com.android.internal.widget.ActionBarContainer
+      # 1x com.android.internal.widget.ActionBarContextView
+      # 1x android.widget.ListView
+      # 1x android.widget.FrameLayout
+      # 1x com.android.internal.widget.ActionBarOverlayLayout
+      # 1x com.android.internal.policy.DecorView
+      act.must_include '1x android.widget.ActionMenuView'
+    else
+      act.must_include '3x android.widget.FrameLayout'
+      act.must_include '2x android.view.ViewGroup'
+      act.must_include '1x android.widget.ListView'
+      act.must_include '1x hierarchy'
+    end
   end
 
   # t 'page_class' do # tested by get_page_class
@@ -64,7 +78,7 @@ describe 'android/helper' do
     wait { find('accessibility').click }
     wait { find('accessibility node provider').click }
 
-    if automation_name_is_uiautomator2?
+    if automation_name_is_uiautomator2? || automation_name_is_espresso?
       wait { text 'Accessibility/Accessibility Node Provider' }
     else
       # With string.xml
