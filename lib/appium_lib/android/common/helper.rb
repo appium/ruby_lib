@@ -254,11 +254,7 @@ module Appium
     # @param value [String] the value to search for
     # @return [Element]
     def complex_find_contains(class_name, value)
-      if automation_name_is_espresso?
-        find_element :xpath, string_visible_contains_xpath(class_name, value)
-      else
-        find_element :uiautomator, string_visible_contains(class_name, value)
-      end
+      find_element :uiautomator, string_visible_contains(class_name, value)
     end
 
     # Find all elements containing value
@@ -266,11 +262,7 @@ module Appium
     # @param value [String] the value to search for
     # @return [Array<Element>]
     def complex_finds_contains(class_name, value)
-      if automation_name_is_espresso?
-        find_elements :xpath, string_visible_contains_xpath(class_name, value)
-      else
-        find_elements :uiautomator, string_visible_contains(class_name, value)
-      end
+      find_elements :uiautomator, string_visible_contains(class_name, value)
     end
 
     # @private
@@ -312,11 +304,7 @@ module Appium
     # @param value [String] the value to search for
     # @return [Element]
     def complex_find_exact(class_name, value)
-      if automation_name_is_espresso?
-        find_element :xpath, string_visible_exact_xpath(class_name, value)
-      else
-        find_element :uiautomator, string_visible_exact(class_name, value)
-      end
+      find_element :uiautomator, string_visible_exact(class_name, value)
     end
 
     # Find all elements exactly matching value
@@ -324,11 +312,7 @@ module Appium
     # @param value [String] the value to search for
     # @return [Element]
     def complex_finds_exact(class_name, value)
-      if automation_name_is_espresso?
-        find_elements :xpath, string_visible_exact_xpath(class_name, value)
-      else
-        find_elements :uiautomator, string_visible_exact(class_name, value)
-      end
+      find_elements :uiautomator, string_visible_exact(class_name, value)
     end
   end # module Android
 end # module Appium

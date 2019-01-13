@@ -38,30 +38,6 @@ module Appium
     # @param scrollable_index [Integer] the index for scrollable views.
     # @return [Element] the element scrolled to
     def scroll_to(text, scrollable_index = 0)
-      if automation_name_is_espresso?
-        # TODO: extract
-        err = nil
-        w_s = window_rect
-
-        (1..30).each do |_count|
-          begin
-            action
-              .move_to_location(w_s.width / 2, (w_s.height * 2) / 5) # pointer based magic number
-              .pointer_down(:left)
-              .move_to_location(0, w_s.height / 5)
-              .release
-              .perform
-            sleep 1 # we must wait finish scrolling
-
-            return text(text)
-          rescue StandardError => e
-            err = e
-          end
-        end
-
-        raise err
-      end
-
       text = %("#{text}")
       rid  = resource_id(text, "new UiSelector().resourceId(#{text});")
       args = rid.empty? ? ["new UiSelector().textContains(#{text})", "new UiSelector().descriptionContains(#{text})"] : [rid]
@@ -80,30 +56,6 @@ module Appium
     # @param scrollable_index [Integer] the index for scrollable views.
     # @return [Element] the element scrolled to
     def scroll_to_exact(text, scrollable_index = 0)
-      if automation_name_is_espresso?
-        # TODO: extract
-        err = nil
-        w_s = window_rect
-
-        (1..30).each do |_count|
-          begin
-            action
-              .move_to_location(w_s.width / 2, (w_s.height * 2) / 5) # pointer based magic number
-              .pointer_down(:left)
-              .move_to_location(0, w_s.height / 5)
-              .release
-              .perform
-            sleep 1 # we must wait finish scrolling
-
-            return text_exact(text)
-          rescue StandardError => e
-            err = e
-          end
-        end
-
-        raise err
-      end
-
       text = %("#{text}")
       rid  = resource_id(text, "new UiSelector().resourceId(#{text});")
       args = rid.empty? ? ["new UiSelector().text(#{text})", "new UiSelector().description(#{text})"] : [rid]

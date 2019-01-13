@@ -209,6 +209,8 @@ module Appium
         case automation_name
         when :uiautomator2
           ::Appium::Android::Uiautomator2::Bridge.for(self)
+        when :espresso
+          ::Appium::Android::Espresso::Bridge.for(self)
         else # default and UiAutomator
           ::Appium::Android::Bridge.for(self)
         end
