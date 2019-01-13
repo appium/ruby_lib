@@ -1,3 +1,10 @@
+#### v9.18.0 2019-01-13
+
+- [32f3272](https://github.com/appium/ruby_lib/commit/32f327239055362ef630979d5975d0fac64d94c6) Release 9.18.0
+- [e0f3683](https://github.com/appium/ruby_lib/commit/e0f36830edf0c33617efa50907c44b4ddc58702d) Enhance espresso adaptation for text, button, finds wrappers (#844)
+- [fb49333](https://github.com/appium/ruby_lib/commit/fb49333c46a7b612920d05d2f9ebc51fd7bfdb20) Add ruby 260 (#843)
+
+
 #### v9.17.0 2018-12-15
 
 - [84f71e4](https://github.com/appium/ruby_lib/commit/84f71e47b86a2f7a1de71c13888adce68622a35b) Release 9.17.0
