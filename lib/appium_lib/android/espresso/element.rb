@@ -6,6 +6,6 @@ module Appium
     module Espresso
       module Element
       end # module Element
-    end # module Uiautomator2
+    end # module Espresso
   end # module Android
 end # module Appium

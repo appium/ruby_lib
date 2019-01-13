@@ -34,6 +34,6 @@ module Appium
           find_elements :xpath, string_visible_exact_xpath(class_name, value)
         end
       end # module Helper
-    end # module Uiautomator2
+    end # module Espresso
   end # module Android
 end # module Appium
