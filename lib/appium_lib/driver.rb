@@ -209,6 +209,8 @@ module Appium
         case automation_name
         when :uiautomator2
           ::Appium::Android::Uiautomator2::Bridge.for(self)
+        when :espresso
+          ::Appium::Android::Espresso::Bridge.for(self)
         else # default and UiAutomator
           ::Appium::Android::Bridge.for(self)
         end
@@ -226,8 +228,11 @@ module Appium
         # no windows specific extentions
         Appium::Logger.debug('windows')
       when :tizen
-        # no tizen specific extentions
+        # https://github.com/Samsung/appium-tizen-driver
         Appium::Logger.debug('tizen')
+      when :youiengine
+        # https://github.com/YOU-i-Labs/appium-youiengine-driver
+        Appium::Logger.debug('YouiEngine')
       else
         Appium::Logger.warn('no device matched')
       end
@@ -334,12 +339,12 @@ module Appium
     #     element = find_element(:id, "some id")
     #     action.click(element).perform # The `click` is a part of `PointerActions`
     #
-    def action(async = false)
+    def action
       if @driver.dialect != :w3c
         ::Appium::Logger.info('Calls TouchAction instead of W3C actions for MJSONWP module')
         TouchAction.new($driver || @driver)
       else
-        @driver.action async
+        @driver.action
       end
     end
 
@@ -473,6 +478,21 @@ module Appium
     #
     def window_size
       @driver.window_size
+    end
+
+    # Get the device window's rect.
+    # @return [Selenium::WebDriver::Rectangle]
+    #
+    # @example
+    #
+    #   size = @driver.window_size
+    #   size.width #=> Integer
+    #   size.height #=> Integer
+    #   size.x #=> Integer
+    #   size.y #=> Integer
+    #
+    def window_rect
+      @driver.window_rect
     end
 
     # Creates a new global driver and quits the old one if it exists.

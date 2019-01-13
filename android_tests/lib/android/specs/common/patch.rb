@@ -12,7 +12,7 @@ describe 'common/patch' do
     # t 'value' do; end # Doesn't work on Android
 
     t 'name' do
-      wait { first_text.name.must_equal 'API Demos' }
+      wait { first_text.text.must_equal 'API Demos' }
     end
 
     # t 'tag_name' do; end # Doesn't work on Android
@@ -48,12 +48,12 @@ describe 'common/patch' do
       if !automation_name_is_uiautomator2?
         wait do
           el = id 'autocomplete_3_button_7' # <string name="autocomplete_3_button_7">Text</string>
-          el.name.must_equal 'Text'
+          el.text.must_equal 'Text'
         end
       else
         wait do
           el = text 'text' # <string name="autocomplete_3_button_7">Text</string>
-          el.name.must_equal 'Text'
+          el.text.must_equal 'Text'
         end
       end
     end

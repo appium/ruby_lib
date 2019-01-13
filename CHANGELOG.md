@@ -5,6 +5,9 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 
 ## Unreleased
 ### 1. Enhancements
+- Enhance Espresso automation name adaptation
+    - Call `xpath` locator strategy instead of `uiautomator` locator strategy in various wrapper methods like `text/s`, `button/s`, etc
+    - [#884](https://github.com/appium/ruby_lib/pull/844/)
 
 ### 2. Bug fixes
 

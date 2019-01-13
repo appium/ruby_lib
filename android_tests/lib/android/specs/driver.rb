@@ -79,7 +79,7 @@ describe 'driver' do
         diff    = HashDiff.diff expected, dup_actual
         diff    = "diff (expected, actual):\n#{diff}"
 
-        dup_actual[:caps][:app] = caps_app_for_teardown
+        dup_actual[:caps][:app] = caps_app_for_teardown if dup_actual.key? :caps
         # example:
         # change :ios in expected to match 'ios' in actual
         # [["~", "caps.platformName", :ios, "ios"]]

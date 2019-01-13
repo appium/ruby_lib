@@ -13,39 +13,43 @@ describe 'android/element/button' do
   end
 
   def fade_in
-    'FADE IN'
+    if automation_name_is_espresso?
+      'Fade in'
+    else
+      'FADE IN'
+    end
   end
 
   t { before_first }
 
   t 'button' do
     # by index
-    2.times { wait { button(1).name.must_equal fade_in } }
+    2.times { wait { button(1).text.upcase.must_equal fade_in.upcase } }
 
     # by name contains
-    wait { button('ade').name.must_equal fade_in }
+    wait { button('ade').text.upcase.must_equal fade_in.upcase }
   end
 
   t 'buttons' do
     exp = ['ZOOM IN', 'MODERN ZOOM IN', 'THUMBNAIL ZOOM']
-    wait { buttons('zoom').map(&:text).must_equal exp }
+    wait { buttons('zoom').map(&:text).map(&:upcase).must_equal exp }
     wait { buttons.length.must_equal 6 }
   end
 
   t 'first_button' do
-    wait { first_button.name.must_equal fade_in }
+    wait { first_button.text.upcase.must_equal fade_in.upcase }
   end
 
   t 'last_button' do
-    wait { last_button.name.must_equal 'THUMBNAIL ZOOM' }
+    wait { last_button.text.upcase.must_equal 'THUMBNAIL ZOOM' }
   end
 
   t 'button_exact' do
-    wait { button_exact(fade_in).name.must_equal fade_in }
+    wait { button_exact(fade_in).text.upcase.must_equal fade_in.upcase }
   end
 
   t 'buttons_exact' do
-    2.times { wait { buttons_exact(fade_in).first.name.must_equal fade_in } }
+    2.times { wait { buttons_exact(fade_in).first.text.upcase.must_equal fade_in.upcase } }
   end
 
   t { after_last }
