@@ -1,3 +1,11 @@
+#### v10.0.0 2019-02-08
+
+- [4e4ec29](https://github.com/appium/ruby_lib/commit/4e4ec298096f13f60db51bda2019c8e12a0d0c25) Release 10.0.0
+- [f64e2e4](https://github.com/appium/ruby_lib/commit/f64e2e406e41b596a6e38de9227cc594938f8a06) Fix newline in doc (#850)
+- [a3b3073](https://github.com/appium/ruby_lib/commit/a3b3073d041270d6bbcb21bf8c795c172a90a59a) bump core (#848)
+- [41c940c](https://github.com/appium/ruby_lib/commit/41c940c73fd4ec12ac5bd8119a0a22422dc26819) remove wrong comment
+
+
 #### v9.18.0 2019-01-13
 
 - [32f3272](https://github.com/appium/ruby_lib/commit/32f327239055362ef630979d5975d0fac64d94c6) Release 9.18.0
