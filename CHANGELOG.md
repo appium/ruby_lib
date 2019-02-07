@@ -10,6 +10,25 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 
 ### 3. Deprecations
 
+## v10.0.0
+
+This change has a breaking change about implicit wait.
+
+### 1. Enhancements
+- **Breaking changes**
+    - Set implicit wait zero by default following [WebDriver spec in Selenium](https://www.seleniumhq.org/docs/04_webdriver_advanced.jsp)
+        - The change potentially break your `find_element/s`
+        - You can wrap it with `wait` method to avoid the error explicitly 
+        - Or you also can configure `wait: 20` as `appium_lib` capability to keep the behaviour
+- [Experimental]
+    - Add `direct_connect` capability
+        - How to use: `{ caps: {...},  appium_lib: { direct_connect: true }}`
+        - Read [here](https://github.com/appium/ruby_lib_core/blob/master/CHANGELOG.md#enhancements-1) for more details
+
+### 2. Bug fixes
+
+### 3. Deprecations
+
 ## v9.18.0
 ### 1. Enhancements
 - Enhance Espresso automation name adaptation
