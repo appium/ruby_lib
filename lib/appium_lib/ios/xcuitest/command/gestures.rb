@@ -28,12 +28,8 @@ module Appium
         #   ```ruby
         #   scroll direction: "down"
         #   ```
-        def scroll(direction:, # rubocop:disable Metrics/ParameterLists
-                   distance: nil,
-                   name: nil,
-                   element: nil,
-                   to_visible: nil,
-                   predicate_string: nil)
+        # rubocop:disable Metrics/ParameterLists
+        def scroll(direction:, distance: nil, name: nil, element: nil, to_visible: nil, predicate_string: nil)
           return 'Set "up", "down", "left" or "right" for :direction' unless %w(up down left right).include?(direction)
 
           args = { direction: direction }
@@ -45,6 +41,7 @@ module Appium
 
           @driver.execute_script 'mobile: scroll', args
         end
+        # rubocop:enable Metrics/ParameterLists
 
         # @param scale [scale] X tap coordinate of type float. Mandatory parameter
         # @param velocity [float] Y tap coordinate of type float. Mandatory parameter
