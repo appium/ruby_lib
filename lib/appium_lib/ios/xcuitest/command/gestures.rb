@@ -28,12 +28,7 @@ module Appium
         #   ```ruby
         #   scroll direction: "down"
         #   ```
-        def scroll(direction:, # rubocop:disable Metrics/ParameterLists
-                   distance: nil,
-                   name: nil,
-                   element: nil,
-                   to_visible: nil,
-                   predicate_string: nil)
+        def scroll(direction:, distance: nil, name: nil, element: nil, to_visible: nil, predicate_string: nil) # rubocop:disable Metrics/ParameterLists,Metrics/LineLength
           return 'Set "up", "down", "left" or "right" for :direction' unless %w(up down left right).include?(direction)
 
           args = { direction: direction }
