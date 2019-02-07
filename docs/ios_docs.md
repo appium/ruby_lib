@@ -66,7 +66,7 @@ __Parameters:__
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] base_dir - parent directory of loaded appium.txt (toml)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] file_paths - 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] file_paths -
 
 __Returns:__
 
@@ -315,7 +315,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Driver] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Driver]
 
 --
 
@@ -335,7 +335,7 @@ Returns a hash of the driver attributes
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Boolean] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Boolean]
 
 --
 
@@ -347,7 +347,7 @@ __Returns:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Boolean] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Boolean]
 
 --
 
@@ -359,7 +359,7 @@ __Returns:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Boolean] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Boolean]
 
 --
 
@@ -371,7 +371,7 @@ Return true if automationName is 'uiautomator2'
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Boolean] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Boolean]
 
 --
 
@@ -383,7 +383,7 @@ Return true if automationName is 'Espresso'
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Boolean] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Boolean]
 
 --
 
@@ -395,7 +395,7 @@ Return true if automationName is 'XCUITest'
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Boolean] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Boolean]
 
 --
 
@@ -434,7 +434,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[TouchAction|Selenium::WebDriver::PointerActions] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[TouchAction|Selenium::WebDriver::PointerActions]
 
 --
 
@@ -446,7 +446,7 @@ Returns the server's version info
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Hash] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Hash]
 
 --
 
@@ -458,7 +458,7 @@ Returns the server's version info
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Hash] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Hash]
 
 --
 
@@ -470,7 +470,7 @@ Return the platform version as an array of integers
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Integer>] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Integer>]
 
 --
 
@@ -482,7 +482,7 @@ Returns the client's version info
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Hash] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Hash]
 
 --
 
@@ -539,7 +539,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[File] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[File]
 
 --
 
@@ -557,7 +557,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[File] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[File]
 
 --
 
@@ -569,7 +569,7 @@ Quits the driver
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[void] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[void]
 
 --
 
@@ -581,7 +581,7 @@ Quits the driver
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[void] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[void]
 
 --
 
@@ -593,7 +593,7 @@ Get the device window's size.
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Selenium::WebDriver::Dimension] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Selenium::WebDriver::Dimension]
 
 --
 
@@ -605,7 +605,7 @@ Get the device window's rect.
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Selenium::WebDriver::Rectangle] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Selenium::WebDriver::Rectangle]
 
 --
 
@@ -657,7 +657,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[void] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[void]
 
 --
 
@@ -681,7 +681,7 @@ wait to after checking existence
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Boolean] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Boolean]
 
 --
 
@@ -699,7 +699,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Object] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Object]
 
 --
 
@@ -777,7 +777,7 @@ Get the current window handle
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[TargetLocator] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[TargetLocator]
 
 --
 
@@ -815,7 +815,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element]
 
 --
 
@@ -836,7 +836,7 @@ the corresponding picture matching operation. This option is disabled by default
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[::Appium::Core::ImageElement] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[::Appium::Core::ImageElement]
 
 --
 
@@ -865,7 +865,7 @@ the corresponding picture matching operation. This option is disabled by default
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[::Appium::Core::ImageElement]] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[::Appium::Core::ImageElement]]
 
 --
 
@@ -894,7 +894,7 @@ quit and exit are reserved by Pry.
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[void] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[void]
 
 --
 
@@ -934,7 +934,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Appium::SauceLabs] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Appium::SauceLabs]
 
 --
 
@@ -946,7 +946,7 @@ Return true if an instance of Appium::SauceLabs has sauce_username and sauce_acc
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Boolean] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Boolean]
 
 --
 
@@ -958,7 +958,7 @@ Return a particular server url to access to. Default is the local address.
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String]
 
 --
 
@@ -1060,7 +1060,7 @@ Navigate back.
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[void] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[void]
 
 --
 
@@ -1072,7 +1072,7 @@ For Sauce Labs reporting. Returns the current session id.
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String]
 
 --
 
@@ -1088,7 +1088,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element]
 
 --
 
@@ -1104,7 +1104,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Element>] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Element>]
 
 --
 
@@ -1160,7 +1160,7 @@ Returns a string of class counts of visible elements.
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String]
 
 --
 
@@ -1173,7 +1173,7 @@ Useful for appium_console.
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[nil] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[nil]
 
 --
 
@@ -1185,7 +1185,7 @@ Prints xml of the current page
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[void] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[void]
 
 --
 
@@ -1198,7 +1198,7 @@ Same as driver.page_source
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String]
 
 --
 
@@ -1222,7 +1222,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array]
 
 --
 
@@ -1238,7 +1238,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array]
 
 --
 
@@ -1254,7 +1254,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[String]
 
 --
 
@@ -1483,7 +1483,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[UIAStaticText|XCUIElementTypeStaticText] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[UIAStaticText|XCUIElementTypeStaticText]
 
 --
 
@@ -1500,7 +1500,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<UIAStaticText|XCUIElementTypeStaticText>] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<UIAStaticText|XCUIElementTypeStaticText>]
 
 --
 
@@ -1512,7 +1512,7 @@ Find the first UIAStaticText|XCUIElementTypeStaticText.
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[UIAStaticText|XCUIElementTypeStaticText] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[UIAStaticText|XCUIElementTypeStaticText]
 
 --
 
@@ -1524,7 +1524,7 @@ Find the last UIAStaticText|XCUIElementTypeStaticText.
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[UIAStaticText|XCUIElementTypeStaticText] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[UIAStaticText|XCUIElementTypeStaticText]
 
 --
 
@@ -1540,7 +1540,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[UIAStaticText|XCUIElementTypeStaticText] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[UIAStaticText|XCUIElementTypeStaticText]
 
 --
 
@@ -1556,7 +1556,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<UIAStaticText|XCUIElementTypeStaticText>] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<UIAStaticText|XCUIElementTypeStaticText>]
 
 --
 
@@ -1620,7 +1620,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[void] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[void]
 
 --
 
@@ -1636,7 +1636,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element]
 
 --
 
@@ -1654,7 +1654,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element]
 
 --
 
@@ -1676,7 +1676,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element]
 
 --
 
@@ -1698,7 +1698,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Element>] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Element>]
 
 --
 
@@ -1715,7 +1715,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element]
 
 --
 
@@ -1734,7 +1734,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Element>] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Element>]
 
 --
 
@@ -1828,7 +1828,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element]
 
 --
 
@@ -1844,7 +1844,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element]
 
 --
 
@@ -1860,7 +1860,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element]
 
 --
 
@@ -1876,7 +1876,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element]
 
 --
 
@@ -1896,7 +1896,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array[Element]] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array[Element]]
 
 --
 
@@ -1916,7 +1916,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array[Element]] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array[Element]]
 
 --
 
@@ -1935,7 +1935,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element]
 
 --
 
@@ -1954,7 +1954,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Element>] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Element>]
 
 --
 
@@ -1973,7 +1973,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element]
 
 --
 
@@ -1992,7 +1992,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element]
 
 --
 
@@ -2018,7 +2018,7 @@ visible - if true, only visible elements are returned. default true
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element]
 
 --
 
@@ -2034,7 +2034,7 @@ visible - if true, only visible elements are returned. default true
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Element>] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Element>]
 
 --
 
@@ -2116,7 +2116,7 @@ Accept the alert.
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[void] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[void]
 
 --
 
@@ -2128,7 +2128,7 @@ Dismiss the alert.
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[void] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[void]
 
 --
 
@@ -2173,7 +2173,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[UIAButton|XCUIElementTypeButton] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[UIAButton|XCUIElementTypeButton]
 
 --
 
@@ -2190,7 +2190,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<UIAButton|XCUIElementTypeButton>] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<UIAButton|XCUIElementTypeButton>]
 
 --
 
@@ -2202,7 +2202,7 @@ Find the first UIAButton|XCUIElementTypeButton.
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[UIAButton|XCUIElementTypeButton] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[UIAButton|XCUIElementTypeButton]
 
 --
 
@@ -2216,7 +2216,7 @@ Find the last UIAButton|XCUIElementTypeButton.
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[UIAButton|XCUIElementTypeButton] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[UIAButton|XCUIElementTypeButton]
 
 --
 
@@ -2232,7 +2232,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[UIAButton|XCUIElementTypeButton] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[UIAButton|XCUIElementTypeButton]
 
 --
 
@@ -2248,7 +2248,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<UIAButton|XCUIElementTypeButton>] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<UIAButton|XCUIElementTypeButton>]
 
 --
 
@@ -2264,7 +2264,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element]
 
 --
 
@@ -2280,7 +2280,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Element>] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Element>]
 
 --
 
@@ -2296,7 +2296,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element]
 
 --
 
@@ -2312,7 +2312,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Element>] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Element>]
 
 --
 
@@ -2352,7 +2352,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element]
 
 --
 
@@ -2368,7 +2368,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element]
 
 --
 
@@ -2384,7 +2384,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element]
 
 --
 
@@ -2404,7 +2404,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array[Element]] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array[Element]]
 
 --
 
@@ -2424,7 +2424,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array[Element]] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array[Element]]
 
 --
 
@@ -2518,7 +2518,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[TextField] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[TextField]
 
 --
 
@@ -2535,7 +2535,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<TextField>] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<TextField>]
 
 --
 
@@ -2547,7 +2547,7 @@ Find the first TextField.
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[TextField] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[TextField]
 
 --
 
@@ -2559,7 +2559,7 @@ Find the last TextField.
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[TextField] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[TextField]
 
 --
 
@@ -2575,7 +2575,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[TextField] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[TextField]
 
 --
 
@@ -2591,7 +2591,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<TextField>] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<TextField>]
 
 --
 
@@ -2644,7 +2644,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[UIAStaticText|XCUIElementTypeStaticText] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[UIAStaticText|XCUIElementTypeStaticText]
 
 --
 
@@ -2661,7 +2661,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<UIAStaticText|XCUIElementTypeStaticText>] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<UIAStaticText|XCUIElementTypeStaticText>]
 
 --
 
@@ -2673,7 +2673,7 @@ Find the first UIAStaticText|XCUIElementTypeStaticText.
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[UIAStaticText|XCUIElementTypeStaticText] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[UIAStaticText|XCUIElementTypeStaticText]
 
 --
 
@@ -2685,7 +2685,7 @@ Find the last UIAStaticText|XCUIElementTypeStaticText.
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[UIAStaticText|XCUIElementTypeStaticText] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[UIAStaticText|XCUIElementTypeStaticText]
 
 --
 
@@ -2701,7 +2701,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[UIAStaticText|XCUIElementTypeStaticText] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[UIAStaticText|XCUIElementTypeStaticText]
 
 --
 
@@ -2717,7 +2717,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<UIAStaticText|XCUIElementTypeStaticText>] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<UIAStaticText|XCUIElementTypeStaticText>]
 
 --
 
@@ -2762,7 +2762,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[UIAButton|XCUIElementTypeButton] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[UIAButton|XCUIElementTypeButton]
 
 --
 
@@ -2779,7 +2779,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<UIAButton|XCUIElementTypeButton>] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<UIAButton|XCUIElementTypeButton>]
 
 --
 
@@ -2791,7 +2791,7 @@ Find the first UIAButton|XCUIElementTypeButton.
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[UIAButton|XCUIElementTypeButton] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[UIAButton|XCUIElementTypeButton]
 
 --
 
@@ -2805,7 +2805,7 @@ Find the last UIAButton|XCUIElementTypeButton.
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[UIAButton|XCUIElementTypeButton] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[UIAButton|XCUIElementTypeButton]
 
 --
 
@@ -2821,7 +2821,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[UIAButton|XCUIElementTypeButton] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[UIAButton|XCUIElementTypeButton]
 
 --
 
@@ -2837,7 +2837,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<UIAButton|XCUIElementTypeButton>] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<UIAButton|XCUIElementTypeButton>]
 
 --
 
@@ -2853,7 +2853,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element]
 
 --
 
@@ -2869,7 +2869,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Element>] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Element>]
 
 --
 
@@ -2885,7 +2885,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Element]
 
 --
 
@@ -2901,7 +2901,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Element>] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<Element>]
 
 --
 
@@ -2937,7 +2937,7 @@ __Parameters:__
 
 ##### [scroll](https://github.com/appium/ruby_lib/blob/32f327239055362ef630979d5975d0fac64d94c6/lib/appium_lib/ios/xcuitest/command/gestures.rb#L31) ios
 
-> def scroll(direction:, # rubocop:disable Metrics/ParameterLists
+> def scroll(direction:, name: nil, element: nil, to_visible: nil, predicate_string: nil)
 
 
 
@@ -3134,7 +3134,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[TextField] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[TextField]
 
 --
 
@@ -3151,7 +3151,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<TextField>] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<TextField>]
 
 --
 
@@ -3163,7 +3163,7 @@ Find the first TextField.
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[TextField] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[TextField]
 
 --
 
@@ -3175,7 +3175,7 @@ Find the last TextField.
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[TextField] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[TextField]
 
 --
 
@@ -3191,7 +3191,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[TextField] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[TextField]
 
 --
 
@@ -3207,7 +3207,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<TextField>] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Array<TextField>]
 
 --
 
@@ -3293,7 +3293,7 @@ __Parameters:__
 
 __Returns:__
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[boolean] 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[boolean]
 
 --
 
