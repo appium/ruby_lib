@@ -159,10 +159,10 @@ module Appium
     # @return [Array<Element>]
     def find_eles_by_predicate(class_name: '*', value:)
       predicate = if class_name == '*'
-                    %(name ==[c] "#{value}" || label ==[c] "#{value}" || value ==[c] "#{value}")
+                    %(name == "#{value}" || label == "#{value}" || value == "#{value}")
                   else
                     %(type == "#{class_name}" && ) +
-                      %((name ==[c] "#{value}" || label ==[c] "#{value}" || value ==[c] "#{value}"))
+                      %((name == "#{value}" || label == "#{value}" || value == "#{value}"))
                   end
       @driver.find_elements :predicate, predicate
     end
