@@ -7,6 +7,7 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 ### 1. Enhancements
 
 ### 2. Bug fixes
+- `*_exact` methods handle value as case sensitive
 
 ### 3. Deprecations
 
