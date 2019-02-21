@@ -1,3 +1,9 @@
+#### v10.1.0 2019-02-21
+
+- [4b43cf7](https://github.com/appium/ruby_lib/commit/4b43cf7b240a7b4cab7b22198ed4dd1307611545) Release 10.1.0
+- [588f83f](https://github.com/appium/ruby_lib/commit/588f83f07360d581a317709a539aea8ecb175617) Case sensitive exact (#853)
+
+
 #### v10.0.0 2019-02-08
 
 - [4e4ec29](https://github.com/appium/ruby_lib/commit/4e4ec298096f13f60db51bda2019c8e12a0d0c25) Release 10.0.0
