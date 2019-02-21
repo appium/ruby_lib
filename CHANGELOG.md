@@ -8,6 +8,7 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 
 ### 2. Bug fixes
 - `*_exact` methods handle value as case sensitive
+    - This might break test cases if it calls `*_exact` as case insensitive
 
 ### 3. Deprecations
 
