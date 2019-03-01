@@ -703,9 +703,6 @@ module Appium
     # Return ImageElement if current view has a partial image
     #
     # @param [String] png_img_path A path to a partial image you'd like to find
-    # @param [Flood] match_threshold At what normalized threshold to reject
-    # @param [Bool] visualize Makes the endpoint to return an image, which contains the visualized result of
-    #                         the corresponding picture matching operation. This option is disabled by default.
     #
     # @return [::Appium::Core::ImageElement]
     # @raise [::Appium::Core::Error::NoSuchElementError|::Appium::Core::Error::CoreError] No such element
@@ -714,17 +711,13 @@ module Appium
     #
     #     @driver.find_element_by_image './test/functional/data/test_element_image.png'
     #
-    DEFAULT_MATCH_THRESHOLD = 0.5
-    def find_element_by_image(png_img_path, match_threshold: DEFAULT_MATCH_THRESHOLD, visualize: false)
-      @driver.find_element_by_image(png_img_path, match_threshold: match_threshold, visualize: visualize)
+    def find_element_by_image(png_img_path)
+      @driver.find_element_by_image(png_img_path)
     end
 
     # Return ImageElement if current view has partial images
     #
     # @param [[String]] png_img_paths Paths to a partial image you'd like to find
-    # @param [Flood] match_threshold At what normalized threshold to reject
-    # @param [Bool] visualize Makes the endpoint to return an image, which contains the visualized result of
-    #                         the corresponding picture matching operation. This option is disabled by default.
     #
     # @return [[::Appium::Core::ImageElement]]
     # @return [::Appium::Core::Error::CoreError]
@@ -733,8 +726,8 @@ module Appium
     #
     #     @driver.find_elements_by_image ['./test/functional/data/test_element_image.png']
     #
-    def find_elements_by_image(png_img_paths, match_threshold: DEFAULT_MATCH_THRESHOLD, visualize: false)
-      @driver.find_elements_by_image(png_img_paths, match_threshold: match_threshold, visualize: visualize)
+    def find_elements_by_image(png_img_paths)
+      @driver.find_elements_by_image(png_img_paths)
     end
 
     # Calls @driver.set_location
