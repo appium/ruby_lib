@@ -7,6 +7,16 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 ### 1. Enhancements
 
 ### 2. Bug fixes
+- **Breaking changes**
+    - `find_element/s_by_image` no longer need arguments except for a file path
+        - `find_element/s_by_image(file_to_image)` instead of `find_element/s_by_image(file_to_image, match_threshold:, visualize:)`
+
+### 3. Deprecations
+
+## v10.1.0
+### 1. Enhancements
+
+### 2. Bug fixes
 - `*_exact` methods handle value as case sensitive
     - This might break test cases if it calls `*_exact` as case insensitive
 
