@@ -1,3 +1,9 @@
+#### v10.2.0 2019-03-01
+
+- [f1b8a2e](https://github.com/appium/ruby_lib/commit/f1b8a2e32fc935508e13431570fd7de4a90b6bd7) Release 10.2.0
+- [dbac05e](https://github.com/appium/ruby_lib/commit/dbac05e58dc25c1e682a4183dff4ead7202a857c) Fix find element by image (#854)
+
+
 #### v10.1.0 2019-02-21
 
 - [4b43cf7](https://github.com/appium/ruby_lib/commit/4b43cf7b240a7b4cab7b22198ed4dd1307611545) Release 10.1.0
