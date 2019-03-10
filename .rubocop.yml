@@ -23,10 +23,6 @@ Style/RegexpLiteral:
 # blocked on https://github.com/appium/ruby_lib/issues/312. Already removed from core part
 Style/GlobalVars:
   Enabled: false
-Style/DoubleNegation:
-  Enabled: false
-Style/EachWithObject:
-  Enabled: false
 Style/PercentLiteralDelimiters:
   Enabled: false
 # Can use over Ruby2.3

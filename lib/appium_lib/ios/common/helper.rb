@@ -21,7 +21,7 @@ module Appium
       def start_element(type, attrs = [])
         return if filter && !filter.eql?(type)
 
-        page = attrs.inject({}) do |hash, attr|
+        page = attrs.each_with_object({}) do |hash, attr|
           hash[attr[0]] = attr[1] if %w(name label value hint visible).include?(attr[0])
           hash
         end

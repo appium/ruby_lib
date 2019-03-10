@@ -190,7 +190,7 @@ module Appium
       set_app_path(opts)
 
       # enable debug patch
-      @appium_debug = appium_lib_opts.fetch :debug, !!defined?(Pry)
+      @appium_debug = appium_lib_opts.fetch :debug, !!defined?(Pry) # rubocop:disable Style/DoubleNegation
       set_sauce_related_values(appium_lib_opts)
 
       # Extend Common methods

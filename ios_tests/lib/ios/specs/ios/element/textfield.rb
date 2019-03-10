@@ -73,9 +73,11 @@ describe 'ios/element/textfield' do
     textfields_exact(enter_password).first.value.must_equal enter_password
   end
 
+  # rubocop:disable Style/DoubleNegation
   def keyboard_exists?
     !!ignore { wait_true(3) { execute_script 'au.mainApp().keyboard().type() !== "UIAElementNil"' } }
   end
+  # rubocop:enable Style/DoubleNegation
 
   def keyboard_must_not_exist
     keyboard_exists?.must_equal false
