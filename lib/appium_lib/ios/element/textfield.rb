@@ -14,20 +14,24 @@
 
 module Appium
   module Ios
-    UIATextField = 'UIATextField'
-    UIASecureTextField = 'UIASecureTextField'
+    UIA_TEXT_FIELD = 'UIATextField'
+    UIATextField = UIA_TEXT_FIELD
+    UIA_SECURE_TEXT_FIELD = 'UIASecureTextField'
+    UIASecureTextField = UIA_SECURE_TEXT_FIELD
 
-    XCUIElementTypeTextField = 'XCUIElementTypeTextField'
-    XCUIElementTypeSecureTextField = 'XCUIElementTypeSecureTextField'
+    XCUIELEMENT_TYPE_TEXT_FIELD = 'XCUIElementTypeTextField'
+    XCUIElementTypeTextField = XCUIELEMENT_TYPE_TEXT_FIELD
+    XCUIELEMENT_TYPE_SECURE_TEXT_FIELD = 'XCUIElementTypeSecureTextField'
+    XCUIElementTypeSecureTextField = XCUIELEMENT_TYPE_SECURE_TEXT_FIELD
 
     # @return [String] Class name for text field
     def text_field_class
-      UIATextField
+      UIA_TEXT_FIELD
     end
 
     # @return [String] Class name for secure text field
     def secure_text_field_class
-      UIASecureTextField
+      UIA_SECURE_TEXT_FIELD
     end
 
     # Find the first TextField that contains value or by index.
@@ -93,7 +97,7 @@ module Appium
 
     # Appium
     def _textfield_visible
-      { typeArray: [UIATextField, UIASecureTextField], onlyVisible: true }
+      { typeArray: [UIA_TEXT_FIELD, UIA_SECURE_TEXT_FIELD], onlyVisible: true }
     end
 
     # Appium

@@ -37,10 +37,6 @@ Style/NumericPredicate:
   Enabled: false
 Style/CommentedKeyword:
   Enabled: false
-Lint/NestedMethodDefinition:
-  Enabled: false
-Naming/ConstantName:
-  Enabled: false
 Naming/AccessorMethodName:
   Enabled: false
 Naming/MemoizedInstanceVariableName:

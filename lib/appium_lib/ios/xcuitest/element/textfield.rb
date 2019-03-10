@@ -21,12 +21,12 @@ module Appium
 
         # @return [String] Class name for text field
         def text_field_class
-          ::Appium::Ios::XCUIElementTypeTextField
+          ::Appium::Ios::XCUIELEMENT_TYPE_TEXT_FIELD
         end
 
         # @return [String] Class name for secure text field
         def secure_text_field_class
-          ::Appium::Ios::XCUIElementTypeSecureTextField
+          ::Appium::Ios::XCUIELEMENT_TYPE_SECURE_TEXT_FIELD
         end
 
         # Find the first TextField that contains value or by index.
