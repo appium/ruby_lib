@@ -39,8 +39,6 @@ Style/CommentedKeyword:
   Enabled: false
 Naming/AccessorMethodName:
   Enabled: false
-Naming/MemoizedInstanceVariableName:
-  Enabled: false
 Layout/IndentHeredoc:
   Enabled: false
 Layout/RescueEnsureAlignment:

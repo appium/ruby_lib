@@ -174,7 +174,7 @@ module Appium
     def lazy_load_strings
       # app strings only works on local apps.
       # on disk apps (ex: com.android.settings) will error
-      @strings_xml ||= ignore { app_strings } || {}
+      @lazy_load_strings ||= ignore { app_strings } || {}
     end
 
     # Search strings.xml's values for target.
@@ -182,7 +182,7 @@ module Appium
     # @return [Array]
     def xml_keys(target)
       lazy_load_strings
-      @strings_xml.select { |key, _value| key.downcase.include? target.downcase }
+      @lazy_load_strings.select { |key, _value| key.downcase.include? target.downcase }
     end
 
     # Search strings.xml's keys for target.
@@ -190,7 +190,7 @@ module Appium
     # @return [Array]
     def xml_values(target)
       lazy_load_strings
-      @strings_xml.select { |_key, value| value.downcase.include? target.downcase }
+      @lazy_load_strings.select { |_key, value| value.downcase.include? target.downcase }
     end
 
     # Resolve id in strings.xml and return the value.
@@ -198,7 +198,7 @@ module Appium
     # @return [String]
     def resolve_id(id)
       lazy_load_strings
-      @strings_xml[id]
+      @lazy_load_strings[id]
     end
 
     # @private
