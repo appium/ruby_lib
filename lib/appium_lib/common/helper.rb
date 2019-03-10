@@ -98,7 +98,7 @@ module Appium
         @result
           .sort_by { |_element, count| count }
           .reverse
-          .each_with_object('') { |element, acc| acc << "#{element[1]}x #{element[0]}\n" }
+          .reduce('') { |acc, element| "#{acc}#{element[1]}x #{element[0]}\n" }
           .strip
       end
     end # class CountElements
