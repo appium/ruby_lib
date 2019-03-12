@@ -1,3 +1,17 @@
+# frozen_string_literal: true
+
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 # Generic helper methods not specific to a particular tag name
 module Appium
   module Common
@@ -84,7 +98,7 @@ module Appium
         @result
           .sort_by { |_element, count| count }
           .reverse
-          .each_with_object('') { |element, acc| acc << "#{element[1]}x #{element[0]}\n" }
+          .reduce('') { |acc, element| "#{acc}#{element[1]}x #{element[0]}\n" }
           .strip
       end
     end # class CountElements
@@ -160,7 +174,7 @@ module Appium
     def lazy_load_strings
       # app strings only works on local apps.
       # on disk apps (ex: com.android.settings) will error
-      @strings_xml ||= ignore { app_strings } || {}
+      @lazy_load_strings ||= ignore { app_strings } || {}
     end
 
     # Search strings.xml's values for target.
@@ -168,7 +182,7 @@ module Appium
     # @return [Array]
     def xml_keys(target)
       lazy_load_strings
-      @strings_xml.select { |key, _value| key.downcase.include? target.downcase }
+      @lazy_load_strings.select { |key, _value| key.downcase.include? target.downcase }
     end
 
     # Search strings.xml's keys for target.
@@ -176,7 +190,7 @@ module Appium
     # @return [Array]
     def xml_values(target)
       lazy_load_strings
-      @strings_xml.select { |_key, value| value.downcase.include? target.downcase }
+      @lazy_load_strings.select { |_key, value| value.downcase.include? target.downcase }
     end
 
     # Resolve id in strings.xml and return the value.
@@ -184,7 +198,7 @@ module Appium
     # @return [String]
     def resolve_id(id)
       lazy_load_strings
-      @strings_xml[id]
+      @lazy_load_strings[id]
     end
 
     # @private

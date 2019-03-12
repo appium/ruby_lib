@@ -1422,7 +1422,7 @@ __Returns:__
 
 ##### [TextView](https://github.com/appium/ruby_lib/blob/f1b8a2e32fc935508e13431570fd7de4a90b6bd7/lib/appium_lib/android/element/text.rb#L4) android
 
-> TextView = 'android.widget.TextView'.freeze
+> TextView = 'android.widget.TextView'
 
 
 
@@ -1914,7 +1914,7 @@ __Returns:__
 
 ##### [Button](https://github.com/appium/ruby_lib/blob/f1b8a2e32fc935508e13431570fd7de4a90b6bd7/lib/appium_lib/android/element/button.rb#L3) android
 
-> Button      = 'android.widget.Button'.freeze
+> Button      = 'android.widget.Button'
 
 
 
@@ -1922,7 +1922,7 @@ __Returns:__
 
 ##### [ImageButton](https://github.com/appium/ruby_lib/blob/f1b8a2e32fc935508e13431570fd7de4a90b6bd7/lib/appium_lib/android/element/button.rb#L4) android
 
-> ImageButton = 'android.widget.ImageButton'.freeze
+> ImageButton = 'android.widget.ImageButton'
 
 
 
@@ -2224,7 +2224,7 @@ __Returns:__
 
 ##### [EditText](https://github.com/appium/ruby_lib/blob/f1b8a2e32fc935508e13431570fd7de4a90b6bd7/lib/appium_lib/android/element/textfield.rb#L3) android
 
-> EditText = 'android.widget.EditText'.freeze
+> EditText = 'android.widget.EditText'
 
 
 

@@ -1,5 +1,5 @@
 AllCops:
-  TargetRubyVersion: 2.2
+  TargetRubyVersion: 2.3
 Metrics/LineLength:
   Max: 128
 Metrics/MethodLength:
@@ -23,14 +23,7 @@ Style/RegexpLiteral:
 # blocked on https://github.com/appium/ruby_lib/issues/312. Already removed from core part
 Style/GlobalVars:
   Enabled: false
-Style/DoubleNegation:
-  Enabled: false
-Style/EachWithObject:
-  Enabled: false
 Style/PercentLiteralDelimiters:
-  Enabled: false
-# Should enable and fix for Ruby3
-Style/FrozenStringLiteralComment:
   Enabled: false
 # Can use over Ruby2.3
 Style/SafeNavigation:
@@ -40,13 +33,7 @@ Style/NumericPredicate:
   Enabled: false
 Style/CommentedKeyword:
   Enabled: false
-Lint/NestedMethodDefinition:
-  Enabled: false
-Naming/ConstantName:
-  Enabled: false
 Naming/AccessorMethodName:
-  Enabled: false
-Naming/MemoizedInstanceVariableName:
   Enabled: false
 Layout/IndentHeredoc:
   Enabled: false

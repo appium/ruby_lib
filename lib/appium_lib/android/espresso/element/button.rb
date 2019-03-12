@@ -1,3 +1,17 @@
+# frozen_string_literal: true
+
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 module Appium
   module Android
     module Espresso
@@ -17,8 +31,8 @@ module Appium
             _button_visible_selectors_xpath(index: index - 1)
           end
 
-          i = find_elements :xpath, _button_contains_string_xpath(Button, value)
-          e = find_elements :xpath, _button_contains_string_xpath(ImageButton, value)
+          i = find_elements :xpath, _button_contains_string_xpath(BUTTON, value)
+          e = find_elements :xpath, _button_contains_string_xpath(IMAGE_BUTTON, value)
 
           raise_no_such_element_if_empty(i + e)
 
@@ -32,8 +46,8 @@ module Appium
         def buttons(value = false)
           return _button_visible_selectors_xpath unless value
 
-          i = find_elements :xpath, _button_contains_string_xpath(Button, value)
-          e = find_elements :xpath, _button_contains_string_xpath(ImageButton, value)
+          i = find_elements :xpath, _button_contains_string_xpath(BUTTON, value)
+          e = find_elements :xpath, _button_contains_string_xpath(IMAGE_BUTTON, value)
           i + e
         end
 
@@ -48,9 +62,9 @@ module Appium
         def last_button
           # uiautomator index doesn't support last
           # and it's 0 indexed
-          button_index = tags(::Appium::Android::Button).length
+          button_index = tags(::Appium::Android::BUTTON).length
           button_index -= 1 if button_index > 0
-          image_button_index = tags(::Appium::Android::ImageButton).length
+          image_button_index = tags(::Appium::Android::IMAGE_BUTTON).length
           image_button_index -= 1 if image_button_index > 0
 
           _button_visible_selectors_xpath(button_index: button_index,
@@ -61,8 +75,8 @@ module Appium
         # @param value [String] the value to match exactly
         # @return [Button]
         def button_exact(value)
-          i = find_elements :xpath, _button_exact_string_xpath(Button, value)
-          e = find_elements :xpath, _button_exact_string_xpath(ImageButton, value)
+          i = find_elements :xpath, _button_exact_string_xpath(BUTTON, value)
+          e = find_elements :xpath, _button_exact_string_xpath(IMAGE_BUTTON, value)
 
           raise_no_such_element_if_empty(i + e)
 
@@ -73,8 +87,8 @@ module Appium
         # @param value [String] the value to match exactly
         # @return [Array<Button>]
         def buttons_exact(value)
-          i = find_elements :xpath, _button_exact_string_xpath(Button, value)
-          e = find_elements :xpath, _button_exact_string_xpath(ImageButton, value)
+          i = find_elements :xpath, _button_exact_string_xpath(BUTTON, value)
+          e = find_elements :xpath, _button_exact_string_xpath(IMAGE_BUTTON, value)
           i + e
         end
 
@@ -93,8 +107,8 @@ module Appium
 
           index = opts.fetch :index, false
 
-          b = find_elements :xpath, "//#{Button}"
-          i = find_elements :xpath, "//#{ImageButton}"
+          b = find_elements :xpath, "//#{BUTTON}"
+          i = find_elements :xpath, "//#{IMAGE_BUTTON}"
 
           if index
             raise_no_such_element_if_empty(b + i)

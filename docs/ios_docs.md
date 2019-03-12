@@ -1422,7 +1422,7 @@ __Returns:__
 
 ##### [UIAStaticText](https://github.com/appium/ruby_lib/blob/f1b8a2e32fc935508e13431570fd7de4a90b6bd7/lib/appium_lib/ios/element/text.rb#L4) ios
 
-> UIAStaticText = 'UIAStaticText'.freeze
+> UIAStaticText = 'UIAStaticText'
 
 
 
@@ -1430,7 +1430,7 @@ __Returns:__
 
 ##### [XCUIElementTypeStaticText](https://github.com/appium/ruby_lib/blob/f1b8a2e32fc935508e13431570fd7de4a90b6bd7/lib/appium_lib/ios/element/text.rb#L5) ios
 
-> XCUIElementTypeStaticText = 'XCUIElementTypeStaticText'.freeze
+> XCUIElementTypeStaticText = 'XCUIElementTypeStaticText'
 
 
 
@@ -2112,7 +2112,7 @@ __Returns:__
 
 ##### [UIAButton](https://github.com/appium/ruby_lib/blob/f1b8a2e32fc935508e13431570fd7de4a90b6bd7/lib/appium_lib/ios/element/button.rb#L4) ios
 
-> UIAButton = 'UIAButton'.freeze
+> UIAButton = 'UIAButton'
 
 
 
@@ -2120,7 +2120,7 @@ __Returns:__
 
 ##### [XCUIElementTypeButton](https://github.com/appium/ruby_lib/blob/f1b8a2e32fc935508e13431570fd7de4a90b6bd7/lib/appium_lib/ios/element/button.rb#L5) ios
 
-> XCUIElementTypeButton = 'XCUIElementTypeButton'.freeze
+> XCUIElementTypeButton = 'XCUIElementTypeButton'
 
 
 
@@ -2428,7 +2428,7 @@ Stop iOS syslog broadcast websocket
 
 ##### [UIATextField](https://github.com/appium/ruby_lib/blob/f1b8a2e32fc935508e13431570fd7de4a90b6bd7/lib/appium_lib/ios/element/textfield.rb#L3) ios
 
-> UIATextField = 'UIATextField'.freeze
+> UIATextField = 'UIATextField'
 
 
 
@@ -2436,7 +2436,7 @@ Stop iOS syslog broadcast websocket
 
 ##### [UIASecureTextField](https://github.com/appium/ruby_lib/blob/f1b8a2e32fc935508e13431570fd7de4a90b6bd7/lib/appium_lib/ios/element/textfield.rb#L4) ios
 
-> UIASecureTextField = 'UIASecureTextField'.freeze
+> UIASecureTextField = 'UIASecureTextField'
 
 
 
@@ -2444,7 +2444,7 @@ Stop iOS syslog broadcast websocket
 
 ##### [XCUIElementTypeTextField](https://github.com/appium/ruby_lib/blob/f1b8a2e32fc935508e13431570fd7de4a90b6bd7/lib/appium_lib/ios/element/textfield.rb#L6) ios
 
-> XCUIElementTypeTextField = 'XCUIElementTypeTextField'.freeze
+> XCUIElementTypeTextField = 'XCUIElementTypeTextField'
 
 
 
@@ -2452,7 +2452,7 @@ Stop iOS syslog broadcast websocket
 
 ##### [XCUIElementTypeSecureTextField](https://github.com/appium/ruby_lib/blob/f1b8a2e32fc935508e13431570fd7de4a90b6bd7/lib/appium_lib/ios/element/textfield.rb#L7) ios
 
-> XCUIElementTypeSecureTextField = 'XCUIElementTypeSecureTextField'.freeze
+> XCUIElementTypeSecureTextField = 'XCUIElementTypeSecureTextField'
 
 
 
