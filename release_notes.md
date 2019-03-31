@@ -1,3 +1,10 @@
+#### v10.3.0 2019-03-31
+
+- [499e824](https://github.com/appium/ruby_lib/commit/499e824668f63958c2fe047b76841612f74d2c1c) Release 10.3.0
+- [fa90527](https://github.com/appium/ruby_lib/commit/fa90527b709cbb2e9ea1e86276a2a884d2a9d4c3) bump core to 3.1.x (#857)
+- [8e7abee](https://github.com/appium/ruby_lib/commit/8e7abeee3b0bc46b8d28b4352bed39819d68cbaf) Bump rubocop 23 (#855)
+
+
 #### v10.2.0 2019-03-01
 
 - [f1b8a2e](https://github.com/appium/ruby_lib/commit/f1b8a2e32fc935508e13431570fd7de4a90b6bd7) Release 10.2.0
