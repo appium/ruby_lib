@@ -5,7 +5,15 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 
 ## Unreleased
 ### 1. Enhancements
+
+### 2. Bug fixes
+
+### 3. Deprecations
+
+## v10.3.0
+### 1. Enhancements
 - Add `tvOS` support
+    - Requires Appium 1.13
 
 ### 2. Bug fixes
 
