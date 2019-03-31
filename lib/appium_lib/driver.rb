@@ -228,7 +228,7 @@ module Appium
         else # default and UiAutomator
           ::Appium::Android::Bridge.for(self)
         end
-      when :ios
+      when :ios, :tvos
         case automation_name
         when :xcuitest
           ::Appium::Ios::Xcuitest::Bridge.for(self)
