@@ -53,7 +53,7 @@ module Appium
     # @return [Element] the element scrolled to
     def scroll_to(text, scrollable_index = 0)
       text = %("#{text}")
-      rid  = resource_id(text, "new UiSelector().resourceId(#{text});")
+      rid  = resource_id(text, "new UiSelector().resourceId(#{text})")
       args = rid.empty? ? ["new UiSelector().textContains(#{text})", "new UiSelector().descriptionContains(#{text})"] : [rid]
       args.each_with_index do |arg, index|
         begin
@@ -71,7 +71,7 @@ module Appium
     # @return [Element] the element scrolled to
     def scroll_to_exact(text, scrollable_index = 0)
       text = %("#{text}")
-      rid  = resource_id(text, "new UiSelector().resourceId(#{text});")
+      rid  = resource_id(text, "new UiSelector().resourceId(#{text})")
       args = rid.empty? ? ["new UiSelector().text(#{text})", "new UiSelector().description(#{text})"] : [rid]
       args.each_with_index do |arg, index|
         begin
