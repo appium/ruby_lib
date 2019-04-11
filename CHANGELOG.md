@@ -10,6 +10,14 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 
 ### 3. Deprecations
 
+## v10.3.1
+### 1. Enhancements
+
+### 2. Bug fixes
+- Fix `scroll_to` and `scroll_to_exact` for Android [#859](https://github.com/appium/ruby_lib/pull/859)
+
+### 3. Deprecations
+
 ## v10.3.0
 ### 1. Enhancements
 - Add `tvOS` support
