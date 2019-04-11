@@ -1,3 +1,9 @@
+#### v10.3.1 2019-04-11
+
+- [ef89749](https://github.com/appium/ruby_lib/commit/ef89749d25c7044fe27fa4b7c1adfd011b60bba1) Release 10.3.1
+- [d90f149](https://github.com/appium/ruby_lib/commit/d90f1499f6c7f5c8222f7915d60c7a7218d43949) remove ';' to avoid 'Unclosed paren in expression' (#859)
+
+
 #### v10.3.0 2019-03-31
 
 - [499e824](https://github.com/appium/ruby_lib/commit/499e824668f63958c2fe047b76841612f74d2c1c) Release 10.3.0
