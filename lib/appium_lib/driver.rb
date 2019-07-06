@@ -636,6 +636,38 @@ module Appium
       @driver.execute_async_script script, *args
     end
 
+    # Run a set of script against the current session, allowing execution of many commands in one Appium request.
+    # Supports {https://webdriver.io/docs/api.html WebdriverIO} API so far.
+    # Please read {http://appium.io/docs/en/commands/session/execute-driver command API} for more details
+    # about acceptable scripts and the output.
+    #
+    # @param [String] script The string consisting of the script itself
+    # @param [String] type The name of the script type.
+    #                      Defaults to 'webdriverio'. Depends on server implementation which type is supported.
+    # @param [Integer] timeout_ms The number of `ms` Appium should wait for the script to finish
+    #                          before killing it due to timeout.
+    #
+    # @return [Appium::Core::Base::Device::ExecuteDriver::Result] The script result parsed by
+    #                          Appium::Core::Base::Device::ExecuteDriver::Result.
+    #
+    # @raise [::Selenium::WebDriver::Error::UnknownError] If something error happens in the script.
+    #                                                     It has the original message.
+    #
+    # @example
+    #      script = <<~SCRIPT
+    #        const status = await driver.status();
+    #        console.warn('warning message');
+    #        return [status];
+    #      SCRIPT
+    #      r = @@driver.execute_driver(script: script, type: 'webdriverio', timeout: 10_000)
+    #      r        #=> An instance of Appium::Core::Base::Device::ExecuteDriver::Result
+    #      r.result #=> The `result` key part as the result of the script
+    #      r.logs   #=> The `logs` key part as `{'log' => [], 'warn' => [], 'error' => []}`
+    #
+    def execute_driver(script: '', type: 'webdriverio', timeout_ms: nil)
+      @driver.execute_driver(script: script, type: type, timeout_ms: timeout_ms)
+    end
+
     def window_handles
       @driver.window_handles
     end
