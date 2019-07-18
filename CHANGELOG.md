@@ -5,6 +5,13 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 
 ## Unreleased
 ### 1. Enhancements
+
+### 2. Bug fixes
+
+### 3. Deprecations
+
+## v10.4.0
+### 1. Enhancements
 - Add `execute_driver` support
 
 ### 2. Bug fixes
