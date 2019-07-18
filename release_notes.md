@@ -1,3 +1,11 @@
+#### v10.4.0 2019-07-19
+
+- [954a3a8](https://github.com/appium/ruby_lib/commit/954a3a8d4d5cd56fa5a4e80d021805759dbf5e10) Release 10.4.0
+- [8289c9f](https://github.com/appium/ruby_lib/commit/8289c9f8e19fab754538f229e1a5513e2994dba3) fix warning message in driver detection (#864)
+- [5e61241](https://github.com/appium/ruby_lib/commit/5e612419ccd4dc5f5bd8b657a972cce4113bf9e7) update core 3.2 (#863)
+- [1f58984](https://github.com/appium/ruby_lib/commit/1f5898400dd1928bfe42ddd5f842d1f8738f2f76) Update readme.md (#861)
+
+
 #### v10.3.1 2019-04-11
 
 - [ef89749](https://github.com/appium/ruby_lib/commit/ef89749d25c7044fe27fa4b7c1adfd011b60bba1) Release 10.3.1
