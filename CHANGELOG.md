@@ -8,6 +8,7 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 - Add `execute_driver` support
 
 ### 2. Bug fixes
+- Fix wrong warning message in create session
 
 ### 3. Deprecations
 
