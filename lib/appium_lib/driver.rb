@@ -248,7 +248,13 @@ module Appium
         # https://github.com/YOU-i-Labs/appium-youiengine-driver
         Appium::Logger.debug('YouiEngine')
       else
-        Appium::Logger.warn('no device matched')
+        case automation_name
+        when :youiengine
+          # https://github.com/YOU-i-Labs/appium-youiengine-driver
+          Appium::Logger.debug('YouiEngine')
+        else
+          Appium::Logger.debug('no device matched') # core also shows waring message
+        end
       end
     end
 
