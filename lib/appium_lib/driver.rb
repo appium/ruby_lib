@@ -253,7 +253,7 @@ module Appium
           # https://github.com/YOU-i-Labs/appium-youiengine-driver
           Appium::Logger.debug('YouiEngine')
         else
-          Appium::Logger.debug('no device matched') # core also shows waring message
+          Appium::Logger.debug('no device matched') # core also shows warning message
         end
       end
     end
