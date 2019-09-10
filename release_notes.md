@@ -1,3 +1,10 @@
+#### v10.4.1 2019-09-11
+
+- [12317e4](https://github.com/appium/ruby_lib/commit/12317e4d74b20d01813526b28e642e3522193fa3) Release 10.4.1
+- [58218e1](https://github.com/appium/ruby_lib/commit/58218e18f74df362e874b2a39d9e922b27b6bd5e) fix ios page (#866)
+- [7f010e7](https://github.com/appium/ruby_lib/commit/7f010e70149847ae5af8dcf08eae889311f78e6d) fix typo in a comment
+
+
 #### v10.4.0 2019-07-19
 
 - [954a3a8](https://github.com/appium/ruby_lib/commit/954a3a8d4d5cd56fa5a4e80d021805759dbf5e10) Release 10.4.0
