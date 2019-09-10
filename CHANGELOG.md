@@ -7,6 +7,7 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 ### 1. Enhancements
 
 ### 2. Bug fixes
+- Fix iOS `page` in native context
 
 ### 3. Deprecations
 
