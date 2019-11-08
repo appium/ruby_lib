@@ -798,7 +798,6 @@ module Appium
       @driver.set_location(latitude, longitude, altitude)
     end
 
-
     # @since Appium 1.16.0
     #
     # Logs a custom event. The event is available via {::Appium::Core::Events#get} or
@@ -840,6 +839,7 @@ module Appium
     def log_events(type = nil)
       @driver.logs.events(type)
     end
+
     # Quit the driver and Pry.
     # quit and exit are reserved by Pry.
     # @return [void]
