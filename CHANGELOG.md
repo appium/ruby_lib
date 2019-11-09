@@ -7,6 +7,22 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 ### 1. Enhancements
 
 ### 2. Bug fixes
+
+### 3. Deprecations
+
+## v10.5.0
+### 1. Enhancements
+- Added `driver.log_event` to post an event
+- Added `driver.log_events` to get the events
+
+### 2. Bug fixes
+
+### 3. Deprecations
+
+## v10.4.1
+### 1. Enhancements
+
+### 2. Bug fixes
 - Fix iOS `page` in native context
 
 ### 3. Deprecations
