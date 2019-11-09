@@ -1,3 +1,9 @@
+#### v10.5.0 2019-11-09
+
+- [722c3a9](https://github.com/appium/ruby_lib/commit/722c3a9aa387d3537b648a50dc24070e62fcc57a) Release 10.5.0
+- [7a2197b](https://github.com/appium/ruby_lib/commit/7a2197b46f6ec15f1adc8626bbff1be74640e98e) feat: Add log event/s (#868)
+
+
 #### v10.4.1 2019-09-11
 
 - [12317e4](https://github.com/appium/ruby_lib/commit/12317e4d74b20d01813526b28e642e3522193fa3) Release 10.4.1
