@@ -52,7 +52,7 @@ end
 def run_android(test_file = nil)
   wait_for_valid_device
   cmd = 'bundle exec ruby ./lib/run.rb android'
-  cmd += %( "#{test_file}") if test_file
+  cmd = %(#{cmd} "#{test_file}") if test_file
   bash cmd
 end
 

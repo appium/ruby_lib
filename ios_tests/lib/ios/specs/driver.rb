@@ -40,7 +40,7 @@ describe 'driver' do
 
     actual   = ''
     actual   = File.basename opts[:caps][:app] if opts && opts[:caps]
-    expected = 'UICatalog.app'
+    expected = 'UICatalog.app.zip'
     assert_equal expected, actual
   end
 
@@ -48,7 +48,7 @@ describe 'driver' do
     t 'verify all attributes' do
       actual                = driver_attributes
       caps_app_for_teardown = actual[:caps][:app]
-      expected_app = File.absolute_path('../test_apps/UICatalog.app')
+      expected_app = File.absolute_path('../test_apps/UICatalog.app.zip')
 
       # rubocop:disable Layout/AlignHash
       expected = {
@@ -134,7 +134,7 @@ describe 'driver' do
       if sauce?
         apk_name.must_equal 'sauce-storage:UICatalog6.1.app.zip'
       else
-        apk_name.must_equal 'UICatalog.app'
+        apk_name.must_equal 'UICatalog.app.zip'
       end
     end
 
@@ -267,6 +267,11 @@ describe 'driver' do
     t 'update settings' do
       update_settings allowInvisibleElements: true
       get_settings['allowInvisibleElements'].must_equal 'true'
+    end
+
+    t 'events' do
+      log_event vendor: 'appium', event: 'funEvent'
+      log_events
     end
 
     # Skip: x # x is only used in Pry

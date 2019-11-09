@@ -52,7 +52,7 @@ task :ios, :args, :test_file do |_args, test_file|
   # test_file = {:args=>"ok"}
   test_file = test_file[:args]
   cmd = 'bundle exec ruby ./lib/run.rb ios'
-  cmd.concat %( "#{test_file}") if test_file
+  cmd = %(#{cmd} "#{test_file}") if test_file
   bash cmd
 end
 
@@ -75,7 +75,7 @@ class Device
       platformName: 'ios',
       platformVersion: '11.0',
       deviceName: 'iPhone 6',
-      app: "#{Dir.pwd}/../test_apps/UICatalog.app",
+      app: "#{Dir.pwd}/../test_apps/UICatalog.app.zip",
       wdaLocalPort: 8100,
       isCommandsQueueEnabled: false
     }
@@ -87,7 +87,7 @@ class Device
       platformName: 'ios',
       platformVersion: '11.0',
       deviceName: 'iPhone 6s',
-      app: "#{Dir.pwd}/../test_apps/UICatalog.app",
+      app: "#{Dir.pwd}/../test_apps/UICatalog.app.zip",
       wdaLocalPort: 8200,
       isCommandsQueueEnabled: false
     }
