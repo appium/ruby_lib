@@ -74,7 +74,7 @@ module Appium
       opts = opts.is_a?(Numeric) ? { timeout: opts } : opts
 
       if opts.is_a? Hash
-        opts.empty? ? @core.wait { yield } : @core.wait(opts) { yield }
+        opts.empty? ? @core.wait { yield } : @core.wait(**opts) { yield }
       else
         ::Appium::Logger.warn('Arguments should be Hash like {timeout: 100}')
       end
