@@ -215,7 +215,14 @@ module Appium
                 # so rescue argument error
                 # and call the name method on $driver
               rescue NoMethodError, ArgumentError
-                driver.send m, *args, &block if driver.respond_to?(m)
+                if args.size == 1 && args.first.is_a?(Hash)
+                  # To prevent warnings by keyword arguments (for Ruby 2.7 and 3)
+                  driver.send m, **args.first, &block if driver.respond_to?(m)
+                else
+                  ::Appium::Logger.warn "Should fix this '#{args}' for Ruby 2.7 (and 3)" if args.first.is_a?(Hash)
+
+                  driver.send m, *args, &block if driver.respond_to?(m)
+                end
               end
             end
           end
