@@ -219,9 +219,8 @@ module Appium
                   # To prevent warnings by keyword arguments (for Ruby 2.7 and 3)
                   driver.send m, **args.first, &block if driver.respond_to?(m)
                 else
-                  if args.first.is_a?(Hash)
-                    ::Appium::Logger.warn "Should fix this '#{args}' for Ruby 2.7 (and 3)"
-                  end
+                  ::Appium::Logger.warn "Should fix this '#{args}' for Ruby 2.7 (and 3)" if args.first.is_a?(Hash)
+
                   driver.send m, *args, &block if driver.respond_to?(m)
                 end
               end
