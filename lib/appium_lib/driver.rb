@@ -849,11 +849,3 @@ module Appium
     end
   end # class Driver
 end # module Appium
-
-# Paging in Pry is annoying :q required to exit.
-# With pager disabled, the output is similar to IRB
-# Only set if Pry is defined and there is no `.pryrc` files.
-if defined?(Pry) && !(File.exist?(Pry::HOME_RC_FILE) || File.exist?(Pry::LOCAL_RC_FILE))
-  Appium::Logger.debug 'Pry.config.pager = false is set.'
-  Pry.config.pager = false
-end

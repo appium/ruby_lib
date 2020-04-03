@@ -9,6 +9,8 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 ### 2. Bug fixes
 
 ### 3. Deprecations
+- Remove auto `Pry.config.pager` off
+    - Please turn it off if you needed. https://github.com/pry/pry/wiki/Customization-and-configuration#Config_pager
 
 ## v10.5.0
 ### 1. Enhancements
