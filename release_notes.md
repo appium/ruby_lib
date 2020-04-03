@@ -1,3 +1,15 @@
+#### v10.6.0 2020-04-03
+
+- [65f690f](https://github.com/appium/ruby_lib/commit/65f690f1fec62a5f8868270287b0099d8b22a2ac) Release 10.6.0
+- [f792db3](https://github.com/appium/ruby_lib/commit/f792db3afbfe3f6056e0af60ce9f6be3e2cecadc) feat: remove pager off (#879)
+- [7ad3189](https://github.com/appium/ruby_lib/commit/7ad318925c0cd2c3e73cc015a1ec929485b8af85) Update hashdiff requirement from ~> 0.3.7 to ~> 1.0.0 (#874)
+- [457e765](https://github.com/appium/ruby_lib/commit/457e7657175e6c9ba981ca476098469e91e522e1) Update rubocop requirement from ~> 0.61.0 to ~> 0.68.1 (#875)
+- [9a2b9fa](https://github.com/appium/ruby_lib/commit/9a2b9fa736877141f92d35b9e2ae97657d9955d7) Update rake requirement from ~> 12.0 to ~> 13.0 (#876)
+- [8748244](https://github.com/appium/ruby_lib/commit/8748244f75ae9344e8b22dd20b2d42fb0bd84d75) fix ruby27 warning (#872)
+- [f1734ab](https://github.com/appium/ruby_lib/commit/f1734ab0ff2a210463ab6a83120a673e1b6efd4a) ci: add 2.7 (#871)
+- [b26a8f7](https://github.com/appium/ruby_lib/commit/b26a8f7c00c966ee3f193b4c97255a4751f0041e) fix a yardoc syntax
+
+
 #### v10.5.0 2019-11-09
 
 - [722c3a9](https://github.com/appium/ruby_lib/commit/722c3a9aa387d3537b648a50dc24070e62fcc57a) Release 10.5.0
