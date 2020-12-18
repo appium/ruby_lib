@@ -1,7 +1,7 @@
 require_relative 'lib/appium_lib/version'
 
 Gem::Specification.new do |s|
-  s.required_ruby_version = '>= 2.2' # rubocop:disable Gemspec/RequiredRubyVersion
+  s.required_ruby_version = '>= 2.4' # rubocop:disable Gemspec/RequiredRubyVersion
 
   s.name          = 'appium_lib'
   s.version       = Appium::VERSION

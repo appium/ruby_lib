@@ -76,7 +76,7 @@ module Appium
       source = get_source
 
       # current_context may be nil which breaks start_with
-      if current_context && current_context.start_with?('WEBVIEW')
+      if current_context&.start_with?('WEBVIEW')
         parser = @android_html_parser ||= Nokogiri::HTML::SAX::Parser.new(Appium::Common::HTMLElements.new)
         parser.document.reset
         parser.document.filter = class_name
