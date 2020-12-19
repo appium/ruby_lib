@@ -5,6 +5,14 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 
 ## Unreleased
 
+### 1. Enhancements
+
+### 2. Bug fixes
+
+### 3. Deprecations
+
+## 11.0.0 - 2020-12-19
+
 Bump supported Ruby version to 2.4+
 
 [related changes](https://github.com/appium/ruby_lib_core/blob/master/CHANGELOG.md#400---2020-12-19) in ruby_lib_core.
