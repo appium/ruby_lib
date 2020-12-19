@@ -1,5 +1,5 @@
 AllCops:
-  TargetRubyVersion: 2.3
+  TargetRubyVersion: 2.4
 Metrics/LineLength:
   Max: 128
 Metrics/MethodLength:
@@ -24,12 +24,6 @@ Style/RegexpLiteral:
 Style/GlobalVars:
   Enabled: false
 Style/PercentLiteralDelimiters:
-  Enabled: false
-# Can use over Ruby2.3
-Style/SafeNavigation:
-  Enabled: false
-# Can use over Ruby2.3
-Style/NumericPredicate:
   Enabled: false
 Style/CommentedKeyword:
   Enabled: false

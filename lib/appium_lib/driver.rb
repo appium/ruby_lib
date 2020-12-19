@@ -163,9 +163,8 @@ module Appium
         global_driver = true # if global_driver is nil, then global_driver must be default value.
       end
 
-      if global_driver
-        $driver.driver_quit if $driver
-      end
+      $driver&.driver_quit if global_driver
+
       raise 'opts must be a hash' unless opts.is_a? Hash
 
       @core = ::Appium::Core.for(opts)

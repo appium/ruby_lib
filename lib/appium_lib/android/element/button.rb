@@ -60,9 +60,9 @@ module Appium
       # uiautomator index doesn't support last
       # and it's 0 indexed
       button_index = tags(BUTTON).length
-      button_index -= 1 if button_index > 0
+      button_index -= 1 if button_index.positive?
       image_button_index = tags(IMAGE_BUTTON).length
-      image_button_index -= 1 if image_button_index > 0
+      image_button_index -= 1 if image_button_index.positive?
 
       find_element :uiautomator,
                    _button_visible_selectors(button_index: button_index,
