@@ -1,7 +1,7 @@
 require_relative 'lib/appium_lib/version'
 
 Gem::Specification.new do |s|
-  s.required_ruby_version = '>= 2.4' # rubocop:disable Gemspec/RequiredRubyVersion
+  s.required_ruby_version = '>= 2.4'
 
   s.name          = 'appium_lib'
   s.version       = Appium::VERSION
@@ -14,12 +14,12 @@ Gem::Specification.new do |s|
   s.homepage      = 'https://github.com/appium/ruby_lib' # published as appium_lib
   s.require_paths = ['lib']
 
-  s.add_runtime_dependency 'appium_lib_core', '~> 3.3'
+  s.add_runtime_dependency 'appium_lib_core', '~> 4.0'
   s.add_runtime_dependency 'nokogiri', '~> 1.8', '>= 1.8.1'
   s.add_runtime_dependency 'tomlrb', '~> 1.1'
 
   s.add_development_dependency 'appium_thor', '~> 1.1', '>= 1.1.4'
-  s.add_development_dependency 'fakefs', '~> 0.13.0'
+  s.add_development_dependency 'fakefs', '~> 1.3.0'
   s.add_development_dependency 'hashdiff', '~> 1.0.0'
   s.add_development_dependency 'posix-spawn', '~> 0.3'
   s.add_development_dependency 'pry'

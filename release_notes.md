@@ -1,3 +1,10 @@
+#### v11.0.0 2020-12-19
+
+- [b4313b0](https://github.com/appium/ruby_lib/commit/b4313b09e62dd22bb95c2e0bc6edd296c7ece7b4) Release 11.0.0
+- [42f01dd](https://github.com/appium/ruby_lib/commit/42f01dd3513e82f9a7ed25ac9055a65dfaa7d81f) feat: bump ruby version (#887)
+- [dc228b3](https://github.com/appium/ruby_lib/commit/dc228b33487281d0428dcd20e92263d7132dd53e) ci: move to GitHub Actions (#882)
+
+
 #### v10.6.0 2020-04-03
 
 - [65f690f](https://github.com/appium/ruby_lib/commit/65f690f1fec62a5f8868270287b0099d8b22a2ac) Release 10.6.0
