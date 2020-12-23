@@ -63,8 +63,8 @@ if one_test
   else
     # ensure ext is .rb
     one_test = File.join(File.dirname(one_test),
-                         File.basename(one_test, '.*') + '.rb')
-    one_test = File.join(dir, test_dir + 'specs/', one_test)
+                         "#{File.basename(one_test, '.*')}.rb")
+    one_test = File.join(dir, "#{test_dir}specs/#{one_test}")
   end
 
   raise "\nTest #{one_test} does not exist.\n" unless File.exist?(one_test)
@@ -72,8 +72,8 @@ if one_test
   start_driver(caps)
 
   # require support (common.rb)
-  file_name = File.join dir, test_dir + '/*.rb'
-  Dir.glob(file_name) do |test|
+  file_name = File.join dir, "#{test_dir}/*.rb"
+  Dir.glob(file_name).sort.each do |test|
     require test
     trace_files << test
   end
@@ -82,8 +82,8 @@ if one_test
   trace_files << one_test
 else
   # require all
-  file_names = File.join(dir, test_dir + '**/*.rb')
-  Dir.glob(file_names) do |test|
+  file_names = File.join(dir, "#{test_dir}**/*.rb")
+  Dir.glob(file_names).sort.each do |test|
     # load all tests
     trace_files << test
     puts "  #{File.basename(test, '.*')}"
@@ -96,7 +96,7 @@ end
 trace_files.map! do |f|
   f = File.expand_path f
   # ensure all traced files end in .rb
-  f = File.join(File.dirname(f), File.basename(f, '.*') + '.rb')
+  f = File.join(File.dirname(f), "#{File.basename(f, '.*')}.rb")
   f
 end
 

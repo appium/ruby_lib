@@ -46,7 +46,7 @@ describe 'common/helper.rb' do
     proc { wait(timeout: 0.2, interval: 0.0) { raise NoMemoryError } }.must_raise ::Appium::Core::Wait::TimeoutError
 
     proc { wait(invalidkey: 2) { true } }.must_raise ArgumentError do |e|
-      assert_equal'unknown keyword: invalidkey', e.message
+      assert_equal 'unknown keyword: invalidkey', e.message
     end
   end
 
@@ -78,7 +78,7 @@ describe 'common/helper.rb' do
       .must_raise ::Appium::Core::Wait::TimeoutError
 
     proc { wait_true(invalidkey: 2) { true } }.must_raise ArgumentError do
-      assert_equal'unknown keyword: invalidkey', e.message
+      assert_equal 'unknown keyword: invalidkey', e.message
     end
   end
 

@@ -49,6 +49,7 @@ module Appium
         puts "   visible: #{visible}" if visible
       end
     end
+
     # iOS only. On Android uiautomator always returns an empty string for EditText password.
     #
     # Password character returned from value of UIASecureTextField
@@ -470,7 +471,7 @@ module Appium
       # will be present.
       _validate_object opts[:name], opts[:label], opts[:value]
 
-      # note that mainWindow is sometimes nil so it's passed as a param
+      # NOTE: that mainWindow is sometimes nil so it's passed as a param
       # $._elementOrElementsByType will validate that the window isn't nil
       element_or_elements_by_type = <<-JS
         (function() {

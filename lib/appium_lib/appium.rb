@@ -77,9 +77,8 @@ module Appium
       Appium::Logger.info "Loading #{toml}" if verbose
 
       data = Tomlrb.load_file(toml, symbolize_keys: true)
-      if verbose
-        Appium::Logger.info data unless data.empty?
-      end
+
+      Appium::Logger.info data if verbose && !data.empty?
 
       if data && data[:caps] && data[:caps][:app] && !data[:caps][:app].empty?
         data[:caps][:app] = Appium::Driver.absolute_app_path data
@@ -200,7 +199,7 @@ module Appium
       raise 'Driver is nil' if driver.nil?
 
       # Wrap single class into an array
-      class_array = [class_array] unless class_array.class == Array
+      class_array = [class_array] unless class_array.instance_of? Array
       # Promote Appium driver methods to class instance methods.
       class_array.each do |klass|
         driver.public_methods(false).each do |m|

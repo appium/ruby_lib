@@ -276,7 +276,6 @@ module Appium
 
     # Returns a hash of the driver attributes
     def driver_attributes
-      # rubocop:disable Layout/AlignHash
       {
         caps:                @core.caps,
         automation_name:     @core.automation_name,
@@ -294,7 +293,6 @@ module Appium
         wait_timeout:        @core.wait_timeout,
         wait_interval:       @core.wait_interval
       }
-      # rubocop:enable Layout/AlignHash
     end
 
     def device_is_android?
@@ -425,14 +423,12 @@ module Appium
       return app_path if app_path =~ URI::DEFAULT_PARSER.make_regexp # public URL for Sauce
 
       absolute_app_path = File.expand_path app_path
-      app_path = if File.exist? absolute_app_path
-                   absolute_app_path
-                 else
-                   ::Appium::Logger.info("Use #{app_path}")
-                   app_path
-                 end
-
-      app_path
+      if File.exist? absolute_app_path
+        absolute_app_path
+      else
+        ::Appium::Logger.info("Use #{app_path}")
+        app_path
+      end
     end
 
     # Get the server url
