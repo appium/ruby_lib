@@ -30,7 +30,7 @@ describe 'device/touch_actions' do
     size = picker.size.to_h
     start_x = loc[:x] + size[:width] / 2
     start_y = loc[:y] + size[:height] / 2
-    # rubocop:disable Metrics/LineLength
+    # rubocop:disable Layout/LineLength
     # Example for iOS's log with XCUITest
     # [0] pry(#<device/touch_actions>)> swipe start_x: start_x, start_y: start_y, offset_x: 0, offset_y: - 50
     # [debug] [WebDriverAgent] Sim: Jan 14 16:35:05 rrcs-172-254-99-35 CoreSimulatorBridge[65868]: KEYMAP: Chose mode=en_US@hw=Automatic;sw=QWERTY from match=en_US@hw=Automatic;sw=QWERTY from language=en
@@ -57,7 +57,7 @@ describe 'device/touch_actions' do
     # [debug] [UIAuto] Got result from instruments: {"status":0,"value":""}
     # [debug] [MJSONWP] Responding to client with driver.performTouch() result: ""
     # [HTTP] <-- POST /wd/hub/session/8b651f03-0fbc-43f0-aaf2-243d0650f6aa/touch/perform 200 1895 ms - 74
-    # rubocop:enable Metrics/LineLength
+    # rubocop:enable Layout/LineLength
     Appium::TouchAction.new.swipe(start_x: start_x, start_y: start_y, end_x: 0, end_y: - 50).perform
     ele_index(ui_ios.static_text, 2).text.must_equal 'Chris Armstrong - 0' # depends on iOS
   end

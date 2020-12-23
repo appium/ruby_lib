@@ -74,7 +74,7 @@ module Appium
           c_names = class_names.map { |class_name| %(type == "#{class_name}") }.join(' || ')
 
           predicate = if value
-                        %((#{c_names}) && (name contains[c] "#{value}" || label contains[c] "#{value}" || value contains[c] "#{value}")) # rubocop:disable Metrics/LineLength
+                        %((#{c_names}) && (name contains[c] "#{value}" || label contains[c] "#{value}" || value contains[c] "#{value}")) # rubocop:disable Layout/LineLength
                       else
                         c_names
                       end

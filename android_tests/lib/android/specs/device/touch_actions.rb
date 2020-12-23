@@ -18,7 +18,7 @@ describe 'device/touch_actions' do
     start_x = window_size[:width] / 2
     start_y = window_size[:height] / 2
     wait(timeout: 0.6) do
-      # rubocop:disable Metrics/LineLength
+      # rubocop:disable Layout/LineLength
       # Example for Android's log
       # [0] pry(#<device/touch_actions>)> swipe start_x: start_x, start_y: start_y, end_x: start_y, end_y: start_y - 100
       # [HTTP] --> POST /wd/hub/session/9baa18bf-a19b-4654-be4a-d0db0334bbc0/touch/perform {"actions":[{"action":"press","options":{"x":600,"y":919}},{"action":"wait","options":{"ms":200}},{"action":"moveTo","options":{"x":600,"y":819}},{"action":"release"}]}
@@ -31,7 +31,7 @@ describe 'device/touch_actions' do
       # [AndroidBootstrap] [BOOTSTRAP LOG] [debug] Display bounds: [0,0][1200,1838]
       # [AndroidBootstrap] [BOOTSTRAP LOG] [debug] Swiping from [x=600.0, y=919.0] to [x=600.0, y=819.0] with steps: 6
       # [debug] [AndroidBootstrap] Received command result from bootstrap
-      # rubocop:enable Metrics/LineLength
+      # rubocop:enable Layout/LineLength
       swipe start_x: start_x, start_y: start_y, end_x: 0.0, end_y: - 100
       text(seen_text).displayed?
     end
