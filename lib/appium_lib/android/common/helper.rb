@@ -27,7 +27,7 @@ module Appium
         @filter = value.to_s.downcase
       end
 
-      def initialize
+      def initialize # rubocop:disable Lint/MissingSuper
         reset
         @filter   = false
       end
@@ -217,7 +217,7 @@ module Appium
       # [^\/]+          - type is made up of at least one non-/ characters
       # \\/             - / ends the type and starts the name
       # [\S]+$          - the name contains at least one non-space character and then the line is ended
-      resource_id = /^[a-zA-Z_][a-zA-Z0-9\._]*:[^\/]+\/[\S]+$/
+      resource_id = /^[a-zA-Z_][a-zA-Z0-9._]*:[^\/]+\/\S+$/
       string.match(resource_id) ? on_match : ''
     end
 

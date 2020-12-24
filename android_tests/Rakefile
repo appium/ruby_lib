@@ -19,13 +19,11 @@ require 'rubocop/rake_task'
 task default: :android
 
 # Run sh and ignore exception
-# rubocop:disable Lint/HandleExceptions,Style/RescueStandardError
 def run_sh(cmd)
   sh cmd
-rescue
+rescue StandardError
   # ignored
 end
-# rubocop:enable Lint/HandleExceptions,Style/RescueStandardError
 
 # Run cmd. On failure run install and try again.
 def bash(cmd)

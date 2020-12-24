@@ -51,7 +51,6 @@ describe 'driver' do
       caps_app_for_teardown = actual[:caps][:app]
       expected_app = File.absolute_path('../test_apps/api.apk')
 
-      # rubocop:disable Layout/AlignHash
       expected = {
         automation_name:     :uiautomator2,
         custom_url:          'http://127.0.0.1:4723/wd/hub',
@@ -68,7 +67,6 @@ describe 'driver' do
         wait_timeout:        30, # default
         wait_interval:       0.5 # default
       }
-      # rubocop:enable Layout/AlignHash
 
       # actual[:caps].to_json send to Appium server
       caps_with_json = JSON.parse(actual[:caps].to_json)

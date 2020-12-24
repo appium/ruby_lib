@@ -31,7 +31,21 @@ Naming/AccessorMethodName:
   Enabled: false
 Naming/RescuedExceptionsVariableName:
   Enabled: false
-Layout/IndentHeredoc:
+Layout/HeredocIndentation:
   Enabled: false
 Layout/RescueEnsureAlignment:
+  Enabled: false
+Layout/HashAlignment:
+  Enabled: false
+Style/ExplicitBlockArgument:
+  Enabled: false
+Style/OptionalBooleanParameter:
+  Enabled: false
+Naming/MethodParameterName:
+  Enabled: false
+Style/KeywordParametersOrder:
+  Enabled: false
+Style/AccessorGrouping:
+  Enabled: false
+Style/StringConcatenation:
   Enabled: false

@@ -50,7 +50,6 @@ describe 'driver' do
       caps_app_for_teardown = actual[:caps][:app]
       expected_app = File.absolute_path('../test_apps/UICatalog.app.zip')
 
-      # rubocop:disable Layout/AlignHash
       expected = {
         automation_name:     :xcuitest,
         custom_url:          false,
@@ -67,7 +66,6 @@ describe 'driver' do
         wait_timeout:        20, # defined in appium.txt
         wait_interval:       1 # defined in appium.txt
       }
-      # rubocop:enable Layout/AlignHash
 
       # actual[:caps].to_json send to Appium server
       caps_with_json = JSON.parse(actual[:caps].to_json)
