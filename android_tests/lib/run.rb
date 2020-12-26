@@ -73,7 +73,7 @@ if one_test
 
   # require support (common.rb)
   file_name = File.join dir, "#{test_dir}/*.rb"
-  Dir.glob(file_name).sort.each do |test|
+  Dir.glob(file_name) do |test|
     require test
     trace_files << test
   end
@@ -83,7 +83,7 @@ if one_test
 else
   # require all
   file_names = File.join(dir, "#{test_dir}**/*.rb")
-  Dir.glob(file_names).sort.each do |test|
+  Dir.glob(file_names) do |test|
     # load all tests
     trace_files << test
     puts "  #{File.basename(test, '.*')}"
