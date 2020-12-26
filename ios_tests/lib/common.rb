@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # common methods
-def back_click(opts = {})
+def back_click
   back
 end
 
