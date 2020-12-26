@@ -29,7 +29,7 @@ module Appium
     # Return yield and ignore any exceptions.
     def ignore
       yield
-    rescue StandardError
+    rescue Exception # rubocop:disable Lint/RescueException
       # Ignored
     end
 

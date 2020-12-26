@@ -202,9 +202,11 @@ module Appium
       class_array = [class_array] unless class_array.instance_of? Array
       # Promote Appium driver methods to class instance methods.
       class_array.each do |klass|
-        driver.public_methods(false).each do |m|
+        driver.public_methods(false).each do |method|
           klass.class_eval do
-            define_method m do |*args, &block|
+            next if method_defined? method
+
+            define_method method do |*args, &block|
               begin
                 # Prefer existing method.
                 # super will invoke method missing on driver
@@ -216,11 +218,11 @@ module Appium
               rescue NoMethodError, ArgumentError
                 if args.size == 1 && args.first.is_a?(Hash)
                   # To prevent warnings by keyword arguments (for Ruby 2.7 and 3)
-                  driver.send m, **args.first, &block if driver.respond_to?(m)
+                  driver.send method, **args.first, &block if driver.respond_to?(method)
                 else
                   ::Appium::Logger.warn "Should fix this '#{args}' for Ruby 2.7 (and 3)" if args.first.is_a?(Hash)
 
-                  driver.send m, *args, &block if driver.respond_to?(m)
+                  driver.send method, *args, &block if driver.respond_to?(method)
                 end
               end
             end
