@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# bundle exec rake "ios[driver.rb]"
+# bundle exec rake "ios[driver]"
 describe 'driver' do
   def before_first
     screen.must_equal catalog
@@ -73,14 +73,14 @@ describe 'driver' do
       caps_with_json['platformVersion'].must_equal '14.2'
       caps_with_json['app'].must_equal expected_app
       caps_with_json['automationName'].must_equal 'XCUITest'
-      caps_with_json['deviceName'].must_equal 'iPhone Simulator'
+      caps_with_json['deviceName'].must_equal 'iPhone 11'
       caps_with_json['someCapability'].must_equal 'some_capability'
 
       actual[:caps][:platformName].must_equal 'ios'
       actual[:caps][:platformVersion].must_equal '14.2'
       actual[:caps][:app].must_equal expected_app
       actual[:caps][:automationName].must_equal 'XCUITest'
-      actual[:caps][:deviceName].must_equal 'iPhone Simulator'
+      actual[:caps][:deviceName].must_equal 'iPhone 11'
       actual[:caps][:someCapability].must_equal 'some_capability'
 
       dup_actual = actual.dup

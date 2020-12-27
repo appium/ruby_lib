@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Tests specifically for areas where the web_context differs in behaviour
-# rake ios[common/web_context]
+# rake "ios[common/web_context]"
 describe 'the web context' do
   def before_first
     screen.must_equal catalog
@@ -23,8 +23,8 @@ describe 'the web context' do
     before_first
   end
 
-  t 'get_android_inspect' do
-    text('Web').click
+  t 'get_ios_inspect' do
+    find_eles_by_predicate_include(value: 'Web').first.click
 
     wait_true { available_contexts.size >= 2 }
     web_view_context = available_contexts.find { |c| c.start_with? 'WEBVIEW' } # Get WEBVIEW_59153.1 for example.
@@ -37,8 +37,8 @@ describe 'the web context' do
 
   t 'xcuitest_get_contexts' do
     context = xcuitest_get_contexts
-    assert_equal [{ 'id' => 'NATIVE_APP' },
-                  { 'id' => 'WEBVIEW_41467.1', 'title' => 'Apple', 'url' => 'https://www.apple.com/' }], context
+    assert_equal({ 'id' => 'NATIVE_APP' }, context.first)
+    assert context[1]['id'].include?('WEBVIEW_')
   end
 
   t 'after_last' do
