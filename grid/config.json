@@ -2,7 +2,7 @@
   "capabilities":
   [
     {
-      "browserName": "iPhone Simulator",
+      "browserName": "iPhone 11",
       "version":"11.4",
       "platform":"ios",
       "maxInstances": 1

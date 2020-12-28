@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Tests specifically for areas where the web_context differs in behaviour
-# rake android[common/web_context]
+# rake "android[common/web_context]"
 describe 'the web context' do
   # appium's context support is broken on android
 
@@ -36,8 +36,9 @@ describe 'the web context' do
       wait { find 'Views' }
     end
 
-    contexts        = available_contexts
-    webview_context = contexts.detect { |e| e.start_with?('WEBVIEW') }
+    wait_true { !available_contexts.detect { |e| e.start_with?('WEBVIEW') }.nil? }
+
+    webview_context = available_contexts.detect { |e| e.start_with?('WEBVIEW') }
 
     if webview_context.nil?
       undo_setcontext_nav

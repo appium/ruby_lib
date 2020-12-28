@@ -12,13 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# rake ios[ios/element/alert]
+# rake "ios[ios/element/alert]"
 describe 'ios/element/alert' do
   def nav_once
     screen.must_equal catalog
     wait_true do
-      automation_name_is_xcuitest? ? find_element(:name, 'Alerts').click : text('alerts').click
-      tag(ui_ios.navbar).name == 'Alerts' # wait for true
+      automation_name_is_xcuitest? ? find_element(:name, 'Alert Views').click : text('alerts').click
+      tag(ui_ios.navbar).name == 'Alert Views' # wait for true
     end
   end
 
@@ -30,13 +30,8 @@ describe 'ios/element/alert' do
 
   def open_alert
     wait_true do
-      if automation_name_is_xcuitest?
-        find_element(:name, 'Show OK-Cancel').click
-        find_element(:name, 'UIActionSheet <title>').displayed?
-      else
-        text('Show OK-Cancel').click
-        text('UIActionSheet <title>').displayed?
-      end
+      find_element(:name, 'Okay / Cancel').click
+      find_element(:name, 'A Short Title Is Best').displayed?
     end
   end
 

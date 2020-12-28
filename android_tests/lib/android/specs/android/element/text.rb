@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# rake android['android/element/text']
+# rake "android[android/element/text]"
 describe 'android/element/text' do
   def must_raise_no_element
     proc { yield }.must_raise Selenium::WebDriver::Error::NoSuchElementError

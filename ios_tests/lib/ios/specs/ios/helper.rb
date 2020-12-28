@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# rake ios[ios/helper]
+# rake "ios[ios/helper]"
 describe 'ios/helper' do
   def before_first
     screen.must_equal catalog
@@ -47,7 +47,7 @@ describe 'ios/helper' do
     elements.length.must_equal 24
 
     elements = tags_include class_names: %w(XCUIElementTypeTextView XCUIElementTypeStaticText), value: 'u'
-    elements.length.must_equal 13
+    elements.length.must_equal 3
   end
 
   t 'tags_exact' do

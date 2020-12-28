@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# rake android[common/command/command]
+# rake "android[common/command/command]"
 describe 'common/command/command' do
   t 'command' do
     File.delete 'logcat.log' if File.exist? 'logcat.log'

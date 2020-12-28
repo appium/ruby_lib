@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# rake ios[ios/command/pasteboard]
+# rake "ios[ios/command/pasteboard]"
 describe 'ios/command/pasteboard' do
   t 'pasteboard' do
     # set blank before testing because pasteboard is remaining during launching simulators

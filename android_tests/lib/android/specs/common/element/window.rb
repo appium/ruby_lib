@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# rake android[common/element/window]
+# rake "android[common/element/window]"
 describe 'common/element/window' do
   # rubocop:disable Lint/UnifiedInteger
   t 'window_size' do

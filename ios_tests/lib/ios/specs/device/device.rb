@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# $ rake ios[device/device]
+# $ rake "ios[device/device]"
 describe 'device/device' do
   def before_first
     screen.must_equal catalog
@@ -21,7 +21,7 @@ describe 'device/device' do
   # go back to the main page
   def go_back
     back
-    wait { !exists { id 'ArrowButton' } } # successfully transitioned back
+    wait { find_ele_by_predicate_include(class_name: ui_ios.navbar, value: 'UICatalog') }
   end
 
   t 'before_first' do
@@ -45,19 +45,19 @@ describe 'device/device' do
   end
 
   t 'app_strings' do
-    app_strings.must_include 'SearchBarExplain'
-    app_strings('en').must_include 'SearchBarExplain'
+    app_strings.must_include 'A Short Title Is Best'
+    app_strings('en').must_include 'A Short Title Is Best'
   end
 
   t 'action_chain' do
     if automation_name_is_xcuitest?
-      element = text(app_strings['ButtonsExplain'])
-      tap(x: 0, y: 0, element: element)
+      element = text('Buttons')
+      one_finger_tap x: 0, y: 0, element: element
     else
-      Appium::TouchAction.new.press(element: text(app_strings['ButtonsExplain'])).perform
+      Appium::TouchAction.new.press(element: text('Buttons')).perform
     end
 
-    wait { text 'Back' } # successfully transitioned to buttons page
+    wait { button 'UICatalog' } # successfully transitioned to buttons page
     go_back
   end
 

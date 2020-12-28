@@ -12,12 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# rake android[device/touch_actions]
+# rake "android[device/touch_actions]"
 describe 'device/touch_actions' do
   def swipe_till_text_visible(seen_text)
     start_x = window_size[:width] / 2
     start_y = window_size[:height] / 2
-    wait(timeout: 0.6) do
+    wait(timeout: 1.0) do
       # rubocop:disable Layout/LineLength
       # Example for Android's log
       # [0] pry(#<device/touch_actions>)> swipe start_x: start_x, start_y: start_y, end_x: start_y, end_y: start_y - 100
@@ -32,7 +32,7 @@ describe 'device/touch_actions' do
       # [AndroidBootstrap] [BOOTSTRAP LOG] [debug] Swiping from [x=600.0, y=919.0] to [x=600.0, y=819.0] with steps: 6
       # [debug] [AndroidBootstrap] Received command result from bootstrap
       # rubocop:enable Layout/LineLength
-      swipe start_x: start_x, start_y: start_y, end_x: 0.0, end_y: - 100
+      swipe start_x: start_x, start_y: start_y, end_x: 0.0, end_y: 10
       text(seen_text).displayed?
     end
   end
@@ -44,7 +44,7 @@ describe 'device/touch_actions' do
       text('animation').displayed?
     end
     text('animation').text.must_equal 'Animation'
-    swipe_till_text_visible('lists')
+    swipe_till_text_visible('Views')
   end
 end
 

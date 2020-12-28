@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# rake android[common/device]
+# rake "android[common/device]"
 describe 'common/device' do
   t 'get_performance_data_types' do
     expected = %w(batteryinfo cpuinfo memoryinfo networkinfo)

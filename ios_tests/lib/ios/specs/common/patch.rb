@@ -17,7 +17,7 @@
 #    execute # debug output for Pry
 #
 
-# rake ios[common/patch]
+# bundle exec rake "ios[common/patch]"
 describe 'common/patch.rb' do
   def before_first
     screen.must_equal catalog

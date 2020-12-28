@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# rake android[driver]
+# rake "android[driver]"
 describe 'driver' do
   def sauce?
     ENV['UPLOAD_FILE'] && ENV['SAUCE_USERNAME']
@@ -48,7 +48,6 @@ describe 'driver' do
 
     t 'verify all attributes' do
       actual = driver_attributes
-      caps_app_for_teardown = actual[:caps][:app]
       expected_app = File.absolute_path('../test_apps/api.apk')
 
       expected = {
@@ -74,7 +73,7 @@ describe 'driver' do
       caps_with_json['app'].must_equal expected_app
       caps_with_json['appPackage'].must_equal 'io.appium.android.apis'
       caps_with_json['appActivity'].must_equal 'io.appium.android.apis.ApiDemos'
-      caps_with_json['deviceName'].must_equal 'Nexus 7'
+      caps_with_json['deviceName'].must_equal 'Android emulator'
       caps_with_json['someCapability'].must_equal 'some_capability'
 
       actual[:caps][:platformName].must_equal 'android'
@@ -87,17 +86,7 @@ describe 'driver' do
       dup_actual = actual.dup
       dup_actual.delete(:caps)
 
-      if dup_actual != expected
-        diff    = HashDiff.diff expected, dup_actual
-        diff    = "diff (expected, actual):\n#{diff}"
-
-        dup_actual[:caps][:app] = caps_app_for_teardown if dup_actual.key? :caps
-        # example:
-        # change :ios in expected to match 'ios' in actual
-        # [["~", "caps.platformName", :ios, "ios"]]
-        message = "\n\nactual:\n\n: #{dup_actual}expected:\n\n#{expected}\n\n#{diff}"
-        raise message
-      end
+      raise "\n\nactual:\n\n: #{dup_actual}expected:\n\n#{expected}" if dup_actual != expected
     end
   end
 

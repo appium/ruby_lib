@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# rake android['android/element/generic']
+# rake "android[android/element/generic]"
 describe 'android/element/generic' do
   def content
     'Content'

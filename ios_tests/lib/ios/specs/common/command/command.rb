@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# rake ios[common/command/command]
+# rake "ios[common/command/command]"
 describe 'common/command/command' do
   t 'command' do
     File.delete 'syslog.log' if File.exist? 'syslog.log'

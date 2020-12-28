@@ -12,7 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# rake ios['ios/element/button']
+# FIXME: The order is broken in Ruby 3.
+# rake "ios[ios/element/button]"
 describe 'ios/element/button' do
   def before_first
     screen.must_equal catalog

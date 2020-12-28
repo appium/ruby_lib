@@ -233,8 +233,9 @@ module Appium
             "#{string}  #{attr[0]}: #{attr1}\n"
           end
 
-          r.concat "\n#{name}\n#{attr_string}" unless attr_string.nil? || attr_string.empty?
-          r
+          return r if attr_string.nil? || attr_string.empty?
+
+          "#{r}\n#{name}\n#{attr_string}"
         end
       end
 

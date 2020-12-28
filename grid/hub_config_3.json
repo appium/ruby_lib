@@ -2,7 +2,7 @@
   "capabilities":
   [
     {
-      "browserName": "iPhone Simulator",
+      "browserName": "iPhone 11",
       "version":"11.4",
       "maxInstances": 1,
       "seleniumProtocol": "WebDriver"

@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# rake ios[driver]
+# bundle exec rake "ios[driver]"
 describe 'driver' do
   def before_first
     screen.must_equal catalog
@@ -52,7 +52,7 @@ describe 'driver' do
 
       expected = {
         automation_name:     :xcuitest,
-        custom_url:          false,
+        custom_url:          'http://127.0.0.1:4723/wd/hub',
         export_session:      true,
         export_session_path: '/tmp/appium_lib_session',
         default_wait:        30,
@@ -70,33 +70,23 @@ describe 'driver' do
       # actual[:caps].to_json send to Appium server
       caps_with_json = JSON.parse(actual[:caps].to_json)
       caps_with_json['platformName'].must_equal 'ios'
-      caps_with_json['platformVersion'].must_equal '11.4'
+      caps_with_json['platformVersion'].must_equal '14.2'
       caps_with_json['app'].must_equal expected_app
       caps_with_json['automationName'].must_equal 'XCUITest'
-      caps_with_json['deviceName'].must_equal 'iPhone Simulator'
+      caps_with_json['deviceName'].must_equal 'iPhone 11'
       caps_with_json['someCapability'].must_equal 'some_capability'
 
       actual[:caps][:platformName].must_equal 'ios'
-      actual[:caps][:platformVersion].must_equal '11.4'
+      actual[:caps][:platformVersion].must_equal '14.2'
       actual[:caps][:app].must_equal expected_app
       actual[:caps][:automationName].must_equal 'XCUITest'
-      actual[:caps][:deviceName].must_equal 'iPhone Simulator'
+      actual[:caps][:deviceName].must_equal 'iPhone 11'
       actual[:caps][:someCapability].must_equal 'some_capability'
 
       dup_actual = actual.dup
       dup_actual.delete(:caps)
 
-      if dup_actual != expected
-        diff    = HashDiff.diff expected, dup_actual
-        diff    = "diff (expected, actual):\n#{diff}"
-
-        dup_actual[:caps][:app] = caps_app_for_teardown
-        # example:
-        # change :ios in expected to match 'ios' in actual
-        # [["~", "caps.platformName", :ios, "ios"]]
-        message = "\n\nactual:\n\n: #{dup_actual}expected:\n\n#{expected}\n\n#{diff}"
-        raise message
-      end
+      raise "\n\nactual:\n\n: #{dup_actual}expected:\n\n#{expected}" if dup_actual != expected
 
       actual_selenium_caps = actual[:caps][:automationName]
       actual_selenium_caps.must_equal 'XCUITest'
@@ -104,9 +94,9 @@ describe 'driver' do
     end
 
     t 'verify attributes are immutable' do
+      driver_attributes[:custom_url].must_equal 'http://127.0.0.1:4723/wd/hub'
       driver_attributes[:custom_url] = true
-      expected                       = false
-      driver_attributes[:custom_url].must_equal expected
+      driver_attributes[:custom_url].must_equal 'http://127.0.0.1:4723/wd/hub'
     end
 
     t 'verify attribute of :caps are not immutable becuse it depends on Selenium' do
@@ -173,7 +163,7 @@ describe 'driver' do
 
   describe 'methods' do
     t 'status' do
-      appium_server_version['build'].keys.sort.must_equal %w(revision version)
+      appium_server_version['build'].keys.sort.must_equal %w(version)
     end
 
     t 'server_version' do
@@ -249,7 +239,7 @@ describe 'driver' do
 
     # any elements
     t 'find_elements' do
-      find_elements(:class, ui_ios.table_cell).length.must_equal 12
+      find_elements(:class, ui_ios.table_cell).length.must_equal 18
     end
 
     # any element
@@ -264,7 +254,7 @@ describe 'driver' do
 
     t 'update settings' do
       update_settings allowInvisibleElements: true
-      get_settings['allowInvisibleElements'].must_equal 'true'
+      get_settings['allowInvisibleElements'].must_equal true
     end
 
     t 'events' do

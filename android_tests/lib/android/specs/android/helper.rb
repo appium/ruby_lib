@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# rake android[android/helper]
+# rake "android[android/helper]"
 describe 'android/helper' do
   t 'tags' do
     wait { tags('android.widget.TextView').length.must_equal 13 }

@@ -16,6 +16,7 @@
 #   status # status patches are already tested in driver.rb
 #   execute # debug output for Pry
 
+# rake "android[common/patch]"
 describe 'common/patch' do
   # Attributes are busted in Android.
   # Blocked on https://github.com/appium/appium/issues/628

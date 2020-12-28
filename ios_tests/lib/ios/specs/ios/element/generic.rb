@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# rake ios['ios/element/generic']
+# rake "ios[ios/element/generic]"
 describe 'ios/element/generic' do
   def before_first
     screen.must_equal catalog

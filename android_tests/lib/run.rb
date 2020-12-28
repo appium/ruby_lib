@@ -71,6 +71,7 @@ if one_test
 
   start_driver(caps)
 
+  # Ruby 3.0 sorts the Dir.glob order
   # require support (common.rb)
   file_name = File.join dir, "#{test_dir}/*.rb"
   Dir.glob(file_name) do |test|

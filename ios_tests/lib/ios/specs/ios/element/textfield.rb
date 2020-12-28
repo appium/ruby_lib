@@ -12,14 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# rake ios[ios/element/textfield]
+# rake "ios[ios/element/textfield]"
 describe 'ios/element/textfield' do
   def enter_text
-    '<enter text>'
+    'Placeholder text'
   end
 
   def enter_password
-    '<enter password>'
+    'Placeholder text'
   end
 
   def before_first
@@ -37,14 +37,14 @@ describe 'ios/element/textfield' do
   t 'textfield' do
     textfield(1).text.must_equal(enter_text)
     textfield(enter_text).text.must_equal(enter_text)
-    textfield('word').value.must_equal enter_password
+    textfield('holder').value.must_equal enter_password
   end
 
   t 'textfields' do
-    values = textfields('enter').map(&:value)
-    values.include?('<enter text>').must_equal true
-    values.include?('<enter password>').must_equal true
-    textfields.length.must_equal 4
+    values = textfields('text').map(&:value)
+    values.include?(enter_text).must_equal true
+    values.include?(enter_password).must_equal true # secure as well
+    textfields.length.must_equal 5
   end
 
   t 'predicate textfields' do
@@ -54,7 +54,7 @@ describe 'ios/element/textfield' do
                    execute_script(%(au.mainApp().getAllWithPredicate("type contains[c] 'textfield'", true)))
                  end
 
-    textfields.length.must_equal 4
+    textfields.length.must_equal 5
   end
 
   t 'first_textfield' do

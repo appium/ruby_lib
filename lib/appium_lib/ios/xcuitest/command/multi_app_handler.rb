@@ -33,8 +33,7 @@ module Appium
         #     xcuitest_install_app(app: "path/to/app.app")
         #
         def xcuitest_install_app(app:)
-          args = { app: app }
-          @driver.execute_script 'mobile: installApp', args
+          @driver.install_app app
         end
 
         # Verifies whether the application with given bundle identifier is installed on the device.
@@ -47,8 +46,7 @@ module Appium
         #     xcuitest_app_installed?(bundle_id: "io.appium.bundle") #=> true or false
         #
         def xcuitest_app_installed?(bundle_id:)
-          args = { bundleId: bundle_id }
-          @driver.execute_script 'mobile: isAppInstalled', args
+          @driver.app_installed? bundle_id
         end
 
         # Uninstalls an existing application from the device under test. This endpoint does not verify
@@ -62,8 +60,7 @@ module Appium
         #     xcuitest_remove_app(bundle_id: "io.appium.bundle") #=> 1
         #
         def xcuitest_remove_app(bundle_id:)
-          args = { bundleId: bundle_id }
-          @driver.execute_script 'mobile: removeApp', args
+          @driver.remove_app bundle_id
         end
 
         # Executes an existing application on the device. If the application is already running then
@@ -92,8 +89,7 @@ module Appium
         #     xcuitest_terminate_app(bundle_id: "io.appium.bundle") #=> 1
         #
         def xcuitest_terminate_app(bundle_id:)
-          args = { bundleId: bundle_id }
-          @driver.execute_script 'mobile: terminateApp', args
+          @driver.terminate_app bundle_id
         end
 
         # Get the status of an existing application on the device.
@@ -114,8 +110,7 @@ module Appium
         #     xcuitest_query_app_status(bundle_id: "io.appium.bundle") #=> 1
         #
         def xcuitest_query_app_status(bundle_id:)
-          args = { bundleId: bundle_id }
-          @driver.execute_script 'mobile: queryAppState', args
+          @driver.app_state bundle_id
         end
 
         # Activates an existing application on the device under test and moves it to the foreground.
@@ -130,8 +125,7 @@ module Appium
         #     xcuitest_activate_app(bundle_id: "io.appium.bundle") #=> 1
         #
         def xcuitest_activate_app(bundle_id:)
-          args = { bundleId: bundle_id }
-          @driver.execute_script 'mobile: activateApp', args
+          @driver.activate_app bundle_id
         end
       end
     end # module Xcuitest
