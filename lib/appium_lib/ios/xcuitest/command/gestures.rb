@@ -124,12 +124,11 @@ module Appium
         #   tap_once x: 100, y: 100
         #   tap_once x: 100, y: 100, element: find_element(:accessibility_id, "some item")
         #   ```
-        def tap(x:, y:, element: nil)
+        def tap_once(x:, y:, element: nil)
           args = { x: x, y: y }
           args[:element] = element.ref if element
           @driver.execute_script 'mobile: tap', args
         end
-        alias tap_once tap
 
         # rubocop:disable Metrics/ParameterLists
         # @param duration [float] Float number of seconds in range [0.5, 60]. How long the tap gesture at starting
