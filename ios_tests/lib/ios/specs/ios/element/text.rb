@@ -12,14 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# rake ios['ios/element/text']
+# rake "ios[ios/element/text]"
 describe 'ios/element/text' do
   def ui_catalog
     'UICatalog'
   end
 
-  def uiview_transitions
-    'Transitions'
+  def uiview_steppers
+    'Steppers'
   end
 
   def before_first
@@ -35,23 +35,23 @@ describe 'ios/element/text' do
   end
 
   t 'last_text' do
-    expected = 'Transitions'
+    expected = 'Steppers'
 
     last_text.text.must_equal expected
     last_text.name.must_equal expected
   end
 
   t 'text' do
-    text('siti').text.must_equal uiview_transitions
+    text('epp').text.must_equal uiview_steppers
     text(1).text.must_equal ui_catalog
-    text('siti').name.must_equal uiview_transitions
+    text('epp').name.must_equal uiview_steppers
   end
 
   t 'texts' do
-    exp = ['Controls', 'Various uses of UIControl', 'Various uses of UISegmentedControl']
+    exp = ['Date Picker', 'AAPLDatePickerController', 'Picker View', 'AAPLPickerViewController']
     texts.length.must_equal 24
-    texts('trol').map(&:name).must_equal exp
-    texts('uses').length.must_equal 7
+    texts('icker').map(&:name).must_equal exp
+    texts('AAPL').length.must_equal 11
   end
 
   t 'text_exact' do

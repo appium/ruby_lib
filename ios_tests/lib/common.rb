@@ -25,8 +25,8 @@ end
 def go_to_textfields
   screen.must_equal catalog
   wait_true do
-    automation_name_is_xcuitest? ? find_element(:name, 'TextFields').click : text('textfield').click
-    screen == 'TextFields' # wait for screen transition
+    automation_name_is_xcuitest? ? find_element(:name, 'Text Fields').click : text('textfield').click
+    screen == 'Text Fields' # wait for screen transition
   end
 end
 
