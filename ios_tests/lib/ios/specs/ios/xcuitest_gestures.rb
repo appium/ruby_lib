@@ -117,7 +117,7 @@ describe 'ios/xcuitest_gestures' do
 
     open_alert_custom
     list = alert action: 'getButtons'
-    list.must_equal ['Choice One', 'Choice Two', 'Cancel' ]
+    list.must_equal ['Choice One', 'Choice Two', 'Cancel']
     alert action: 'accept', button_label: 'Choice Two'
   end
 

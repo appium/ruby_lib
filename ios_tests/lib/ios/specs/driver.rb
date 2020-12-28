@@ -86,9 +86,7 @@ describe 'driver' do
       dup_actual = actual.dup
       dup_actual.delete(:caps)
 
-      if dup_actual != expected
-        raise "\n\nactual:\n\n: #{dup_actual}expected:\n\n#{expected}"
-      end
+      raise "\n\nactual:\n\n: #{dup_actual}expected:\n\n#{expected}" if dup_actual != expected
 
       actual_selenium_caps = actual[:caps][:automationName]
       actual_selenium_caps.must_equal 'XCUITest'
