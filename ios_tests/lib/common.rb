@@ -75,6 +75,10 @@ class UI
     xcuitest? ? 'XCUIElementTypePicker' : 'UIAPicker'
   end
 
+  def picker_wheel
+    xcuitest? ? 'XCUIElementTypePickerWheel' : 'UIAPickerWheel'
+  end
+
   def action_sheet
     xcuitest? ? 'XCUIElementTypeActionSheet' : 'UIActionSheet'
   end

@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# rake ios[device/multi_touch]
+# rake "ios[device/multi_touch]"
 describe 'device/multi_touch' do
   def before_first
     screen.must_equal catalog
@@ -21,7 +21,7 @@ describe 'device/multi_touch' do
   # go back to the main page
   def go_back
     back
-    wait { !exists { id 'ArrowButton' } } # successfully transitioned back
+    wait { find_ele_by_predicate_include(class_name: 'XCUIElementTypeNavigationBar', value: 'UICatalog') }
   end
 
   t 'before_first' do
@@ -29,7 +29,7 @@ describe 'device/multi_touch' do
   end
 
   t 'pinch & zoom' do
-    wait { id('Images').click }
+    wait { id('Image View').click }
     # both of these appear to do nothing on iOS 8
     Appium::MultiTouch.zoom 200
     Appium::MultiTouch.pinch 75
