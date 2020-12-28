@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# rake android[android/element/alert]
+# rake "android[android/element/alert]"
 describe 'android/element/alert' do
   def open_alert
     # trigger the alert

@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# rake "android[install]"
 describe 'install' do
   # To Do: Blocked on https://github.com/appium/appium/issues/3032
   def pkg

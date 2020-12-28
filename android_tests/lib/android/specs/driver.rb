@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# rake android[driver]
+# rake "android[driver]"
 describe 'driver' do
   def sauce?
     ENV['UPLOAD_FILE'] && ENV['SAUCE_USERNAME']
@@ -73,7 +73,7 @@ describe 'driver' do
       caps_with_json['app'].must_equal expected_app
       caps_with_json['appPackage'].must_equal 'io.appium.android.apis'
       caps_with_json['appActivity'].must_equal 'io.appium.android.apis.ApiDemos'
-      caps_with_json['deviceName'].must_equal 'Nexus 7'
+      caps_with_json['deviceName'].must_equal 'Android emulator'
       caps_with_json['someCapability'].must_equal 'some_capability'
 
       actual[:caps][:platformName].must_equal 'android'

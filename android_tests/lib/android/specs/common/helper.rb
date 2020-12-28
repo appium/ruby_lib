@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# rake "android[common/helper]"
 describe 'common/helper' do
   wait_opts = { timeout: 0.2, interval: 0.2 } # max_wait, interval
 

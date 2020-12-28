@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# rake android[android/patch]
+# rake "android[android/patch]"
 describe 'android/patch.rb' do
   t 'type' do
     # nav to textfield

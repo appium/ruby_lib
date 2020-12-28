@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# rake android[common/device_touchaction]
+# rake "android[common/device_touchaction]"
 describe 'common/device_touchaction' do
   def before_first
     wait { text('Accessibility') }

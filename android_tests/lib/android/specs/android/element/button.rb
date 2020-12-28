@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# rake android['android/element/button']
+# rake "android[android/element/button]"
 describe 'android/element/button' do
   def before_first
     # nav to buttons activity
@@ -27,11 +27,7 @@ describe 'android/element/button' do
   end
 
   def fade_in
-    if automation_name_is_espresso?
-      'Fade in'
-    else
-      'FADE IN'
-    end
+    'Fade in'
   end
 
   t { before_first }

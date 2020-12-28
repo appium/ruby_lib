@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# rake "android[android/element/textfield]"
 describe 'android/element/textfield' do
   def must_raise_no_element
     proc { yield }.must_raise Selenium::WebDriver::Error::NoSuchElementError

@@ -1,11 +1,12 @@
 [caps]
 automationName = "uiautomator2"
 platformName = "android"
-deviceName = "Nexus 7"
+deviceName = "Android emulator"
 app = "../test_apps/api.apk"
 appPackage = "io.appium.android.apis"
 appActivity = "io.appium.android.apis.ApiDemos"
 some_capability = "some_capability"
+
 
 [appium_lib]
 sauce_username = ""
