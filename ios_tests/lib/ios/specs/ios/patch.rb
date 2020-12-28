@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# rake ios[ios/patch]
+# rake "ios[ios/patch]"
 describe 'ios/patch' do
   def before_first
     screen.must_equal catalog
@@ -28,11 +28,11 @@ describe 'ios/patch' do
   end
 
   t 'label' do
-    textfields[1].label.must_equal 'Rounded'
+    textfields[0].label.must_equal ''
   end
 
   t 'type' do
-    text('textfields').click # nav to textfield
+    text('text fields').click
 
     ele = first_textfield
 

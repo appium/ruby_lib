@@ -52,7 +52,7 @@ describe 'device/device' do
   t 'action_chain' do
     if automation_name_is_xcuitest?
       element = text('Buttons')
-      tap_once x: 0, y: 0, element: element
+      one_finger_tap x: 0, y: 0, element: element
     else
       Appium::TouchAction.new.press(element: text('Buttons')).perform
     end

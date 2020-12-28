@@ -8,6 +8,7 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 ### 1. Enhancements
 
 ### 2. Bug fixes
+- Rename `Appium::Ios::Xcuitest::Guesture#tap` to `Appium::Ios::Xcuitest::Guesture#one_finger_tap` to prevent conflicts with `tap` in Ruby
 
 ### 3. Deprecations
 

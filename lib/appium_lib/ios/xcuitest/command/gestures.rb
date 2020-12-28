@@ -121,10 +121,10 @@ module Appium
         #   Otherwise they should be calculated relatively to screen borders.
         #
         #   ```ruby
-        #   tap_once x: 100, y: 100
-        #   tap_once x: 100, y: 100, element: find_element(:accessibility_id, "some item")
+        #   one_finger_tap x: 100, y: 100
+        #   one_finger_tap x: 100, y: 100, element: find_element(:accessibility_id, "some item")
         #   ```
-        def tap_once(x:, y:, element: nil)
+        def one_finger_tap(x:, y:, element: nil)
           args = { x: x, y: y }
           args[:element] = element.ref if element
           @driver.execute_script 'mobile: tap', args

@@ -42,7 +42,7 @@ describe 'ios/xcuitest_gestures' do
 
   t 'tap' do
     element = text('controls')
-    tap(x: 0, y: 0, element: element)
+    one_finger_tap x: 0, y: 0, element: element
 
     back_click
 
