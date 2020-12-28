@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# rake ios[common/helper]
+# rake "ios[common/helper]"
 describe 'common/helper.rb' do
   def before_first
     screen.must_equal catalog
@@ -110,15 +110,19 @@ describe 'common/helper.rb' do
   end
 
   t 'xpaths' do
-    xpaths("//#{ui_ios.static_text}").length.must_equal 25
+    xpaths("//#{ui_ios.static_text}").length.must_equal 35
   end
 
   def uibutton_text
     'Buttons'
   end
 
+  def action_sheets
+    'Action Sheets'
+  end
+
   t 'ele_index' do
-    ele_index(ui_ios.static_text, 2).name.must_equal uibutton_text
+    ele_index(ui_ios.static_text, 2).name.must_equal action_sheets
   end
 
   # TODO: 'string_attr_exact'
@@ -169,8 +173,7 @@ describe 'common/helper.rb' do
 
   t 'find_eles_by_attr_include' do
     ele_count = find_eles_by_attr_include(ui_ios.static_text, :name, 'e').length
-    expected = automation_name_is_xcuitest? ? 20 : 19
-    ele_count.must_equal expected
+    ele_count.must_equal 31
   end
 
   t 'find_ele_by_predicate_include' do
@@ -182,7 +185,7 @@ describe 'common/helper.rb' do
   end
 
   t 'find_eles_by_predicate_include' do
-    find_eles_by_predicate_include(value: 'e').length.must_equal 21
+    find_eles_by_predicate_include(value: 'e').length.must_equal 49
   end
 
   t 'first_ele' do
@@ -190,7 +193,7 @@ describe 'common/helper.rb' do
   end
 
   t 'last_ele' do
-    expected = 'Transitions'
+    expected = 'Steppers'
 
     el = last_ele(ui_ios.static_text)
     el.text.must_equal expected
@@ -219,19 +222,18 @@ describe 'common/helper.rb' do
   end
 
   t 'find_eles_by_attr_include_length' do
-    find_eles_by_attr_include(ui_ios.static_text, 'name', 'Use').length.must_equal 7
+    find_eles_by_attr_include(ui_ios.static_text, 'name', 'AAPL').length.must_equal 16
   end
 
   t 'get_page_class' do
     act = get_page_class
-    act.split("\n").length.must_be :>=, 8
+    act.split("\n").length.must_be :>=, 7
+    act.must_include '25x XCUIElementTypeOther'
     act.must_include '24x XCUIElementTypeStaticText'
     act.must_include '12x XCUIElementTypeCell'
-    act.must_include '8x XCUIElementTypeOther'
-    act.must_include '2x XCUIElementTypeWindow'
-    act.must_include '1x XCUIElementTypeStatusBar'
     act.must_include '1x XCUIElementTypeTable'
     act.must_include '1x XCUIElementTypeNavigationBar'
+    act.must_include '1x XCUIElementTypeWindow'
     act.must_include '1x XCUIElementTypeApplication'
   end
 
