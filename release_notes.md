@@ -1,3 +1,14 @@
+#### v11.1.0 2020-12-29
+
+- [bc3da9b](https://github.com/appium/ruby_lib/commit/bc3da9bc1ee58d5e96811b72f3ed737ed0e9c401) Release 11.1.0
+- [3c33cd6](https://github.com/appium/ruby_lib/commit/3c33cd639f8ce55fb81c5ae2116a863407529599) ci: Set up CI with Azure Pipelines (#895)
+- [ecee089](https://github.com/appium/ruby_lib/commit/ecee08981f935295e6413cd98dea4366cbc7bc69) feat: work with Ruby 3 (#893)
+- [bb3d715](https://github.com/appium/ruby_lib/commit/bb3d715e39509ac091b8f493cca42eb4fe8fd5bf) feat: work with Ruby 3 (#892)
+- [eb5cee7](https://github.com/appium/ruby_lib/commit/eb5cee7a926b90bbedd6aa28f013a0b3c5f38510) chore: Update rubocop requirement from = 1.6.1 to = 1.7.0 (#891)
+- [219181d](https://github.com/appium/ruby_lib/commit/219181d80f3b86999706f90a68996945fdc7b1d0) fix: rubocop (#890)
+- [334b791](https://github.com/appium/ruby_lib/commit/334b791a3c4420598e3e832023aa1a16af92492f) chore: Update fakefs requirement from ~> 0.13.0 to ~> 1.3.0 (#888)
+
+
 #### v11.0.0 2020-12-19
 
 - [b4313b0](https://github.com/appium/ruby_lib/commit/b4313b09e62dd22bb95c2e0bc6edd296c7ece7b4) Release 11.0.0
