@@ -1,3 +1,10 @@
+#### v11.2.0 2021-01-25
+
+- [06f2e54](https://github.com/appium/ruby_lib/commit/06f2e54b4b55df25e624272b5a2cd7b23a000298) Release 11.2.0
+- [8489c32](https://github.com/appium/ruby_lib/commit/8489c32dbb9c2b499af82e874aa532f2c9f63d8d) chore: Update rubocop requirement from = 1.8.0 to = 1.8.1 (#897)
+- [eba6a68](https://github.com/appium/ruby_lib/commit/eba6a68b93f010101b3713fef162c23e6c75b330) chore: Update rubocop requirement from = 1.7.0 to = 1.8.0 (#896)
+
+
 #### v11.1.0 2020-12-29
 
 - [bc3da9b](https://github.com/appium/ruby_lib/commit/bc3da9bc1ee58d5e96811b72f3ed737ed0e9c401) Release 11.1.0
