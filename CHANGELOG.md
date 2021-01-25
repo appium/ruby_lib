@@ -9,7 +9,7 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 
 ### 2. Bug fixes
 
-## 11.1.0 - 2020-12-29
+## 11.1.0 - 2020-12-29 (11.2.0 is the same as this version)
 
 Support Ruby 3
 
