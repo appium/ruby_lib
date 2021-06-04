@@ -56,12 +56,10 @@ module Appium
       rid  = resource_id(text, "new UiSelector().resourceId(#{text})")
       args = rid.empty? ? ["new UiSelector().textContains(#{text})", "new UiSelector().descriptionContains(#{text})"] : [rid]
       args.each_with_index do |arg, index|
-        begin
-          elem = find_element :uiautomator, scroll_uiselector(arg, scrollable_index)
-          return elem
-        rescue StandardError => e
-          raise e if index == args.size - 1
-        end
+        elem = find_element :uiautomator, scroll_uiselector(arg, scrollable_index)
+        return elem
+      rescue StandardError => e
+        raise e if index == args.size - 1
       end
     end
 
@@ -74,12 +72,10 @@ module Appium
       rid  = resource_id(text, "new UiSelector().resourceId(#{text})")
       args = rid.empty? ? ["new UiSelector().text(#{text})", "new UiSelector().description(#{text})"] : [rid]
       args.each_with_index do |arg, index|
-        begin
-          elem = find_element :uiautomator, scroll_uiselector(arg, scrollable_index)
-          return elem
-        rescue StandardError => e
-          raise e if index == args.size - 1
-        end
+        elem = find_element :uiautomator, scroll_uiselector(arg, scrollable_index)
+        return elem
+      rescue StandardError => e
+        raise e if index == args.size - 1
       end
     end
   end # module Android

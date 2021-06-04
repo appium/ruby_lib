@@ -156,18 +156,16 @@ module Appium
 
       target_modules.each do |const|
         # noinspection RubyResolve
-        # rubocop:disable Style/MultilineIfModifier
         driver.public_methods(false).each do |m|
+          # override unless there's an existing method with matching arity
+          next if const.respond_to?(m) && const.method(m).arity == driver.method(m).arity
+
           const.send(:define_singleton_method, m) do |*args, &block|
-            begin
-              super(*args, &block) # promote.rb
-            rescue NoMethodError, ArgumentError
-              driver.send m, *args, &block if driver.respond_to?(m)
-            end
-            # override unless there's an existing method with matching arity
-          end unless const.respond_to?(m) && const.method(m).arity == driver.method(m).arity
+            super(*args, &block) # promote.rb
+          rescue NoMethodError, ArgumentError
+            driver.send m, *args, &block if driver.respond_to?(m)
+          end
         end
-        # rubocop:enable Style/MultilineIfModifier
       end
     end
 
@@ -210,23 +208,21 @@ module Appium
             end
 
             define_method method do |*args, &block|
-              begin
-                # Prefer existing method.
-                # super will invoke method missing on driver
-                super(*args, &block)
+              # Prefer existing method.
+              # super will invoke method missing on driver
+              super(*args, &block)
 
-                # minitest also defines a name method,
-                # so rescue argument error
-                # and call the name method on $driver
-              rescue NoMethodError, ArgumentError
-                if args.size == 1 && args.first.is_a?(Hash)
-                  # To prevent warnings by keyword arguments (for Ruby 2.7 and 3)
-                  driver.send method, **args.first, &block if driver.respond_to?(method)
-                else
-                  ::Appium::Logger.warn "Should fix this '#{args}' for Ruby 2.7 (and 3)" if args.first.is_a?(Hash)
+              # minitest also defines a name method,
+              # so rescue argument error
+              # and call the name method on $driver
+            rescue NoMethodError, ArgumentError
+              if args.size == 1 && args.first.is_a?(Hash)
+                # To prevent warnings by keyword arguments (for Ruby 2.7 and 3)
+                driver.send method, **args.first, &block if driver.respond_to?(method)
+              else
+                ::Appium::Logger.warn "Should fix this '#{args}' for Ruby 2.7 (and 3)" if args.first.is_a?(Hash)
 
-                  driver.send method, *args, &block if driver.respond_to?(method)
-                end
+                driver.send method, *args, &block if driver.respond_to?(method)
               end
             end
           end

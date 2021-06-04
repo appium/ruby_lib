@@ -202,16 +202,14 @@ describe 'driver' do
 
     # simple integration sanity test to check for unexpected exceptions
     t 'set_location' do
-      begin
-        set_location latitude: 55, longitude: -72, altitude: 33
-      rescue Selenium::WebDriver::Error::UnknownError => e
-        # on android this method is expected to raise with this message when running
-        # on a regular device, or on genymotion.
-        # error could be many messages, including:
-        # ERROR running Appium command: port should be a number or string
-        # ERROR running Appium command: port should be > 0 and < 65536
-        raise unless e.message.include?('ERROR running Appium command: port should be')
-      end
+      set_location latitude: 55, longitude: -72, altitude: 33
+    rescue Selenium::WebDriver::Error::UnknownError => e
+      # on android this method is expected to raise with this message when running
+      # on a regular device, or on genymotion.
+      # error could be many messages, including:
+      # ERROR running Appium command: port should be a number or string
+      # ERROR running Appium command: port should be > 0 and < 65536
+      raise unless e.message.include?('ERROR running Appium command: port should be')
     end
 
     # settings

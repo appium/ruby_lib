@@ -25,19 +25,17 @@ module Appium
           w_s = window_rect
 
           (1..30).each do |_count|
-            begin
-              action
-                .move_to_location(w_s.width / 2, (w_s.height * 2) / 5) # pointer based magic number
-                .pointer_down(:left)
-                .move_to_location(0, w_s.height / 5)
-                .release
-                .perform
-              sleep 1 # we must wait finish scrolling
+            action
+              .move_to_location(w_s.width / 2, (w_s.height * 2) / 5) # pointer based magic number
+              .pointer_down(:left)
+              .move_to_location(0, w_s.height / 5)
+              .release
+              .perform
+            sleep 1 # we must wait finish scrolling
 
-              return text(text)
-            rescue StandardError => e
-              err = e
-            end
+            return text(text)
+          rescue StandardError => e
+            err = e
           end
 
           raise err
@@ -52,19 +50,17 @@ module Appium
           w_s = window_rect
 
           (1..30).each do |_count|
-            begin
-              action
-                .move_to_location(w_s.width / 2, (w_s.height * 2) / 5) # pointer based magic number
-                .pointer_down(:left)
-                .move_to_location(0, w_s.height / 5)
-                .release
-                .perform
-              sleep 1 # we must wait finish scrolling
+            action
+              .move_to_location(w_s.width / 2, (w_s.height * 2) / 5) # pointer based magic number
+              .pointer_down(:left)
+              .move_to_location(0, w_s.height / 5)
+              .release
+              .perform
+            sleep 1 # we must wait finish scrolling
 
-              return text_exact(text)
-            rescue StandardError => e
-              err = e
-            end
+            return text_exact(text)
+          rescue StandardError => e
+            err = e
           end
 
           raise err
