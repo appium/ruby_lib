@@ -244,7 +244,7 @@ describe 'driver' do
 
     # any element
     t 'find_element' do
-      find_element(:class, ui_ios.static_text).class.must_equal Selenium::WebDriver::Element
+      find_element(:class, ui_ios.static_text).class.must_equal ::Appium::Core::Element
     end
 
     # settings

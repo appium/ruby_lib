@@ -35,16 +35,9 @@ $ appium
 ```
 
 ## Install / Upgrade
-- Update rubygems and bundler
-```bash
-$ gem update --system
-$ gem update bundler
-```
 
-- Install the latest gem release
 ```bash
-gem uninstall -aIx appium_lib
-gem install --no-rdoc --no-ri appium_lib
+gem install appium_lib
 ```
 
 ## [Sauce Labs env vars](https://github.com/appium/ruby_lib/blob/master/lib/appium_lib/sauce_labs.rb)

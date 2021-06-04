@@ -196,7 +196,7 @@ describe 'driver' do
     # any element
     t 'find_element' do
       wait do
-        find_element(:class_name, 'android.widget.TextView').class.must_equal Selenium::WebDriver::Element
+        find_element(:class_name, 'android.widget.TextView').class.must_equal ::Appium::Core::Element
       end
     end
 
