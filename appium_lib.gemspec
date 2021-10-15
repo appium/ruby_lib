@@ -1,7 +1,7 @@
 require_relative 'lib/appium_lib/version'
 
 Gem::Specification.new do |s|
-  s.required_ruby_version = '>= 2.5'
+  s.required_ruby_version = '>= 2.6'
 
   s.name          = 'appium_lib'
   s.version       = Appium::VERSION
