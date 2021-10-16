@@ -21,9 +21,11 @@ We can avoid the class driver with current `ruby_lib`, but if you'd like to impl
 # Setup
 ## Requirement
 - [Appium](https://github.com/appium/appium#requirements)
-- Ruby: 2.5+
+- Ruby: 2.6+
 
 ### Ruby Lib and Appium
+
+- Ruby library version over `12.0.0` is based on Selenium v4
 - Ruby library version over `9.8.0` requires Appium over `1.8`
 - Ruby library version under `9.7.5` can work with Appium under `1.7`
 
