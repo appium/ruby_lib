@@ -29,7 +29,7 @@ describe 'common/patch.rb' do
 
   # Attributes are busted in Android.
   # Blocked on https://github.com/appium/appium/issues/628
-  describe 'Selenium::WebDriver::Element methods' do
+  describe 'Appium::Core::Element methods' do
     # TODO: t 'value' do; end
 
     t 'name' do
@@ -42,23 +42,6 @@ describe 'common/patch.rb' do
       loc = first_text.location_rel($driver)
       loc.x.class.must_equal String
       loc.y.class.must_equal String
-    end
-  end
-
-  describe 'common patch' do
-    # By default, the webdriver gem will return message instead of origValue
-    # {"message":"An unknown server-side error occurred while processing the command.","origValue":"Strategy id is not valid."}
-    t 'error_message' do
-      value = ''
-      begin
-        set_wait 0
-        find_element(:css, 'ok')
-      rescue StandardError => e
-        value = e.message
-      ensure
-        set_wait
-      end
-      value.must_equal "Locator Strategy 'css selector' is not supported for this session"
     end
   end
 end

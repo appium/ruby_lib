@@ -1,15 +1,12 @@
 [caps]
 platformName = "ios"
-platformVersion = "14.2"
+platformVersion = "14.5"
 deviceName ="iPhone 11"
 automationName = 'XCUITest'
 app = "../test_apps/UICatalog.app.zip"
 someCapability = "some_capability"
 
 [appium_lib]
-sauce_username = ""
-sauce_access_key = ""
-sauce_endpoint = ""
 wait = 30
 wait_timeout = 20
 wait_interval = 1

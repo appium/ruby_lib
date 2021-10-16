@@ -20,7 +20,7 @@
 describe 'common/patch' do
   # Attributes are busted in Android.
   # Blocked on https://github.com/appium/appium/issues/628
-  describe 'Selenium::WebDriver::Element methods' do
+  describe 'Appium::Core::Element methods' do
     # Android supports exactly two string Attributes
     # .name and .text
     # https://github.com/appium/appium/blob/ea3450e7f78d1794bab42fa396a387e7b86fd3b3/android/bootstrap/src/io/appium/android/bootstrap/handler/GetAttribute.java#L43
@@ -60,14 +60,14 @@ describe 'common/patch' do
     end
 
     t 'id success' do
-      if !automation_name_is_uiautomator2?
+      if automation_name_is_uiautomator2?
         wait do
-          el = id 'autocomplete_3_button_7' # <string name="autocomplete_3_button_7">Text</string>
+          el = text 'text' # <string name="autocomplete_3_button_7">Text</string>
           el.text.must_equal 'Text'
         end
       else
         wait do
-          el = text 'text' # <string name="autocomplete_3_button_7">Text</string>
+          el = id 'autocomplete_3_button_7' # <string name="autocomplete_3_button_7">Text</string>
           el.text.must_equal 'Text'
         end
       end

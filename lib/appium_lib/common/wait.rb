@@ -42,7 +42,7 @@ module Appium
     #     wait_true(20) { button_exact('Back') }.click
     #
     def wait_true(opts = {})
-      opts = opts.is_a?(Numeric) ? { timeout: opts } : opts
+      opts = { timeout: opts } if opts.is_a? Numeric
 
       if opts.is_a? Hash
         opts.empty? ? @core.wait_true { yield } : @core.wait_true(**opts) { yield }
@@ -71,8 +71,7 @@ module Appium
     #     wait(20) { button_exact('Back') }.click
     #
     def wait(opts = {})
-      opts = opts.is_a?(Numeric) ? { timeout: opts } : opts
-
+      opts = { timeout: opts } if opts.is_a? Numeric
       if opts.is_a? Hash
         opts.empty? ? @core.wait { yield } : @core.wait(**opts) { yield }
       else

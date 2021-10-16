@@ -151,17 +151,9 @@ module Appium
     # @param opts [Object] A hash containing various options.
     # @param global_driver [Bool] A bool require global driver before initialize.
     # @return [Driver]
-    def initialize(opts = {}, global_driver = nil)
-      # TODO: set `global_driver = false` by default in the future.
+    def initialize(opts = {}, global_driver = false)
       # Capybara can't put `global_driver` as the 2nd argument.
       global_driver = opts.delete :global_driver if global_driver.nil?
-
-      if global_driver.nil?
-        warn '[DEPRECATION] Appium::Driver.new(opts) will not generate global driver by default.' \
-                 'If you would like to generate the global driver dy default, ' \
-                 'please initialise driver with Appium::Driver.new(opts, true)'
-        global_driver = true # if global_driver is nil, then global_driver must be default value.
-      end
 
       $driver&.driver_quit if global_driver
 
@@ -325,27 +317,7 @@ module Appium
       !@core.automation_name.nil? && @core.automation_name == :xcuitest
     end
 
-    # Get the dialect value whether current driver is OSS or W3C
-    #
-    # @return [:oss | :w3c]
-    #
-    #  @example
-    #
-    #      if dialect == :w3c
-    #        driver.action
-    #              .move_to_location(500, 500).pointer_down(:left)
-    #              .move_to_location(0, 700)
-    #              .release.perform
-    #      else
-    #        action = TouchAction.new(driver).press(x: 500, y: 500).move_to(500, 700).release
-    #        action.perform
-    #      end
-    #
-    def dialect
-      @driver.dialect
-    end
-
-    # An entry point to chain W3C actions. Returns `TouchAction.new` if it works as MJSONWP instead of W3C action.
+    # An entry point to chain W3C actions
     # Read https://www.rubydoc.info/github/appium/ruby_lib_core/Appium/Core/Base/Bridge/W3C#action-instance_method
     #
     # @return [TouchAction|Selenium::WebDriver::PointerActions]
@@ -356,12 +328,7 @@ module Appium
     #     action.click(element).perform # The `click` is a part of `PointerActions`
     #
     def action
-      if @driver.dialect != :w3c
-        ::Appium::Logger.info('Calls TouchAction instead of W3C actions for MJSONWP module')
-        TouchAction.new($driver || @driver)
-      else
-        @driver.action
-      end
+      @driver.action
     end
 
     # Returns the server's version info

@@ -45,7 +45,7 @@ describe 'common/device' do
   end
 
   def must_return_element(element)
-    element.class.must_equal Selenium::WebDriver::Element
+    element.class.must_equal ::Appium::Core::Element
   end
 
   t 'press_keycode' do
