@@ -31,7 +31,7 @@ describe 'device/touch_actions' do
     start_y = picker_rect.y + picker_rect.height / 2
 
     args = { x: start_x, y: start_y }
-    args[:element] = element.ref if element
+    args[:element] = element.id if element
     execute_script 'mobile: tap', args
 
     Appium::TouchAction.new.swipe(start_x: start_x, start_y: start_y, end_x: 0, end_y: - 50).perform

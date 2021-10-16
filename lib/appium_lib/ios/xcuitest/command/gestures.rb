@@ -24,7 +24,7 @@ module Appium
         #   ```
         def swipe(direction:, element: nil)
           args = { direction: direction }
-          args[:element] = element.ref if element
+          args[:element] = element.id if element
 
           @driver.execute_script 'mobile: swipe', args
         end
@@ -47,7 +47,7 @@ module Appium
           return 'Set "up", "down", "left" or "right" for :direction' unless %w(up down left right).include?(direction)
 
           args = { direction: direction }
-          args[:element] = element.ref if element
+          args[:element] = element.id if element
           args[:distance] = distance if distance
           args[:name] = name if name
           args[:toVisible] = to_visible if to_visible
@@ -66,7 +66,7 @@ module Appium
         #   ```
         def pinch(scale:, velocity: 1.0, element: nil)
           args = { scale: scale, velocity: velocity }
-          args[:element] = element.ref if element
+          args[:element] = element.id if element
 
           @driver.execute_script 'mobile: pinch', args
         end
@@ -82,7 +82,7 @@ module Appium
         def double_tap(x: nil, y: nil, element: nil)
           return 'Set x, y or element' if (x.nil? || y.nil?) && element.nil?
 
-          args = element.nil? ? { x: x, y: y } : { element: element.ref }
+          args = element.nil? ? { x: x, y: y } : { element: element.id }
           @driver.execute_script 'mobile: doubleTap', args
         end
 
@@ -99,7 +99,7 @@ module Appium
         def touch_and_hold(x: nil, y: nil, element: nil, duration: 1.0)
           return 'Set x, y or element' if (x.nil? || y.nil?) && element.nil?
 
-          args = element.nil? ? { x: x, y: y } : { element: element.ref }
+          args = element.nil? ? { x: x, y: y } : { element: element.id }
           args[:duration] = duration
           @driver.execute_script 'mobile: touchAndHold', args
         end
@@ -110,7 +110,7 @@ module Appium
         #   two_finger_tap element: find_element(:accessibility_id, "some item")
         #   ```
         def two_finger_tap(element:)
-          args = { element: element.ref }
+          args = { element: element.id }
           @driver.execute_script 'mobile: twoFingerTap', args
         end
 
@@ -126,7 +126,7 @@ module Appium
         #   ```
         def one_finger_tap(x:, y:, element: nil)
           args = { x: x, y: y }
-          args[:element] = element.ref if element
+          args[:element] = element.id if element
           @driver.execute_script 'mobile: tap', args
         end
 
@@ -146,7 +146,7 @@ module Appium
         #   ```
         def drag_from_to_for_duration(from_x:, from_y:, to_x:, to_y:, duration: 1.0, element: nil)
           args = { fromX: from_x, fromY: from_y, toX: to_x, toY: to_y, duration: duration }
-          args[:element] = element.ref if element
+          args[:element] = element.id if element
           @driver.execute_script 'mobile: dragFromToForDuration', args
         end
         # rubocop:enable Metrics/ParameterLists
@@ -164,7 +164,7 @@ module Appium
         def select_picker_wheel(element:, order:, offset: nil)
           return 'Set "next" or "previous" for :order' unless %w(next previous).include?(order)
 
-          args = { element: element.ref, order: order }
+          args = { element: element.id, order: order }
           args[:offset] = offset if offset
           @driver.execute_script 'mobile: selectPickerWheelValue', args
         end

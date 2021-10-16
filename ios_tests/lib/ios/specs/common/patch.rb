@@ -44,21 +44,4 @@ describe 'common/patch.rb' do
       loc.y.class.must_equal String
     end
   end
-
-  describe 'common patch' do
-    # By default, the webdriver gem will return message instead of origValue
-    # {"message":"An unknown server-side error occurred while processing the command.","origValue":"Strategy id is not valid."}
-    t 'error_message' do
-      value = ''
-      begin
-        set_wait 0
-        find_element(:css, 'ok')
-      rescue StandardError => e
-        value = e.message
-      ensure
-        set_wait
-      end
-      value.must_equal "Locator Strategy 'css selector' is not supported for this session"
-    end
-  end
 end

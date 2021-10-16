@@ -22,19 +22,12 @@ describe 'driver' do
     before_first
   end
 
-  def sauce?
-    ENV['UPLOAD_FILE'] && ENV['SAUCE_USERNAME']
-  end
-
   t 'unicode defaults' do
     data = File.read File.expand_path('../../../data/unicode.txt', __dir__)
     data.strip.must_equal 174.chr('UTF-8')
   end
 
   t 'load_settings' do
-    # skip this test if we're using Sauce
-    # the storage API doesn't have an on disk file
-    skip if sauce?
     appium_txt = File.join(Dir.pwd, 'appium.txt')
     opts       = Appium.load_settings file: appium_txt, verbose: true
 
@@ -56,9 +49,6 @@ describe 'driver' do
         export_session:      true,
         export_session_path: '/tmp/appium_lib_session',
         default_wait:        30,
-        sauce_username:      nil,
-        sauce_access_key:    nil,
-        sauce_endpoint:      'ondemand.saucelabs.com:443/wd/hub',
         port:                4723,
         device:              :ios,
         debug:               true,
@@ -70,7 +60,7 @@ describe 'driver' do
       # actual[:caps].to_json send to Appium server
       caps_with_json = JSON.parse(actual[:caps].to_json)
       caps_with_json['platformName'].must_equal 'ios'
-      caps_with_json['platformVersion'].must_equal '14.2'
+      caps_with_json['platformVersion'].must_equal '14.5'
       caps_with_json['app'].must_equal expected_app
       caps_with_json['automationName'].must_equal 'XCUITest'
       caps_with_json['deviceName'].must_equal 'iPhone 11'
@@ -118,40 +108,7 @@ describe 'driver' do
 
     t 'app_path attr' do
       apk_name = File.basename driver_attributes[:caps][:app]
-
-      if sauce?
-        apk_name.must_equal 'sauce-storage:UICatalog6.1.app.zip'
-      else
-        apk_name.must_equal 'UICatalog.app.zip'
-      end
-    end
-
-    # Only used for Sauce Labs
-    t 'app_name attr' do
-      name_attr = driver_attributes[:caps][:name]
-      if sauce?
-        name_attr.must_equal 'appium_lib_ios'
-      else
-        name_attr.must_be_nil
-      end
-    end
-
-    t 'sauce_username attr' do
-      sauce_username = driver_attributes[:sauce_username]
-      if sauce?
-        sauce_username.must_equal 'appiumci'
-      else
-        sauce_username.must_be_nil
-      end
-    end
-
-    t 'sauce_access_key attr' do
-      sauce_access_key = driver_attributes[:sauce_access_key]
-      if sauce?
-        sauce_access_key.must_match(/\h{8}-\h{4}-\h{4}-\h{4}-\h{12}/)
-      else
-        sauce_access_key.must_be_nil
-      end
+      apk_name.must_equal 'UICatalog.app.zip'
     end
   end
 
@@ -168,11 +125,7 @@ describe 'driver' do
 
     t 'server_version' do
       server_version = appium_server_version['build']['version']
-      if sauce?
-        server_version.must_match 'Sauce OnDemand'
-      else
-        server_version.must_match(/(\d+)\.(\d+).(\d+)/)
-      end
+      server_version.must_match(/(\d+)\.(\d+).(\d+)/)
     end
 
     t 'client_version' do
