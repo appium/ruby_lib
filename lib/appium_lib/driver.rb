@@ -151,17 +151,9 @@ module Appium
     # @param opts [Object] A hash containing various options.
     # @param global_driver [Bool] A bool require global driver before initialize.
     # @return [Driver]
-    def initialize(opts = {}, global_driver = nil)
-      # TODO: set `global_driver = false` by default in the future.
+    def initialize(opts = {}, global_driver = false)
       # Capybara can't put `global_driver` as the 2nd argument.
       global_driver = opts.delete :global_driver if global_driver.nil?
-
-      if global_driver.nil?
-        warn '[DEPRECATION] Appium::Driver.new(opts) will not generate global driver by default.' \
-                 'If you would like to generate the global driver dy default, ' \
-                 'please initialise driver with Appium::Driver.new(opts, true)'
-        global_driver = true # if global_driver is nil, then global_driver must be default value.
-      end
 
       $driver&.driver_quit if global_driver
 

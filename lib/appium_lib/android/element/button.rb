@@ -98,10 +98,10 @@ module Appium
 
       if button_index && image_button_index
         "new UiSelector().className(#{BUTTON}).instance(#{button_index});" \
-        "new UiSelector().className(#{IMAGE_BUTTON}).instance(#{image_button_index});"
+          "new UiSelector().className(#{IMAGE_BUTTON}).instance(#{image_button_index});"
       else
         "new UiSelector().className(#{BUTTON});" \
-        "new UiSelector().className(#{IMAGE_BUTTON});"
+          "new UiSelector().className(#{IMAGE_BUTTON});"
       end
     end
 

@@ -234,11 +234,11 @@ module Appium
 
       if class_name == '*'
         return "//*[contains(translate(@text,'#{value.upcase}', '#{value}'), '#{value}')" \
-          " or contains(translate(@content-desc,'#{value.upcase}', '#{value}'), '#{value}')" + r_id + ']'
+               " or contains(translate(@content-desc,'#{value.upcase}', '#{value}'), '#{value}')" + r_id + ']'
       end
 
       "//#{class_name}[contains(translate(@text,'#{value.upcase}', '#{value}'), '#{value}')" \
-        " or contains(translate(@content-desc,'#{value.upcase}', '#{value}'), '#{value}')" + r_id + ']'
+      " or contains(translate(@content-desc,'#{value.upcase}', '#{value}'), '#{value}')" + r_id + ']'
     end
 
     # Returns a string that matches the first element that contains value
