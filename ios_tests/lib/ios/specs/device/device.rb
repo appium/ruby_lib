@@ -54,7 +54,7 @@ describe 'device/device' do
       element = text('Buttons')
       one_finger_tap x: 0, y: 0, element: element
     else
-      Appium::TouchAction.new.press(element: text('Buttons')).perform
+      action.click(text('Buttons')).perform
     end
 
     wait { button 'UICatalog' } # successfully transitioned to buttons page
@@ -62,24 +62,7 @@ describe 'device/device' do
   end
 
   t 'swipe' do
-    touch_action = Appium::TouchAction.new.swipe(start_x: 75, start_y: 500,
-                                                 end_x: 75, end_y: 20, duration: 500).perform
-    touch_action.actions.must_equal []
-
-    touch_action = Appium::TouchAction.new.swipe(start_x: 75, start_y: 500, end_x: 75, end_y: 20, duration: 500)
-
-    touch_action.actions[0][:action].must_equal :press
-    touch_action.actions[0][:options].must_equal(x: 75, y: 500)
-
-    touch_action.actions[1][:action].must_equal :wait,
-                                                touch_action.actions[1][:options].must_equal(ms: 500)
-
-    touch_action.actions[2][:action].must_equal :moveTo
-    touch_action.actions[2][:options].must_equal(x: 75, y: 20)
-
-    touch_action.actions[3][:action].must_equal :release
-
-    touch_action.perform
-    touch_action.actions.must_equal []
+    action.move_to_location(75, 500).pointer_down(:left)
+          .move_to_location(75, 20).release.perform
   end
 end
