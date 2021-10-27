@@ -82,8 +82,6 @@ describe 'common/helper.rb' do
     end
   end
 
-  # t 'id' # id is for Selendroid
-
   t 'back' do
     # start page
     tag(ui_ios.navbar).name.must_equal 'UICatalog'

@@ -7,7 +7,20 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 
 ### 1. Enhancements
 
-### 2. Bug fixes
+- Update base [ruby_lib_core client](https://github.com/appium/ruby_lib_core) to v5
+    - Update base selenium webdriver version to `4.0.0`
+        - Support only W3C spec as following Selenium v4 client
+        - Support Ruby 2.6+
+    - `element.id` returns the element id instead of `element.ref`. `element.ref` now returns an array.
+    - Removed `forceMjsonwp` to send only MJSONWP capabilities since Selenium cleint v4 no longer supports MJSONWP
+    - No longer set default `timeouts` as `0`. ruby_lib_core calls `/timeouts` endpoint only when `appium_lib: { wait: 5 }` is provided explicitly
+    - Raises `::Appium::Core::Error::ArgumentError` instead of `ArgumentError` for this library specific argument errors
+
+### 2. Deprecations
+- `TouchAction` and `MultiTouch` are deprecated
+    - Please use W3C actions instead https://github.com/appium/ruby_lib/blob/master/docs/w3c.md
+    - Other examples: https://github.com/appium/ruby_lib/pull/909
+- Removed Selendroid related methods
 
 ## 11.1.0 - 2020-12-29 (11.2.0 is the same as this version)
 
@@ -105,7 +118,7 @@ This change has a breaking change about implicit wait.
 - **Breaking changes**
     - Set implicit wait zero by default following [WebDriver spec in Selenium](https://www.seleniumhq.org/docs/04_webdriver_advanced.jsp)
         - The change potentially break your `find_element/s`
-        - You can wrap it with `wait` method to avoid the error explicitly 
+        - You can wrap it with `wait` method to avoid the error explicitly
         - Or you also can configure `wait: 20` as `appium_lib` capability to keep the behaviour
 - [Experimental]
     - Add `direct_connect` capability
@@ -162,7 +175,7 @@ This change has a breaking change about implicit wait.
       { platformName: :windows,
         app: 'relative/path/to/app'
       }
-    } # `:app` will be alsolute path to the `:app` if the path exists    
+    } # `:app` will be alsolute path to the `:app` if the path exists
     ```
 
 ### 3. Deprecations
@@ -312,7 +325,7 @@ This change has a breaking change about implicit wait.
 ## v9.9.0
 ### 1. Enhancements
 - Bump the core library to 1.3.0
-    - The change have one breaking change for `start_recording_screen`(Android) 
+    - The change have one breaking change for `start_recording_screen`(Android)
     - Read `docs/migration.md`
 
 ### 2. Bug fixes

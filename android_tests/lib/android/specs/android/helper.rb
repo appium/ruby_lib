@@ -18,7 +18,6 @@ describe 'android/helper' do
     wait { tags('android.widget.TextView').length.must_equal 13 }
   end
 
-  # t 'get_selendroid_inspect' # only works on selendroid
   t 'get_page_class' do
     # digit values change based on screen size
     # larger screens have more elements

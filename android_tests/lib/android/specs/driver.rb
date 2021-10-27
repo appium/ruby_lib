@@ -32,7 +32,7 @@ describe 'driver' do
       set_wait
     end
 
-    # attr_reader :default_wait, :app_path, :app_name, :selendroid,
+    # attr_reader :default_wait, :app_path, :app_name,
     #            :app_package, :app_activity, :app_wait_activity,
     #            :sauce_username, :sauce_access_key, :port, :os, :debug
     t 'default_wait attr' do
