@@ -47,9 +47,9 @@ describe 'common/device_touchaction' do
     wait { text_exact('Bouncing Balls').click }
 
     driver.action
-      .move_to_location(0.75, 0.25).pointer_down(:left)
-      .move_to_location(0.75, 50)
-      .release.perform
+          .move_to_location(0.75, 0.25).pointer_down(:left)
+          .move_to_location(0.75, 50)
+          .release.perform
 
     2.times { back }
     wait { text_exact 'NFC' }
@@ -62,21 +62,21 @@ describe 'common/device_touchaction' do
 
     # multiple action chains
     f1 = driver.action.add_pointer_input(:touch, 'finger1')
-    f1.create_pointer_move(duration: 1, x: 200, y: 500,
-                      origin: ::Selenium::WebDriver::Interactions::PointerMove::VIEWPORT)
+    f1.create_pointer_move(duration: 0.5, x: 500, y: 800,
+                           origin: ::Selenium::WebDriver::Interactions::PointerMove::VIEWPORT)
     f1.create_pointer_down(:left)
     f1.create_pause(0.5)
-    f1.create_pointer_move(duration: 1, x: 200, y: 200,
-                      origin: ::Selenium::WebDriver::Interactions::PointerMove::VIEWPORT)
+    f1.create_pointer_move(duration: 3, x: 500, y: 700,
+                           origin: ::Selenium::WebDriver::Interactions::PointerMove::VIEWPORT)
     f1.create_pointer_up(:left)
 
     f2 = driver.action.add_pointer_input(:touch, 'finger2')
-    f2.create_pointer_move(duration: 1, x: 200, y: 500,
-                      origin: ::Selenium::WebDriver::Interactions::PointerMove::VIEWPORT)
+    f2.create_pointer_move(duration: 0.5, x: 500, y: 800,
+                           origin: ::Selenium::WebDriver::Interactions::PointerMove::VIEWPORT)
     f2.create_pointer_down(:left)
-    f2.create_pause(0.5)
-    f2.create_pointer_move(duration: 1, x: 200, y: 800,
-                      origin: ::Selenium::WebDriver::Interactions::PointerMove::VIEWPORT)
+    f1.create_pause(0.5)
+    f2.create_pointer_move(duration: 3, x: 500, y: 900,
+                           origin: ::Selenium::WebDriver::Interactions::PointerMove::VIEWPORT)
     f2.create_pointer_up(:left)
 
     driver.perform_actions [f1, f2]

@@ -62,7 +62,7 @@ describe 'device/device' do
   end
 
   t 'swipe' do
-    action.move_to_location(75, 500).pointer_down(:left).
-      move_to_location(75, 20).release.perform
+    action.move_to_location(75, 500).pointer_down(:left)
+          .move_to_location(75, 20).release.perform
   end
 end

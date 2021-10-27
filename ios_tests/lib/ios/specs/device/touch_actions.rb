@@ -36,11 +36,10 @@ describe 'device/touch_actions' do
 
     puts window_rect
 
-    action.move_to_location(start_x, start_y).pointer_down(:left).move_to_location(start_x, start_y - 10).pointer_up(:left).perform
-
+    action.move_to_location(start_x, start_y).pointer_down(:left)
+          .move_to_location(start_x, start_y - 10).pointer_up(:left).perform
 
     ele_index(ui_ios.picker_wheel, 1).text.must_equal '70'
-
   end
 
   t 'after_last' do
