@@ -27,15 +27,20 @@ describe 'device/touch_actions' do
     ele_index(ui_ios.picker_wheel, 1).text.must_equal '65'
     picker = ele_index(ui_ios.picker_wheel, 1)
     picker_rect = picker.rect
-    start_x = picker_rect.x + picker_rect.width / 2
-    start_y = picker_rect.y + picker_rect.height / 2
+    start_x = picker_rect.x + picker_rect.width / 2 + 50
+    start_y = picker_rect.y + picker_rect.height / 2 + 60
 
     args = { x: start_x, y: start_y }
-    args[:element] = element.id if element
+    args[:element] = picker.id if picker
     execute_script 'mobile: tap', args
 
-    Appium::TouchAction.new.swipe(start_x: start_x, start_y: start_y, end_x: 0, end_y: - 50).perform
-    ele_index(ui_ios.static_text, 1).text.must_equal '70'
+    puts window_rect
+
+    action.move_to_location(start_x, start_y).pointer_down(:left).move_to_location(start_x, start_y - 10).pointer_up(:left).perform
+
+
+    ele_index(ui_ios.picker_wheel, 1).text.must_equal '70'
+
   end
 
   t 'after_last' do

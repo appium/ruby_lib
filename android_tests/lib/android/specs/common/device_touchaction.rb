@@ -25,9 +25,7 @@ describe 'common/device_touchaction' do
   t 'action_chain_press_release' do
     wait do
       e = text('Accessibility')
-      touch_action = Appium::TouchAction.new.press(element: e, x: 0.5, y: 0.5).release(element: e)
-      touch_action.perform
-      touch_action.actions.must_equal []
+      action.click(e).perform
     end
     wait { text('Custom View') }
     back
@@ -37,9 +35,7 @@ describe 'common/device_touchaction' do
   t 'action_chain_tap' do
     wait do
       e = text('Accessibility')
-      touch_action = Appium::TouchAction.new.tap(element: e)
-      touch_action.perform
-      touch_action.actions.must_equal []
+      action.click(e).perform
     end
     wait { text('Custom View') }
     back
@@ -49,7 +45,12 @@ describe 'common/device_touchaction' do
   t 'swipe' do
     wait { text('Animation').click }
     wait { text_exact('Bouncing Balls').click }
-    wait { Appium::TouchAction.new.swipe(start_x: 0.75, start_y: 0.25, end_x: 0.0, end_y: 49.75).perform }
+
+    driver.action
+      .move_to_location(0.75, 0.25).pointer_down(:left)
+      .move_to_location(0.75, 50)
+      .release.perform
+
     2.times { back }
     wait { text_exact 'NFC' }
   end
@@ -58,8 +59,28 @@ describe 'common/device_touchaction' do
     wait { text_exact 'NFC' }
     wait { text_exact('Graphics').click }
     wait { scroll_to('Touch Paint').click }
-    wait { zoom 200 }
-    wait { pinch 75 }
+
+    # multiple action chains
+    f1 = driver.action.add_pointer_input(:touch, 'finger1')
+    f1.create_pointer_move(duration: 1, x: 200, y: 500,
+                      origin: ::Selenium::WebDriver::Interactions::PointerMove::VIEWPORT)
+    f1.create_pointer_down(:left)
+    f1.create_pause(0.5)
+    f1.create_pointer_move(duration: 1, x: 200, y: 200,
+                      origin: ::Selenium::WebDriver::Interactions::PointerMove::VIEWPORT)
+    f1.create_pointer_up(:left)
+
+    f2 = driver.action.add_pointer_input(:touch, 'finger2')
+    f2.create_pointer_move(duration: 1, x: 200, y: 500,
+                      origin: ::Selenium::WebDriver::Interactions::PointerMove::VIEWPORT)
+    f2.create_pointer_down(:left)
+    f2.create_pause(0.5)
+    f2.create_pointer_move(duration: 1, x: 200, y: 800,
+                      origin: ::Selenium::WebDriver::Interactions::PointerMove::VIEWPORT)
+    f2.create_pointer_up(:left)
+
+    driver.perform_actions [f1, f2]
+
     wait { text('Graphics/Touch Paint') }
     2.times { back }
     wait { text_exact 'NFC' }

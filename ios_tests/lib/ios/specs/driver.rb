@@ -60,7 +60,7 @@ describe 'driver' do
       # actual[:caps].to_json send to Appium server
       caps_with_json = JSON.parse(actual[:caps].to_json)
       caps_with_json['platformName'].must_equal 'ios'
-      caps_with_json['platformVersion'].must_equal '14.5'
+      caps_with_json['platformVersion'].must_equal '15.0'
       caps_with_json['app'].must_equal expected_app
       caps_with_json['automationName'].must_equal 'XCUITest'
       caps_with_json['deviceName'].must_equal 'iPhone 11'
