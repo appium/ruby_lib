@@ -7,20 +7,36 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 
 ### 1. Enhancements
 
-- Update base [ruby_lib_core client](https://github.com/appium/ruby_lib_core) to v5
-    - Update base selenium webdriver version to `4.0.0`
-        - Support only W3C spec as following Selenium v4 client
+### 2. Bug fixes
+
+### 3. Deprecations
+
+## 12.0.0
+### 1. Enhancements
+
+- Update ruby_lib_core version from v4 to v5. The change affects this library.
+    - [Migration from v4 to v5 in ruby_lib_core client](https://github.com/appium/ruby_lib_core#migration-from-v4-to-v5)
+        - Base Selenium Ruby binding is now v4
+        - Support only W3C WebDriver spec (and a few Appium specific commands)
         - Support Ruby 2.6+
-    - `element.id` returns the element id instead of `element.ref`. `element.ref` now returns an array.
+    - `element.id` returns the element id instead of `element.ref`
+        - `element.ref` now returns an array
     - Removed `forceMjsonwp` to send only MJSONWP capabilities since Selenium cleint v4 no longer supports MJSONWP
-    - No longer set default `timeouts` as `0`. ruby_lib_core calls `/timeouts` endpoint only when `appium_lib: { wait: 5 }` is provided explicitly
+    - No longer set default `timeouts` as `0`
+        - ruby_lib_core will call `/timeouts` endpoint only when `appium_lib: { wait: 5 }` is provided explicitly
     - Raises `::Appium::Core::Error::ArgumentError` instead of `ArgumentError` for this library specific argument errors
 
 ### 2. Deprecations
 - `TouchAction` and `MultiTouch` are deprecated
     - Please use W3C actions instead https://github.com/appium/ruby_lib/blob/master/docs/w3c.md
-    - Other examples: https://github.com/appium/ruby_lib/pull/909
-- Removed Selendroid related methods
+    - Other examples
+        - https://github.com/appium/ruby_lib/pull/909
+        - https://github.com/appium/ruby_lib_core/blob/master/CHANGELOG.md#deprecations-1
+- `launch_app`, `close_app` and `reset` are deprecated. Please read [issues#15807](https://github.com/appium/appium/issues/15807) for more details.
+    - `activate_app` or a new session request can be alternatives of `launch_app`
+    - `terminate_app` or close the session request can be alternatives of `close_app`
+    - Close current session and creating a new session, or `terminate_app` and `launch_app` can be alternatives of `reset`
+
 
 ## 11.1.0 - 2020-12-29 (11.2.0 is the same as this version)
 
