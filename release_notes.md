@@ -1,3 +1,31 @@
+#### v12.0.0 2021-11-06
+
+- [3060ef3](https://github.com/appium/ruby_lib/commit/3060ef3bf06c19a79731a49985efa75c3337dd27) Release 12.0.0
+- [2c76d15](https://github.com/appium/ruby_lib/commit/2c76d15edafb43e8c0124bfd4c1c9e95f61fb725) chore: bump version to 12.0.0
+- [19bc90f](https://github.com/appium/ruby_lib/commit/19bc90fef5646f3cde201654ae4fd92da2124b1c) docs: update readme
+- [3239d7f](https://github.com/appium/ruby_lib/commit/3239d7f9a64529c8afc87c2f99a7984eb3057fd5) docs: update changelog
+- [bbf56a5](https://github.com/appium/ruby_lib/commit/bbf56a5e502bdb1e2b38245c879eafbc7d9c0ea9) chore: bump core to 5.0.0, bump version to rc5
+- [b785de1](https://github.com/appium/ruby_lib/commit/b785de188f15da76e91c2a10cccd95c13de3c331) chore: bump the version
+- [d14d151](https://github.com/appium/ruby_lib/commit/d14d15167cc462d75acbef8d7d82b0fb728ec3a5) Merge branch 'master' of github.com:appium/ruby_lib
+- [35bf3ed](https://github.com/appium/ruby_lib/commit/35bf3edcf6dcbfd0b2122aa32bfb85d7209bc52f) chore: bump core version
+- [e990681](https://github.com/appium/ruby_lib/commit/e990681bad2932e895d3e706e5db2593d727b2b7) chore: Update rubocop requirement from = 1.22.2 to = 1.22.3 (#910)
+- [9d3f1b6](https://github.com/appium/ruby_lib/commit/9d3f1b62bc32ef1ea210a92a69d444bc830680f8) docs: remove outdated docs
+- [1049a68](https://github.com/appium/ruby_lib/commit/1049a688cbd11b468002e0fb1c1d1a960a6350c7) chore: bump version to 12.0.0.rc3
+- [8448f29](https://github.com/appium/ruby_lib/commit/8448f299ad91cf47f69c961da811310cd13d906b) chore: remove selendroid stuff
+- [171f3bd](https://github.com/appium/ruby_lib/commit/171f3bd0a9443a7c0c386c8a2c1340f6117c4aa9) chore: update tests with W3C spec for interactions (#909)
+- [01505ed](https://github.com/appium/ruby_lib/commit/01505ed5bf51ce386f285ae1790b91f48bc38487) chore: bump version
+- [8a873f2](https://github.com/appium/ruby_lib/commit/8a873f2c0606488b640d0c4c21237ddb5db97516) chore: bump core version to rc6
+- [2bf24f2](https://github.com/appium/ruby_lib/commit/2bf24f2fc93141415fee1f43a5434a722c64e576) chore: Update fakefs requirement from ~> 1.3.0 to ~> 1.4.0 (#906)
+- [7e9f58c](https://github.com/appium/ruby_lib/commit/7e9f58c483f1c600525d9dc1584b7a4712a33b6a) chore: Update rubocop requirement from = 1.22.1 to = 1.22.2 (#907)
+- [5683456](https://github.com/appium/ruby_lib/commit/5683456f6c6f434d3fa1490a250d23acc3033729) feat: apply core 5.x for selenium v4 (#905)
+- [c0098b4](https://github.com/appium/ruby_lib/commit/c0098b480786ce0442d3d06bf4d3d161375c760d) chore: Update rubocop requirement from = 1.12.0 to = 1.12.1 (#904)
+- [2adbb0e](https://github.com/appium/ruby_lib/commit/2adbb0e03e55f57f0c4001d1577d1577dfd63ae2) chore: Update rubocop requirement from = 1.11.0 to = 1.12.0 (#903)
+- [83769cc](https://github.com/appium/ruby_lib/commit/83769cc9bc8a96cb0526e950a9b7e8d656e84390) chore: Update rubocop requirement from = 1.8.1 to = 1.11.0 (#902)
+- [6e6b61d](https://github.com/appium/ruby_lib/commit/6e6b61d455773147c76f41df65503fb6d61d6019) chore: Update tomlrb requirement from ~> 1.1 to >= 1.1, < 3.0 (#886)
+- [0e34f82](https://github.com/appium/ruby_lib/commit/0e34f82310b9906af858ccf5230a7b0f23fd12f9) chore: Create Dependabot config file (#900)
+- [4783382](https://github.com/appium/ruby_lib/commit/47833829bed009416949ed8ecd60e1a8356e28ce) chore: address 11.2
+
+
 #### v11.2.0 2021-01-25
 
 - [06f2e54](https://github.com/appium/ruby_lib/commit/06f2e54b4b55df25e624272b5a2cd7b23a000298) Release 11.2.0
