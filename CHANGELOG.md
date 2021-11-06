@@ -11,7 +11,7 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 
 ### 3. Deprecations
 
-## 12.0.0
+## 12.0.0 - 2021-11-06
 ### 1. Enhancements
 
 - Update ruby_lib_core version from v4 to v5. The change affects this library.
