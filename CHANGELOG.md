@@ -36,7 +36,7 @@ Release tags are https://github.com/appium/ruby_lib/releases .
     - `activate_app` or a new session request can be alternatives of `launch_app`
     - `terminate_app` or close the session request can be alternatives of `close_app`
     - Close current session and creating a new session, or `terminate_app` and `launch_app` can be alternatives of `reset`
-
+- Global driver (`$driver`) is `false` by default. Please provide `true` as `Appium::Driver.new(opts, true)` to enable it as previously logged as a deprecation warning message.
 
 ## 11.1.0 - 2020-12-29 (11.2.0 is the same as this version)
 
