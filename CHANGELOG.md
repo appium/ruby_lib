@@ -11,6 +11,15 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 
 ### 3. Deprecations
 
+## 12.0.1 - 2022-04-02
+
+### 1. Enhancements
+
+### 2. Bug fixes
+- Fixes `promote_appium_methods`
+
+### 3. Deprecations
+
 ## 12.0.0 - 2021-11-06
 ### 1. Enhancements
 
