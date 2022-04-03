@@ -202,10 +202,8 @@ module Appium
       class_array.each do |klass|
         driver.public_methods(false).each do |method|
           klass.class_eval do
-            if method_defined? method
-              ::Appium::Logger.warn "'#{method}' is already defined. Skipping to override it."
-              next
-            end
+            # remove the method before adding it
+            remove_method method if method_defined? method
 
             define_method method do |*args, &block|
               # Prefer existing method.
