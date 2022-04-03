@@ -202,7 +202,7 @@ module Appium
       class_array.each do |klass|
         driver.public_methods(false).each do |method|
           klass.class_eval do
-            # Note: Do not skip re-definding methods to not keep old instance information.
+            # NOTE: Do not skip re-definding methods to not keep old instance information.
             # Probably the global driver ($driver) stuff needs to override (re-defined)
             # every time to not keep unexpected state.
             # https://github.com/appium/ruby_lib/issues/917
