@@ -1,3 +1,18 @@
+#### v12.0.1 2022-04-02
+
+- [ae4bddd](https://github.com/appium/ruby_lib/commit/ae4bddd7ba5bf3aafe8fedc44919bb02b4f260be) Release 12.0.1
+- [a5d4c4f](https://github.com/appium/ruby_lib/commit/a5d4c4f08cd3fc5d2ca575595f0741b4d22bf7b9) fix: remove the method and define again instead (#920)
+- [484006b](https://github.com/appium/ruby_lib/commit/484006b903c6bc15b5ce1767cf9c407c978afab9) docs: tweak
+- [e22140e](https://github.com/appium/ruby_lib/commit/e22140e970ddb5975e16a5d4f46b1d9a29da2c31) chore: Update rubocop requirement from = 1.26.0 to = 1.26.1 (#919)
+- [a900972](https://github.com/appium/ruby_lib/commit/a9009728f9cee8a432fe6d1b0cd7caf1e77b0106) chore: Update rubocop requirement from = 1.25.1 to = 1.26.0 (#918)
+- [923ba1c](https://github.com/appium/ruby_lib/commit/923ba1ca8602fd404090efef09174166794ce074) chore: Update rubocop requirement from = 1.25.0 to = 1.25.1 (#916)
+- [0dc8e19](https://github.com/appium/ruby_lib/commit/0dc8e19a2c481c3d6dea3be4e309f0aafd256656) chore: Update rubocop requirement from = 1.24.1 to = 1.25.0 (#915)
+- [b02bb65](https://github.com/appium/ruby_lib/commit/b02bb653dfc8ff7c770155b7c4c8d6afaecd8a5c) chore: Update rubocop requirement from = 1.24.0 to = 1.24.1 (#914)
+- [b6ade8d](https://github.com/appium/ruby_lib/commit/b6ade8d5cca1260071c236566e660e41b65aa118) chore: Update appium_lib_core requirement from ~> 5.0.0 to >= 5.0, < 5.2 (#913)
+- [eac87a4](https://github.com/appium/ruby_lib/commit/eac87a4cc8bf55bfe6fc8820ff947713042c79a4) chore: Update rubocop requirement from = 1.23.0 to = 1.24.0 (#912)
+- [ac25f13](https://github.com/appium/ruby_lib/commit/ac25f13f7c36017c13449b5038b2f698806ee1eb) chore: Update rubocop requirement from = 1.22.3 to = 1.23.0 (#911)
+
+
 #### v12.0.0 2021-11-06
 
 - [3060ef3](https://github.com/appium/ruby_lib/commit/3060ef3bf06c19a79731a49985efa75c3337dd27) Release 12.0.0
