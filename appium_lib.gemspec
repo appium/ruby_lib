@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'tomlrb', '>= 1.1', '< 3.0'
 
   s.add_development_dependency 'appium_thor', '~> 1.1', '>= 1.1.4'
-  s.add_development_dependency 'fakefs', '~> 1.7.0'
+  s.add_development_dependency 'fakefs', '~> 1.8.0'
   s.add_development_dependency 'hashdiff', '~> 1.0.0'
   s.add_development_dependency 'posix-spawn', '~> 0.3'
   s.add_development_dependency 'pry'
