@@ -51,7 +51,7 @@ Style/StringConcatenation:
   Enabled: false
 Lint/NonDeterministicRequireOrder:
   Enabled: false
-Gemspec/DateAssignment:
+Gemspec/DeprecatedAttributeAssignment:
   Enabled: true
 Layout/LineEndStringConcatenationIndentation:
   Enabled: true
