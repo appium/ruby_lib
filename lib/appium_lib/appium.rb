@@ -86,8 +86,8 @@ module Appium
           data[:caps][:app] = Appium::Driver.absolute_app_path data
         elsif data[:caps]['app'] && !data[:caps]['app'].empty?
           data[:caps]['app'] = Appium::Driver.absolute_app_path data
-        elsif data['caps']['app'] && !data['caps']['app'].empty?
-          data['caps']['app'] = Appium::Driver.absolute_app_path data
+        elsif data['caps'][:app] && !data['caps'][:app].empty?
+          data['caps'][:app] = Appium::Driver.absolute_app_path data
         elsif data['caps']['app'] && !data['caps']['app'].empty?
           data['caps']['app'] = Appium::Driver.absolute_app_path data
         end
