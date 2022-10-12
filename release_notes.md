@@ -1,3 +1,32 @@
+#### v12.1.0 2022-10-11
+
+- [8f20fe1](https://github.com/appium/ruby_lib/commit/8f20fe12b728195a8d2eb7d39004de4075caeff8) Release 12.1.0
+- [b00662a](https://github.com/appium/ruby_lib/commit/b00662a3976aeadc8d5385fd00129fb9dafa967c) chore: specify latest core
+- [98a3c6b](https://github.com/appium/ruby_lib/commit/98a3c6b9720eeff74f6eefda6e54196477854ed3) feat: update the minimal ruby lib core version (#946)
+- [45a2194](https://github.com/appium/ruby_lib/commit/45a21942311ed4e5b88df3ad9ddb540693422b5e) docs: update the readme
+- [c29cf02](https://github.com/appium/ruby_lib/commit/c29cf0284041f449dc594248cadf47bf7ca074ae) chore: Update rubocop requirement from = 1.35.1 to = 1.36.0 (#944)
+- [26ff210](https://github.com/appium/ruby_lib/commit/26ff21044030eb833c5c167026834f8a522c1a7c) chore: Update rubocop requirement from = 1.35.0 to = 1.35.1 (#941)
+- [1984bd0](https://github.com/appium/ruby_lib/commit/1984bd09e4fa55a41b9c1cf22ae9c4fffa51b149) chore: Update rubocop requirement from = 1.34.1 to = 1.35.0 (#940)
+- [71f889b](https://github.com/appium/ruby_lib/commit/71f889b2671696244609d2ce970dc602be28644a) chore: Update rubocop requirement from = 1.34.0 to = 1.34.1 (#939)
+- [6d4c02d](https://github.com/appium/ruby_lib/commit/6d4c02d0f8d59d5debe60d782260bf1b2e4b80ad) chore: Update rubocop requirement from = 1.33.0 to = 1.34.0 (#938)
+- [6d10490](https://github.com/appium/ruby_lib/commit/6d104904974798e187fc07ad6f98875c09368ca7) chore: Update rubocop requirement from = 1.32.0 to = 1.33.0 (#937)
+- [0144c9c](https://github.com/appium/ruby_lib/commit/0144c9c9d7331e5384de0a528eedf82be98affbd) chore: Update rubocop requirement from = 1.31.2 to = 1.32.0 (#936)
+- [6d08328](https://github.com/appium/ruby_lib/commit/6d083282eb0f04dc70453d5290af2eb6f3d5da90) chore: Update rubocop requirement from = 1.31.1 to = 1.31.2 (#934)
+- [8554315](https://github.com/appium/ruby_lib/commit/8554315055cb5742cb8251e087a7e6d0cc3b7504) chore: Update rubocop requirement from = 1.31.0 to = 1.31.1 (#933)
+- [50b76c6](https://github.com/appium/ruby_lib/commit/50b76c6713d5ae1134dbe7f2d5cfae95df9dede6) chore: Update rubocop requirement from = 1.30.1 to = 1.31.0 (#932)
+- [b55c2a5](https://github.com/appium/ruby_lib/commit/b55c2a58e5ea0ffc215e43dc8e1b28a99c7be372) chore: Update fakefs requirement from ~> 1.7.0 to ~> 1.8.0 (#931)
+- [7c501bc](https://github.com/appium/ruby_lib/commit/7c501bc47f8a40bf83088a43af2892d46cef561c) chore: Update fakefs requirement from ~> 1.5.0 to ~> 1.7.0 (#930)
+- [574e3c4](https://github.com/appium/ruby_lib/commit/574e3c4acc9f38419250aa3a046143acc8d55a75) chore: Update rubocop requirement from = 1.30.0 to = 1.30.1 (#929)
+- [0dacfea](https://github.com/appium/ruby_lib/commit/0dacfea1924f953ae8c6328c97065dcdb6b372d7) chore: Update rubocop requirement from = 1.29.1 to = 1.30.0 (#928)
+- [cf368c8](https://github.com/appium/ruby_lib/commit/cf368c848a76cf5a86c26f006cd4ff412f1f8a86) chore: Update fakefs requirement from ~> 1.4.0 to ~> 1.5.0 (#927)
+- [2e9190a](https://github.com/appium/ruby_lib/commit/2e9190aa8905c3d06adcc16a87209f3841e4cdc4) chore: Update rubocop requirement from = 1.29.0 to = 1.29.1 (#926)
+- [99360fb](https://github.com/appium/ruby_lib/commit/99360fb8b0aab56fc3eb6e903cf89e10bbd8b78b) chore: Update rubocop requirement from = 1.28.2 to = 1.29.0 (#925)
+- [9bf18ce](https://github.com/appium/ruby_lib/commit/9bf18ce0365f4c677d81d83b3a33ef7125a8e1dd) chore: Update rubocop requirement from = 1.28.1 to = 1.28.2 (#924)
+- [d7a5983](https://github.com/appium/ruby_lib/commit/d7a598369c0e28f8924e04aaa6d2159662fa710f) chore: Update rubocop requirement from = 1.28.0 to = 1.28.1 (#923)
+- [e33f440](https://github.com/appium/ruby_lib/commit/e33f4408ccf28564316196b9555b23aaa83d9b5e) chore: Update rubocop requirement from = 1.27.0 to = 1.28.0 (#922)
+- [e598c26](https://github.com/appium/ruby_lib/commit/e598c2681c565c8d52338c6bb544374df5c3729b) chore: Update rubocop requirement from = 1.26.1 to = 1.27.0 (#921)
+
+
 #### v12.0.1 2022-04-02
 
 - [ae4bddd](https://github.com/appium/ruby_lib/commit/ae4bddd7ba5bf3aafe8fedc44919bb02b4f260be) Release 12.0.1
