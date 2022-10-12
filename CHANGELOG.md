@@ -6,6 +6,14 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 ## Unreleased
 
 ### 1. Enhancements
+
+### 2. Bug fixes
+
+### 3. Deprecations
+
+## 12.1.0 - 2022-10-11
+
+### 1. Enhancements
 - Bump minimal ruby_lib_core version
 
 ### 2. Bug fixes
