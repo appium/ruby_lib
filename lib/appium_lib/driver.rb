@@ -250,10 +250,20 @@ module Appium
     end
 
     # @private
+    # Deprecated. TODO: remove
     def set_app_path(opts)
-      return unless @core.caps && @core.caps[:app] && !@core.caps[:app].empty?
+      return unless @core.caps
 
-      @core.caps[:app] = self.class.absolute_app_path opts
+      # return the path exists on the local
+      return if @core.caps['app'] && !@core.caps['app'].nil? && File.exist?(@core.caps['app'])
+      return if @core.caps[:app] && !@core.caps[:app].nil? && File.exist?(@core.caps[:app])
+
+      # The app file is not exact path
+      if !@core.caps['app'].nil?
+        @core.caps['app'] = self.class.absolute_app_path opts
+      elsif !@core.caps[:app].nil?
+        @core.caps[:app] = self.class.absolute_app_path opts
+      end
     end
 
     # @private
@@ -371,7 +381,7 @@ module Appium
       { version: ::Appium::VERSION }
     end
 
-    # Converts app_path to an absolute path.
+    # [Deprecated] Converts app_path to an absolute path.
     #
     # opts is the full options hash (caps and appium_lib). If server_url is set
     # then the app path is used as is.
@@ -382,8 +392,12 @@ module Appium
     def self.absolute_app_path(opts)
       raise 'opts must be a hash' unless opts.is_a? Hash
 
-      caps            = opts[:caps] || {}
-      app_path        = caps[:app]
+      ::Appium::Logger.warning('[Deprecation] Converting the path to absolute path will be removed. ' \
+                               'Please specify the full path which can be accessible from the appium server')
+
+      # FIXME: 'caps' and 'app' will be correct
+      caps            = opts[:caps] || opts['caps'] || {}
+      app_path        = caps[:app] || caps['app']
       raise 'absolute_app_path invoked and app is not set!' if app_path.nil? || app_path.empty?
       # Sauce storage API. http://saucelabs.com/docs/rest#storage
       return app_path if app_path.start_with? 'sauce-storage:'
