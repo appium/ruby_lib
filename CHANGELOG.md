@@ -6,10 +6,13 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 ## Unreleased
 
 ### 1. Enhancements
+- Bump minimal ruby_lib_core version
 
 ### 2. Bug fixes
 
 ### 3. Deprecations
+- Deprecate `Appium::Driver.absolute_app_path`, instead, please set proper `app` capability
+    - This aims to reduce client side validation as same as other clients.
 
 ## 12.0.1 - 2022-04-02
 

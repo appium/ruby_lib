@@ -80,8 +80,18 @@ module Appium
 
       Appium::Logger.info data if verbose && !data.empty?
 
-      if data && data[:caps] && data[:caps][:app] && !data[:caps][:app].empty?
-        data[:caps][:app] = Appium::Driver.absolute_app_path data
+      # FIXME: Deprecated. Will remove when we remove 'Appium::Driver.absolute_app_path'
+      if data
+        if data[:caps][:app] && !data[:caps][:app].empty?
+          data[:caps][:app] = Appium::Driver.absolute_app_path data
+        elsif data[:caps]['app'] && !data[:caps]['app'].empty?
+          data[:caps]['app'] = Appium::Driver.absolute_app_path data
+        elsif data['caps'][:app] && !data['caps'][:app].empty?
+          data['caps'][:app] = Appium::Driver.absolute_app_path data
+        elsif data['caps']['app'] && !data['caps']['app'].empty?
+          data['caps']['app'] = Appium::Driver.absolute_app_path data
+        end
+
       end
 
       if data && data[:appium_lib] && data[:appium_lib][:require]
