@@ -14,7 +14,7 @@
 
 Helper methods for writing cross platform (iOS, Android) tests in Ruby using Appium. Note that user waits should not exceed 120 seconds if they're going to run on Sauce Labs.
 
-**Recommend** to use [ruby_lib_core](https://github.com/appium/ruby_lib_core), which is available as a Ruby client for Appium. `ruby_lib` wraps the core library with some additional helpful methods.
+**Recommend** to use [ruby_lib_core](https://github.com/appium/ruby_lib_core), which works as a Ruby client for Appium. `ruby_lib` wraps the core library with some additional helpful methods, but some of wrapped methods may have unexpected complexity.
 Ordinary, `ruby_lib` worked with class driver, `$driver`, mainly.
 We can avoid the class driver with current `ruby_lib`, but if you'd like to implement your test cases based on instance driver, `@driver`, you can consider using `ruby_lib_core` first.
 
