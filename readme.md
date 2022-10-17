@@ -34,12 +34,12 @@ We can avoid the class driver with current `ruby_lib`, but if you'd like to impl
 
 ```bash
 $ npm install -g appium@next
-$ appium driver install xcuitest  # proper driver names
+$ appium driver install xcuitest  # proper driver name to install
 $ appium server
 ```
 
 > **Note** Please set `server_url` properly like the below since the appium 2
-> changed the default listening WebDriver URL without `/wd/hub` to follow W3C.
+> changed the default WebDriver URL to without `/wd/hub` to follow W3C.
 > ```
 >  opts = {
 >    caps: {
