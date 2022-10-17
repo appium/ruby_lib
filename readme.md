@@ -6,11 +6,9 @@
 [![Downloads](https://img.shields.io/gem/dt/appium_lib.svg)](https://rubygems.org/gems/appium_lib)
 
 - [appium_lib on RubyGems](https://rubygems.org/gems/appium_lib)
-- [Documentation for appium_lib](https://github.com/appium/ruby_lib/tree/master/docs)
+- [Documentation for appium_lib](https://www.rubydoc.info/github/appium/ruby_lib)
     - [Documentation for core lib](http://www.rubydoc.info/github/appium/ruby_lib_core)
         - Especially [driver method for Appium](http://www.rubydoc.info/github/appium/ruby_lib_core/Appium/Core/Device)
-- [Getting Started](https://github.com/appium/appium/blob/master/docs/en/about-appium/getting-started.md)
-- [code examples](https://github.com/appium/sample-code/tree/master/sample-code/examples/ruby)
 
 Helper methods for writing cross platform (iOS, Android) tests in Ruby using Appium. Note that user waits should not exceed 120 seconds if they're going to run on Sauce Labs.
 
@@ -21,7 +19,7 @@ We can avoid the class driver with current `ruby_lib`, but if you'd like to impl
 # Setup
 ## Requirement
 - [Appium](https://github.com/appium/appium#requirements)
-- Ruby: 2.6+
+- Ruby: 2.7+
 
 ### Ruby Lib and Appium
 
@@ -32,6 +30,33 @@ We can avoid the class driver with current `ruby_lib`, but if you'd like to impl
 
 ## Start appium server
 
+### Appium 2
+
+```bash
+$ npm install -g appium@next
+$ appium driver install xcuitest  # proper driver names
+$ appium server
+```
+
+> !!Note Please set `server_url` properly like the below since the appium 2
+> changed the default listening WebDriver URL without `/wd/hub` to follow W3C.
+> ```
+>  opts = {
+>    caps: {
+>      automationName: 'xcuitest'
+>      platformName: 'ios',
+>      app: '/path/to/MyiOS.app'
+>    },
+>    appium_lib: {
+>      server_url: 'http://127.0.0.1:4723'
+>    }
+>  }
+>  appium_driver = Appium::Driver.new(opts)
+>  appium_driver.start_driver
+> ```
+> Or please start the appium server with `appium server --base-path=/wd/hub`
+
+### Appium 1
 ```bash
 $ npm install -g appium
 $ appium
@@ -53,12 +78,11 @@ gem install appium_lib
 
 # Documentation
 
-- [Getting started](https://github.com/appium/appium/blob/master/docs/en/about-appium/getting-started.md)
+- [Getting started](https://github.com/appium/appium)
 - [Overview](https://github.com/appium/ruby_lib/blob/master/docs/docs.md)
 - [Ruby Android methods](https://github.com/appium/ruby_lib/blob/master/docs/android_docs.md)
 - [Ruby iOS methods](https://github.com/appium/ruby_lib/blob/master/docs/ios_docs.md)
     - [Tips for XCUITest for iOS](https://github.com/appium/ruby_lib/blob/master/docs/ios_xcuitest.md)
-- [Appium Server docs](https://github.com/appium/appium/tree/master/docs)
 
 # Related libraries
 - [ruby_lib_core](https://github.com/appium/ruby_lib_core): Bridged commands, WebDriver dependencies

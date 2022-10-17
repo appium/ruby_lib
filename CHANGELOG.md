@@ -362,7 +362,6 @@ This change has a breaking change about implicit wait.
 ### 1. Enhancements
 - Bump the core library to 1.3.0
     - The change have one breaking change for `start_recording_screen`(Android)
-    - Read `docs/migration.md`
 
 ### 2. Bug fixes
 
