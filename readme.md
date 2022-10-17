@@ -38,7 +38,7 @@ $ appium driver install xcuitest  # proper driver names
 $ appium server
 ```
 
-> !!Note Please set `server_url` properly like the below since the appium 2
+> **Note** Please set `server_url` properly like the below since the appium 2
 > changed the default listening WebDriver URL without `/wd/hub` to follow W3C.
 > ```
 >  opts = {
