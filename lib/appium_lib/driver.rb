@@ -393,9 +393,6 @@ module Appium
     def self.absolute_app_path(opts)
       raise 'opts must be a hash' unless opts.is_a? Hash
 
-      ::Appium::Logger.warning('[Deprecation] Converting the path to absolute path will be removed. ' \
-                               'Please specify the full path which can be accessible from the appium server')
-
       # FIXME: 'caps' and 'app' will be correct
       caps            = opts[:caps] || opts['caps'] || {}
       app_path        = caps[:app] || caps['app']
@@ -403,6 +400,9 @@ module Appium
       # Sauce storage API. http://saucelabs.com/docs/rest#storage
       return app_path if app_path.start_with? 'sauce-storage:'
       return app_path if app_path =~ URI::DEFAULT_PARSER.make_regexp # public URL for Sauce
+
+      ::Appium::Logger.warn('[Deprecation] Converting the path to absolute path will be removed. ' \
+        'Please specify the full path which can be accessible from the appium server')
 
       absolute_app_path = File.expand_path app_path
       if File.exist? absolute_app_path
