@@ -402,7 +402,7 @@ module Appium
       return app_path if app_path =~ URI::DEFAULT_PARSER.make_regexp # public URL for Sauce
 
       ::Appium::Logger.warn('[Deprecation] Converting the path to absolute path will be removed. ' \
-        'Please specify the full path which can be accessible from the appium server')
+                            'Please specify the full path which can be accessible from the appium server')
 
       absolute_app_path = File.expand_path app_path
       if File.exist? absolute_app_path
