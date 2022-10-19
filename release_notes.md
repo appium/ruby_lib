@@ -1,5 +1,10 @@
-#### v12.1.0 2022-10-11
+#### v12.1.1 2022-10-19
 
+- [83c89c1](https://github.com/appium/ruby_lib/commit/83c89c107ea0e030b7eae2d8ab664c38766df6ed) Release 12.1.1
+- [e40222d](https://github.com/appium/ruby_lib/commit/e40222d66f497fe295aea982ef0c042b901f6e3f) fix: use warn (#951)
+- [a9b7558](https://github.com/appium/ruby_lib/commit/a9b75583e9923ade4f4fd16cb7fad03cc0f7c1be) docs: tweak
+- [600f867](https://github.com/appium/ruby_lib/commit/600f8670f97d91babfd84e1c6c1ef34d2682b883) docs: updating (#950)
+- [a81ea4b](https://github.com/appium/ruby_lib/commit/a81ea4b2a74ea71fa62c1756ffea2f85da57d49b) docd: udpate readme
 - [8f20fe1](https://github.com/appium/ruby_lib/commit/8f20fe12b728195a8d2eb7d39004de4075caeff8) Release 12.1.0
 - [b00662a](https://github.com/appium/ruby_lib/commit/b00662a3976aeadc8d5385fd00129fb9dafa967c) chore: specify latest core
 - [98a3c6b](https://github.com/appium/ruby_lib/commit/98a3c6b9720eeff74f6eefda6e54196477854ed3) feat: update the minimal ruby lib core version (#946)
