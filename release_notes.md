@@ -1,3 +1,12 @@
+#### v12.1.2 2022-11-13
+
+- [c3330bd](https://github.com/appium/ruby_lib/commit/c3330bd208d4aba2cdc616f5ca4ac23a3ec4790a) Release 12.1.2
+- [40ca5c8](https://github.com/appium/ruby_lib/commit/40ca5c8a200638e145f71c27b320d19d1f3f63db) fix: non app in the caps by toml (#955)
+- [b953b30](https://github.com/appium/ruby_lib/commit/b953b30c854232d11628ef894a8d6d43f8b59883) chore: Update rubocop requirement from = 1.37.1 to = 1.38.0 (#954)
+- [a62597a](https://github.com/appium/ruby_lib/commit/a62597a5b0c7ff0a593e7fecaec66729b44ef78e) chore: Update rubocop requirement from = 1.37.0 to = 1.37.1 (#953)
+- [049ac4e](https://github.com/appium/ruby_lib/commit/049ac4ec86399fe5406b6b0ca336ac0e2a8c2735) chore: Update rubocop requirement from = 1.36.0 to = 1.37.0 (#952)
+
+
 #### v12.1.1 2022-10-19
 
 - [83c89c1](https://github.com/appium/ruby_lib/commit/83c89c107ea0e030b7eae2d8ab664c38766df6ed) Release 12.1.1
