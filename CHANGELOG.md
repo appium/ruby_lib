@@ -11,6 +11,15 @@ Release tags are https://github.com/appium/ruby_lib/releases .
 
 ### 3. Deprecations
 
+## 12.1.2 - 2022-11-13
+
+### 1. Enhancements
+
+### 2. Bug fixes
+- Fix `app` capability handling in parsing a toml file
+
+### 3. Deprecations
+
 ## 12.1.1 - 2022-10-19
 
 ### 1. Enhancements
