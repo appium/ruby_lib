@@ -82,16 +82,19 @@ module Appium
 
       # FIXME: Deprecated. Will remove when we remove 'Appium::Driver.absolute_app_path'
       if data
-        if data[:caps][:app] && !data[:caps][:app].empty?
-          data[:caps][:app] = Appium::Driver.absolute_app_path data
-        elsif data[:caps]['app'] && !data[:caps]['app'].empty?
-          data[:caps]['app'] = Appium::Driver.absolute_app_path data
-        elsif data['caps'][:app] && !data['caps'][:app].empty?
-          data['caps'][:app] = Appium::Driver.absolute_app_path data
-        elsif data['caps']['app'] && !data['caps']['app'].empty?
-          data['caps']['app'] = Appium::Driver.absolute_app_path data
+        if data['caps']
+          if data['caps'][:app] && !data['caps'][:app].empty?
+            data['caps'][:app] = Appium::Driver.absolute_app_path data
+          elsif data['caps']['app'] && !data['caps']['app'].empty?
+            data['caps']['app'] = Appium::Driver.absolute_app_path data
+          end
+        elsif data[:caps]
+          if data[:caps][:app] && !data[:caps][:app].empty?
+            data[:caps][:app] = Appium::Driver.absolute_app_path data
+          elsif data[:caps]['app'] && !data[:caps]['app'].empty?
+            data[:caps]['app'] = Appium::Driver.absolute_app_path data
+          end
         end
-
       end
 
       if data && data[:appium_lib] && data[:appium_lib][:require]
