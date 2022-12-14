@@ -18,7 +18,7 @@ describe 'ios/element/button' do
   def before_first
     screen.must_equal catalog
     # nav to buttons activity
-    wait { automation_name_is_xcuitest? ? find_element(:name, 'Buttons').click : text('buttons').click }
+    wait { find_element(:name, 'Buttons').click }
   end
 
   def after_last

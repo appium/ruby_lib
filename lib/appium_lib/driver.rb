@@ -221,12 +221,8 @@ module Appium
           ::Appium::Android::Bridge.for(self)
         end
       when :ios, :tvos
-        case automation_name
-        when :xcuitest
-          ::Appium::Ios::Xcuitest::Bridge.for(self)
-        else # default and UIAutomation
-          ::Appium::Ios::Bridge.for(self)
-        end
+        # default and XCUITest
+        ::Appium::Ios::Xcuitest::Bridge.for(self)
       when :mac
         # no Mac specific extentions
         Appium::Logger.debug('mac')

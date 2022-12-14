@@ -48,12 +48,7 @@ describe 'ios/element/textfield' do
   end
 
   t 'predicate textfields' do
-    textfields = if automation_name_is_xcuitest?
-                   find_elements(:predicate, "type contains[c] 'textfield'")
-                 else
-                   execute_script(%(au.mainApp().getAllWithPredicate("type contains[c] 'textfield'", true)))
-                 end
-
+    textfields = find_elements(:predicate, "type contains[c] 'textfield'")
     textfields.length.must_equal 5
   end
 
@@ -73,33 +68,10 @@ describe 'ios/element/textfield' do
     textfields_exact(enter_password).first.value.must_equal enter_password
   end
 
-  def keyboard_exists?
-    !!ignore { wait_true(3) { execute_script 'au.mainApp().keyboard().type() !== "UIAElementNil"' } }
-  end
-
-  def keyboard_must_not_exist
-    keyboard_exists?.must_equal false
-  end
-
-  def keyboard_must_exist
-    keyboard_exists?.must_equal true
-  end
-
   t 'textfield type' do
-    # Regular send keys triggers the keyboard and doesn't dismiss
-    keyboard_must_not_exist unless automation_name_is_xcuitest? # xcuitest doesn't support JS command
     textfield(1).send_keys "o'k"
-    keyboard_must_exist unless automation_name_is_xcuitest? # xcuitest doesn't support JS command
 
     find_exact("o'k").text.must_equal "o'k"
-
-    unless automation_name_is_xcuitest?
-      # type should not dismiss the keyboard
-      message = 'type test type'
-      textfield(1).type message
-      keyboard_must_exist
-      textfield(1).text.must_equal message
-    end
   end
 
   def must_raise_no_element
