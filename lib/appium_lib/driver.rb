@@ -366,7 +366,10 @@ module Appium
     # Return the platform version as an array of integers
     # @return [Array<Integer>]
     def platform_version
-      @core.platform_version
+      return [] if @driver.nil?
+
+      p_version = @driver.capabilities['platformVersion'] || @driver.session_capabilities['platformVersion']
+      p_version.split('.').map(&:to_i)
     end
 
     # Returns the client's version info
@@ -459,7 +462,7 @@ module Appium
     # Quits the driver
     # @return [void]
     def driver_quit
-      @core.quit_driver
+      @driver&.quit
     end
     alias quit_driver driver_quit
 
