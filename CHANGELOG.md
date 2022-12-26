@@ -3,6 +3,15 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## 12.2.0 - 2022-12-25
+
+### 1. Enhancements
+
+### 2. Bug fixes
+
+### 3. Deprecations
+- Defaults to XCUITest modulefor iOS
+
 ## 12.1.3 - 2022-12-13
 
 ### 1. Enhancements
