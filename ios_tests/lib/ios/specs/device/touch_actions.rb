@@ -19,10 +19,7 @@ describe 'device/touch_actions' do
   end
 
   t 'swipe_default_duration' do
-    wait_true do
-      wait { automation_name_is_xcuitest? ? find_element(:name, 'Picker View').click : text('pickers').click }
-      screen == 'Picker View'
-    end
+    wait { find_element(:name, 'Picker View').click }
 
     ele_index(ui_ios.picker_wheel, 1).text.must_equal '65'
     picker = ele_index(ui_ios.picker_wheel, 1)

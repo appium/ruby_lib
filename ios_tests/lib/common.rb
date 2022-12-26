@@ -25,7 +25,7 @@ end
 def go_to_textfields
   screen.must_equal catalog
   wait_true do
-    automation_name_is_xcuitest? ? find_element(:name, 'Text Fields').click : text('textfield').click
+    find_element(:name, 'Text Fields').click
     screen == 'Text Fields' # wait for screen transition
   end
 end
@@ -47,55 +47,51 @@ class UI
     @driver = driver
   end
 
-  def xcuitest?
-    @driver.automation_name_is_xcuitest?
-  end
-
   def navbar
-    xcuitest? ? 'XCUIElementTypeNavigationBar' : 'UIANavigationBar'
+    'XCUIElementTypeNavigationBar'
   end
 
   def button
-    xcuitest? ? 'XCUIElementTypeButton' : 'UIAButton'
+    'XCUIElementTypeButton'
   end
 
   def static_text
-    xcuitest? ? 'XCUIElementTypeStaticText' : 'UIAStaticText'
+    'XCUIElementTypeStaticText'
   end
 
   def text_field
-    xcuitest? ? 'XCUIElementTypeTextField' : 'UIATextField'
+    'XCUIElementTypeTextField'
   end
 
   def secure_text_field
-    xcuitest? ? 'XCUIElementTypeSecureTextField' : 'UIASecureTextField'
+    'XCUIElementTypeSecureTextField'
   end
 
   def picker
-    xcuitest? ? 'XCUIElementTypePicker' : 'UIAPicker'
+    'XCUIElementTypePicker'
   end
 
   def picker_wheel
-    xcuitest? ? 'XCUIElementTypePickerWheel' : 'UIAPickerWheel'
+    'XCUIElementTypePickerWheel'
   end
 
   def action_sheet
-    xcuitest? ? 'XCUIElementTypeActionSheet' : 'UIActionSheet'
+    'XCUIElementTypeActionSheet'
   end
 
   def table
-    xcuitest? ? 'XCUIElementTypeTable' : 'UIATable'
+    'XCUIElementTypeTable'
   end
 
   def table_cell
-    xcuitest? ? 'XCUIElementTypeCell' : 'UIATableCell'
+    'XCUIElementTypeCell'
   end
 
   def other
-    xcuitest? ? 'XCUIElementTypeOther' : raise('unknown UIA element: other')
+    'XCUIElementTypeOther'
   end
 
   def status_bar
-    xcuitest? ? 'XCUIElementTypeStatusBar' : 'UIAStatusBar'
+    'XCUIElementTypeStatusBar'
   end
 end

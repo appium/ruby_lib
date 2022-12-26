@@ -105,7 +105,7 @@ describe 'ios/xcuitest_gestures' do
 
   t 'alert' do
     wait_true do
-      automation_name_is_xcuitest? ? find_element(:name, 'Alert Views').click : text('alerts').click
+      find_element(:name, 'Alert Views').click
       tag(ui_ios.navbar).name == 'Alert Views'
     end
 

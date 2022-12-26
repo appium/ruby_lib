@@ -50,12 +50,8 @@ describe 'device/device' do
   end
 
   t 'action_chain' do
-    if automation_name_is_xcuitest?
-      element = text('Buttons')
-      one_finger_tap x: 0, y: 0, element: element
-    else
-      action.click(text('Buttons')).perform
-    end
+    element = text('Buttons')
+    one_finger_tap x: 0, y: 0, element: element
 
     wait { button 'UICatalog' } # successfully transitioned to buttons page
     go_back
