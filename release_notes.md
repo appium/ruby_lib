@@ -1,3 +1,12 @@
+#### v12.2.0 2022-12-25
+
+- [83c756d](https://github.com/appium/ruby_lib/commit/83c756d67c3f19deff6e9270856e0889f3de8b9b) Release 12.2.0
+- [e963c02](https://github.com/appium/ruby_lib/commit/e963c025630cb8eaab6dcdf47b1a9b402db98541) chore: bump the ruby core ver (#963)
+- [ce80e17](https://github.com/appium/ruby_lib/commit/ce80e17369268be2c8da2a7007a8f5173c144404) chore: remove  non-xuitest stuff (#960)
+- [7011c05](https://github.com/appium/ruby_lib/commit/7011c05ccd14bbdb92652be8ec811d5c04c9dcc7) chore: Update rubocop requirement from = 1.41.0 to = 1.41.1 (#962)
+- [18dc444](https://github.com/appium/ruby_lib/commit/18dc44429aba30dc675e0be020699790aa0f41ec) chore: Update rubocop requirement from = 1.40.0 to = 1.41.0 (#961)
+
+
 #### v12.1.3 2022-12-13
 
 - [65f8b1c](https://github.com/appium/ruby_lib/commit/65f8b1c4406f358bf4a44ef0d4d7ae429ddc23c4) Release 12.1.3
