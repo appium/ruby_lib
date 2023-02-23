@@ -521,7 +521,7 @@ module Appium
     # @return [Selenium::WebDriver] the new global driver
     def start_driver(http_client_ops =
                          { http_client: ::Appium::Http::Default.new, open_timeout: 999_999, read_timeout: 999_999 })
-      @core.quit_driver
+      @core.driver&.quit
 
       # If automationName is set only in server side, then the following automation_name should be nil before
       # starting driver.
