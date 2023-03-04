@@ -74,7 +74,7 @@ module Appium
     class CountElements < Nokogiri::XML::SAX::Document
       attr_reader :result
 
-      def initialize(platform) # rubocop:disable Lint/MissingSuper
+      def initialize(platform)
         reset
         @platform = platform
       end
@@ -214,7 +214,7 @@ module Appium
         @filter = value.to_s.downcase
       end
 
-      def initialize # rubocop:disable Lint/MissingSuper
+      def initialize
         reset
         @filter = false
       end

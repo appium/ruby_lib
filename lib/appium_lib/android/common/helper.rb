@@ -27,7 +27,7 @@ module Appium
         @filter = value.to_s.downcase
       end
 
-      def initialize # rubocop:disable Lint/MissingSuper
+      def initialize
         reset
         @filter   = false
       end
