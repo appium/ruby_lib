@@ -53,7 +53,7 @@ caps = if caps[:appium_lib]
        else
          caps.merge(appium_lib: { debug: true, wait: 1 })
        end
-caps[:app] = ENV['SAUCE_PATH'] if ENV['SAUCE_USERNAME'] && ENV['SAUCE_ACCESS_KEY']
+caps[:app] = ENV.fetch('SAUCE_PATH', nil) if ENV.fetch('SAUCE_USERNAME', nil) && ENV.fetch('SAUCE_ACCESS_KEY', nil)
 
 trace_files = []
 

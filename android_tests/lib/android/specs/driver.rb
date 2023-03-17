@@ -15,7 +15,7 @@
 # rake "android[driver]"
 describe 'driver' do
   def sauce?
-    ENV['UPLOAD_FILE'] && ENV['SAUCE_USERNAME']
+    ENV.fetch('UPLOAD_FILE', nil) && ENV.fetch('SAUCE_USERNAME', nil)
   end
 
   t 'load_settings' do
