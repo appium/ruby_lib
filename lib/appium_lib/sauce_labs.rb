@@ -45,13 +45,13 @@ module Appium
     #   sauce_labs.endpoint   #=> "ondemand.other-saucelabs.com:443/wd/hub"
     #
     def initialize(appium_lib_opts)
-      @username   = appium_lib_opts.fetch :sauce_username, ENV['SAUCE_USERNAME']
+      @username   = appium_lib_opts.fetch :sauce_username, ENV.fetch('SAUCE_USERNAME', nil)
       @username   = nil if !@username || (@username.is_a?(String) && @username.empty?)
 
-      @access_key = appium_lib_opts.fetch :sauce_access_key, ENV['SAUCE_ACCESS_KEY']
+      @access_key = appium_lib_opts.fetch :sauce_access_key, ENV.fetch('SAUCE_ACCESS_KEY', nil)
       @access_key = nil if !@access_key || (@access_key.is_a?(String) && @access_key.empty?)
 
-      @endpoint   = appium_lib_opts.fetch :sauce_endpoint, ENV['SAUCE_ENDPOINT']
+      @endpoint   = appium_lib_opts.fetch :sauce_endpoint, ENV.fetch('SAUCE_ENDPOINT', nil)
       @endpoint   = 'ondemand.saucelabs.com:443/wd/hub' if !@endpoint || (@endpoint.is_a?(String) && @endpoint.empty?)
     end
 

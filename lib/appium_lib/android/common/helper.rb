@@ -27,7 +27,7 @@ module Appium
         @filter = value.to_s.downcase
       end
 
-      def initialize
+      def initialize # rubocop:disable Lint/MissingSuper
         reset
         @filter   = false
       end
@@ -233,12 +233,12 @@ module Appium
       r_id = resource_id(value, " or @resource-id='#{value}'")
 
       if class_name == '*'
-        return "//*[contains(translate(@text,'#{value.upcase}', '#{value}'), '#{value}')" \
-               " or contains(translate(@content-desc,'#{value.upcase}', '#{value}'), '#{value}')" + r_id + ']'
+        return "//*[contains(translate(@text,'#{value.upcase}', '#{value}'), '#{value}') " \
+               "or contains(translate(@content-desc,'#{value.upcase}', '#{value}'), '#{value}')" + r_id + ']'
       end
 
-      "//#{class_name}[contains(translate(@text,'#{value.upcase}', '#{value}'), '#{value}')" \
-      " or contains(translate(@content-desc,'#{value.upcase}', '#{value}'), '#{value}')" + r_id + ']'
+      "//#{class_name}[contains(translate(@text,'#{value.upcase}', '#{value}'), '#{value}') " \
+      "or contains(translate(@content-desc,'#{value.upcase}', '#{value}'), '#{value}')" + r_id + ']'
     end
 
     # Returns a string that matches the first element that contains value

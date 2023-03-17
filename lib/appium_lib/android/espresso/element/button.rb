@@ -129,8 +129,8 @@ module Appium
 
         def _button_contains_string_xpath(class_name, value)
           r_id = resource_id(value, " or @resource-id='#{value}'")
-          "//#{class_name}[contains(translate(@text,'#{value.upcase}', '#{value}'), '#{value}')" \
-            " or contains(translate(@content-desc,'#{value.upcase}', '#{value}'), '#{value}')#{r_id}]"
+          "//#{class_name}[contains(translate(@text,'#{value.upcase}', '#{value}'), '#{value}') " \
+            "or contains(translate(@content-desc,'#{value.upcase}', '#{value}'), '#{value}')#{r_id}]"
         end
       end # module Element
     end # module Espresso
