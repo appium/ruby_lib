@@ -217,3 +217,5 @@ Lint/UselessRuby2Keywords: # new in 1.23
   Enabled: true
 Style/OpenStructUse: # new in 1.23
   Enabled: false
+Lint/RedundantStringCoercion:
+  Enabled: false
