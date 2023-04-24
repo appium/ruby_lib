@@ -170,7 +170,7 @@ module Appium
       @custom_url = @core.custom_url
       @export_session = @core.export_session
       @export_session_path = @core.export_session_path
-      @default_wait = @core.default_wait
+      @default_wait = @core.default_wait || 0
       @appium_port = @core.port
       @appium_wait_timeout = @core.wait_timeout
       @appium_wait_interval = @core.wait_interval
@@ -281,7 +281,7 @@ module Appium
         custom_url:          @core.custom_url,
         export_session:      @core.export_session,
         export_session_path: @core.export_session_path,
-        default_wait:        @core.default_wait,
+        default_wait:        @default_wait,
         sauce_username:      @sauce.username,
         sauce_access_key:    @sauce.access_key,
         sauce_endpoint:      @sauce.endpoint,
@@ -555,18 +555,18 @@ module Appium
       @driver.manage.timeouts.implicit_wait = 0
     end
 
-    # Set implicit wait. Default to @core.default_wait.
+    # Set implicit wait. Default to @default_wait.
     #
     # @example
     #
     #   set_wait 2
-    #   set_wait # @core.default_wait
+    #   set_wait # @default_wait
     #
     #
     # @param timeout [Integer] the timeout in seconds
     # @return [void]
     def set_wait(timeout = nil)
-      timeout = @core.default_wait if timeout.nil?
+      timeout = @default_wait if timeout.nil?
       @driver.manage.timeouts.implicit_wait = timeout
     end
 
@@ -582,7 +582,7 @@ module Appium
     #                             wait to after checking existence
     # @yield The block to call
     # @return [Boolean]
-    def exists(pre_check = 0, post_check = @core.default_wait)
+    def exists(pre_check = 0, post_check = @default_wait)
       # do not uset set_wait here.
       # it will cause problems with other methods reading the default_wait of 0
       # which then gets converted to a 1 second wait.
