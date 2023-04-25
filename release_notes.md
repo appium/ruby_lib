@@ -1,3 +1,25 @@
+#### v12.2.1 2023-04-24
+
+- [8e93297](https://github.com/appium/ruby_lib/commit/8e932971b216be735290757d1885498e8d57347f) Release 12.2.1
+- [a47a7ad](https://github.com/appium/ruby_lib/commit/a47a7ad905ce36b94568cdf54b45eeeffd3eaad5) docs: remove travis badge
+- [a93d286](https://github.com/appium/ruby_lib/commit/a93d286106d706ef5bb6d97680542b2f79483d4f) fix default_wait value (#983)
+- [712ab14](https://github.com/appium/ruby_lib/commit/712ab14dd6d798962b228da831bebd20f2c73403) chore: Update rubocop requirement from = 1.49.0 to = 1.50.2 (#982)
+- [363067e](https://github.com/appium/ruby_lib/commit/363067edd60ba9d557c37d4153398000f5447067) chore: Update rubocop requirement from = 1.48.1 to = 1.49.0 (#979)
+- [779cbc0](https://github.com/appium/ruby_lib/commit/779cbc020f10fb405c3b02a96a1215864a571028) chore: Update rubocop requirement from = 1.47.0 to = 1.48.1 (#978)
+- [225c510](https://github.com/appium/ruby_lib/commit/225c510042ccc1e32ed716b8fa4f6b617ebd409f) chore: Update rubocop requirement from = 1.46.0 to = 1.47.0 (#976)
+- [9715260](https://github.com/appium/ruby_lib/commit/9715260e2d752b3967cbfb2f052c4693d883f634) chore: Update rubocop requirement from = 1.45.1 to = 1.46.0 (#975)
+- [1fd3bf7](https://github.com/appium/ruby_lib/commit/1fd3bf7988d54e3cbf9be4cdd8a2ffef0ffffb6a) core#quit_driver is deprecated use core.driver.quit (#973)
+- [3850ae2](https://github.com/appium/ruby_lib/commit/3850ae2b3fc2e09389ba04cbf741369aab37f7c1) chore: Update fakefs requirement from ~> 2.3.0 to ~> 2.4.0 (#972)
+- [a4d1808](https://github.com/appium/ruby_lib/commit/a4d1808c381165559d8efd453337cfe2a0f5262d) chore: Update fakefs requirement from ~> 2.2.0 to ~> 2.3.0 (#971)
+- [a913380](https://github.com/appium/ruby_lib/commit/a9133804acc497ac72a48644bba3b77afb7a71b7) chore: Update fakefs requirement from ~> 2.0.0 to ~> 2.2.0 (#970)
+- [129bebb](https://github.com/appium/ruby_lib/commit/129bebb79c9eab5933bf10f76a56540a6995fffc) chore: Update rubocop requirement from = 1.44.1 to = 1.45.1 (#969)
+- [1781671](https://github.com/appium/ruby_lib/commit/17816716ee3f7bdcae8eeb24a4dc279735929524) chore: Update rubocop requirement from = 1.44.0 to = 1.44.1 (#968)
+- [852af7d](https://github.com/appium/ruby_lib/commit/852af7d2cbf08408f541bb7850a6bfef7b6270b6) chore: Update rubocop requirement from = 1.43.0 to = 1.44.0 (#967)
+- [06a3194](https://github.com/appium/ruby_lib/commit/06a3194c3e57006f8ac957b3aca2eeb2bf640d9f) chore: Update rubocop requirement from = 1.42.0 to = 1.43.0 (#966)
+- [a19f211](https://github.com/appium/ruby_lib/commit/a19f211a7ed0030de0b243db62c4be297cb584cb) chore: Update fakefs requirement from ~> 1.9.0 to ~> 2.0.0 (#965)
+- [9ea6c91](https://github.com/appium/ruby_lib/commit/9ea6c9126a90a405beb4d1bd86eebc4652db5698) chore: Update rubocop requirement from = 1.41.1 to = 1.42.0 (#964)
+
+
 #### v12.2.0 2022-12-25
 
 - [83c756d](https://github.com/appium/ruby_lib/commit/83c756d67c3f19deff6e9270856e0889f3de8b9b) Release 12.2.0
