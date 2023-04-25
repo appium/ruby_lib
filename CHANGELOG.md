@@ -3,6 +3,17 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## 12.2.1 - 2023-04-24
+
+### 1. Enhancements
+
+### 2. Bug fixes
+- fixed the `default_wait` value as zero (regression)
+    `set_wait` will set `0` if no `appium_lib: {wait: 0}` is not given.
+
+### 3. Deprecations
+
+
 ## 12.2.0 - 2022-12-25
 
 ### 1. Enhancements
