@@ -1,3 +1,9 @@
+#### v12.2.2 2023-04-27
+
+- [2f3ac2d](https://github.com/appium/ruby_lib/commit/2f3ac2df0e770e033076429059f5b96dde0565b5) Release 12.2.2
+- [aba17f0](https://github.com/appium/ruby_lib/commit/aba17f0ba8d91e070ad37ad6e1cf2dde60da3ef9) fix: tune quit in start_driver to not raise an exception there (#985)
+
+
 #### v12.2.1 2023-04-24
 
 - [8e93297](https://github.com/appium/ruby_lib/commit/8e932971b216be735290757d1885498e8d57347f) Release 12.2.1
