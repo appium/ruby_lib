@@ -459,6 +459,9 @@ module Appium
     # @return [void]
     def driver_quit
       @driver&.quit
+      @driver = nil
+    rescue Selenium::WebDriver::Error::WebDriverError
+      nil
     end
     alias quit_driver driver_quit
 
@@ -521,7 +524,13 @@ module Appium
     # @return [Selenium::WebDriver] the new global driver
     def start_driver(http_client_ops =
                          { http_client: ::Appium::Http::Default.new, open_timeout: 999_999, read_timeout: 999_999 })
-      @core.driver&.quit
+
+      # TODO: do not kill the previous session in the future version.
+      if $driver.nil?
+        driver_quit
+      else
+        $driver.driver_quit
+      end
 
       # If automationName is set only in server side, then the following automation_name should be nil before
       # starting driver.
