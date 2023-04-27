@@ -460,7 +460,7 @@ module Appium
     def driver_quit
       @driver&.quit
       @driver = nil
-    rescue
+    rescue Selenium::WebDriver::Error::WebDriverError
       nil
     end
     alias quit_driver driver_quit
