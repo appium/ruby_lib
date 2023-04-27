@@ -3,6 +3,12 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+
+## 12.3.3 - 2023-04-27
+
+### Bug fixes
+- Fix start_driver
+
 ## 12.2.1 - 2023-04-24
 
 ### 1. Enhancements
