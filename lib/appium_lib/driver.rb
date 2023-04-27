@@ -525,6 +525,7 @@ module Appium
     def start_driver(http_client_ops =
                          { http_client: ::Appium::Http::Default.new, open_timeout: 999_999, read_timeout: 999_999 })
 
+      # TODO: do not kill the previous session in the future version.
       if $driver.nil?
         driver_quit
       else
