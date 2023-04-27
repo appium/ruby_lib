@@ -459,6 +459,7 @@ module Appium
     # @return [void]
     def driver_quit
       @driver&.quit
+      @driver = nil
     end
     alias quit_driver driver_quit
 
