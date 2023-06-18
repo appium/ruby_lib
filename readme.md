@@ -18,7 +18,7 @@ We can avoid the class driver with current `ruby_lib`, but if you'd like to impl
 # Setup
 ## Requirement
 - [Appium](https://github.com/appium/appium#requirements)
-- Ruby: 2.7+
+- Ruby: 3.0+
 
 ### Ruby Lib and Appium
 
