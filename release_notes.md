@@ -1,3 +1,13 @@
+#### v13.0.0 2023-06-18
+
+- [a5add59](https://github.com/appium/ruby_lib/commit/a5add59a76fd88883c323566387c03b95a6db265) Release 13.0.0
+- [7af0cde](https://github.com/appium/ruby_lib/commit/7af0cdeab1afa8832cf7725fb14705f49b1fa1dd) feat: drop Ruby 2.7 (#990)
+- [2a3bee4](https://github.com/appium/ruby_lib/commit/2a3bee4ce4ebd82a6e8e27923332ec50c8252de5) chore: Update rubocop requirement from = 1.52.0 to = 1.52.1 (#989)
+- [669beaa](https://github.com/appium/ruby_lib/commit/669beaa5734d34ea5f6af4ccf345d594ba52225f) chore: Update rubocop requirement from = 1.51.0 to = 1.52.0 (#988)
+- [b96709e](https://github.com/appium/ruby_lib/commit/b96709e9b0833bfe898b35326564bfa8a819ac2a) chore: Update fakefs requirement from ~> 2.4.0 to ~> 2.5.0 (#987)
+- [d075903](https://github.com/appium/ruby_lib/commit/d075903ff5586a996a6775a3fbe938765c66c50c) chore: Update rubocop requirement from = 1.50.2 to = 1.51.0 (#986)
+
+
 #### v12.2.2 2023-04-27
 
 - [2f3ac2d](https://github.com/appium/ruby_lib/commit/2f3ac2df0e770e033076429059f5b96dde0565b5) Release 12.2.2
@@ -60,10 +70,6 @@
 - [a9b7558](https://github.com/appium/ruby_lib/commit/a9b75583e9923ade4f4fd16cb7fad03cc0f7c1be) docs: tweak
 - [600f867](https://github.com/appium/ruby_lib/commit/600f8670f97d91babfd84e1c6c1ef34d2682b883) docs: updating (#950)
 - [a81ea4b](https://github.com/appium/ruby_lib/commit/a81ea4b2a74ea71fa62c1756ffea2f85da57d49b) docd: udpate readme
-
-
-#### v12.1.0 2022-10-11
-
 - [8f20fe1](https://github.com/appium/ruby_lib/commit/8f20fe12b728195a8d2eb7d39004de4075caeff8) Release 12.1.0
 - [b00662a](https://github.com/appium/ruby_lib/commit/b00662a3976aeadc8d5385fd00129fb9dafa967c) chore: specify latest core
 - [98a3c6b](https://github.com/appium/ruby_lib/commit/98a3c6b9720eeff74f6eefda6e54196477854ed3) feat: update the minimal ruby lib core version (#946)
