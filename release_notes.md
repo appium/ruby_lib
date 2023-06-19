@@ -1,3 +1,9 @@
+#### v13.0.1 2023-06-19
+
+- [777e15d](https://github.com/appium/ruby_lib/commit/777e15d7c0a727cbe25b1e51a3ba7a68759a12db) Release 13.0.1
+- [d6a2afe](https://github.com/appium/ruby_lib/commit/d6a2afede2c39f242a47e995efe2ff047afe35cd) chore: Update appium_lib_core requirement from ~> 6.0 to >= 6, < 8 (#991)
+
+
 #### v13.0.0 2023-06-18
 
 - [a5add59](https://github.com/appium/ruby_lib/commit/a5add59a76fd88883c323566387c03b95a6db265) Release 13.0.0
