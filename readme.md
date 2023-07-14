@@ -32,7 +32,7 @@ We can avoid the class driver with current `ruby_lib`, but if you'd like to impl
 ### Appium 2
 
 ```bash
-$ npm install -g appium@next
+$ npm install --location=global appium
 $ appium driver install xcuitest  # proper driver name to install
 $ appium server
 ```
