@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'posix-spawn', '~> 0.3'
   s.add_development_dependency 'pry'
   s.add_development_dependency 'rake', '~> 13.0'
-  s.add_development_dependency 'rubocop', '1.58.0'
+  s.add_development_dependency 'rubocop', '1.59.0'
   s.add_development_dependency 'spec', '~> 5.3', '>= 5.3.4'
   s.add_development_dependency 'yard', '~> 0.9.11'
 
