@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'appium_thor', '~> 1.1', '>= 1.1.4'
   s.add_development_dependency 'fakefs', '~> 2.5.0'
-  s.add_development_dependency 'hashdiff', '~> 1.0.0'
+  s.add_development_dependency 'hashdiff', '~> 1.1.0'
   s.add_development_dependency 'posix-spawn', '~> 0.3'
   s.add_development_dependency 'pry'
   s.add_development_dependency 'rake', '~> 13.0'
