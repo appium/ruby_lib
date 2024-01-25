@@ -1,3 +1,28 @@
+#### v13.0.2 2024-01-25
+
+- [9c52fd3](https://github.com/appium/ruby_lib/commit/9c52fd3a8f0ef88d7c4e83f210ab22f817a30632) Release 13.0.2
+- [d14669e](https://github.com/appium/ruby_lib/commit/d14669ebfe091f06e5c248787c753419cee9ed6f) chore: restrict the ruby core version (#1014)
+- [202718c](https://github.com/appium/ruby_lib/commit/202718ca86a99a3443510c9992f21752c090136c) chore: Update rubocop requirement from = 1.60.0 to = 1.60.1 (#1011)
+- [4e93dce](https://github.com/appium/ruby_lib/commit/4e93dce9d7c4d86fb568ca60cfb8d9918f3b20f6) chore: Update rubocop requirement from = 1.59.0 to = 1.60.0 (#1010)
+- [cb2f421](https://github.com/appium/ruby_lib/commit/cb2f42108c600752b120e06917eea3b0a15f2b6f) chore: Update hashdiff requirement from ~> 1.0.0 to ~> 1.1.0 (#1009)
+- [7342c05](https://github.com/appium/ruby_lib/commit/7342c055090e49f03a8c5d5229c1d795d0c60fd5) chore: Update rubocop requirement from = 1.58.0 to = 1.59.0 (#1008)
+- [033eb4f](https://github.com/appium/ruby_lib/commit/033eb4f70cf5a6a5ba015bb86c1f61f2c4ca341e) chore: Update rubocop requirement from = 1.57.2 to = 1.58.0 (#1007)
+- [d3b9c56](https://github.com/appium/ruby_lib/commit/d3b9c56bfa5dbf9939499bd9d1b10639914a4a46) chore: Update rubocop requirement from = 1.57.1 to = 1.57.2 (#1006)
+- [fd8e103](https://github.com/appium/ruby_lib/commit/fd8e103a507e7c6a1815cfb0b590c84cedb8caca) chore: Update rubocop requirement from = 1.57.0 to = 1.57.1 (#1005)
+- [5d3e809](https://github.com/appium/ruby_lib/commit/5d3e809d1e7c05b276b5e19a05822204d4d852fb) chore: Update rubocop requirement from = 1.56.4 to = 1.57.0 (#1004)
+- [e6383f8](https://github.com/appium/ruby_lib/commit/e6383f84c723e08db670bd2b59f88d07da210eb5) chore: Update rubocop requirement from = 1.56.2 to = 1.56.4 (#1003)
+- [c37e87f](https://github.com/appium/ruby_lib/commit/c37e87f6b50e71e99bccf2c3601def497412482c) chore: Update rubocop requirement from = 1.56.1 to = 1.56.2 (#1001)
+- [ee96909](https://github.com/appium/ruby_lib/commit/ee969091251d3fb5ace65ef2d0f0d543880bb4dd) chore: Update rubocop requirement from = 1.56.0 to = 1.56.1 (#1000)
+- [4282704](https://github.com/appium/ruby_lib/commit/42827044578a215ac8cd024f15e56ccfb075a760) chore: Update rubocop requirement from = 1.55.1 to = 1.56.0 (#999)
+- [2083158](https://github.com/appium/ruby_lib/commit/20831586a664e39b51e953fc755860b5d1255a9a) chore: Update rubocop requirement from = 1.55.0 to = 1.55.1 (#998)
+- [7807e5d](https://github.com/appium/ruby_lib/commit/7807e5d2de3803c08a480d2e760b0d7d8957b06d) chore: Update rubocop requirement from = 1.54.2 to = 1.55.0 (#997)
+- [093449f](https://github.com/appium/ruby_lib/commit/093449fbf31eb8751b9c07affa2d4204312bd887) docs: readme.md
+- [e156bbd](https://github.com/appium/ruby_lib/commit/e156bbd5ef012db7a2c0472a7a51764a592b25a6) chore: add CODEOWNERS
+- [00a5b5d](https://github.com/appium/ruby_lib/commit/00a5b5dcef0a3bf53ed52f19ce765ffc9d22990e) chore: Update rubocop requirement from = 1.53.1 to = 1.54.2 (#996)
+- [d5c1caa](https://github.com/appium/ruby_lib/commit/d5c1caad5f2f91f6ecf66dfe137a54ee6693fb22) chore: Update rubocop requirement from = 1.53.0 to = 1.53.1 (#993)
+- [6aa7001](https://github.com/appium/ruby_lib/commit/6aa70019fd7d33fdbc35b292a640708f3a98a6e1) chore: Update rubocop requirement from = 1.52.1 to = 1.53.0 (#992)
+
+
 #### v13.0.1 2023-06-19
 
 - [777e15d](https://github.com/appium/ruby_lib/commit/777e15d7c0a727cbe25b1e51a3ba7a68759a12db) Release 13.0.1
