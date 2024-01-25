@@ -4,8 +4,13 @@ Commit based release not is [release_notes.md](./release_notes.md)
 Release tags are https://github.com/appium/ruby_lib/releases .
 
 
+## 14.0.0 - 2024-01-25
+- Use appium_lib_core  7.4.0 and up
+    - Removed deprecated `export_session` and `export_session_path`
+    - Please get the session id via `driver.session_id` intead
+
 ## 13.0.2 - 2024-01-25
-- Allow up to ruby lib core 7.3
+- Allow up to appium_lib_core 7.3
 
 ## 13.0.1 - 2023-06-19
 - Ruby 3.0+ is required
