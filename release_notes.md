@@ -1,3 +1,10 @@
+#### v14.0.0 2024-01-25
+
+- [50cf980](https://github.com/appium/ruby_lib/commit/50cf980b570acd7d2d95ea64d1d1b0225f96c73b) Release 14.0.0
+- [978ed76](https://github.com/appium/ruby_lib/commit/978ed769120338d817fd69dadeb3894549021245) bump the major version as deprecation code removal
+- [ea3cc5d](https://github.com/appium/ruby_lib/commit/ea3cc5d41653f1df4b8bdad1ec36f142c1430e47) feat: remove deprecated export_session (#1015)
+
+
 #### v13.0.2 2024-01-25
 
 - [9c52fd3](https://github.com/appium/ruby_lib/commit/9c52fd3a8f0ef88d7c4e83f210ab22f817a30632) Release 13.0.2
