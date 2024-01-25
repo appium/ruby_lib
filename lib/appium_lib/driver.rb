@@ -64,8 +64,6 @@ module Appium
     # read http://www.rubydoc.info/github/appium/ruby_lib_core/Appium/Core/Driver
     attr_reader :caps
     attr_reader :custom_url
-    attr_reader :export_session
-    attr_reader :export_session_path
     attr_reader :default_wait
     attr_reader :appium_port
     attr_reader :appium_device
@@ -168,8 +166,6 @@ module Appium
 
       @caps = @core.caps
       @custom_url = @core.custom_url
-      @export_session = @core.export_session
-      @export_session_path = @core.export_session_path
       @default_wait = @core.default_wait || 0
       @appium_port = @core.port
       @appium_wait_timeout = @core.wait_timeout
@@ -279,8 +275,6 @@ module Appium
         caps:                @core.caps,
         automation_name:     @core.automation_name,
         custom_url:          @core.custom_url,
-        export_session:      @core.export_session,
-        export_session_path: @core.export_session_path,
         default_wait:        @default_wait,
         sauce_username:      @sauce.username,
         sauce_access_key:    @sauce.access_key,

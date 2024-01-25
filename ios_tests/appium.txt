@@ -10,4 +10,3 @@ someCapability = "some_capability"
 wait = 30
 wait_timeout = 20
 wait_interval = 1
-export_session = true
