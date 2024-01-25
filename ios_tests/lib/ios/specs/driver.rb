@@ -46,8 +46,6 @@ describe 'driver' do
       expected = {
         automation_name:     :xcuitest,
         custom_url:          'http://127.0.0.1:4723/wd/hub',
-        export_session:      true,
-        export_session_path: '/tmp/appium_lib_session',
         default_wait:        30,
         port:                4723,
         device:              :ios,

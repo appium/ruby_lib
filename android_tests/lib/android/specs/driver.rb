@@ -53,8 +53,6 @@ describe 'driver' do
       expected = {
         automation_name:     :uiautomator2,
         custom_url:          'http://127.0.0.1:4723/wd/hub',
-        export_session:      false,
-        export_session_path: '/tmp/appium_lib_session',
         default_wait:        1,
         sauce_username:      nil,
         sauce_access_key:    nil,
