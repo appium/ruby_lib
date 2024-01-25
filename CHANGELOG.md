@@ -4,6 +4,9 @@ Commit based release not is [release_notes.md](./release_notes.md)
 Release tags are https://github.com/appium/ruby_lib/releases .
 
 
+## 13.0.2 - 2024-01-25
+- Allow up to ruby lib core 7.3
+
 ## 13.0.1 - 2023-06-19
 - Ruby 3.0+ is required
 
