@@ -321,7 +321,7 @@ module Appium
     # An entry point to chain W3C actions
     # Read https://www.rubydoc.info/github/appium/ruby_lib_core/Appium/Core/Base/Bridge/W3C#action-instance_method
     #
-    # @return [TouchAction|Selenium::WebDriver::PointerActions]
+    # @return [Selenium::WebDriver::PointerActions]
     #
     # @example
     #
@@ -358,7 +358,7 @@ module Appium
     def platform_version
       return [] if @driver.nil?
 
-      p_version = @driver.capabilities['platformVersion'] || @driver.session_capabilities['platformVersion']
+      p_version = @driver.capabilities['platformVersion']
       p_version.split('.').map(&:to_i)
     end
 
@@ -779,8 +779,7 @@ module Appium
 
     # @since Appium 1.16.0
     #
-    # Logs a custom event. The event is available via {::Appium::Core::Events#get} or
-    # <code>driver.session_capabilities['events']</code> with <code>eventTimings</code> capabilities.
+    # Logs a custom event. The event is available via {::Appium::Core::Events#get}.
     #
     # @param [String] vendor The vendor prefix for the event
     # @param [String] event The name of event

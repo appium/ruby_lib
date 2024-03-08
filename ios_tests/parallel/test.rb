@@ -53,9 +53,9 @@ class TestParallelRunThread
 
     sleep 5
 
-    # TouchAction
+    # TODO: fixme
     text_elem = @appium.text(@appium.app_strings['ButtonsExplain'])
-    @appium.tap x: 0, y: 0, element: text_elem
+    @appium.driver.action.click(text_elem).perform
     @appium.back
 
     teardown
@@ -92,9 +92,10 @@ class TestParallelRunProcess
 
     sleep 5
 
+    # TODO: fixme
     # TouchAction
     text_elem = text(app_strings['ButtonsExplain'])
-    tap x: 0, y: 0, element: text_elem
+    driver.action.click(text_elem).perform
     back
 
     teardown
