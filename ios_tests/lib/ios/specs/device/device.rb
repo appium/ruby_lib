@@ -40,10 +40,6 @@ describe 'device/device' do
     proc { screen }.must_raise ::Selenium::WebDriver::Error::NoSuchElementError
   end
 
-  t 'reset' do
-    reset
-  end
-
   t 'app_strings' do
     app_strings.must_include 'A Short Title Is Best'
     app_strings('en').must_include 'A Short Title Is Best'
