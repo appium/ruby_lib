@@ -4,11 +4,12 @@ Commit based release not is [release_notes.md](./release_notes.md)
 Release tags are https://github.com/appium/ruby_lib/releases .
 
 ## (not released yet)
-- Use appium_lib_core  8.0.0 and up
-    - Please refer to [the diff](https://github.com/appium/ruby_lib_core/blob/master/CHANGELOG.md#800---2024-03-08) about the details.
-    - Remove `Appium::MultiTouch` and `Appium::TouchAction`
-        `swipe` could use `mobile:swipe`, or w3c actions. `swipe`
-    - Please use [w3c actions](https://github.com/appium/ruby_lib/blob/master/docs/w3c.md) instead
+- Breaking
+    - Use appium_lib_core  8.0.0 and up
+        - Please refer to [the diff](https://github.com/appium/ruby_lib_core/blob/master/CHANGELOG.md#800---2024-03-08) about the details.
+        - Remove `Appium::MultiTouch` and `Appium::TouchAction`
+            `swipe` could use `mobile:swipe`, or w3c actions. `swipe`
+        - Please use [w3c actions](https://github.com/appium/ruby_lib/blob/master/docs/w3c.md) instead
 
 ## 14.0.0 - 2024-01-25
 - Use appium_lib_core  7.4.0 and up
