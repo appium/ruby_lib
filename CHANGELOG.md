@@ -3,11 +3,18 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## (not released yet)
+- Breaking
+    - Use appium_lib_core 8.0.0 and up
+        - Please refer to [the diff](https://github.com/appium/ruby_lib_core/blob/master/CHANGELOG.md#800---2024-03-08) about the details.
+        - Remove `Appium::MultiTouch` and `Appium::TouchAction`
+            - `swipe` could use `mobile:swipe`, or w3c actions. Multi-touch actions such as zoom/pinch can be written in w3c actions.
+            - Please use [w3c actions](https://github.com/appium/ruby_lib/blob/master/docs/w3c.md) instead. Several resources such as [test code in ruby_lib_core](https://github.com/appium/ruby_lib_core/blob/master/test/functional/common_w3c_actions.rb) also would help to check the syntax.
 
 ## 14.0.0 - 2024-01-25
 - Use appium_lib_core  7.4.0 and up
     - Removed deprecated `export_session` and `export_session_path`
-    - Please get the session id via `driver.session_id` intead
+    - Please get the session id via `driver.session_id` instead
 
 ## 13.0.2 - 2024-01-25
 - Allow up to appium_lib_core 7.3

@@ -11,11 +11,15 @@ dialect #=> :w3c
 el = find_element(:name, 'Pickers')
 driver.action.click(el).perform #=> work
 
+
+# Scroll/Swipe
 driver.action
       .move_to_location(500, 500).pointer_down(:left)
       .move_to_location(0, 700)
       .release.perform
 
+
+# Zoom in
 # multiple action chains
 f1 = driver.action.add_pointer_input(:touch, 'finger1')
 f1.create_pointer_move(duration: 1, x: 200, y: 500,
@@ -48,4 +52,4 @@ driver.perform_actions [f1, f2]
 ## Limitations
 - WebDriverAgent support only `touch` as a `pointer type`.
     - By default, [ruby_lib_core](https://github.com/appium/ruby_lib_core/blob/ab5d7c5ed31f318a9395e5aeafe1d0d655d3cff4/lib/appium_lib_core/common/base/w3c_bridge.rb#L26) generate `touch` based actions.
-    - About `pointer type` => [W3C](https://www.w3.org/TR/webdriver/#perform-actions) and [Simple WD Spec](https://github.com/jlipps/simple-wd-spec#perform-actions) 
+    - About `pointer type` => [W3C](https://www.w3.org/TR/webdriver/#perform-actions) and [Simple WD Spec](https://github.com/jlipps/simple-wd-spec#perform-actions)
