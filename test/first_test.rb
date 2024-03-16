@@ -12,22 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'bundler/gem_tasks'
-require 'rubocop/rake_task'
-require 'rake/testtask'
+require 'minitest/autorun'
+require 'minitest/reporters'
+require 'minitest'
 
-desc 'Execute RuboCop static code analysis'
-RuboCop::RakeTask.new(:rubocop) do |t|
-  t.patterns = %w(lib ios_tests android_tests)
-  t.options = %w(-D)
-  t.fail_on_error = true
+begin
+  Minitest::Reporters.use! [Minitest::Reporters::ProgressReporter.new]
+rescue Errno::ENOENT
+  # Ignore since Minitest::Reporters::JUnitReporter.new fails in deleting files, sometimes
 end
 
-namespace :test do
-  desc('Run all unit tests in test directory')
-  Rake::TestTask.new(:unit) do |t|
-    t.libs << 'test'
-    t.libs << 'lib'
-    t.test_files = FileList[ENV['TESTS'] ? ENV['TESTS'].split(',') : 'test/**/*_test.rb']
+class SampleTest < Minitest::Test
+  def test_test
+    assert(true)
   end
 end
