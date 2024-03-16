@@ -27,6 +27,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rubocop', '1.62.1'
   s.add_development_dependency 'spec', '~> 5.3', '>= 5.3.4'
   s.add_development_dependency 'yard', '~> 0.9.11'
+  s.add_development_dependency 'minitest', '~> 5.0'
+  s.add_development_dependency 'minitest-reporters', '~> 1.1'
 
   s.files = `git ls-files`.split("\n").reject { |v| v.match(/\A^(ios_tests|android_tests|grid|test_apps)\/.+/) }
 end
