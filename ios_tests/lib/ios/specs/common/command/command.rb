@@ -14,7 +14,7 @@
 
 # rake "ios[common/command/command]"
 describe 'common/command/command' do
-  t 'command' do
+  it 'command' do
     File.delete 'syslog.log' if File.exist? 'syslog.log'
 
     # A number of systemlog is quite small than Android.

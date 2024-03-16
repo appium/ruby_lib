@@ -26,35 +26,35 @@ describe 'ios/element/text' do
     screen.must_equal catalog
   end
 
-  t 'before_first' do
+  it 'before_first' do
     before_first
   end
 
-  t 'first_text' do
+  it 'first_text' do
     first_text.text.must_equal ui_catalog
   end
 
-  t 'last_text' do
+  it 'last_text' do
     expected = 'Steppers'
 
     last_text.text.must_equal expected
     last_text.name.must_equal expected
   end
 
-  t 'text' do
+  it 'text' do
     text('epp').text.must_equal uiview_steppers
     text(1).text.must_equal ui_catalog
     text('epp').name.must_equal uiview_steppers
   end
 
-  t 'texts' do
+  it 'texts' do
     exp = ['Date Picker', 'AAPLDatePickerController', 'Picker View', 'AAPLPickerViewController']
     texts.length.must_equal 24
     texts('icker').map(&:name).must_equal exp
     texts('AAPL').length.must_equal 11
   end
 
-  t 'text_exact' do
+  it 'text_exact' do
     # should fail
     set_wait 0
     act = begin
@@ -69,7 +69,7 @@ describe 'ios/element/text' do
     text_exact(ui_catalog).text.must_equal ui_catalog
   end
 
-  t 'texts_exact' do
+  it 'texts_exact' do
     texts_exact('UICatalog').length.must_equal 1
   end
 end

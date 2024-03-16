@@ -18,13 +18,13 @@ describe 'ios/mobile_methods' do
     screen.must_equal catalog
   end
 
-  t 'an element with class chain' do
+  it 'an element with class chain' do
     element = find_element :class_chain, '**/XCUIElementTypeStaticText'
 
     element.name.must_equal catalog
   end
 
-  t 'elements with class chain' do
+  it 'elements with class chain' do
     elements = find_elements :class_chain, 'XCUIElementTypeWindow/*/*'
 
     elements.size.must_equal 4

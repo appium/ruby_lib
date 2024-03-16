@@ -35,21 +35,21 @@ describe 'ios/element/alert' do
     end
   end
 
-  t 'before' do
+  it 'before' do
     nav_once
   end
 
-  t 'alert_accept' do
+  it 'alert_accept' do
     open_alert
     alert_accept
   end
 
-  t 'alert_dismiss' do
+  it 'alert_dismiss' do
     open_alert
     alert_dismiss
   end
 
-  t 'after_last' do
+  it 'after_last' do
     after_last
   end
 end

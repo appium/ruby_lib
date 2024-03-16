@@ -36,11 +36,11 @@ describe 'ios/xcuitest_gestures' do
     end
   end
 
-  t 'before_first' do
+  it 'before_first' do
     before_first
   end
 
-  t 'tap' do
+  it 'tap' do
     element = text('controls')
     one_finger_tap x: 0, y: 0, element: element
 
@@ -50,43 +50,43 @@ describe 'ios/xcuitest_gestures' do
     one_finger_tap x: rect.x + rect.width / 2, y: rect.y + rect.height / 2
   end
 
-  t 'double_tap' do
+  it 'double_tap' do
     element = button('Search')
     double_tap(element: element)
   end
 
-  t 'touch_and_hold' do
+  it 'touch_and_hold' do
     element = button('Tools')
     touch_and_hold(element: element, duration: 4.0)
     touch_and_hold(x: 100, y: 100)
   end
 
-  t 'scroll' do
+  it 'scroll' do
     scroll direction: 'down'
     text('Toolbars').displayed?.must_equal true
   end
 
-  t 'swipe' do
+  it 'swipe' do
     swipe direction: 'down'
     swipe direction: 'down'
 
     proc { text('Toolbars') }.must_raise Selenium::WebDriver::Error::NoSuchElementError
   end
 
-  t 'drag_from_to_for_duration' do
+  it 'drag_from_to_for_duration' do
     drag_from_to_for_duration from_x: 100, from_y: 100, to_x: 100, to_y: 400
     text('Action Sheets').displayed?.must_equal true
   end
 
-  t 'pinch' do
+  it 'pinch' do
     pinch(scale: 0.5, velocity: -1)
   end
 
-  t 'back to top' do
+  it 'back to top' do
     back_click
   end
 
-  t 'select_picker_wheel' do
+  it 'select_picker_wheel' do
     element = text('Picker View')
     one_finger_tap x: 0, y: 0, element: element
 
@@ -99,11 +99,11 @@ describe 'ios/xcuitest_gestures' do
     assert current_element.text != previous_value
   end
 
-  t 'back to top' do
+  it 'back to top' do
     back_click
   end
 
-  t 'alert' do
+  it 'alert' do
     wait_true do
       find_element(:name, 'Alert Views').click
       tag(ui_ios.navbar).name == 'Alert Views'
@@ -121,11 +121,11 @@ describe 'ios/xcuitest_gestures' do
     alert action: 'accept', button_label: 'Choice Two'
   end
 
-  t 'back to top' do
+  it 'back to top' do
     back_click
   end
 
-  t 'after_last' do
+  it 'after_last' do
     after_last
   end
 end

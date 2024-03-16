@@ -23,7 +23,7 @@ describe 'common/patch.rb' do
     screen.must_equal catalog
   end
 
-  t 'before_first' do
+  it 'before_first' do
     before_first
   end
 
@@ -32,13 +32,13 @@ describe 'common/patch.rb' do
   describe 'Appium::Core::Element methods' do
     # TODO: t 'value' do; end
 
-    t 'name' do
+    it 'name' do
       first_text.name.must_equal 'UICatalog'
     end
 
     # t 'tag_name' do; end # Doesn't work on Android
 
-    t 'location_rel' do
+    it 'location_rel' do
       loc = first_text.location_rel($driver)
       loc.x.class.must_equal String
       loc.y.class.must_equal String

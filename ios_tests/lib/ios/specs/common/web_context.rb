@@ -19,11 +19,11 @@ describe 'the web context' do
     screen.must_equal catalog
   end
 
-  t 'before_first' do
+  it 'before_first' do
     before_first
   end
 
-  t 'get_ios_inspect' do
+  it 'get_ios_inspect' do
     find_eles_by_predicate_include(value: 'Web').first.click
 
     wait_true { available_contexts.size >= 2 }
@@ -35,13 +35,13 @@ describe 'the web context' do
     page.start_with?("\nhtml\n").must_equal true
   end
 
-  t 'xcuitest_get_contexts' do
+  it 'xcuitest_get_contexts' do
     context = xcuitest_get_contexts
     assert_equal({ 'id' => 'NATIVE_APP' }, context.first)
     assert context[1]['id'].include?('WEBVIEW_')
   end
 
-  t 'after_last' do
+  it 'after_last' do
     set_context 'NATIVE_APP'
     back_click
   end

@@ -23,15 +23,15 @@ describe 'ios/patch' do
     leave_textfields
   end
 
-  t 'before_first' do
+  it 'before_first' do
     before_first
   end
 
-  t 'label' do
+  it 'label' do
     textfields[0].label.must_equal ''
   end
 
-  t 'type' do
+  it 'type' do
     text('text fields').click
 
     ele = first_textfield
@@ -41,7 +41,7 @@ describe 'ios/patch' do
     ele.text.must_equal 'ok'
   end
 
-  t 'after_last' do
+  it 'after_last' do
     after_last
   end
 end

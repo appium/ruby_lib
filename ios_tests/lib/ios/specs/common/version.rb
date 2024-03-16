@@ -17,15 +17,15 @@ describe 'version.rb' do
     screen.must_equal catalog
   end
 
-  t 'before_first' do
+  it 'before_first' do
     before_first
   end
 
-  t '::Appium::VERSION' do
+  it '::Appium::VERSION' do
     ::Appium::VERSION.must_match(/(\d+)\.(\d+).(\d+)/)
   end
 
-  t '::Appium::DATE' do
+  it '::Appium::DATE' do
     ::Appium::DATE.must_match(/(\d+)-(\d+)-(\d+)/)
   end
 end

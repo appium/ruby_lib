@@ -18,12 +18,12 @@ describe 'common/element/window' do
     screen.must_equal catalog
   end
 
-  t 'before_first' do
+  it 'before_first' do
     before_first
   end
 
   # rubocop:disable Lint/UnifiedInteger
-  t 'window_size' do
+  it 'window_size' do
     size = window_size
     size.width.class.must_equal Fixnum
     size.height.class.must_equal Fixnum

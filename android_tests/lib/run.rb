@@ -13,10 +13,20 @@
 # limitations under the License.
 
 require 'rubygems'
-require 'spec'
+require 'minitest/autorun'
+require 'minitest/reporters'
+require 'minitest'
 require 'fakefs/safe'
 require 'hashdiff'
 require_relative '../../lib/appium_lib'
+
+Appium::Logger.level = ::Logger::ERROR # Show Logger logs only they are error
+
+begin
+  Minitest::Reporters.use! [Minitest::Reporters::ProgressReporter.new]
+rescue Errno::ENOENT
+  # Ignore since Minitest::Reporters::JUnitReporter.new fails in deleting files, sometimes
+end
 
 # Run all Android tests:
 #   ruby run.rb android
@@ -103,5 +113,3 @@ end
 
 # Exit after tests.
 Minitest.after_run { $driver&.x }
-# Run Minitest. Provide test file array for tracing.
-Minitest.run_specs(trace: trace_files)

@@ -14,7 +14,7 @@
 
 # $ rake ios[device/image_comparison]
 describe 'device/image_comparison' do
-  t 'image comparison' do
+  it 'image comparison' do
     image1 = File.read './data/test_normal.png'
     image2 = File.read './data/test_has_blue.png'
 

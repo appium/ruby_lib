@@ -18,7 +18,7 @@ describe 'driver' do
     ENV.fetch('UPLOAD_FILE', nil) && ENV.fetch('SAUCE_USERNAME', nil)
   end
 
-  t 'load_settings' do
+  it 'load_settings' do
     appium_txt = File.join(Dir.pwd, 'appium.txt')
     parsed   = Appium.load_settings file: appium_txt, verbose: true
     apk_name = File.basename parsed[:caps][:app]
@@ -26,7 +26,7 @@ describe 'driver' do
   end
 
   describe 'Appium::Driver attributes' do
-    t 'no_wait' do
+    it 'no_wait' do
       no_wait
       proc { button('zz') }.must_raise Selenium::WebDriver::Error::NoSuchElementError
       set_wait
@@ -35,18 +35,18 @@ describe 'driver' do
     # attr_reader :default_wait, :app_path, :app_name,
     #            :app_package, :app_activity, :app_wait_activity,
     #            :sauce_username, :sauce_access_key, :port, :os, :debug
-    t 'default_wait attr' do
+    it 'default_wait attr' do
       set_wait 1
       default_wait.must_equal 1
       set_wait # restore default
     end
 
-    t 'app_path attr' do
+    it 'app_path attr' do
       apk_name = File.basename driver_attributes[:caps][:app]
       apk_name.must_equal 'api.apk'
     end
 
-    t 'verify all attributes' do
+    it 'verify all attributes' do
       actual = driver_attributes
       expected_app = File.absolute_path('../test_apps/api.apk')
 
@@ -59,7 +59,7 @@ describe 'driver' do
         sauce_endpoint:      'ondemand.saucelabs.com:443/wd/hub',
         port:                4723,
         device:              :android,
-        debug:               true,
+        debug:               itrue,
         listener:            nil,
         wait_timeout:        30, # default
         wait_interval:       0.5 # default
@@ -89,11 +89,11 @@ describe 'driver' do
   end
 
   describe 'Appium::Driver' do
-    t '$driver.class' do
+    it '$driver.class' do
       $driver.class.must_equal Appium::Driver
     end
 
-    t 'absolute_app_path' do
+    it 'absolute_app_path' do
       def absolute_app_path(path)
         $driver.class.absolute_app_path(caps: { app: path })
       end
@@ -136,11 +136,11 @@ describe 'driver' do
   end
 
   describe 'methods' do
-    t 'status' do
+    it 'status' do
       appium_server_version['build'].keys.sort.include? 'version'
     end
 
-    t 'server_version' do
+    it 'server_version' do
       server_version = appium_server_version['build']['version']
       if sauce?
         server_version.must_match 'Sauce OnDemand'
@@ -149,19 +149,19 @@ describe 'driver' do
       end
     end
 
-    t 'client_version' do
+    it 'client_version' do
       client_version = appium_client_version
       expected = { version: ::Appium::VERSION }
       client_version.must_equal expected
     end
 
-    t 'restart' do
+    it 'restart' do
       set_wait 1 # ensure wait is 1 before we restart.
       restart
       current_activity.must_equal '.ApiDemos'
     end
 
-    t 'driver' do
+    it 'driver' do
       driver.browser.must_equal('unknown')
     end
 
@@ -173,33 +173,33 @@ describe 'driver' do
     #   set_wait # posts value to server, it's not stored locally
     #   execute_script # 'mobile: ' is deprecated and plain execute_script unsupported
 
-    t 'default_wait' do
+    it 'default_wait' do
       set_wait 1
       default_wait.must_equal 1
     end
 
     # returns true unless an error is raised
-    t 'exists' do
+    it 'exists' do
       exists(0, 0) { true }.must_equal true
       exists(0, 0) { raise 'error' }.must_equal false
     end
 
     # any elements
-    t 'find_elements' do
+    it 'find_elements' do
       wait do
         find_elements(:class_name, 'android.widget.TextView').length.must_equal 13
       end
     end
 
     # any element
-    t 'find_element' do
+    it 'find_element' do
       wait do
         find_element(:class_name, 'android.widget.TextView').class.must_equal ::Appium::Core::Element
       end
     end
 
     # simple integration sanity test to check for unexpected exceptions
-    t 'set_location' do
+    it 'set_location' do
       set_location latitude: 55, longitude: -72, altitude: 33
     rescue Selenium::WebDriver::Error::UnknownError => e
       # on android this method is expected to raise with this message when running
@@ -211,11 +211,11 @@ describe 'driver' do
     end
 
     # settings
-    t 'get settings' do
+    it 'get settings' do
       get_settings.wont_be_nil
     end
 
-    t 'update settings' do
+    it 'update settings' do
       update_settings allowInvisibleElements: true
       get_settings['allowInvisibleElements'].must_equal true
     end

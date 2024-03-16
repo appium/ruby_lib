@@ -26,7 +26,7 @@ describe 'ios/element/button' do
     back_click
   end
 
-  t 'before_first' do
+  it 'before_first' do
     before_first
   end
 
@@ -34,7 +34,7 @@ describe 'ios/element/button' do
     'Gray'
   end
 
-  t 'button' do
+  it 'button' do
     # by index
     button(3).name.must_equal gray # or UIButtonTypeInfoDark in XCUITest
 
@@ -42,7 +42,7 @@ describe 'ios/element/button' do
     button('ray').name.must_equal gray
   end
 
-  t 'buttons' do
+  it 'buttons' do
     exp = ['Back', 'Back', 'Gray', 'Right pointing arrow']
 
     target_buttons = buttons('a')
@@ -50,24 +50,24 @@ describe 'ios/element/button' do
     target_buttons.length.must_equal exp.length
   end
 
-  t 'first_button' do
+  it 'first_button' do
     first_button.name.must_equal 'Back'
   end
 
-  t 'last_button' do
+  it 'last_button' do
     expected = 'Rounded'
     last_button.name.must_equal expected
   end
 
-  t 'button_exact' do
+  it 'button_exact' do
     button_exact(gray).name.must_equal gray
   end
 
-  t 'buttons_exact' do
+  it 'buttons_exact' do
     buttons_exact(gray).first.name.must_equal gray
   end
 
-  t 'after_last' do
+  it 'after_last' do
     after_last
   end
 end

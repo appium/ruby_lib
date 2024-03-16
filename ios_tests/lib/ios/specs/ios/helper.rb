@@ -18,28 +18,28 @@ describe 'ios/helper' do
     screen.must_equal catalog
   end
 
-  t 'before_first' do
+  it 'before_first' do
     before_first
   end
 
-  t 'ios_password' do
+  it 'ios_password' do
     ios_password.must_equal 8226.chr('UTF-8')
     ios_password(2).must_equal 8226.chr('UTF-8') * 2
   end
 
-  t 'page' do
+  it 'page' do
     page # writes to std out
   end
 
-  t 'id' do
+  it 'id' do
     id 'Buttons' # 'Various uses of UIButton'
   end
 
-  t 'platform_version' do
+  it 'platform_version' do
     platform_version.wont_be_empty
   end
 
-  t 'tags_include' do
+  it 'tags_include' do
     elements = tags_include class_names: %w(XCUIElementTypeTextView)
     elements.length.must_equal 0
 
@@ -50,7 +50,7 @@ describe 'ios/helper' do
     elements.length.must_equal 3
   end
 
-  t 'tags_exact' do
+  it 'tags_exact' do
     elements = tags_exact class_names: %w()
     elements.length.must_equal 0
 

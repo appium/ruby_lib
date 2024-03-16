@@ -27,23 +27,23 @@ describe 'ios/element/generic' do
     element.name.must_equal uibutton_text
   end
 
-  t 'before_first' do
+  it 'before_first' do
     before_first
   end
 
-  t 'find' do
+  it 'find' do
     verify find 'tons'
   end
 
-  t 'finds' do
+  it 'finds' do
     verify finds 'tons'
   end
 
-  t 'find_exact' do
+  it 'find_exact' do
     verify find_exact uibutton_text
   end
 
-  t 'finds_exact' do
+  it 'finds_exact' do
     elements = finds_exact uibutton_text
     elements.is_a?(Array).must_equal true
     verify elements
