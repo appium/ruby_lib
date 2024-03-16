@@ -23,11 +23,9 @@ RuboCop::RakeTask.new(:rubocop) do |t|
   t.fail_on_error = true
 end
 
-namespace :test do
-  desc('Run all unit tests in test directory')
-  Rake::TestTask.new(:unit) do |t|
-    t.libs << 'test'
-    t.libs << 'lib'
-    t.test_files = FileList[ENV['TESTS'] ? ENV['TESTS'].split(',') : 'test/**/*_test.rb']
-  end
+desc('Run all unit tests in test directory')
+Rake::TestTask.new(:test) do |t|
+  t.libs << 'test'
+  t.libs << 'lib'
+  t.test_files = FileList[ENV['TESTS'] ? ENV['TESTS'].split(',') : 'test/**/*_test.rb']
 end
