@@ -22,6 +22,8 @@ require_relative '../../lib/appium_lib'
 
 Appium::Logger.level = ::Logger::ERROR # Show Logger logs only they are error
 
+Minitest::Test.i_suck_and_my_tests_are_order_dependent!
+
 begin
   Minitest::Reporters.use! [Minitest::Reporters::ProgressReporter.new]
 rescue Errno::ENOENT
@@ -37,7 +39,7 @@ end
 def start_driver(caps)
   driver = Appium::Driver.new(caps, true)
   # Tests expect methods defined on the minispec object
-  Appium.promote_appium_methods ::Minitest::Spec, driver
+  Appium.promote_appium_methods Minitest::Test, driver
   driver.start_driver
 end
 
