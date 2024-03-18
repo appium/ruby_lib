@@ -13,8 +13,7 @@
 # limitations under the License.
 
 # rake "ios[ios/element/textfield]"
-
-class IOSTest
+class IosTest
   class Element
     class Textfield < Minitest::Test
       def enter_text
