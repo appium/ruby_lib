@@ -12,20 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-describe 'version.rb' do
-  def before_first
-    screen.must_equal catalog
-  end
+class IosTest
+  class Common
+    class Version < Minitest::Test
+      def test_01_before_first
+        assert_equal screen, catalog
+      end
 
-  it 'before_first' do
-    before_first
-  end
+      def test_02_appium_version
+        assert_match /(\d+)\.(\d+).(\d+)/, ::Appium::VERSION
+      end
 
-  it '::Appium::VERSION' do
-    ::Appium::VERSION.must_match(/(\d+)\.(\d+).(\d+)/)
-  end
-
-  it '::Appium::DATE' do
-    ::Appium::DATE.must_match(/(\d+)-(\d+)-(\d+)/)
+      def test_03_appium_date
+        assert_match /(\d+)-(\d+)-(\d+)/, ::Appium::DATE
+      end
+    end
   end
 end

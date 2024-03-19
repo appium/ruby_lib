@@ -18,30 +18,22 @@
 #
 
 # bundle exec rake "ios[common/patch]"
-describe 'common/patch.rb' do
-  def before_first
-    screen.must_equal catalog
-  end
+class IosTest
+  class Common
+    class Patch < Minitest::Test
+      def test_01_before_first
+        assert_equal screen, catalog
+      end
 
-  it 'before_first' do
-    before_first
-  end
+      def test_02_appium_core_element_method_name
+        assert_equal first_text.name, 'UICatalog'
+      end
 
-  # Attributes are busted in Android.
-  # Blocked on https://github.com/appium/appium/issues/628
-  describe 'Appium::Core::Element methods' do
-    # TODO: t 'value' do; end
-
-    it 'name' do
-      first_text.name.must_equal 'UICatalog'
-    end
-
-    # t 'tag_name' do; end # Doesn't work on Android
-
-    it 'location_rel' do
-      loc = first_text.location_rel($driver)
-      loc.x.class.must_equal String
-      loc.y.class.must_equal String
+      def test_03_appium_core_element_method_location_rel
+        loc = first_text.location_rel($driver)
+        assert_equal loc.x.class, String
+        assert_equal loc.y.class, String
+      end
     end
   end
 end
