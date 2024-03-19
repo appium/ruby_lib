@@ -13,48 +13,55 @@
 # limitations under the License.
 
 # $ rake "ios[device/device]"
-describe 'device/device' do
-  def before_first
-    screen.must_equal catalog
-  end
 
-  # go back to the main page
-  def go_back
-    back
-    wait { find_ele_by_predicate_include(class_name: ui_ios.navbar, value: 'UICatalog') }
-  end
+class IosTest
+  class Device
+    class Device < Minitest::Test
+      # go back to the main page
+      def go_back
+        back
+        wait { find_ele_by_predicate_include(class_name: ui_ios.navbar, value: 'UICatalog') }
+      end
 
-  it 'before_first' do
-    before_first
-  end
+      def test_01_before_first
+        assert_equal screen, catalog
+      end
 
-  it 'app_installed' do
-    installed = app_installed? 'Derrp'
-    installed.must_equal false
-  end
+      def test_02_app_installed
+        installed = app_installed? 'Derrp'
+        assert_equal installed, false
+      end
 
-  it 'background_app homescreen' do
-    background_app(-1) # background_app(nil) should work as same.
+      def test_03_background_app_homescreen
+        bundle_id = 'com.example.apple-samplecode.UICatalog'
 
-    # The app goes to background and never come back
-    proc { screen }.must_raise ::Selenium::WebDriver::Error::NoSuchElementError
-  end
+        background_app(-1) # background_app(nil) should work as same.
 
-  it 'app_strings' do
-    app_strings.must_include 'A Short Title Is Best'
-    app_strings('en').must_include 'A Short Title Is Best'
-  end
+        # The app goes to background and never come back
+        wait do
+          assert_equal driver.app_state(bundle_id), :running_in_background_suspended
+        end
 
-  it 'action_chain' do
-    element = text('Buttons')
-    one_finger_tap x: 0, y: 0, element: element
+        driver.activate_app bundle_id
+      end
 
-    wait { button 'UICatalog' } # successfully transitioned to buttons page
-    go_back
-  end
+      def test_04_app_strings
+        assert_includes app_strings, 'A Short Title Is Best'
+        assert_includes app_strings('en'), 'A Short Title Is Best'
+      end
 
-  it 'swipe' do
-    action.move_to_location(75, 500).pointer_down(:left)
-          .move_to_location(75, 20).release.perform
+      def test_05_action_chain
+        element = text('Buttons')
+        one_finger_tap x: 0, y: 0, element: element
+
+        wait { button 'UICatalog' } # successfully transitioned to buttons page
+        go_back
+      end
+
+      def test_06_swipe
+        action.move_to_location(75, 500).pointer_down(:left)
+              .move_to_location(75, 20).release.perform
+      end
+    end
   end
 end
