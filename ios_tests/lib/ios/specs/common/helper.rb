@@ -13,240 +13,266 @@
 # limitations under the License.
 
 # rake "ios[common/helper]"
-describe 'common/helper.rb' do
-  def before_first
-    screen.must_equal catalog
-  end
+class IosTest
+  class Common
+    class Helper < Minitest::Test
+      def setup
+        @wait_opts = { timeout: 0.2, interval: 0.2 } # max_wait, interval
+      end
 
-  it 'before_first' do
-    before_first
-  end
+      def test_01_before_first
+        assert_equal screen, catalog
+      end
 
-  wait_opts = { timeout: 0.2, interval: 0.2 } # max_wait, interval
+      # There's no `must_not_raise` as the opposite of must_raise
+      #
+      # By default code is expected to not raise exceptions.
+      # must_not_raise is a no-op.
 
-  # There's no `must_not_raise` as the opposite of must_raise
-  #
-  # By default code is expected to not raise exceptions.
-  # must_not_raise is a no-op.
+      # wait is a success unless an error is raised
+      # max_wait=0 is infinity to use 0.1
+      def test_02_wait
+        # successful wait should not raise error
+        wait(@wait_opts) { true }
+        wait(@wait_opts) { false }
+        wait(@wait_opts) { nil }
 
-  # wait is a success unless an error is raised
-  # max_wait=0 is infinity to use 0.1
-  it 'wait' do
-    # successful wait should not raise error
-    wait(wait_opts) { true }
-    wait(wait_opts) { false }
-    wait(wait_opts) { nil }
+        # failed wait should error
+        assert_raises ::Appium::Core::Wait::TimeoutError do
+          wait(@wait_opts) { raise }
+        end
 
-    # failed wait should error
-    proc { wait(wait_opts) { raise } }.must_raise ::Appium::Core::Wait::TimeoutError
+        # regular rescue will not handle exceptions outside of StandardError hierarchy
+        # must rescue Exception explicitly to rescue everything
+        assert_raises ::Appium::Core::Wait::TimeoutError do
+          wait(@wait_opts) { raise NoMemoryError }
+        end
 
-    # regular rescue will not handle exceptions outside of StandardError hierarchy
-    # must rescue Exception explicitly to rescue everything
-    proc { wait(wait_opts) { raise NoMemoryError } }.must_raise ::Appium::Core::Wait::TimeoutError
-    proc { wait(timeout: 0.2, interval: 0.0) { raise NoMemoryError } }.must_raise ::Appium::Core::Wait::TimeoutError
+        assert_raises ::Appium::Core::Wait::TimeoutError do
+          wait(timeout: 0.2, interval: 0.0) { raise NoMemoryError }
+        end
+        e = assert_raises ArgumentError do
+          wait(invalidkey: 2) { true }
+        end
+        assert_equal 'unknown keyword: :invalidkey', e.message
+      end
 
-    proc { wait(invalidkey: 2) { true } }.must_raise ArgumentError do |e|
-      assert_equal 'unknown keyword: invalidkey', e.message
+      def test_03_ignore
+        # ignore should rescue all exceptions
+        ignore { true }
+        ignore { false }
+        ignore { nil }
+        ignore { raise }
+        ignore { raise NoMemoryError }
+      end
+
+      # wait_true is a success unless the value is not true
+      def test_04_wait_true
+        # successful wait should not error
+        wait_true(@wait_opts) { true }
+
+        # failed wait should error
+        assert_raises ::Appium::Core::Wait::TimeoutError do
+          wait_true(@wait_opts) { false }
+        end
+        assert_raises ::Appium::Core::Wait::TimeoutError do
+          wait_true(@wait_opts) { nil }
+        end
+
+
+        # raise should error
+        assert_raises ::Appium::Core::Wait::TimeoutError do
+          wait_true(@wait_opts) { raise }
+        end
+
+
+        # regular rescue will not handle exceptions outside of StandardError hierarchy
+        # must rescue Exception explicitly to rescue everything
+        assert_raises ::Appium::Core::Wait::TimeoutError do
+          wait_true(@wait_opts) { raise NoMemoryError }
+        end
+        assert_raises ::Appium::Core::Wait::TimeoutError do
+          wait_true(timeout: 0.2, interval: 0.0) { raise NoMemoryError }
+        end
+
+
+        e = assert_raises ArgumentError do
+          wait_true(invalidkey: 2) { true }
+        end
+        assert_equal 'unknown keyword: :invalidkey', e.message
+      end
+
+      def test_06_back
+        # start page
+        assert_equal tag(ui_ios.navbar).name, 'UICatalog'
+        # nav to new page.
+        wait_true do
+          text('buttons').click
+          tag(ui_ios.navbar).name == 'Buttons'
+        end
+
+        assert_equal tag(ui_ios.navbar).name, 'Buttons'
+        # go back
+        back_click
+        # start page
+        assert_equal tag(ui_ios.navbar).name, 'UICatalog'
+      end
+
+      def test_07_session_id
+        # Sauce doesn't return '-' so make them optional.
+        assert_match /\h{8}-?\h{4}-?\h{4}-?\h{4}-?\h{12}/, session_id
+      end
+
+      def test_08_xpath
+        assert_equal xpath("//#{ui_ios.static_text}").name, 'UICatalog'
+      end
+
+      def test_09_xpaths
+        assert_equal xpaths("//#{ui_ios.static_text}").length, 35
+      end
+
+      def uibutton_text
+        'Buttons'
+      end
+
+      def action_sheets
+        'Action Sheets'
+      end
+
+      def test_10_ele_index
+        assert_equal ele_index(ui_ios.static_text, 2).name, action_sheets
+      end
+
+      # TODO: 'string_attr_exact'
+
+      def test_11_find_ele_by_attr
+        el_id = find_ele_by_attr(ui_ios.static_text, 'name', uibutton_text).instance_variable_get :@id
+        assert_match /\d+/, el_id
+      end
+
+      def test_12_find_eles_by_attr
+        # '!' clears the input buffer in Pry so make sure there's
+        # no space after the !
+        set_wait 1
+        # empty array returned when no match
+        found = !find_eles_by_attr(ui_ios.static_text, 'name', uibutton_text).empty?
+        assert_equal found, true
+
+        found = !find_eles_by_attr(ui_ios.static_text, 'name', 'zz').empty?
+        assert_equal found, false
+        set_wait
+      end
+
+      def test_13_find_ele_by_predicate
+        el_text = find_ele_by_predicate(value: uibutton_text).text
+        assert_equal el_text, uibutton_text
+
+        el_name = find_ele_by_predicate(value: uibutton_text).name
+        assert_equal el_name, uibutton_text
+      end
+
+      def test_14_find_eles_by_predicate
+        ele_count = find_eles_by_predicate(value: uibutton_text).length
+        assert_equal ele_count, 1
+
+        ele_count = find_eles_by_predicate(value: 'zz').length
+        assert_equal ele_count, 0
+      end
+
+      # TODO: 'string_attr_include'
+
+      def test_15_find_ele_by_attr_include
+        el_text = find_ele_by_attr_include(ui_ios.static_text, :name, 'button').text
+        assert_equal el_text, uibutton_text
+
+        el_name = find_ele_by_attr_include(ui_ios.static_text, :name, 'button').name
+        assert_equal el_name, uibutton_text
+      end
+
+      def test_16_find_eles_by_attr_include
+        ele_count = find_eles_by_attr_include(ui_ios.static_text, :name, 'e').length
+        assert_equal ele_count, 31
+      end
+
+      def test_17_find_ele_by_predicate_include
+        el_text = find_ele_by_predicate_include(value: 'button').text
+        assert_equal el_text, uibutton_text
+
+        el_name = find_ele_by_predicate_include(value: 'button').name
+        assert_equal el_name, uibutton_text
+      end
+
+      def test_18_find_eles_by_predicate_include
+        assert_equal find_eles_by_predicate_include(value: 'e').length, 49
+      end
+
+      def test_19_first_ele
+        assert_equal first_ele(ui_ios.static_text).name, 'UICatalog'
+      end
+
+      def test_20_last_ele
+        expected = 'Steppers'
+
+        el = last_ele(ui_ios.static_text)
+        assert_equal el.text, expected
+        assert_equal el.name, expected
+      end
+
+      # t 'source' do # tested by get_source
+
+      def test_21_get_source
+        assert_equal get_source.class, String
+      end
+
+      def test_22_invalid_id_should_error
+        assert_raises Selenium::WebDriver::Error::NoSuchElementError do
+          id 'does not exist'
+        end
+
+        assert_raises Selenium::WebDriver::Error::NoSuchElementError do
+          id 'android:id/text1'
+        end
+      end
+
+      def test_23_tag
+        assert_equal tag(ui_ios.navbar).name, 'UICatalog'
+      end
+
+      def test_24_tags
+        assert_equal tags(ui_ios.table_cell).length, 12
+      end
+
+      def test_25_find_eles_by_attr_include_length
+        assert_equal find_eles_by_attr_include(ui_ios.static_text, 'name', 'AAPL').length, 16
+      end
+
+      def test_26_get_page_class
+        act = get_page_class
+
+        assert(act.split("\n").length >= 7)
+        assert_includes act, '25x XCUIElementTypeOther'
+        assert_includes act, '24x XCUIElementTypeStaticText'
+        assert_includes act, '12x XCUIElementTypeCell'
+        assert_includes act, '1x XCUIElementTypeTable'
+        assert_includes act, '1x XCUIElementTypeNavigationBar'
+        assert_includes act, '1x XCUIElementTypeWindow'
+        assert_includes act, '1x XCUIElementTypeApplication'
+      end
+
+      # TODO: write tests
+      # page_class
+      # px_to_window_rel
+      # lazy_load_strings
+      # xml_keys
+      # xml_values
+      # resolve_id
+      # string_visible_contains
+      # xpath_visible_contains
+      # xpaths_visible_contains
+      # string_visible_exact
+      # xpath_visible_exact
+      # xpaths_visible_exact
+      # raise_no_element_error
     end
   end
-
-  it 'ignore' do
-    # ignore should rescue all exceptions
-    ignore { true }
-    ignore { false }
-    ignore { nil }
-    ignore { raise }
-    ignore { raise NoMemoryError }
-  end
-
-  # wait_true is a success unless the value is not true
-  it 'wait_true' do
-    # successful wait should not error
-    wait_true(wait_opts) { true }
-
-    # failed wait should error
-    proc { wait_true(wait_opts) { false } }.must_raise ::Appium::Core::Wait::TimeoutError
-    proc { wait_true(wait_opts) { nil } }.must_raise ::Appium::Core::Wait::TimeoutError
-
-    # raise should error
-    proc { wait_true(wait_opts) { raise } }.must_raise ::Appium::Core::Wait::TimeoutError
-
-    # regular rescue will not handle exceptions outside of StandardError hierarchy
-    # must rescue Exception explicitly to rescue everything
-    proc { wait_true(wait_opts) { raise NoMemoryError } }.must_raise ::Appium::Core::Wait::TimeoutError
-    proc { wait_true(timeout: 0.2, interval: 0.0) { raise NoMemoryError } }
-      .must_raise ::Appium::Core::Wait::TimeoutError
-
-    proc { wait_true(invalidkey: 2) { true } }.must_raise ArgumentError do
-      assert_equal 'unknown keyword: invalidkey', e.message
-    end
-  end
-
-  it 'back' do
-    # start page
-    tag(ui_ios.navbar).name.must_equal 'UICatalog'
-    # nav to new page.
-    wait_true do
-      text('buttons').click
-      tag(ui_ios.navbar).name == 'Buttons'
-    end
-
-    tag(ui_ios.navbar).name.must_equal 'Buttons'
-    # go back
-    back_click
-    # start page
-    tag(ui_ios.navbar).name.must_equal 'UICatalog'
-  end
-
-  it 'session_id' do
-    # Sauce doesn't return '-' so make them optional.
-    session_id.must_match(/\h{8}-?\h{4}-?\h{4}-?\h{4}-?\h{12}/)
-  end
-
-  it 'xpath' do
-    xpath("//#{ui_ios.static_text}").name.must_equal 'UICatalog'
-  end
-
-  it 'xpaths' do
-    xpaths("//#{ui_ios.static_text}").length.must_equal 35
-  end
-
-  def uibutton_text
-    'Buttons'
-  end
-
-  def action_sheets
-    'Action Sheets'
-  end
-
-  it 'ele_index' do
-    ele_index(ui_ios.static_text, 2).name.must_equal action_sheets
-  end
-
-  # TODO: 'string_attr_exact'
-
-  it 'find_ele_by_attr' do
-    el_id = find_ele_by_attr(ui_ios.static_text, 'name', uibutton_text).instance_variable_get :@id
-    el_id.must_match(/\d+/)
-  end
-
-  it 'find_eles_by_attr' do
-    # '!' clears the input buffer in Pry so make sure there's
-    # no space after the !
-    set_wait 1
-    # empty array returned when no match
-    found = !find_eles_by_attr(ui_ios.static_text, 'name', uibutton_text).empty?
-    found.must_equal true
-
-    found = !find_eles_by_attr(ui_ios.static_text, 'name', 'zz').empty?
-    found.must_equal false
-    set_wait
-  end
-
-  it 'find_ele_by_predicate' do
-    el_text = find_ele_by_predicate(value: uibutton_text).text
-    el_text.must_equal uibutton_text
-
-    el_name = find_ele_by_predicate(value: uibutton_text).name
-    el_name.must_equal uibutton_text
-  end
-
-  it 'find_eles_by_predicate' do
-    ele_count = find_eles_by_predicate(value: uibutton_text).length
-    ele_count.must_equal 1
-
-    ele_count = find_eles_by_predicate(value: 'zz').length
-    ele_count.must_equal 0
-  end
-
-  # TODO: 'string_attr_include'
-
-  it 'find_ele_by_attr_include' do
-    el_text = find_ele_by_attr_include(ui_ios.static_text, :name, 'button').text
-    el_text.must_equal uibutton_text
-
-    el_name = find_ele_by_attr_include(ui_ios.static_text, :name, 'button').name
-    el_name.must_equal uibutton_text
-  end
-
-  it 'find_eles_by_attr_include' do
-    ele_count = find_eles_by_attr_include(ui_ios.static_text, :name, 'e').length
-    ele_count.must_equal 31
-  end
-
-  it 'find_ele_by_predicate_include' do
-    el_text = find_ele_by_predicate_include(value: 'button').text
-    el_text.must_equal uibutton_text
-
-    el_name = find_ele_by_predicate_include(value: 'button').name
-    el_name.must_equal uibutton_text
-  end
-
-  it 'find_eles_by_predicate_include' do
-    find_eles_by_predicate_include(value: 'e').length.must_equal 49
-  end
-
-  it 'first_ele' do
-    first_ele(ui_ios.static_text).name.must_equal 'UICatalog'
-  end
-
-  it 'last_ele' do
-    expected = 'Steppers'
-
-    el = last_ele(ui_ios.static_text)
-    el.text.must_equal expected
-    el.name.must_equal expected
-  end
-
-  # t 'source' do # tested by get_source
-
-  it 'get_source' do
-    get_source.class.must_equal String
-  end
-
-  it 'invalid id should error' do
-    proc { id 'does not exist' }.must_raise Selenium::WebDriver::Error::NoSuchElementError
-
-    # resource id should error on ios
-    proc { id 'android:id/text1' }.must_raise Selenium::WebDriver::Error::NoSuchElementError
-  end
-
-  it 'tag' do
-    tag(ui_ios.navbar).name.must_equal 'UICatalog'
-  end
-
-  it 'tags' do
-    tags(ui_ios.table_cell).length.must_equal 12
-  end
-
-  it 'find_eles_by_attr_include_length' do
-    find_eles_by_attr_include(ui_ios.static_text, 'name', 'AAPL').length.must_equal 16
-  end
-
-  it 'get_page_class' do
-    act = get_page_class
-    act.split("\n").length.must_be :>=, 7
-    act.must_include '25x XCUIElementTypeOther'
-    act.must_include '24x XCUIElementTypeStaticText'
-    act.must_include '12x XCUIElementTypeCell'
-    act.must_include '1x XCUIElementTypeTable'
-    act.must_include '1x XCUIElementTypeNavigationBar'
-    act.must_include '1x XCUIElementTypeWindow'
-    act.must_include '1x XCUIElementTypeApplication'
-  end
-
-  # TODO: write tests
-  # page_class
-  # px_to_window_rel
-  # lazy_load_strings
-  # xml_keys
-  # xml_values
-  # resolve_id
-  # string_visible_contains
-  # xpath_visible_contains
-  # xpaths_visible_contains
-  # string_visible_exact
-  # xpath_visible_exact
-  # xpaths_visible_exact
-  # raise_no_element_error
 end
