@@ -20,11 +20,11 @@ class IosTest
       end
 
       def test_02_appium_version
-        assert_match /(\d+)\.(\d+).(\d+)/, ::Appium::VERSION
+        assert_match(/(\d+)\.(\d+).(\d+)/, ::Appium::VERSION)
       end
 
       def test_03_appium_date
-        assert_match /(\d+)-(\d+)-(\d+)/, ::Appium::DATE
+        assert_match(/(\d+)-(\d+)-(\d+)/, ::Appium::DATE)
       end
     end
   end

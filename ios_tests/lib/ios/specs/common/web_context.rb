@@ -14,35 +14,36 @@
 
 # Tests specifically for areas where the web_context differs in behaviour
 # rake "ios[common/web_context]"
-describe 'the web context' do
-  def before_first
-    screen.must_equal catalog
-  end
 
-  it 'before_first' do
-    before_first
-  end
+class IosTest
+  class Common
+    class WebContext < Minitest::Test
+      def test_01_before_first
+        assert_equal screen, catalog
+      end
 
-  it 'get_ios_inspect' do
-    find_eles_by_predicate_include(value: 'Web').first.click
+      def test_02_get_ios_inspect
+        find_eles_by_predicate_include(value: 'Web').first.click
 
-    wait_true { available_contexts.size >= 2 }
-    web_view_context = available_contexts.find { |c| c.start_with? 'WEBVIEW' } # Get WEBVIEW_59153.1 for example.
+        wait_true { available_contexts.size >= 2 }
+        web_view_context = available_contexts.find { |c| c.start_with? 'WEBVIEW' } # Get WEBVIEW_59153.1 for example.
 
-    set_context web_view_context
-    current_context.must_equal web_view_context
-    sleep 1 # Give a chance to load
-    page.start_with?("\nhtml\n").must_equal true
-  end
+        set_context web_view_context
+        assert_equal current_context, web_view_context
+        sleep 1 # Give a chance to load
+        assert_equal page.start_with?("\nhtml\n"), true
+      end
 
-  it 'xcuitest_get_contexts' do
-    context = xcuitest_get_contexts
-    assert_equal({ 'id' => 'NATIVE_APP' }, context.first)
-    assert context[1]['id'].include?('WEBVIEW_')
-  end
+      def test_03_xcuitest_get_contexts
+        context = xcuitest_get_contexts
+        assert_equal({ 'id' => 'NATIVE_APP' }, context.first)
+        assert context[1]['id'].include?('WEBVIEW_')
+      end
 
-  it 'after_last' do
-    set_context 'NATIVE_APP'
-    back_click
+      def test_04_after_last
+        set_context 'NATIVE_APP'
+        back_click
+      end
+    end
   end
 end

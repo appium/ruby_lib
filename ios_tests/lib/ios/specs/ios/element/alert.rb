@@ -16,7 +16,6 @@
 class IosTest
   class Element
     class Alert < Minitest::Test
-
       def open_alert
         wait_true do
           find_element(:name, 'Okay / Cancel').click

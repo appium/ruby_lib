@@ -79,12 +79,10 @@ class IosTest
           wait_true(@wait_opts) { nil }
         end
 
-
         # raise should error
         assert_raises ::Appium::Core::Wait::TimeoutError do
           wait_true(@wait_opts) { raise }
         end
-
 
         # regular rescue will not handle exceptions outside of StandardError hierarchy
         # must rescue Exception explicitly to rescue everything
@@ -94,7 +92,6 @@ class IosTest
         assert_raises ::Appium::Core::Wait::TimeoutError do
           wait_true(timeout: 0.2, interval: 0.0) { raise NoMemoryError }
         end
-
 
         e = assert_raises ArgumentError do
           wait_true(invalidkey: 2) { true }
@@ -120,7 +117,7 @@ class IosTest
 
       def test_07_session_id
         # Sauce doesn't return '-' so make them optional.
-        assert_match /\h{8}-?\h{4}-?\h{4}-?\h{4}-?\h{12}/, session_id
+        assert_match(/\h{8}-?\h{4}-?\h{4}-?\h{4}-?\h{12}/, session_id)
       end
 
       def test_08_xpath
@@ -147,7 +144,7 @@ class IosTest
 
       def test_11_find_ele_by_attr
         el_id = find_ele_by_attr(ui_ios.static_text, 'name', uibutton_text).instance_variable_get :@id
-        assert_match /\d+/, el_id
+        assert_match(/\d+/, el_id)
       end
 
       def test_12_find_eles_by_attr
