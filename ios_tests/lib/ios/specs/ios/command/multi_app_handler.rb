@@ -13,27 +13,33 @@
 # limitations under the License.
 
 # rake "ios[ios/command/multi_app_handler]"
-describe 'ios/command/source' do
-  # Only for Xcode 9+
-  it 'multip app handler' do
-    test_app_bundle = 'com.example.apple-samplecode.UICatalog'
+class IosTest
+  class Ios
+    class Command
+      class MultiAppHandler < Minitest::Test
+        # Only for Xcode 9+
+        def test_multip_app_handler
+          test_app_bundle = 'com.example.apple-samplecode.UICatalog'
 
-    xcuitest_query_app_status(bundle_id: test_app_bundle).must_equal :running_in_foreground
+          assert_equal xcuitest_query_app_status(bundle_id: test_app_bundle), :running_in_foreground
 
-    xcuitest_terminate_app(bundle_id: test_app_bundle).must_equal true
-    xcuitest_query_app_status(bundle_id: test_app_bundle).must_equal :not_running
+          assert_equal xcuitest_terminate_app(bundle_id: test_app_bundle), true
+          assert_equal xcuitest_query_app_status(bundle_id: test_app_bundle), :not_running
 
-    assert xcuitest_activate_app(bundle_id: test_app_bundle).nil?
-    xcuitest_query_app_status(bundle_id: test_app_bundle).must_equal :running_in_foreground
+          assert xcuitest_activate_app(bundle_id: test_app_bundle).nil?
+          assert_equal xcuitest_query_app_status(bundle_id: test_app_bundle), :running_in_foreground
 
-    assert xcuitest_activate_app(bundle_id: 'com.apple.Preferences').nil?
-    wait(timeout: 5) do
-      xcuitest_query_app_status(bundle_id: test_app_bundle).must_equal :running_in_background_suspended
-    end
+          assert xcuitest_activate_app(bundle_id: 'com.apple.Preferences').nil?
+          wait(timeout: 5) do
+            assert_equal xcuitest_query_app_status(bundle_id: test_app_bundle), :running_in_background_suspended
+          end
 
-    assert xcuitest_activate_app(bundle_id: test_app_bundle).nil?
-    wait(timeout: 5) do
-      xcuitest_query_app_status(bundle_id: test_app_bundle).must_equal :running_in_foreground
+          assert xcuitest_activate_app(bundle_id: test_app_bundle).nil?
+          wait(timeout: 5) do
+            assert_equal xcuitest_query_app_status(bundle_id: test_app_bundle), :running_in_foreground
+          end
+        end
+      end
     end
   end
 end

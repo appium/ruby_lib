@@ -13,9 +13,15 @@
 # limitations under the License.
 
 # rake ios[ios/command/source]
-describe 'ios/command/source' do
-  it 'source' do
-    xcuitest_source(format: :json).is_a?(Hash).must_equal true
-    xcuitest_source(format: :xml).is_a?(String).must_equal true
+class IosTest
+  class Ios
+    class Command
+      class Source < Minitest::Test
+        def test_source
+          assert_equal xcuitest_source(format: :json).is_a?(Hash), true
+          assert_equal xcuitest_source(format: :xml).is_a?(String), true
+        end
+      end
+    end
   end
 end

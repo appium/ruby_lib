@@ -13,14 +13,20 @@
 # limitations under the License.
 
 # rake "ios[ios/command/pasteboard]"
-describe 'ios/command/pasteboard' do
-  it 'pasteboard' do
-    # set blank before testing because pasteboard is remaining during launching simulators
-    set_pasteboard content: 'before'
-    get_pasteboard.must_equal 'before'
+class IosTest
+  class Ios
+    class Command
+      class Pasteboard < Minitest::Test
+        def test_pasteboard
+          # set blank before testing because pasteboard is remaining during launching simulators
+          set_pasteboard content: 'before'
+          assert_equal get_pasteboard, 'before'
 
-    set_pasteboard content: 'sample content'
+          set_pasteboard content: 'sample content'
 
-    get_pasteboard.must_equal 'sample content'
+          assert_equal get_pasteboard, 'sample content'
+        end
+      end
+    end
   end
 end
