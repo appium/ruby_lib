@@ -13,35 +13,31 @@
 # limitations under the License.
 
 # rake "ios[ios/patch]"
-describe 'ios/patch' do
-  def before_first
-    screen.must_equal catalog
-    go_to_textfields
-  end
+class IosTest
+  class Ios
+    class MobileMethods < Minitest::Test
+      def test_01_before_first
+        assert_equal screen, catalog
+        go_to_textfields
+      end
 
-  def after_last
-    leave_textfields
-  end
+      def test_02_label
+        assert_equal textfields[0].label, ''
+      end
 
-  it 'before_first' do
-    before_first
-  end
+      def test_03_type
+        text('text fields').click
 
-  it 'label' do
-    textfields[0].label.must_equal ''
-  end
+        ele = first_textfield
 
-  it 'type' do
-    text('text fields').click
+        ele.clear
+        ele.type 'ok'
+        assert_equal ele.text, 'ok'
+      end
 
-    ele = first_textfield
-
-    ele.clear
-    ele.type 'ok'
-    ele.text.must_equal 'ok'
-  end
-
-  it 'after_last' do
-    after_last
+      def test_04_after_last
+        leave_textfields
+      end
+    end
   end
 end

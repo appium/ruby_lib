@@ -14,60 +14,63 @@
 
 # FIXME: The order is broken in Ruby 3.
 # rake "ios[ios/element/button]"
-describe 'ios/element/button' do
-  def before_first
-    screen.must_equal catalog
-    # nav to buttons activity
-    wait { find_element(:name, 'Buttons').click }
-  end
 
-  def after_last
-    # nav back to start
-    back_click
-  end
+class IosTest
+  class Ios
+    class Element
+      class Button < Minitest::Test
+        def before_first
+          assert_equal screen, catalog
+          # nav to buttons activity
+          wait { find_element(:name, 'Buttons').click }
+        end
 
-  it 'before_first' do
-    before_first
-  end
+        def after_last
+          # nav back to start
+          back_click
+        end
 
-  def gray
-    'Gray'
-  end
+        def test_01_before_first
+          before_first
+        end
 
-  it 'button' do
-    # by index
-    button(3).name.must_equal gray # or UIButtonTypeInfoDark in XCUITest
+        def test_02_button
+          # by index
+          assert_equal button(3).name, 'UIAccessoryButtonPlus'
 
-    # by name contains
-    button('ray').name.must_equal gray
-  end
+          # by name contains
+          assert_equal button('Plus').name, 'UIAccessoryButtonPlus'
+        end
 
-  it 'buttons' do
-    exp = ['Back', 'Back', 'Gray', 'Right pointing arrow']
+        def test_03_buttons
+          exp = %w(UICatalog UIAccessoryButtonPlus)
 
-    target_buttons = buttons('a')
-    target_buttons.map(&:name).must_equal exp
-    target_buttons.length.must_equal exp.length
-  end
+          target_buttons = buttons('a')
+          assert_equal target_buttons.map(&:name), exp
+          assert_equal target_buttons.length, exp.length
+        end
 
-  it 'first_button' do
-    first_button.name.must_equal 'Back'
-  end
+        def test_04_first_button
+          assert_equal first_button.name, 'UICatalog'
+        end
 
-  it 'last_button' do
-    expected = 'Rounded'
-    last_button.name.must_equal expected
-  end
+        def test_05_last_button
+          expected = 'Button'
+          assert_equal last_button.name, expected
+        end
 
-  it 'button_exact' do
-    button_exact(gray).name.must_equal gray
-  end
+        def test_06_button_exact
+          assert_equal button_exact('UIAccessoryButtonPlus').name, 'UIAccessoryButtonPlus'
+        end
 
-  it 'buttons_exact' do
-    buttons_exact(gray).first.name.must_equal gray
-  end
+        def test_07_buttons_exact
+          assert_equal buttons_exact('UIAccessoryButtonPlus').first.name, 'UIAccessoryButtonPlus'
+        end
 
-  it 'after_last' do
-    after_last
+        def test_08_after_last
+          after_last
+        end
+      end
+    end
   end
 end

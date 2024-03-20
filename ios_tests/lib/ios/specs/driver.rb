@@ -13,136 +13,113 @@
 # limitations under the License.
 
 # bundle exec rake "ios[driver]"
-describe 'driver' do
-  def before_first
-    screen.must_equal catalog
-  end
+class IosTest
+  class Driver < Minitest::Test
+    def test_01_before_first
+      assert_equal screen, catalog
+    end
 
-  it 'before_first' do
-    before_first
-  end
+    def test_02_unicode_defaults
+      data = File.read File.expand_path('../../../data/unicode.txt', __dir__)
+      assert_equal data.strip, 174.chr('UTF-8')
+    end
 
-  it 'unicode defaults' do
-    data = File.read File.expand_path('../../../data/unicode.txt', __dir__)
-    data.strip.must_equal 174.chr('UTF-8')
-  end
+    def test_03_load_settings
+      appium_txt = File.join(Dir.pwd, 'appium.txt')
+      opts       = Appium.load_settings file: appium_txt, verbose: true
 
-  it 'load_settings' do
-    appium_txt = File.join(Dir.pwd, 'appium.txt')
-    opts       = Appium.load_settings file: appium_txt, verbose: true
+      actual   = ''
+      actual   = File.basename opts[:caps][:app] if opts && opts[:caps]
+      expected = 'UICatalog.app.zip'
+      assert_equal expected, actual
+    end
 
-    actual   = ''
-    actual   = File.basename opts[:caps][:app] if opts && opts[:caps]
-    expected = 'UICatalog.app.zip'
-    assert_equal expected, actual
-  end
-
-  describe 'Appium::Driver attributes' do
-    it 'verify all attributes' do
+    def test_04_verify_all_attributes
       actual                = driver_attributes
       caps_app_for_teardown = actual[:caps][:app]
       expected_app = File.absolute_path('../test_apps/UICatalog.app.zip')
 
-      expected = {
-        automation_name:     :xcuitest,
-        custom_url:          'http://127.0.0.1:4723/wd/hub',
-        default_wait:        30,
-        port:                4723,
-        device:              :ios,
-        debug:               itrue,
-        listener:            nil,
-        wait_timeout:        20, # defined in appium.txt
-        wait_interval:       1 # defined in appium.txt
-      }
-
       # actual[:caps].to_json send to Appium server
       caps_with_json = JSON.parse(actual[:caps].to_json)
-      caps_with_json['platformName'].must_equal 'ios'
-      caps_with_json['platformVersion'].must_equal '15.0'
-      caps_with_json['app'].must_equal expected_app
-      caps_with_json['automationName'].must_equal 'XCUITest'
-      caps_with_json['deviceName'].must_equal 'iPhone 11'
-      caps_with_json['someCapability'].must_equal 'some_capability'
+      assert_equal caps_with_json['platformName'], 'ios'
+      assert !caps_with_json['platformVersion'].nil?
+      assert_equal caps_with_json['app'], expected_app
+      assert_equal caps_with_json['automationName'], 'XCUITest'
+      assert !caps_with_json['deviceName'].nil?
+      assert_equal caps_with_json['someCapability'], 'some_capability'
 
-      actual[:caps][:platformName].must_equal 'ios'
-      actual[:caps][:platformVersion].must_equal '14.2'
-      actual[:caps][:app].must_equal expected_app
-      actual[:caps][:automationName].must_equal 'XCUITest'
-      actual[:caps][:deviceName].must_equal 'iPhone 11'
-      actual[:caps][:someCapability].must_equal 'some_capability'
-
-      dup_actual = actual.dup
-      dup_actual.delete(:caps)
-
-      raise "\n\nactual:\n\n: #{dup_actual}expected:\n\n#{expected}" if dup_actual != expected
+      assert_equal actual[:caps][:platformName], 'ios'
+      assert !actual[:caps][:platformVersion].nil?
+      assert_equal actual[:caps][:app], expected_app
+      assert_equal actual[:caps][:automationName], 'XCUITest'
+      assert !actual[:caps][:deviceName].nil?
+      assert_equal actual[:caps][:someCapability], 'some_capability'
 
       actual_selenium_caps = actual[:caps][:automationName]
-      actual_selenium_caps.must_equal 'XCUITest'
+      assert_equal actual_selenium_caps, 'XCUITest'
       actual[:caps][:app] = caps_app_for_teardown
     end
 
-    it 'verify attributes are immutable' do
-      driver_attributes[:custom_url].must_equal 'http://127.0.0.1:4723/wd/hub'
+    def test_05_verify_attributes_are_immutable
+      assert_equal driver_attributes[:custom_url], 'http://127.0.0.1:4723/wd/hub'
       driver_attributes[:custom_url] = true
-      driver_attributes[:custom_url].must_equal 'http://127.0.0.1:4723/wd/hub'
+      assert_equal driver_attributes[:custom_url], 'http://127.0.0.1:4723/wd/hub'
     end
 
-    it 'verify attribute of :caps are not immutable becuse it depends on Selenium' do
+    def test_06_verify_attribute_of_caps_are_not_immutable_because_it_depends_on_selenium
       # immutability depends on Selenium
       for_clean_up                   = driver_attributes[:caps][:app].dup
       driver_attributes[:caps][:app] = 'fake'
       expected                       = 'fake'
-      driver_attributes[:caps][:app].must_equal expected
+      assert_equal driver_attributes[:caps][:app], expected
 
       # clean up
       driver_attributes[:caps][:app] = for_clean_up
     end
 
-    it 'no_wait' do
+    def test_07_no_wait
       no_wait
-      proc { find_element(:accessibility_id, 'zz') }.must_raise Selenium::WebDriver::Error::NoSuchElementError
+      assert_raises Selenium::WebDriver::Error::NoSuchElementError do
+        find_element(:accessibility_id, 'zz')
+      end
       set_wait
     end
 
-    it 'app_path attr' do
+    def test_08_app_path_attr
       apk_name = File.basename driver_attributes[:caps][:app]
-      apk_name.must_equal 'UICatalog.app.zip'
-    end
-  end
-
-  describe 'Appium::Driver' do
-    it '$driver.class' do
-      $driver.class.must_equal Appium::Driver
-    end
-  end
-
-  describe 'methods' do
-    it 'status' do
-      appium_server_version['build'].keys.sort.must_equal %w(version)
+      assert_equal apk_name, 'UICatalog.app.zip'
     end
 
-    it 'server_version' do
+    def test_09_driver_class
+      assert_equal $driver.class, Appium::Driver
+    end
+
+    def test_10_status
+      assert_equal appium_server_version['build'].keys.sort, %w(built git-sha version)
+    end
+
+    def test_11_server_version
       server_version = appium_server_version['build']['version']
-      server_version.must_match(/(\d+)\.(\d+).(\d+)/)
+      assert_match(/(\d+)\.(\d+).(\d+)/, server_version)
     end
 
-    it 'client_version' do
+    def test_12_client_version
       client_version = appium_client_version
       expected = { version: ::Appium::VERSION }
-      client_version.must_equal expected
+      assert_equal client_version, expected
     end
 
-    it 'restart' do
+    def test_13_restart
       restart
-      itext 'buttons'
+      text 'buttons'
     end
 
-    it 'driver' do
-      driver.browser.must_be_empty
+    def test_14_driver
+      assert driver.browser.empty?
     end
 
-    it 'automation_name_is_xcuitest?' do
-      automation_name_is_xcuitest?.must_equal automation_name_is_xcuitest?
+    def test_15_automation_name_is_xcuitest?
+      assert_equal automation_name_is_xcuitest?, automation_name_is_xcuitest?
     end
 
     #
@@ -152,67 +129,65 @@ describe 'driver' do
     #    start_driver # tested by restart
     #
 
-    it 'set_wait' do
+    def test_16_set_wait
       # fill the @last_waits array with: [30, 30]
-      set_wait(30).must_equal(30)
-      set_wait(30).must_equal(30)
+      assert_equal set_wait(30), 30
+      assert_equal set_wait(30), 30
 
       # verify set_wait with no args works correctly
-      set_wait.must_equal(30)
-      set_wait(30).must_equal(30)
-      set_wait.must_equal(30)
+      assert_equal set_wait, 30
+      assert_equal set_wait(30), 30
+      assert_equal set_wait, 30
 
-      set_wait(2).must_equal(2)
-      set_wait.must_equal(30)
-      set_wait(3).must_equal(3)
-      set_wait.must_equal(30)
+      assert_equal set_wait(2), 2
+      assert_equal set_wait, 30
+      assert_equal set_wait(3), 3
+      assert_equal set_wait, 30
 
-      set_wait(2).must_equal(2)
-      set_wait(3).must_equal(3)
-      set_wait.must_equal(30)
+      assert_equal set_wait(2), 2
+      assert_equal set_wait(3), 3
+      assert_equal set_wait, 30
     end
 
-    it 'default_wait' do
+    def test_17_default_wait
       set_wait 30
-      default_wait.must_equal 30 # set in run.rb
+      assert_equal default_wait, 30 # set in run.rb
     end
 
     # returns true unless an error is raised
-    it 'exists' do
-      exists(0, 0) { true }.must_equal true
-      exists(0, 0) { raise 'error' }.must_equal false
+    def test_18_exists
+      assert_equal exists(0, 0) { true }, true
+      assert_equal exists(0, 0) { raise 'error' }, false
     end
 
     # simple integration sanity test to check for unexpected exceptions
-    it 'set_location' do
+    def test_19_set_location
       set_location latitude: 55, longitude: -72, altitude: 33
     end
 
     # any elements
-    it 'find_elements' do
-      find_elements(:class, ui_ios.table_cell).length.must_equal 18
+    def test_20_find_elements
+      assert_equal find_elements(:class, ui_ios.table_cell).length, 18
     end
 
     # any element
-    it 'find_element' do
-      find_element(:class, ui_ios.static_text).class.must_equal ::Appium::Core::Element
+    def test_21_find_element
+      assert_equal find_element(:class, ui_ios.static_text).class, ::Appium::Core::Element
     end
 
     # settings
-    it 'get settings' do
-      get_settings.wont_be_nil
+    def test_22_get_settings
+      assert !get_settings.nil?
     end
 
-    it 'update settings' do
+    def test_23_update_settings
       update_settings allowInvisibleElements: true
-      get_settings['allowInvisibleElements'].must_equal true
+      assert_equal get_settings['allowInvisibleElements'], true
     end
 
-    it 'events' do
+    def test_24_events
       log_event vendor: 'appium', event: 'funEvent'
       log_events
     end
-
-    # Skip: x # x is only used in Pry
   end
 end

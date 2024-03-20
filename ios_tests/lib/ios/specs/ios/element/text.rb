@@ -13,63 +13,65 @@
 # limitations under the License.
 
 # rake "ios[ios/element/text]"
-describe 'ios/element/text' do
-  def ui_catalog
-    'UICatalog'
-  end
+class IosTest
+  class Ios
+    class Element
+      class Text < Minitest::Test
+        def ui_catalog
+          'UICatalog'
+        end
 
-  def uiview_steppers
-    'Steppers'
-  end
+        def uiview_steppers
+          'Steppers'
+        end
 
-  def before_first
-    screen.must_equal catalog
-  end
+        def test_01_before_first
+          assert_equal screen, catalog
+        end
 
-  it 'before_first' do
-    before_first
-  end
+        def test_02_first_text
+          assert_equal first_text.text, ui_catalog
+        end
 
-  it 'first_text' do
-    first_text.text.must_equal ui_catalog
-  end
+        def test_03_last_text
+          expected = 'Steppers'
 
-  it 'last_text' do
-    expected = 'Steppers'
+          assert_equal last_text.text, expected
+          assert_equal last_text.name, expected
+        end
 
-    last_text.text.must_equal expected
-    last_text.name.must_equal expected
-  end
+        def test_04_text
+          assert_equal text('epp').text, uiview_steppers
+          assert_equal text(1).text, ui_catalog
+          assert_equal text('epp').name, uiview_steppers
+        end
 
-  it 'text' do
-    text('epp').text.must_equal uiview_steppers
-    text(1).text.must_equal ui_catalog
-    text('epp').name.must_equal uiview_steppers
-  end
+        def test_05_texts
+          exp = ['Date Picker', 'AAPLDatePickerController', 'Picker View', 'AAPLPickerViewController']
+          assert_equal texts.length, 24
+          assert_equal texts('icker').map(&:name), exp
+          assert_equal texts('AAPL').length, 11
+        end
 
-  it 'texts' do
-    exp = ['Date Picker', 'AAPLDatePickerController', 'Picker View', 'AAPLPickerViewController']
-    texts.length.must_equal 24
-    texts('icker').map(&:name).must_equal exp
-    texts('AAPL').length.must_equal 11
-  end
+        def test_06_text_exact
+          # should fail
+          set_wait 0
+          act = begin
+            text_exact 'mos'
+          rescue StandardError
+            # nop
+          end
+          assert act.nil?
+          set_wait
 
-  it 'text_exact' do
-    # should fail
-    set_wait 0
-    act = begin
-      text_exact 'mos'
-    rescue StandardError
-      # nop
+          # should pass
+          assert_equal text_exact(ui_catalog).text, ui_catalog
+        end
+
+        def test_07_texts_exact
+          assert_equal texts_exact('UICatalog').length, 1
+        end
+      end
     end
-    act.must_be_nil
-    set_wait
-
-    # should pass
-    text_exact(ui_catalog).text.must_equal ui_catalog
-  end
-
-  it 'texts_exact' do
-    texts_exact('UICatalog').length.must_equal 1
   end
 end
