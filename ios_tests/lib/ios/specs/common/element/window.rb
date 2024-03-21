@@ -13,20 +13,25 @@
 # limitations under the License.
 
 # rake "ios[common/element/window]"
-describe 'common/element/window' do
-  def before_first
-    screen.must_equal catalog
-  end
 
-  t 'before_first' do
-    before_first
-  end
+class IosTest
+  class Common
+    class Element
+      class Window < Minitest::Test
+        def before_first
+          assert_equal screen, catalog
+        end
 
-  # rubocop:disable Lint/UnifiedInteger
-  t 'window_size' do
-    size = window_size
-    size.width.class.must_equal Fixnum
-    size.height.class.must_equal Fixnum
+        def test_01_before_first
+          before_first
+        end
+
+        def test_02_window_size
+          size = window_size
+          assert_equal  size.width.class, Integer
+          assert_equal  size.height.class, Integer
+        end
+      end
+    end
   end
-  # rubocop:enable Lint/UnifiedInteger
 end

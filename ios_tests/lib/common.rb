@@ -19,11 +19,11 @@ end
 
 def leave_textfields
   back_click
-  screen.must_equal catalog
+  assert screen == catalog
 end
 
 def go_to_textfields
-  screen.must_equal catalog
+  assert screen == catalog
   wait_true do
     find_element(:name, 'Text Fields').click
     screen == 'Text Fields' # wait for screen transition

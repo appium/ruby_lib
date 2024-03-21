@@ -13,60 +13,64 @@
 # limitations under the License.
 
 # rake "android[android/element/generic]"
-describe 'android/element/generic' do
-  def content
-    'Content'
-  end
+class AndroidTest
+  class Element
+    class Generic < Minitest::Test
+      def content
+        'Content'
+      end
 
-  def partial
-    'tent'
-  end
+      def partial
+        'tent'
+      end
 
-  t 'find works before and after get_source' do
-    wait { find(partial).text.must_equal content }
-    wait { get_source.class.must_equal String }
-    wait { find(partial).text.must_equal content }
-  end
+      def test_01_find_works_before_and_after_get_source
+        wait { assert_equal find(partial).text, content }
+        wait { assert_equal get_source.class, String }
+        wait { assert_equal find(partial).text, content }
+      end
 
-  t 'find' do
-    wait { find(partial).text.must_equal content }
-  end
+      def test_01_find
+        wait { assert_equal find(partial).text, content }
+      end
 
-  t 'finds' do
-    wait { finds(partial).first.text.must_equal content }
-  end
+      def test_01_finds
+        wait { assert_equal finds(partial).first.text, content }
+      end
 
-  t 'find_exact' do
-    wait { find_exact(content).text.must_equal content }
-  end
+      def test_01_find_exact
+        wait { assert_equal find_exact(content).text, content }
+      end
 
-  t 'finds_exact' do
-    wait { finds_exact(content).first.text.must_equal content }
-  end
+      def test_01_finds_exact
+        wait { assert_equal finds_exact(content).first.text, content }
+      end
 
-  # scroll_to is broken
-  t 'scroll_to' do
-    wait { scroll_to('Views').click }
-    wait { scroll_to('scrollbars').text.must_equal 'ScrollBars' }
+      # scroll_to is broken
+      def test_01_scroll_to
+        wait { scroll_to('Views').click }
+        wait { assert_equal scroll_to('scrollbars').text, 'ScrollBars' }
 
-    wait { find('ScrollBars').click }
-    wait { text('style').click }
-    wait { scroll_to('Developers', 1).text.must_include 'What would it take to build a better mobile phone?' }
-    back
-    back
-    # back to start activity
-    back
-  end
+        wait { find('ScrollBars').click }
+        wait { text('style').click }
+        wait { assert scroll_to('Developers', 1).text.include? 'What would it take to build a better mobile phone?' }
+        back
+        back
+        # back to start activity
+        back
+      end
 
-  t 'scroll_to_exact' do
-    wait { scroll_to('Views').click }
+      def test_01_scroll_to_exact
+        wait { scroll_to('Views').click }
 
-    wait { scroll_to_exact('ScrollBars').text.must_equal 'ScrollBars' }
-    wait { find('ScrollBars').click }
-    wait { text('style').click }
-    back
-    back
-    # back to start activity
-    back
+        wait { assert_equal scroll_to_exact('ScrollBars').text, 'ScrollBars' }
+        wait { find('ScrollBars').click }
+        wait { text('style').click }
+        back
+        back
+        # back to start activity
+        back
+      end
+    end
   end
 end

@@ -13,119 +13,112 @@
 # limitations under the License.
 
 # rake "ios[ios/xcuitest_gestures]"
-describe 'ios/xcuitest_gestures' do
-  def before_first
-    screen.must_equal catalog
-  end
+class IosTest
+  class Ios
+    class XcuitestGestures < Minitest::Test
+      def open_alert_ok_cancel
+        wait_true do
+          find_element(:name, 'Okay / Cancel').click
+          find_element(:name, 'A Short Title Is Best').displayed?
+        end
+      end
 
-  def after_last
-    screen.must_equal catalog
-  end
+      def open_alert_custom
+        wait_true do
+          find_element(:name, 'Other').click
+          find_element(:name, 'A Short Title Is Best').displayed?
+        end
+      end
 
-  def open_alert_ok_cancel
-    wait_true do
-      find_element(:name, 'Okay / Cancel').click
-      find_element(:name, 'A Short Title Is Best').displayed?
+      def test_01_before_first
+        assert_equal screen, catalog
+      end
+
+      def test_02_tap
+        element = text('controls')
+        one_finger_tap x: 0, y: 0, element: element
+
+        back_click
+
+        element = text('controls')
+        rect = element.rect
+        one_finger_tap x: rect.x + rect.width / 2, y: rect.y + rect.height / 2
+      end
+
+      def test_03_double_tap
+        element = button('Search')
+        double_tap(element: element)
+      end
+
+      def test_04_touch_and_hold
+        element = button('Tools')
+        touch_and_hold(element: element, duration: 4.0)
+        touch_and_hold(x: 100, y: 100)
+      end
+
+      def test_05_swipe
+        swipe direction: 'down'
+        swipe direction: 'down'
+
+        assert_raises Selenium::WebDriver::Error::NoSuchElementError do
+          text('Toolbars')
+        end
+      end
+
+      def test_06_drag_from_to_for_duration
+        drag_from_to_for_duration from_x: 100, from_y: 100, to_x: 100, to_y: 400
+      end
+
+      def test_07_pinch
+        pinch(scale: 0.5, velocity: -1)
+      end
+
+      def test_08_back_to_top
+        back_click
+      end
+
+      def test_09_select_picker_wheel
+        element = text('Picker View')
+        one_finger_tap x: 0, y: 0, element: element
+
+        e = find_element :class, ui_ios.picker_wheel
+        previous_value = e.text
+        select_picker_wheel(element: e, order: 'next')
+
+        current_element = find_element(:class, ui_ios.picker_wheel)
+        assert_equal current_element.displayed?, true
+        assert current_element.text != previous_value
+      end
+
+      def test_10_back_to_top
+        back_click
+      end
+
+      def test_11_alert
+        wait_true do
+          find_element(:name, 'Alert Views').click
+          tag(ui_ios.navbar).name == 'Alert Views'
+        end
+
+        open_alert_ok_cancel
+        alert action: 'accept'
+
+        open_alert_ok_cancel
+        alert action: 'dismiss'
+
+        open_alert_custom
+        list = alert action: 'getButtons'
+        assert_equal list, ['Choice One', 'Choice Two', 'Cancel']
+        alert action: 'accept', button_label: 'Choice Two'
+      end
+
+      def test_12_back_to_top
+        back_click
+      end
+
+      def test_13_after_last
+        assert_equal screen, catalog
+      end
     end
-  end
-
-  def open_alert_custom
-    wait_true do
-      find_element(:name, 'Other').click
-      find_element(:name, 'A Short Title Is Best').displayed?
-    end
-  end
-
-  t 'before_first' do
-    before_first
-  end
-
-  t 'tap' do
-    element = text('controls')
-    one_finger_tap x: 0, y: 0, element: element
-
-    back_click
-
-    rect = element.rect
-    one_finger_tap x: rect.x + rect.width / 2, y: rect.y + rect.height / 2
-  end
-
-  t 'double_tap' do
-    element = button('Search')
-    double_tap(element: element)
-  end
-
-  t 'touch_and_hold' do
-    element = button('Tools')
-    touch_and_hold(element: element, duration: 4.0)
-    touch_and_hold(x: 100, y: 100)
-  end
-
-  t 'scroll' do
-    scroll direction: 'down'
-    text('Toolbars').displayed?.must_equal true
-  end
-
-  t 'swipe' do
-    swipe direction: 'down'
-    swipe direction: 'down'
-
-    proc { text('Toolbars') }.must_raise Selenium::WebDriver::Error::NoSuchElementError
-  end
-
-  t 'drag_from_to_for_duration' do
-    drag_from_to_for_duration from_x: 100, from_y: 100, to_x: 100, to_y: 400
-    text('Action Sheets').displayed?.must_equal true
-  end
-
-  t 'pinch' do
-    pinch(scale: 0.5, velocity: -1)
-  end
-
-  t 'back to top' do
-    back_click
-  end
-
-  t 'select_picker_wheel' do
-    element = text('Picker View')
-    one_finger_tap x: 0, y: 0, element: element
-
-    e = find_element :class, ui_ios.picker_wheel
-    previous_value = e.text
-    select_picker_wheel(element: e, order: 'next')
-
-    current_element = find_element(:class, ui_ios.picker_wheel)
-    current_element.displayed?.must_equal true
-    assert current_element.text != previous_value
-  end
-
-  t 'back to top' do
-    back_click
-  end
-
-  t 'alert' do
-    wait_true do
-      find_element(:name, 'Alert Views').click
-      tag(ui_ios.navbar).name == 'Alert Views'
-    end
-
-    open_alert_ok_cancel
-    alert action: 'accept'
-
-    open_alert_ok_cancel
-    alert action: 'dismiss'
-
-    open_alert_custom
-    list = alert action: 'getButtons'
-    list.must_equal ['Choice One', 'Choice Two', 'Cancel']
-    alert action: 'accept', button_label: 'Choice Two'
-  end
-
-  t 'back to top' do
-    back_click
-  end
-
-  t 'after_last' do
-    after_last
   end
 end

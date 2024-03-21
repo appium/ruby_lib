@@ -13,55 +13,55 @@
 # limitations under the License.
 
 # rake "ios[ios/helper]"
-describe 'ios/helper' do
-  def before_first
-    screen.must_equal catalog
-  end
+class IosTest
+  class Ios
+    class Helper < Minitest::Test
+      def test_01_before_first
+        assert_equal screen, catalog
+      end
 
-  t 'before_first' do
-    before_first
-  end
+      def test_02_ios_password
+        assert_equal ios_password, 8226.chr('UTF-8')
+        assert_equal ios_password(2), 8226.chr('UTF-8') * 2
+      end
 
-  t 'ios_password' do
-    ios_password.must_equal 8226.chr('UTF-8')
-    ios_password(2).must_equal 8226.chr('UTF-8') * 2
-  end
+      def test_03_page
+        page # writes to std out
+      end
 
-  t 'page' do
-    page # writes to std out
-  end
+      def test_04_id
+        id 'Buttons' # 'Various uses of UIButton'
+      end
 
-  t 'id' do
-    id 'Buttons' # 'Various uses of UIButton'
-  end
+      def test_05_platform_version
+        assert !platform_version.empty?
+      end
 
-  t 'platform_version' do
-    platform_version.wont_be_empty
-  end
+      def test_06_tags_include
+        elements = tags_include class_names: %w(XCUIElementTypeTextView)
+        assert_equal elements.length, 0
 
-  t 'tags_include' do
-    elements = tags_include class_names: %w(XCUIElementTypeTextView)
-    elements.length.must_equal 0
+        elements = tags_include class_names: %w(XCUIElementTypeTextView XCUIElementTypeStaticText)
+        assert_equal elements.length, 24
 
-    elements = tags_include class_names: %w(XCUIElementTypeTextView XCUIElementTypeStaticText)
-    elements.length.must_equal 24
+        elements = tags_include class_names: %w(XCUIElementTypeTextView XCUIElementTypeStaticText), value: 'u'
+        assert_equal elements.length, 3
+      end
 
-    elements = tags_include class_names: %w(XCUIElementTypeTextView XCUIElementTypeStaticText), value: 'u'
-    elements.length.must_equal 3
-  end
+      def test_07_tags_exact
+        elements = tags_exact class_names: %w()
+        assert_equal elements.length, 0
 
-  t 'tags_exact' do
-    elements = tags_exact class_names: %w()
-    elements.length.must_equal 0
+        elements = tags_exact class_names: %w(XCUIElementTypeStaticText)
+        assert_equal elements.length, 24
 
-    elements = tags_exact class_names: %w(XCUIElementTypeStaticText)
-    elements.length.must_equal 24
+        elements = tags_exact class_names: %w(XCUIElementTypeTextView XCUIElementTypeStaticText)
+        assert_equal elements.length, 24
 
-    elements = tags_exact class_names: %w(XCUIElementTypeTextView XCUIElementTypeStaticText)
-    elements.length.must_equal 24
-
-    elements = tags_exact class_names: %w(XCUIElementTypeTextView XCUIElementTypeStaticText), value: 'Buttons'
-    elements.length.must_equal 1
-    elements.first.value.must_equal 'Buttons'
+        elements = tags_exact class_names: %w(XCUIElementTypeTextView XCUIElementTypeStaticText), value: 'Buttons'
+        assert_equal elements.length, 1
+        assert_equal elements.first.value, 'Buttons'
+      end
+    end
   end
 end

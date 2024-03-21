@@ -13,39 +13,41 @@
 # limitations under the License.
 
 # rake "ios[ios/element/generic]"
-describe 'ios/element/generic' do
-  def before_first
-    screen.must_equal catalog
-  end
+class IosTest
+  class Ios
+    class Element
+      class Generic < Minitest::Test
+        def uibutton_text
+          'Buttons'
+        end
 
-  def uibutton_text
-    'Buttons'
-  end
+        def verify(element)
+          element = element.first if element.is_a? Array
+          assert_equal element.name, uibutton_text
+        end
 
-  def verify(element)
-    element = element.first if element.is_a? Array
-    element.name.must_equal uibutton_text
-  end
+        def test_01_before_first
+          assert_equal screen, catalog
+        end
 
-  t 'before_first' do
-    before_first
-  end
+        def test_02_find
+          verify find 'tons'
+        end
 
-  t 'find' do
-    verify find 'tons'
-  end
+        def test_03_finds
+          verify finds 'tons'
+        end
 
-  t 'finds' do
-    verify finds 'tons'
-  end
+        def test_04_find_exact
+          verify find_exact uibutton_text
+        end
 
-  t 'find_exact' do
-    verify find_exact uibutton_text
-  end
-
-  t 'finds_exact' do
-    elements = finds_exact uibutton_text
-    elements.is_a?(Array).must_equal true
-    verify elements
+        def test_05_finds_exact
+          elements = finds_exact uibutton_text
+          assert_equal elements.is_a?(Array), true
+          verify elements
+        end
+      end
+    end
   end
 end

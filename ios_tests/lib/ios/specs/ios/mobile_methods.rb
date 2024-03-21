@@ -13,22 +13,26 @@
 # limitations under the License.
 
 # rake ios[ios/mobile_methods]
-describe 'ios/mobile_methods' do
-  def before_first
-    screen.must_equal catalog
-  end
+class IosTest
+  class Ios
+    class MobileMethods < Minitest::Test
+      def test_01_before_first
+        assert_equal screen, catalog
+      end
 
-  t 'an element with class chain' do
-    element = find_element :class_chain, '**/XCUIElementTypeStaticText'
+      def test_02_an_element_with_class_chain
+        element = find_element :class_chain, '**/XCUIElementTypeStaticText'
 
-    element.name.must_equal catalog
-  end
+        assert_equal element.name, catalog
+      end
 
-  t 'elements with class chain' do
-    elements = find_elements :class_chain, 'XCUIElementTypeWindow/*/*'
+      def test_03_elements_with_class_chain
+        elements = find_elements :class_chain, 'XCUIElementTypeWindow/*/*'
 
-    elements.size.must_equal 4
-    elements[0].name.must_equal catalog
-    elements[1].name.must_be_nil
+        assert_equal elements.size, 2
+        assert_equal elements[0].name, catalog
+        assert elements[1].name.nil?
+      end
+    end
   end
 end

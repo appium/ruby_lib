@@ -13,48 +13,55 @@
 # limitations under the License.
 
 # rake "android[common/device]"
-describe 'common/device' do
-  t 'get_performance_data_types' do
-    expected = %w(batteryinfo cpuinfo memoryinfo networkinfo)
-    get_performance_data_types.sort.must_equal expected
+class AndroidTest
+  class Common
+    class Device < Minitest::Test
+      def test_01_get_performance_data_types
+        expected = %w(batteryinfo cpuinfo memoryinfo networkinfo)
+        assert_equal get_performance_data_types.sort, expected
 
-    get_performance_data(package_name: 'io.appium.android.apis',
-                         data_type: 'cpuinfo')[0].must_equal %w(user kernel)
-  end
+        assert_equal get_performance_data(
+          package_name: 'io.appium.android.apis', data_type: 'cpuinfo'
+        )[0], %w(user kernel)
+      end
 
-  t 'start_activity' do
-    wait { current_activity.must_equal '.ApiDemos' }
-    start_activity app_package: 'io.appium.android.apis',
-                   app_activity: '.accessibility.AccessibilityNodeProviderActivity'
-    wait { current_activity.include?('Node').must_equal true }
-    start_activity app_package: 'com.android.settings',
-                   app_activity: '.Settings',
-                   app_wait_package: 'com.android.settings',
-                   app_wait_activity: '.Settings'
-    wait { current_activity.include?('Settings').must_equal true }
-  end
+      def test_02_start_activity
+        wait { assert_equal current_activity, '.ApiDemos' }
+        start_activity(
+          app_package: 'io.appium.android.apis',
+          app_activity: '.accessibility.AccessibilityNodeProviderActivity'
+        )
+        wait { assert_equal current_activity.include?('Node'), true }
+        start_activity(
+          app_package: 'com.android.settings',
+          app_activity: '.Settings',
+          app_wait_package: 'com.android.settings',
+          app_wait_activity: '.Settings'
+        )
+        wait { assert_equal current_activity.include?('Settings'), true }
+      end
 
-  t 'current_package' do
-    start_activity app_package: 'io.appium.android.apis',
-                   app_activity: '.accessibility.AccessibilityNodeProviderActivity'
-    wait { current_package.must_equal 'io.appium.android.apis' }
-  end
+      def test_03_current_package
+        start_activity(
+          app_package: 'io.appium.android.apis',
+          app_activity: '.accessibility.AccessibilityNodeProviderActivity'
+        )
+        wait { assert_equal current_package, 'io.appium.android.apis' }
+      end
 
-  t 'app_strings' do
-    wait_true { app_strings.key? 'activity_save_restore' }
-  end
+      def test_04_app_strings
+        wait_true { app_strings.key? 'activity_save_restore' }
+      end
 
-  def must_return_element(element)
-    element.class.must_equal ::Appium::Core::Element
-  end
+      def test_05_press_keycode
+        # http://developer.android.com/reference/android/view/KeyEvent.html
+        press_keycode 176
+      end
 
-  t 'press_keycode' do
-    # http://developer.android.com/reference/android/view/KeyEvent.html
-    press_keycode 176
-  end
-
-  t 'long_press_keycode' do
-    # http://developer.android.com/reference/android/view/KeyEvent.html
-    long_press_keycode 176
+      def test_06_long_press_keycode
+        # http://developer.android.com/reference/android/view/KeyEvent.html
+        long_press_keycode 176
+      end
+    end
   end
 end

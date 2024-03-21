@@ -14,46 +14,50 @@
 
 # Tests specifically for areas where the web_context differs in behaviour
 # rake "android[common/web_context]"
-describe 'the web context' do
-  # appium's context support is broken on android
+class AndroidTest
+  class Common
+    class WebContext < Minitest::Test
+      # appium's context support is broken on android
 
-  t 'available_contexts' do
-    wait_true { available_contexts.include? 'NATIVE_APP' }
-  end
+      def test_01_available_contexts
+        wait_true { available_contexts.include? 'NATIVE_APP' }
+      end
 
-  t 'current_context' do
-    wait { current_context.must_equal 'NATIVE_APP' }
-  end
+      def test_02_current_context
+        wait { assert_equal current_context, 'NATIVE_APP' }
+      end
 
-  t 'set_context' do
-    wait { scroll_to('Views').click }
-    wait { scroll_to('WebView').click }
+      def undo_setcontext_nav
+        back
+        wait { find('WebView') }
+        back
+        wait { find 'Views' }
+      end
 
-    def undo_setcontext_nav
-      back
-      wait { find('WebView') }
-      back
-      wait { find 'Views' }
+      def test_03_set_context
+        wait { scroll_to('Views').click }
+        wait { scroll_to('WebView').click }
+
+        wait_true { !available_contexts.detect { |e| e.start_with?('WEBVIEW') }.nil? }
+
+        webview_context = available_contexts.detect { |e| e.start_with?('WEBVIEW') }
+
+        if webview_context.nil?
+          undo_setcontext_nav
+          raise "No webview context found. contexts are: #{contexts}"
+        end
+
+        wait { set_context webview_context }
+        wait { assert_equal current_context, webview_context }
+
+        # verify inspect within webview works
+        assert get_android_inspect.split("\n").length >= 3
+
+        wait { set_context 'NATIVE_APP' }
+        wait { assert_equal current_context, 'NATIVE_APP' }
+
+        undo_setcontext_nav
+      end
     end
-
-    wait_true { !available_contexts.detect { |e| e.start_with?('WEBVIEW') }.nil? }
-
-    webview_context = available_contexts.detect { |e| e.start_with?('WEBVIEW') }
-
-    if webview_context.nil?
-      undo_setcontext_nav
-      raise "No webview context found. contexts are: #{contexts}"
-    end
-
-    wait { set_context webview_context }
-    wait { current_context.must_equal webview_context }
-
-    # verify inspect within webview works
-    get_android_inspect.split("\n").length.must_be :>=, 3
-
-    wait { set_context 'NATIVE_APP' }
-    wait { current_context.must_equal 'NATIVE_APP' }
-
-    undo_setcontext_nav
   end
 end

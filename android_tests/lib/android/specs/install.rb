@@ -13,29 +13,31 @@
 # limitations under the License.
 
 # rake "android[install]"
-describe 'install' do
-  # To Do: Blocked on https://github.com/appium/appium/issues/3032
-  def pkg
-    'io.appium.android.apis'
-  end
+class AndroidTest
+  class Install < Minitest::Test
+    # To Do: Blocked on https://github.com/appium/appium/issues/3032
+    def pkg
+      'io.appium.android.apis'
+    end
 
-  def installed
-    app_installed?(pkg).must_equal true
-  end
+    def installed
+      assert_equal app_installed?(pkg), true
+    end
 
-  def not_installed
-    app_installed?(pkg).must_equal false
-  end
+    def not_installed
+      assert_equal app_installed?(pkg), false
+    end
 
-  t 'install/uninstall' do
-    installed
-    remove_app 'io.appium.android.apis'
-    not_installed
-    install_app caps[:app]
-    installed
-  end
+    def test_install_uninstall
+      installed
+      remove_app 'io.appium.android.apis'
+      not_installed
+      install_app caps[:app]
+      installed
+    end
 
-  # no way to launch apk after it's uninstalled/installed
-  # blocked on: https://github.com/appium/appium/issues/2969
-  # launch_app
+    # no way to launch apk after it's uninstalled/installed
+    # blocked on: https://github.com/appium/appium/issues/2969
+    # launch_app
+  end
 end

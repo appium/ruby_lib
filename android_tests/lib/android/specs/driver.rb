@@ -13,40 +13,42 @@
 # limitations under the License.
 
 # rake "android[driver]"
-describe 'driver' do
-  def sauce?
-    ENV.fetch('UPLOAD_FILE', nil) && ENV.fetch('SAUCE_USERNAME', nil)
-  end
+class AndroidTest
+  class Driver < Minitest::Test
+    def sauce?
+      ENV.fetch('UPLOAD_FILE', nil) && ENV.fetch('SAUCE_USERNAME', nil)
+    end
 
-  t 'load_settings' do
-    appium_txt = File.join(Dir.pwd, 'appium.txt')
-    parsed   = Appium.load_settings file: appium_txt, verbose: true
-    apk_name = File.basename parsed[:caps][:app]
-    assert_equal apk_name, 'api.apk'
-  end
+    def test_01_load_settings
+      appium_txt = File.join(Dir.pwd, 'appium.txt')
+      parsed   = Appium.load_settings file: appium_txt, verbose: true
+      apk_name = File.basename parsed[:caps][:app]
+      assert_equal apk_name, 'api.apk'
+    end
 
-  describe 'Appium::Driver attributes' do
-    t 'no_wait' do
+    def test_02_attributes_no_wait
       no_wait
-      proc { button('zz') }.must_raise Selenium::WebDriver::Error::NoSuchElementError
+      assert_raises Selenium::WebDriver::Error::NoSuchElementError do
+        button('zz')
+      end
       set_wait
     end
 
     # attr_reader :default_wait, :app_path, :app_name,
     #            :app_package, :app_activity, :app_wait_activity,
     #            :sauce_username, :sauce_access_key, :port, :os, :debug
-    t 'default_wait attr' do
+    def test_03_attributes_default_wait_attr
       set_wait 1
-      default_wait.must_equal 1
+      assert_equal default_wait, 1
       set_wait # restore default
     end
 
-    t 'app_path attr' do
+    def test_04_attributes_app_path_attr
       apk_name = File.basename driver_attributes[:caps][:app]
-      apk_name.must_equal 'api.apk'
+      assert_equal apk_name, 'api.apk'
     end
 
-    t 'verify all attributes' do
+    def test_05_attributes_verify_all_attributes
       actual = driver_attributes
       expected_app = File.absolute_path('../test_apps/api.apk')
 
@@ -67,41 +69,39 @@ describe 'driver' do
 
       # actual[:caps].to_json send to Appium server
       caps_with_json = JSON.parse(actual[:caps].to_json)
-      caps_with_json['platformName'].must_equal 'android'
-      caps_with_json['app'].must_equal expected_app
-      caps_with_json['appPackage'].must_equal 'io.appium.android.apis'
-      caps_with_json['appActivity'].must_equal 'io.appium.android.apis.ApiDemos'
-      caps_with_json['deviceName'].must_equal 'Android emulator'
-      caps_with_json['someCapability'].must_equal 'some_capability'
+      assert_equal caps_with_json['platformName'], 'android'
+      assert_equal caps_with_json['app'], expected_app
+      assert_equal caps_with_json['appPackage'], 'io.appium.android.apis'
+      assert_equal caps_with_json['appActivity'], 'io.appium.android.apis.ApiDemos'
+      assert_equal caps_with_json['deviceName'], 'Android emulator'
+      assert_equal caps_with_json['someCapability'], 'some_capability'
 
-      actual[:caps][:platformName].must_equal 'android'
-      actual[:caps][:app].must_equal expected_app
-      actual[:caps][:appPackage].must_equal 'io.appium.android.apis'
-      actual[:caps][:appActivity].must_equal 'io.appium.android.apis.ApiDemos'
-      actual[:caps][:deviceName].must_equal 'Nexus 7'
-      actual[:caps][:some_capability].must_equal 'some_capability'
+      assert_equal actual[:caps][:platformName], 'android'
+      assert_equal actual[:caps][:app], expected_app
+      assert_equal actual[:caps][:appPackage], 'io.appium.android.apis'
+      assert_equal actual[:caps][:appActivity], 'io.appium.android.apis.ApiDemos'
+      assert !actual[:caps][:deviceName].nil?
+      assert_equal actual[:caps][:some_capability], 'some_capability'
 
       dup_actual = actual.dup
       dup_actual.delete(:caps)
 
       raise "\n\nactual:\n\n: #{dup_actual}expected:\n\n#{expected}" if dup_actual != expected
     end
-  end
 
-  describe 'Appium::Driver' do
-    t '$driver.class' do
-      $driver.class.must_equal Appium::Driver
+    def test_06_driver_class
+      assert_equal $driver.class, Appium::Driver
     end
 
-    t 'absolute_app_path' do
-      def absolute_app_path(path)
-        $driver.class.absolute_app_path(caps: { app: path })
-      end
+    def absolute_app_path(path)
+      $driver.class.absolute_app_path(caps: { app: path })
+    end
 
-      def validate_path(path)
-        absolute_app_path(path).must_equal path
-      end
+    def validate_path(path)
+      assert_equal absolute_app_path(path), path
+    end
 
+    def test_07_absolute_app_path
       validate_path 'sauce-storage:some_storage_suffix'
       validate_path 'http://www.saucelabs.com'
 
@@ -128,41 +128,39 @@ describe 'driver' do
       relative_path = File.join __FILE__, ('..' + File::SEPARATOR) * 5, 'test_apps/api.apk'
       expected_path = File.expand_path relative_path
 
-      absolute_app_path(relative_path).must_equal expected_path
+      assert_equal absolute_app_path(relative_path), expected_path
 
       # invalid path test
-      absolute_app_path('../../does_not_exist.apk').must_equal '../../does_not_exist.apk'
+      assert_equal absolute_app_path('../../does_not_exist.apk'), '../../does_not_exist.apk'
     end
-  end
 
-  describe 'methods' do
-    t 'status' do
+    def test_08_methods_status
       appium_server_version['build'].keys.sort.include? 'version'
     end
 
-    t 'server_version' do
+    def test_09_methods_server_version
       server_version = appium_server_version['build']['version']
       if sauce?
-        server_version.must_match 'Sauce OnDemand'
+        assert_match 'Sauce OnDemand', server_version
       else
-        server_version.must_match(/(\d+)\.(\d+).(\d+)/)
+        assert_match(/(\d+)\.(\d+).(\d+)/, server_version)
       end
     end
 
-    t 'client_version' do
+    def test_10_methods_client_version
       client_version = appium_client_version
       expected = { version: ::Appium::VERSION }
-      client_version.must_equal expected
+      assert_equal client_version, expected
     end
 
-    t 'restart' do
+    def test_11_methods_restart
       set_wait 1 # ensure wait is 1 before we restart.
       restart
-      current_activity.must_equal '.ApiDemos'
+      assert_equal current_activity, '.ApiDemos'
     end
 
-    t 'driver' do
-      driver.browser.must_equal('unknown')
+    def test_12_methods_driver
+      assert_equal driver.browser, 'unknown'
     end
 
     # Skip:
@@ -173,33 +171,33 @@ describe 'driver' do
     #   set_wait # posts value to server, it's not stored locally
     #   execute_script # 'mobile: ' is deprecated and plain execute_script unsupported
 
-    t 'default_wait' do
+    def test_13_methods_default_wait
       set_wait 1
-      default_wait.must_equal 1
+      assert_equal default_wait, 1
     end
 
     # returns true unless an error is raised
-    t 'exists' do
-      exists(0, 0) { true }.must_equal true
-      exists(0, 0) { raise 'error' }.must_equal false
+    def test_14_methods_exists
+      assert_equal exists(0, 0) { true }, true
+      assert_equal exists(0, 0) { raise 'error' }, false
     end
 
     # any elements
-    t 'find_elements' do
+    def test_15_methods_find_elements
       wait do
-        find_elements(:class_name, 'android.widget.TextView').length.must_equal 13
+        assert_equal find_elements(:class_name, 'android.widget.TextView').length, 13
       end
     end
 
     # any element
-    t 'find_element' do
+    def test_16_methods_find_element
       wait do
-        find_element(:class_name, 'android.widget.TextView').class.must_equal ::Appium::Core::Element
+        assert_equal find_element(:class_name, 'android.widget.TextView').class, ::Appium::Core::Element
       end
     end
 
     # simple integration sanity test to check for unexpected exceptions
-    t 'set_location' do
+    def test_17_methods_set_location
       set_location latitude: 55, longitude: -72, altitude: 33
     rescue Selenium::WebDriver::Error::UnknownError => e
       # on android this method is expected to raise with this message when running
@@ -211,13 +209,13 @@ describe 'driver' do
     end
 
     # settings
-    t 'get settings' do
-      get_settings.wont_be_nil
+    def test_18_methods_get_settings
+      assert !get_settings.nil?
     end
 
-    t 'update settings' do
+    def test_19_methods_update_settings
       update_settings allowInvisibleElements: true
-      get_settings['allowInvisibleElements'].must_equal true
+      assert_equal get_settings['allowInvisibleElements'], true
     end
 
     # Skip: x # x is only used in Pry

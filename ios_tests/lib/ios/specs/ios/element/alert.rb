@@ -13,43 +13,41 @@
 # limitations under the License.
 
 # rake "ios[ios/element/alert]"
-describe 'ios/element/alert' do
-  def nav_once
-    screen.must_equal catalog
-    wait_true do
-      find_element(:name, 'Alert Views').click
-      tag(ui_ios.navbar).name == 'Alert Views' # wait for true
+class IosTest
+  class Ios
+    class Element
+      class Alert < Minitest::Test
+        def open_alert
+          wait_true do
+            find_element(:name, 'Okay / Cancel').click
+            find_element(:name, 'A Short Title Is Best').displayed?
+          end
+        end
+
+        def test_01_before
+          assert_equal screen, catalog
+          wait_true do
+            find_element(:name, 'Alert Views').click
+            tag(ui_ios.navbar).name == 'Alert Views' # wait for true
+          end
+        end
+
+        def test_02_alert_accept
+          open_alert
+          alert_accept
+        end
+
+        def test_03_alert_dismiss
+          open_alert
+          alert_dismiss
+        end
+
+        def test_04_after_last
+          back_click
+          assert screen == catalog
+          sleep 1
+        end
+      end
     end
-  end
-
-  def after_last
-    back_click
-    screen.must_equal catalog
-    sleep 1
-  end
-
-  def open_alert
-    wait_true do
-      find_element(:name, 'Okay / Cancel').click
-      find_element(:name, 'A Short Title Is Best').displayed?
-    end
-  end
-
-  t 'before' do
-    nav_once
-  end
-
-  t 'alert_accept' do
-    open_alert
-    alert_accept
-  end
-
-  t 'alert_dismiss' do
-    open_alert
-    alert_dismiss
-  end
-
-  t 'after_last' do
-    after_last
   end
 end

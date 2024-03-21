@@ -17,73 +17,72 @@
 #   execute # debug output for Pry
 
 # rake "android[common/patch]"
-describe 'common/patch' do
-  # Attributes are busted in Android.
-  # Blocked on https://github.com/appium/appium/issues/628
-  describe 'Appium::Core::Element methods' do
-    # Android supports exactly two string Attributes
-    # .name and .text
-    # https://github.com/appium/appium/blob/ea3450e7f78d1794bab42fa396a387e7b86fd3b3/android/bootstrap/src/io/appium/android/bootstrap/handler/GetAttribute.java#L43
-    # t 'value' do; end # Doesn't work on Android
+class AndroidTest
+  class Common
+    class Patch < Minitest::Test
+      # Attributes are busted in Android.
+      # Blocked on https://github.com/appium/appium/issues/628
 
-    t 'name' do
-      wait { first_text.text.must_equal 'API Demos' }
-    end
+      # Android supports exactly two string Attributes
+      # .name and .text
+      # https://github.com/appium/appium/blob/ea3450e7f78d1794bab42fa396a387e7b86fd3b3/android/bootstrap/src/io/appium/android/bootstrap/handler/GetAttribute.java#L43
+      # def test_01_value' do; end # Doesn't work on And
 
-    # t 'tag_name' do; end # Doesn't work on Android
-
-    t 'location_rel' do
-      wait do
-        loc = first_text.location_rel($driver)
-        loc.x.class.must_equal String
-        loc.y.class.must_equal String
+      def test_01_element_method_name
+        wait { assert_equal first_text.text, 'API Demos' }
       end
-    end
-  end
 
-  describe 'common patch' do
-    # By default, the webdriver gem will return message instead of origValue
-    # {"message":"An unknown server-side error occurred while processing the command.","origValue":"Strategy id is not valid."}
-    t 'id error_message' do
-      value = ''
-      begin
-        set_wait 0
-        find_element(:id, 'ok')
-      rescue StandardError => e
-        value = e.message
-      ensure
-        set_wait 30
-      end
-      value = value.split("\n").first.strip
-      exp   = 'An element could not be located on the page using the given search parameters.'
-      value.must_equal exp
-    end
+      # def test_01_tag_name' do; end # Doesn't work on And
 
-    t 'id success' do
-      if automation_name_is_uiautomator2?
+      def test_02_element_method_location_rel
         wait do
-          el = text 'text' # <string name="autocomplete_3_button_7">Text</string>
-          el.text.must_equal 'Text'
-        end
-      else
-        wait do
-          el = id 'autocomplete_3_button_7' # <string name="autocomplete_3_button_7">Text</string>
-          el.text.must_equal 'Text'
+          loc = first_text.location_rel($driver)
+          assert_equal loc.x.class, String
+          assert_equal loc.y.class, String
         end
       end
-    end
 
-    t 'find many elements by resource id' do
-      wait do
-        value = find_elements(:id, 'android:id/text1').length
-        value.must_equal 12
+      # By default, the webdriver gem will return message instead of origValue
+      def test_03_common_patch_id_error_message
+        value = ''
+        begin
+          set_wait 0
+          find_element(:id, 'ok')
+        rescue StandardError => e
+          value = e.message
+        ensure
+          set_wait 30
+        end
+        exp = 'An element could not be located on the page using the given search parameters.'
+        assert value.start_with? exp
       end
-    end
 
-    t 'find single element by resource id' do
-      wait do
-        value = id('android:id/text1').text
-        value.must_equal "Access'ibility"
+      def test_04_id_common_patch_success
+        if automation_name_is_uiautomator2?
+          wait do
+            el = text 'text' # <string name="autocomplete_3_button_7">Text</str
+            assert_equal el.text, 'Text'
+          end
+        else
+          wait do
+            el = id 'autocomplete_3_button_7' # <string name="autocomplete_3_button_7">Text</string>
+            assert_equal el.text, 'Text'
+          end
+        end
+      end
+
+      def test_05_find_many_elements_by_resource_id
+        wait do
+          value = find_elements(:id, 'android:id/text1').length
+          assert_equal value, 12
+        end
+      end
+
+      def test_06_find_single_element_by_resource_id
+        wait do
+          value = id('android:id/text1').text
+          assert_equal value, "Access'ibility"
+        end
       end
     end
   end

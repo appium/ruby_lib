@@ -13,15 +13,21 @@
 # limitations under the License.
 
 # rake "android[common/command/command]"
-describe 'common/command/command' do
-  t 'command' do
-    File.delete 'logcat.log' if File.exist? 'logcat.log'
+class AndroidTest
+  class Common
+    class Command
+      class Command < Minitest::Test
+        def test_command
+          File.delete 'logcat.log' if File.exist? 'logcat.log'
 
-    start_logs_broadcast
-    sleep 5
-    stop_logs_broadcast
+          start_logs_broadcast
+          sleep 5
+          stop_logs_broadcast
 
-    assert File.exist?('logcat.log')
-    assert File.size?('logcat.log')
+          assert File.exist?('logcat.log')
+          assert File.size?('logcat.log')
+        end
+      end
+    end
   end
 end
