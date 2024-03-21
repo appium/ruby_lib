@@ -17,7 +17,6 @@
 class AndroidTest
   class Common
     class WebContext < Minitest::Test
-
       # appium's context support is broken on android
 
       def test_01_available_contexts
@@ -54,7 +53,7 @@ class AndroidTest
         # verify inspect within webview works
         assert get_android_inspect.split("\n").length >= 3
 
-        wait { set_context 'NATIVE_AP' }
+        wait { set_context 'NATIVE_APP' }
         wait { assert_equal current_context, 'NATIVE_APP' }
 
         undo_setcontext_nav
