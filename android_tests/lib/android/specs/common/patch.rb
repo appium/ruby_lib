@@ -29,7 +29,7 @@ class AndroidTest
       # def test_01_value' do; end # Doesn't work on And
 
       def test_01_element_method_name
-        wait { first_text.text.must_equal 'API Demos' }
+        wait { assert_equal first_text.text, 'API Demos' }
       end
 
       # def test_01_tag_name' do; end # Doesn't work on And
@@ -37,14 +37,13 @@ class AndroidTest
       def test_02_element_method_location_rel
         wait do
           loc = first_text.location_rel($driver)
-          loc.x.class.must_equal String
-          loc.y.class.must_equal String
+          assert_equal loc.x.class, String
+          assert_equal loc.y.class, String
         end
       end
 
       # By default, the webdriver gem will return message instead of origValue
-      # {"message":"An unknown server-side error occurred while processing the command.","origValue":"Strategy id is not valid."}
-      def test_03_common_patch_id error_message
+      def test_03_common_patch_id_error_message
         value = ''
         begin
           set_wait 0
@@ -54,21 +53,20 @@ class AndroidTest
         ensure
           set_wait 30
         end
-        value = value.split("\n").first.strip
-        exp   = 'An element could not be located on the page using the given search parameters.'
-        value.must_equal exp
+        exp = 'An element could not be located on the page using the given search parameters.'
+        assert value.start_with? exp
       end
 
       def test_04_id_common_patch_success
         if automation_name_is_uiautomator2?
           wait do
             el = text 'text' # <string name="autocomplete_3_button_7">Text</str
-            el.text.must_equal 'Text'
+            assert_equal el.text, 'Text'
           end
         else
           wait do
             el = id 'autocomplete_3_button_7' # <string name="autocomplete_3_button_7">Text</string>
-            el.text.must_equal 'Text'
+            assert_equal el.text, 'Text'
           end
         end
       end
@@ -76,14 +74,14 @@ class AndroidTest
       def test_05_find_many_elements_by_resource_id
         wait do
           value = find_elements(:id, 'android:id/text1').length
-          value.must_equal 12
+          assert_equal value, 12
         end
       end
 
       def test_06_find_single_element_by_resource_id
         wait do
           value = id('android:id/text1').text
-          value.must_equal "Access'ibility"
+          assert_equal value, "Access'ibility"
         end
       end
     end
