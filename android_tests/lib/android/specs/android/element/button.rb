@@ -13,54 +13,62 @@
 # limitations under the License.
 
 # rake "android[android/element/button]"
-describe 'android/element/button' do
-  def before_first
-    # nav to buttons activity
-    wait { find('App').click }
-    wait { find('Activity').click }
-    wait { find('Animation').click }
+class AndroidTest
+  class Element
+    class Button < Minitest::Test
+      def before_first
+        # nav to buttons activity
+        wait { find('App').click }
+        wait { find('Activity').click }
+        wait { find('Animation').click }
+      end
+
+      def after_last
+        # nav back to home activity
+        3.times { back }
+      end
+
+      def fade_in
+        'Fade in'
+      end
+
+      def test_01_before_first
+        before_first
+      end
+
+      def test_02_button
+        # by index
+        2.times { wait { assert_equal button(1).text.upcase, fade_in.upcase } }
+
+        # by name contains
+        wait { assert_equal button('ade').text.upcase, fade_in.upcase }
+      end
+
+      def test_03_buttons
+        exp = ['ZOOM IN', 'MODERN ZOOM IN', 'THUMBNAIL ZOOM']
+        wait { assert_equal buttons('zoom').map(&:text).map(&:upcase), exp }
+        wait { assert_equal buttons.length, 6 }
+      end
+
+      def test_04_first_button
+        wait { assert_equal first_button.text.upcase, fade_in.upcase }
+      end
+
+      def test_05_last_button
+        wait { assert_equal last_button.text.upcase, 'THUMBNAIL ZOOM' }
+      end
+
+      def test_06_button_exact
+        wait { assert_equal button_exact(fade_in).text.upcase, fade_in.upcase }
+      end
+
+      def test_07_buttons_exact
+        2.times { wait { assert_equal buttons_exact(fade_in).first.text.upcase, fade_in.upcase } }
+      end
+
+      def test_08_after_last
+        after_last
+      end
+    end
   end
-
-  def after_last
-    # nav back to home activity
-    3.times { back }
-  end
-
-  def fade_in
-    'Fade in'
-  end
-
-  t { before_first }
-
-  t 'button' do
-    # by index
-    2.times { wait { button(1).text.upcase.must_equal fade_in.upcase } }
-
-    # by name contains
-    wait { button('ade').text.upcase.must_equal fade_in.upcase }
-  end
-
-  t 'buttons' do
-    exp = ['ZOOM IN', 'MODERN ZOOM IN', 'THUMBNAIL ZOOM']
-    wait { buttons('zoom').map(&:text).map(&:upcase).must_equal exp }
-    wait { buttons.length.must_equal 6 }
-  end
-
-  t 'first_button' do
-    wait { first_button.text.upcase.must_equal fade_in.upcase }
-  end
-
-  t 'last_button' do
-    wait { last_button.text.upcase.must_equal 'THUMBNAIL ZOOM' }
-  end
-
-  t 'button_exact' do
-    wait { button_exact(fade_in).text.upcase.must_equal fade_in.upcase }
-  end
-
-  t 'buttons_exact' do
-    2.times { wait { buttons_exact(fade_in).first.text.upcase.must_equal fade_in.upcase } }
-  end
-
-  t { after_last }
 end

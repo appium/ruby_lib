@@ -13,37 +13,43 @@
 # limitations under the License.
 
 # rake "android[android/element/text]"
-describe 'android/element/text' do
-  def must_raise_no_element
-    proc { yield }.must_raise Selenium::WebDriver::Error::NoSuchElementError
-  end
+class AndroidTest
+  class Element
+    class Text < Minitest::Test
+      def must_raise_no_element
+        assert_raises Selenium::WebDriver::Error::NoSuchElementError do
+          yield
+        end
+      end
 
-  t 'text' do
-    wait { ['API Demos', "Access'ibility"].must_include text(1).text }
-    wait { text('mos').text.must_equal 'API Demos' }
-  end
+      def test_01_text
+        wait { assert ['API Demos', "Access'ibility"].include? text(1).text }
+        wait { assert_equal text('mos').text, 'API Demos' }
+      end
 
-  t 'texts' do
-    wait { texts('i').length.must_equal 7 }
-    wait { texts.length.must_equal 13 }
-  end
+      def test_02_texts
+        wait { assert_equal texts('i').length, 7 }
+        wait { assert_equal texts.length, 13 }
+      end
 
-  t 'first_text' do
-    wait { ['API Demos', "Access'ibility"].must_include first_text.text }
-  end
+      def test_03_first_text
+        wait { assert ['API Demos', "Access'ibility"].include? first_text.text }
+      end
 
-  t 'last_text' do
-    wait { ['API Demos', 'Views'].must_include last_text.text }
-  end
+      def test_04_last_text
+        wait { assert ['API Demos', 'Views'].include? last_text.text }
+      end
 
-  t 'text_exact' do
-    must_raise_no_element { text_exact 'mos' }
+      def test_05_text_exact
+        must_raise_no_element { text_exact 'mos' }
 
-    # should pass
-    wait { text_exact('API Demos').text.must_equal 'API Demos' }
-  end
+        # should pass
+        wait { assert_equal text_exact('API Demos').text, 'API Demos' }
+      end
 
-  t 'texts_exact' do
-    wait { texts_exact('API Demos').length.must_equal 1 }
+      def test_06_texts_exact
+        wait { assert_equal texts_exact('API Demos').length, 1 }
+      end
+    end
   end
 end

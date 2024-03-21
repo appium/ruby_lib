@@ -13,50 +13,54 @@
 # limitations under the License.
 
 # rake "android[android/element/alert]"
-describe 'android/element/alert' do
-  def open_alert
-    # trigger the alert
-    wait { button('OK Cancel dialog with a message').click }
-  end
+class AndroidTest
+  class Element
+    class Alert < Minitest::Test
+      def open_alert
+        # trigger the alert
+        wait { button('OK Cancel dialog with a message').click }
+      end
 
-  t 'alert_click' do
-    # nav to alert activity
-    wait { find('app').click }
-    wait { find('alert').click }
+      def test_01_alert_click
+        # nav to alert activity
+        wait { find('app').click }
+        wait { find('alert').click }
 
-    # test
-    wait { open_alert }
-    wait { alert_click('OK') }
-  end
+        # test
+        wait { open_alert }
+        wait { alert_click('OK') }
+      end
 
-  t 'alert_accept' do
-    wait { open_alert }
-    wait { alert_accept }
-  end
+      def test_02_alert_accept
+        wait { open_alert }
+        wait { alert_accept }
+      end
 
-  t 'alert_accept_text' do
-    wait { open_alert }
-    wait { alert_accept_text.must_equal 'OK' }
-    wait { alert_accept }
-  end
+      def test_03_alert_accept_text
+        wait { open_alert }
+        wait { assert_equal alert_accept_text, 'OK' }
+        wait { alert_accept }
+      end
 
-  t 'alert_dismiss' do
-    wait { open_alert }
-    wait { alert_dismiss }
-  end
+      def test_04_alert_dismiss
+        wait { open_alert }
+        wait { alert_dismiss }
+      end
 
-  t 'alert_dismiss_text' do
-    wait { open_alert }
+      def test_05_alert_dismiss_text
+        wait { open_alert }
 
-    # alert dialog button placement changed:
-    # 'OK Cancel dialog with a long message'
-    # Android L: 'Something, Cancel, Ok'
-    # Android 19: 'Cancel, Something, Ok'
+        # alert dialog button placement changed:
+        # 'OK Cancel dialog with a long message'
+        # Android L: 'Something, Cancel, Ok'
+        # Android 19: 'Cancel, Something, Ok'
 
-    wait { alert_dismiss_text.downcase.must_equal 'cancel' }
-    wait { alert_dismiss }
+        wait { assert_equal alert_dismiss_text.downcase, 'cancel' }
+        wait { alert_dismiss }
 
-    # nav to start activity
-    2.times { back }
+        # nav to start activity
+        2.times { back }
+      end
+    end
   end
 end
