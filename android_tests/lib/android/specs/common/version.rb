@@ -12,12 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-describe 'version.rb' do
-  t '::Appium::VERSION' do
-    ::Appium::VERSION.must_match(/(\d+)\.(\d+).(\d+)/)
-  end
+# rake "android[common/version]"
+class AndroidTest
+  class Common
+    class Version < Minitest::Test
+      def test_appium_version
+        assert_match(/(\d+)\.(\d+).(\d+)/, ::Appium::VERSION)
+      end
 
-  t '::Appium::DATE' do
-    ::Appium::DATE.must_match(/(\d+)-(\d+)-(\d+)/)
+      def test_appium_date
+        assert_match(/(\d+)-(\d+)-(\d+)/, ::Appium::DATE)
+      end
+    end
   end
 end
