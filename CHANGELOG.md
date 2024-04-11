@@ -3,7 +3,7 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
-## (not released yet)
+## 15.0.0 - 2024-04-11
 - Breaking
     - Use appium_lib_core 8.0.0 and up
         - Please refer to [the diff](https://github.com/appium/ruby_lib_core/blob/master/CHANGELOG.md#800---2024-03-08) about the details.
