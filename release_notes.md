@@ -1,3 +1,17 @@
+#### v15.0.0 2024-04-11
+
+- [203a605](https://github.com/appium/ruby_lib/commit/203a6052db42039c89cd000f245f1534379bc86b) Release 15.0.0
+- [7ab9f44](https://github.com/appium/ruby_lib/commit/7ab9f442ee9a9d22ad021316171e6824628eeb99) chore: Update rubocop requirement from = 1.62.1 to = 1.63.0 (#1023)
+- [ad20d82](https://github.com/appium/ruby_lib/commit/ad20d828e8124f37c3ab3055c744c2c76c74f563) ci: add 3.3
+- [df9752c](https://github.com/appium/ruby_lib/commit/df9752c5176db395e7a427a77c4755293ff75cee) feat: remove "spec" deps (#1022)
+- [c5a7216](https://github.com/appium/ruby_lib/commit/c5a7216c005bb819ff7bc3fe313e7400777b9587) test: add empty test code (#1021)
+- [c450c20](https://github.com/appium/ruby_lib/commit/c450c20bae801e2f9f9ce66a9df2e352a614f73f) feat: bump ruby lib core v8 (#1018)
+- [9d40e0e](https://github.com/appium/ruby_lib/commit/9d40e0e2c2cbe571fd788c12565b3cb3d92f16a4) chore: Update rubocop requirement from = 1.62.0 to = 1.62.1 (#1020)
+- [98861af](https://github.com/appium/ruby_lib/commit/98861af3d779ce288937344a63aec7cbefed9db1) chore: Update rubocop requirement from = 1.61.0 to = 1.62.0 (#1017)
+- [1b385bc](https://github.com/appium/ruby_lib/commit/1b385bc2bab3f45d38a4f58e8c79ddbbe58d5596) chore: Update rubocop requirement from = 1.60.2 to = 1.61.0 (#1016)
+- [612d944](https://github.com/appium/ruby_lib/commit/612d944fc60b202d3e24c7e052004cef1b69c8d0) chore: Update rubocop requirement from = 1.60.1 to = 1.60.2 (#1013)
+
+
 #### v14.0.0 2024-01-25
 
 - [50cf980](https://github.com/appium/ruby_lib/commit/50cf980b570acd7d2d95ea64d1d1b0225f96c73b) Release 14.0.0
