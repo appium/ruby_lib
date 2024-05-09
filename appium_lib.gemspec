@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'hashdiff', '~> 1.1.0'
   s.add_development_dependency 'pry'
   s.add_development_dependency 'rake', '~> 13.0'
-  s.add_development_dependency 'rubocop', '1.63.4'
+  s.add_development_dependency 'rubocop', '1.63.5'
   s.add_development_dependency 'yard', '~> 0.9.11'
   s.add_development_dependency 'minitest', '~> 5.0'
   s.add_development_dependency 'minitest-reporters', '~> 1.1'
