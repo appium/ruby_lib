@@ -4,8 +4,8 @@ Commit based release not is [release_notes.md](./release_notes.md)
 Release tags are https://github.com/appium/ruby_lib/releases .
 
 
-## [not yet]
-- Use appium_lib_core 9.0.0 and up
+## [15.1.0] - 2024-05-19
+- Use appium_lib_core 9.0.0
 
 ## 15.0.1 - 2024-04-26
 - Bump release module (internal only)
