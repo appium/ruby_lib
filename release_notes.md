@@ -1,3 +1,13 @@
+#### v15.2.0 2024-07-20
+
+- [d73525e](https://github.com/appium/ruby_lib/commit/d73525eec584c3c31690dcd55a6c52d641d43f9f) Release 15.2.0
+- [6b5d969](https://github.com/appium/ruby_lib/commit/6b5d9693f10e64a521f6ac5d31c78d71e5f0f6be) feat: raise its own defined errors (#1035)
+- [4a74c60](https://github.com/appium/ruby_lib/commit/4a74c60937e66bf028a66e4f05a324ce8b2077ce) chore: Update rubocop requirement from = 1.64.1 to = 1.65.0 (#1034)
+- [fa4cea4](https://github.com/appium/ruby_lib/commit/fa4cea4e5bea0aa4e3ed7052ba77812c82684fe0) chore: Update rubocop requirement from = 1.64.0 to = 1.64.1 (#1033)
+- [96ce262](https://github.com/appium/ruby_lib/commit/96ce26264d985b5260e99573486e8f712bfb12e3) chore: Update rubocop requirement from = 1.63.5 to = 1.64.0 (#1032)
+- [14590cc](https://github.com/appium/ruby_lib/commit/14590cce6f6cbef8c20e12ae10b00bf3f7b5ab3a) chore: tweak changelog format
+
+
 #### v15.1.0 2024-05-19
 
 - [b1534cc](https://github.com/appium/ruby_lib/commit/b1534cc8e781e37f9632fa1cbaa6e2422b6a768d) Release 15.1.0
