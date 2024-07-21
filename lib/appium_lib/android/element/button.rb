@@ -29,7 +29,7 @@ module Appium
       # Android needs to combine button and image button to match iOS.
       if value.is_a? Numeric
         index = value
-        raise "#{index} is not a valid index. Must be >= 1" if index <= 0
+        raise ArgumentError, "#{index} is not a valid index. Must be >= 1" if index <= 0
 
         # 1 indexed
         return find_element :uiautomator, _button_visible_selectors(index: index)
