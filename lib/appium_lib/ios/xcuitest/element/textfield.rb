@@ -37,7 +37,7 @@ module Appium
         def textfield(value)
           if value.is_a? Numeric
             index = value
-            raise "#{index} is not a valid index. Must be >= 1" if index <= 0
+            raise ArgumentError, "#{index} is not a valid index. Must be >= 1" if index <= 0
 
             index -= 1 # eles_by_json and _textfields_with_predicate is 0 indexed.
             result = _textfields_with_predicate[index]
