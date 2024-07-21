@@ -3,6 +3,8 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## 15.2.0 - 2024-07-20
+- Raise defined errors instead of Ruby general errors by appium_lib's own errors
 
 ## 15.1.0 - 2024-05-19
 - Use appium_lib_core 9.0.0
