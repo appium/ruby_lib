@@ -156,7 +156,7 @@ module Appium
 
       $driver&.driver_quit if global_driver
 
-      raise 'opts must be a hash' unless opts.is_a? Hash
+      raise ArgumentError, 'opts must be a hash' unless opts.is_a? Hash
 
       @core = ::Appium::Core.for(opts)
       extend ::Appium::Core::Device
@@ -329,7 +329,7 @@ module Appium
     #     action.click(element).perform # The `click` is a part of `PointerActions`
     #
     def action
-      @driver.action
+      @driver&.action
     end
 
     # Returns the server's version info
@@ -384,12 +384,12 @@ module Appium
     #
     # @return [String] APP_PATH as an absolute path
     def self.absolute_app_path(opts)
-      raise 'opts must be a hash' unless opts.is_a? Hash
+      raise ArgumentError, 'opts must be a hash' unless opts.is_a? Hash
 
       # FIXME: 'caps' and 'app' will be correct
       caps            = opts[:caps] || opts['caps'] || {}
       app_path        = caps[:app] || caps['app']
-      raise 'absolute_app_path invoked and app is not set!' if app_path.nil? || app_path.empty?
+      raise ArgumentError, 'absolute_app_path invoked and app is not set!' if app_path.nil? || app_path.empty?
       # Sauce storage API. http://saucelabs.com/docs/rest#storage
       return app_path if app_path.start_with? 'sauce-storage:'
       return app_path if app_path =~ URI::DEFAULT_PARSER.make_regexp # public URL for Sauce
@@ -431,7 +431,7 @@ module Appium
     # @param png_save_path [String] the full path to save the png
     # @return [File]
     def screenshot(png_save_path)
-      @driver.save_screenshot png_save_path
+      @driver&.save_screenshot png_save_path
     end
 
     # Takes a png screenshot of particular element's area
@@ -445,7 +445,7 @@ module Appium
     # @param [String] png_save_path the full path to save the png
     # @return [File]
     def element_screenshot(element, png_save_path)
-      @driver.take_element_screenshot element, png_save_path
+      @driver&.take_element_screenshot element, png_save_path
       nil
     end
 
@@ -469,6 +469,9 @@ module Appium
     #   size.height #=> Integer
     #
     def window_size
+      # maybe exception is expected as no driver created
+      raise NoDriverInstanceError if @driver.nil?
+
       @driver.window_size
     end
 
@@ -484,6 +487,8 @@ module Appium
     #   size.y #=> Integer
     #
     def window_rect
+      raise NoDriverInstanceError if @driver.nil?
+
       @driver.window_rect
     end
 
@@ -555,7 +560,7 @@ module Appium
 
     # Set implicit wait to zero.
     def no_wait
-      @driver.manage.timeouts.implicit_wait = 0
+      @driver&.manage&.timeouts&.implicit_wait = 0
     end
 
     # Set implicit wait. Default to @default_wait.
@@ -570,7 +575,7 @@ module Appium
     # @return [void]
     def set_wait(timeout = nil)
       timeout = @default_wait if timeout.nil?
-      @driver.manage.timeouts.implicit_wait = timeout
+      @driver&.manage&.timeouts&.implicit_wait = timeout
     end
 
     # Returns existence of element.
@@ -589,9 +594,9 @@ module Appium
       # do not uset set_wait here.
       # it will cause problems with other methods reading the default_wait of 0
       # which then gets converted to a 1 second wait.
-      @driver.manage.timeouts.implicit_wait = pre_check
+      @driver&.manage&.timeouts&.implicit_wait = pre_check
       # the element exists unless an error is raised.
-      exists                                = true
+      exists = true
 
       begin
         yield # search for element
@@ -600,7 +605,7 @@ module Appium
       end
 
       # restore wait
-      @driver.manage.timeouts.implicit_wait = post_check if post_check != pre_check
+      @driver&.manage&.timeouts&.implicit_wait = post_check if post_check != pre_check
 
       exists
     end
@@ -610,6 +615,8 @@ module Appium
     # @param [*args] args The args to pass to the script
     # @return [Object]
     def execute_script(script, *args)
+      raise NoDriverInstanceError if @driver.nil?
+
       @driver.execute_script script, *args
     end
 
@@ -618,6 +625,8 @@ module Appium
     ###
     # Get the window handles of open browser windows
     def execute_async_script(script, *args)
+      raise NoDriverInstanceError if @driver.nil?
+
       @driver.execute_async_script script, *args
     end
 
@@ -650,41 +659,59 @@ module Appium
     #      r.logs   #=> The `logs` key part as `{'log' => [], 'warn' => [], 'error' => []}`
     #
     def execute_driver(script: '', type: 'webdriverio', timeout_ms: nil)
+      raise NoDriverInstanceError if @driver.nil?
+
       @driver.execute_driver(script: script, type: type, timeout_ms: timeout_ms)
     end
 
     def window_handles
+      raise NoDriverInstanceError if @driver.nil?
+
       @driver.window_handles
     end
 
     # Get the current window handle
     def window_handle
+      raise NoDriverInstanceError if @driver.nil?
+
       @driver.window_handle
     end
 
     def navigate
+      raise NoDriverInstanceError if @driver.nil?
+
       @driver.navigate
     end
 
     def manage
+      raise NoDriverInstanceError if @driver.nil?
+
       @driver.manage
     end
 
     def get(url)
+      raise NoDriverInstanceError if @driver.nil?
+
       @driver.get(url)
     end
 
     def current_url
+      raise NoDriverInstanceError if @driver.nil?
+
       @driver.current_url
     end
 
     def title
+      raise NoDriverInstanceError if @driver.nil?
+
       @driver.title
     end
 
     # @return [TargetLocator]
     # @see TargetLocator
     def switch_to
+      raise NoDriverInstanceError if @driver.nil?
+
       @driver.switch_to
     end
     ###
@@ -712,6 +739,8 @@ module Appium
     # @param [*args] args The args to use
     # @return [Array<Element>] Array is empty when no elements are found.
     def find_elements(*args)
+      raise NoDriverInstanceError if @driver.nil?
+
       @driver.find_elements(*args)
     end
 
@@ -728,6 +757,8 @@ module Appium
     # @param [*args] args The args to use
     # @return [Element]
     def find_element(*args)
+      raise NoDriverInstanceError if @driver.nil?
+
       @driver.find_element(*args)
     end
 
@@ -743,6 +774,8 @@ module Appium
     #     @driver.find_element_by_image './test/functional/data/test_element_image.png'
     #
     def find_element_by_image(png_img_path)
+      raise NoDriverInstanceError if @driver.nil?
+
       @driver.find_element_by_image(png_img_path)
     end
 
@@ -758,6 +791,8 @@ module Appium
     #     @driver.find_elements_by_image ['./test/functional/data/test_element_image.png']
     #
     def find_elements_by_image(png_img_paths)
+      raise NoDriverInstanceError if @driver.nil?
+
       @driver.find_elements_by_image(png_img_paths)
     end
 
@@ -771,6 +806,8 @@ module Appium
     # @option opts [Float] :altitude the altitude, defaulting to 75
     # @return [Selenium::WebDriver::Location] the location constructed by the selenium webdriver
     def set_location(opts = {})
+      raise NoDriverInstanceError if @driver.nil?
+
       latitude = opts.fetch(:latitude)
       longitude = opts.fetch(:longitude)
       altitude = opts.fetch(:altitude, 75)
@@ -794,10 +831,13 @@ module Appium
     #              #          'appium:anotherEvent' => 1572959315}
     #
     def log_event(vendor:, event:)
+      raise NoDriverInstanceError if @driver.nil?
+
       @driver.logs.event vendor: vendor, event: event
     end
 
     def log_event=(log_event)
+      raise if @driver.nil?
       unless log_event.is_a?(Hash)
         raise ::Appium::Core::Error::ArgumentError('log_event should be Hash like { vendor: "appium", event: "funEvent"}')
       end
@@ -817,6 +857,8 @@ module Appium
     #   log_events #=> {'commands' => [{'cmd' => 123455, ....}], 'startTime' => 1572954894127, }
     #
     def log_events(type = nil)
+      raise NoDriverInstanceError if @driver.nil?
+
       @driver.logs.events(type)
     end
 

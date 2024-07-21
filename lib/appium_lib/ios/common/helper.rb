@@ -107,7 +107,7 @@ module Appium
     # @param index [Integer] the index
     # @return [Element]
     def ele_index(class_name, index)
-      raise 'Index must be >= 1' unless index == 'last()' || (index.is_a?(Integer) && index >= 1)
+      raise ArgumentError, 'Index must be >= 1' unless index == 'last()' || (index.is_a?(Integer) && index >= 1)
 
       elements = tags(class_name)
 
@@ -376,7 +376,7 @@ module Appium
     #
     def _all_pred(opts)
       predicate = opts[:predicate]
-      raise 'predicate must be provided' unless predicate
+      raise ArgumentError, 'predicate must be provided' unless predicate
 
       visible = opts.fetch :visible, true
       %($.mainApp().getAllWithPredicate("#{predicate}", #{visible});)
@@ -404,23 +404,23 @@ module Appium
     end
 
     def _validate_object(*objects)
-      raise 'objects must be an array' unless objects.is_a? Array
+      raise ArgumentError, 'objects must be an array' unless objects.is_a? Array
 
       objects.each do |obj|
         next unless obj # obj may be nil. if so, ignore.
 
         valid_keys   = %i[target substring insensitive]
         unknown_keys = obj.keys - valid_keys
-        raise "Unknown keys: #{unknown_keys}" unless unknown_keys.empty?
+        raise ArgumentError, "Unknown keys: #{unknown_keys}" unless unknown_keys.empty?
 
         target = obj[:target]
-        raise 'target must be a string' unless target.is_a? String
+        raise ArgumentError, 'target must be a string' unless target.is_a? String
 
         substring = obj[:substring]
-        raise 'substring must be a boolean' unless [true, false].include? substring
+        raise ArgumentError, 'substring must be a boolean' unless [true, false].include? substring
 
         insensitive = obj[:insensitive]
-        raise 'insensitive must be a boolean' unless [true, false].include? insensitive
+        raise ArgumentError, 'insensitive must be a boolean' unless [true, false].include? insensitive
       end
     end
 
@@ -456,16 +456,16 @@ module Appium
     def _by_json(opts)
       valid_keys = %i(typeArray onlyFirst onlyVisible name label value)
       unknown_keys = opts.keys - valid_keys
-      raise "Unknown keys: #{unknown_keys}" unless unknown_keys.empty?
+      raise ArgumentError, "Unknown keys: #{unknown_keys}" unless unknown_keys.empty?
 
       type_array = opts[:typeArray]
-      raise 'typeArray must be an array' unless type_array.is_a? Array
+      raise ArgumentError, 'typeArray must be an array' unless type_array.is_a? Array
 
       only_first = opts[:onlyFirst]
-      raise 'onlyFirst must be a boolean' unless [true, false].include? only_first
+      raise ArgumentError, 'onlyFirst must be a boolean' unless [true, false].include? only_first
 
       only_visible = opts[:onlyVisible]
-      raise 'onlyVisible must be a boolean' unless [true, false].include? only_visible
+      raise ArgumentError, 'onlyVisible must be a boolean' unless [true, false].include? only_visible
 
       # name/label/value are optional. when searching for class only, then none
       # will be present.
