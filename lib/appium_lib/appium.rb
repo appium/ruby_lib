@@ -56,11 +56,11 @@ module Appium
     # @param opts [Hash] file: '/path/to/appium.txt', verbose: true
     # @return [hash] the symbolized hash with updated :app and :require keys
     def load_settings(opts = {})
-      raise 'opts must be a hash' unless opts.is_a? Hash
-      raise 'opts must not be empty' if opts.empty?
+      raise ArgumentError, 'opts must be a hash' unless opts.is_a? Hash
+      raise ArgumentError, 'opts must not be empty' if opts.empty?
 
       toml = opts[:file]
-      raise 'Must pass a capability file which has [caps] and [appium_lib]' unless toml
+      raise ArgumentError, 'Must pass a capability file which has [caps] and [appium_lib]' unless toml
 
       verbose = opts.fetch :verbose, false
 
@@ -69,7 +69,7 @@ module Appium
       toml_exists = File.exist? toml
       Appium::Logger.info "Exists? #{toml_exists}" if verbose
 
-      raise "toml doesn't exist #{toml}" unless toml_exists
+      raise ArgumentError, "toml doesn't exist #{toml}" unless toml_exists
 
       require 'tomlrb'
       Appium::Logger.info "Loading #{toml}" if verbose
@@ -151,7 +151,7 @@ module Appium
     # @param [Array<Module>] modules An array of modules
     # @param [Driver] driver A driver to extend for
     def promote_singleton_appium_methods(modules, driver = $driver)
-      raise 'Global $driver is nil' if driver.nil?
+      raise ArgumentError, 'Global $driver is nil' if driver.nil?
 
       target_modules = []
 
@@ -160,7 +160,7 @@ module Appium
           target_modules << modules.const_get(sub_module)
         end
       else
-        raise 'modules must be a module or an array' unless modules.is_a? Array
+        raise ArgumentError, 'modules must be a module or an array' unless modules.is_a? Array
 
         target_modules = modules
       end
@@ -205,7 +205,7 @@ module Appium
     #   Appium.promote_appium_methods Minitest::Spec
     #
     def promote_appium_methods(class_array, driver = $driver)
-      raise 'Driver is nil' if driver.nil?
+      raise ArgumentError, 'Driver is nil' if driver.nil?
 
       # Wrap single class into an array
       class_array = [class_array] unless class_array.instance_of? Array
