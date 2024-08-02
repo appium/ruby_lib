@@ -25,6 +25,9 @@ class IosTest
         end
 
         def test_01_before
+          driver.terminate_app target_bundle_id
+          driver.activate_app target_bundle_id
+
           assert_equal screen, catalog
           wait_true do
             find_element(:name, 'Alert Views').click

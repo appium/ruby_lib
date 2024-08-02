@@ -18,6 +18,9 @@ class IosTest
     class Command
       class Command < Minitest::Test
         def test_01_command
+          driver.terminate_app target_bundle_id
+          driver.activate_app target_bundle_id
+
           File.delete 'syslog.log' if File.exist? 'syslog.log'
 
           # A number of systemlog is quite small than Android.

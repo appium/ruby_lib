@@ -17,6 +17,9 @@ class IosTest
   class Ios
     class Helper < Minitest::Test
       def test_01_before_first
+        driver.terminate_app target_bundle_id
+        driver.activate_app target_bundle_id
+
         assert_equal screen, catalog
       end
 

@@ -43,10 +43,6 @@ def start_driver(caps)
   driver.start_driver
 end
 
-# Sanity check
-a = OpenStruct.new x: 'ok'
-raise 'x issue' unless a.x == 'ok'
-
 dir = File.expand_path(File.join(Dir.pwd, 'lib'))
 appium_txt = File.join(Dir.pwd, 'appium.txt')
 device = ARGV[0].downcase.strip

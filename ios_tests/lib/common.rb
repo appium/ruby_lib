@@ -38,6 +38,10 @@ def catalog
   'UICatalog'
 end
 
+def target_bundle_id
+  'com.example.apple-samplecode.UICatalog'
+end
+
 def ui_ios
   UI.new($driver)
 end

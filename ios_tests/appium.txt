@@ -1,7 +1,7 @@
 [caps]
 platformName = "ios"
-platformVersion = "17.2"
-deviceName ="iPhone 15"
+platformVersion = "17.4"
+deviceName ="iPhone 15 Plus"
 automationName = 'XCUITest'
 app = "../test_apps/UICatalog.app.zip"
 someCapability = "some_capability"

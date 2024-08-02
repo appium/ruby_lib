@@ -19,7 +19,10 @@ class IosTest
       class MultiAppHandler < Minitest::Test
         # Only for Xcode 9+
         def test_multip_app_handler
-          test_app_bundle = 'com.example.apple-samplecode.UICatalog'
+          driver.terminate_app target_bundle_id
+          driver.activate_app target_bundle_id
+
+          test_app_bundle = target_bundle_id
 
           assert_equal xcuitest_query_app_status(bundle_id: test_app_bundle), :running_in_foreground
 

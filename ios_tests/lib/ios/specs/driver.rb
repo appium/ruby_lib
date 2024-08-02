@@ -16,6 +16,8 @@
 class IosTest
   class Driver < Minitest::Test
     def test_01_before_first
+      driver.terminate_app target_bundle_id
+      driver.activate_app target_bundle_id
       assert_equal screen, catalog
     end
 
@@ -119,7 +121,7 @@ class IosTest
     end
 
     def test_15_automation_name_is_xcuitest?
-      assert_equal automation_name_is_xcuitest?, automation_name_is_xcuitest?
+      assert_equal automation_name_is_xcuitest?, true
     end
 
     #
@@ -188,6 +190,10 @@ class IosTest
     def test_24_events
       log_event vendor: 'appium', event: 'funEvent'
       log_events
+    end
+
+    def test_25_device_is_ios
+      assert_equal device_is_ios?, true
     end
   end
 end

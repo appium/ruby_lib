@@ -31,6 +31,9 @@ class IosTest
         end
 
         def test_01_before_first
+          driver.terminate_app target_bundle_id
+          driver.activate_app target_bundle_id
+
           before_first
         end
 

@@ -18,6 +18,9 @@ class IosTest
     class Command
       class Pasteboard < Minitest::Test
         def test_pasteboard
+          driver.terminate_app target_bundle_id
+          driver.activate_app target_bundle_id
+
           # set blank before testing because pasteboard is remaining during launching simulators
           set_pasteboard content: 'before'
           assert_equal get_pasteboard, 'before'
