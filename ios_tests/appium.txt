@@ -5,8 +5,9 @@ deviceName ="iPhone 15 Plus"
 automationName = 'XCUITest'
 app = "../test_apps/UICatalog.app.zip"
 someCapability = "some_capability"
+simulatorStartupTimeout = 600000
 
 [appium_lib]
-wait = 30
+wait = 120
 wait_timeout = 20
 wait_interval = 1
