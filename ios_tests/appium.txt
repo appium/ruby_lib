@@ -9,5 +9,6 @@ simulatorStartupTimeout = 600000
 wdaLaunchTimeout = 600000
 
 [appium_lib]
+wait = 30
 wait_timeout = 20
 wait_interval = 1
