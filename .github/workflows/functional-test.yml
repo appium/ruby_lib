@@ -1,0 +1,77 @@
+name: Functional Tests
+
+on:
+  # Run by manual at this time
+  workflow_dispatch:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ios_test:
+    runs-on: macos-14
+    env:
+          XCODE_VERSION: 15.3
+          IOS_VERSION: 17.4
+          IOS_DEVICE_NAME: iPhone 15 Plus
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Install Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 'lts/*'
+
+    - name: Select Xcode
+      uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: ${{ env.XCODE_VERSION }}
+    - run: defaults write com.apple.iphonesimulator PasteboardAutomaticSync -bool false
+
+    - uses: futureware-tech/simulator-action@v3
+      with:
+      # https://github.com/actions/runner-images/blob/main/images/macos/macos-14-arm64-Readme.md
+        model: ${{ env.IOS_DEVICE_NAME }}
+        os_version: ${{ env.IOS_VERSION }}
+
+    - name: Preparing other environment
+      run: |
+        brew install ffmpeg
+        brew tap wix/brew
+        brew install applesimutils
+
+    # Start Appium
+    - name: Install appium and mjpeg-consumer
+      run: |
+        npm install -g appium
+        npm install -g mjpeg-consumer
+    - run: |
+        appium driver install xcuitest
+        appium plugin install images@2.1.8
+        appium plugin install execute-driver
+        nohup appium --use-plugins=images,execute-driver --relaxed-security --log-timestamp --log-no-colors --base-path=/wd/hub > appium.log &
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.2
+    - run: |
+        bundle install
+        rake ios
+      name: Run tests
+      working-directory: ios_tests
+
+    - name: Save server output
+      if: ${{ always() }}
+      uses: actions/upload-artifact@master
+      with:
+        name: appium-ios_test_with_other_deps.log
+        path: |
+          appium.log
+          test/report/

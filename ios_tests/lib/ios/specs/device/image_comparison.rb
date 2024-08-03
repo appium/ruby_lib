@@ -24,7 +24,8 @@ class IosTest
         # Equal to `$driver.driver.find_image_occurrence`
         # Equal to `driver.find_image_occurrence`
         find_result = find_image_occurrence full_image: image1, partial_image: image2
-        assert_equal({ 'rect' => { 'x' => 0, 'y' => 0, 'width' => 750, 'height' => 1334 } }, find_result)
+        rect = find_result['rect']
+        assert_equal({ 'x' => 0, 'y' => 0, 'width' => 750, 'height' => 1334 }, rect)
       end
     end
   end

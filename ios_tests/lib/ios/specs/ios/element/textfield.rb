@@ -25,6 +25,9 @@ class IosTest
       end
 
       def test_01_before_first
+        driver.terminate_app target_bundle_id
+        driver.activate_app target_bundle_id
+        assert_equal screen, catalog
         go_to_textfields
       end
 

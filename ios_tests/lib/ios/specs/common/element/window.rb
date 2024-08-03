@@ -19,6 +19,8 @@ class IosTest
     class Element
       class Window < Minitest::Test
         def before_first
+          driver.terminate_app target_bundle_id
+          driver.activate_app target_bundle_id
           assert_equal screen, catalog
         end
 

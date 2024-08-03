@@ -40,6 +40,26 @@ require 'uri'
 
 module Appium
   class Driver
+    # @private
+    class << self
+      def convert_to_symbol(value)
+        if value.nil?
+          value
+        else
+          value.to_sym
+        end
+      end
+
+      # @private
+      def get_cap(caps, name)
+        name_with_prefix = "#{::Appium::Core::Base::Bridge::APPIUM_PREFIX}#{name}"
+        caps[convert_to_symbol name] ||
+          caps[name] ||
+          caps[convert_to_symbol name_with_prefix] ||
+          caps[name_with_prefix]
+      end
+    end
+
     # attr readers are promoted to global scope. To avoid clobbering, they're
     # made available via the driver_attributes method
     #
@@ -248,15 +268,11 @@ module Appium
       return unless @core.caps
 
       # return the path exists on the local
-      return if @core.caps['app'] && !@core.caps['app'].nil? && File.exist?(@core.caps['app'])
-      return if @core.caps[:app] && !@core.caps[:app].nil? && File.exist?(@core.caps[:app])
+      app_path = Driver.get_cap(@core.caps, 'app')
+      return if !app_path.nil? && File.exist?(app_path)
 
       # The app file is not exact path
-      if !@core.caps['app'].nil?
-        @core.caps['app'] = self.class.absolute_app_path opts
-      elsif !@core.caps[:app].nil?
-        @core.caps[:app] = self.class.absolute_app_path opts
-      end
+      @core.caps['app'] = self.class.absolute_app_path opts
     end
 
     # @private
@@ -386,9 +402,8 @@ module Appium
     def self.absolute_app_path(opts)
       raise ArgumentError, 'opts must be a hash' unless opts.is_a? Hash
 
-      # FIXME: 'caps' and 'app' will be correct
-      caps            = opts[:caps] || opts['caps'] || {}
-      app_path        = caps[:app] || caps['app']
+      caps = opts[:caps] || opts['caps'] || {}
+      app_path = get_cap(caps, 'app')
       raise ArgumentError, 'absolute_app_path invoked and app is not set!' if app_path.nil? || app_path.empty?
       # Sauce storage API. http://saucelabs.com/docs/rest#storage
       return app_path if app_path.start_with? 'sauce-storage:'
@@ -521,8 +536,11 @@ module Appium
     # @option http_client_ops [Hash] :open_timeout Custom open timeout for http client.
     # @option http_client_ops [Hash] :read_timeout Custom read timeout for http client.
     # @return [Selenium::WebDriver] the new global driver
-    def start_driver(http_client_ops =
-                         { http_client: ::Appium::Http::Default.new, open_timeout: 999_999, read_timeout: 999_999 })
+    def start_driver(http_client_ops = { http_client: nil, open_timeout: 999_999, read_timeout: 999_999 })
+      if http_client_ops[:http_client].nil?
+        http_client = ::Appium::Http::Default.new(open_timeout: http_client_ops[:open_timeout],
+                                                  read_timeout: http_client_ops[:read_timeout])
+      end
 
       # TODO: do not kill the previous session in the future version.
       if $driver.nil?
@@ -535,7 +553,12 @@ module Appium
       # starting driver.
       automation_name = @core.automation_name
 
-      @driver = @core.start_driver(server_url: server_url, http_client_ops: http_client_ops)
+      @driver = @core.start_driver(server_url: server_url,
+                                   http_client_ops: {
+                                     http_client: http_client,
+                                     open_timeout: 999_999,
+                                     read_timeout: 999_999
+                                   })
       @http_client = @core.http_client
 
       # if automation_name was nil before start_driver, then re-extend driver specific methods
