@@ -97,7 +97,7 @@ class IosTest
     end
 
     def test_10_status
-      assert_equal appium_server_version['build'].keys.member?('version')
+      assert appium_server_version['build'].keys.member?('version')
     end
 
     def test_11_server_version
