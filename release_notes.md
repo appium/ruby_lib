@@ -1,3 +1,11 @@
+#### v15.2.1 2024-08-03
+
+- [693dc16](https://github.com/appium/ruby_lib/commit/693dc167cbbcbe1ab08d1142958207d635c480a3) Release 15.2.1
+- [d98126c](https://github.com/appium/ruby_lib/commit/d98126c47e04d7d152f85a2a75c3fdcb3011ae96) ci: add ci (#1037)
+- [fd2e639](https://github.com/appium/ruby_lib/commit/fd2e639b62e9b5c533915e7e860621391479c4aa) chore: modify rubocop.yml a bit
+- [0d1c2b8](https://github.com/appium/ruby_lib/commit/0d1c2b87b8f2ac456372bf4cbb2441fffae5cf27) chore: Update rubocop requirement from = 1.65.0 to = 1.65.1 (#1036)
+
+
 #### v15.2.0 2024-07-20
 
 - [d73525e](https://github.com/appium/ruby_lib/commit/d73525eec584c3c31690dcd55a6c52d641d43f9f) Release 15.2.0
