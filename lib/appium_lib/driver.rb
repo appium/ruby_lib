@@ -536,12 +536,11 @@ module Appium
     # @option http_client_ops [Hash] :open_timeout Custom open timeout for http client.
     # @option http_client_ops [Hash] :read_timeout Custom read timeout for http client.
     # @return [Selenium::WebDriver] the new global driver
-    def start_driver(http_client_ops =
-                         {
-                           http_client: ::Appium::Http::Default.new(
-                             open_timeout: 999_999, read_timeout: 999_999
-                           ), open_timeout: 999_999, read_timeout: 999_999
-                         })
+    def start_driver(http_client_ops = { http_client: nil, open_timeout: 999_999, read_timeout: 999_999 })
+      if http_client_ops[:http_client].nil?
+        http_client = ::Appium::Http::Default.new(open_timeout: http_client_ops[:open_timeout],
+                                                  read_timeout: http_client_ops[:read_timeout])
+      end
 
       # TODO: do not kill the previous session in the future version.
       if $driver.nil?
@@ -554,7 +553,12 @@ module Appium
       # starting driver.
       automation_name = @core.automation_name
 
-      @driver = @core.start_driver(server_url: server_url, http_client_ops: http_client_ops)
+      @driver = @core.start_driver(server_url: server_url,
+                                   http_client_ops: {
+                                     http_client: http_client,
+                                     open_timeout: 999_999,
+                                     read_timeout: 999_999
+                                   })
       @http_client = @core.http_client
 
       # if automation_name was nil before start_driver, then re-extend driver specific methods
