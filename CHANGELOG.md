@@ -3,6 +3,10 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## 15.2.1 - 2024-08-03
+- Fix client side timeout in the default http client
+- Bump appium_lib_core 9.2.1+ to apply the fix
+
 ## 15.2.0 - 2024-07-20
 - Raise defined errors instead of Ruby general errors by appium_lib's own errors
 
