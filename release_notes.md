@@ -1,3 +1,9 @@
+#### v15.2.2 2024-08-06
+
+- [08ac85a](https://github.com/appium/ruby_lib/commit/08ac85ace5a451886431f10367f544708a792954) Release 15.2.2
+- [b741383](https://github.com/appium/ruby_lib/commit/b74138352b7f274d89e0af36efe3d65a574ed502) fix: non-app capability handling (#1039)
+
+
 #### v15.2.1 2024-08-03
 
 - [693dc16](https://github.com/appium/ruby_lib/commit/693dc167cbbcbe1ab08d1142958207d635c480a3) Release 15.2.1
