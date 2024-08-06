@@ -269,11 +269,8 @@ module Appium
 
       # return the path exists on the local
       app_path = Driver.get_cap(@core.caps, 'app')
-      return if !app_path.nil? && File.exist?(app_path)
-
-      # The app file is not exact path
-      app_path = get_cap(@core.caps, 'app')
       return if app_path.nil?
+      return if File.exist?(app_path)
 
       @core.caps['app'] = self.class.absolute_app_path opts
     end
