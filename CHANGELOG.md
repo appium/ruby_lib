@@ -3,7 +3,7 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
-## not released
+## 15.2.2 - 2024-08-06
 - Fix non `app` capability behavior
 
 ## 15.2.1 - 2024-08-03
