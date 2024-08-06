@@ -272,6 +272,9 @@ module Appium
       return if !app_path.nil? && File.exist?(app_path)
 
       # The app file is not exact path
+      app_path = get_cap(@core.caps, 'app')
+      return if app_path.nil?
+
       @core.caps['app'] = self.class.absolute_app_path opts
     end
 
