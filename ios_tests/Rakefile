@@ -98,7 +98,7 @@ task :run_parallel_t do
   require_relative 'parallel/test'
 
   threads = []
-  [Device.one, Device.two].each do |capability|
+  [Device.one, Device.two].map do |capability|
     threads << Thread.new do
       TestParallelRunThread.new(capability).test_run
     end
