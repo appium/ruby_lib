@@ -13,4 +13,5 @@
 # limitations under the License.
 
 source 'https://rubygems.org'
-gemspec path: File.expand_path('..', __dir__) # __dir__ fails on 1.9
+gemspec path: File.expand_path('..', __dir__)
+eval_gemfile File.join(File.expand_path('..', __dir__), 'Gemfile')
