@@ -1,3 +1,19 @@
+#### v15.3.0 2025-01-22
+
+- [030f83b](https://github.com/appium/ruby_lib/commit/030f83ba4d48480f3ac664d0029dc1aae7b90d7d) Release 15.3.0
+- [8befdbe](https://github.com/appium/ruby_lib/commit/8befdbe07d9d415ee04a09096326e670e901be20) feat: bump mini Ruby version to 3.1 by following core (#1051)
+- [35edaf4](https://github.com/appium/ruby_lib/commit/35edaf4b9cfdda5b0f18b91189cf04d6c714356c) chore: Update rubocop requirement from = 1.69.2 to = 1.70.0 (#1049)
+- [c45abdf](https://github.com/appium/ruby_lib/commit/c45abdfc2423e3fc0fb9d7b347751cc61dc65295) chore: Update rubocop requirement from = 1.69.1 to = 1.69.2 (#1048)
+- [9776747](https://github.com/appium/ruby_lib/commit/97767471108d7270e74255fcc1ffc1bd04c1a895) chore: Update fakefs requirement from ~> 2.7.1 to ~> 2.8.0 (#1047)
+- [961bc02](https://github.com/appium/ruby_lib/commit/961bc02c359ff05c75802e6d313e08cb4d24e09e) chore: Update fakefs requirement from ~> 2.5.0 to ~> 2.7.1 (#1046)
+- [93cffb5](https://github.com/appium/ruby_lib/commit/93cffb5547756dc76ba6897350877446410464ec) chore: Update rubocop requirement from = 1.69.0 to = 1.69.1 (#1045)
+- [304f953](https://github.com/appium/ruby_lib/commit/304f953f8eb0514a145360ea885722860791ac36) chore: Update rubocop requirement from = 1.68.0 to = 1.69.0 (#1044)
+- [e47c764](https://github.com/appium/ruby_lib/commit/e47c764fe6d581006731549dce49f5e0cd2312c1) chore: Update rubocop requirement from = 1.67.0 to = 1.68.0 (#1043)
+- [40db502](https://github.com/appium/ruby_lib/commit/40db502c68586af5c9acac988fdbbb04e9a5899b) chore: Update rubocop requirement from = 1.66.1 to = 1.67.0 (#1042)
+- [87da90b](https://github.com/appium/ruby_lib/commit/87da90b00bb98e5a76b4a7fb3312965fe7abb644) chore: Update rubocop requirement from = 1.66.0 to = 1.66.1 (#1041)
+- [57a1e79](https://github.com/appium/ruby_lib/commit/57a1e7903ca31ee5a7ff3d37f98d51f9abf591d1) chore: Update rubocop requirement from = 1.65.1 to = 1.66.0 (#1040)
+
+
 #### v15.2.2 2024-08-06
 
 - [08ac85a](https://github.com/appium/ruby_lib/commit/08ac85ace5a451886431f10367f544708a792954) Release 15.2.2
