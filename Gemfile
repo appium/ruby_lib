@@ -16,7 +16,7 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'appium_thor', '~> 2.0'
-gem 'fakefs', '~> 2.8.0'
+gem 'fakefs', '~> 3.0.0'
 gem 'hashdiff', '~> 1.1.0'
 gem 'minitest', '~> 5.0'
 gem 'minitest-reporters', '~> 1.1'
