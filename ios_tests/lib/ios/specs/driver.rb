@@ -63,9 +63,9 @@ class IosTest
     end
 
     def test_05_verify_attributes_are_immutable
-      assert_equal driver_attributes[:custom_url], 'http://127.0.0.1:4723/wd/hub'
+      assert_equal driver_attributes[:custom_url], 'http://127.0.0.1:4723'
       driver_attributes[:custom_url] = true
-      assert_equal driver_attributes[:custom_url], 'http://127.0.0.1:4723/wd/hub'
+      assert_equal driver_attributes[:custom_url], 'http://127.0.0.1:4723'
     end
 
     def test_06_verify_attribute_of_caps_are_not_immutable_because_it_depends_on_selenium

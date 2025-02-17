@@ -37,8 +37,7 @@ $ appium driver install xcuitest  # proper driver name to install
 $ appium server
 ```
 
-> **Note** Please set `server_url` properly like the below since the appium 2
-> changed the default WebDriver URL to without `/wd/hub` to follow W3C.
+> **Note** Please set `server_url` properly like the below for Appium v1.
 > ```
 >  opts = {
 >    caps: {
@@ -47,13 +46,12 @@ $ appium server
 >      app: '/path/to/MyiOS.app'
 >    },
 >    appium_lib: {
->      server_url: 'http://127.0.0.1:4723'
+>      server_url: 'http://127.0.0.1:4723/wd/hub'
 >    }
 >  }
 >  appium_driver = Appium::Driver.new(opts)
 >  appium_driver.start_driver
 > ```
-> Or please start the appium server with `appium server --base-path=/wd/hub`
 
 ### Appium 1
 ```bash

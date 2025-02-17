@@ -427,7 +427,7 @@ module Appium
       return @core.custom_url if @core.custom_url
       return @sauce.server_url if @sauce.sauce_server_url?
 
-      "http://127.0.0.1:#{@core.port}/wd/hub"
+      "http://127.0.0.1:#{@core.port}"
     end
 
     # Restarts the driver

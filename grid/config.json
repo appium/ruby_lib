@@ -13,7 +13,7 @@
     "cleanUpCycle": 2000,
     "timeout": 60000,
     "proxy": "org.openqa.grid.selenium.proxy.DefaultRemoteProxy",
-    "url": "http://localhost:4723/wd/hub",
+    "url": "http://localhost:4723",
     "host": "localhost",
     "port": 4723,
     "maxSession": 1,
