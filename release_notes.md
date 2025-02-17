@@ -1,3 +1,13 @@
+#### v16.0.0 2025-02-16
+
+- [f260936](https://github.com/appium/ruby_lib/commit/f26093663056bee2c170d74283928b517d5071dc) Release 16.0.0
+- [134af92](https://github.com/appium/ruby_lib/commit/134af92efc674377940c82d7f819b4eb98816653) feat: drop `/wd/hub` from the default url config (#1055)
+- [1f7f8cb](https://github.com/appium/ruby_lib/commit/1f7f8cb82ad6499421125d1ca1aabb601af5a869) chore: Update rubocop requirement from 1.71.1 to 1.71.2 (#1054)
+- [fcfc777](https://github.com/appium/ruby_lib/commit/fcfc777eef0b4909896506b83ceeef02702e9811) chore: Update rubocop requirement from 1.71.0 to 1.71.1 (#1053)
+- [34f0695](https://github.com/appium/ruby_lib/commit/34f069526befbd9d449bea27aae0bd2172557abe) chore: Update rubocop requirement from 1.70.0 to 1.71.0 (#1052)
+- [c48681c](https://github.com/appium/ruby_lib/commit/c48681cdc6ccceda612b735457b4496946eab8c6) chore: Update fakefs requirement from ~> 2.8.0 to ~> 3.0.0 (#1050)
+
+
 #### v15.3.0 2025-01-22
 
 - [030f83b](https://github.com/appium/ruby_lib/commit/030f83ba4d48480f3ac664d0029dc1aae7b90d7d) Release 15.3.0
