@@ -13,7 +13,7 @@
   "port": 4444,
   "register": true,
   "registerCycle": 5000,
-  "hub": "http://localhost:4444/wd/hub",
+  "hub": "http://localhost:4444",
   "nodeStatusCheckTimeout": 5000,
   "nodePolling": 5000,
   "role": "hub",

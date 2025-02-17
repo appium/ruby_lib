@@ -54,7 +54,7 @@ class AndroidTest
 
       expected = {
         automation_name:     :uiautomator2,
-        custom_url:          'http://127.0.0.1:4723/wd/hub',
+        custom_url:          'http://127.0.0.1:4723',
         default_wait:        1,
         sauce_username:      nil,
         sauce_access_key:    nil,
