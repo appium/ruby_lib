@@ -3,6 +3,9 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## not yet
+- Use `http://127.0.0.1:4723` as the default url destination instead of `http://127.0.0.1:4723/wd/hub`
+
 ## 15.2.2 - 2024-08-06
 - Fix non `app` capability behavior
 
