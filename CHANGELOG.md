@@ -3,7 +3,7 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
-## 16.0.1 - 2025-02-16
+## 16.0.1 - 2025-03-16
 - Update appium_lib_core deps version condition
 
 ## 16.0.0 - 2025-02-16
