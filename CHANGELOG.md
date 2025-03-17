@@ -3,6 +3,9 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## 16.0.1 - 2025-02-16
+- Update appium_lib_core deps version condition
+
 ## 16.0.0 - 2025-02-16
 - Use `http://127.0.0.1:4723` as the default url destination instead of `http://127.0.0.1:4723/wd/hub`
     - `--base-path` in appium server may need to drop the `/wd/hub` if configured
