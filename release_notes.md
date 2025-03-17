@@ -1,3 +1,14 @@
+#### v16.0.1 2025-03-16
+
+- [97de309](https://github.com/appium/ruby_lib/commit/97de309bd6a60b22e2937b51086f7e7491e035cc) Release 16.0.1
+- [8a0bc17](https://github.com/appium/ruby_lib/commit/8a0bc17f0352f158cbb80c44676f90ec1b57e287) chore: allow appium lib core to use 10
+- [ea9f6ab](https://github.com/appium/ruby_lib/commit/ea9f6ab852896a43e01c57ea608334806cc8834f) chore: Update rubocop requirement from 1.73.2 to 1.74.0 (#1062)
+- [7ed65df](https://github.com/appium/ruby_lib/commit/7ed65dfbbacba5093476139629bd828e1b9f67a9) chore: Update rubocop requirement from 1.73.0 to 1.73.2 (#1061)
+- [7c1f16c](https://github.com/appium/ruby_lib/commit/7c1f16c7f3441879c7c1836c4a63336e276da066) chore: Update rubocop requirement from 1.72.2 to 1.73.0 (#1059)
+- [2524c42](https://github.com/appium/ruby_lib/commit/2524c42c626473bdfac846905e42eabf889570bd) chore: Update rubocop requirement from 1.72.1 to 1.72.2 (#1058)
+- [7294b88](https://github.com/appium/ruby_lib/commit/7294b887dd744e107217840144ead4e4a137f9bc) chore: Update rubocop requirement from 1.71.2 to 1.72.1 (#1056)
+
+
 #### v16.0.0 2025-02-16
 
 - [f260936](https://github.com/appium/ruby_lib/commit/f26093663056bee2c170d74283928b517d5071dc) Release 16.0.0
