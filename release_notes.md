@@ -1,3 +1,9 @@
+#### v16.1.0 2025-03-27
+
+- [caca559](https://github.com/appium/ruby_lib/commit/caca559c1fb70d0376860a5b8590c71e33eb453f) Release 16.1.0
+- [1673d38](https://github.com/appium/ruby_lib/commit/1673d38e38fab8f510f494564810723508ff8ff7) feat: allow including ruby lib core 11 (#1064)
+
+
 #### v16.0.1 2025-03-16
 
 - [97de309](https://github.com/appium/ruby_lib/commit/97de309bd6a60b22e2937b51086f7e7491e035cc) Release 16.0.1
