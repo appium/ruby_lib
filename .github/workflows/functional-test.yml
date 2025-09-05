@@ -53,7 +53,7 @@ jobs:
         npm install -g mjpeg-consumer
     - run: |
         appium driver install xcuitest
-        appium plugin install images@2.1.8
+        appium plugin install images
         appium plugin install execute-driver
         nohup appium --use-plugins=images,execute-driver --relaxed-security --log-timestamp --log-no-colors > appium.log &
 
