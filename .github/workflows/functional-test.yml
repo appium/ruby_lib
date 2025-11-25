@@ -21,7 +21,7 @@ jobs:
           IOS_DEVICE_NAME: iPhone 15 Plus
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v6
 
     - name: Install Node.js
       uses: actions/setup-node@v3
