@@ -31,6 +31,8 @@ module Appium
         @driver.execute_script 'mobile: shell', args
       end
 
+      # @deprecated Please use BiDi implementation via `$driver.driver.bidi` directly instead.
+      #
       # Starts Android logcat broadcast websocket
       #
       # @param [String] logcat_file A file path to write messages from a logcat WebSocket client
@@ -46,6 +48,8 @@ module Appium
         @logcat_client = ::Appium::Common::Command::WsLogcat.new(url: socket_url, output_file: logcat_file)
       end
 
+      # @deprecated Please use BiDi implementation directly instead.
+      #
       # Stop Android logcat broadcast websocket
       #
       # @example

@@ -22,6 +22,8 @@ module Appium
   module Ios
     module Xcuitest
       module Command
+        # @deprecated Please use BiDi implementation via `$driver.driver.bidi` directly instead.
+        #
         # Starts iOS syslog broadcast websocket
         #
         # @param [String] syslog_file A file path to write messages from a syslog WebSocket client
@@ -37,6 +39,8 @@ module Appium
           @logcat_client = ::Appium::Common::Command::WsLogcat.new(url: socket_url, output_file: syslog_file)
         end
 
+        # @deprecated Please use BiDi implementation directly instead.
+        #
         # Stop iOS syslog broadcast websocket
         #
         # @example
