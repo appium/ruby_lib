@@ -15,6 +15,7 @@
 module Appium
   module Common
     module Command
+      # TODO: Remove this implementation after dropping start_logs_broadcast
       class WsLogcat < ::Appium::Core::WebSocket
         def initialize(url:, output_file: 'logcat.log')
           super(url: url)
