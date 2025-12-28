@@ -1,3 +1,40 @@
+#### v16.1.1 2025-12-28
+
+- [2efaf09](https://github.com/appium/ruby_lib/commit/2efaf0937dfaf3759d370607fdea05c890df634a) Release 16.1.1
+- [121316f](https://github.com/appium/ruby_lib/commit/121316f8c74cbcdab6073c7b7cb8ef5b46f28bb6) chore: add deprecated in docstrings for start_logs_broadcast/stop_logs_broadcast (#1095)
+- [2736ab2](https://github.com/appium/ruby_lib/commit/2736ab2cb77cf7a149bd2e933f1c5af5e5e6c8cc) ci: use ruby v4 (#1094)
+- [0fe4fbc](https://github.com/appium/ruby_lib/commit/0fe4fbce26f71211e15eea11ff624b1fbeb23767) chore: Update rubocop requirement from 1.81.7 to 1.82.0 (#1093)
+- [5676f33](https://github.com/appium/ruby_lib/commit/5676f338c399cddc41f3b830d82eccd7a955466c) chore: Bump futureware-tech/simulator-action from 3 to 4 (#1092)
+- [9b7b69b](https://github.com/appium/ruby_lib/commit/9b7b69b26c20b0dd23a218d4994cac634504fb08) chore: Bump actions/setup-node from 3 to 6 (#1091)
+- [00d640d](https://github.com/appium/ruby_lib/commit/00d640dd460a013a924b27a2865d605563f44e2d) chore: Bump actions/checkout from 3 to 6 (#1090)
+- [2272004](https://github.com/appium/ruby_lib/commit/2272004b6127b49bc555bdf13a61fd8370f0adec) ci: add github actions dependabot config
+- [0ffe7d4](https://github.com/appium/ruby_lib/commit/0ffe7d48eddf59817686cf72b2811af11d7b34c3) chore: Update rubocop requirement from 1.81.6 to 1.81.7 (#1089)
+- [1b9628c](https://github.com/appium/ruby_lib/commit/1b9628c0098499e5c0c763f2f1e63578ce1a3dae) chore: Update rubocop requirement from 1.81.1 to 1.81.6 (#1088)
+- [99d15ca](https://github.com/appium/ruby_lib/commit/99d15ca8e0339da425f2cc93c360fbd1e4231453) chore: Update rubocop requirement from 1.81.0 to 1.81.1 (#1087)
+- [94f8d72](https://github.com/appium/ruby_lib/commit/94f8d72e251b3513db7c1ddd6009cef76c6b620f) chore: Update rubocop requirement from 1.80.2 to 1.81.0 (#1086)
+- [31a7747](https://github.com/appium/ruby_lib/commit/31a77475ce32fe1cfb61e8a9e5b8c9c4671603fb) chore: Update rubocop requirement from 1.80.1 to 1.80.2 (#1084)
+- [38c0dcb](https://github.com/appium/ruby_lib/commit/38c0dcb248a5cd8e458027304c6a3fb11f97cf95) ci: use newer dependencies (#1085)
+- [e925497](https://github.com/appium/ruby_lib/commit/e925497539a5cfa374a1855642bcf524f3cbdb0d) chore: Update rubocop requirement from 1.80.0 to 1.80.1 (#1083)
+- [a3b6a09](https://github.com/appium/ruby_lib/commit/a3b6a09bf6faf9ac870704b6430412113d2d9262) chore: Update rubocop requirement from 1.79.2 to 1.80.0 (#1082)
+- [dfa1010](https://github.com/appium/ruby_lib/commit/dfa10104bcd8f1e477f8aa8da5437ae89df2a330) chore: Update rubocop requirement from 1.79.1 to 1.79.2 (#1081)
+- [454dcfb](https://github.com/appium/ruby_lib/commit/454dcfb4cea592a7e295b787f2c6f9c8d78a53b1) chore: Update rubocop requirement from 1.79.0 to 1.79.1 (#1080)
+- [facc0db](https://github.com/appium/ruby_lib/commit/facc0db652c1f5d4c82d7b5be7dfdf80fba4d509) chore: Update rubocop requirement from 1.78.0 to 1.79.0 (#1079)
+- [d9df353](https://github.com/appium/ruby_lib/commit/d9df35303244433576026b17db1388a1b1135b05) chore: Update rubocop requirement from 1.77.0 to 1.78.0 (#1078)
+- [8d3b64c](https://github.com/appium/ruby_lib/commit/8d3b64c09ff623791255f93910f16f2d4c26d132) chore: Update rubocop requirement from 1.76.2 to 1.77.0 (#1077)
+- [83283a9](https://github.com/appium/ruby_lib/commit/83283a98f0e396d25d4c9b6d9eb65a14a1b043e1) chore: Update rubocop requirement from 1.76.1 to 1.76.2 (#1076)
+- [f92405a](https://github.com/appium/ruby_lib/commit/f92405a943139284ab189a50f189714e56244e9b) chore: Update rubocop requirement from 1.76.0 to 1.76.1 (#1075)
+- [a8cf9da](https://github.com/appium/ruby_lib/commit/a8cf9daa6e1703a9adef7c62e3f061ecdf345101) chore: Update rubocop requirement from 1.75.8 to 1.76.0 (#1074)
+- [1e3c2f6](https://github.com/appium/ruby_lib/commit/1e3c2f6bec7e84be3f05095ac09421be25c5f940) chore: Update rubocop requirement from 1.75.7 to 1.75.8 (#1073)
+- [48c869e](https://github.com/appium/ruby_lib/commit/48c869e660c0701cf659ca2965286070629b2cf7) chore: Update rubocop requirement from 1.75.6 to 1.75.7 (#1072)
+- [a7dbd63](https://github.com/appium/ruby_lib/commit/a7dbd63df5c19f8d0a03d8f35a22d64ac95550bf) chore: Update hashdiff requirement from ~> 1.1.0 to ~> 1.2.0 (#1071)
+- [710884d](https://github.com/appium/ruby_lib/commit/710884d4eaffa7a2d62615907934ab35e19e3639) chore: Update rubocop requirement from 1.75.5 to 1.75.6 (#1070)
+- [6e58d17](https://github.com/appium/ruby_lib/commit/6e58d17499371b8e4bfed9a57922ba9f94ca0c9f) chore: Update rubocop requirement from 1.75.4 to 1.75.5 (#1069)
+- [0398421](https://github.com/appium/ruby_lib/commit/039842150019d0e844542551ada80256ebaf18ab) chore: Update rubocop requirement from 1.75.3 to 1.75.4 (#1068)
+- [2f73e58](https://github.com/appium/ruby_lib/commit/2f73e5810cb9f4430a8baa39bfd2d959a333819a) chore: Update rubocop requirement from 1.75.2 to 1.75.3 (#1067)
+- [17b591b](https://github.com/appium/ruby_lib/commit/17b591b1e78a092431b597ba43bb7085616391ed) chore: Update rubocop requirement from 1.75.1 to 1.75.2 (#1066)
+- [b49421a](https://github.com/appium/ruby_lib/commit/b49421a28dfaa40f22e6dc45a59b85de2b27cad0) chore: Update rubocop requirement from 1.74.0 to 1.75.1 (#1065)
+
+
 #### v16.1.0 2025-03-27
 
 - [caca559](https://github.com/appium/ruby_lib/commit/caca559c1fb70d0376860a5b8590c71e33eb453f) Release 16.1.0
