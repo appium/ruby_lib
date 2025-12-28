@@ -14,6 +14,6 @@
 
 module Appium
   # Version and Date are defined on the 'Appium' module, not 'Appium::Common'
-  VERSION = '16.1.0' unless defined? ::Appium::VERSION
-  DATE    = '2025-03-27' unless defined? ::Appium::DATE
+  VERSION = '16.1.1' unless defined? ::Appium::VERSION
+  DATE    = '2025-12-28' unless defined? ::Appium::DATE
 end

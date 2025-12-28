@@ -3,6 +3,9 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## 16.1.1 - 2025-12-28
+- Add deprecated mark for start_logs_broadcast/stop_logs_broadcast to use BiDi instead
+
 ## 16.1.0 - 2025-03-37
 - Relaxed usable the appium_lib_core deps version to `> 11`
 
