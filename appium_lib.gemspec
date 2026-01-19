@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
 
   # TODO: We must remove start_logs_broadcast/stop_logs_broadcast to bump the appium_lib_core version to v12+.
-  s.add_dependency 'appium_lib_core', '>= 9.2.1', '< 12.0'
+  s.add_dependency 'appium_lib_core', '>= 9.2.1', '< 13.0'
   s.add_dependency 'nokogiri', '~> 1.8', '>= 1.8.1'
   s.add_dependency 'tomlrb', '>= 1.1', '< 3.0'
 
