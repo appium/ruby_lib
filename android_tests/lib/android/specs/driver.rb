@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require 'tmpdir'
+
 # rake "android[driver]"
 class AndroidTest
   class Driver < Minitest::Test
@@ -105,20 +107,11 @@ class AndroidTest
       validate_path 'sauce-storage:some_storage_suffix'
       validate_path 'http://www.saucelabs.com'
 
-      # fake real paths for osx/windows.
-      FakeFS.activate!
-
-      osx_existing_path = '/Users/user/myapp.app'
-      FileUtils.mkdir_p osx_existing_path
-      validate_path osx_existing_path
-
-      # TODO: FakeFS fails on Windows paths due to the drive letters.
-      # Look into how opscode/chef tests this.
-      # windows_existing_path = "C:\\Program Files\\myapp.apk"
-      # FileUtils.mkdir_p windows_existing_path
-      # validate_path windows_existing_path
-
-      FakeFS.deactivate!
+      Dir.mktmpdir do |tmp_dir|
+        existing_path = File.join(tmp_dir, 'myapp.app')
+        FileUtils.mkdir_p existing_path
+        validate_path existing_path
+      end
 
       # bundle id test
       validate_path 'my.bundle.id'

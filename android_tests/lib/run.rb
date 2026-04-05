@@ -16,7 +16,6 @@ require 'rubygems'
 require 'minitest/autorun'
 require 'minitest/reporters'
 require 'minitest'
-require 'fakefs/safe'
 require 'hashdiff'
 require_relative '../../lib/appium_lib'
 
