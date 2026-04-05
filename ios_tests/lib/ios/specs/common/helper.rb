@@ -202,7 +202,7 @@ class IosTest
       end
 
       def test_18_find_eles_by_predicate_include
-        assert_equal find_eles_by_predicate_include(value: 'e').length, 49
+        assert_equal find_eles_by_predicate_include(value: 'e').length, 51
       end
 
       def test_19_first_ele

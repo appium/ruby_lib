@@ -15,6 +15,7 @@ concurrency:
 jobs:
   ios_test:
     runs-on: macos-15
+    timeout-minutes: 90
     env:
           XCODE_VERSION: 16.4
           IOS_VERSION: 18.5
@@ -65,6 +66,7 @@ jobs:
         bundle install
         rake ios
       name: Run tests
+      timeout-minutes: 60
       working-directory: ios_tests
 
     - name: Save server output
