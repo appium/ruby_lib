@@ -14,11 +14,11 @@ concurrency:
 
 jobs:
   ios_test:
-    runs-on: macos-14
+    runs-on: macos-15
     env:
-          XCODE_VERSION: 15.3
-          IOS_VERSION: 17.4
-          IOS_DEVICE_NAME: iPhone 15 Plus
+          XCODE_VERSION: 16.4
+          IOS_VERSION: 18.5
+          IOS_DEVICE_NAME: iPhone 16 Plus
 
     steps:
     - uses: actions/checkout@v6
