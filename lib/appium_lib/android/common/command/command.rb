@@ -30,37 +30,6 @@ module Appium
         # --relaxed-security
         @driver.execute_script 'mobile: shell', args
       end
-
-      # @deprecated Please use BiDi implementation via `$driver.driver.bidi` directly instead.
-      #
-      # Starts Android logcat broadcast websocket
-      #
-      # @param [String] logcat_file A file path to write messages from a logcat WebSocket client
-      #
-      # @example
-      #
-      #   start_logs_broadcast 'outputfile.log' #=> #<Appium::Android::Command::WsLogcat:...>
-      #
-      def start_logs_broadcast(logcat_file = 'logcat.log')
-        @driver.execute_script 'mobile: startLogsBroadcast'
-
-        socket_url = "ws://#{URI.parse(server_url).host}:#{@core.port}/ws/session/#{@driver.session_id}/appium/device/logcat"
-        @logcat_client = ::Appium::Common::Command::WsLogcat.new(url: socket_url, output_file: logcat_file)
-      end
-
-      # @deprecated Please use BiDi implementation directly instead.
-      #
-      # Stop Android logcat broadcast websocket
-      #
-      # @example
-      #
-      #   stop_logs_broadcast #=> nil
-      #
-      def stop_logs_broadcast
-        @logcat_client.close
-
-        @driver.execute_script 'mobile: stopLogsBroadcast'
-      end
     end
   end
 end
