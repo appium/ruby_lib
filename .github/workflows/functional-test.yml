@@ -149,9 +149,11 @@ jobs:
         disable-animations: false
         disable-spellchecker: true
         script: |
-          cd android_tests
-          bundle install
-          bundle exec rake android
+          pushd android_tests
+            bundle install
+            bundle exec rake --tasks
+            bundle exec rake android
+          popd
 
     - name: Save server output
       if: ${{ always() }}
