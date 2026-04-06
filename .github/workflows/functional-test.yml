@@ -58,6 +58,10 @@ jobs:
         appium plugin install execute-driver
         nohup appium --use-plugins=images,execute-driver --relaxed-security --log-timestamp --log-no-colors > appium.log &
 
+    - run: |
+        npx appium driver run xcuitest download-wda-sim --platform=ios --outdir=${{ github.workspace }}/wda
+      name: Downloading prebuilt WDA
+
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
@@ -68,6 +72,8 @@ jobs:
       name: Run tests
       timeout-minutes: 60
       working-directory: ios_tests
+      env:
+        LOCAL_PREBUILT_WDA: ${{ github.workspace }}/wda/WebDriverAgentRunner-Runner.app
 
     - name: Save server output
       if: ${{ always() }}

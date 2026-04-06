@@ -65,7 +65,11 @@ caps = if caps[:appium_lib]
        else
          caps.merge(appium_lib: { debug: true, wait: 1 })
        end
-caps[:app] = ENV.fetch('SAUCE_PATH', nil) if ENV.fetch('SAUCE_USERNAME', nil) && ENV.fetch('SAUCE_ACCESS_KEY', nil)
+
+if ENV['LOCAL_PREBUILT_WDA']
+  caps[:caps][:usePreinstalledWDA] = true
+  caps[:caps][:prebuiltWDAPath] = ENV['LOCAL_PREBUILT_WDA']
+end
 
 trace_files = []
 
