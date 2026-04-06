@@ -77,3 +77,97 @@ jobs:
         path: |
           appium.log
           test/report/
+
+  android_test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      API_LEVEL: 35
+      ARCH: x86_64
+
+    steps:
+    - uses: actions/checkout@v6
+
+    - name: Set up Java
+      uses: actions/setup-java@v5
+      with:
+        distribution: temurin
+        java-version: '17'
+
+    - name: Install Node.js
+      uses: actions/setup-node@v6
+      with:
+        node-version: 'lts/*'
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 4.0
+
+    - name: Install appium
+      run: |
+        npm install -g appium
+        npm install -g mjpeg-consumer
+
+    - name: Start appium
+      run: |
+        appium driver install uiautomator2
+        appium plugin install images
+        appium plugin install execute-driver
+        nohup appium --use-plugins=images,execute-driver --relaxed-security --log-timestamp --log-no-colors > appium.log &
+
+    - name: Enable KVM group perms
+      run: |
+        echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+        sudo udevadm control --reload-rules
+        sudo udevadm trigger --name-match=kvm
+
+    - name: AVD cache
+      uses: actions/cache@v4
+      id: avd-cache
+      with:
+        path: |
+          ~/.android/avd/*
+          ~/.android/adb*
+        key: avd-${{ env.API_LEVEL }}
+
+    - name: Create AVD snapshot for cache
+      if: steps.avd-cache.outputs.cache-hit != 'true'
+      uses: reactivecircus/android-emulator-runner@v2
+      with:
+        api-level: ${{ env.API_LEVEL }}
+        arch: ${{ env.ARCH }}
+        target: google_apis
+        force-avd-creation: false
+        emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+        disable-animations: false
+        disable-spellchecker: true
+        script: |
+          adb devices
+          cd android_tests
+          bundle install
+          rake android
+
+    - name: Run Android tests
+      uses: reactivecircus/android-emulator-runner@v2
+      with:
+        api-level: ${{ env.API_LEVEL }}
+        arch: ${{ env.ARCH }}
+        target: google_apis
+        profile: Nexus 5X
+        disable-animations: true
+        disable-spellchecker: true
+        script: |
+          adb devices
+          cd android_tests
+          bundle install
+          rake android
+
+    - name: Save server output
+      if: ${{ always() }}
+      uses: actions/upload-artifact@master
+      with:
+        name: appium-android_test_with_other_deps.log
+        path: |
+          appium.log
+          test/report/
