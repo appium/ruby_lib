@@ -149,22 +149,6 @@ jobs:
         disable-animations: false
         disable-spellchecker: true
         script: |
-          adb devices
-          cd android_tests
-          bundle install
-          rake android
-
-    - name: Run Android tests
-      uses: reactivecircus/android-emulator-runner@v2
-      with:
-        api-level: ${{ env.API_LEVEL }}
-        arch: ${{ env.ARCH }}
-        target: google_apis
-        profile: Nexus 5X
-        disable-animations: true
-        disable-spellchecker: true
-        script: |
-          adb devices
           cd android_tests
           bundle install
           rake android
