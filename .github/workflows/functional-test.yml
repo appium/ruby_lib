@@ -68,7 +68,7 @@ jobs:
         ruby-version: 4.0
     - run: |
         bundle install
-        rake ios
+        bundle exec rake ios
       name: Run tests
       timeout-minutes: 60
       working-directory: ios_tests
@@ -151,7 +151,7 @@ jobs:
         script: |
           cd android_tests
           bundle install
-          rake android
+          bundle exec rake android
 
     - name: Save server output
       if: ${{ always() }}
