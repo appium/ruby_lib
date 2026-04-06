@@ -16,7 +16,6 @@ require 'rubygems'
 require 'minitest/autorun'
 require 'minitest/reporters'
 require 'minitest'
-require 'fakefs/safe'
 require 'hashdiff'
 require_relative '../../lib/appium_lib'
 
@@ -40,7 +39,12 @@ def start_driver(caps)
   driver = Appium::Driver.new(caps, true)
   # Tests expect methods defined on the minispec object
   Appium.promote_appium_methods Minitest::Test, driver
-  driver.start_driver
+
+  # Use bounded HTTP timeouts in tests to avoid CI hangs on stuck requests.
+  open_timeout = Integer(ENV.fetch('APPIUM_TEST_OPEN_TIMEOUT', '120'))
+  read_timeout = Integer(ENV.fetch('APPIUM_TEST_READ_TIMEOUT', '300'))
+
+  driver.start_driver(open_timeout: open_timeout, read_timeout: read_timeout)
 end
 
 dir = File.expand_path(File.join(Dir.pwd, 'lib'))
