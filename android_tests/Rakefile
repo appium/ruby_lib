@@ -29,10 +29,12 @@ end
 def bash(cmd)
   sh cmd do |successful, result|
     # exitstatus 7 means bundle install failed
-    # exitstatus 1 means the test failed
+    # non-zero (except 7 retry path) means the test failed
     if !successful && result.exitstatus == 7
       Rake::Task['install'].execute
-      run_sh cmd
+      sh cmd
+    elsif !successful
+      raise "Command failed with status #{result.exitstatus}: #{cmd}"
     end
   end
 end
