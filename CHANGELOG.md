@@ -3,6 +3,9 @@ Commit based release not is [release_notes.md](./release_notes.md)
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## [Unreleased]
+- Define device methods (`lock`, `unlock`, `hide_keyboard`, `push_file`, `pull_file`, `background_app`, `shake`, etc.) natively on `Appium::Driver` via `def_delegators :driver`, replacing the implicit delegation previously set up by `extend ::Appium::Core::Device`. Paves the way for `ruby_lib_core` to drop its static compatibility list (appium/ruby_lib_core#97).
+
 ## 16.1.1 - 2025-12-28
 - Add deprecated mark for start_logs_broadcast/stop_logs_broadcast to use BiDi instead
 

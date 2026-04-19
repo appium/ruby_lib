@@ -40,6 +40,33 @@ require 'uri'
 
 module Appium
   class Driver
+    extend Forwardable
+
+    # Methods forwarded to the underlying Appium::Core::Base::Driver instance
+    # (exposed via `#driver`). Previously these were wired up implicitly by
+    # `extend ::Appium::Core::Device` through a static compatibility list in
+    # `ruby_lib_core` (see appium/ruby_lib_core#97). Defining them here lets
+    # `ruby_lib_core` eventually drop that list.
+    CORE_BRIDGE_METHODS = %i[
+      take_element_screenshot save_viewport_screenshot
+      lock device_locked? unlock
+      hide_keyboard is_keyboard_shown
+      ime_activate ime_available_engines ime_active_engine ime_activated ime_deactivate
+      get_settings update_settings
+      within_context current_context available_contexts set_context
+      push_file pull_file pull_folder
+      keyevent press_keycode long_press_keycode
+      match_images_features find_image_occurrence get_images_similarity compare_images
+      app_strings background_app
+      install_app remove_app app_installed? activate_app terminate_app
+      app_state
+      stop_recording_screen stop_and_save_recording_screen
+      shake device_time
+      execute_cdp
+    ].freeze
+
+    def_delegators :driver, *CORE_BRIDGE_METHODS
+
     # @private
     class << self
       def convert_to_symbol(value)
