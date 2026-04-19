@@ -1,3 +1,22 @@
+#### v16.2.0 2026-04-19
+
+- [939a204](https://github.com/appium/ruby_lib/commit/939a20461738c80f9a19bb9ee8fe41030ab6c91e) Release 16.2.0
+- [324b646](https://github.com/appium/ruby_lib/commit/324b646adcf182b92cad66bd53ec8f7b1892b34f) feat: define device methods natively on Appium::Driver (#1109)
+- [5e60d97](https://github.com/appium/ruby_lib/commit/5e60d973ca74fe25af3b58ad7dcf9ce46d209b08) chore: Update rubocop requirement from 1.86.0 to 1.86.1 (#1108)
+- [76a85fd](https://github.com/appium/ruby_lib/commit/76a85fde1c05b5a479179d07e062a2ca9b18d48d) chore: Bump actions/cache from 4 to 5 (#1107)
+- [555767c](https://github.com/appium/ruby_lib/commit/555767cf885f49705cfeea8be4688f7bddb08cd7) ci: add android (#1106)
+- [59a27af](https://github.com/appium/ruby_lib/commit/59a27af6c3c2bbfd37664e59d2a9e3322250199c) feat: drop deprecated start_logs_broadcast/stop_logs_broadcast methods (#1105)
+- [4bd31dc](https://github.com/appium/ruby_lib/commit/4bd31dc1b15de6dccb80a5eb2f70e5c592af7293) chore: Update rubocop requirement from 1.85.1 to 1.86.0 (#1104)
+- [070e4e3](https://github.com/appium/ruby_lib/commit/070e4e34294e1d2a6bf57519493e4f47d96a7fae) chore: Update rubocop requirement from 1.85.0 to 1.85.1 (#1103)
+- [e624cea](https://github.com/appium/ruby_lib/commit/e624cea7ab88fd543f77d63517eb0fc4b3d138fe) chore: Bump futureware-tech/simulator-action from 4 to 5 (#1102)
+- [6192589](https://github.com/appium/ruby_lib/commit/6192589e4379e4405d6dbf0c99fb583544be996c) chore: Update rubocop requirement from 1.84.2 to 1.85.0 (#1101)
+- [211cb0b](https://github.com/appium/ruby_lib/commit/211cb0bfb746b51db6f24d27a7d1ae8153fc6937) chore: Update rubocop requirement from 1.84.1 to 1.84.2 (#1100)
+- [56e092d](https://github.com/appium/ruby_lib/commit/56e092de3ff7c4c29a2cf9f63672563f60f5457f) chore: Update rubocop requirement from 1.84.0 to 1.84.1 (#1099)
+- [858cacb](https://github.com/appium/ruby_lib/commit/858cacb2675dcfd7935bee7c8fc9dbfd6eae60c1) chore: Update rubocop requirement from 1.82.1 to 1.84.0 (#1098)
+- [0451b50](https://github.com/appium/ruby_lib/commit/0451b50e15723b649d92f4f1476d5b575ed92482) ci: add pr title check
+- [d5a27a8](https://github.com/appium/ruby_lib/commit/d5a27a8de9fcca37accd851686c6a8a90a40b374) chore: Update rubocop requirement from 1.82.0 to 1.82.1 (#1097)
+
+
 #### v16.1.1 2025-12-28
 
 - [2efaf09](https://github.com/appium/ruby_lib/commit/2efaf0937dfaf3759d370607fdea05c890df634a) Release 16.1.1
