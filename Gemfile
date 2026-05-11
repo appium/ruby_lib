@@ -15,6 +15,8 @@
 source 'https://rubygems.org'
 gemspec
 
+gem 'appium_lib_core', git: 'https://github.com/appium/ruby_lib_core.git', branch: 'remove-unnecessary-lines'
+
 gem 'appium_thor', '~> 2.0'
 gem 'hashdiff', '~> 1.2.0'
 gem 'minitest', '~> 5.0'
