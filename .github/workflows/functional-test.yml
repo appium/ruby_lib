@@ -22,7 +22,7 @@ jobs:
           IOS_DEVICE_NAME: iPhone 16 Plus
 
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
 
     - name: Install Node.js
       uses: actions/setup-node@v6
@@ -92,7 +92,7 @@ jobs:
       ARCH: x86_64
 
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
 
     - name: Set up Java
       uses: actions/setup-java@v5
