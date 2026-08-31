@@ -30,8 +30,8 @@ class IosTest
 
         def test_02_window_size
           size = window_size
-          assert_equal  size.width.class, Integer
-          assert_equal  size.height.class, Integer
+          assert_equal size.width.class, Integer
+          assert_equal size.height.class, Integer
         end
       end
     end

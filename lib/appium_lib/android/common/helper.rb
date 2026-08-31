@@ -29,12 +29,12 @@ module Appium
 
       def initialize # rubocop:disable Lint/MissingSuper
         reset
-        @filter   = false
+        @filter = false
       end
 
       def reset
-        @result   = ''
-        @keys     = %w(text resource-id content-desc)
+        @result = ''
+        @keys = %w(text resource-id content-desc)
       end
 
       # http://nokogiri.org/Nokogiri/XML/SAX/Document.html
