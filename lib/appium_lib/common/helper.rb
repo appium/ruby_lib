@@ -276,7 +276,7 @@ module Appium
       doc = if source.start_with? '<html'
               Nokogiri::HTML(source) { |cfg| cfg.options = opts }
             else
-              Nokogiri::XML(source)  { |cfg| cfg.options = opts }
+              Nokogiri::XML(source) { |cfg| cfg.options = opts }
             end
       puts doc.to_xml indent: 2
     end
