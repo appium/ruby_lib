@@ -564,7 +564,8 @@ module Appium
     # @option http_client_ops [Hash] :read_timeout Custom read timeout for http client.
     # @return [Selenium::WebDriver] the new global driver
     def start_driver(http_client_ops = { http_client: nil, open_timeout: 999_999, read_timeout: 999_999 })
-      if http_client_ops[:http_client].nil?
+      http_client = http_client_ops[:http_client]
+      if http_client.nil?
         http_client = ::Appium::Http::Default.new(open_timeout: http_client_ops[:open_timeout],
                                                   read_timeout: http_client_ops[:read_timeout])
       end
