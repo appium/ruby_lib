@@ -110,7 +110,7 @@ module Appium
     # @return [Array] list of require files as an array, nil if require doesn't exist
     def expand_required_files(base_dir, file_paths)
       # ensure files are absolute
-      Array(file_paths).map! do |f|
+      file_paths = Array(file_paths).map do |f|
         file = File.exist?(f) ? f : File.join(base_dir, f)
         file = File.expand_path file
 
@@ -171,10 +171,10 @@ module Appium
           # override unless there's an existing method with matching arity
           next if const.respond_to?(m) && const.method(m).arity == driver.method(m).arity
 
-          const.send(:define_singleton_method, m) do |*args, &block|
-            super(*args, &block) # promote.rb
+          const.send(:define_singleton_method, m) do |*args, **kwargs, &block|
+            super(*args, **kwargs, &block) # promote.rb
           rescue NoMethodError, ArgumentError
-            driver.send m, *args, &block if driver.respond_to?(m)
+            driver.send m, *args, **kwargs, &block if driver.respond_to?(m)
           end
         end
       end
@@ -219,7 +219,7 @@ module Appium
             # https://github.com/appium/ruby_lib/issues/917
 
             # Remove the method before adding it.
-            remove_method method if method_defined? method
+            remove_method method if instance_methods(false).include? method
 
             define_method method do |*args, &block|
               # Prefer existing method.
