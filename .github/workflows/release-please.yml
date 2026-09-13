@@ -1,0 +1,55 @@
+name: Release Please
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-please
+  cancel-in-progress: false
+
+jobs:
+  release:
+    if: github.repository == 'appium/ruby_lib'
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      actions: write
+    runs-on: ubuntu-latest
+    env:
+      TZ: UTC
+    steps:
+      - name: Update release PR or create GitHub Release
+        id: release
+        uses: googleapis/release-please-action@5c625bfb5d1ff62eadeeb3772007f7f66fdcf071 # v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          target-branch: master
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
+
+      # GITHUB_TOKEN does not automatically start downstream workflows.
+      # Explicit dispatch runs checks on the release PR commit without a bot key.
+      - name: Run release PR checks
+        if: steps.release.outputs.prs_created == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_PR: ${{ steps.release.outputs.pr }}
+        run: |
+          branch=$(jq -er '.headBranchName | select(type == "string" and length > 0)' <<< "$RELEASE_PR")
+          for workflow in rubocop.yml release-validation.yml; do
+            gh workflow run "$workflow" --ref "$branch"
+          done
+      - name: Publish the new release
+        if: steps.release.outputs.release_created == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ steps.release.outputs.tag_name }}
+        run: gh workflow run publish-gem.yml --ref master -f "tag=$RELEASE_TAG"

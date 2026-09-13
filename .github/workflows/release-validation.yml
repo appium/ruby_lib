@@ -1,0 +1,29 @@
+name: Release validation
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches: [master]
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '4.0'
+          bundler-cache: true
+      - name: Build gem
+        run: bundle exec rake build
+      - name: Validate built gem
+        uses: appium/appium-workflows/.github/actions/ruby-release-validate@b9358466aa945baa7afa4d8f177d9fa4f4515bc0
+        with:
+          gem-name: appium_lib
+          version-file: lib/appium_lib/version.rb
