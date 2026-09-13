@@ -20,11 +20,10 @@ jobs:
         with:
           ruby-version: '4.0'
           bundler-cache: true
-      - name: Test release validation
-        run: |
-          ruby -c script/release.rb
-          bundle exec ruby test/release/release_test.rb
-      - name: Build and validate gem
-        run: |
-          bundle exec rake build
-          ruby script/release.rb verify
+      - name: Build gem
+        run: bundle exec rake build
+      - name: Validate built gem
+        uses: appium/appium-workflows/.github/actions/ruby-release-validate@b9358466aa945baa7afa4d8f177d9fa4f4515bc0
+        with:
+          gem-name: appium_lib
+          version-file: lib/appium_lib/version.rb

@@ -23,7 +23,7 @@ jobs:
     if: github.repository == 'appium/ruby_lib'
     runs-on: ubuntu-latest
     outputs:
-      gem_path: ${{ steps.package.outputs.gem_path }}
+      gem_filename: ${{ steps.artifact.outputs.gem-filename }}
     steps:
       - name: Validate tag syntax
         shell: bash
@@ -49,14 +49,22 @@ jobs:
       - name: Run checks on the release commit
         run: |
           bundle exec rake rubocop test
-          bundle exec ruby test/release/release_test.rb
       - name: Validate the built gem
         id: package
-        run: ruby script/release.rb verify "$RELEASE_TAG" >> "$GITHUB_OUTPUT"
+        uses: appium/appium-workflows/.github/actions/ruby-release-validate@b9358466aa945baa7afa4d8f177d9fa4f4515bc0
+        with:
+          gem-name: appium_lib
+          version-file: lib/appium_lib/version.rb
+          tag: ${{ env.RELEASE_TAG }}
+      - name: Record artifact filename for the publishing job
+        id: artifact
+        env:
+          VERIFIED_GEM_PATH: ${{ steps.package.outputs.gem-path }}
+        run: echo "gem-filename=$(basename "$VERIFIED_GEM_PATH")" >> "$GITHUB_OUTPUT"
       - uses: actions/upload-artifact@v4
         with:
           name: release-gem
-          path: ${{ steps.package.outputs.gem_path }}
+          path: ${{ steps.package.outputs.gem-path }}
           if-no-files-found: error
           retention-days: 14
 
@@ -79,5 +87,5 @@ jobs:
         uses: rubygems/configure-rubygems-credentials@daab0479595bcc124493903b3df17273d86e073f
       - name: Publish the verified gem
         env:
-          GEM_PATH_TO_PUBLISH: ${{ needs.verify.outputs.gem_path }}
+          GEM_PATH_TO_PUBLISH: pkg/${{ needs.verify.outputs.gem_filename }}
         run: gem push --host https://rubygems.org "$GEM_PATH_TO_PUBLISH"

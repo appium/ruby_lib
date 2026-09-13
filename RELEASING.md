@@ -92,8 +92,8 @@ is for stable releases from master, not a parallel prerelease branch.
 ## Recovery
 
 - **Release PR has a date mismatch:** rerun **Release Please**. Alternatively, check
-  out its branch, run `ruby script/release.rb prepare-date`, and commit the date
-  change. Do not edit the date to the upload day independently of the changelog.
+  out its branch, use the shared validator’s `prepare-date` command described
+  below, and commit the date change. Do not edit the date to the upload day independently of the changelog.
 - **PR checks do not start:** inspect the **Run release PR checks** step, Actions
   policy, and workflow permissions. Each dispatched workflow must exist on master.
   Retry the affected workflow from the generated PR branch using **Run workflow**;
@@ -104,7 +104,7 @@ is for stable releases from master, not a parallel prerelease branch.
   not necessarily emit an already-created release again. The verified artifact is kept for 14 days.
   If it has expired, run **Publish gem** manually from master with the same existing
   release tag; it rechecks and rebuilds that tag. This retry route is for releases
-  containing this workflow and validation script, not older historical tags.
+  containing this publishing workflow, not older historical tags.
 - **RubyGems already has that version:** confirm the existing release before retrying.
   The workflow deliberately does not treat every push failure as success. Published
   versions cannot be overwritten. Do not move the tag or rebuild different source
@@ -118,14 +118,32 @@ is for stable releases from master, not a parallel prerelease branch.
 ```sh
 bundle install
 bundle exec rake rubocop test
-bundle exec ruby test/release/release_test.rb
 bundle exec rake build
-ruby script/release.rb verify
 ```
 
-To validate a prospective tag, pass `v<version>` to `verify`. This checks metadata;
-it does not create the tag. `prepare-date` changes only the local version file.
-Neither script command pushes or publishes. `bundle exec rake build` only builds.
+The CI workflows use the shared [ruby-release-validate Action](https://github.com/appium/appium-workflows/tree/b9358466aa945baa7afa4d8f177d9fa4f4515bc0/.github/actions/ruby-release-validate),
+pinned to commit `b9358466aa945baa7afa4d8f177d9fa4f4515bc0`. Its validation tests are maintained
+in that repository; this repository keeps its own application tests.
+
+For local metadata/package verification, clone the shared repository alongside
+this checkout, then run the same validator (adjust paths as needed):
+
+```sh
+git clone https://github.com/appium/appium-workflows.git ../appium-workflows
+git -C ../appium-workflows checkout b9358466aa945baa7afa4d8f177d9fa4f4515bc0
+ruby ../appium-workflows/.github/actions/ruby-release-validate/release.rb \
+  verify --root . --gem-name appium_lib --version-file lib/appium_lib/version.rb
+```
+
+Add `--tag v<version>` to verify a prospective tag. For date recovery, replace
+`verify` with `prepare-date` and omit `--tag`; it copies the changelog date into
+the local version file. Neither command pushes or publishes. If the shared
+checkout already exists, use it instead of cloning again.
+
+The Action returns an absolute `gem-path` for artifact upload. The workflow passes
+only the filename to the separate publishing job, which downloads the artifact
+into its own `pkg/` directory. The publishing workflow, `rubygems` environment,
+and Trusted Publisher registration remain in this repository.
 
 The repository bootstrap is pinned to the existing `v16.3.0` commit
 `8b80a78e1bf1053e8f9a3f16bec3205a766f7faa`, with manifest version `16.3.0`. This avoids
