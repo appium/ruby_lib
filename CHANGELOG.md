@@ -4,6 +4,13 @@ New entries are maintained by Release Please.
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## [16.3.1](https://github.com/appium/ruby_lib/compare/v16.3.0...v16.3.1) (2026-09-13)
+
+
+### Bug Fixes
+
+* issues in code ([#1124](https://github.com/appium/ruby_lib/issues/1124)) ([1fc98b8](https://github.com/appium/ruby_lib/commit/1fc98b89cf41284c7da83df214aed6d8764429c2))
+
 ## [16.3.0] - 2026-05-11
 - Bump appium_lib_core to 13+
     - No user facing changes are expected.
