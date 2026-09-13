@@ -1,0 +1,83 @@
+name: Publish gem
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing release tag to publish or retry (for example v13.1.1)
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-gem-${{ inputs.tag }}
+  cancel-in-progress: false
+
+env:
+  RELEASE_TAG: ${{ inputs.tag }}
+
+jobs:
+  verify:
+    if: github.repository == 'appium/ruby_lib'
+    runs-on: ubuntu-latest
+    outputs:
+      gem_path: ${{ steps.package.outputs.gem_path }}
+    steps:
+      - name: Validate tag syntax
+        shell: bash
+        run: |
+          if [[ ! "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z]+([.-][0-9A-Za-z]+)*)?$ ]]; then
+            echo 'Expected a release tag such as v13.1.1 or v13.2.0-rc.1' >&2
+            exit 1
+          fi
+      - uses: actions/checkout@v7
+        with:
+          ref: refs/tags/${{ env.RELEASE_TAG }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Verify release commit belongs to master
+        run: git merge-base --is-ancestor HEAD origin/master
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '4.0'
+          bundler-cache: true
+      # Build before tools/tests can generate or update local files.
+      - name: Build gem from the tagged checkout
+        run: bundle exec rake build
+      - name: Run checks on the release commit
+        run: |
+          bundle exec rake rubocop test
+          bundle exec ruby test/release/release_test.rb
+      - name: Validate the built gem
+        id: package
+        run: ruby script/release.rb verify "$RELEASE_TAG" >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-gem
+          path: ${{ steps.package.outputs.gem_path }}
+          if-no-files-found: error
+          retention-days: 14
+
+  publish:
+    needs: verify
+    runs-on: ubuntu-latest
+    environment: rubygems
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '4.0'
+      - uses: actions/download-artifact@v4
+        with:
+          name: release-gem
+          path: pkg
+      - name: Authenticate with RubyGems Trusted Publishing
+        uses: rubygems/configure-rubygems-credentials@daab0479595bcc124493903b3df17273d86e073f
+      - name: Publish the verified gem
+        env:
+          GEM_PATH_TO_PUBLISH: ${{ needs.verify.outputs.gem_path }}
+        run: gem push --host https://rubygems.org "$GEM_PATH_TO_PUBLISH"

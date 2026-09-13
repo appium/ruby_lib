@@ -19,4 +19,10 @@ Gem::Specification.new do |s|
 
   s.files = `git ls-files`.split("\n").reject { |v| v.match(/\A^(ios_tests|android_tests|grid|test_apps)\/.+/) }
   s.metadata['rubygems_mfa_required'] = 'true'
+  # Keep release automation out of the published package.
+  s.files.reject! do |file|
+    file.start_with?('.github/', 'script/', 'test/release/') ||
+      %w[RELEASING.md release-please-config.json .release-please-manifest.json].include?(file)
+  end
+
 end

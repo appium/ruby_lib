@@ -99,3 +99,8 @@ This repository has examples for running tests in parallel. Read [ios_tests](htt
 
 ## How to add new helpful methods
 - Add the new methods in this library
+
+## Releasing
+
+Review and merge the Release Please PR to publish. See [RELEASING.md](RELEASING.md)
+for one-time Trusted Publishing setup and recovery instructions.

@@ -1,5 +1,6 @@
 # Changelogs
-Commit based release not is [release_notes.md](./release_notes.md)
+Historical commit-level release notes are in [release_notes.md](./release_notes.md).
+New entries are maintained by Release Please.
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
