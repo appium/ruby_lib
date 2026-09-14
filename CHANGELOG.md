@@ -4,6 +4,13 @@ New entries are maintained by Release Please.
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## [16.3.2](https://github.com/appium/ruby_lib/compare/v16.3.1...v16.3.2) (2026-09-14)
+
+
+### Bug Fixes
+
+* metadata in gems ([d727297](https://github.com/appium/ruby_lib/commit/d727297b4fff4e98287058b0ea26c093a0aab334))
+
 ## [16.3.1](https://github.com/appium/ruby_lib/compare/v16.3.0...v16.3.1) (2026-09-13)
 
 
