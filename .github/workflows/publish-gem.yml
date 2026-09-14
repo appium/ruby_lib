@@ -84,7 +84,7 @@ jobs:
           name: release-gem
           path: pkg
       - name: Authenticate with RubyGems Trusted Publishing
-        uses: rubygems/configure-rubygems-credentials@daab0479595bcc124493903b3df17273d86e073f
+        uses: rubygems/configure-rubygems-credentials@2a7221c7c44c30ebc68eda38fa25c60b918245c7
       - name: Publish the verified gem
         env:
           GEM_PATH_TO_PUBLISH: pkg/${{ needs.verify.outputs.gem_filename }}
