@@ -246,7 +246,7 @@ module Appium
       # Save global reference to last created Appium driver for top level methods.
       $driver = self if global_driver
 
-      self # rubocop:disable Lint/Void # return newly created driver
+      self # rubocop:disable Lint/Void -- return newly created driver
     end
 
     private
