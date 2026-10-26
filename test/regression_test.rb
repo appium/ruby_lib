@@ -142,6 +142,21 @@ class RegressionTest < Minitest::Test
     assert_equal expected, doc.result
   end
 
+  def test_html_elements_result_continues_after_attribute_free_elements
+    parser = Nokogiri::HTML::SAX::Parser.new(Appium::Common::HTMLElements.new)
+    parser.parse('<html><head></head><body><div></div><a href="/login">Sign in</a></body></html>')
+
+    assert_equal "\na\n  href: /login\n  text: Sign in\n", parser.document.result
+  end
+
+  def test_log_event_writer_raises_no_driver_and_argument_errors
+    driver = build_driver
+    assert_raises(Appium::NoDriverInstanceError) { driver.log_event = { vendor: 'appium', event: 'funEvent' } }
+
+    driver.instance_variable_set(:@driver, Object.new)
+    assert_raises(Appium::Core::Error::ArgumentError) { driver.log_event = 'invalid' }
+  end
+
   private
 
   def build_driver

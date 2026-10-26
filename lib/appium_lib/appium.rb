@@ -19,6 +19,7 @@ require 'nokogiri'
 require 'appium_lib_core'
 
 # base
+require_relative 'error'
 require_relative 'driver'
 require_relative 'sauce_labs'
 

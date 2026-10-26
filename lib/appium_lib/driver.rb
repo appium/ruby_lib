@@ -888,9 +888,9 @@ module Appium
     end
 
     def log_event=(log_event)
-      raise if @driver.nil?
+      raise NoDriverInstanceError if @driver.nil?
       unless log_event.is_a?(Hash)
-        raise ::Appium::Core::Error::ArgumentError('log_event should be Hash like { vendor: "appium", event: "funEvent"}')
+        raise ::Appium::Core::Error::ArgumentError, 'log_event should be Hash like { vendor: "appium", event: "funEvent"}'
       end
 
       @driver.logs.event vendor: log_event[:vendor], event: log_event[:event]
