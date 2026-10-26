@@ -119,6 +119,29 @@ class RegressionTest < Minitest::Test
     assert_instance_of Appium::Http::Default, driver.http_client
   end
 
+  def test_android_elements_includes_view_tag
+    stub_driver = Object.new
+    def stub_driver.lazy_load_strings
+      {}
+    end
+
+    doc = Appium::Android::AndroidElements.new
+    doc.start_element(
+      'android.widget.Button',
+      [['text', 'Submit'], ['resource-id', 'com.example:id/submit'], ['view-tag', 'submit_btn']],
+      stub_driver
+    )
+    doc.start_element(
+      'androidx.compose.ui.platform.ComposeView',
+      [['view-tag', 'compose_tag']],
+      stub_driver
+    )
+
+    expected = "\nandroid.widget.Button\n  text: Submit\n  id: com.example:id/submit\n  tag: submit_btn\n" \
+               "\nandroidx.compose.ui.platform.ComposeView\n  tag: compose_tag\n"
+    assert_equal expected, doc.result
+  end
+
   private
 
   def build_driver

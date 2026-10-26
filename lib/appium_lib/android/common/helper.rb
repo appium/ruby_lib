@@ -34,7 +34,7 @@ module Appium
 
       def reset
         @result = ''
-        @keys = %w(text resource-id content-desc)
+        @keys = %w(text resource-id content-desc view-tag)
       end
 
       # http://nokogiri.org/Nokogiri/XML/SAX/Document.html
@@ -47,7 +47,7 @@ module Appium
           attributes[key] = value if keys.include?(key) && !value.empty?
         end
 
-        # scoped to: text resource-id content-desc
+        # scoped to: text resource-id content-desc view-tag
         attributes_values = attributes.values
         strings           = driver.lazy_load_strings
         id_matches = strings.empty? ? [] : strings.select { |_key, value| attributes_values.include? value }
@@ -72,6 +72,7 @@ module Appium
         text   = attributes['text']
         desc   = attributes['content-desc']
         id     = attributes['resource-id']
+        tag    = attributes['view-tag']
 
         if !text.nil? && text == desc
           string += "  text, desc: #{text}\n"
@@ -80,6 +81,7 @@ module Appium
           string += "  desc: #{desc}\n" unless desc.nil?
         end
         string += "  id: #{id}\n" unless id.nil?
+        string += "  tag: #{tag}\n" unless tag.nil?
         string += "  strings.xml: #{string_ids}" unless string_ids.nil?
 
         @result += "\n#{name}\n#{string}" unless attributes.empty?
@@ -88,7 +90,7 @@ module Appium
 
     # Android only.
     # Returns a string containing interesting elements.
-    # The text, content description, and id are returned.
+    # The text, content description, id, and view tag are returned.
     # @param class_name [String] the class name to filter on.
     # if false (default) then all classes will be inspected
     # @return [String]
