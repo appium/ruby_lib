@@ -4,6 +4,13 @@ New entries are maintained by Release Please.
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## [16.4.0](https://github.com/appium/ruby_lib/compare/v16.3.2...v16.4.0) (2026-10-26)
+
+
+### Features
+
+* include view-tag attribute in Android page inspection ([#1138](https://github.com/appium/ruby_lib/issues/1138)) ([0041940](https://github.com/appium/ruby_lib/commit/0041940f3588285ac10b7bdd95c227e4a559ce5f))
+
 ## [16.3.2](https://github.com/appium/ruby_lib/compare/v16.3.1...v16.3.2) (2026-09-14)
 
 
