@@ -174,7 +174,7 @@ module Appium
 
           const.send(:define_singleton_method, m) do |*args, **kwargs, &block|
             super(*args, **kwargs, &block) # promote.rb
-          rescue NoMethodError, ArgumentError
+          rescue NoMethodError, ::ArgumentError
             driver.send m, *args, **kwargs, &block if driver.respond_to?(m)
           end
         end
@@ -230,7 +230,7 @@ module Appium
               # minitest also defines a name method,
               # so rescue argument error
               # and call the name method on $driver
-            rescue NoMethodError, ArgumentError
+            rescue NoMethodError, ::ArgumentError
               if args.size == 1 && args.first.is_a?(Hash)
                 # To prevent warnings by keyword arguments (for Ruby 2.7 and 3)
                 driver.send method, **args.first, &block if driver.respond_to?(method)

@@ -44,6 +44,36 @@ class RegressionTest < Minitest::Test
     assert_equal :inherited, child.new.back
   end
 
+  def test_promote_falls_back_to_driver_on_arity_mismatch
+    parent = Class.new do
+      def name
+        :parent_name
+      end
+    end
+    child = Class.new(parent)
+    driver = Object.new
+    def driver.name(value)
+      :"driver_#{value}"
+    end
+
+    Appium.promote_appium_methods(child, driver)
+    assert_equal :parent_name, child.new.name
+    assert_equal :driver_arg, child.new.name(:arg)
+
+    base_mod = Module.new do
+      def name
+        :mod_name
+      end
+    end
+    target_mod = Module.new do
+      extend base_mod
+    end
+
+    Appium.promote_singleton_appium_methods([target_mod], driver)
+    assert_equal :mod_name, target_mod.name
+    assert_equal :driver_arg, target_mod.name(:arg)
+  end
+
   def test_promote_again_uses_new_driver
     target = Class.new
     first = Object.new
