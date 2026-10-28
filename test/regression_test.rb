@@ -44,6 +44,36 @@ class RegressionTest < Minitest::Test
     assert_equal :inherited, child.new.back
   end
 
+  def test_promote_falls_back_to_driver_on_arity_mismatch
+    parent = Class.new do
+      def name
+        :parent_name
+      end
+    end
+    child = Class.new(parent)
+    driver = Object.new
+    def driver.name(value)
+      :"driver_#{value}"
+    end
+
+    Appium.promote_appium_methods(child, driver)
+    assert_equal :parent_name, child.new.name
+    assert_equal :driver_arg, child.new.name(:arg)
+
+    base_mod = Module.new do
+      def name
+        :mod_name
+      end
+    end
+    target_mod = Module.new do
+      extend base_mod
+    end
+
+    Appium.promote_singleton_appium_methods([target_mod], driver)
+    assert_equal :mod_name, target_mod.name
+    assert_equal :driver_arg, target_mod.name(:arg)
+  end
+
   def test_promote_again_uses_new_driver
     target = Class.new
     first = Object.new
@@ -140,6 +170,21 @@ class RegressionTest < Minitest::Test
     expected = "\nandroid.widget.Button\n  text: Submit\n  id: com.example:id/submit\n  tag: submit_btn\n" \
                "\nandroidx.compose.ui.platform.ComposeView\n  tag: compose_tag\n"
     assert_equal expected, doc.result
+  end
+
+  def test_html_elements_result_continues_after_attribute_free_elements
+    parser = Nokogiri::HTML::SAX::Parser.new(Appium::Common::HTMLElements.new)
+    parser.parse('<html><head></head><body><div></div><a href="/login">Sign in</a></body></html>')
+
+    assert_equal "\na\n  href: /login\n  text: Sign in\n", parser.document.result
+  end
+
+  def test_log_event_writer_raises_no_driver_and_argument_errors
+    driver = build_driver
+    assert_raises(Appium::NoDriverInstanceError) { driver.log_event = { vendor: 'appium', event: 'funEvent' } }
+
+    driver.instance_variable_set(:@driver, Object.new)
+    assert_raises(Appium::Core::Error::ArgumentError) { driver.log_event = 'invalid' }
   end
 
   private

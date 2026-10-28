@@ -233,7 +233,7 @@ module Appium
             "#{string}  #{attr[0]}: #{attr1}\n"
           end
 
-          return r if attr_string.nil? || attr_string.empty?
+          next r if attr_string.nil? || attr_string.empty?
 
           "#{r}\n#{name}\n#{attr_string}"
         end
