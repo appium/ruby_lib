@@ -69,6 +69,9 @@ module Appium
     # json and ap are required for the source method.
     require 'json'
 
+    WindowRel = Struct.new(:x, :y)
+    private_constant :WindowRel
+
     # @private
     # http://nokogiri.org/Nokogiri/XML/SAX.html
     class CountElements < Nokogiri::XML::SAX::Document
@@ -160,15 +163,15 @@ module Appium
     #
     # @example
     #
-    #   px_to_window_rel x: 50, y: 150 #=> #<OpenStruct x="50.0 / 375.0", y="150.0 / 667.0">
+    #   px_to_window_rel x: 50, y: 150 #=> #<struct Appium::Common::WindowRel x="50.0 / 375.0", y="150.0 / 667.0">
     #
-    def px_to_window_rel(opts = {}, driver = $driver)
+    def px_to_window_rel(opts = {}, driver = $driver || self)
       w = driver.window_size
       x = opts.fetch :x, 0
       y = opts.fetch :y, 0
 
-      OpenStruct.new(x: "#{x.to_f} / #{w.width.to_f}",
-                     y: "#{y.to_f} / #{w.height.to_f}")
+      WindowRel.new("#{x.to_f} / #{w.width.to_f}",
+                    "#{y.to_f} / #{w.height.to_f}")
     end
 
     # @private

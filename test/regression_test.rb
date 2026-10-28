@@ -163,7 +163,7 @@ class RegressionTest < Minitest::Test
     )
     doc.start_element(
       'androidx.compose.ui.platform.ComposeView',
-      [['view-tag', 'compose_tag']],
+      [%w(view-tag compose_tag)],
       stub_driver
     )
 
@@ -185,6 +185,62 @@ class RegressionTest < Minitest::Test
 
     driver.instance_variable_set(:@driver, Object.new)
     assert_raises(Appium::Core::Error::ArgumentError) { driver.log_event = 'invalid' }
+  end
+
+  def test_get_android_inspect_without_global_driver
+    previous_driver = $driver
+    $driver = nil
+
+    driver = build_driver
+    driver.extend(Appium::Common)
+    driver.extend(Appium::Android)
+    def driver.get_source
+      '<hierarchy><android.widget.Button text="Submit" resource-id="com.example:id/submit" /></hierarchy>'
+    end
+
+    def driver.lazy_load_strings
+      { 'submit_label' => 'Submit' }
+    end
+
+    expected = "\nandroid.widget.Button\n  text: Submit\n  id: com.example:id/submit\n  strings.xml: submit_label\n"
+    assert_equal expected, driver.get_android_inspect
+  ensure
+    $driver = previous_driver
+  end
+
+  def test_px_to_window_rel_without_global_driver
+    previous_driver = $driver
+    $driver = nil
+
+    driver = build_driver
+    driver.extend(Appium::Common)
+    def driver.window_size
+      Struct.new(:width, :height).new(375, 667)
+    end
+
+    rel = driver.px_to_window_rel(x: 50, y: 150)
+    assert_equal '50.0 / 375.0', rel.x
+    assert_equal '150.0 / 667.0', rel.y
+  ensure
+    $driver = previous_driver
+  end
+
+  def test_instance_promotion_forwards_keywords_and_string_keyed_hash
+    driver = Object.new
+    def driver.update_settings(settings)
+      settings
+    end
+
+    def driver.log_event(vendor:, event:)
+      "#{vendor}:#{event}"
+    end
+
+    target = Class.new
+    Appium.promote_appium_methods(target, driver)
+    instance = target.new
+
+    assert_equal({ 'allowInvisibleElements' => true }, instance.update_settings({ 'allowInvisibleElements' => true }))
+    assert_equal 'appium:funEvent', instance.log_event(vendor: 'appium', event: 'funEvent')
   end
 
   private
