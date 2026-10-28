@@ -4,6 +4,13 @@ New entries are maintained by Release Please.
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## [16.4.1](https://github.com/appium/ruby_lib/compare/v16.4.0...v16.4.1) (2026-10-28)
+
+
+### Bug Fixes
+
+* require error definitions, use next in HTMLElements#result, and fix Driver#log_event= error raising ([#1140](https://github.com/appium/ruby_lib/issues/1140)) ([1b28f90](https://github.com/appium/ruby_lib/commit/1b28f9008c488b8945cfbc41458bb430b2f7a546))
+
 ## [16.4.0](https://github.com/appium/ruby_lib/compare/v16.3.2...v16.4.0) (2026-10-26)
 
 
