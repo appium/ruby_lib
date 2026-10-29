@@ -16,24 +16,24 @@
 class AndroidTest
   class Element
     class Button < Minitest::Test
-      def before_first
-        # nav to buttons activity
+      include AndroidTestNavigation
+
+      def setup
+        super
+        reset_test_app
         wait { find('App').click }
         wait { find('Activity').click }
         wait { find('Animation').click }
       end
 
-      def after_last
-        # nav back to home activity
-        3.times { back }
+      def teardown
+        reset_test_app
+      ensure
+        super
       end
 
       def fade_in
         'Fade in'
-      end
-
-      def test_01_before_first
-        before_first
       end
 
       def test_02_button
@@ -64,10 +64,6 @@ class AndroidTest
 
       def test_07_buttons_exact
         2.times { wait { assert_equal buttons_exact(fade_in).first.text.upcase, fade_in.upcase } }
-      end
-
-      def test_08_after_last
-        after_last
       end
     end
   end

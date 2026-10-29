@@ -45,13 +45,14 @@ class AndroidTest
       # By default, the webdriver gem will return message instead of origValue
       def test_03_common_patch_id_error_message
         value = ''
+        previous_wait = driver.manage.timeouts.implicit_wait
         begin
           set_wait 0
           find_element(:id, 'ok')
         rescue StandardError => e
           value = e.message
         ensure
-          set_wait 30
+          set_wait previous_wait
         end
         exp = 'An element could not be located on the page using the given search parameters.'
         assert value.start_with? exp

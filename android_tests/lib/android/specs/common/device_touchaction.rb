@@ -16,6 +16,19 @@
 class AndroidTest
   class Common
     class DeviceTouchAction < Minitest::Test
+      include AndroidTestNavigation
+
+      def setup
+        super
+        reset_test_app
+      end
+
+      def teardown
+        reset_test_app
+      ensure
+        super
+      end
+
       def test_01_before_test
         wait { text('Accessibility') }
       end
@@ -78,7 +91,7 @@ class AndroidTest
           origin: ::Selenium::WebDriver::Interactions::PointerMove::VIEWPORT
         )
         f2.create_pointer_down(:left)
-        f1.create_pause(0.5)
+        f2.create_pause(0.5)
         f2.create_pointer_move(
           duration: 3, x: 500, y: 900,
           origin: ::Selenium::WebDriver::Interactions::PointerMove::VIEWPORT

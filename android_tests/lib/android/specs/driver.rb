@@ -76,7 +76,7 @@ class AndroidTest
       assert_equal caps_with_json['appPackage'], 'io.appium.android.apis'
       assert_equal caps_with_json['appActivity'], 'io.appium.android.apis.ApiDemos'
       assert_equal caps_with_json['deviceName'], 'Android emulator'
-      assert_equal caps_with_json['someCapability'], 'some_capability'
+      assert_equal 'some_capability', caps_with_json['some_capability']
 
       assert_equal actual[:caps][:platformName], 'android'
       assert_equal actual[:caps][:app], expected_app

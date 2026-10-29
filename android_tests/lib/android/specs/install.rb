@@ -15,7 +15,15 @@
 # rake "android[install]"
 class AndroidTest
   class Install < Minitest::Test
-    # To Do: Blocked on https://github.com/appium/appium/issues/3032
+    include AndroidTestNavigation
+
+    def teardown
+      install_app caps[:app] unless app_installed?(pkg)
+      reset_test_app
+    ensure
+      super
+    end
+
     def pkg
       'io.appium.android.apis'
     end
@@ -35,9 +43,5 @@ class AndroidTest
       install_app caps[:app]
       installed
     end
-
-    # no way to launch apk after it's uninstalled/installed
-    # blocked on: https://github.com/appium/appium/issues/2969
-    # launch_app
   end
 end
