@@ -31,7 +31,7 @@ def go_to_textfields
 end
 
 def screen
-  $driver.find_element(:class, ui_ios.navbar).name
+  AppiumTestSession.driver.find_element(:class, ui_ios.navbar).name
 end
 
 def catalog
@@ -43,7 +43,7 @@ def target_bundle_id
 end
 
 def ui_ios
-  UI.new($driver)
+  UI.new(AppiumTestSession.driver)
 end
 
 class UI

@@ -163,7 +163,7 @@ class RegressionTest < Minitest::Test
     )
     doc.start_element(
       'androidx.compose.ui.platform.ComposeView',
-      [['view-tag', 'compose_tag']],
+      [%w[view-tag compose_tag]],
       stub_driver
     )
 

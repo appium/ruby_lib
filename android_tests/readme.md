@@ -3,6 +3,10 @@ ruby_lib_android
 
 ruby_lib's Android tests. Requires `Ruby 2.2+` or better.
 
+Tests use non-global drivers by default. To check legacy global mode, run
+`APPIUM_TEST_GLOBAL_DRIVER=true bundle exec rake android`. Both modes use the
+same test cases and explicitly close their session after the run.
+
 - `rake install` Install gems required to run the tests.
 - `rake android` Run all tests.
 - `rake android['android/element/generic']` Run a single test.

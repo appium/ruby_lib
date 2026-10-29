@@ -93,7 +93,7 @@ class IosTest
     end
 
     def test_09_driver_class
-      assert_equal $driver.class, Appium::Driver
+      assert_equal AppiumTestSession.driver.class, Appium::Driver
     end
 
     def test_10_status

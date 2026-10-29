@@ -152,7 +152,7 @@ module Appium
     # @param [Array<Module>] modules An array of modules
     # @param [Driver] driver A driver to extend for
     def promote_singleton_appium_methods(modules, driver = $driver)
-      raise ArgumentError, 'Global $driver is nil' if driver.nil?
+      raise ArgumentError, 'Driver is nil' if driver.nil?
 
       target_modules = []
 
@@ -167,16 +167,24 @@ module Appium
       end
 
       target_modules.each do |const|
+        promoted_methods = const.instance_variable_get(:@_appium_promoted_singleton_methods) || {}
+        const.instance_variable_set(:@_appium_promoted_singleton_methods, promoted_methods)
         # noinspection RubyResolve
         driver.public_methods(false).each do |m|
-          # override unless there's an existing method with matching arity
-          next if const.respond_to?(m) && const.method(m).arity == driver.method(m).arity
+          # Preserve user methods, but refresh wrappers that captured an earlier driver.
+          if const.respond_to?(m)
+            existing = const.method(m)
+            next if existing != promoted_methods[m] && existing.arity == driver.method(m).arity
+
+            const.singleton_class.send(:remove_method, m) if existing == promoted_methods[m]
+          end
 
           const.send(:define_singleton_method, m) do |*args, **kwargs, &block|
             super(*args, **kwargs, &block) # promote.rb
           rescue NoMethodError, ::ArgumentError
             driver.send m, *args, **kwargs, &block if driver.respond_to?(m)
           end
+          promoted_methods[m] = const.method(m)
         end
       end
     end

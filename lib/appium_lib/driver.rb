@@ -130,7 +130,7 @@ module Appium
     # Instance of Appium::Core::Driver
     attr_reader :core
 
-    # Creates a new driver. The driver is defined as global scope by default.
+    # Creates a new driver without a global reference by default.
     # We can avoid defining global driver.
     #
     # @example
@@ -195,15 +195,18 @@ module Appium
     #   appium_driver.start_driver
     #
     # @param opts [Object] A hash containing various options.
-    # @param global_driver [Bool] A bool require global driver before initialize.
+    # @param global_driver [Boolean, nil] Register as $driver when true. nil uses opts[:global_driver], default false.
     # @return [Driver]
-    def initialize(opts = {}, global_driver = false)
-      # Capybara can't put `global_driver` as the 2nd argument.
-      global_driver = opts.delete :global_driver if global_driver.nil?
+    def initialize(opts = {}, global_driver = nil)
+      raise ArgumentError, 'opts must be a hash' unless opts.is_a? Hash
+
+      # Support options-only callers without changing their options hash.
+      # An explicit second argument takes precedence over the hash option.
+      opts = opts.dup
+      configured_global_driver = opts.delete(:global_driver) { opts.delete('global_driver') { false } }
+      global_driver = configured_global_driver if global_driver.nil?
 
       $driver&.driver_quit if global_driver
-
-      raise ArgumentError, 'opts must be a hash' unless opts.is_a? Hash
 
       @core = ::Appium::Core.for(opts)
       extend ::Appium::Core::Device
@@ -495,9 +498,12 @@ module Appium
     # @return [void]
     def driver_quit
       @driver&.quit
-      @driver = nil
+      nil
     rescue Selenium::WebDriver::Error::WebDriverError
       nil
+    ensure
+      @driver = nil
+      @lazy_load_strings = nil
     end
     alias quit_driver driver_quit
 
@@ -534,7 +540,7 @@ module Appium
       @driver.window_rect
     end
 
-    # Creates a new global driver and quits the old one if it exists.
+    # Creates a new session and quits this instance's previous session if it exists.
     # You can customise http_client as the following
     #
     # Read http://www.rubydoc.info/github/appium/ruby_lib_core/Appium/Core/Device to understand more what the driver
@@ -562,7 +568,7 @@ module Appium
     # @option http_client_ops [Hash] :http_client Custom HTTP Client
     # @option http_client_ops [Hash] :open_timeout Custom open timeout for http client.
     # @option http_client_ops [Hash] :read_timeout Custom read timeout for http client.
-    # @return [Selenium::WebDriver] the new global driver
+    # @return [Selenium::WebDriver] the underlying driver for the new session
     def start_driver(http_client_ops = { http_client: nil, open_timeout: 999_999, read_timeout: 999_999 })
       http_client = http_client_ops[:http_client]
       if http_client.nil?
@@ -570,12 +576,8 @@ module Appium
                                                   read_timeout: http_client_ops[:read_timeout])
       end
 
-      # TODO: do not kill the previous session in the future version.
-      if $driver.nil?
-        driver_quit
-      else
-        $driver.driver_quit
-      end
+      # Each wrapper owns its session, even when another wrapper is global.
+      driver_quit
 
       # If automationName is set only in server side, then the following automation_name should be nil before
       # starting driver.

@@ -15,6 +15,9 @@ Helper methods for writing cross platform (iOS, Android) tests in Ruby using App
 Ordinary, `ruby_lib` worked with class driver, `$driver`, mainly.
 We can avoid the class driver with current `ruby_lib`, but if you'd like to implement your test cases based on instance driver, `@driver`, you can consider using `ruby_lib_core` first.
 
+See [non-global drivers and migration](docs/parallel.md) for instance-based usage,
+Page Objects, and coexistence with legacy global drivers.
+
 # Setup
 ## Requirement
 - [Appium](https://github.com/appium/appium#requirements)

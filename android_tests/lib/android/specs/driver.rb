@@ -92,11 +92,11 @@ class AndroidTest
     end
 
     def test_06_driver_class
-      assert_equal $driver.class, Appium::Driver
+      assert_equal AppiumTestSession.driver.class, Appium::Driver
     end
 
     def absolute_app_path(path)
-      $driver.class.absolute_app_path(caps: { app: path })
+      AppiumTestSession.driver.class.absolute_app_path(caps: { app: path })
     end
 
     def validate_path(path)

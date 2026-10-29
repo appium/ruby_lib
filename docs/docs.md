@@ -34,7 +34,9 @@ apk = {
         appActivity: '.Settings',
         appWaitActivity: '.Settings'
       }
-Appium::Driver.new({caps: apk}, false).start_driver
+appium = Appium::Driver.new({caps: apk}, false)
+appium.start_driver
+appium.find_element(:id, 'target') # use the wrapper for subsequent commands
 ```
 
 Example use of Appium's mobile gesture.
@@ -117,14 +119,15 @@ require 'json' # for .to_json
 require 'sauce_whisk'
 
 After do |scenario|
-  # end the test session, ignoring any exceptions.
-  ignore { $driver.driver_quit }
+  # Keep @appium_driver from setup and capture the ID before closing its session.
+  session_id = @appium_driver.session_id
+  @appium_driver.driver_quit
   
   user   = ENV['SAUCE_USERNAME']
   key    = ENV['SAUCE_ACCESS_KEY']
   if user && !user.empty? && key && !key.empty?
     passed = ! scenario.failed?
-    SauceWhisk::Jobs.change_status $driver.driver.session_id, passed
+    SauceWhisk::Jobs.change_status session_id, passed
   end
 end
 ```
