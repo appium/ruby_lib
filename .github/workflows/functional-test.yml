@@ -14,12 +14,18 @@ concurrency:
 
 jobs:
   ios_test:
+    name: ios_test (global_driver=${{ matrix.global_driver }})
+    strategy:
+      fail-fast: false
+      matrix:
+        global_driver: ['true', 'false']
     runs-on: macos-15
     timeout-minutes: 90
     env:
-          XCODE_VERSION: 16.4
-          IOS_VERSION: 18.5
-          IOS_DEVICE_NAME: iPhone 16 Plus
+      APPIUM_TEST_GLOBAL_DRIVER: ${{ matrix.global_driver }}
+      XCODE_VERSION: 16.4
+      IOS_VERSION: 18.5
+      IOS_DEVICE_NAME: iPhone 16 Plus
 
     steps:
     - uses: actions/checkout@v7
@@ -79,15 +85,21 @@ jobs:
       if: ${{ always() }}
       uses: actions/upload-artifact@master
       with:
-        name: appium-ios_test_with_other_deps.log
+        name: appium-ios_test_with_other_deps-global-${{ matrix.global_driver }}.log
         path: |
           appium.log
           test/report/
 
   android_test:
+    name: android_test (global_driver=${{ matrix.global_driver }})
+    strategy:
+      fail-fast: false
+      matrix:
+        global_driver: ['true', 'false']
     runs-on: ubuntu-latest
     timeout-minutes: 90
     env:
+      APPIUM_TEST_GLOBAL_DRIVER: ${{ matrix.global_driver }}
       API_LEVEL: 35
       ARCH: x86_64
 
@@ -164,7 +176,7 @@ jobs:
       if: ${{ always() }}
       uses: actions/upload-artifact@master
       with:
-        name: appium-android_test_with_other_deps.log
+        name: appium-android_test_with_other_deps-global-${{ matrix.global_driver }}.log
         path: |
           appium.log
           test/report/
