@@ -35,8 +35,18 @@ end
 # Run only the view album test:
 #   ruby run.rb ios view_album
 
+module AppiumTestSession
+  class << self
+    attr_accessor :driver
+  end
+end
+
 def start_driver(caps)
-  driver = Appium::Driver.new(caps, true)
+  global_driver = ENV.fetch('APPIUM_TEST_GLOBAL_DRIVER', 'false')
+  raise 'APPIUM_TEST_GLOBAL_DRIVER must be true or false' unless %w(true false).include?(global_driver)
+
+  driver = Appium::Driver.new(caps, global_driver == 'true')
+  AppiumTestSession.driver = driver
   # Tests expect methods defined on the minispec object
   Appium.promote_appium_methods Minitest::Test, driver
 
@@ -65,6 +75,12 @@ caps = if caps[:appium_lib]
        else
          caps.merge(appium_lib: { debug: true, wait: 1 })
        end
+
+if device == 'ios'
+  caps[:caps][:app] = ENV['IOS_APP'] if ENV['IOS_APP']
+  caps[:caps][:platformVersion] = ENV['IOS_VERSION'] if ENV['IOS_VERSION']
+  caps[:caps][:deviceName] = ENV['IOS_DEVICE_NAME'] if ENV['IOS_DEVICE_NAME']
+end
 
 if ENV['LOCAL_PREBUILT_WDA']
   caps[:caps][:usePreinstalledWDA] = true
@@ -118,4 +134,4 @@ trace_files.map! do |f|
 end
 
 # Exit after tests.
-Minitest.after_run { $driver&.x }
+Minitest.after_run { AppiumTestSession.driver&.driver_quit }

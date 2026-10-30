@@ -16,16 +16,27 @@
 class AndroidTest
   class Element
     class Alert < Minitest::Test
+      include AndroidTestNavigation
+
+      def setup
+        super
+        reset_test_app
+        wait { find('app').click }
+        wait { find('alert').click }
+      end
+
+      def teardown
+        reset_test_app
+      ensure
+        super
+      end
+
       def open_alert
         # trigger the alert
         wait { button('OK Cancel dialog with a message').click }
       end
 
       def test_01_alert_click
-        # nav to alert activity
-        wait { find('app').click }
-        wait { find('alert').click }
-
         # test
         wait { open_alert }
         wait { alert_click('OK') }
@@ -57,9 +68,6 @@ class AndroidTest
 
         wait { assert_equal alert_dismiss_text.downcase, 'cancel' }
         wait { alert_dismiss }
-
-        # nav to start activity
-        2.times { back }
       end
     end
   end

@@ -7,6 +7,7 @@ app = "../test_apps/UICatalog.app.zip"
 someCapability = "some_capability"
 simulatorStartupTimeout = 600000
 wdaLaunchTimeout = 600000
+includeSafariInWebviews = true
 
 [appium_lib]
 wait = 30

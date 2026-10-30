@@ -68,6 +68,7 @@ module Appium
 
     # json and ap are required for the source method.
     require 'json'
+    require 'ostruct'
 
     # @private
     # http://nokogiri.org/Nokogiri/XML/SAX.html
@@ -162,7 +163,7 @@ module Appium
     #
     #   px_to_window_rel x: 50, y: 150 #=> #<OpenStruct x="50.0 / 375.0", y="150.0 / 667.0">
     #
-    def px_to_window_rel(opts = {}, driver = $driver)
+    def px_to_window_rel(opts = {}, driver = self)
       w = driver.window_size
       x = opts.fetch :x, 0
       y = opts.fetch :y, 0
@@ -173,6 +174,8 @@ module Appium
 
     # @private
     def lazy_load_strings
+      return {} if @driver.nil?
+
       # app strings only works on local apps.
       # on disk apps (ex: com.android.settings) will error
       @lazy_load_strings ||= ignore { app_strings } || {}
@@ -182,24 +185,21 @@ module Appium
     # @param target [String] the target to search for in strings.xml values
     # @return [Array]
     def xml_keys(target)
-      lazy_load_strings
-      @lazy_load_strings.select { |key, _value| key.downcase.include? target.downcase }
+      lazy_load_strings.select { |key, _value| key.downcase.include? target.downcase }
     end
 
     # Search strings.xml's keys for target.
     # @param target [String] the target to search for in strings.xml keys
     # @return [Array]
     def xml_values(target)
-      lazy_load_strings
-      @lazy_load_strings.select { |_key, value| value.downcase.include? target.downcase }
+      lazy_load_strings.select { |_key, value| value.downcase.include? target.downcase }
     end
 
     # Resolve id in strings.xml and return the value.
     # @param id [String] the id to resolve
     # @return [String]
     def resolve_id(id)
-      lazy_load_strings
-      @lazy_load_strings[id]
+      lazy_load_strings[id]
     end
 
     # @private

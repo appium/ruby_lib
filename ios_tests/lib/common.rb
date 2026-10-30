@@ -31,7 +31,7 @@ def go_to_textfields
 end
 
 def screen
-  $driver.find_element(:class, ui_ios.navbar).name
+  AppiumTestSession.driver.find_element(:class, ui_ios.navbar).name
 end
 
 def catalog
@@ -43,7 +43,28 @@ def target_bundle_id
 end
 
 def ui_ios
-  UI.new($driver)
+  UI.new(AppiumTestSession.driver)
+end
+
+# Opt in for tests that must not inherit a previous test's screen or context.
+module IosTestNavigation
+  def reset_test_app
+    set_context 'NATIVE_APP'
+    driver.terminate_app target_bundle_id
+    driver.activate_app target_bundle_id
+    wait_true { screen == catalog }
+  end
+
+  def setup
+    super
+    reset_test_app
+  end
+
+  def teardown
+    reset_test_app
+  ensure
+    super
+  end
 end
 
 class UI

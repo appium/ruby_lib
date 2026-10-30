@@ -27,9 +27,10 @@ module Appium
         @filter = value.to_s.downcase
       end
 
-      def initialize # rubocop:disable Lint/MissingSuper
+      def initialize(driver = $driver) # rubocop:disable Lint/MissingSuper
         reset
         @filter = false
+        @driver = driver
       end
 
       def reset
@@ -38,7 +39,7 @@ module Appium
       end
 
       # http://nokogiri.org/Nokogiri/XML/SAX/Document.html
-      def start_element(name, attrs = [], driver = $driver)
+      def start_element(name, attrs = [], driver = @driver)
         return if filter && !name.downcase.include?(filter)
 
         attributes = {}
@@ -49,7 +50,7 @@ module Appium
 
         # scoped to: text resource-id content-desc view-tag
         attributes_values = attributes.values
-        strings           = driver.lazy_load_strings
+        strings           = driver ? driver.lazy_load_strings : {}
         id_matches = strings.empty? ? [] : strings.select { |_key, value| attributes_values.include? value }
 
         string_ids = nil
@@ -104,7 +105,7 @@ module Appium
       parser = if source_is_html # parse html from webview
                  @android_html_parser ||= Nokogiri::HTML::SAX::Parser.new(Appium::Common::HTMLElements.new)
                else
-                 @android_native_parser ||= Nokogiri::XML::SAX::Parser.new(AndroidElements.new)
+                 @android_native_parser ||= Nokogiri::XML::SAX::Parser.new(AndroidElements.new(self))
                end
       parser.document.reset # ensure document is reset before parsing
       parser.document.filter = class_name

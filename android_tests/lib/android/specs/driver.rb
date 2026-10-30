@@ -76,7 +76,7 @@ class AndroidTest
       assert_equal caps_with_json['appPackage'], 'io.appium.android.apis'
       assert_equal caps_with_json['appActivity'], 'io.appium.android.apis.ApiDemos'
       assert_equal caps_with_json['deviceName'], 'Android emulator'
-      assert_equal caps_with_json['someCapability'], 'some_capability'
+      assert_equal 'some_capability', caps_with_json['some_capability']
 
       assert_equal actual[:caps][:platformName], 'android'
       assert_equal actual[:caps][:app], expected_app
@@ -92,11 +92,11 @@ class AndroidTest
     end
 
     def test_06_driver_class
-      assert_equal $driver.class, Appium::Driver
+      assert_equal AppiumTestSession.driver.class, Appium::Driver
     end
 
     def absolute_app_path(path)
-      $driver.class.absolute_app_path(caps: { app: path })
+      AppiumTestSession.driver.class.absolute_app_path(caps: { app: path })
     end
 
     def validate_path(path)

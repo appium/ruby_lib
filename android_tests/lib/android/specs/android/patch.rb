@@ -15,6 +15,19 @@
 # rake "android[android/patch]"
 class AndroidTest
   class Patch < Minitest::Test
+    include AndroidTestNavigation
+
+    def setup
+      super
+      reset_test_app
+    end
+
+    def teardown
+      reset_test_app
+    ensure
+      super
+    end
+
     def test_type
       # nav to textfield
       wait { find('app').click }

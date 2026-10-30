@@ -32,7 +32,7 @@ class IosTest
       end
 
       def test_03_appium_core_element_method_location_rel
-        loc = first_text.location_rel($driver)
+        loc = first_text.location_rel(AppiumTestSession.driver)
         assert_equal loc.x.class, String
         assert_equal loc.y.class, String
       end

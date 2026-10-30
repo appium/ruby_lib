@@ -17,29 +17,29 @@ class IosTest
   class Ios
     class Command
       class MultiAppHandler < Minitest::Test
-        # Only for Xcode 9+
-        def test_multip_app_handler
-          driver.terminate_app target_bundle_id
-          driver.activate_app target_bundle_id
+        include IosTestNavigation
 
+        def test_multi_app_handler
           test_app_bundle = target_bundle_id
 
-          assert_equal xcuitest_query_app_status(bundle_id: test_app_bundle), :running_in_foreground
+          assert_equal :running_in_foreground, xcuitest_query_app_status(bundle_id: test_app_bundle)
 
-          assert_equal xcuitest_terminate_app(bundle_id: test_app_bundle), true
-          assert_equal xcuitest_query_app_status(bundle_id: test_app_bundle), :not_running
+          assert_equal true, xcuitest_terminate_app(bundle_id: test_app_bundle)
+          assert_equal :not_running, xcuitest_query_app_status(bundle_id: test_app_bundle)
 
           assert xcuitest_activate_app(bundle_id: test_app_bundle).nil?
-          assert_equal xcuitest_query_app_status(bundle_id: test_app_bundle), :running_in_foreground
+          assert_equal :running_in_foreground, xcuitest_query_app_status(bundle_id: test_app_bundle)
 
           assert xcuitest_activate_app(bundle_id: 'com.apple.Preferences').nil?
           wait(timeout: 5) do
-            assert_equal xcuitest_query_app_status(bundle_id: test_app_bundle), :running_in_background_suspended
+            # iOS may suspend the background app before we observe its state.
+            assert_includes %i[running_in_background running_in_background_suspended],
+                            xcuitest_query_app_status(bundle_id: test_app_bundle)
           end
 
           assert xcuitest_activate_app(bundle_id: test_app_bundle).nil?
           wait(timeout: 5) do
-            assert_equal xcuitest_query_app_status(bundle_id: test_app_bundle), :running_in_foreground
+            assert_equal :running_in_foreground, xcuitest_query_app_status(bundle_id: test_app_bundle)
           end
         end
       end
