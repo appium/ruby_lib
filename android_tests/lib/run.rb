@@ -76,6 +76,12 @@ caps = if caps[:appium_lib]
          caps.merge(appium_lib: { debug: true, wait: 1 })
        end
 
+if device == 'ios'
+  caps[:caps][:app] = ENV['IOS_APP'] if ENV['IOS_APP']
+  caps[:caps][:platformVersion] = ENV['IOS_VERSION'] if ENV['IOS_VERSION']
+  caps[:caps][:deviceName] = ENV['IOS_DEVICE_NAME'] if ENV['IOS_DEVICE_NAME']
+end
+
 if ENV['LOCAL_PREBUILT_WDA']
   caps[:caps][:usePreinstalledWDA] = true
   caps[:caps][:prebuiltWDAPath] = ENV['LOCAL_PREBUILT_WDA']

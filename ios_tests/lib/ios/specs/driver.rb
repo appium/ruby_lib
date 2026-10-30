@@ -39,7 +39,7 @@ class IosTest
     def test_04_verify_all_attributes
       actual                = driver_attributes
       caps_app_for_teardown = actual[:caps][:app]
-      expected_app = File.absolute_path('../test_apps/UICatalog.app.zip')
+      expected_app = File.absolute_path(ENV.fetch('IOS_APP', '../test_apps/UICatalog.app.zip'))
 
       # actual[:caps].to_json send to Appium server
       caps_with_json = JSON.parse(actual[:caps].to_json)
@@ -89,7 +89,7 @@ class IosTest
 
     def test_08_app_path_attr
       apk_name = File.basename driver_attributes[:caps][:app]
-      assert_equal apk_name, 'UICatalog.app.zip'
+      assert_equal File.basename(ENV.fetch('IOS_APP', 'UICatalog.app.zip')), apk_name
     end
 
     def test_09_driver_class

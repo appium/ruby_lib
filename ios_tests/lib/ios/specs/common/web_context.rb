@@ -15,36 +15,59 @@
 # Tests specifically for areas where the web_context differs in behaviour
 # rake "ios[common/web_context]"
 
+require_relative '../../../fixture_server'
+
 class IosTest
   class Common
     class WebContext < Minitest::Test
-      def test_01_before_first
-        driver.terminate_app target_bundle_id
-        driver.activate_app target_bundle_id
-        assert_equal screen, catalog
+      include IosTestNavigation
+
+      SAFARI_BUNDLE_ID = 'com.apple.mobilesafari'
+
+      def loaded_webview
+        context = nil
+        wait_true(timeout: 60) do
+          context = xcuitest_get_contexts.find do |candidate|
+            candidate['id'].start_with?('WEBVIEW_') &&
+              candidate['url'] == @fixture.url
+          end
+        end
+        context
       end
 
-      def test_02_get_ios_inspect
-        find_eles_by_predicate_include(value: 'Web').first.click
-
-        wait_true { available_contexts.size >= 2 }
-        web_view_context = available_contexts.find { |c| c.start_with? 'WEBVIEW' } # Get WEBVIEW_59153.1 for example.
-
-        set_context web_view_context
-        assert_equal current_context, web_view_context
-        sleep 1 # Give a chance to load
-        assert_equal page.start_with?("\nhtml\n"), true
+      def setup
+        super
+        @fixture = IosFixtureServer.new
+        # UICatalog's legacy UIWebView uses a protocol removed by RemoteDebugger.
+        # Safari exercises web-context inspection with a supported WebKit target.
+        driver.execute_script 'mobile: deepLink', url: @fixture.url, bundleId: SAFARI_BUNDLE_ID
       end
 
-      def test_03_xcuitest_get_contexts
-        context = xcuitest_get_contexts
-        assert_equal({ 'id' => 'NATIVE_APP' }, context.first)
-        assert context[1]['id'].include?('WEBVIEW_')
-      end
-
-      def test_04_after_last
+      def teardown
         set_context 'NATIVE_APP'
-        back_click
+        driver.terminate_app SAFARI_BUNDLE_ID
+      ensure
+        @fixture&.close
+        super
+      end
+
+      def test_get_ios_inspect
+        webview = loaded_webview
+        set_context webview.fetch('id')
+        assert_equal webview.fetch('id'), current_context
+        wait_true { execute_script('return document.readyState') == 'complete' }
+        assert_includes page, "\nbody\n  text: ruby-lib-webview"
+        assert_includes get_source, 'ruby-lib-webview'
+      ensure
+        set_context 'NATIVE_APP'
+      end
+
+      def test_xcuitest_get_contexts
+        webview = loaded_webview
+        assert_includes xcuitest_get_contexts, { 'id' => 'NATIVE_APP' }
+        assert_includes available_contexts, webview.fetch('id')
+        assert_equal SAFARI_BUNDLE_ID, webview.fetch('bundleId')
+        assert_equal @fixture.url, webview.fetch('url')
       end
     end
   end

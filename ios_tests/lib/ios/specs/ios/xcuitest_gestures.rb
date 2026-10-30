@@ -16,110 +16,83 @@
 class IosTest
   class Ios
     class XcuitestGestures < Minitest::Test
-      def open_alert_ok_cancel
-        wait_true do
-          find_element(:name, 'Okay / Cancel').click
-          find_element(:name, 'A Short Title Is Best').displayed?
-        end
+      include IosTestNavigation
+
+      def open_screen(name)
+        wait { find_element(:accessibility_id, name).click }
+        wait_true { screen == name }
       end
 
-      def open_alert_custom
-        wait_true do
-          find_element(:name, 'Other').click
-          find_element(:name, 'A Short Title Is Best').displayed?
-        end
+      def open_alert(name)
+        wait { find_element(:accessibility_id, name).click }
+        wait_true { find_element(:name, 'A Short Title Is Best').displayed? }
       end
 
-      def test_01_before_first
-        driver.terminate_app target_bundle_id
-        driver.activate_app target_bundle_id
-        assert_equal screen, catalog
-      end
-
-      def test_02_tap
-        element = text('controls')
-        one_finger_tap x: 0, y: 0, element: element
-
-        back_click
-
-        element = text('controls')
-        rect = element.rect
+      def test_tap
+        element = text_exact('Buttons')
+        one_finger_tap x: element.rect.width / 2, y: element.rect.height / 2, element: element
+        wait_true { screen == 'Buttons' }
+        rect = button_exact('Button').rect
         one_finger_tap x: rect.x + rect.width / 2, y: rect.y + rect.height / 2
+        assert_equal 'Buttons', screen
       end
 
-      def test_03_double_tap
-        element = button('Search')
-        double_tap(element: element)
+      def test_double_tap
+        open_screen 'Buttons'
+        double_tap(element: button_exact('Button'))
+        assert_equal 'Buttons', screen
       end
 
-      def test_04_touch_and_hold
-        element = button('Tools')
-        touch_and_hold(element: element, duration: 4.0)
-        touch_and_hold(x: 100, y: 100)
+      def test_touch_and_hold
+        open_screen 'Buttons'
+        element = button_exact('Button')
+        touch_and_hold(element: element, duration: 1.0)
+        rect = element.rect
+        touch_and_hold(x: rect.x + rect.width / 2, y: rect.y + rect.height / 2)
+        assert_equal 'Buttons', screen
       end
 
-      def test_05_swipe
-        swipe direction: 'down'
-        swipe direction: 'down'
-
-        assert_raises Selenium::WebDriver::Error::NoSuchElementError do
-          text('Toolbars')
-        end
+      def test_swipe
+        table = find_element(:class_name, ui_ios.table)
+        2.times { swipe direction: 'up', element: table }
+        wait_true { find_element(:accessibility_id, 'Toolbars').displayed? }
+        2.times { swipe direction: 'down', element: table }
+        wait_true { find_element(:accessibility_id, 'Activity Indicators').displayed? }
       end
 
-      def test_06_drag_from_to_for_duration
+      def test_drag_from_to_for_duration
         drag_from_to_for_duration from_x: 100, from_y: 100, to_x: 100, to_y: 400
+        assert_equal catalog, screen
       end
 
-      def test_07_pinch
+      def test_pinch
+        open_screen 'Image View'
         pinch(scale: 0.5, velocity: -1)
+        assert_equal 'Image View', screen
       end
 
-      def test_08_back_to_top
-        back_click
-      end
-
-      def test_09_select_picker_wheel
-        element = text('Picker View')
-        one_finger_tap x: 0, y: 0, element: element
-
-        e = find_element :class, ui_ios.picker_wheel
-        previous_value = e.text
-        select_picker_wheel(element: e, order: 'next')
+      def test_select_picker_wheel
+        open_screen 'Picker View'
+        element = find_element :class, ui_ios.picker_wheel
+        previous_value = element.text
+        select_picker_wheel(element: element, order: 'next')
 
         current_element = find_element(:class, ui_ios.picker_wheel)
-        assert_equal current_element.displayed?, true
-        assert current_element.text != previous_value
+        assert current_element.displayed?
+        refute_equal previous_value, current_element.text
       end
 
-      def test_10_back_to_top
-        back_click
-      end
-
-      def test_11_alert
-        wait_true do
-          find_element(:name, 'Alert Views').click
-          tag(ui_ios.navbar).name == 'Alert Views'
-        end
-
-        open_alert_ok_cancel
+      def test_alert
+        open_screen 'Alert Views'
+        open_alert 'Okay / Cancel'
         alert action: 'accept'
 
-        open_alert_ok_cancel
+        open_alert 'Okay / Cancel'
         alert action: 'dismiss'
 
-        open_alert_custom
-        list = alert action: 'getButtons'
-        assert_equal list, ['Choice One', 'Choice Two', 'Cancel']
+        open_alert 'Other'
+        assert_equal ['Choice One', 'Choice Two', 'Cancel'], alert(action: 'getButtons')
         alert action: 'accept', button_label: 'Choice Two'
-      end
-
-      def test_12_back_to_top
-        back_click
-      end
-
-      def test_13_after_last
-        assert_equal screen, catalog
       end
     end
   end

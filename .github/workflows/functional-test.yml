@@ -26,6 +26,8 @@ jobs:
       XCODE_VERSION: 16.4
       IOS_VERSION: 18.5
       IOS_DEVICE_NAME: iPhone 16 Plus
+      # Allow WDA startup (up to 600s) and session creation to finish.
+      APPIUM_TEST_READ_TIMEOUT: 900
 
     steps:
     - uses: actions/checkout@v7
