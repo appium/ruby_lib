@@ -4,6 +4,22 @@ New entries are maintained by Release Please.
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## [16.5.0](https://github.com/appium/ruby_lib/compare/v16.4.1...v16.5.0) (2026-10-30)
+
+
+### Features
+
+* support independent non-global drivers while preserving explicit global-driver usage and the existing non-global default ([203da2d](https://github.com/appium/ruby_lib/commit/203da2dfe9a2299f24acb52a95161584d5c1d285))
+
+
+### Bug Fixes
+
+* clear session and app-string cache on quit and reload app strings for replacement sessions ([203da2d](https://github.com/appium/ruby_lib/commit/203da2dfe9a2299f24acb52a95161584d5c1d285))
+* honor symbol and string global_driver hash options when the constructor's second argument is omitted or nil; true now replaces the global driver and quits its previous session, while an explicit boolean argument takes precedence ([203da2d](https://github.com/appium/ruby_lib/commit/203da2dfe9a2299f24acb52a95161584d5c1d285))
+* make start_driver quit only its own previous session; callers relying on cleanup of another global driver must quit that driver explicitly ([203da2d](https://github.com/appium/ruby_lib/commit/203da2dfe9a2299f24acb52a95161584d5c1d285))
+* refresh generated singleton methods on re-promotion so they use the newly supplied driver rather than the previous driver ([203da2d](https://github.com/appium/ruby_lib/commit/203da2dfe9a2299f24acb52a95161584d5c1d285))
+* use the receiving driver's session for coordinate conversion and Android inspection instead of an unrelated global driver ([203da2d](https://github.com/appium/ruby_lib/commit/203da2dfe9a2299f24acb52a95161584d5c1d285))
+
 ## [16.4.1](https://github.com/appium/ruby_lib/compare/v16.4.0...v16.4.1) (2026-10-28)
 
 
