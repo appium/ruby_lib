@@ -179,6 +179,14 @@ class RegressionTest < Minitest::Test
     assert_equal "\na\n  href: /login\n  text: Sign in\n", parser.document.result
   end
 
+  def test_html_elements_ignores_text_after_filtered_element
+    parser = Nokogiri::HTML::SAX::Parser.new(Appium::Common::HTMLElements.new)
+    parser.document.filter = :a
+    parser.parse('<html><body><div><a href="/login">Sign in</a> or register</div></body></html>')
+
+    assert_equal "\na\n  href: /login\n  text: Sign in\n", parser.document.result
+  end
+
   def test_log_event_writer_raises_no_driver_and_argument_errors
     driver = build_driver
     assert_raises(Appium::NoDriverInstanceError) { driver.log_event = { vendor: 'appium', event: 'funEvent' } }

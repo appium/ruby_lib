@@ -257,7 +257,8 @@ module Appium
       end
 
       def characters(chars)
-        return if @skip_element
+        # Text that follows a closed filtered element has no element to attach to.
+        return if @skip_element || @element_stack.empty?
 
         element        = @element_stack.last
         element[:text] = chars
