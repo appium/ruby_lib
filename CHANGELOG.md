@@ -4,6 +4,13 @@ New entries are maintained by Release Please.
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
+## [16.5.1](https://github.com/appium/ruby_lib/compare/v16.5.0...v16.5.1) (2026-11-06)
+
+
+### Bug Fixes
+
+* ignore text after a filtered element in HTMLElements ([#1148](https://github.com/appium/ruby_lib/issues/1148)) ([6eb4baf](https://github.com/appium/ruby_lib/commit/6eb4baf8c9b8d7576251ebd4c633f536ff0d7a4a))
+
 ## [16.5.0](https://github.com/appium/ruby_lib/compare/v16.4.1...v16.5.0) (2026-10-30)
 
 
