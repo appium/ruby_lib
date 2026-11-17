@@ -23,34 +23,6 @@ Page Objects, and coexistence with legacy global drivers.
 - [Appium](https://github.com/appium/appium#requirements)
 - Ruby: 3.1+
 
-### Upgrading to core 14
-
-This library requires `appium_lib_core >= 14.0.0, < 15.0`.
-
-- `wait` and `wait_true` now retry only `Selenium::WebDriver::Error::NoSuchElementError`
-  by default. Other errors, including assertion failures and interruptions, propagate
-  immediately. Use `ignored: [SomeTransientError]` to choose retryable exceptions;
-  this replaces the default list. Use `ignored: []` to disable exception retries.
-  `wait` still accepts false or nil results, while `wait_true` requires a truthy result.
-- `Appium::Driver` continues to support `appium_lib: { wait: seconds }`, `default_wait`,
-  `no_wait`, and `set_wait`. The wrapper applies a configured implicit wait after each
-  session starts. Without that option, it sends no implicit-timeout command.
-  Direct `Appium::Core` users must configure `driver.manage.timeouts.implicit_wait`
-  themselves. `wait_timeout` controls explicit waits, not implicit waits.
-- `element_screenshot` and `take_element_screenshot` remain available on
-  `Appium::Driver`; they now use core's `save_element_screenshot`.
-- Replace `element.location_rel(driver)` with `element.rect`. To calculate the
-  center relative to the window, use `(rect.x + rect.width / 2.0) / window.width`
-  and `(rect.y + rect.height / 2.0) / window.height`.
-- `Appium.symbolize_keys` is removed. Use symbol keys for client options or Ruby's
-  `transform_keys(&:to_sym)` where appropriate. The wrapper accepts string client
-  option keys without converting capability keys or nested capability values.
-- Custom server responses must use the W3C element key
-  `element-6066-11e4-a52e-4f735466cecf`; legacy `ELEMENT` references are no longer supported.
-
-See the [core 14 migration notes](https://github.com/appium/ruby_lib_core/blob/v14.0.0/CHANGELOG.md)
-for changes affecting direct core API usage.
-
 ### Ruby Lib and Appium
 
 - Ruby library version over `12.0.0` is based on Selenium v4
