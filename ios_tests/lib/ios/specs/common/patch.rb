@@ -31,10 +31,10 @@ class IosTest
         assert_equal first_text.name, 'UICatalog'
       end
 
-      def test_03_appium_core_element_method_location_rel
-        loc = first_text.location_rel(AppiumTestSession.driver)
-        assert_equal loc.x.class, String
-        assert_equal loc.y.class, String
+      def test_03_appium_core_element_method_rect
+        rect = first_text.rect
+        assert_kind_of Numeric, rect.x
+        assert_kind_of Numeric, rect.y
       end
     end
   end

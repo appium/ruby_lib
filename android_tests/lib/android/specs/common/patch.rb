@@ -34,11 +34,11 @@ class AndroidTest
 
       # def test_01_tag_name' do; end # Doesn't work on And
 
-      def test_02_element_method_location_rel
+      def test_02_element_method_rect
         wait do
-          loc = first_text.location_rel(AppiumTestSession.driver)
-          assert_equal loc.x.class, String
-          assert_equal loc.y.class, String
+          rect = first_text.rect
+          assert_kind_of Numeric, rect.x
+          assert_kind_of Numeric, rect.y
         end
       end
 

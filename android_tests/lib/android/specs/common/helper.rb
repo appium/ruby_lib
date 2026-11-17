@@ -34,17 +34,16 @@ class AndroidTest
         wait(wait_opts) { nil }
 
         # failed wait should error
-        assert_raises ::Appium::Core::Wait::TimeoutError do
+        assert_raises RuntimeError do
           wait(wait_opts) { raise }
         end
 
-        # regular rescue will not handle exceptions outside of StandardError hierarchy
-        # must rescue Exception explicitly to rescue everything
-        assert_raises ::Appium::Core::Wait::TimeoutError do
+        # Wait helpers propagate errors outside their default retry list.
+        assert_raises NoMemoryError do
           wait(wait_opts) { raise NoMemoryError }
         end
 
-        assert_raises ::Appium::Core::Wait::TimeoutError do
+        assert_raises NoMemoryError do
           wait(timeout: 0.2, interval: 0.0) { raise NoMemoryError }
         end
 
@@ -78,17 +77,16 @@ class AndroidTest
         end
 
         # raise should error
-        assert_raises ::Appium::Core::Wait::TimeoutError do
+        assert_raises RuntimeError do
           wait_true(wait_opts) { raise }
         end
 
-        # regular rescue will not handle exceptions outside of StandardError hierarchy
-        # must rescue Exception explicitly to rescue everything
-        assert_raises ::Appium::Core::Wait::TimeoutError do
+        # Wait helpers propagate errors outside their default retry list.
+        assert_raises NoMemoryError do
           wait_true(wait_opts) { raise NoMemoryError }
         end
 
-        assert_raises ::Appium::Core::Wait::TimeoutError do
+        assert_raises NoMemoryError do
           wait_true(timeout: 0.2, interval: 0.0) { raise NoMemoryError }
         end
 

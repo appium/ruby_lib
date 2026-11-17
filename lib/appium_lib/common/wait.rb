@@ -34,7 +34,7 @@ module Appium
     # @option opts [Numeric] :timeout Seconds to wait before timing out. Set default by `appium_wait_timeout` (30).
     # @option opts [Numeric] :interval Seconds to sleep between polls. Set default by `appium_wait_interval` (0.5).
     # @option opts [String] :message Exception message if timed out.
-    # @option opts [Array, Exception] :ignore Exceptions to ignore while polling (default: Exception)
+    # @option opts [Array<Class>, Class] :ignored Exceptions to retry (default: Selenium::WebDriver::Error::NoSuchElementError)
     #
     # @example
     #
@@ -63,7 +63,7 @@ module Appium
     # @option opts [Numeric] :timeout Seconds to wait before timing out. Set default by `appium_wait_timeout` (30).
     # @option opts [Numeric] :interval Seconds to sleep between polls. Set default by `appium_wait_interval` (0.5).
     # @option opts [String] :message Exception message if timed out.
-    # @option opts [Array, Exception] :ignore Exceptions to ignore while polling (default: Exception)
+    # @option opts [Array<Class>, Class] :ignored Exceptions to retry (default: Selenium::WebDriver::Error::NoSuchElementError)
     #
     # @example
     #
