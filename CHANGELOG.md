@@ -4,9 +4,7 @@ New entries are maintained by Release Please.
 
 Release tags are https://github.com/appium/ruby_lib/releases .
 
-## Unreleased
-
-### Upgrading to core 14
+### Upgrading to core 14 (unreleased)
 
 This library requires `appium_lib_core >= 14.0.0, < 15.0`.
 
