@@ -48,9 +48,12 @@ class IosTest
         def test_03_buttons
           exp = %w(UICatalog UIAccessoryButtonPlus)
 
-          target_buttons = buttons('a')
-          assert_equal target_buttons.map(&:name), exp
-          assert_equal target_buttons.length, exp.length
+          wait(ignored: [Minitest::Assertion, Selenium::WebDriver::Error::NoSuchElementError,
+                         Selenium::WebDriver::Error::StaleElementReferenceError]) do
+            target_buttons = buttons('a')
+            assert_equal exp, target_buttons.map(&:name)
+            assert_equal exp.length, target_buttons.length
+          end
         end
 
         def test_04_first_button

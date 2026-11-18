@@ -35,7 +35,7 @@ class AndroidTest
 
         # failed wait should error
         assert_raises RuntimeError do
-          wait(wait_opts) { raise }
+          wait(wait_opts) { raise 'wait condition failed' }
         end
 
         # Wait helpers propagate errors outside their default retry list.
@@ -78,7 +78,7 @@ class AndroidTest
 
         # raise should error
         assert_raises RuntimeError do
-          wait_true(wait_opts) { raise }
+          wait_true(wait_opts) { raise 'wait condition failed' }
         end
 
         # Wait helpers propagate errors outside their default retry list.

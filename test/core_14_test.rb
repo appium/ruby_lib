@@ -142,4 +142,27 @@ class Core14Test < Minitest::Test
     assert_equal :ready, wrapper.wait_true(1) { :ready }
     assert_raises(Appium::Core::Wait::TimeoutError) { wrapper.wait_true(timeout: 0.001, interval: 0) { false } }
   end
+
+  def test_promoted_wait_helpers_propagate_explicit_errors_and_retry_assertions
+    target = Class.new(Minitest::Test)
+    Appium.promote_appium_methods(target, build)
+    page = target.new('promoted_wait')
+
+    %i[wait wait_true].each do |method|
+      error = assert_raises(RuntimeError) do
+        page.public_send(method, timeout: 1) { raise 'wait condition failed' }
+      end
+      assert_equal 'wait condition failed', error.message
+
+      attempts = 0
+      result = page.public_send(method, timeout: 1, interval: 0, ignored: [Minitest::Assertion]) do
+        attempts += 1
+        raise Minitest::Assertion, 'not ready' if attempts == 1
+
+        true
+      end
+      assert result
+      assert_equal 2, attempts
+    end
+  end
 end
