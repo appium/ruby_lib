@@ -17,46 +17,43 @@
 class AndroidTest
   class Common
     class WebContext < Minitest::Test
-      # appium's context support is broken on android
+      include AndroidTestNavigation
+
+      def setup
+        super
+        reset_test_app
+      end
+
+      def teardown
+        reset_test_app
+      ensure
+        super
+      end
 
       def test_01_available_contexts
         wait_true { available_contexts.include? 'NATIVE_APP' }
       end
 
       def test_02_current_context
-        wait { assert_equal current_context, 'NATIVE_APP' }
-      end
-
-      def undo_setcontext_nav
-        back
-        wait { find('WebView') }
-        back
-        wait { find 'Views' }
+        assert_equal 'NATIVE_APP', current_context
       end
 
       def test_03_set_context
-        wait { scroll_to('Views').click }
-        wait { scroll_to('WebView').click }
+        wait { scroll_to_exact('Views') }.click
+        wait { scroll_to_exact('WebView') }.click
 
-        wait_true { !available_contexts.detect { |e| e.start_with?('WEBVIEW') }.nil? }
-
-        webview_context = available_contexts.detect { |e| e.start_with?('WEBVIEW') }
-
-        if webview_context.nil?
-          undo_setcontext_nav
-          raise "No webview context found. contexts are: #{contexts}"
+        webview_context = wait_true do
+          available_contexts.find { |context| context.start_with?('WEBVIEW') }
         end
 
-        wait { set_context webview_context }
-        wait { assert_equal current_context, webview_context }
+        set_context webview_context
+        wait_true { current_context == webview_context }
 
         # verify inspect within webview works
         assert get_android_inspect.split("\n").length >= 3
 
-        wait { set_context 'NATIVE_APP' }
-        wait { assert_equal current_context, 'NATIVE_APP' }
-
-        undo_setcontext_nav
+        set_context 'NATIVE_APP'
+        wait_true { current_context == 'NATIVE_APP' }
       end
     end
   end

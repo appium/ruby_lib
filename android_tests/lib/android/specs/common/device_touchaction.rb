@@ -62,7 +62,10 @@ class AndroidTest
               .move_to_location(0.75, 50)
               .release.perform
 
-        3.times { back }
+        # Bouncing Balls -> Animation -> ApiDemos. A third Back exits the app.
+        back
+        wait { text_exact('Bouncing Balls') }
+        back
         wait { text_exact 'NFC' }
       end
 
