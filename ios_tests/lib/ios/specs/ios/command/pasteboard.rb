@@ -21,13 +21,13 @@ class IosTest
           driver.terminate_app target_bundle_id
           driver.activate_app target_bundle_id
 
-          # set blank before testing because pasteboard is remaining during launching simulators
+          # Replace any content left by an earlier Simulator session and wait for it to be readable.
           set_pasteboard content: 'before'
-          assert_equal get_pasteboard, 'before'
+          wait_true { get_pasteboard == 'before' }
 
           set_pasteboard content: 'sample content'
 
-          assert_equal get_pasteboard, 'sample content'
+          wait_true { get_pasteboard == 'sample content' }
         end
       end
     end
