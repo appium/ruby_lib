@@ -59,7 +59,10 @@ class IosTest
         rect = element.rect
         one_finger_tap x: rect.width / 2, y: rect.height / 2, element: element
 
-        wait { button 'UICatalog' } # successfully transitioned to buttons page
+        wait_true(ignored: [Selenium::WebDriver::Error::NoSuchElementError,
+                            Selenium::WebDriver::Error::StaleElementReferenceError]) do
+          screen == 'Buttons' && button('UICatalog').displayed?
+        end
         go_back
       end
 

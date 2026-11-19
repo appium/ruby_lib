@@ -23,6 +23,10 @@ class IosTest
           assert_equal screen, catalog
           # nav to buttons activity
           wait { find_element(:name, 'Buttons').click }
+          wait_true(ignored: [Selenium::WebDriver::Error::NoSuchElementError,
+                              Selenium::WebDriver::Error::StaleElementReferenceError]) do
+            screen == 'Buttons' && button_exact('UIAccessoryButtonPlus').displayed?
+          end
         end
 
         def after_last
@@ -38,11 +42,15 @@ class IosTest
         end
 
         def test_02_button
-          # by index
-          assert_equal button(3).name, 'UIAccessoryButtonPlus'
+          wait(ignored: [Minitest::Assertion, Selenium::WebDriver::Error::NoSuchElementError,
+                         Selenium::WebDriver::Error::StaleElementReferenceError]) do
+            # Reacquire the elements on every attempt while the view settles.
+            # by index
+            assert_equal 'UIAccessoryButtonPlus', button(3).name
 
-          # by name contains
-          assert_equal button('Plus').name, 'UIAccessoryButtonPlus'
+            # by name contains
+            assert_equal 'UIAccessoryButtonPlus', button('Plus').name
+          end
         end
 
         def test_03_buttons
