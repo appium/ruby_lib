@@ -45,9 +45,17 @@ class IosTest
 
       def test_touch_and_hold
         open_screen 'Buttons'
-        element = button_exact('Button')
+        retryable_errors = [Selenium::WebDriver::Error::NoSuchElementError,
+                            Selenium::WebDriver::Error::StaleElementReferenceError]
+        element = wait_true(ignored: retryable_errors) do
+          candidate = button_exact('Button')
+          candidate if candidate.displayed?
+        end
         touch_and_hold(element: element, duration: 1.0)
-        rect = button_exact('Button').rect
+        rect = wait_true(ignored: retryable_errors) do
+          candidate = button_exact('Button')
+          candidate.rect if candidate.displayed?
+        end
         touch_and_hold(x: rect.x + rect.width / 2, y: rect.y + rect.height / 2)
         assert_equal 'Buttons', screen
       end

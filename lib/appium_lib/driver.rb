@@ -608,14 +608,15 @@ module Appium
       @driver
     end
 
-    # To ignore error for Espresso Driver
+    # Preserve core 13's handling of drivers without implicit-wait support.
     def set_implicit_wait(wait)
       @driver.manage.timeouts.implicit_wait = wait
     rescue Selenium::WebDriver::Error::UnknownError => e
-      unless e.message.include?('The operation requested is not yet implemented by Espresso driver')
-        raise ::Appium::Core::Error::ServerError
+      unless e.message.include?('The operation requested is not yet implemented')
+        raise ::Appium::Core::Error::ServerError, e.message
       end
 
+      ::Appium::Logger.debug(e.message)
       {}
     end
 

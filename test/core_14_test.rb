@@ -72,6 +72,31 @@ class Core14Test < Minitest::Test
     assert_equal [0], session.waits
   end
 
+  def test_session_start_tolerates_unimplemented_implicit_wait
+    ['The operation requested is not yet implemented',
+     'The operation requested is not yet implemented by Espresso driver'].each do |message|
+      wrapper = build(wait: 2)
+      session = Session.new
+      session.define_singleton_method(:implicit_wait=) do |_value|
+        raise Selenium::WebDriver::Error::UnknownError, message
+      end
+
+      assert_same session, attach_session(wrapper, session)
+      assert_same session, wrapper.driver
+    end
+  end
+
+  def test_session_start_preserves_other_implicit_wait_errors
+    wrapper = build(wait: 2)
+    session = Session.new
+    original = Selenium::WebDriver::Error::UnknownError.new('Timeout configuration failed')
+    session.define_singleton_method(:implicit_wait=) { |_value| raise original }
+
+    error = assert_raises(Appium::Core::Error::ServerError) { attach_session(wrapper, session) }
+    assert_equal original.message, error.message
+    assert_same original, error.cause
+  end
+
   def test_absent_or_nil_wait_does_not_send_a_timeout_command
     [{}, { wait: nil }].each do |options|
       wrapper = build(options)
