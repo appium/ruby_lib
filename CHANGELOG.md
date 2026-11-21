@@ -32,6 +32,17 @@ This library requires `appium_lib_core >= 14.0.0, < 15.0`.
 See the [core 14 migration notes](https://github.com/appium/ruby_lib_core/blob/v14.0.0/CHANGELOG.md)
 for changes affecting direct core API usage.
 
+## [17.0.0](https://github.com/appium/ruby_lib/compare/v16.5.1...v17.0.0) (2026-11-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade appium_lib_core to 14 ([#1151](https://github.com/appium/ruby_lib/issues/1151))
+
+### Features
+
+* upgrade appium_lib_core to 14 ([#1151](https://github.com/appium/ruby_lib/issues/1151)) ([727f986](https://github.com/appium/ruby_lib/commit/727f986baa4e804310a82c77166324a22ee669b3))
+
 ## [16.5.1](https://github.com/appium/ruby_lib/compare/v16.5.0...v16.5.1) (2026-11-06)
 
 
