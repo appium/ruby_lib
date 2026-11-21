@@ -48,7 +48,7 @@ module Appium
     # `ruby_lib_core` (see appium/ruby_lib_core#97). Defining them here lets
     # `ruby_lib_core` eventually drop that list.
     CORE_BRIDGE_METHODS = %i[
-      take_element_screenshot save_viewport_screenshot
+      save_element_screenshot save_viewport_screenshot
       lock device_locked? unlock
       hide_keyboard is_keyboard_shown
       ime_activate ime_available_engines ime_active_engine ime_activated ime_deactivate
@@ -208,15 +208,17 @@ module Appium
 
       $driver&.driver_quit if global_driver
 
+      opts = opts.transform_keys { |key| key.is_a?(String) ? key.to_sym : key }
+      appium_lib_opts = (opts[:appium_lib] || {}).transform_keys { |key| key.is_a?(String) ? key.to_sym : key }
+      opts[:appium_lib] = appium_lib_opts
       @core = ::Appium::Core.for(opts)
       extend ::Appium::Core::Device
 
-      opts = Appium.symbolize_keys opts
-      appium_lib_opts = opts[:appium_lib] || {}
-
       @caps = @core.caps
       @custom_url = @core.custom_url
-      @default_wait = @core.default_wait || 0
+      # Core 14 no longer manages implicit waits; keep the wrapper's wait option.
+      @implicit_wait = appium_lib_opts[:wait]
+      @default_wait = @implicit_wait || 0
       @appium_port = @core.port
       @appium_wait_timeout = @core.wait_timeout
       @appium_wait_interval = @core.wait_interval
@@ -490,8 +492,13 @@ module Appium
     # @param [String] png_save_path the full path to save the png
     # @return [File]
     def element_screenshot(element, png_save_path)
-      @driver&.take_element_screenshot element, png_save_path
+      @driver&.save_element_screenshot element, png_save_path
       nil
+    end
+
+    # Compatibility name retained by appium_lib after its removal from core 14.
+    def take_element_screenshot(element, png_save_path)
+      save_element_screenshot(element, png_save_path)
     end
 
     # Quits the driver
@@ -590,6 +597,7 @@ module Appium
                                      read_timeout: 999_999
                                    })
       @http_client = @core.http_client
+      set_implicit_wait(@implicit_wait) unless @implicit_wait.nil?
 
       # if automation_name was nil before start_driver, then re-extend driver specific methods
       # to be able to extend correctly.
@@ -600,14 +608,15 @@ module Appium
       @driver
     end
 
-    # To ignore error for Espresso Driver
+    # Preserve core 13's handling of drivers without implicit-wait support.
     def set_implicit_wait(wait)
       @driver.manage.timeouts.implicit_wait = wait
     rescue Selenium::WebDriver::Error::UnknownError => e
-      unless e.message.include?('The operation requested is not yet implemented by Espresso driver')
-        raise ::Appium::Core::Error::ServerError
+      unless e.message.include?('The operation requested is not yet implemented')
+        raise ::Appium::Core::Error::ServerError, e.message
       end
 
+      ::Appium::Logger.debug(e.message)
       {}
     end
 

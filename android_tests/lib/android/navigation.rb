@@ -12,6 +12,10 @@ module AndroidTestNavigation
   end
 
   def reset_test_app
+    AppiumTestSession.driver.set_context 'NATIVE_APP'
     start_test_activity('io.appium.android.apis/.ApiDemos')
+    AppiumTestSession.driver.wait_true do
+      AppiumTestSession.driver.text_exact('NFC').displayed?
+    end
   end
 end

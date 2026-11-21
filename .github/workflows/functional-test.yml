@@ -44,10 +44,12 @@ jobs:
     - run: defaults write com.apple.iphonesimulator PasteboardAutomaticSync -bool false
 
     - uses: futureware-tech/simulator-action@v6
+      id: simulator
       with:
       # https://github.com/actions/runner-images/blob/main/images/macos/macos-14-arm64-Readme.md
         model: ${{ env.IOS_DEVICE_NAME }}
         os_version: ${{ env.IOS_VERSION }}
+        wait_for_boot: true
 
     - name: Preparing other environment
       run: |
@@ -79,6 +81,7 @@ jobs:
       timeout-minutes: 60
       working-directory: ios_tests
       env:
+        IOS_UDID: ${{ steps.simulator.outputs.udid }}
         LOCAL_PREBUILT_WDA: ${{ github.workspace }}/wda/WebDriverAgentRunner-Runner.app
 
     - name: Save server output

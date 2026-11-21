@@ -45,19 +45,28 @@ class IosTest
 
       def test_touch_and_hold
         open_screen 'Buttons'
-        element = button_exact('Button')
+        retryable_errors = [Selenium::WebDriver::Error::NoSuchElementError,
+                            Selenium::WebDriver::Error::StaleElementReferenceError]
+        element = wait_true(ignored: retryable_errors) do
+          candidate = button_exact('Button')
+          candidate if candidate.displayed?
+        end
         touch_and_hold(element: element, duration: 1.0)
-        rect = element.rect
+        rect = wait_true(ignored: retryable_errors) do
+          candidate = button_exact('Button')
+          candidate.rect if candidate.displayed?
+        end
         touch_and_hold(x: rect.x + rect.width / 2, y: rect.y + rect.height / 2)
         assert_equal 'Buttons', screen
       end
 
       def test_swipe
-        table = find_element(:class_name, ui_ios.table)
-        2.times { swipe direction: 'up', element: table }
-        wait_true { find_element(:accessibility_id, 'Toolbars').displayed? }
-        2.times { swipe direction: 'down', element: table }
-        wait_true { find_element(:accessibility_id, 'Activity Indicators').displayed? }
+        [['up', 'Toolbars'], ['down', 'Activity Indicators']].each do |direction, target|
+          wait_true do
+            swipe direction: direction, element: find_element(:class_name, ui_ios.table)
+            find_element(:accessibility_id, target).displayed?
+          end
+        end
       end
 
       def test_drag_from_to_for_duration

@@ -32,41 +32,44 @@ class AndroidTest
       end
 
       def open_alert
-        # trigger the alert
+        # Click once, then wait for the dialog rather than matching its launch button again.
         wait { button('OK Cancel dialog with a message').click }
+        wait_true do
+          button_exact('OK').displayed? && button_exact('Cancel').displayed?
+        end
       end
 
       def test_01_alert_click
         # test
-        wait { open_alert }
+        open_alert
         wait { alert_click('OK') }
       end
 
       def test_02_alert_accept
-        wait { open_alert }
+        open_alert
         wait { alert_accept }
       end
 
       def test_03_alert_accept_text
-        wait { open_alert }
-        wait { assert_equal alert_accept_text, 'OK' }
+        open_alert
+        wait_true { alert_accept_text == 'OK' }
         wait { alert_accept }
       end
 
       def test_04_alert_dismiss
-        wait { open_alert }
+        open_alert
         wait { alert_dismiss }
       end
 
       def test_05_alert_dismiss_text
-        wait { open_alert }
+        open_alert
 
         # alert dialog button placement changed:
         # 'OK Cancel dialog with a long message'
         # Android L: 'Something, Cancel, Ok'
         # Android 19: 'Cancel, Something, Ok'
 
-        wait { assert_equal alert_dismiss_text.downcase, 'cancel' }
+        wait_true { alert_dismiss_text.downcase == 'cancel' }
         wait { alert_dismiss }
       end
     end

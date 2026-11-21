@@ -57,12 +57,20 @@ class AndroidTest
         wait { text('Animation').click }
         wait { text_exact('Bouncing Balls').click }
 
+        # W3C actions take pixels, not ratios; avoid swiping from the system status bar.
+        size = driver.window_size
+        x = (size.width * 0.75).to_i
+        start_y = (size.height * 0.25).to_i
+        end_y = (size.height * 0.5).to_i
         driver.action
-              .move_to_location(0.75, 0.25).pointer_down(:left)
-              .move_to_location(0.75, 50)
+              .move_to_location(x, start_y).pointer_down(:left)
+              .move_to_location(x, end_y)
               .release.perform
 
-        3.times { back }
+        # Bouncing Balls -> Animation -> ApiDemos. A third Back exits the app.
+        back
+        wait { text_exact('Bouncing Balls') }
+        back
         wait { text_exact 'NFC' }
       end
 

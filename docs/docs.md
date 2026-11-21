@@ -71,7 +71,7 @@ e.tag_name # calls .type (patch.rb)
 e.text
 e.size
 e.location
-e.location_rel
+e.rect # position and size; location_rel was removed in core 14
 e.click
 e.send_keys 'keys to send'
 e.displayed? # true or false depending if the element is visible

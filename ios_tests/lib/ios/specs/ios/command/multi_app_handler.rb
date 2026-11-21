@@ -31,15 +31,16 @@ class IosTest
           assert_equal :running_in_foreground, xcuitest_query_app_status(bundle_id: test_app_bundle)
 
           assert xcuitest_activate_app(bundle_id: 'com.apple.Preferences').nil?
-          wait(timeout: 5) do
+          wait_true(timeout: 5) do
             # iOS may suspend the background app before we observe its state.
-            assert_includes %i[running_in_background running_in_background_suspended],
-                            xcuitest_query_app_status(bundle_id: test_app_bundle)
+            %i[running_in_background running_in_background_suspended].include?(
+              xcuitest_query_app_status(bundle_id: test_app_bundle)
+            )
           end
 
           assert xcuitest_activate_app(bundle_id: test_app_bundle).nil?
-          wait(timeout: 5) do
-            assert_equal :running_in_foreground, xcuitest_query_app_status(bundle_id: test_app_bundle)
+          wait_true(timeout: 5) do
+            xcuitest_query_app_status(bundle_id: test_app_bundle) == :running_in_foreground
           end
         end
       end

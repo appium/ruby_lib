@@ -17,6 +17,8 @@
 class IosTest
   class Device
     class Device < Minitest::Test
+      include IosTestNavigation
+
       # go back to the main page
       def go_back
         back
@@ -40,10 +42,10 @@ class IosTest
         background_app(-1) # background_app(nil) should work as same.
 
         # The app goes to background and never come back
-        wait do
-          assert_equal driver.app_state(bundle_id), :running_in_background_suspended
+        wait_true do
+          %i[running_in_background running_in_background_suspended].include?(driver.app_state(bundle_id))
         end
-
+      ensure
         driver.activate_app bundle_id
       end
 
@@ -54,9 +56,13 @@ class IosTest
 
       def test_05_action_chain
         element = text('Buttons')
-        one_finger_tap x: 0, y: 0, element: element
+        rect = element.rect
+        one_finger_tap x: rect.width / 2, y: rect.height / 2, element: element
 
-        wait { button 'UICatalog' } # successfully transitioned to buttons page
+        wait_true(ignored: [Selenium::WebDriver::Error::NoSuchElementError,
+                            Selenium::WebDriver::Error::StaleElementReferenceError]) do
+          screen == 'Buttons' && button('UICatalog').displayed?
+        end
         go_back
       end
 

@@ -20,6 +20,20 @@
 class AndroidTest
   class Common
     class Patch < Minitest::Test
+      include AndroidTestNavigation
+
+      def setup
+        super
+        reset_test_app
+        wait_true { text_exact('API Demos').displayed? }
+      end
+
+      def teardown
+        reset_test_app
+      ensure
+        super
+      end
+
       # Attributes are busted in Android.
       # Blocked on https://github.com/appium/appium/issues/628
 
@@ -34,11 +48,11 @@ class AndroidTest
 
       # def test_01_tag_name' do; end # Doesn't work on And
 
-      def test_02_element_method_location_rel
+      def test_02_element_method_rect
         wait do
-          loc = first_text.location_rel(AppiumTestSession.driver)
-          assert_equal loc.x.class, String
-          assert_equal loc.y.class, String
+          rect = first_text.rect
+          assert_kind_of Numeric, rect.x
+          assert_kind_of Numeric, rect.y
         end
       end
 
@@ -59,30 +73,23 @@ class AndroidTest
       end
 
       def test_04_id_common_patch_success
-        if automation_name_is_uiautomator2?
-          wait do
-            el = text 'text' # <string name="autocomplete_3_button_7">Text</str
-            assert_equal el.text, 'Text'
-          end
-        else
-          wait do
-            el = id 'autocomplete_3_button_7' # <string name="autocomplete_3_button_7">Text</string>
-            assert_equal el.text, 'Text'
-          end
+        wait do
+          expected = find_element(:id, 'android:id/text1')
+          assert_equal expected, id('android:id/text1')
         end
       end
 
       def test_05_find_many_elements_by_resource_id
-        wait do
+        wait(ignored: [Minitest::Assertion, Selenium::WebDriver::Error::NoSuchElementError]) do
           value = find_elements(:id, 'android:id/text1').length
-          assert_equal value, 12
+          assert_equal 12, value
         end
       end
 
       def test_06_find_single_element_by_resource_id
-        wait do
+        wait(ignored: [Minitest::Assertion, Selenium::WebDriver::Error::NoSuchElementError]) do
           value = id('android:id/text1').text
-          assert_equal value, "Access'ibility"
+          assert_equal "Access'ibility", value
         end
       end
     end

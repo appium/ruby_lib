@@ -34,12 +34,21 @@ module Appium
     # @option opts [Numeric] :timeout Seconds to wait before timing out. Set default by `appium_wait_timeout` (30).
     # @option opts [Numeric] :interval Seconds to sleep between polls. Set default by `appium_wait_interval` (0.5).
     # @option opts [String] :message Exception message if timed out.
-    # @option opts [Array, Exception] :ignore Exceptions to ignore while polling (default: Exception)
+    # @option opts [Array<Class>, Class] :ignored Exceptions to retry (default: Selenium::WebDriver::Error::NoSuchElementError)
     #
     # @example
     #
     #     wait_true(timeout: 20, interval: 0.2, message: 'custom message') { button_exact('Back') }.click
     #     wait_true(20) { button_exact('Back') }.click
+    #
+    # @example Retrying Minitest assertions with core 14+
+    #
+    #     # Assertion failures propagate immediately by default.
+    #     # ignored replaces the default list; include NoSuchElementError to keep retrying missing elements.
+    #     wait_true(ignored: [Minitest::Assertion, Selenium::WebDriver::Error::NoSuchElementError]) do
+    #       assert_equal 'Ready', find_element(:accessibility_id, 'status').text
+    #       true # wait_true requires a truthy result after the assertion succeeds.
+    #     end
     #
     def wait_true(opts = {})
       opts = { timeout: opts } if opts.is_a? Numeric
@@ -63,12 +72,22 @@ module Appium
     # @option opts [Numeric] :timeout Seconds to wait before timing out. Set default by `appium_wait_timeout` (30).
     # @option opts [Numeric] :interval Seconds to sleep between polls. Set default by `appium_wait_interval` (0.5).
     # @option opts [String] :message Exception message if timed out.
-    # @option opts [Array, Exception] :ignore Exceptions to ignore while polling (default: Exception)
+    # @option opts [Array<Class>, Class] :ignored Exceptions to retry (default: Selenium::WebDriver::Error::NoSuchElementError)
     #
     # @example
     #
     #     wait(timeout: 20, interval: 0.2, message: 'custom message') { button_exact('Back') }.click
     #     wait(20) { button_exact('Back') }.click
+    #
+    # @example Retrying Minitest assertions with core 14+
+    #
+    #     # This fails immediately if the assertion fails; it no longer retries automatically.
+    #     wait { assert_equal 'Ready', find_element(:accessibility_id, 'status').text }
+    #
+    #     # ignored replaces the default list; include NoSuchElementError to keep retrying missing elements.
+    #     wait(ignored: [Minitest::Assertion, Selenium::WebDriver::Error::NoSuchElementError]) do
+    #       assert_equal 'Ready', find_element(:accessibility_id, 'status').text
+    #     end
     #
     def wait(opts = {})
       opts = { timeout: opts } if opts.is_a? Numeric
